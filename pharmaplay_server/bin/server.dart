@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:shelf/shelf.dart';
 import 'package:shelf/shelf_io.dart';
 import 'package:shelf_router/shelf_router.dart';
+import 'package:dotenv/dotenv.dart' show load, clean, isEveryDefined, env;
 
 // Configure routes.
 final _router = Router()
@@ -30,15 +31,24 @@ app.get('/users/<userName>/whoami', (Request request) async {
 */
 
 void main(List<String> args) async {
+  load(); //env load
+  print('read all vars? ${isEveryDefined(['APP_NAME', 'HOME'])}');
+
+  print('value of APP_NAME is ${env['APP_NAME']}');
+
+  print('your PHARMAPLAY_HOST directory is: ${env['PHARMAPLAY_HOST']}');
+
+  clean(); //env clean
+
   // Use any available host or container IP (usually `0.0.0.0`).
-  final ip = InternetAddress.anyIPv4;
-  print(ip);
+  final ip = Platform.environment['PHARMAPLAY_HOST'] ?? InternetAddress.anyIPv4;
+  final port = int.parse(Platform.environment['PHARMAPLAY_PORT'] ?? '9093');
 
   // Configure a pipeline that logs requests.
   final _handler = Pipeline().addMiddleware(logRequests()).addHandler(_router);
 
   // For running in containers, we respect the PORT environment variable.
-  final port = int.parse(Platform.environment['PORT'] ?? '8080');
+
   final server = await serve(_handler, ip, port);
-  print('Server listening on port ${server.port}');
+  print('Server listening on port ${server.address.host}:${server.port}');
 }
