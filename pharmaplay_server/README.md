@@ -47,3 +47,22 @@ You should see the logging printed in the first terminal:
 2021-05-06T15:47:04.620417  0:00:00.000158 GET     [200] /
 2021-05-06T15:47:08.392928  0:00:00.001216 GET     [200] /echo/I_love_Dart
 ```
+
+
+ 
+  add to       ~/.bashrc
+  export PHARMAPLAY_HOST='localhost'
+  export PHARMAPLAY_PORT='9093'
+  -----
+
+  .env 
+
+APP_NAME='PharmaPlay Server'
+secretKey = '25BBD3FF-975D-4D45-8FFF-B3FA92155CFF'
+dbName = 'pharmadb'
+serverPort = '9093'
+serverHost = 'localhost'
+dbServerPort = '5432'
+dbServerHost = 'localhost'
+redisHost = 'localhost'
+redisPort = '6379'
