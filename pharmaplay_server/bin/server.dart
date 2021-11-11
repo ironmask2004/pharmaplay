@@ -33,12 +33,13 @@ app.get('/users/<userName>/whoami', (Request request) async {
 void main(List<String> args) async {
   /*
   !Highlights
-  !add next  VARs to    ~/.bashrc
+        ~/.bashrc
   export PHARMAPLAY_HOST='pharmaplay.mywire.org'
   export PHARMAPLAY_PORT='9093'
   */
 
 //! dotenv package : adding .env to platform.environment
+
   load(); //env load
   print('read all vars? ${isEveryDefined(['APP_NAME', 'HOME'])}');
 
