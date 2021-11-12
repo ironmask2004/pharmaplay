@@ -13,6 +13,9 @@ class User extends Equatable {
   final String password;
   final String salt;
   final String mobile;
+  final DateTime createdate;
+  final DateTime updatedate;
+
   User({
     required this.idx,
     required this.id,
@@ -22,6 +25,8 @@ class User extends Equatable {
     required this.password,
     required this.salt,
     required this.mobile,
+    required this.createdate,
+    required this.updatedate,
   });
 
   User copyWith({
@@ -33,6 +38,8 @@ class User extends Equatable {
     String? password,
     String? salt,
     String? mobile,
+    DateTime? createdate,
+    DateTime? updatedate,
   }) {
     return User(
       idx: idx ?? this.idx,
@@ -43,6 +50,8 @@ class User extends Equatable {
       password: password ?? this.password,
       salt: salt ?? this.salt,
       mobile: mobile ?? this.mobile,
+      createdate: createdate ?? this.createdate,
+      updatedate: updatedate ?? this.updatedate,
     );
   }
 
@@ -56,11 +65,12 @@ class User extends Equatable {
       'password': password,
       'salt': salt,
       'mobile': mobile,
+      'createdate': createdate.millisecondsSinceEpoch,
+      'updatedate': updatedate.millisecondsSinceEpoch,
     };
   }
 
   factory User.fromMap(Map<String, dynamic> map) {
-    //print('From map' + map.toString());
     return User(
       idx: map['idx'],
       id: map['id'],
@@ -69,7 +79,9 @@ class User extends Equatable {
       email: map['email'],
       password: map['password'],
       salt: map['salt'],
-      mobile: map['mobile'] ?? '0',
+      mobile: map['mobile'],
+      createdate: DateTime.fromMillisecondsSinceEpoch(map['createdate']),
+      updatedate: DateTime.fromMillisecondsSinceEpoch(map['updatedate']),
     );
   }
 
@@ -91,6 +103,8 @@ class User extends Equatable {
       password,
       salt,
       mobile,
+      createdate,
+      updatedate,
     ];
   }
 }

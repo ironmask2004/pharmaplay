@@ -81,7 +81,7 @@ class AuthApi {
       final hashedPassword = hashPassword(password, salt);
       try {
         sql =
-            "insert into  pharmaplay.$authStore (firstname,lastname, id, email, password,salt,mobile) values (@firstname,@lastname, @id, @email, @password,@salt , @mobile ) returning idx";
+            "insert into  pharmaplay.$authStore (firstname,lastname, id, email, password,salt,mobile, createdate, updatedate) values (@firstname,@lastname, @id, @email, @password,@salt , @mobile ,  @createdate, @updatedate ) returning idx";
         params = {
           "firstname": firstname,
           "lastname": lastname,
@@ -89,7 +89,9 @@ class AuthApi {
           "email": email,
           "password": hashedPassword,
           "salt": salt,
-          "mobile": mobile
+          "mobile": mobile,
+          "createdate": DateTime.now().microsecondsSinceEpoch,
+          "updatedate": DateTime.now().millisecondsSinceEpoch
         };
         resultSet = await db.query(sql, values: params);
 
@@ -132,11 +134,16 @@ class AuthApi {
 
       if (resultSet.length == 0) {
         return Response.forbidden(
-            "{ \"error\" : \"Incorrect user  Name\" ,  \"errorNo\" : \"403\"  }");
+            "{ \"error\" : \"Incorrect user  Login\" ,  \"errorNo\" : \"403\"  }");
       }
       print(resultSet.first.toString());
 
       final user = resultSet.first['$authStore'];
+      // User Myuser = User.fromMap(user);
+
+      // print("My userrrrrr: " + Myuser.toString());
+
+      print('fided user :   ======== ');
       print(user.toString());
 
       final hashedPassword = hashPassword(password, user['salt']);
@@ -152,6 +159,7 @@ class AuthApi {
       // final userId = (user['id'] as ObjectId).toHexString();
       final userId = ObjectId.fromHexString(user['id']).toString();
       print('User ID:' + userId);
+
       try {
         final tokenPair = await tokenService.createTokenPair(userId);
         user['token'] = tokenPair.toJson()['token'];
@@ -159,7 +167,11 @@ class AuthApi {
         user["'error'"] = "\"" + 'Suucess' + "\"";
         user["'errorNo'"] = "\"" + '200' + "\"";
 
-        return Response.ok(json.encode(user), headers: {
+        print('------------------' + user.toString());
+        var jsonString = json.encode(user);
+
+        print('-----======================================--' + jsonString);
+        return Response.ok(jsonString, headers: {
           HttpHeaders.contentTypeHeader: ContentType.json.mimeType,
         });
       } catch (e) {
