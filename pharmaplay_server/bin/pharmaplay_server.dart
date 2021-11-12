@@ -40,7 +40,7 @@ void main(List<String> args) async {
   final app = Router()
     ..mount('/auth/',
         AuthApi(dbApi.db, authStore, sysEnv.secretKey, tokenService).router)
-    // ..mount('/users/', UserApi(dbApi.db, authStore).router)
+    ..mount('/users/', UserApi(dbApi.db, authStore).router)
     ..mount('/assets/', StaticAssetsApi('public').router)
     ..all('/<name|.*>', fallback('public/index.html'));
 

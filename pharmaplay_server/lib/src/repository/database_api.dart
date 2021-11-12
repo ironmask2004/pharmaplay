@@ -37,7 +37,7 @@ class DB {
       return await _connection.mappedResultsQuery(sql,
           substitutionValues: values);
     } catch (e) {
-      print(e.toString());
+      print("erororo QUERY:" + e.toString());
       return Future.value([]);
     }
   }

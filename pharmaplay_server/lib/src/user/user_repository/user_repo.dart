@@ -1,4 +1,6 @@
 import 'package:pharmaplay_server/pharmaplay_server.dart';
+import 'package:pharmaplay_server/src/repository/database_api.dart';
+
 // !using EITHER
 /*
 Future<Either<ApiResponse, String>> logOutUser(String userToken) async {
@@ -32,24 +34,29 @@ Future<Either<ApiResponse, String>> logOutUser(String userToken) async {
   }
   return left(_apiResponse);
 }
-
 */
-
-/*
-Future<User> findUserByID(String id, Database db) async {
-  final resultSet = db.select('SELECT * FROM Users WHERE id = \"' + id + '\"');
-  if (resultSet.isNotEmpty) {
-    return User.fromJson(resultSet.first);
+Future<User> findUserByID(String id, DB db, String authStore) async {
+  String sql = "SELECT *  FROM pharmaplay.$authStore WHERE id =  @id ";
+  print(id);
+  Map<String, dynamic> params = {"id": id};
+  print(sql);
+  dynamic resultSet = await db.query(sql, values: params);
+  print(resultSet.first['$authStore']);
+  if (resultSet.length > 0) {
+    return User.fromMap(resultSet.first['$authStore']);
   } else {
     print(' User ID($id) Not Found ');
     throw ' User ID($id) Not Found ';
   }
 }
 
-Future<List<User>> findUserAll(Database db) async {
+Future<List<User>> findUserAll(DB db, String authStore) async {
   List<User> resultUsers = <User>[];
-  final resultSet = db.select('SELECT * FROM Users ');
-  if (resultSet.isNotEmpty) {
+  String sql = "SELECT *  FROM pharmaplay.$authStore   ";
+
+  dynamic resultSet = await db.query(sql);
+
+  if (resultSet.length > 0) {
     resultSet.forEach((element) {
       // print(element);
       resultUsers.add(User.fromJson(element));
@@ -61,4 +68,3 @@ Future<List<User>> findUserAll(Database db) async {
     throw ' Users is Empty ';
   }
 }
-*/

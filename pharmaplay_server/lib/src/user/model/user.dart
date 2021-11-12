@@ -12,6 +12,7 @@ class User extends Equatable {
   final String email;
   final String password;
   final String salt;
+  final String mobile;
   User({
     required this.idx,
     required this.id,
@@ -20,6 +21,7 @@ class User extends Equatable {
     required this.email,
     required this.password,
     required this.salt,
+    required this.mobile,
   });
 
   User copyWith({
@@ -30,6 +32,7 @@ class User extends Equatable {
     String? email,
     String? password,
     String? salt,
+    String? mobile,
   }) {
     return User(
       idx: idx ?? this.idx,
@@ -39,6 +42,7 @@ class User extends Equatable {
       email: email ?? this.email,
       password: password ?? this.password,
       salt: salt ?? this.salt,
+      mobile: mobile ?? this.mobile,
     );
   }
 
@@ -51,10 +55,12 @@ class User extends Equatable {
       'email': email,
       'password': password,
       'salt': salt,
+      'mobile': mobile,
     };
   }
 
   factory User.fromMap(Map<String, dynamic> map) {
+    //print('From map' + map.toString());
     return User(
       idx: map['idx'],
       id: map['id'],
@@ -63,6 +69,7 @@ class User extends Equatable {
       email: map['email'],
       password: map['password'],
       salt: map['salt'],
+      mobile: map['mobile'] ?? '0',
     );
   }
 
@@ -83,6 +90,7 @@ class User extends Equatable {
       email,
       password,
       salt,
+      mobile,
     ];
   }
 }
