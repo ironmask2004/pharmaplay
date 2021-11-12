@@ -19,6 +19,7 @@ class AuthApi {
       final password = userInfo['password'];
       final firstname = userInfo['firstname'];
       final lastname = userInfo['lastname'];
+      final mobile = userInfo['mobile'];
 
       // Ensure email and password fields are present
       if (email == null ||
@@ -42,6 +43,10 @@ class AuthApi {
             "{ \"error\" : \"Please provide your firstname and lastname \" ,  \"errorNo\" : \"403\"  }");
       }
 
+      if (mobile == null || mobile.isEmpty) {
+        return Response.forbidden(
+            "{ \"error\" : \"Please provide your Mobile Number!! \" ,  \"errorNo\" : \"403\"  }");
+      }
       String sql =
           "SELECT idx  FROM pharmaplay.$authStore WHERE email =  @email ";
       Map<String, dynamic> params = {"email": email};
@@ -61,28 +66,32 @@ class AuthApi {
         return Response.forbidden(
             "{ \"error\" : \"User name:  $firstname $lastname  was already registerd!!\" ,  \"errorNo\" : \"403\"  }");
       }
-      // Create user
-      //final authDetails = req.context['authDetails'] as JWT;
-      //print (authDetails.subject.toString());
+
+      sql = "SELECT idx  FROM pharmaplay.$authStore WHERE mobile =  @mobile ";
+      params = {"mobile": mobile};
+      resultSet = await db.query(sql, values: params);
+
+      if (resultSet.length > 0) {
+        return Response.forbidden(
+            "{ \"error\" : \"mobile Number:  $mobile  was already registerd!!\" ,  \"errorNo\" : \"403\"  }");
+      }
 
       final id = ObjectId().toString();
       final salt = generateSalt();
       final hashedPassword = hashPassword(password, salt);
       try {
-        //var stmt = db.query(
-        //    'INSERT INTO $authStore (email, password,salt,id ) VALUES (?,?,?, ?)');
-//
-        String sql =
-            "insert into  pharmaplay.$authStore (firstname,lastname, id, email, password,salt) values (@firstname,@lastname, @id, @email, @password,@salt) returning idx";
-        Map<String, dynamic> params = {
+        sql =
+            "insert into  pharmaplay.$authStore (firstname,lastname, id, email, password,salt,mobile) values (@firstname,@lastname, @id, @email, @password,@salt , @mobile ) returning idx";
+        params = {
           "firstname": firstname,
           "lastname": lastname,
           "id": id,
           "email": email,
           "password": hashedPassword,
-          "salt": salt
+          "salt": salt,
+          "mobile": mobile
         };
-        dynamic resultSet = await db.query(sql, values: params);
+        resultSet = await db.query(sql, values: params);
 
         print(resultSet.first.toString());
         if (resultSet.length == 0) {

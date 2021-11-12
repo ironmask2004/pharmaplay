@@ -56,7 +56,8 @@ class DB {
 
   Future<List<dynamic>> testConn() async {
     List<Map<String, dynamic>> items = [];
-    dynamic result = await query('select idx, email from pharmaplay.users000');
+    dynamic result = await query(
+        'select idx, email from pharmaplay.users000 ORDER BY idx ASC LIMIT 4 ');
 
     for (final row in result) {
       items.add(row['users000']);
