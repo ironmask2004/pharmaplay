@@ -9,18 +9,22 @@ class Env {
   late final String serverHost;
   late final int dbServerPort;
   late final String dbServerHost;
+  late final String dbUser;
+  late final String dbPassword;
 
   Env() {
 //! dotenv package : adding .env file  to platform.environment
     load(); //env load
     secretKey = env['secretKey'] ?? '25BBD3FF-975D-4D45-8FFF-B3FA92155CFF';
-    dbName = env['dbName'] ?? 'pharmadb';
     redisHost = env['redisHost'] ?? 'localhost';
     redisPort = int.parse(env['redisPort'] ?? '5432');
     serverPort = int.parse(env['serverPort'] ?? '9093');
     serverHost = env['serverHost'] ?? 'localhost';
     dbServerPort = int.parse(env['dbServerPort'] ?? '5432');
     dbServerHost = env['dbServerHost'] ?? 'localhost';
+    dbName = env['dbName'] ?? 'pharmadb';
+    dbUser = env['dbUser'] ?? 'pharmauser';
+    dbPassword = env['dbPassword'] ?? 'Pharma73@user.com';
     clean(); //env clean
   }
 }
@@ -29,6 +33,8 @@ class Env {
 
 
 /*
+! .env file
+
 APP_NAME='PharmaPlay Server'
 secretKey = '25BBD3DF-975D-4D45-8FDF-B3FA92155CDF'
 dbName = 'pharmadb'
@@ -38,4 +44,6 @@ dbServerPort = '5432'
 dbServerHost = 'pharmaplay.mywire.org'
 redisHost = 'pharmaplay.mywire.org'
 redisPort = '6379'
+dbUser='pharmauser'
+dbPassword='Pharma73@user.com'
 */

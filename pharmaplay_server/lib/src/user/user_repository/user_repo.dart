@@ -35,6 +35,7 @@ Future<Either<ApiResponse, String>> logOutUser(String userToken) async {
 
 */
 
+/*
 Future<User> findUserByID(String id, Database db) async {
   final resultSet = db.select('SELECT * FROM Users WHERE id = \"' + id + '\"');
   if (resultSet.isNotEmpty) {
@@ -60,3 +61,4 @@ Future<List<User>> findUserAll(Database db) async {
     throw ' Users is Empty ';
   }
 }
+*/

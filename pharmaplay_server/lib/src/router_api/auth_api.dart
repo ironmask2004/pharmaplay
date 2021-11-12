@@ -1,10 +1,11 @@
 import 'package:pharmaplay_server/pharmaplay_server.dart';
+import 'package:pharmaplay_server/src/repository/database_api.dart';
 
 class AuthApi {
   String store;
   String secret;
   TokenService tokenService;
-  Database db;
+  DB db;
   AuthApi(this.db, this.store, this.secret, this.tokenService);
 
   Router get router {
@@ -28,9 +29,9 @@ class AuthApi {
       // Ensure user is unique
       //final user = await store_findOne(where.eq('email', email));
       print(db.toString());
-      final ResultSet resultSet =
-          db.select('SELECT id FROM Users WHERE email = \"' + email + '\"');
-      if (resultSet.isNotEmpty) {
+      dynamic resultSet =
+          db.query('SELECT id FROM Users WHERE email = \"' + email + '\"');
+      if (resultSet.length > 0) {
         return Response(HttpStatus.badRequest, body: 'User already exists');
       }
 
@@ -41,12 +42,12 @@ class AuthApi {
       final salt = generateSalt();
       final hashedPassword = hashPassword(password, salt);
       try {
-        var stmt = db.prepare(
+        var stmt = db.query(
             'INSERT INTO Users (email, password,salt,id ) VALUES (?,?,?, ?)');
 
-        stmt.execute([email, hashedPassword, salt, id]);
+        //stmt.execute([email, hashedPassword, salt, id]);
 
-        stmt.dispose();
+        //  stmt.dispose();
       } catch (error) {
         print(' error while adding user  ' + error.toString());
         return Response(HttpStatus.badRequest, body: 'error while adding user');
@@ -74,8 +75,8 @@ class AuthApi {
       }
 
       //final user = await store.findOne(where.eq('email', email));
-      final ResultSet resultSet =
-          db.select('SELECT *  FROM Users WHERE email = \"' + email + "\"");
+      final dynamic resultSet =
+          db.query('SELECT *  FROM Users WHERE email = \"' + email + "\"");
       if (resultSet.isEmpty) {
         return Response.forbidden(
             "{ \"error\" : \"Incorrect user and/or password\" ,  \"errorNo\" : \"403\"  }");

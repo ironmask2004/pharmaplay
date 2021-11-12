@@ -1,8 +1,10 @@
 import 'package:pharmaplay_server/pharmaplay_server.dart';
+import 'package:pharmaplay_server/src/user/model/user.dart';
 
 class UserApi {
+  /*
   String store;
-  Database db;
+  DB db;
   UserApi(this.db, this.store);
   Handler get router {
     final router = Router();
@@ -11,7 +13,7 @@ class UserApi {
       print('authDetails.subject.toString ' + authDetails.subject.toString());
 
       User Curr_user = await User.findById(authDetails.subject.toString(), db);
-      print("founded_user------:" + Curr_user.email!);
+      print("founded_user------:" + Curr_user.email);
       //return Response.ok('{ "email": "${Curr_user.email}" }'
       print(Curr_user.toJson().toString());
       return Response.ok(Curr_user.toJson().toString(), headers: {
@@ -33,5 +35,6 @@ class UserApi {
     final handler =
         Pipeline().addMiddleware(checkAuthorisation()).addHandler(router);
     return handler;
-  }
+  }*/
+
 }

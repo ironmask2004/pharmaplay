@@ -17,6 +17,8 @@ export 'package:pharmaplay_server/src/utilites/utils.dart';
 export 'package:pharmaplay_server/src/utilites/token_pair.dart';
 export 'package:pharmaplay_server/src/utilites/token_service.dart';
 export 'package:equatable/equatable.dart';
-export 'package:lib/src/user/user_repository/user_repo.dart;
+//export 'package:lib/src/user/user_repository/user_repo.dart';
+export 'package:pharmaplay_server/src/user/model/user.dart';
+
 export 'package:postgres/postgres.dart';
 export 'package:uuid/uuid.dart';
