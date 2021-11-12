@@ -75,26 +75,23 @@ class AuthApi {
       }
 
       //final user = await store.findOne(where.eq('email', email));
-      final dynamic resultSet =
-          db.query('SELECT *  FROM Users WHERE email = \"' + email + "\"");
-      if (resultSet.isEmpty) {
+      String sql = "SELECT *  FROM pharmaplay.users000 WHERE email =  @email ";
+      Map<String, dynamic> params = {"email": email};
+      dynamic resultSet = await db.query(sql, values: params);
+
+      if (resultSet.length == 0) {
         return Response.forbidden(
             "{ \"error\" : \"Incorrect user and/or password\" ,  \"errorNo\" : \"403\"  }");
       }
       print(resultSet.first.toString());
-      final user = ({
-        'id': resultSet.first['id'],
-        'email': resultSet.first['email'],
-        'password': resultSet.first['password'],
-        'salt': resultSet.first['salt']
-      });
-      // final user = resultSet.toList ();
+
+      final user = resultSet.first['users000'];
       print(user.toString());
 
       final hashedPassword = hashPassword(password, user['salt']);
       if (hashedPassword != user['password']) {
         return Response.forbidden(
-            "{ \"error\" : \"Incorrect user and/or password\" ,  \"errorNo\" : \"403\"  }");
+            "{ \"error\" : \"Incorrect user and/or password!!\" ,  \"errorNo\" : \"403\"  }");
       }
 
       ;

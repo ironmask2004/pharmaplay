@@ -29,7 +29,7 @@ void main(List<String> args) async {
   print('Token Service running...');
 
   //var db_api = dbSqlite_api(sysEnv);   print('Connected to our database');
-  var dbApi = dbPGsqlAPI(sysEnv);
+  var dbApi = DBPGsqlAPI(sysEnv);
   await dbApi.initdb();
   print(dbApi.db);
   print('Connected to our database');

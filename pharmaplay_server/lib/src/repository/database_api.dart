@@ -64,10 +64,10 @@ class DB {
   }
 }
 
-class dbPGsqlAPI {
+class DBPGsqlAPI {
   late final Env _sysEnv;
   late DB db;
-  dbPGsqlAPI(this._sysEnv);
+  DBPGsqlAPI(this._sysEnv);
 
   initdb() async {
     db = await DB.connect(_sysEnv);
