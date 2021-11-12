@@ -2,11 +2,11 @@ import 'package:pharmaplay_server/pharmaplay_server.dart';
 import 'package:pharmaplay_server/src/repository/database_api.dart';
 
 class AuthApi {
-  String store;
+  String authStore;
   String secret;
   TokenService tokenService;
   DB db;
-  AuthApi(this.db, this.store, this.secret, this.tokenService);
+  AuthApi(this.db, this.authStore, this.secret, this.tokenService);
 
   Router get router {
     final router = Router();
@@ -14,40 +14,81 @@ class AuthApi {
     router.post('/register', (Request req) async {
       final payload = await req.readAsString();
       final userInfo = json.decode(payload);
+      print(userInfo);
       final email = userInfo['email'];
       final password = userInfo['password'];
+      final firstname = userInfo['firstname'];
+      final lastname = userInfo['lastname'];
 
       // Ensure email and password fields are present
       if (email == null ||
           email.isEmpty ||
           password == null ||
           password.isEmpty) {
-        return Response(HttpStatus.badRequest,
-            body: 'Please provide your email and password');
+        // return Response(HttpStatus.badRequest,
+        //      body: 'Please provide your email and password');
+
+        return Response.forbidden(
+            "{ \"error\" : \"Please provide your email and password \" ,  \"errorNo\" : \"403\"  }");
       }
 
-      // Ensure user is unique
-      //final user = await store_findOne(where.eq('email', email));
-      print(db.toString());
-      dynamic resultSet =
-          db.query('SELECT id FROM Users WHERE email = \"' + email + '\"');
+      print(firstname);
+      print(lastname);
+      if (firstname == null ||
+          firstname.isEmpty ||
+          lastname == null ||
+          lastname.isEmpty) {
+        return Response.forbidden(
+            "{ \"error\" : \"Please provide your firstname and lastname \" ,  \"errorNo\" : \"403\"  }");
+      }
+
+      String sql =
+          "SELECT idx  FROM pharmaplay.$authStore WHERE email =  @email ";
+      Map<String, dynamic> params = {"email": email};
+      dynamic resultSet = await db.query(sql, values: params);
+
       if (resultSet.length > 0) {
-        return Response(HttpStatus.badRequest, body: 'User already exists');
+        return Response.forbidden(
+            "{ \"error\" : \"Email:  $email  was already registerd!!\" ,  \"errorNo\" : \"403\"  }");
       }
 
+      sql =
+          "SELECT idx  FROM pharmaplay.$authStore WHERE firstname= @firstname and lastname =  @lastname ";
+      params = {"firstname": firstname, "lastname": lastname};
+      resultSet = await db.query(sql, values: params);
+
+      if (resultSet.length > 0) {
+        return Response.forbidden(
+            "{ \"error\" : \"User name:  $firstname $lastname  was already registerd!!\" ,  \"errorNo\" : \"403\"  }");
+      }
       // Create user
       //final authDetails = req.context['authDetails'] as JWT;
       //print (authDetails.subject.toString());
+
       final id = ObjectId().toString();
       final salt = generateSalt();
       final hashedPassword = hashPassword(password, salt);
       try {
-        var stmt = db.query(
-            'INSERT INTO Users (email, password,salt,id ) VALUES (?,?,?, ?)');
+        //var stmt = db.query(
+        //    'INSERT INTO $authStore (email, password,salt,id ) VALUES (?,?,?, ?)');
+//
+        String sql =
+            "insert into  pharmaplay.$authStore (firstname,lastname, id, email, password,salt) values (@firstname,@lastname, @id, @email, @password,@salt) returning idx";
+        Map<String, dynamic> params = {
+          "firstname": firstname,
+          "lastname": lastname,
+          "id": id,
+          "email": email,
+          "password": hashedPassword,
+          "salt": salt
+        };
+        dynamic resultSet = await db.query(sql, values: params);
 
-        //stmt.execute([email, hashedPassword, salt, id]);
-
-        //  stmt.dispose();
+        print(resultSet.first.toString());
+        if (resultSet.length == 0) {
+          return Response.forbidden(
+              "{ \"error\" : \" facing error while adding user\" ,  \"errorNo\" : \"403\"  }");
+        }
       } catch (error) {
         print(' error while adding user  ' + error.toString());
         return Response(HttpStatus.badRequest, body: 'error while adding user');
@@ -75,23 +116,24 @@ class AuthApi {
       }
 
       //final user = await store.findOne(where.eq('email', email));
-      String sql = "SELECT *  FROM pharmaplay.users000 WHERE email =  @email ";
+      String sql =
+          "SELECT *  FROM pharmaplay.$authStore WHERE email =  @email ";
       Map<String, dynamic> params = {"email": email};
       dynamic resultSet = await db.query(sql, values: params);
 
       if (resultSet.length == 0) {
         return Response.forbidden(
-            "{ \"error\" : \"Incorrect user and/or password\" ,  \"errorNo\" : \"403\"  }");
+            "{ \"error\" : \"Incorrect user  Name\" ,  \"errorNo\" : \"403\"  }");
       }
       print(resultSet.first.toString());
 
-      final user = resultSet.first['users000'];
+      final user = resultSet.first['$authStore'];
       print(user.toString());
 
       final hashedPassword = hashPassword(password, user['salt']);
       if (hashedPassword != user['password']) {
         return Response.forbidden(
-            "{ \"error\" : \"Incorrect user and/or password!!\" ,  \"errorNo\" : \"403\"  }");
+            "{ \"error\" : \"Incorrect  password!!\" ,  \"errorNo\" : \"403\"  }");
       }
 
       ;
@@ -105,10 +147,8 @@ class AuthApi {
         final tokenPair = await tokenService.createTokenPair(userId);
         user['token'] = tokenPair.toJson()['token'];
         user['refreshToken'] = tokenPair.toJson()['refreshToken'];
-        print(tokenPair.toJson().toString());
         user["'error'"] = "\"" + 'Suucess' + "\"";
         user["'errorNo'"] = "\"" + '200' + "\"";
-        print("==============================" + user.toString());
 
         return Response.ok(json.encode(user), headers: {
           HttpHeaders.contentTypeHeader: ContentType.json.mimeType,

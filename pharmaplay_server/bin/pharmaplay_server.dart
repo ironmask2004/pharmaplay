@@ -36,7 +36,7 @@ void main(List<String> args) async {
   // Configure a pipeline that logs requests.
   //final _handler = Pipeline().addMiddleware(logRequests()).addHandler(_router);
 
-  final authStore = 'users';
+  final authStore = 'users000';
   final app = Router()
     ..mount('/auth/',
         AuthApi(dbApi.db, authStore, sysEnv.secretKey, tokenService).router)
