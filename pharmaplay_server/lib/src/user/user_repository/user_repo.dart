@@ -39,9 +39,9 @@ Future<User> findUserByID(String id, DB db, String authStore) async {
   String sql = "SELECT *  FROM pharmaplay.$authStore WHERE id =  @id ";
   print(id);
   Map<String, dynamic> params = {"id": id};
-  print(sql);
+  //print(sql);
   dynamic resultSet = await db.query(sql, values: params);
-  print(resultSet.first['$authStore']);
+  // print(resultSet.first['$authStore']);
   if (resultSet.length > 0) {
     return User.fromMap(resultSet.first['$authStore']);
   } else {

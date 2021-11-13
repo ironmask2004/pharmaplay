@@ -68,6 +68,28 @@ class User extends Equatable {
     );
   }
 
+  User copyWithFromMap(Map<String, dynamic> map) {
+    return User(
+        idx: map['idx'] ?? idx,
+        id: map['id'] ?? id,
+        firstname: map['firstname'] ?? firstname,
+        lastname: map['lastname'] ?? lastname,
+        email: map['email'] ?? email,
+        password: map['password'] ?? password,
+        salt: map['salt'] ?? salt,
+        mobile: map['mobile'] ?? mobile,
+        //createdate: ((map['updatedate'] ?? createdate)),
+        // updatedate: (map['updatedate'] ?? updatedate));
+        createdate: (map['updatedate'] == null
+            ? createdate
+            : DateTime.fromMillisecondsSinceEpoch(
+                int.parse(map['updatedate'].toString()))),
+        updatedate: (map['updatedate'] == null
+            ? updatedate
+            : DateTime.fromMillisecondsSinceEpoch(
+                int.parse(map['updatedate'].toString()))));
+  }
+
   Map<String, dynamic> toMap() {
     return {
       'idx': idx,
@@ -93,15 +115,17 @@ class User extends Equatable {
         password: map['password'],
         salt: map['salt'],
         mobile: map['mobile'],
-        createdate:
-            DateTime.fromMillisecondsSinceEpoch(int.parse(map['updatedate'])),
-        updatedate:
-            DateTime.fromMillisecondsSinceEpoch(int.parse(map['updatedate'])));
+        createdate: DateTime.fromMillisecondsSinceEpoch(
+            int.parse(map['updatedate'].toString())),
+        updatedate: DateTime.fromMillisecondsSinceEpoch(
+            int.parse(map['updatedate'].toString())));
   }
 
   String toJson() => json.encode(toMap());
 
   factory User.fromJson(String source) => User.fromMap(json.decode(source));
+
+  copyWithfromJson(String source) => copyWithFromMap(json.decode(source));
 
   @override
   bool get stringify => true;
