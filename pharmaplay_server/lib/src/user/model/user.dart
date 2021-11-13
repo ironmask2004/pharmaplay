@@ -1,8 +1,21 @@
 import 'dart:convert';
-
 import 'package:equatable/equatable.dart';
-
 import 'package:pharmaplay_server/pharmaplay_server.dart';
+
+/*
+SELECT  createdate,  current_timestamp,
+TIMESTAMP WITH TIME ZONE 'epoch' + updatedate  * INTERVAL '1 millisecond'  , updatedate
+FROM pharmaplay.users000;
+
+SELECT EXTRACT(EPOCH FROM TIMESTAMP WITH TIME ZONE '2001-02-16 20:38:40.12-08');
+Result: 982384720.12
+
+SELECT EXTRACT(EPOCH FROM INTERVAL '5 days 3 hours');
+Result: 442800
+Here is how you can convert an epoch value back to a time stamp:
+
+SELECT TIMESTAMP WITH TIME ZONE 'epoch' + 982384720.12 * INTERVAL '1 second';
+*/
 
 class User extends Equatable {
   final int idx;
@@ -72,17 +85,18 @@ class User extends Equatable {
 
   factory User.fromMap(Map<String, dynamic> map) {
     return User(
-      idx: map['idx'],
-      id: map['id'],
-      firstname: map['firstname'],
-      lastname: map['lastname'],
-      email: map['email'],
-      password: map['password'],
-      salt: map['salt'],
-      mobile: map['mobile'],
-      createdate: DateTime.fromMillisecondsSinceEpoch(map['createdate']),
-      updatedate: DateTime.fromMillisecondsSinceEpoch(map['updatedate']),
-    );
+        idx: map['idx'],
+        id: map['id'],
+        firstname: map['firstname'],
+        lastname: map['lastname'],
+        email: map['email'],
+        password: map['password'],
+        salt: map['salt'],
+        mobile: map['mobile'],
+        createdate:
+            DateTime.fromMillisecondsSinceEpoch(int.parse(map['updatedate'])),
+        updatedate:
+            DateTime.fromMillisecondsSinceEpoch(int.parse(map['updatedate'])));
   }
 
   String toJson() => json.encode(toMap());
