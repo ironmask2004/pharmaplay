@@ -90,7 +90,7 @@ class AuthApi {
           "password": hashedPassword,
           "salt": salt,
           "mobile": mobile,
-          "createdate": DateTime.now().microsecondsSinceEpoch,
+          "createdate": DateTime.now().millisecondsSinceEpoch,
           "updatedate": DateTime.now().millisecondsSinceEpoch
         };
         resultSet = await db.query(sql, values: params);
