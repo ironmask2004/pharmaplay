@@ -25,6 +25,7 @@ void main(List<String> args) async {
   final Env sysEnv = Env();
   final tokenService = TokenService(RedisConnection(), sysEnv.secretKey);
 
+  print(sysEnv.redisPort);
   await tokenService.start(sysEnv.redisHost, sysEnv.redisPort);
   print('Token Service running...');
 

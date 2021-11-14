@@ -2,6 +2,9 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 
+import 'package:pharmaplay_server/pharmaplay_server.dart';
+import 'package:pharmaplay_server/src/utilites/config.dart';
+import 'package:pharmaplay_server/src/utilites/token_service.dart';
 import 'package:shelf/shelf.dart';
 import 'package:crypto/crypto.dart';
 import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
@@ -48,7 +51,7 @@ String generateJwt(
   String issuer,
   String secret, {
   required String jwtId,
-  Duration expiry = const Duration(seconds: 120),
+  Duration expiry = const Duration(seconds: 60),
 }) {
   final jwt = JWT(
     {
@@ -65,10 +68,12 @@ dynamic verifyJwt(String token, String secret) {
   try {
     final jwt = JWT.verify(token, SecretKey(secret));
     return jwt;
-  } on JWTExpiredError {
+  } on JWTExpiredError catch (err0) {
     // TODO Handle error
+    print('JWTExpiredError' + err0.toString());
   } on JWTError catch (err) {
     // TODO Handle error
+    print('JWTError' + err.toString());
   }
 }
 
@@ -76,11 +81,28 @@ Middleware handleAuth(String secret) {
   return (Handler innerHandler) {
     return (Request request) async {
       final authHeader = request.headers['authorization'];
+      print('===============aaaaaaaaaaaaaaaaaaa========' +
+          request.headers['authorization'].toString());
       var token, jwt;
 
       if (authHeader != null && authHeader.startsWith('Bearer')) {
         token = authHeader.substring(7);
         jwt = verifyJwt(token, secret);
+
+//---------------------
+        if (jwt != null) {
+          final Env sysEnv = Env();
+          //var refreshtoken = authHeader.substring(7);
+          final tokenService =
+              TokenService(RedisConnection(), sysEnv.secretKey);
+          final dbToken =
+              await tokenService.getRefreshToken((jwt as JWT).jwtId.toString());
+
+//------------------
+          if (dbToken == null) {
+            jwt = null;
+          }
+        }
       }
 
       final updatedRequest = request.change(context: {
@@ -94,6 +116,8 @@ Middleware handleAuth(String secret) {
 Middleware checkAuthorisation() {
   return createMiddleware(
     requestHandler: (Request request) {
+      print('----------rrrrrrrrrrrrrrrrr----------------' +
+          request.context['authDetails'].toString());
       if (request.context['authDetails'] == null) {
         //return Response.forbidden('Not authorised to perform this action.');
         return Response.forbidden(
