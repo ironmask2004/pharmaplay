@@ -9,6 +9,7 @@ class UserApi {
   UserApi(this.db, this.authStore);
   Handler get router {
     final router = Router();
+    //============= /users/INFO ROUTE
     router.get('/info/', (Request req) async {
       final authDetails = req.context['authDetails'] as JWT;
       print('authDetails.subject.toString ' + authDetails.subject.toString());
@@ -22,6 +23,8 @@ class UserApi {
       });
     });
 
+    //============= /users/  ROUTE
+
     router.post('/', (Request req) async {
       final authDetails = req.context['authDetails'] as JWT;
       print('authDetails.subject.toString ' + authDetails.subject.toString());
@@ -34,6 +37,8 @@ class UserApi {
         'content-type': 'application/json',
       });
     });
+
+    //============= /users/UPDATE  ROUTE
 
     router.post('/update/', (Request req) async {
       String sql;

@@ -10,6 +10,7 @@ class AuthApi {
 
   Router get router {
     final router = Router();
+    // =============== authraize /register route
 
     router.post('/register', (Request req) async {
       final payload = await req.readAsString();
@@ -27,7 +28,7 @@ class AuthApi {
           password == null ||
           password.isEmpty) {
         // return Response(HttpStatus.badRequest,
-        //      body: 'Please provide your email and password');
+        // body: 'Please provide your email and password');
 
         return Response.forbidden(
             "{ \"error\" : \"Please provide your email and password \" ,  \"errorNo\" : \"403\"  }");
@@ -108,7 +109,8 @@ class AuthApi {
           "{ \"error\" : \"Successfully registered user\"   ,  \"errorNo\" : \"200\" }");
     });
 
-    ///------ LOGiN
+    //=============== authraize /LOGiN route
+
     router.post('/login', (Request req) async {
       print('----------Start Login REquest -------------');
       final payload = await req.readAsString();
@@ -185,6 +187,7 @@ class AuthApi {
       }
     });
 
+// ================== authrizee / logout  route
     router.post('/logout', (Request req) async {
       final auth = req.context['authDetails'];
       if (auth == null) {
@@ -203,6 +206,45 @@ class AuthApi {
       return Response.ok(
           '{ \"error\" : \"Successfully Loggedout user\"   ,  \"errorNo\" : \"200\" }');
     });
+
+// ================== authrizee / unrigster  route
+    router.post('/unregister/', (Request req) async {
+      final auth = req.context['authDetails'];
+      if (auth == null) {
+        return Response.forbidden(
+            '"{ \"error\" : \"Not authorised to perform this operation."  ,  \"errorNo\" : \"403\" }");');
+      }
+
+      final authDetails = req.context['authDetails'] as JWT;
+      print('authDetails.subject.toString ' + authDetails.subject.toString());
+
+      try {
+//-----------
+        final String id = authDetails.subject.toString();
+        String sql =
+            "delete  FROM pharmaplay.$authStore WHERE id =  @id returning 1 ";
+        Map<String, dynamic> params = {"id": id};
+        dynamic resultSet = await db.query(sql, values: params);
+
+        if (resultSet.length == 0) {
+          return Response.forbidden(
+              "{ \"error\" : \"Failed to remove user\" ,  \"errorNo\" : \"403\"  }");
+        }
+        print(resultSet.first.toString());
+//------------
+
+        await tokenService.removeRefreshToken(((auth as JWT)).jwtId.toString());
+      } catch (e) {
+        return Response.internalServerError(
+            body:
+                '{ \"error\" : \"There was an issue unregistering  user. Please check and try again.\"   ,  \"errorNo\" : \"199991\" }');
+      }
+
+      return Response.ok(
+          '{ \"error\" : \"Successfully Unrigested  user \"   ,  \"errorNo\" : \"200\" }');
+    });
+
+//  ================ authreize / refresh token route
 
     router.post('/refreshToken', (Request req) async {
       final payload = await req.readAsString();
