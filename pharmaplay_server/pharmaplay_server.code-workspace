@@ -4,5 +4,19 @@
 			"path": "."
 		}
 	],
-	"settings": {}
+	"settings": {
+		"sqltools.connections": [
+			{
+				"previewLimit": 50,
+				"server": "localhost",
+				"port": 5432,
+				"driver": "PostgreSQL",
+				"name": "pharmadb",
+				"group": "pahrmadb",
+				"database": "pharmadb",
+				"username": "pharmaadmin",
+				"password": "Pharma73@gim"
+			}
+		]
+	}
 }
