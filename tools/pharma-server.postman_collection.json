@@ -1,0 +1,230 @@
+{
+	"info": {
+		"_postman_id": "b1b02e34-03f9-4ccf-b34c-22462f8fe6be",
+		"name": "pharma-server",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"email\": \"k1@gmail.com\" , \"password\": \"123456\" }"
+				},
+				"url": {
+					"raw": "pharmaplay.mywire.org:9093/auth/login",
+					"host": [
+						"pharmaplay",
+						"mywire",
+						"org"
+					],
+					"port": "9093",
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "pharmaplay.mywire.org:9093",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "pharmaplay.mywire.org:9093",
+					"host": [
+						"pharmaplay",
+						"mywire",
+						"org"
+					],
+					"port": "9093"
+				}
+			},
+			"response": []
+		},
+		{
+			"name": " users/info/",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzY3OTQ4MjUsImV4cCI6MTYzNjc5NzgyNSwic3ViIjoiNjE4ZjdhNzZiZWIwM2UyOGM1NWJhOGFkIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdCIsImp0aSI6ImE3YTU2ZmZjLWEyMTQtNDc4OS1iMWJhLWU3MGE2MWM2YzViMyJ9.JIm-ef7nhrm6ut7nT3j6dNjyZXD4rrsgH5mXvk4nhrA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "pharmaplay.mywire.org:9093/users/info/",
+					"host": [
+						"pharmaplay",
+						"mywire",
+						"org"
+					],
+					"port": "9093",
+					"path": [
+						"users",
+						"info",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": " uth/logout",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzY3MTk1MDUsImV4cCI6MTYzNjcyMDUwNSwic3ViIjoiNjE4ZTM1ODU4MWI2ZjQ2ZWMxYzhjZjgwIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdCIsImp0aSI6IjgzNTdlMjA0LTlkMTItNGY4Yy04ZDQzLWRkNTY0Y2Y2NjBkYSJ9.twFHHmtHgpeRzELX3xIv0Gxr9Xm_nLGjEj-cnMcHBDg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "pharmaplay.mywire.org:9093/auth/logout",
+					"host": [
+						"pharmaplay",
+						"mywire",
+						"org"
+					],
+					"port": "9093",
+					"path": [
+						"auth",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "auth/register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {  \"firstname\": \"k111\" , \"lastname\": \"f111\" , \"email\": \"k111@gmail.com\" , \"password\": \"123456\" ,\n  \"mobile\" : \"12345678911\" }"
+				},
+				"url": {
+					"raw": "pharmaplay.mywire.org:9093/auth/register",
+					"host": [
+						"pharmaplay",
+						"mywire",
+						"org"
+					],
+					"port": "9093",
+					"path": [
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "users/update",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzY3OTQ4MjUsImV4cCI6MTYzNjc5NzgyNSwic3ViIjoiNjE4ZjdhNzZiZWIwM2UyOGM1NWJhOGFkIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdCIsImp0aSI6ImE3YTU2ZmZjLWEyMTQtNDc4OS1iMWJhLWU3MGE2MWM2YzViMyJ9.JIm-ef7nhrm6ut7nT3j6dNjyZXD4rrsgH5mXvk4nhrA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {  \"firstname\": \"k1eed1\" , \"lastname\": \"f1d1\"  , \"mobile\" : \"12345678911d\"}"
+				},
+				"url": {
+					"raw": "pharmaplay.mywire.org:9093/users/update/",
+					"host": [
+						"pharmaplay",
+						"mywire",
+						"org"
+					],
+					"port": "9093",
+					"path": [
+						"users",
+						"update",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/users/info/",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzY3MTg0NzQsImV4cCI6MTYzNjcxOTQ3NCwic3ViIjoiNjE4ZTM1ODU4MWI2ZjQ2ZWMxYzhjZjgwIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdCIsImp0aSI6ImQ5MzE0N2UwLTRjMmQtNGVkZi04ZmVkLTk3MWZhYmM4ODExMyJ9.dkJCzWHrXI0bMZ2rlv7GfG367tWLVBi5Ott7ExRvBAo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "pharmaplay.mywire.org:9093/users/info/",
+					"host": [
+						"pharmaplay",
+						"mywire",
+						"org"
+					],
+					"port": "9093",
+					"path": [
+						"users",
+						"info",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer"
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

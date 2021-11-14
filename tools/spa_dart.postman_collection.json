@@ -1,0 +1,194 @@
+{
+	"info": {
+		"_postman_id": "128f5d8d-0b88-4d1e-b5e2-5f0fe7e2b8aa",
+		"name": "spa_dart",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"email\": \"melocalcom1\" , \"password\": \"123456\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "192.168.0.3:9093/auth/login",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"3"
+					],
+					"port": "9093",
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " { \"email\": \"melocalco3e3\" , \"password\": \"123456\"}"
+				},
+				"url": {
+					"raw": "192.168.0.3:9093/auth/register",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"3"
+					],
+					"port": "9093",
+					"path": [
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "users",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzYyODczMzcsImV4cCI6MTYzNjI4ODMzNywic3ViIjoiNjE0OGRmM2M1NWE5NjQ2NzdiNDMxOGZiIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdCIsImp0aSI6ImIyOWY0ZjgzLWJjMzMtNGI2NS1hNDNjLWU2NDIzZDc1YWZhZSJ9.k-plVE9czaKPVctWxzz3JiL_IQLQBAZ6yvxNl-JxeFQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "192.168.0.3:9093/users/info/",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"3"
+					],
+					"port": "9093",
+					"path": [
+						"users",
+						"info",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "logout",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzQxMjE0MjUsImV4cCI6MTYzNDEyMTU1NSwic3ViIjoiNjE0OGRmM2M1NWE5NjQ2NzdiNDMxOGZiIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdCIsImp0aSI6ImRjMjAwMjkxLWQwOGYtNGQ4Mi04NjJiLTkzMjE3ZTcxNzY2MCJ9.RJBCe22_llu7ZJY5RQqMbqMtMdc2rUlEs1_6rVGD454",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "192.168.0.3:9093/auth/logout",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"3"
+					],
+					"port": "9093",
+					"path": [
+						"auth",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "refreshToken",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR6cCI6IkpXVCJ9.eyJpYXQiOjE2MzIyNTQ4NDksImV4cCI6MTYzMjI1NDk3OSwic3ViIjoiNjE0OGRmM2M1NWE5NjQ2NzdiNDMxOGZiIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdCIsImp0aSI6IjY3YmQ5M2FiLWIxNzAtNGNiMS1hYzM4LTEwZDczYWEwYjBmMCJ9.pCGEJC9XCwbi6a-98Ri1uZMhzCER_WzyH8RE_L-Ltkg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzIyNTQ4NDksImV4cCI6MTYzMjI1NTAwOSwic3ViIjoiNjE0OGRmM2M1NWE5NjQ2NzdiNDMxOGZiIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdCIsImp0aSI6IjY3YmQ5M2FiLWIxNzAtNGNiMS1hYzM4LTEwZDczYWEwYjBmMCJ9.x0Vr-H__86TZpNGoy_Jy6rf2WZA40d6nkDFHAnAPa1o\"\n}"
+				},
+				"url": {
+					"raw": "localhost:9093/auth/refreshToken",
+					"host": [
+						"localhost"
+					],
+					"port": "9093",
+					"path": [
+						"auth",
+						"refreshToken"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzIyNTQzMjksImV4cCI6MTYzMjI1NDQ1OSwic3ViIjoiNjE0OGRmM2M1NWE5NjQ2NzdiNDMxOGZiIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdCIsImp0aSI6IjMyYTBmODllLTY3YTItNDgyZC1iZmUzLTMzMzQzYjRjNjMwYiJ9.KQyxOPodML_Zqam7LKGauYCJ0IBqlXKCfjiuGu3WIII",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
