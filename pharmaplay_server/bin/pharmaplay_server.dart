@@ -48,7 +48,7 @@ void main(List<String> args) async {
   final _handler = Pipeline()
       .addMiddleware(logRequests())
       .addMiddleware(handleCors())
-      .addMiddleware(handleAuth(sysEnv.secretKey))
+      .addMiddleware(handleAuth(sysEnv.secretKey, tokenService))
       .addHandler(app);
 
   // For running in containers, we respect the PORT environment variable.

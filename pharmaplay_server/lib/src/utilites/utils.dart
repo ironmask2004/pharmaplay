@@ -77,7 +77,7 @@ dynamic verifyJwt(String token, String secret) {
   }
 }
 
-Middleware handleAuth(String secret) {
+Middleware handleAuth(String secret, TokenService tokenService) {
   return (Handler innerHandler) {
     return (Request request) async {
       final authHeader = request.headers['authorization'];
@@ -91,10 +91,10 @@ Middleware handleAuth(String secret) {
 
 //---------------------
         if (jwt != null) {
-          final Env sysEnv = Env();
+          //   final Env sysEnv = Env();
           //var refreshtoken = authHeader.substring(7);
-          final tokenService =
-              TokenService(RedisConnection(), sysEnv.secretKey);
+          //  final tokenService =
+          //       TokenService(RedisConnection(), sysEnv.secretKey);
           final dbToken =
               await tokenService.getRefreshToken((jwt as JWT).jwtId.toString());
 
