@@ -1,3 +1,6 @@
 11/11/2021
 
-Created by me under a BSD-style license.
+ 
+
+this is testing and learning stuff, nothing else!!  :)
+
