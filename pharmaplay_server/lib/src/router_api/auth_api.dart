@@ -211,6 +211,28 @@ class AuthApi {
           '{ \"error\" : \"Successfully Loggedout user\"   ,  \"errorNo\" : \"200\" }');
     });
 
+// ================== Sessions RElated to users /sessions/   route
+    router.post('/sessions', (Request req) async {
+      final auth = req.context['authDetails'];
+      var result;
+      if (auth == null) {
+        return Response.forbidden(
+            '"{ \"error\" : \"Not authorised to perform this operation."  ,  \"errorNo\" : \"403\" }");');
+      }
+
+      try {
+        final userId = ((auth as JWT)).subject.toString();
+
+        result = await tokenService.RefreshTokenByScanUserId(userId);
+      } catch (e) {
+        return Response.internalServerError(
+            body:
+                '{ \"error\" : \"There was an issue getting sessions  out $e. Please check and try again.\"   ,  \"errorNo\" : \"199991\" }');
+      }
+
+      return Response.ok(result.toString());
+    });
+
 // ================== authrizee / Unrigster   route
     router.post('/unregister/', (Request req) async {
       final auth = req.context['authDetails'];

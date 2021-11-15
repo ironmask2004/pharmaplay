@@ -53,13 +53,59 @@ class TokenService {
     print('remove refresh token:    userId:$userId:');
 
 //redis-cli --scan --pattern 'userId:$userId:*'
-    var result = await Process.run(
-        'redis-cli', ['--scan', '--pattern', 'userId:$userId:*']);
-    LineSplitter liness = LineSplitter();
-    List<String> keys = liness.convert(result.stdout);
+    //  var result = await Process.run(
+    //      'redis-cli', ['--scan', '--pattern', 'userId:$userId:*']);
+    // LineSplitter liness = LineSplitter();
+    // List<String> keys = liness.convert(result.stdout);
+
+    // for (var i = 0; i < keys.length; i++) {
+    //    await _cache.send_object(['EXPIRE', '${keys[i]}', '-1']);
+    //  }
+
+    var keys = [];
+    await _cache.send_object(['KEYS', 'userId:$userId:*']).then(
+        (value) => keys = value);
 
     for (var i = 0; i < keys.length; i++) {
       await _cache.send_object(['EXPIRE', '${keys[i]}', '-1']);
     }
+  }
+
+  Future<dynamic> RefreshTokenByScanUserId(String userId) async {
+    print('remove refresh token:    userId:$userId:');
+
+//redis-cli --scan --pattern 'userId:$userId:*'
+    var list = [];
+    await _cache.send_object(['KEYS', 'userId:$userId:*']).then(
+        (value) => list = value);
+
+    String jsonList = jsonEncode(
+        list.asMap().entries.map((e) => '${e.key}:${e.value}').toList());
+    print(jsonList);
+
+/*
+//while scan not returning 0 , ther is more items to get
+     list = [];
+     await _cache.send_object(['scan', '0', 'MATCH', 'userId:$userId:*']).then(
+        (value) => list = value);
+    print(list.toString());
+*/
+    int x = 0;
+    var resaultList = [];
+    do {
+      await _cache
+          .send_object(['SCAN', '$x', 'MATCH', 'userId:$userId:*']).then(
+              (value) => list = value);
+      print(list[1].toString());
+      resaultList.addAll(list[1]);
+      x = int.parse(list[0].toString());
+      print('X=$x');
+    } while (x != 0);
+    print("========list + list" + resaultList.toString());
+
+    jsonList = jsonEncode(
+        resaultList.asMap().entries.map((e) => '${e.key}:${e.value}').toList());
+    print(jsonList);
+    return jsonList;
   }
 }
