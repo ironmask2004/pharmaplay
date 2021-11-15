@@ -57,11 +57,15 @@ class TokenService {
     //await _cache.multi()
 
 //redis-cli --scan --pattern 'userId:$userId:*'
-    var result =
-        await Process.run('redis-cli', ['--scan', '--pattern', '$userId:*']);
-    print(result.stdout);
+    var result = await Process.run(
+        'redis-cli', ['--scan', '--pattern', 'userId:$userId:*']);
+    LineSplitter liness = LineSplitter();
+    List<String> keys = liness.convert(result.stdout);
 
-    await _cache.send_object(['EXPIRE', 'userId:$userId:$_prefix:$id:', '-1']);
+    for (var i = 0; i < keys.length; i++) {
+      await _cache.send_object(['EXPIRE', '${keys[i]}', '-1']);
+    }
+
     //await _cache.send_object(['DELETE', 'userId:$userId:*']);
     //  await _cache.del ( 'userId:$userId:');
   }
