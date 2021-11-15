@@ -27,21 +27,42 @@ class TokenService {
       expiry: refreshTokenExpiry,
     );
 
-    await addRefreshToken(tokenId, refreshToken, refreshTokenExpiry);
+    await addRefreshToken(tokenId, userId, refreshToken, refreshTokenExpiry);
 
     return TokenPair(token, refreshToken);
   }
 
-  Future<void> addRefreshToken(String id, String token, Duration expiry) async {
-    await _cache.send_object(['SET', '$_prefix:$id', token]);
-    await _cache.send_object(['EXPIRE', '$_prefix:$id', expiry.inSeconds]);
+  Future<void> addRefreshToken(
+      String id, String userId, String token, Duration expiry) async {
+    await _cache.send_object(['SET', 'userId:$userId:$_prefix:$id:', token]);
+
+    await _cache.send_object(
+        ['EXPIRE', 'userId:$userId:$_prefix:$id:', expiry.inSeconds]);
   }
 
-  Future<dynamic> getRefreshToken(String id) async {
-    return await _cache.get('$_prefix:$id');
+  Future<dynamic> getRefreshToken(String id, String userId) async {
+    return await _cache.get('userId:$userId:$_prefix:$id:');
   }
 
-  Future<void> removeRefreshToken(String id) async {
-    await _cache.send_object(['EXPIRE', '$_prefix:$id', '-1']);
+  Future<void> removeRefreshToken(String id, String userId) async {
+    print('remove refresh token  ID: userId:$userId:$_prefix:$id:');
+    await _cache.send_object(['EXPIRE', 'userId:$userId:$_prefix:$id:', '-1']);
+  }
+
+  Future<void> removeRefreshTokenByUserId(String userId) async {
+    print('remove refresh token:    userId:$userId:');
+
+    //await _cache.send_object(['GET', 'userId:$userId:*']).then(
+    //   (value) => print('get * from rdis:' + value.toString()));
+    //await _cache.multi()
+
+//redis-cli --scan --pattern 'userId:$userId:*'
+    var result =
+        await Process.run('redis-cli', ['--scan', '--pattern', '$userId:*']);
+    print(result.stdout);
+
+    await _cache.send_object(['EXPIRE', 'userId:$userId:$_prefix:$id:', '-1']);
+    //await _cache.send_object(['DELETE', 'userId:$userId:*']);
+    //  await _cache.del ( 'userId:$userId:');
   }
 }

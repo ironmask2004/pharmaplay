@@ -196,7 +196,11 @@ class AuthApi {
       }
 
       try {
-        await tokenService.removeRefreshToken(((auth as JWT)).jwtId.toString());
+        final userId = ((auth as JWT)).subject.toString();
+        print('iiiiiiiiiiiiiiiiiiiiiii    subject   rrrrrrrrrrrr:  $userId');
+
+        await tokenService.removeRefreshToken(
+            ((auth as JWT)).jwtId.toString(), userId);
       } catch (e) {
         return Response.internalServerError(
             body:
@@ -207,7 +211,7 @@ class AuthApi {
           '{ \"error\" : \"Successfully Loggedout user\"   ,  \"errorNo\" : \"200\" }');
     });
 
-// ================== authrizee / unrigster  route
+// ================== authrizee / Unrigster   route
     router.post('/unregister/', (Request req) async {
       final auth = req.context['authDetails'];
       if (auth == null) {
@@ -232,8 +236,8 @@ class AuthApi {
         }
         print(resultSet.first.toString());
 //------------
-
-        await tokenService.removeRefreshToken(((auth as JWT)).jwtId.toString());
+        final userId = ((auth as JWT)).subject.toString();
+        await tokenService.removeRefreshTokenByUserId(userId);
       } catch (e) {
         return Response.internalServerError(
             body:
@@ -258,16 +262,24 @@ class AuthApi {
         return Response(400, body: 'Refresh token is not valid.');
       }
 
-      final dbToken =
-          await tokenService.getRefreshToken((token as JWT).jwtId.toString());
+//-----------------
+      final authDetails = req.context['authDetails'] as JWT;
+      print('authDetails.subject.toString ' + authDetails.subject.toString());
+      final userId = authDetails.subject.toString();
+      print(userId);
+//----------------
+      final dbToken = await tokenService.getRefreshToken(
+          (token as JWT).jwtId.toString(), userId);
       if (dbToken == null) {
         return Response(400, body: 'Refresh token is not recognised.');
       }
 
       // Generate new token pair
       final oldJwt = (token as JWT);
+      //final userId = (token as JWT).subject.toString();
       try {
-        await tokenService.removeRefreshToken((token as JWT).jwtId.toString());
+        await tokenService.removeRefreshToken(
+            (token as JWT).jwtId.toString(), userId);
 
         final tokenPair =
             await tokenService.createTokenPair(oldJwt.subject.toString());

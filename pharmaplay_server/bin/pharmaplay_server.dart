@@ -22,6 +22,9 @@ app.get('/users/<userName>/whoami', (Request request) async {
 */
 
 void main(List<String> args) async {
+  /// TODO   Run DynDns Script
+  print(' ===========Dont forget to Run Dyndns Script========= ');
+
   final Env sysEnv = Env();
   final tokenService = TokenService(RedisConnection(), sysEnv.secretKey);
 

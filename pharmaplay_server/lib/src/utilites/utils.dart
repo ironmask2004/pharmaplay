@@ -95,8 +95,9 @@ Middleware handleAuth(String secret, TokenService tokenService) {
           //var refreshtoken = authHeader.substring(7);
           //  final tokenService =
           //       TokenService(RedisConnection(), sysEnv.secretKey);
-          final dbToken =
-              await tokenService.getRefreshToken((jwt as JWT).jwtId.toString());
+          final userId = (jwt as JWT).subject.toString();
+          final dbToken = await tokenService.getRefreshToken(
+              (jwt as JWT).jwtId.toString(), userId);
 
 //------------------
           if (dbToken == null) {
