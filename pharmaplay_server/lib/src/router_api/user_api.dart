@@ -103,9 +103,6 @@ class UserApi {
               "{ \"error\" : \"mobile Number:  $mobile  was already taken !!\" ,  \"errorNo\" : \"403\"  }");
         }
       }
-      // final id = ObjectId().toString();
-      // final salt = generateSalt();
-      // final hashedPassword = hashPassword(password, salt);
       try {
         sql =
             'update pharmaplay.$authStore SET   id=@id, firstname=@firstname, lastname=@lastname, email=@email, password=@password, salt=@salt, mobile=@mobile, createdate=@createdate, updatedate=@updatedate 	where idx= @idx returning idx';

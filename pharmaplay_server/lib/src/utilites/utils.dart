@@ -1,9 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
-
 import 'package:pharmaplay_server/pharmaplay_server.dart';
-import 'package:pharmaplay_server/src/utilites/config.dart';
 import 'package:pharmaplay_server/src/utilites/token_service.dart';
 import 'package:shelf/shelf.dart';
 import 'package:crypto/crypto.dart';
@@ -91,10 +89,6 @@ Middleware handleAuth(String secret, TokenService tokenService) {
 
 //---------------------
         if (jwt != null) {
-          //   final Env sysEnv = Env();
-          //var refreshtoken = authHeader.substring(7);
-          //  final tokenService =
-          //       TokenService(RedisConnection(), sysEnv.secretKey);
           final userId = (jwt as JWT).subject.toString();
           final dbToken = await tokenService.getRefreshToken(
               (jwt as JWT).jwtId.toString(), userId);

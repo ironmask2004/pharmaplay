@@ -52,10 +52,6 @@ class TokenService {
   Future<void> removeRefreshTokenByUserId(String userId) async {
     print('remove refresh token:    userId:$userId:');
 
-    //await _cache.send_object(['GET', 'userId:$userId:*']).then(
-    //   (value) => print('get * from rdis:' + value.toString()));
-    //await _cache.multi()
-
 //redis-cli --scan --pattern 'userId:$userId:*'
     var result = await Process.run(
         'redis-cli', ['--scan', '--pattern', 'userId:$userId:*']);
@@ -65,8 +61,5 @@ class TokenService {
     for (var i = 0; i < keys.length; i++) {
       await _cache.send_object(['EXPIRE', '${keys[i]}', '-1']);
     }
-
-    //await _cache.send_object(['DELETE', 'userId:$userId:*']);
-    //  await _cache.del ( 'userId:$userId:');
   }
 }
