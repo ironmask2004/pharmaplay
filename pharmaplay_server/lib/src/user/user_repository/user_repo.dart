@@ -61,8 +61,9 @@ Future<List<User>> findUserByParams(
   }
   print(resultSet);
   List<User> resaultUsers = [];
-  for (int i = 0; i < resultSet.length; i++) {
-    resaultUsers.add(User.fromMap(resultSet[i][authStore]));
+
+  for (final row in resultSet) {
+    resaultUsers.add(User.fromMap(row[authStore]));
   }
 
   if (resultSet.length > 0) {

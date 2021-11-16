@@ -33,6 +33,10 @@ class AuthApi {
         return Response.forbidden(
             "{ \"error\" : \"Please provide your email and password \" ,  \"errorNo\" : \"403\"  }");
       }
+      if (!EmailValidator.validate(email)) {
+        return Response(HttpStatus.badRequest,
+            body: '"{ \"error\" : \"Please provide a vaild  Email \" }"');
+      }
 
       print(firstname);
       print(lastname);
@@ -126,6 +130,10 @@ class AuthApi {
         return Response(HttpStatus.badRequest,
             body:
                 '"{ \"error\" : \"Please provide your email and password\" }"');
+      }
+      if (!EmailValidator.validate(email)) {
+        return Response(HttpStatus.badRequest,
+            body: '"{ \"error\" : \"Please provide a vaild  Email \" }"');
       }
 
       //final user = await store.findOne(where.eq('email', email));

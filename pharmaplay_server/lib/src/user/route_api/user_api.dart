@@ -98,6 +98,10 @@ class UserApi {
       print("updared _user_data: ------:" + UpdatedUserInfo.toString());
 
       if (oldUserInfo.email != UpdatedUserInfo.email) {
+        if (!EmailValidator.validate(UpdatedUserInfo.email)) {
+          return Response(HttpStatus.badRequest,
+              body: '"{ \"error\" : \"Please provide a vaild  Email \" }"');
+        }
         sql =
             "SELECT idx  FROM pharmaplay.$authStore WHERE email =  @email  and idx != @idx";
         params = {"email": UpdatedUserInfo.email, "idx": UpdatedUserInfo.idx};

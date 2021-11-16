@@ -3,9 +3,9 @@
 import 'dart:io';
 import 'package:pharmaplay_server/pharmaplay_server.dart';
 import 'package:pharmaplay_server/src/repository/database_api.dart';
-import 'package:pharmaplay_server/src/router_api/auth_api.dart';
+import 'package:pharmaplay_server/src/authentication/auth_api/auth_api.dart';
 import 'package:pharmaplay_server/src/router_api/static_assets_api.dart';
-import 'package:pharmaplay_server/src/router_api/user_api.dart';
+import 'package:pharmaplay_server/src/user/route_api/user_api.dart';
 import 'package:pharmaplay_server/src/utilites/config.dart';
 import 'package:shelf/shelf.dart';
 import 'package:shelf/shelf_io.dart';
