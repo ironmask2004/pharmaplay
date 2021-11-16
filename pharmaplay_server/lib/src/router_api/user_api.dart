@@ -13,17 +13,32 @@ class UserApi {
     //============= /users/test  ROUTE
 
     router.post('/test', (Request req) async {
-      final authDetails = req.context['authDetails'] as JWT;
-      print('authDetails.subject.toString ' + authDetails.subject.toString());
+      // final authDetails = req.context['authDetails'] as JWT;
+      try {
+        final payload = await req.readAsString();
+        print(payload);
+        final Map<String, dynamic> querybody = json.decode(payload);
+        print(querybody);
 
-      User userInfo = await findUserByParams(
-          db, authStore, {'idx': 25, 'id': '6192420a320f9dcaa17894e2'});
-      print("founded_user------:" + userInfo.toString());
-      print(userInfo.toJson().toString());
+        List<User> usersInfo = await findUserByParams(db, authStore, querybody);
+        print("founded_user------:" + usersInfo.toString());
+        print(usersInfo.toString());
+        String response = "";
+        for (int i = 0; i < usersInfo.length; i++) {
+          response = response + (usersInfo[i].toJson().toString());
+        }
 
-      return Response.ok(userInfo.toJson().toString(), headers: {
-        'content-type': 'application/json',
-      });
+        return Response.ok(response, headers: {
+          'content-type': 'application/json',
+        });
+      } catch (e) {
+        print('----------end test  Request--------------');
+
+        return Response.internalServerError(
+            body: '{ \"error\" : \" There was a problem test  .\" ' +
+                e.toString() +
+                '\" , \"errorNo\" : \"199991\" }');
+      }
     });
 
     //============= /users/INFO ROUTE

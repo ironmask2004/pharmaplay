@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_brace_in_string_interps
+
 import 'package:pharmaplay_server/pharmaplay_server.dart';
 import 'package:pharmaplay_server/src/repository/database_api.dart';
 
@@ -38,27 +40,37 @@ Future<Either<ApiResponse, String>> logOutUser(String userToken) async {
 
 //----------------------
 
-Future<User> findUserByParams(
+Future<List<User>> findUserByParams(
     DB db, String authStore, Map<String, dynamic> params) async {
   String sql;
 
 //---- params to where condetion
-
-  params.forEach((k, v) => print('======================----- + ${k}: ${v}'));
+  String whereCond = '';
+  params.forEach((k, v) => whereCond =
+      (whereCond.isEmpty ? 'WHERE ' : whereCond + ' and ') + '${k} = @${k} ');
 
 //---
 
   dynamic resultSet;
-  sql = "SELECT *  FROM pharmaplay.$authStore WHERE    idx = @idx ";
-  params = {"idx": 25};
-  resultSet = await db.query(sql, values: params);
+  sql = 'SELECT *  FROM pharmaplay.$authStore  $whereCond ';
+  print(sql + '    ' + params.toString());
+  try {
+    resultSet = await db.query(sql, values: params);
+  } catch (err) {
+    throw params.toString() + err.toString();
+  }
   print(resultSet);
+  List<User> resaultUsers = [];
+  for (int i = 0; i < resultSet.length; i++) {
+    resaultUsers.add(User.fromMap(resultSet[i][authStore]));
+  }
 
   if (resultSet.length > 0) {
-    return User.fromMap(resultSet.first[authStore]);
+    print(resaultUsers);
+    return resaultUsers;
   } else {
-    print(' User ID(${params['idx']}) Not Found ');
-    throw ' User ID(${params['idx']}) Not Found ';
+    print(params.toString() + '  Not Found ');
+    throw params.toString() + '  Not Found ';
   }
 }
 

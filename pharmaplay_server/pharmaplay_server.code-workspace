@@ -17,6 +17,16 @@
 				"username": "pharmaadmin",
 				"password": "Pharma73@gim"
 			}
-		]
+		],
+		"flutter-files.menu.smallpack": false,
+		"flutter-files.menu.screen": false,
+		"flutter-files.menu.page": false,
+		"flutter-files.menu.index": false,
+		"flutter-files.menu.event": false,
+		"flutter-files.menu.dynamic": false,
+		"flutter-files.menu.bigpack": false,
+		"flutter-files.menu.bloc": false,
+		"flutter-files.menu.state": false,
+		"flutter-files.menu.templates": false
 	}
 }

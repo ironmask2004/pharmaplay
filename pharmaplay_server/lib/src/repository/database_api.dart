@@ -38,7 +38,8 @@ class DB {
           substitutionValues: values);
     } catch (e) {
       print("erororo QUERY:" + e.toString());
-      return Future.value([]);
+      throw (e.toString());
+      //return Future.value([]);
     }
   }
 

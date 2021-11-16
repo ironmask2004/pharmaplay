@@ -154,8 +154,6 @@ class AuthApi {
             "{ \"error\" : \"Incorrect  password!!\" ,  \"errorNo\" : \"403\"  }");
       }
 
-      ;
-
       // Generate JWT and send with response
       print('User ID:' + user['id']);
       // final userId = (user['id'] as ObjectId).toHexString();
