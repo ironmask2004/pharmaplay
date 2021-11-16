@@ -49,63 +49,48 @@ class TokenService {
     await _cache.send_object(['EXPIRE', 'userId:$userId:$_prefix:$id:', '-1']);
   }
 
-  Future<void> removeRefreshTokenByUserId(String userId) async {
+  Future<void> removeAllRefreshTokenByUserId(String userId) async {
     print('remove refresh token:    userId:$userId:');
 
-//redis-cli --scan --pattern 'userId:$userId:*'
-    //  var result = await Process.run(
-    //      'redis-cli', ['--scan', '--pattern', 'userId:$userId:*']);
-    // LineSplitter liness = LineSplitter();
-    // List<String> keys = liness.convert(result.stdout);
-
-    // for (var i = 0; i < keys.length; i++) {
-    //    await _cache.send_object(['EXPIRE', '${keys[i]}', '-1']);
-    //  }
-
-    var keys = [];
-    await _cache.send_object(['KEYS', 'userId:$userId:*']).then(
-        (value) => keys = value);
-
-    for (var i = 0; i < keys.length; i++) {
-      await _cache.send_object(['EXPIRE', '${keys[i]}', '-1']);
-    }
-  }
-
-  Future<dynamic> RefreshTokenByScanUserId(String userId) async {
-    print('remove refresh token:    userId:$userId:');
-
-//redis-cli --scan --pattern 'userId:$userId:*'
-    var list = [];
-    await _cache.send_object(['KEYS', 'userId:$userId:*']).then(
-        (value) => list = value);
-
-    String jsonList = jsonEncode(
-        list.asMap().entries.map((e) => '${e.key}:${e.value}').toList());
-    print(jsonList);
-
-/*
-//while scan not returning 0 , ther is more items to get
-     list = [];
-     await _cache.send_object(['scan', '0', 'MATCH', 'userId:$userId:*']).then(
-        (value) => list = value);
-    print(list.toString());
-*/
-    int x = 0;
+    int iterator = 0;
     var resaultList = [];
     do {
-      await _cache
-          .send_object(['SCAN', '$x', 'MATCH', 'userId:$userId:*']).then(
-              (value) => list = value);
-      print(list[1].toString());
-      resaultList.addAll(list[1]);
-      x = int.parse(list[0].toString());
-      print('X=$x');
-    } while (x != 0);
-    print("========list + list" + resaultList.toString());
+      resaultList = await _cache
+          .send_object(['SCAN', '$iterator', 'MATCH', 'userId:$userId:*']);
+      var keys = resaultList[1];
+      for (var i = 0; i < keys.length; i++) {
+        await _cache.send_object(['EXPIRE', '${keys[i]}', '-1']);
+      }
+      iterator = int.parse(resaultList[0].toString());
 
-    jsonList = jsonEncode(
-        resaultList.asMap().entries.map((e) => '${e.key}:${e.value}').toList());
-    print(jsonList);
-    return jsonList;
+      print('X=$iterator');
+    } while (iterator != 0);
+    print("========list + list" + resaultList.toString());
+  }
+
+  Future<dynamic> AllRefreshTokenByScanUserId(String userId) async {
+    var list = [];
+
+    int iter = 0;
+    var resaultList = [];
+    do {
+      list = await _cache
+          .send_object(['SCAN', '$iter', 'MATCH', 'userId:$userId:*']);
+      resaultList.addAll(list[1]);
+      iter = int.parse(list[0].toString());
+      print('X=$iter');
+    } while (iter != 0);
+
+    print(resaultList);
+
+    Map mapp = {};
+    for (int i = 0; i < resaultList.length; i++) {
+      mapp["$i"] = "";
+
+      mapp["$i"] = resaultList[i].toString();
+    }
+    print(mapp);
+
+    return (json.encode(mapp));
   }
 }

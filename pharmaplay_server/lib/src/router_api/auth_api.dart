@@ -223,14 +223,18 @@ class AuthApi {
       try {
         final userId = ((auth as JWT)).subject.toString();
 
-        result = await tokenService.RefreshTokenByScanUserId(userId);
+        result = await tokenService.AllRefreshTokenByScanUserId(userId);
       } catch (e) {
         return Response.internalServerError(
             body:
                 '{ \"error\" : \"There was an issue getting sessions  out $e. Please check and try again.\"   ,  \"errorNo\" : \"199991\" }');
       }
 
-      return Response.ok(result.toString());
+      //var json1 = json.encode(result.toString());
+      return Response.ok(result, headers: {
+        'content-type': 'application/json',
+      });
+      //return Response.ok(json.encode(result));
     });
 
 // ================== authrizee / Unrigster   route
@@ -259,7 +263,7 @@ class AuthApi {
         print(resultSet.first.toString());
 //------------
         final userId = ((auth as JWT)).subject.toString();
-        await tokenService.removeRefreshTokenByUserId(userId);
+        await tokenService.removeAllRefreshTokenByUserId(userId);
       } catch (e) {
         return Response.internalServerError(
             body:
