@@ -35,6 +35,34 @@ Future<Either<ApiResponse, String>> logOutUser(String userToken) async {
   return left(_apiResponse);
 }
 */
+
+//----------------------
+
+Future<User> findUserByParams(
+    DB db, String authStore, Map<String, dynamic> params) async {
+  String sql;
+
+//---- params to where condetion
+
+  params.forEach((k, v) => print('======================----- + ${k}: ${v}'));
+
+//---
+
+  dynamic resultSet;
+  sql = "SELECT *  FROM pharmaplay.$authStore WHERE    idx = @idx ";
+  params = {"idx": 25};
+  resultSet = await db.query(sql, values: params);
+  print(resultSet);
+
+  if (resultSet.length > 0) {
+    return User.fromMap(resultSet.first[authStore]);
+  } else {
+    print(' User ID(${params['idx']}) Not Found ');
+    throw ' User ID(${params['idx']}) Not Found ';
+  }
+}
+
+//----------------------
 Future<User> findUserByID(String id, DB db, String authStore) async {
   String sql = "SELECT *  FROM pharmaplay.$authStore WHERE id =  @id ";
   print(id);

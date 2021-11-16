@@ -9,6 +9,23 @@ class UserApi {
   UserApi(this.db, this.authStore);
   Handler get router {
     final router = Router();
+
+    //============= /users/test  ROUTE
+
+    router.post('/test', (Request req) async {
+      final authDetails = req.context['authDetails'] as JWT;
+      print('authDetails.subject.toString ' + authDetails.subject.toString());
+
+      User userInfo = await findUserByParams(
+          db, authStore, {'idx': 25, 'id': '6192420a320f9dcaa17894e2'});
+      print("founded_user------:" + userInfo.toString());
+      print(userInfo.toJson().toString());
+
+      return Response.ok(userInfo.toJson().toString(), headers: {
+        'content-type': 'application/json',
+      });
+    });
+
     //============= /users/INFO ROUTE
     router.get('/info/', (Request req) async {
       final authDetails = req.context['authDetails'] as JWT;
@@ -16,6 +33,7 @@ class UserApi {
 
       User userInfo =
           await findUserByID(authDetails.subject.toString(), db, authStore);
+
       print("founded_user------:" + userInfo.toString());
       print(userInfo.toJson().toString());
       return Response.ok(userInfo.toJson().toString(), headers: {
@@ -33,6 +51,7 @@ class UserApi {
           await findUserByID(authDetails.subject.toString(), db, authStore);
       print("founded_user------:" + userInfo.toString());
       print(userInfo.toJson().toString());
+
       return Response.ok(userInfo.toJson().toString(), headers: {
         'content-type': 'application/json',
       });
