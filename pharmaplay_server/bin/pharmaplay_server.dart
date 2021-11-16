@@ -22,7 +22,9 @@ app.get('/users/<userName>/whoami', (Request request) async {
 */
 
 void main(List<String> args) async {
-  /// TODO   Run DynDns Script
+  // TODO  add verficstion code to new registerd user
+  //TODO ADD Mailer to send email verifiction code
+  /// !   Run DynDns Script
   print(' ===========Dont forget to Run Dyndns Script========= ');
 
   final Env sysEnv = Env();
