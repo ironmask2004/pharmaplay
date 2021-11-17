@@ -1,7 +1,9 @@
 import 'package:pharmaplay_server/pharmaplay_server.dart';
 import 'package:pharmaplay_server/src/repository/database_api.dart';
 import 'package:pharmaplay_server/src/user/model/user.dart';
+import 'package:pharmaplay_server/src/user/model/userstatustype.dart';
 import 'package:pharmaplay_server/src/user/user_repository/user_repo.dart';
+import 'package:pharmaplay_server/src/user/user_repository/usersstatustype_repo.dart';
 
 class UserApi {
   String authStore;
@@ -41,6 +43,31 @@ class UserApi {
       }
     });
 
+//============= /users/loadUSerstatus  ROUTE
+
+    router.post('/userstatuslist', (Request req) async {
+      // final authDetails = req.context['authDetails'] as JWT;
+      try {
+        UserStatusTypeList statusTypeList = await getAllUserStatusType(db);
+        print("founded_user------:" + statusTypeList.toString());
+
+        String response = "";
+        for (int i = 0; i < statusTypeList.items.length; i++) {
+          response = response + (statusTypeList.items[i].toJson().toString());
+        }
+
+        return Response.ok(response, headers: {
+          'content-type': 'application/json',
+        });
+      } catch (e) {
+        print('----------end test  Request--------------');
+
+        return Response.internalServerError(
+            body: '{ \"error\" : \" There was a problem test  .\" ' +
+                e.toString() +
+                '\" , \"errorNo\" : \"199991\" }');
+      }
+    });
     //============= /users/INFO ROUTE
     router.get('/info/', (Request req) async {
       final authDetails = req.context['authDetails'] as JWT;
