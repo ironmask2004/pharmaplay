@@ -15,13 +15,13 @@ class AuthApi {
 
     router.post('/register', (Request req) async {
       final payload = await req.readAsString();
-      final userInfo = json.decode(payload);
-      print(userInfo);
-      final email = userInfo['email'];
-      final password = userInfo['password'];
-      final firstname = userInfo['firstname'];
-      final lastname = userInfo['lastname'];
-      final mobile = userInfo['mobile'];
+      final userRequestInfo = json.decode(payload);
+      print(userRequestInfo);
+      final email = userRequestInfo['email'];
+      final password = userRequestInfo['password'];
+      final firstname = userRequestInfo['firstname'];
+      final lastname = userRequestInfo['lastname'];
+      final mobile = userRequestInfo['mobile'];
 
       // Ensure email and password fields are present
       if (email == null ||
@@ -85,6 +85,7 @@ class AuthApi {
       final id = ObjectId().toString();
       final salt = generateSalt();
       final hashedPassword = hashPassword(password, salt);
+      String vrifycode;
       try {
         sql =
             "insert into  pharmaplay.$authStore (firstname,lastname, id, email, password,salt,mobile, createdate, updatedate) values (@firstname,@lastname, @id, @email, @password,@salt , @mobile ,  @createdate, @updatedate ) returning idx";
@@ -106,12 +107,15 @@ class AuthApi {
           return Response.forbidden(
               "{ \"error\" : \" facing error while adding user\" ,  \"errorNo\" : \"403\"  }");
         }
+
+        vrifycode = await createUserVerifcationCode(id, db);
+        print(vrifycode);
       } catch (error) {
         print(' error while adding user  ' + error.toString());
         return Response(HttpStatus.badRequest, body: 'error while adding user');
       }
       return Response.ok(
-          "{ \"error\" : \"Successfully registered user\"   ,  \"errorNo\" : \"200\" }");
+          "{ \"error\" : \"Successfully registered user $vrifycode\"   ,  \"errorNo\" : \"200\" }");
     });
 
     //=============== authraize /LOGiN route
@@ -119,9 +123,9 @@ class AuthApi {
     router.post('/login', (Request req) async {
       print('----------Start Login REquest -------------');
       final payload = await req.readAsString();
-      final userInfo = json.decode(payload);
-      final email = userInfo['email'];
-      final password = userInfo['password'];
+      final userRequestInfo = json.decode(payload);
+      final email = userRequestInfo['email'];
+      final password = userRequestInfo['password'];
 
       // Ensure email and password fields are present
       if (email == null ||
@@ -164,48 +168,50 @@ class AuthApi {
       }
 
       if (user['status'] == 0) {
-        if (user['verificationcode'] == null) {
+        print(userRequestInfo['verificationcode']);
+        if (userRequestInfo['verificationcode'] == null) {
           return Response.forbidden(
-              "{ \"error\" : \"User Need Verifcation!!\" ,  \"errorNo\" : \"403\"  }");
+              "{ \"error\" : \"User Need Verifcation!\" ,  \"errorNo\" : \"403\"  }");
         } else {
-          var ans = userVerifcation(
-              user['id'], db, authStore, user['verficationCode']);
+          print('user code verificationcode');
+          bool ans = await userVerifyCode(
+              user['id'], db, authStore, userRequestInfo['verificationcode']);
 
-          if (ans == false) {
+          if (!ans) {
             return Response.forbidden(
-                "{ \"error\" : \"User Need Verifcation!!\" ,  \"errorNo\" : \"403\"  }");
+                "{ \"error\" : \"User   verification Code Error!!!\" ,  \"errorNo\" : \"403\"  }");
           }
         }
+      }
 
-        // Generate JWT and send with response
-        print('User ID:' + user['id']);
-        // final userId = (user['id'] as ObjectId).toHexString();
-        final userId = ObjectId.fromHexString(user['id']).toString();
-        print('User ID:' + userId);
+      // Generate JWT and send with response
+      print('User ID:' + user['id']);
+      // final userId = (user['id'] as ObjectId).toHexString();
+      final userId = ObjectId.fromHexString(user['id']).toString();
+      print('User ID:' + userId);
 
-        try {
-          final tokenPair = await tokenService.createTokenPair(userId);
-          user['token'] = tokenPair.toJson()['token'];
-          user['refreshToken'] = tokenPair.toJson()['refreshToken'];
-          user["'error'"] = "\"" + 'Suucess' + "\"";
-          user["'errorNo'"] = "\"" + '200' + "\"";
+      try {
+        final tokenPair = await tokenService.createTokenPair(userId);
+        user['token'] = tokenPair.toJson()['token'];
+        user['refreshToken'] = tokenPair.toJson()['refreshToken'];
+        user["'error'"] = "\"" + 'Suucess' + "\"";
+        user["'errorNo'"] = "\"" + '200' + "\"";
 
-          print('------------------' + user.toString());
-          var jsonString = json.encode(user);
+        print('------------------' + user.toString());
+        var jsonString = json.encode(user);
 
-          print('-----======================================--' + jsonString);
-          return Response.ok(jsonString, headers: {
-            HttpHeaders.contentTypeHeader: ContentType.json.mimeType,
-          });
-        } catch (e) {
-          print('----------end Login Request--------------');
+        print('-----======================================--' + jsonString);
+        return Response.ok(jsonString, headers: {
+          HttpHeaders.contentTypeHeader: ContentType.json.mimeType,
+        });
+      } catch (e) {
+        print('----------end Login Request--------------');
 
-          return Response.internalServerError(
-              body:
-                  '{ \"error\" : \" There was a problem logging you in. Please try again.\" ' +
-                      e.toString() +
-                      '\" , \"errorNo\" : \"199991\" }');
-        }
+        return Response.internalServerError(
+            body:
+                '{ \"error\" : \" There was a problem logging you in. Please try again.\" ' +
+                    e.toString() +
+                    '\" , \"errorNo\" : \"199991\" }');
       }
     });
 

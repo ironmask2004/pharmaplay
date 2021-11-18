@@ -2,6 +2,7 @@ import 'package:pharmaplay_server/pharmaplay_server.dart';
 import 'package:pharmaplay_server/src/repository/database_api.dart';
 import 'package:pharmaplay_server/src/user/model/user.dart';
 import 'package:pharmaplay_server/src/user/user_repository/user_repo.dart';
+import 'package:pharmaplay_server/src/utilites/random_code.dart';
 
 class UserApi {
   String authStore;
@@ -42,7 +43,7 @@ class UserApi {
     }
     */
       return Response.internalServerError(
-          body: '{ \"error\" : \" There was a problem test  .\" ' +
+          body: '{ \"VerCode\" : \" ${RandomCode.nextInter()} .\" ' +
               '\" , \"errorNo\" : \"199991\" }');
     });
 
