@@ -2,10 +2,10 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 14.0
--- Dumped by pg_dump version 14.0
+-- Dumped from database version 14.1
+-- Dumped by pg_dump version 14.1
 
--- Started on 2021-11-10 23:39:14 EET
+-- Started on 2021-11-19 00:16:34 EET
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -19,7 +19,7 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- TOC entry 4 (class 2615 OID 16434)
+-- TOC entry 4 (class 2615 OID 16563)
 -- Name: pharmaplay; Type: SCHEMA; Schema: -; Owner: pharmaadmin
 --
 
@@ -33,7 +33,7 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
--- TOC entry 210 (class 1259 OID 16435)
+-- TOC entry 210 (class 1259 OID 16564)
 -- Name: ChemicalNames000; Type: TABLE; Schema: pharmaplay; Owner: pharmaadmin
 --
 
@@ -46,7 +46,7 @@ CREATE TABLE pharmaplay."ChemicalNames000" (
 ALTER TABLE pharmaplay."ChemicalNames000" OWNER TO pharmaadmin;
 
 --
--- TOC entry 211 (class 1259 OID 16440)
+-- TOC entry 211 (class 1259 OID 16569)
 -- Name: ChemicalNames_ChemicalName_ID_seq; Type: SEQUENCE; Schema: pharmaplay; Owner: pharmaadmin
 --
 
@@ -61,7 +61,7 @@ ALTER TABLE pharmaplay."ChemicalNames000" ALTER COLUMN "ChemicalName_ID" ADD GEN
 
 
 --
--- TOC entry 212 (class 1259 OID 16441)
+-- TOC entry 212 (class 1259 OID 16570)
 -- Name: Factory000; Type: TABLE; Schema: pharmaplay; Owner: pharmaadmin
 --
 
@@ -74,7 +74,7 @@ CREATE TABLE pharmaplay."Factory000" (
 ALTER TABLE pharmaplay."Factory000" OWNER TO pharmaadmin;
 
 --
--- TOC entry 213 (class 1259 OID 16444)
+-- TOC entry 213 (class 1259 OID 16573)
 -- Name: Factory000_Factory_ID_seq; Type: SEQUENCE; Schema: pharmaplay; Owner: pharmaadmin
 --
 
@@ -89,7 +89,7 @@ ALTER TABLE pharmaplay."Factory000" ALTER COLUMN "Factory_ID" ADD GENERATED ALWA
 
 
 --
--- TOC entry 214 (class 1259 OID 16445)
+-- TOC entry 214 (class 1259 OID 16574)
 -- Name: GenericNames000; Type: TABLE; Schema: pharmaplay; Owner: pharmaadmin
 --
 
@@ -102,7 +102,7 @@ CREATE TABLE pharmaplay."GenericNames000" (
 ALTER TABLE pharmaplay."GenericNames000" OWNER TO pharmaadmin;
 
 --
--- TOC entry 215 (class 1259 OID 16450)
+-- TOC entry 215 (class 1259 OID 16579)
 -- Name: GenericNames_genericname_ID_seq; Type: SEQUENCE; Schema: pharmaplay; Owner: pharmaadmin
 --
 
@@ -117,7 +117,7 @@ ALTER TABLE pharmaplay."GenericNames000" ALTER COLUMN "genericname_ID" ADD GENER
 
 
 --
--- TOC entry 216 (class 1259 OID 16451)
+-- TOC entry 216 (class 1259 OID 16580)
 -- Name: PharmaForm000; Type: TABLE; Schema: pharmaplay; Owner: pharmaadmin
 --
 
@@ -130,7 +130,7 @@ CREATE TABLE pharmaplay."PharmaForm000" (
 ALTER TABLE pharmaplay."PharmaForm000" OWNER TO pharmaadmin;
 
 --
--- TOC entry 217 (class 1259 OID 16454)
+-- TOC entry 217 (class 1259 OID 16583)
 -- Name: PharmaceuticalForm000_PharmaceuticalFormID_seq; Type: SEQUENCE; Schema: pharmaplay; Owner: pharmaadmin
 --
 
@@ -145,7 +145,7 @@ ALTER TABLE pharmaplay."PharmaForm000" ALTER COLUMN "PharmaForm_ID" ADD GENERATE
 
 
 --
--- TOC entry 218 (class 1259 OID 16455)
+-- TOC entry 218 (class 1259 OID 16584)
 -- Name: formula000; Type: TABLE; Schema: pharmaplay; Owner: pharmaadmin
 --
 
@@ -158,7 +158,7 @@ CREATE TABLE pharmaplay.formula000 (
 ALTER TABLE pharmaplay.formula000 OWNER TO pharmaadmin;
 
 --
--- TOC entry 219 (class 1259 OID 16458)
+-- TOC entry 219 (class 1259 OID 16587)
 -- Name: formual_formulaID_seq; Type: SEQUENCE; Schema: pharmaplay; Owner: pharmaadmin
 --
 
@@ -173,7 +173,7 @@ ALTER TABLE pharmaplay.formula000 ALTER COLUMN "formula_ID" ADD GENERATED ALWAYS
 
 
 --
--- TOC entry 220 (class 1259 OID 16459)
+-- TOC entry 220 (class 1259 OID 16588)
 -- Name: medicines000; Type: TABLE; Schema: pharmaplay; Owner: pharmaadmin
 --
 
@@ -194,7 +194,7 @@ CREATE TABLE pharmaplay.medicines000 (
 ALTER TABLE pharmaplay.medicines000 OWNER TO pharmaadmin;
 
 --
--- TOC entry 221 (class 1259 OID 16464)
+-- TOC entry 221 (class 1259 OID 16593)
 -- Name: medicines_medicine_ID_seq; Type: SEQUENCE; Schema: pharmaplay; Owner: pharmaadmin
 --
 
@@ -209,7 +209,7 @@ ALTER TABLE pharmaplay.medicines000 ALTER COLUMN "medicine_ID" ADD GENERATED ALW
 
 
 --
--- TOC entry 222 (class 1259 OID 16465)
+-- TOC entry 222 (class 1259 OID 16594)
 -- Name: pharma000; Type: TABLE; Schema: pharmaplay; Owner: pharmaadmin
 --
 
@@ -227,7 +227,7 @@ CREATE TABLE pharmaplay.pharma000 (
 ALTER TABLE pharmaplay.pharma000 OWNER TO pharmaadmin;
 
 --
--- TOC entry 223 (class 1259 OID 16470)
+-- TOC entry 223 (class 1259 OID 16599)
 -- Name: pharmaview000; Type: VIEW; Schema: pharmaplay; Owner: pharmaadmin
 --
 
@@ -251,29 +251,45 @@ CREATE VIEW pharmaplay.pharmaview000 AS
 ALTER TABLE pharmaplay.pharmaview000 OWNER TO pharmaadmin;
 
 --
--- TOC entry 225 (class 1259 OID 16492)
+-- TOC entry 224 (class 1259 OID 16604)
 -- Name: users000; Type: TABLE; Schema: pharmaplay; Owner: pharmaadmin
 --
 
 CREATE TABLE pharmaplay.users000 (
-    _id integer NOT NULL,
+    idx integer NOT NULL,
     id character varying(512) NOT NULL,
     firstname character varying(256) NOT NULL,
     lastname character varying(256) NOT NULL,
     email character varying(256) NOT NULL,
     password character varying(512) NOT NULL,
-    salt character varying(256)
+    salt character varying(256),
+    mobile character varying(56),
+    createdate bigint,
+    updatedate bigint,
+    status smallint DEFAULT 0 NOT NULL
 );
 
 
 ALTER TABLE pharmaplay.users000 OWNER TO pharmaadmin;
 
 --
--- TOC entry 224 (class 1259 OID 16491)
+-- TOC entry 4401 (class 0 OID 0)
+-- Dependencies: 224
+-- Name: TABLE users000; Type: COMMENT; Schema: pharmaplay; Owner: pharmaadmin
+--
+
+COMMENT ON TABLE pharmaplay.users000 IS 'SELECT  createdate,  current_timestamp, 
+TIMESTAMP WITHOUT TIME ZONE ''epoch'' + ( updatedate   * INTERVAL ''1 millisecond''  ), updatedate,
+TIMESTAMP WITH TIME ZONE ''epoch''  -  86400000 *10 * INTERVAL ''1 millisecond''  , updatedate
+FROM pharmaplay.users000;';
+
+
+--
+-- TOC entry 225 (class 1259 OID 16610)
 -- Name: users000__id_seq; Type: SEQUENCE; Schema: pharmaplay; Owner: pharmaadmin
 --
 
-ALTER TABLE pharmaplay.users000 ALTER COLUMN _id ADD GENERATED ALWAYS AS IDENTITY (
+ALTER TABLE pharmaplay.users000 ALTER COLUMN idx ADD GENERATED ALWAYS AS IDENTITY (
     SEQUENCE NAME pharmaplay.users000__id_seq
     START WITH 1
     INCREMENT BY 1
@@ -284,7 +300,36 @@ ALTER TABLE pharmaplay.users000 ALTER COLUMN _id ADD GENERATED ALWAYS AS IDENTIT
 
 
 --
--- TOC entry 4361 (class 0 OID 16435)
+-- TOC entry 226 (class 1259 OID 16611)
+-- Name: verificationcodes; Type: TABLE; Schema: pharmaplay; Owner: pharmaadmin
+--
+
+CREATE TABLE pharmaplay.verificationcodes (
+    verificationcode character varying(16) NOT NULL,
+    userid character varying(128) NOT NULL,
+    idx integer NOT NULL
+);
+
+
+ALTER TABLE pharmaplay.verificationcodes OWNER TO pharmaadmin;
+
+--
+-- TOC entry 227 (class 1259 OID 16631)
+-- Name: verficationcodes_idx_seq; Type: SEQUENCE; Schema: pharmaplay; Owner: pharmaadmin
+--
+
+ALTER TABLE pharmaplay.verificationcodes ALTER COLUMN idx ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME pharmaplay.verficationcodes_idx_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 4370 (class 0 OID 16564)
 -- Dependencies: 210
 -- Data for Name: ChemicalNames000; Type: TABLE DATA; Schema: pharmaplay; Owner: pharmaadmin
 --
@@ -293,7 +338,7 @@ INSERT INTO pharmaplay."ChemicalNames000" OVERRIDING SYSTEM VALUE VALUES (1, 'غ
 
 
 --
--- TOC entry 4363 (class 0 OID 16441)
+-- TOC entry 4372 (class 0 OID 16570)
 -- Dependencies: 212
 -- Data for Name: Factory000; Type: TABLE DATA; Schema: pharmaplay; Owner: pharmaadmin
 --
@@ -376,7 +421,7 @@ INSERT INTO pharmaplay."Factory000" OVERRIDING SYSTEM VALUE VALUES (75, 'عمر�
 
 
 --
--- TOC entry 4365 (class 0 OID 16445)
+-- TOC entry 4374 (class 0 OID 16574)
 -- Dependencies: 214
 -- Data for Name: GenericNames000; Type: TABLE DATA; Schema: pharmaplay; Owner: pharmaadmin
 --
@@ -385,7 +430,7 @@ INSERT INTO pharmaplay."GenericNames000" OVERRIDING SYSTEM VALUE VALUES (1, 'غ�
 
 
 --
--- TOC entry 4367 (class 0 OID 16451)
+-- TOC entry 4376 (class 0 OID 16580)
 -- Dependencies: 216
 -- Data for Name: PharmaForm000; Type: TABLE DATA; Schema: pharmaplay; Owner: pharmaadmin
 --
@@ -458,7 +503,7 @@ INSERT INTO pharmaplay."PharmaForm000" OVERRIDING SYSTEM VALUE VALUES (65, 'قط
 
 
 --
--- TOC entry 4369 (class 0 OID 16455)
+-- TOC entry 4378 (class 0 OID 16584)
 -- Dependencies: 218
 -- Data for Name: formula000; Type: TABLE DATA; Schema: pharmaplay; Owner: pharmaadmin
 --
@@ -1652,7 +1697,7 @@ INSERT INTO pharmaplay.formula000 OVERRIDING SYSTEM VALUE VALUES (2372, 'ZOLPIDE
 
 
 --
--- TOC entry 4371 (class 0 OID 16459)
+-- TOC entry 4380 (class 0 OID 16588)
 -- Dependencies: 220
 -- Data for Name: medicines000; Type: TABLE DATA; Schema: pharmaplay; Owner: pharmaadmin
 --
@@ -9195,7 +9240,7 @@ INSERT INTO pharmaplay.medicines000 OVERRIDING SYSTEM VALUE VALUES (7535, 'TRANC
 
 
 --
--- TOC entry 4373 (class 0 OID 16465)
+-- TOC entry 4382 (class 0 OID 16594)
 -- Dependencies: 222
 -- Data for Name: pharma000; Type: TABLE DATA; Schema: pharmaplay; Owner: pharmaadmin
 --
@@ -16738,15 +16783,35 @@ INSERT INTO pharmaplay.pharma000 VALUES ('TRANCOMED-5 CTD TAB.', '5 MG/CTD TAB.'
 
 
 --
--- TOC entry 4375 (class 0 OID 16492)
--- Dependencies: 225
+-- TOC entry 4383 (class 0 OID 16604)
+-- Dependencies: 224
 -- Data for Name: users000; Type: TABLE DATA; Schema: pharmaplay; Owner: pharmaadmin
 --
 
+INSERT INTO pharmaplay.users000 OVERRIDING SYSTEM VALUE VALUES (15, '618efa44a3a22765ecc20d25', 'khawled', 'flihwan', 'kfwlihan@gmail.com', 'c1538fcea1128aedcd3ad3043e2fb76c97791e388ada8b1b1b5b237ecf4a2aa7', 'tHbxzu4/mw+ruYtH7UcJ4VQHPJqOPFIfUaaXKnUsxEI=', '093963f838', 1636760132571, 1636760132571, 0);
+INSERT INTO pharmaplay.users000 OVERRIDING SYSTEM VALUE VALUES (16, '618f089d1acf2d9072b47332', 'kehawled', 'flihewan', 'kfwlihaen@gmail.com', '7d708a4734a16f27f85e9b489fa3090b007acc0cd11c7938ce3d3fd92b6d7272', 'zKA8seRoJbOqPvCngV3x5cjO79lIu7tSmG/z9Ngs6+U=', '09396e3f838', 1636763805224, 1636763805224, 0);
+INSERT INTO pharmaplay.users000 OVERRIDING SYSTEM VALUE VALUES (18, '618f7a95beb03e28c55ba8ae', 'k11', 'f11', 'k11@gmail.com', '28c224f041b2016df72ba91fe7b0ddd1068beac25338f41e8d8086b4a0c645de', 'AkTTpZugT+Ks9z6zSSDrLu74sR31ESdV44jDsrL+KDM=', '1234567891', 1636792981309, 1636792981309, 0);
+INSERT INTO pharmaplay.users000 OVERRIDING SYSTEM VALUE VALUES (21, '619225ac8c005e7a58d1a639', 'k1121', 'f1211', 'k1113@gmail.com', 'b5dedd8a54c662a312d6587048eccc4d59f590f2461904cb531b090acb50966d', 'x+0ULaFY+7HwyteR8UriCSbNvxuDsNLQhOmTbHbN7DA=', '123456783911', 1636967852935, 1636967852935, 0);
+INSERT INTO pharmaplay.users000 OVERRIDING SYSTEM VALUE VALUES (22, '619225d98c005e7a58d1a63a', 'k112331', 'f123131', 'k11133@gmail.com', '9793f5fdfb2f186b025c10449fbc9c3ac4cbf0e8e321b91f94a2a02b5cc82079', '5j0lM5YBz9BJWdIjH2gadiYSobZ+ec1SjhBi/Wnz+/s=', '1234567383911', 1636967897825, 1636967897825, 0);
+INSERT INTO pharmaplay.users000 OVERRIDING SYSTEM VALUE VALUES (40, '61960d2c57a7a57ba73a21a9', 'iroertnmask', '200ert4', 'iroerter4@gmail.com', 'b20504e5daa0564e455950e210d475148fab8e2f377300f35a6f60515dbd492c', 'tuVcFEYTjhRAp8xd6Zo/baiwuQ2FDdnV7uO6zTodeFM=', '1234ds5678911d', 1637223724340, 1637223724340, 0);
+INSERT INTO pharmaplay.users000 OVERRIDING SYSTEM VALUE VALUES (42, '61964d3dd4593e3912045f69', 'iii', 'iiii', 'ii@gmail.com', '46e5976ba6ed9ee5e3d63d58fbad225b1b543ab91c1011c5662ac0b19a939d2e', 'UcmAOq4OWFSlaa48P4JDB15LoZoR8pArFuuYeBEIJ/o=', 'iiii', 1637240125755, 1637240125755, 2);
+INSERT INTO pharmaplay.users000 OVERRIDING SYSTEM VALUE VALUES (25, '6192420a320f9dcaa17894e2', 'ironmask', '2004', 'ironmask2004@gmail.com', 'e4b5c2d04695eecfce620e46e13da895c2dd6d21763bbdcd706580b206d1c7d5', 'LW6hP+l8rf447Im2nuBmX96BfQeL17kgFqfX/P0ipFo=', '1234d56789110', 1636975114253, 1636975114253, 0);
+INSERT INTO pharmaplay.users000 OVERRIDING SYSTEM VALUE VALUES (43, '6196b06cc8385e2224537427', 'kk1313s', 'ff1133s', 'fk1313s@gmail.com', '7d8dfab1e84117cfb21dcb0caedaef61c05668d8af7dacfde8154322738994ce', 'IBRcHshojpwsmoG6ELgm5tmAd+2eOiP/vBrHZZfjh/s=', '12343478391s1', 1637265516496, 1637265516496, 0);
+INSERT INTO pharmaplay.users000 OVERRIDING SYSTEM VALUE VALUES (44, '6196bc4a2cdd73d70cbc0c10', 'mm', 'mm', 'mm@gmail.com', '306f332b5328fb6c8206f43312773952180133f86ec003c7a0a43c1ded6b91d7', 'hrs9JqDtZS/+jyN179z1szgIUtuGjt6EPaSN5XByOFA=', '555555555', 1637268554539, 1637268554539, 0);
+INSERT INTO pharmaplay.users000 OVERRIDING SYSTEM VALUE VALUES (45, '6196bdd0e6055b3dde570e0c', 'ss', 'ss', 'ss@gmail.com', '1a5f7a592d5b903f69072f245c13cf3465c60edf9fd804009406fcd9f12731b0', 'fAo5Gst7y8qjnhLJrLxVv2RNkvUjtnJpuY/tueBMJQg=', '55555s5555', 1637268944989, 1637268944989, 0);
+INSERT INTO pharmaplay.users000 OVERRIDING SYSTEM VALUE VALUES (46, '6196be2e5b459ae2b4c2d776', 'sss', 'sss', 'sss@gmail.com', '061772be613e709ec16f1da5719dc3d68f0c76167d33393c247b3395f5f54004', 'twWGp2vjrlBNJTZkGYb/k+uTTVzbDzF98LX7aq8s2jE=', '55555ss5555', 1637269038574, 1637269038574, 1);
 
 
 --
--- TOC entry 4390 (class 0 OID 0)
+-- TOC entry 4385 (class 0 OID 16611)
+-- Dependencies: 226
+-- Data for Name: verificationcodes; Type: TABLE DATA; Schema: pharmaplay; Owner: pharmaadmin
+--
+
+
+
+--
+-- TOC entry 4404 (class 0 OID 0)
 -- Dependencies: 211
 -- Name: ChemicalNames_ChemicalName_ID_seq; Type: SEQUENCE SET; Schema: pharmaplay; Owner: pharmaadmin
 --
@@ -16755,7 +16820,7 @@ SELECT pg_catalog.setval('pharmaplay."ChemicalNames_ChemicalName_ID_seq"', 1, tr
 
 
 --
--- TOC entry 4391 (class 0 OID 0)
+-- TOC entry 4405 (class 0 OID 0)
 -- Dependencies: 213
 -- Name: Factory000_Factory_ID_seq; Type: SEQUENCE SET; Schema: pharmaplay; Owner: pharmaadmin
 --
@@ -16764,7 +16829,7 @@ SELECT pg_catalog.setval('pharmaplay."Factory000_Factory_ID_seq"', 75, true);
 
 
 --
--- TOC entry 4392 (class 0 OID 0)
+-- TOC entry 4406 (class 0 OID 0)
 -- Dependencies: 215
 -- Name: GenericNames_genericname_ID_seq; Type: SEQUENCE SET; Schema: pharmaplay; Owner: pharmaadmin
 --
@@ -16773,7 +16838,7 @@ SELECT pg_catalog.setval('pharmaplay."GenericNames_genericname_ID_seq"', 1, true
 
 
 --
--- TOC entry 4393 (class 0 OID 0)
+-- TOC entry 4407 (class 0 OID 0)
 -- Dependencies: 217
 -- Name: PharmaceuticalForm000_PharmaceuticalFormID_seq; Type: SEQUENCE SET; Schema: pharmaplay; Owner: pharmaadmin
 --
@@ -16782,7 +16847,7 @@ SELECT pg_catalog.setval('pharmaplay."PharmaceuticalForm000_PharmaceuticalFormID
 
 
 --
--- TOC entry 4394 (class 0 OID 0)
+-- TOC entry 4408 (class 0 OID 0)
 -- Dependencies: 219
 -- Name: formual_formulaID_seq; Type: SEQUENCE SET; Schema: pharmaplay; Owner: pharmaadmin
 --
@@ -16791,7 +16856,7 @@ SELECT pg_catalog.setval('pharmaplay."formual_formulaID_seq"', 2372, true);
 
 
 --
--- TOC entry 4395 (class 0 OID 0)
+-- TOC entry 4409 (class 0 OID 0)
 -- Dependencies: 221
 -- Name: medicines_medicine_ID_seq; Type: SEQUENCE SET; Schema: pharmaplay; Owner: pharmaadmin
 --
@@ -16800,16 +16865,25 @@ SELECT pg_catalog.setval('pharmaplay."medicines_medicine_ID_seq"', 7535, true);
 
 
 --
--- TOC entry 4396 (class 0 OID 0)
--- Dependencies: 224
+-- TOC entry 4410 (class 0 OID 0)
+-- Dependencies: 225
 -- Name: users000__id_seq; Type: SEQUENCE SET; Schema: pharmaplay; Owner: pharmaadmin
 --
 
-SELECT pg_catalog.setval('pharmaplay.users000__id_seq', 1, false);
+SELECT pg_catalog.setval('pharmaplay.users000__id_seq', 46, true);
 
 
 --
--- TOC entry 4213 (class 2606 OID 16476)
+-- TOC entry 4411 (class 0 OID 0)
+-- Dependencies: 227
+-- Name: verficationcodes_idx_seq; Type: SEQUENCE SET; Schema: pharmaplay; Owner: pharmaadmin
+--
+
+SELECT pg_catalog.setval('pharmaplay.verficationcodes_idx_seq', 1, true);
+
+
+--
+-- TOC entry 4219 (class 2606 OID 16615)
 -- Name: PharmaForm000 PharmaceuticalForm000_pkey; Type: CONSTRAINT; Schema: pharmaplay; Owner: pharmaadmin
 --
 
@@ -16818,7 +16892,7 @@ ALTER TABLE ONLY pharmaplay."PharmaForm000"
 
 
 --
--- TOC entry 4215 (class 2606 OID 16478)
+-- TOC entry 4221 (class 2606 OID 16617)
 -- Name: formula000 formual_pkey; Type: CONSTRAINT; Schema: pharmaplay; Owner: pharmaadmin
 --
 
@@ -16827,16 +16901,25 @@ ALTER TABLE ONLY pharmaplay.formula000
 
 
 --
--- TOC entry 4217 (class 2606 OID 16498)
+-- TOC entry 4223 (class 2606 OID 16619)
 -- Name: users000 users000_pkey; Type: CONSTRAINT; Schema: pharmaplay; Owner: pharmaadmin
 --
 
 ALTER TABLE ONLY pharmaplay.users000
-    ADD CONSTRAINT users000_pkey PRIMARY KEY (_id);
+    ADD CONSTRAINT users000_pkey PRIMARY KEY (idx);
 
 
 --
--- TOC entry 4218 (class 1259 OID 16499)
+-- TOC entry 4229 (class 2606 OID 16621)
+-- Name: verificationcodes verficationcodes_pkey; Type: CONSTRAINT; Schema: pharmaplay; Owner: pharmaadmin
+--
+
+ALTER TABLE ONLY pharmaplay.verificationcodes
+    ADD CONSTRAINT verficationcodes_pkey PRIMARY KEY (verificationcode);
+
+
+--
+-- TOC entry 4224 (class 1259 OID 16622)
 -- Name: users_email_index_001; Type: INDEX; Schema: pharmaplay; Owner: pharmaadmin
 --
 
@@ -16844,7 +16927,7 @@ CREATE UNIQUE INDEX users_email_index_001 ON pharmaplay.users000 USING btree (em
 
 
 --
--- TOC entry 4219 (class 1259 OID 16501)
+-- TOC entry 4225 (class 1259 OID 16623)
 -- Name: users_id_index_001; Type: INDEX; Schema: pharmaplay; Owner: pharmaadmin
 --
 
@@ -16852,7 +16935,7 @@ CREATE UNIQUE INDEX users_id_index_001 ON pharmaplay.users000 USING btree (id);
 
 
 --
--- TOC entry 4220 (class 1259 OID 16500)
+-- TOC entry 4226 (class 1259 OID 16624)
 -- Name: users_name_f_l_index_001; Type: INDEX; Schema: pharmaplay; Owner: pharmaadmin
 --
 
@@ -16860,7 +16943,24 @@ CREATE UNIQUE INDEX users_name_f_l_index_001 ON pharmaplay.users000 USING btree 
 
 
 --
--- TOC entry 4381 (class 0 OID 0)
+-- TOC entry 4227 (class 1259 OID 16625)
+-- Name: verficationcode_id_idx001; Type: INDEX; Schema: pharmaplay; Owner: pharmaadmin
+--
+
+CREATE INDEX verficationcode_id_idx001 ON pharmaplay.verificationcodes USING btree (userid);
+
+
+--
+-- TOC entry 4392 (class 0 OID 0)
+-- Dependencies: 4
+-- Name: SCHEMA pharmaplay; Type: ACL; Schema: -; Owner: pharmaadmin
+--
+
+GRANT ALL ON SCHEMA pharmaplay TO pharmauser;
+
+
+--
+-- TOC entry 4393 (class 0 OID 0)
 -- Dependencies: 210
 -- Name: TABLE "ChemicalNames000"; Type: ACL; Schema: pharmaplay; Owner: pharmaadmin
 --
@@ -16869,7 +16969,7 @@ GRANT ALL ON TABLE pharmaplay."ChemicalNames000" TO pharmauser;
 
 
 --
--- TOC entry 4382 (class 0 OID 0)
+-- TOC entry 4394 (class 0 OID 0)
 -- Dependencies: 212
 -- Name: TABLE "Factory000"; Type: ACL; Schema: pharmaplay; Owner: pharmaadmin
 --
@@ -16878,7 +16978,7 @@ GRANT ALL ON TABLE pharmaplay."Factory000" TO pharmauser;
 
 
 --
--- TOC entry 4383 (class 0 OID 0)
+-- TOC entry 4395 (class 0 OID 0)
 -- Dependencies: 214
 -- Name: TABLE "GenericNames000"; Type: ACL; Schema: pharmaplay; Owner: pharmaadmin
 --
@@ -16887,7 +16987,7 @@ GRANT ALL ON TABLE pharmaplay."GenericNames000" TO pharmauser;
 
 
 --
--- TOC entry 4384 (class 0 OID 0)
+-- TOC entry 4396 (class 0 OID 0)
 -- Dependencies: 216
 -- Name: TABLE "PharmaForm000"; Type: ACL; Schema: pharmaplay; Owner: pharmaadmin
 --
@@ -16896,7 +16996,7 @@ GRANT ALL ON TABLE pharmaplay."PharmaForm000" TO pharmauser;
 
 
 --
--- TOC entry 4385 (class 0 OID 0)
+-- TOC entry 4397 (class 0 OID 0)
 -- Dependencies: 218
 -- Name: TABLE formula000; Type: ACL; Schema: pharmaplay; Owner: pharmaadmin
 --
@@ -16905,7 +17005,7 @@ GRANT ALL ON TABLE pharmaplay.formula000 TO pharmauser;
 
 
 --
--- TOC entry 4386 (class 0 OID 0)
+-- TOC entry 4398 (class 0 OID 0)
 -- Dependencies: 220
 -- Name: TABLE medicines000; Type: ACL; Schema: pharmaplay; Owner: pharmaadmin
 --
@@ -16914,7 +17014,7 @@ GRANT ALL ON TABLE pharmaplay.medicines000 TO pharmauser;
 
 
 --
--- TOC entry 4387 (class 0 OID 0)
+-- TOC entry 4399 (class 0 OID 0)
 -- Dependencies: 222
 -- Name: TABLE pharma000; Type: ACL; Schema: pharmaplay; Owner: pharmaadmin
 --
@@ -16923,7 +17023,7 @@ GRANT ALL ON TABLE pharmaplay.pharma000 TO pharmauser;
 
 
 --
--- TOC entry 4388 (class 0 OID 0)
+-- TOC entry 4400 (class 0 OID 0)
 -- Dependencies: 223
 -- Name: TABLE pharmaview000; Type: ACL; Schema: pharmaplay; Owner: pharmaadmin
 --
@@ -16932,8 +17032,8 @@ GRANT ALL ON TABLE pharmaplay.pharmaview000 TO pharmauser;
 
 
 --
--- TOC entry 4389 (class 0 OID 0)
--- Dependencies: 225
+-- TOC entry 4402 (class 0 OID 0)
+-- Dependencies: 224
 -- Name: TABLE users000; Type: ACL; Schema: pharmaplay; Owner: pharmaadmin
 --
 
@@ -16941,15 +17041,23 @@ GRANT ALL ON TABLE pharmaplay.users000 TO pharmauser;
 
 
 --
--- TOC entry 2064 (class 826 OID 16479)
+-- TOC entry 4403 (class 0 OID 0)
+-- Dependencies: 226
+-- Name: TABLE verificationcodes; Type: ACL; Schema: pharmaplay; Owner: pharmaadmin
+--
+
+GRANT ALL ON TABLE pharmaplay.verificationcodes TO pharmauser;
+
+
+--
+-- TOC entry 2069 (class 826 OID 16626)
 -- Name: DEFAULT PRIVILEGES FOR TABLES; Type: DEFAULT ACL; Schema: pharmaplay; Owner: pharmaadmin
 --
 
-ALTER DEFAULT PRIVILEGES FOR ROLE pharmaadmin IN SCHEMA pharmaplay REVOKE ALL ON TABLES  FROM pharmaadmin;
 ALTER DEFAULT PRIVILEGES FOR ROLE pharmaadmin IN SCHEMA pharmaplay GRANT ALL ON TABLES  TO pharmauser;
 
 
--- Completed on 2021-11-10 23:39:21 EET
+-- Completed on 2021-11-19 00:16:44 EET
 
 --
 -- PostgreSQL database dump complete
