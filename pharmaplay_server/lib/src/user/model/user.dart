@@ -1,6 +1,9 @@
 import 'dart:convert';
+import 'package:json_annotation/json_annotation.dart';
+
 import 'package:equatable/equatable.dart';
 import 'package:pharmaplay_server/pharmaplay_server.dart';
+part 'user.g.dart';
 
 /*
 SELECT  createdate,  current_timestamp,
@@ -16,7 +19,7 @@ Here is how you can convert an epoch value back to a time stamp:
 
 SELECT TIMESTAMP WITH TIME ZONE 'epoch' + 982384720.12 * INTERVAL '1 second';
 */
-
+@JsonSerializable(explicitToJson: true)
 class User extends Equatable {
   final int idx;
   final String id;
@@ -67,6 +70,9 @@ class User extends Equatable {
       updatedate: updatedate ?? this.updatedate,
     );
   }
+
+  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
+  Map<String, dynamic> toJson() => _$UserToJson(this);
 
   User copyWithFromMap(Map<String, dynamic> map) {
     return User(
@@ -121,9 +127,10 @@ class User extends Equatable {
             int.parse(map['updatedate'].toString())));
   }
 
-  String toJson() => json.encode(toMap());
+  //String toJson() => json.encode(toMap());
 
-  factory User.fromJson(String source) => User.fromMap(json.decode(source));
+  // factory User.fromJson(String source) =>
+  //   User.fromMap(json.decode(source));
 
   copyWithfromJson(String source) => copyWithFromMap(json.decode(source));
 

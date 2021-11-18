@@ -135,6 +135,7 @@ class UserApi {
         resultSet = await db.query(sql, values: params);
 
         if (resultSet.length > 0) {
+          print(resultSet.toString());
           return Response.forbidden(
               "{ \"error\" : \"Email:  $email  was already registerd! with some one else !\" ,  \"errorNo\" : \"403\"  }");
         }
