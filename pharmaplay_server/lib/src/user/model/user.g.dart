@@ -17,6 +17,8 @@ User _$UserFromJson(Map<String, dynamic> json) => User(
       mobile: json['mobile'] as String,
       createdate: DateTime.parse(json['createdate'] as String),
       updatedate: DateTime.parse(json['updatedate'] as String),
+      status: $enumDecode(_$UserStatusEnumMap, json['status'],
+          unknownValue: UserStatus.needVerify),
     );
 
 Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
@@ -25,9 +27,18 @@ Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'firstname': instance.firstname,
       'lastname': instance.lastname,
       'email': instance.email,
+      'mobile': instance.mobile,
       'password': instance.password,
       'salt': instance.salt,
-      'mobile': instance.mobile,
-      'createdate': instance.createdate.toIso8601String(),
       'updatedate': instance.updatedate.toIso8601String(),
+      'createdate': instance.createdate.toIso8601String(),
+      'status': _$UserStatusEnumMap[instance.status],
     };
+
+const _$UserStatusEnumMap = {
+  UserStatus.needVerify: 0,
+  UserStatus.verifyed: 1,
+  UserStatus.loggedIn: 2,
+  UserStatus.loggedOut: 3,
+  UserStatus.loginTimeOut: 4,
+};

@@ -1,4 +1,5 @@
 import 'package:pharmaplay_server/pharmaplay_server.dart';
+import 'package:pharmaplay_server/src/authentication/auth_repos.dart';
 import 'package:pharmaplay_server/src/repository/database_api.dart';
 
 class AuthApi {
@@ -162,34 +163,49 @@ class AuthApi {
             "{ \"error\" : \"Incorrect  password!!\" ,  \"errorNo\" : \"403\"  }");
       }
 
-      // Generate JWT and send with response
-      print('User ID:' + user['id']);
-      // final userId = (user['id'] as ObjectId).toHexString();
-      final userId = ObjectId.fromHexString(user['id']).toString();
-      print('User ID:' + userId);
+      if (user['status'] == 0) {
+        if (user['verificationcode'] == null) {
+          return Response.forbidden(
+              "{ \"error\" : \"User Need Verifcation!!\" ,  \"errorNo\" : \"403\"  }");
+        } else {
+          var ans = userVerifcation(
+              user['id'], db, authStore, user['verficationCode']);
 
-      try {
-        final tokenPair = await tokenService.createTokenPair(userId);
-        user['token'] = tokenPair.toJson()['token'];
-        user['refreshToken'] = tokenPair.toJson()['refreshToken'];
-        user["'error'"] = "\"" + 'Suucess' + "\"";
-        user["'errorNo'"] = "\"" + '200' + "\"";
+          if (ans == false) {
+            return Response.forbidden(
+                "{ \"error\" : \"User Need Verifcation!!\" ,  \"errorNo\" : \"403\"  }");
+          }
+        }
 
-        print('------------------' + user.toString());
-        var jsonString = json.encode(user);
+        // Generate JWT and send with response
+        print('User ID:' + user['id']);
+        // final userId = (user['id'] as ObjectId).toHexString();
+        final userId = ObjectId.fromHexString(user['id']).toString();
+        print('User ID:' + userId);
 
-        print('-----======================================--' + jsonString);
-        return Response.ok(jsonString, headers: {
-          HttpHeaders.contentTypeHeader: ContentType.json.mimeType,
-        });
-      } catch (e) {
-        print('----------end Login Request--------------');
+        try {
+          final tokenPair = await tokenService.createTokenPair(userId);
+          user['token'] = tokenPair.toJson()['token'];
+          user['refreshToken'] = tokenPair.toJson()['refreshToken'];
+          user["'error'"] = "\"" + 'Suucess' + "\"";
+          user["'errorNo'"] = "\"" + '200' + "\"";
 
-        return Response.internalServerError(
-            body:
-                '{ \"error\" : \" There was a problem logging you in. Please try again.\" ' +
-                    e.toString() +
-                    '\" , \"errorNo\" : \"199991\" }');
+          print('------------------' + user.toString());
+          var jsonString = json.encode(user);
+
+          print('-----======================================--' + jsonString);
+          return Response.ok(jsonString, headers: {
+            HttpHeaders.contentTypeHeader: ContentType.json.mimeType,
+          });
+        } catch (e) {
+          print('----------end Login Request--------------');
+
+          return Response.internalServerError(
+              body:
+                  '{ \"error\" : \" There was a problem logging you in. Please try again.\" ' +
+                      e.toString() +
+                      '\" , \"errorNo\" : \"199991\" }');
+        }
       }
     });
 

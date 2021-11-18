@@ -1,9 +1,7 @@
 import 'package:pharmaplay_server/pharmaplay_server.dart';
 import 'package:pharmaplay_server/src/repository/database_api.dart';
 import 'package:pharmaplay_server/src/user/model/user.dart';
-import 'package:pharmaplay_server/src/user/model/userstatustype.dart';
 import 'package:pharmaplay_server/src/user/user_repository/user_repo.dart';
-import 'package:pharmaplay_server/src/user/user_repository/usersstatustype_repo.dart';
 
 class UserApi {
   String authStore;
@@ -15,7 +13,7 @@ class UserApi {
     //============= /users/test  ROUTE
 
     router.post('/test', (Request req) async {
-      // final authDetails = req.context['authDetails'] as JWT;
+      /*  // final authDetails = req.context['authDetails'] as JWT;
       try {
         final payload = await req.readAsString();
         print(payload);
@@ -41,6 +39,11 @@ class UserApi {
                 e.toString() +
                 '\" , \"errorNo\" : \"199991\" }');
       }
+    }
+    */
+      return Response.internalServerError(
+          body: '{ \"error\" : \" There was a problem test  .\" ' +
+              '\" , \"errorNo\" : \"199991\" }');
     });
 
 //============= /users/loadUSerstatus  ROUTE
@@ -48,7 +51,7 @@ class UserApi {
     router.post('/userstatuslist', (Request req) async {
       // final authDetails = req.context['authDetails'] as JWT;
       try {
-        UserStatusTypeList statusTypeList = await getAllUserStatusType(db);
+        /* UserStatusTypeList statusTypeList = await getAllUserStatusType(db);
         print("founded_user------:" + statusTypeList.toString());
 
         String response = "";
@@ -58,7 +61,7 @@ class UserApi {
 
         return Response.ok(response, headers: {
           'content-type': 'application/json',
-        });
+        });*/
       } catch (e) {
         print('----------end test  Request--------------');
 
@@ -77,7 +80,7 @@ class UserApi {
           await findUserByID(authDetails.subject.toString(), db, authStore);
 
       print("founded_user------:" + userInfo.toString());
-      print(userInfo.toJson().toString());
+
       return Response.ok(userInfo.toJson().toString(), headers: {
         'content-type': 'application/json',
       });
@@ -107,7 +110,6 @@ class UserApi {
       dynamic resultSet;
       final authDetails = req.context['authDetails'] as JWT;
       print('authDetails.subject.toString ' + authDetails.subject.toString());
-
       final payload = await req.readAsString();
       final Map<String, dynamic> userInfo = json.decode(payload);
       print(userInfo);
@@ -116,12 +118,15 @@ class UserApi {
       final firstname = userInfo['firstname'];
       final lastname = userInfo['lastname'];
       final mobile = userInfo['mobile'];
-
+      print('-------------------------');
       User oldUserInfo =
           await findUserByID(authDetails.subject.toString(), db, authStore);
+      print('-------------------------');
       print("founded_old_user_data: ------:" + oldUserInfo.toString());
+      //print(oldUserInfo);
 
       User UpdatedUserInfo = oldUserInfo.copyWithFromMap(userInfo);
+
       print("updared _user_data: ------:" + UpdatedUserInfo.toString());
 
       if (oldUserInfo.email != UpdatedUserInfo.email) {
@@ -171,7 +176,7 @@ class UserApi {
       }
       try {
         sql =
-            'update pharmaplay.$authStore SET   id=@id, firstname=@firstname, lastname=@lastname, email=@email, password=@password, salt=@salt, mobile=@mobile, createdate=@createdate, updatedate=@updatedate 	where idx= @idx returning idx';
+            'update pharmaplay.$authStore SET   id=@id, firstname=@firstname, lastname=@lastname, email=@email, password=@password, salt=@salt, mobile=@mobile, createdate=@createdate, updatedate=@updatedate ,  status=@status 	where idx= @idx returning idx';
         params = UpdatedUserInfo.toMap();
         resultSet = await db.query(sql, values: params);
 
