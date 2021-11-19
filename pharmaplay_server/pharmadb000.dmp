@@ -279,16 +279,31 @@ ALTER TABLE pharmaplay.users000 ALTER COLUMN idx ADD GENERATED ALWAYS AS IDENTIT
 
 
 --
--- Name: verficationcodes; Type: TABLE; Schema: pharmaplay; Owner: pharmaadmin
+-- Name: verificationcodes; Type: TABLE; Schema: pharmaplay; Owner: pharmaadmin
 --
 
-CREATE TABLE pharmaplay.verficationcodes (
-    verficationcode character varying(16) NOT NULL,
-    userid character varying(128) NOT NULL
+CREATE TABLE pharmaplay.verificationcodes (
+    verificationcode character varying(16) NOT NULL,
+    userid character varying(128) NOT NULL,
+    idx integer NOT NULL
 );
 
 
-ALTER TABLE pharmaplay.verficationcodes OWNER TO pharmaadmin;
+ALTER TABLE pharmaplay.verificationcodes OWNER TO pharmaadmin;
+
+--
+-- Name: verificationcodes_idx_seq; Type: SEQUENCE; Schema: pharmaplay; Owner: pharmaadmin
+--
+
+ALTER TABLE pharmaplay.verificationcodes ALTER COLUMN idx ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME pharmaplay.verificationcodes_idx_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
 
 --
 -- Data for Name: ChemicalNames000; Type: TABLE DATA; Schema: pharmaplay; Owner: pharmaadmin
@@ -16749,22 +16764,15 @@ TRANCOMED-5 CTD TAB.	5 MG/CTD TAB.	ZOLPIDEM	ميديكو	311/2006	9/11/2006	أق
 --
 
 COPY pharmaplay.users000 (idx, id, firstname, lastname, email, password, salt, mobile, createdate, updatedate, status) FROM stdin;
-15	618efa44a3a22765ecc20d25	khawled	flihwan	kfwlihan@gmail.com	c1538fcea1128aedcd3ad3043e2fb76c97791e388ada8b1b1b5b237ecf4a2aa7	tHbxzu4/mw+ruYtH7UcJ4VQHPJqOPFIfUaaXKnUsxEI=	093963f838	1636760132571	1636760132571	0
-16	618f089d1acf2d9072b47332	kehawled	flihewan	kfwlihaen@gmail.com	7d708a4734a16f27f85e9b489fa3090b007acc0cd11c7938ce3d3fd92b6d7272	zKA8seRoJbOqPvCngV3x5cjO79lIu7tSmG/z9Ngs6+U=	09396e3f838	1636763805224	1636763805224	0
-18	618f7a95beb03e28c55ba8ae	k11	f11	k11@gmail.com	28c224f041b2016df72ba91fe7b0ddd1068beac25338f41e8d8086b4a0c645de	AkTTpZugT+Ks9z6zSSDrLu74sR31ESdV44jDsrL+KDM=	1234567891	1636792981309	1636792981309	0
-21	619225ac8c005e7a58d1a639	k1121	f1211	k1113@gmail.com	b5dedd8a54c662a312d6587048eccc4d59f590f2461904cb531b090acb50966d	x+0ULaFY+7HwyteR8UriCSbNvxuDsNLQhOmTbHbN7DA=	123456783911	1636967852935	1636967852935	0
-22	619225d98c005e7a58d1a63a	k112331	f123131	k11133@gmail.com	9793f5fdfb2f186b025c10449fbc9c3ac4cbf0e8e321b91f94a2a02b5cc82079	5j0lM5YBz9BJWdIjH2gadiYSobZ+ec1SjhBi/Wnz+/s=	1234567383911	1636967897825	1636967897825	0
-40	61960d2c57a7a57ba73a21a9	iroertnmask	200ert4	iroerter4@gmail.com	b20504e5daa0564e455950e210d475148fab8e2f377300f35a6f60515dbd492c	tuVcFEYTjhRAp8xd6Zo/baiwuQ2FDdnV7uO6zTodeFM=	1234ds5678911d	1637223724340	1637223724340	0
-42	61964d3dd4593e3912045f69	iii	iiii	ii@gmail.com	46e5976ba6ed9ee5e3d63d58fbad225b1b543ab91c1011c5662ac0b19a939d2e	UcmAOq4OWFSlaa48P4JDB15LoZoR8pArFuuYeBEIJ/o=	iiii	1637240125755	1637240125755	2
-25	6192420a320f9dcaa17894e2	ironmask	2004	ironmask2004@gmail.com	e4b5c2d04695eecfce620e46e13da895c2dd6d21763bbdcd706580b206d1c7d5	LW6hP+l8rf447Im2nuBmX96BfQeL17kgFqfX/P0ipFo=	1234d56789110	1636975114253	1636975114253	0
+48	619814b0f4ffdd2ac61c4713	ittii	tt	dd@gmail.com	1017e52add07d3893dd35a61a695cb820dee70f88fe7c3e313e943965ccf8f45	46Y8hF59liybD5Iy4uVusucf0G7XKydhO3y7cSE3sRM=	ttt	1637356720719	1637356720719	3
 \.
 
 
 --
--- Data for Name: verficationcodes; Type: TABLE DATA; Schema: pharmaplay; Owner: pharmaadmin
+-- Data for Name: verificationcodes; Type: TABLE DATA; Schema: pharmaplay; Owner: pharmaadmin
 --
 
-COPY pharmaplay.verficationcodes (verficationcode, userid) FROM stdin;
+COPY pharmaplay.verificationcodes (verificationcode, userid, idx) FROM stdin;
 \.
 
 
@@ -16814,7 +16822,14 @@ SELECT pg_catalog.setval('pharmaplay."medicines_medicine_ID_seq"', 7535, true);
 -- Name: users000__id_seq; Type: SEQUENCE SET; Schema: pharmaplay; Owner: pharmaadmin
 --
 
-SELECT pg_catalog.setval('pharmaplay.users000__id_seq', 42, true);
+SELECT pg_catalog.setval('pharmaplay.users000__id_seq', 48, true);
+
+
+--
+-- Name: verificationcodes_idx_seq; Type: SEQUENCE SET; Schema: pharmaplay; Owner: pharmaadmin
+--
+
+SELECT pg_catalog.setval('pharmaplay.verificationcodes_idx_seq', 8, true);
 
 
 --
@@ -16842,11 +16857,11 @@ ALTER TABLE ONLY pharmaplay.users000
 
 
 --
--- Name: verficationcodes verficationcodes_pkey; Type: CONSTRAINT; Schema: pharmaplay; Owner: pharmaadmin
+-- Name: verificationcodes verficationcodes_pkey; Type: CONSTRAINT; Schema: pharmaplay; Owner: pharmaadmin
 --
 
-ALTER TABLE ONLY pharmaplay.verficationcodes
-    ADD CONSTRAINT verficationcodes_pkey PRIMARY KEY (verficationcode);
+ALTER TABLE ONLY pharmaplay.verificationcodes
+    ADD CONSTRAINT verficationcodes_pkey PRIMARY KEY (verificationcode);
 
 
 --
@@ -16874,7 +16889,7 @@ CREATE UNIQUE INDEX users_name_f_l_index_001 ON pharmaplay.users000 USING btree 
 -- Name: verficationcode_id_idx001; Type: INDEX; Schema: pharmaplay; Owner: pharmaadmin
 --
 
-CREATE INDEX verficationcode_id_idx001 ON pharmaplay.verficationcodes USING btree (userid);
+CREATE INDEX verficationcode_id_idx001 ON pharmaplay.verificationcodes USING btree (userid);
 
 
 --
@@ -16948,10 +16963,10 @@ GRANT ALL ON TABLE pharmaplay.users000 TO pharmauser;
 
 
 --
--- Name: TABLE verficationcodes; Type: ACL; Schema: pharmaplay; Owner: pharmaadmin
+-- Name: TABLE verificationcodes; Type: ACL; Schema: pharmaplay; Owner: pharmaadmin
 --
 
-GRANT ALL ON TABLE pharmaplay.verficationcodes TO pharmauser;
+GRANT ALL ON TABLE pharmaplay.verificationcodes TO pharmauser;
 
 
 --
