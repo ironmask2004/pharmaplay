@@ -1,5 +1,5 @@
 import 'package:pharmaplay_server/pharmaplay_server.dart';
-import 'package:pharmaplay_server/src/authentication/auth_repos.dart';
+import 'package:pharmaplay_server/src/authentication/authentication_repository/auth_repos.dart';
 import 'package:pharmaplay_server/src/repository/database_api.dart';
 
 class AuthApi {
@@ -17,105 +17,10 @@ class AuthApi {
       final payload = await req.readAsString();
       final userRequestInfo = json.decode(payload);
       print(userRequestInfo);
-      final email = userRequestInfo['email'];
-      final password = userRequestInfo['password'];
-      final firstname = userRequestInfo['firstname'];
-      final lastname = userRequestInfo['lastname'];
-      final mobile = userRequestInfo['mobile'];
-
-      // Ensure email and password fields are present
-      if (email == null ||
-          email.isEmpty ||
-          password == null ||
-          password.isEmpty) {
-        // return Response(HttpStatus.badRequest,
-        // body: 'Please provide your email and password');
-
-        return Response.forbidden(
-            "{ \"error\" : \"Please provide your email and password \" ,  \"errorNo\" : \"403\"  }");
-      }
-      if (!EmailValidator.validate(email)) {
-        return Response(HttpStatus.badRequest,
-            body: '"{ \"error\" : \"Please provide a vaild  Email \" }"');
-      }
-
-      print(firstname);
-      print(lastname);
-      if (firstname == null ||
-          firstname.isEmpty ||
-          lastname == null ||
-          lastname.isEmpty) {
-        return Response.forbidden(
-            "{ \"error\" : \"Please provide your firstname and lastname \" ,  \"errorNo\" : \"403\"  }");
-      }
-
-      if (mobile == null || mobile.isEmpty) {
-        return Response.forbidden(
-            "{ \"error\" : \"Please provide your Mobile Number!! \" ,  \"errorNo\" : \"403\"  }");
-      }
-      String sql =
-          "SELECT idx  FROM pharmaplay.$authStore WHERE email =  @email ";
-      Map<String, dynamic> params = {"email": email};
-      dynamic resultSet = await db.query(sql, values: params);
-
-      if (resultSet.length > 0) {
-        return Response.forbidden(
-            "{ \"error\" : \"Email:  $email  was already registerd!!\" ,  \"errorNo\" : \"403\"  }");
-      }
-
-      sql =
-          "SELECT idx  FROM pharmaplay.$authStore WHERE firstname= @firstname and lastname =  @lastname ";
-      params = {"firstname": firstname, "lastname": lastname};
-      resultSet = await db.query(sql, values: params);
-
-      if (resultSet.length > 0) {
-        return Response.forbidden(
-            "{ \"error\" : \"User name:  $firstname $lastname  was already registerd!!\" ,  \"errorNo\" : \"403\"  }");
-      }
-
-      sql = "SELECT idx  FROM pharmaplay.$authStore WHERE mobile =  @mobile ";
-      params = {"mobile": mobile};
-      resultSet = await db.query(sql, values: params);
-
-      if (resultSet.length > 0) {
-        return Response.forbidden(
-            "{ \"error\" : \"mobile Number:  $mobile  was already registerd!!\" ,  \"errorNo\" : \"403\"  }");
-      }
-
-      final id = ObjectId().toString();
-      final salt = generateSalt();
-      final hashedPassword = hashPassword(password, salt);
-      String vrifycode;
-      try {
-        sql =
-            "insert into  pharmaplay.$authStore (firstname,lastname, id, email, password,salt,mobile, createdate, updatedate) values (@firstname,@lastname, @id, @email, @password,@salt , @mobile ,  @createdate, @updatedate ) returning idx";
-        params = {
-          "firstname": firstname,
-          "lastname": lastname,
-          "id": id,
-          "email": email,
-          "password": hashedPassword,
-          "salt": salt,
-          "mobile": mobile,
-          "createdate": DateTime.now().millisecondsSinceEpoch,
-          "updatedate": DateTime.now().millisecondsSinceEpoch
-        };
-        resultSet = await db.query(sql, values: params);
-
-        print(resultSet.first.toString());
-        if (resultSet.length == 0) {
-          return Response.forbidden(
-              "{ \"error\" : \" facing error while adding user\" ,  \"errorNo\" : \"403\"  }");
-        }
-
-        vrifycode = await createUserVerifcationCode(id, db);
-        print(vrifycode);
-      } catch (error) {
-        print(' error while adding user  ' + error.toString());
-        return Response(HttpStatus.badRequest, body: 'error while adding user');
-      }
-      return Response.ok(
-          "{ \"error\" : \"Successfully registered user $vrifycode\"   ,  \"errorNo\" : \"200\" }");
+      var resault =
+          createUserWithVerifcationCode(userRequestInfo, db, authStore);
+      return (resault);
+      //Response.ok("{ \"error\" : \"Successfully registered user vrifycode\"   ,  \"errorNo\" : \"200\" }");
     });
 
     //=============== authraize /LOGiN route
