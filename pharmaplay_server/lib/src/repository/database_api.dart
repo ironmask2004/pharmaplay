@@ -55,7 +55,16 @@ class DB {
 
   //---------------------------------
 
-  Future<List<dynamic>> mutlyiTransaction(List<String> sql) async {
+/*
+await connection.transaction((ctx) async {
+    var result = await ctx.query("SELECT id FROM table");
+    await ctx.query("INSERT INTO table (id) VALUES (@a:int4)", substitutionValues: {
+        "a" : result.last[0] + 1
+    });
+});
+*/
+
+  Future<List<dynamic>> mutliTransaction(List<String> sql) async {
     try {
       return await _connection.transaction((ctx) async {
         for (var i = 0; i > sql.length; i++) {
