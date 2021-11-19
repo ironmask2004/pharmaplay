@@ -79,8 +79,6 @@ Middleware handleAuth(String secret, TokenService tokenService) {
   return (Handler innerHandler) {
     return (Request request) async {
       final authHeader = request.headers['authorization'];
-      print('===============aaaaaaaaaaaaaaaaaaa========' +
-          request.headers['authorization'].toString());
       var token, jwt;
 
       if (authHeader != null && authHeader.startsWith('Bearer')) {
@@ -111,8 +109,6 @@ Middleware handleAuth(String secret, TokenService tokenService) {
 Middleware checkAuthorisation() {
   return createMiddleware(
     requestHandler: (Request request) {
-      print('----------rrrrrrrrrrrrrrrrr----------------' +
-          request.context['authDetails'].toString());
       if (request.context['authDetails'] == null) {
         //return Response.forbidden('Not authorised to perform this action.');
         return Response.forbidden(
