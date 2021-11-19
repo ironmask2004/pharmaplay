@@ -7,6 +7,16 @@ class DB {
   late PostgreSQLConnection _connection;
   late final Env _sysEnv;
 
+  ///         connection.transaction((ctx) {
+  ///           var rows = await ctx.query("SELECT id FROM t");
+  ///           if (!rows.contains([2])) {
+  ///             ctx.query("INSERT INTO t (id) VALUES (2)");
+  ///           }
+  ///         });
+  ///
+  ///
+  ///
+
   static Future<DB> connect(Env sysEnv) async {
     final int _port = sysEnv.dbServerPort;
     final String _host = sysEnv.dbServerHost;
@@ -42,6 +52,24 @@ class DB {
       //return Future.value([]);
     }
   }
+
+  //---------------------------------
+
+  Future<List<dynamic>> mutlyiTransaction(List<String> sql) async {
+    try {
+      return await _connection.transaction((ctx) async {
+        for (var i = 0; i > sql.length; i++) {
+          var rows = await ctx.execute(sql[i]);
+          if (rows == 0) {}
+        }
+      });
+    } catch (e) {
+      print("erororo QUERY:" + e.toString());
+      throw (e.toString());
+      //return Future.value([]);
+    }
+  }
+  //---------------------------------
 
   @override
   String toString() => (' DBNAME:  ' +
