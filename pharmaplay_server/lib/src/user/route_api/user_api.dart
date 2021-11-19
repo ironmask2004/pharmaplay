@@ -47,31 +47,18 @@ class UserApi {
               '\" , \"errorNo\" : \"199991\" }');
     });
 
-//============= /users/loadUSerstatus  ROUTE
+//============= /users/userstatuslist  ROUTE
 
     router.post('/userstatuslist', (Request req) async {
       // final authDetails = req.context['authDetails'] as JWT;
-      try {
-        /* UserStatusTypeList statusTypeList = await getAllUserStatusType(db);
-        print("founded_user------:" + statusTypeList.toString());
 
-        String response = "";
-        for (int i = 0; i < statusTypeList.items.length; i++) {
-          response = response + (statusTypeList.items[i].toJson().toString());
-        }
+      String response = UserStatusEnumMap.toString();
 
-        return Response.ok(response, headers: {
-          'content-type': 'application/json',
-        });*/
-      } catch (e) {
-        print('----------end test  Request--------------');
-
-        return Response.internalServerError(
-            body: '{ \"error\" : \" There was a problem test  .\" ' +
-                e.toString() +
-                '\" , \"errorNo\" : \"199991\" }');
-      }
+      return Response.ok(response, headers: {
+        'content-type': 'application/json',
+      });
     });
+
     //============= /users/INFO ROUTE
     router.get('/info/', (Request req) async {
       final authDetails = req.context['authDetails'] as JWT;

@@ -1,8 +1,131 @@
 library authentication_repository;
 
 import 'package:pharmaplay_server/pharmaplay_server.dart';
-import 'package:pharmaplay_server/src/repository/database_api.dart';
-import 'package:pharmaplay_server/src/utilites/random_code.dart';
+
+//----------------------
+Future<int?> changeUserStatus(
+    String userId, UserStatus newStatus, String authStore, DB db) async {
+  List<Map<String, dynamic>> paramslist = [];
+  List<String> sqllist = [];
+
+  sqllist.add(
+      'UPDATE pharmaplay.$authStore SET status = @status WHERE id = @userid ');
+  paramslist.add({"userid": userId, "status": UserStatusEnumMap[newStatus]});
+  print(userId);
+
+  print(sqllist);
+
+  var resault = 0;
+  try {
+    resault = await db.mutliTransaction(sqllist, paramslist);
+  } catch (err) {
+    print(err.toString());
+    rethrow;
+  }
+  if (resault == 0) {
+    throw ('No Status HAs Been Changed!!!');
+  } else {
+    return UserStatusEnumMap[newStatus];
+  }
+}
+
+///-------- resend verfication code
+
+Future<Response> resendVerificationCode(
+    var userRequestInfo, DB db, String authStore) async {
+  print('----------Start resend Code REquest -------------');
+
+  final email = userRequestInfo['email'];
+  final password = userRequestInfo['password'];
+
+  // Ensure email and password fields are present
+  if (email == null || email.isEmpty || password == null || password.isEmpty) {
+    return Response(HttpStatus.badRequest,
+        body: '"{ \"error\" : \"Please provide your email and password\" }"');
+  }
+  if (!EmailValidator.validate(email)) {
+    return Response(HttpStatus.badRequest,
+        body: '"{ \"error\" : \"Please provide a vaild  Email \" }"');
+  }
+
+  //final user = await store.findOne(where.eq('email', email));
+  String sql = "SELECT *  FROM pharmaplay.$authStore WHERE email =  @email ";
+  Map<String, dynamic> params = {"email": email};
+  dynamic resultSet = await db.query(sql, values: params);
+
+  if (resultSet.length == 0) {
+    return Response.forbidden(
+        "{ \"error\" : \"Incorrect user  Login\" ,  \"errorNo\" : \"403\"  }");
+  }
+  print(resultSet.first.toString());
+
+  final user = resultSet.first['$authStore'];
+  // User Myuser = User.fromMap(user);
+
+  // print("My userrrrrr: " + Myuser.toString());
+
+  print('fided user :   ======== ');
+  print(user.toString());
+
+  final hashedPassword = hashPassword(password, user['salt']);
+  if (hashedPassword != user['password']) {
+    return Response.forbidden(
+        "{ \"error\" : \"Incorrect  password!!\" ,  \"errorNo\" : \"403\"  }");
+  }
+
+  if (user['status'] != 0) {
+    return Response.forbidden(
+        "{ \"error\" : \"User Email ${user['email']} & Mobile ${user['mobile']}  Already Verifide!!\" ,  \"errorNo\" : \"403\"  }");
+  }
+
+  List<Map<String, dynamic>> paramslist = [];
+  List<String> sqllist = [];
+
+  sqllist.add(
+      "   UPDATE  pharmaplay.$authStore SET     updatedate = @updatedate where id= @id");
+  paramslist.add(params = {
+    "id": user['id'],
+    "updatedate": DateTime.now().millisecondsSinceEpoch
+  });
+
+  sqllist.add('DELETE  FROM pharmaplay.verificationcodes WHERE userid =  @id ');
+  paramslist.add(params = {"id": user['id']});
+
+  String verificationcode = RandomCode.nextInter();
+  print(verificationcode);
+
+  paramslist
+      .add(params = {"id": user['id'], "verificationcode": verificationcode});
+  // return (resultSet.first['verificationcodes']['verificationcode']);
+  sqllist.add(
+      'insert into pharmaplay.verificationcodes ( userid,verificationcode ) values (  @id , @verificationcode  )  returning idx ');
+
+  print(id);
+
+  print(sql);
+
+  try {
+    await db.mutliTransaction(sqllist, paramslist);
+
+    //=====
+
+    // resultSet = await db.query(sql, values: params);
+
+  } catch (err) {
+    print(err.toString());
+    rethrow;
+  }
+
+  try {
+    await sendVerificationCodeByMail(verificationcode, user['email']);
+  } catch (err) {
+    print(err.toString());
+    rethrow;
+  }
+
+  return Response.ok(
+      "{ \"error\" : \"Successfully resend new  user  verificationcode  $verificationcode\"   ,  \"errorNo\" : \"200\" }");
+}
 
 //----------------------
 Future<bool> userVerifyCode(
@@ -22,19 +145,6 @@ Future<bool> userVerifyCode(
     dynamic resultSet = await db.query(sql, values: params);
 
     if (resultSet.length > 0) {
-      /*sql =
-          'DELETE FROM pharmaplay.verificationcodes WHERE userid =  @userid   and verificationcode = @verificationcode ';
-      print(sql);
-      resultSet = await db.query(sql, values: params);
-
-      params = {"userid": userId};
-
-      sql =
-          'UPDATE pharmaplay.$authStore SET status = @status WHERE id = @userid ';
-      params = {"userid": userId, "status": 1};
-      print(sql);
-      resultSet = await db.query(sql, values: params);
-*/
       List<Map<String, dynamic>> paramslist = [];
       List<String> sqllist = [];
       sqllist.add(
@@ -145,28 +255,22 @@ Future<Response> createUserWithVerifcationCode(
     "updatedate": DateTime.now().millisecondsSinceEpoch
   });
 
-  sql =
-      'SELECT verificationcode  FROM pharmaplay.verificationcodes WHERE userid =  @id  ';
-  params = {"id": id};
+  sqllist
+      .add('DELETE  FROM pharmaplay.verificationcodes WHERE userid =  @id  ');
+  paramslist.add(params = {"id": id});
 
-  resultSet = await db.query(sql, values: params);
-  String verificationcode;
+  String verificationcode = RandomCode.nextInter();
+  print(verificationcode);
 
-  if (resultSet.length == 0) {
-    verificationcode = RandomCode.nextInter();
-    print(verificationcode);
+  paramslist.add(params = {"id": id, "verificationcode": verificationcode});
+  // return (resultSet.first['verificationcodes']['verificationcode']);
+  sqllist.add(
+      'insert into pharmaplay.verificationcodes ( userid,verificationcode ) values (  @id , @verificationcode  )  returning idx ');
 
-    paramslist.add(params = {"id": id, "verificationcode": verificationcode});
-    // return (resultSet.first['verificationcodes']['verificationcode']);
-    sqllist.add(
-        'insert into pharmaplay.verificationcodes ( userid,verificationcode ) values (  @id , @verificationcode  )  returning idx ');
+  print(id);
 
-    print(id);
+  print(sql);
 
-    print(sql);
-  } else {
-    verificationcode = resultSet.first['verificationcodes']['verificationcode'];
-  }
   try {
     await db.mutliTransaction(sqllist, paramslist);
 
@@ -174,6 +278,12 @@ Future<Response> createUserWithVerifcationCode(
 
     // resultSet = await db.query(sql, values: params);
 
+  } catch (err) {
+    print(err.toString());
+    rethrow;
+  }
+  try {
+    await sendVerificationCodeByMail(verificationcode, email);
   } catch (err) {
     print(err.toString());
     rethrow;

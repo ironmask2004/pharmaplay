@@ -66,7 +66,7 @@ await connection.transaction((ctx) async {
 
   Future<int> mutliTransaction(
       List<String> sqlList, List<Map<String, dynamic>> paramsList) async {
-    var rows = 0;
+    var resault = 0;
     try {
       await _connection.transaction((ctx) async {
         print('rrrrrrrrrrrrrrrrrrrrrrrrrrrrr');
@@ -76,16 +76,18 @@ await connection.transaction((ctx) async {
               'ppppppp:' +
               paramsList[i].toString());
 
-          rows = await ctx.execute(sqlList[i].toString(),
+          var rows = await ctx.execute(sqlList[i].toString(),
               substitutionValues: paramsList[i]);
           if (rows == 0) {
             print('No rows effectedy by last sql!!! ');
+          } else {
+            resault = resault + rows;
           }
         }
       });
-      print('Number of  rows effectedy by last Transaction: $rows!!! ');
+      print('Number of  rows effectedy by last Transaction: $resault!!! ');
 
-      return rows;
+      return resault;
     } catch (e) {
       print("erororo QUERY:" + e.toString());
       throw (e.toString());

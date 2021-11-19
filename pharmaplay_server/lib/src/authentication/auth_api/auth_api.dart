@@ -20,9 +20,22 @@ class AuthApi {
       var resault =
           createUserWithVerifcationCode(userRequestInfo, db, authStore);
       return (resault);
-      //Response.ok("{ \"error\" : \"Successfully registered user vrifycode\"   ,  \"errorNo\" : \"200\" }");
+    });
+    router.post('/resendcode', (Request req) async {
+      final payload = await req.readAsString();
+      final userRequestInfo = json.decode(payload);
+      print(userRequestInfo);
+      var resault = resendVerificationCode(userRequestInfo, db, authStore);
+      return (resault);
     });
 
+    router.post('/resendcode', (Request req) async {
+      final payload = await req.readAsString();
+      final userRequestInfo = json.decode(payload);
+      print(userRequestInfo);
+      var resault = resendVerificationCode(userRequestInfo, db, authStore);
+      return (resault);
+    });
     //=============== authraize /LOGiN route
 
     router.post('/login', (Request req) async {
@@ -89,6 +102,21 @@ class AuthApi {
         }
       }
 
+//---change status to logedin
+      if (user['status'] != UserStatusEnumMap[UserStatus.loggedIn]) {
+        try {
+          user['status'] = await changeUserStatus(
+              user['id'], UserStatus.loggedIn, authStore, db);
+        } catch (e) {
+          return Response.internalServerError(
+              body:
+                  '{ \"error\" : \" There was a problem change status to  loggedIn. Please try again.\" ' +
+                      e.toString() +
+                      '\" , \"errorNo\" : \"199991\" }');
+        }
+      }
+//---
+
       // Generate JWT and send with response
       print('User ID:' + user['id']);
       // final userId = (user['id'] as ObjectId).toHexString();
@@ -127,9 +155,33 @@ class AuthApi {
         return Response.forbidden(
             '"{ \"error\" : \"Not authorised to perform this operation."  ,  \"errorNo\" : \"403\" }");');
       }
+      final userId = ((auth as JWT)).subject.toString();
+      try {
+        Map<dynamic, dynamic> result =
+            await tokenService.AllRefreshTokenByScanUserId(userId);
+        print('llllllllllllllllllllll' + result.toString());
+        print(result.length);
+        if (result.length == 1) {
+//---change status to logedout
+
+          try {
+            await changeUserStatus(userId, UserStatus.loggedOut, authStore, db);
+          } catch (e) {
+            return Response.internalServerError(
+                body:
+                    '{ \"error\" : \" There was a problem change status to  loggedOut  Please try again.\" ' +
+                        e.toString() +
+                        '\" , \"errorNo\" : \"199991\" }');
+          }
+//---
+        }
+      } catch (e) {
+        return Response.internalServerError(
+            body:
+                '{ \"error\" : \"There was an issue getting sessions  out $e. Please check and try again.\"   ,  \"errorNo\" : \"199991\" }');
+      }
 
       try {
-        final userId = ((auth as JWT)).subject.toString();
         print('iiiiiiiiiiiiiiiiiiiiiii    subject   rrrrrrrrrrrr:  $userId');
 
         await tokenService.removeRefreshToken(
@@ -144,10 +196,47 @@ class AuthApi {
           '{ \"error\" : \"Successfully Loggedout user\"   ,  \"errorNo\" : \"200\" }');
     });
 
+// ================== authrizee / logout All Sessions  route
+    router.post('/logout/allsessions', (Request req) async {
+      final auth = req.context['authDetails'];
+      if (auth == null) {
+        return Response.forbidden(
+            '"{ \"error\" : \"Not authorised to perform this operation."  ,  \"errorNo\" : \"403\" }");');
+      }
+
+      final userId = ((auth as JWT)).subject.toString();
+
+//---change status to logedin
+      try {
+        await changeUserStatus(userId, UserStatus.loggedOut, authStore, db);
+      } catch (e) {
+        return Response.internalServerError(
+            body:
+                '{ \"error\" : \" There was a problem change status to  loggedOut. Please try again.\" ' +
+                    e.toString() +
+                    '\" , \"errorNo\" : \"199991\" }');
+      }
+
+//---
+
+      try {
+        print('iiiiiiiiiiiiiiiiiiiiiii    subject   rrrrrrrrrrrr:  $userId');
+
+        await tokenService.removeAllRefreshTokenByUserId(userId);
+      } catch (e) {
+        return Response.internalServerError(
+            body:
+                '{ \"error\" : \"There was an issue logging out. Please check and try again.\"   ,  \"errorNo\" : \"199991\" }');
+      }
+
+      return Response.ok(
+          '{ \"error\" : \"Successfully Loggedout from All USer sessions  \"   ,  \"errorNo\" : \"200\" }');
+    });
+
 // ================== Sessions RElated to users /sessions/   route
     router.post('/sessions', (Request req) async {
       final auth = req.context['authDetails'];
-      var result;
+      dynamic result;
       if (auth == null) {
         return Response.forbidden(
             '"{ \"error\" : \"Not authorised to perform this operation."  ,  \"errorNo\" : \"403\" }");');
@@ -164,7 +253,7 @@ class AuthApi {
       }
 
       //var json1 = json.encode(result.toString());
-      return Response.ok(result, headers: {
+      return Response.ok(result.toString(), headers: {
         'content-type': 'application/json',
       });
       //return Response.ok(json.encode(result));

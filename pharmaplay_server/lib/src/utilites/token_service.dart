@@ -91,6 +91,6 @@ class TokenService {
       mapp["$i"] = resaultList[i].toString();
     }
 
-    return (json.encode(mapp));
+    return (mapp);
   }
 }
