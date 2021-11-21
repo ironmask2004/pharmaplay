@@ -11,6 +11,8 @@ class Env {
   late final String dbServerHost;
   late final String dbUser;
   late final String dbPassword;
+  late final String smtpEmail;
+  late final String smtpPassword;
 
   Env() {
 //! dotenv package : adding .env file  to platform.environment
@@ -24,7 +26,9 @@ class Env {
     dbServerHost = env['dbServerHost'] ?? 'localhost';
     dbName = env['dbName'] ?? 'pharmadb';
     dbUser = env['dbUser'] ?? 'pharmauser';
-    dbPassword = env['dbPassword'] ?? 'Pharma73@user.com';
+    dbPassword = env['dbPassword'] ?? 'Password';
+    smtpEmail = env['mjdoulin@gmail.com'] ?? 'mjdoulin@gmail.com';
+    smtpPassword = env['smtpPassword'] ?? 'smtpPassword';
     clean(); //env clean
   }
 }

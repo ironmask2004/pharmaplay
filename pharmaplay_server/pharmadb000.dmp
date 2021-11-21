@@ -16764,7 +16764,8 @@ TRANCOMED-5 CTD TAB.	5 MG/CTD TAB.	ZOLPIDEM	ميديكو	311/2006	9/11/2006	أق
 --
 
 COPY pharmaplay.users000 (idx, id, firstname, lastname, email, password, salt, mobile, createdate, updatedate, status) FROM stdin;
-48	619814b0f4ffdd2ac61c4713	ittii	tt	dd@gmail.com	1017e52add07d3893dd35a61a695cb820dee70f88fe7c3e313e943965ccf8f45	46Y8hF59liybD5Iy4uVusucf0G7XKydhO3y7cSE3sRM=	ttt	1637356720719	1637356720719	3
+53	619a4fc8452a9d32440d5885	iro1n11	ma11sek1	f@gmail.com	ec32194516ae7268e6fba517b4d057056efa4a81ff6359e849b0fb19f6bd3e1c	sZhQ5kGonRS4t/+ltYuGonKpn+24prYxCuDp+//80IM=	59301851295891	1637502920649	1637502920649	0
+55	619a51fd452a9d32440d5887	Iron	Mask	ironmask2004@gmail.com	e88d7634658f2f349dd98e9ecba499d3f4b39d4a3d6d8c6af398fc9b957826bf	S0NzWJB30HVN0vkwLRYeexSfWxExoXVDL+G94/z+QcM=	593018512953891	1637503485582	1637503485582	2
 \.
 
 
@@ -16773,6 +16774,7 @@ COPY pharmaplay.users000 (idx, id, firstname, lastname, email, password, salt, m
 --
 
 COPY pharmaplay.verificationcodes (verificationcode, userid, idx) FROM stdin;
+632-538	619a4fc8452a9d32440d5885	14
 \.
 
 
@@ -16822,14 +16824,14 @@ SELECT pg_catalog.setval('pharmaplay."medicines_medicine_ID_seq"', 7535, true);
 -- Name: users000__id_seq; Type: SEQUENCE SET; Schema: pharmaplay; Owner: pharmaadmin
 --
 
-SELECT pg_catalog.setval('pharmaplay.users000__id_seq', 48, true);
+SELECT pg_catalog.setval('pharmaplay.users000__id_seq', 55, true);
 
 
 --
 -- Name: verificationcodes_idx_seq; Type: SEQUENCE SET; Schema: pharmaplay; Owner: pharmaadmin
 --
 
-SELECT pg_catalog.setval('pharmaplay.verificationcodes_idx_seq', 8, true);
+SELECT pg_catalog.setval('pharmaplay.verificationcodes_idx_seq', 17, true);
 
 
 --

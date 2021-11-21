@@ -42,8 +42,10 @@ class UserApi {
       }
     }
     */
+      sendMail('ironmask2004@gmail.com', 'Veervication Cdoe from Pharma Play',
+          'The Code is: ${RandomCode.nextInter()} ');
       return Response.internalServerError(
-          body: '{ \"VerCode\" : \" ${RandomCode.nextInter()} .\" ' +
+          body: '{ \"VerCode\" : \" ؟؟؟-؟؟؟ .\" ' +
               '\" , \"errorNo\" : \"199991\" }');
     });
 

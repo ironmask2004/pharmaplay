@@ -27,7 +27,7 @@ export 'package:pharmaplay_server/src/repository/database_api.dart';
 export 'package:pharmaplay_server/src/user/model/user.dart';
 
 export 'package:pharmaplay_server/src/utilites/random_code.dart';
-export 'package:pharmaplay_server/src/utilites/sender.dart';
+export 'package:pharmaplay_server/src/utilites/mail_sender.dart';
 
 export 'package:postgres/postgres.dart';
 export 'package:uuid/uuid.dart';

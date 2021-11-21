@@ -1,0 +1,6 @@
+-- @block Bookmarked query
+-- @group users
+-- @name one user
+
+SELECT * from  pharmaplay.users000 ;
+
