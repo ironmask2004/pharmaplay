@@ -60,9 +60,6 @@ Future<Response> resendVerificationCode(
   print(resultSet.first.toString());
 
   final user = resultSet.first['$authStore'];
-  // User Myuser = User.fromMap(user);
-
-  // print("My userrrrrr: " + Myuser.toString());
 
   print('fided user :   ======== ');
   print(user.toString());
