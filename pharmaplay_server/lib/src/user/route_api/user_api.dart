@@ -71,7 +71,13 @@ class UserApi {
 
       print("founded_user------:" + userInfo.toString());
 
-      return Response.ok(userInfo.toJson().toString(), headers: {
+      final userWithresault = userInfo.toJson();
+      userWithresault["'error'"] = "\"" + 'Suucess' + "\"";
+      userWithresault["'errorNo'"] = "\"" + '200' + "\"";
+
+      var jsonString = json.encode(userWithresault);
+
+      return Response.ok(jsonString, headers: {
         'content-type': 'application/json',
       });
     });
@@ -108,13 +114,14 @@ class UserApi {
       final firstname = userInfo['firstname'];
       final lastname = userInfo['lastname'];
       final mobile = userInfo['mobile'];
+
       print('-------------------------');
       User oldUserInfo =
           await findUserByID(authDetails.subject.toString(), db, authStore);
       print('-------------------------');
       print("founded_old_user_data: ------:" + oldUserInfo.toString());
       //print(oldUserInfo);
-
+      userInfo['updatedate'] = DateTime.now();
       User UpdatedUserInfo = oldUserInfo.copyWithFromMap(userInfo);
 
       print("updared _user_data: ------:" + UpdatedUserInfo.toString());
@@ -165,6 +172,7 @@ class UserApi {
         }
       }
       try {
+        // UpdatedUserInfo.updatedate = DateTime.now();
         sql =
             'update pharmaplay.$authStore SET   id=@id, firstname=@firstname, lastname=@lastname, email=@email, password=@password, salt=@salt, mobile=@mobile, createdate=@createdate, updatedate=@updatedate ,  status=@status 	where idx= @idx returning idx';
         params = UpdatedUserInfo.toMap();

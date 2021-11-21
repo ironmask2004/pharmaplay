@@ -46,23 +46,24 @@ class User extends Equatable {
         password: map['password'],
         salt: map['salt'],
         mobile: map['mobile'],
-        createdate: DateTime.fromMillisecondsSinceEpoch(
-            int.parse(map['updatedate'].toString())),
-        updatedate: DateTime.fromMillisecondsSinceEpoch(
-            int.parse(map['updatedate'].toString())),
+        createdate: DateTime.parse(map['createdate'].toString()),
+        /* updatedate: DateTime.fromMillisecondsSinceEpoch(
+            int.parse(map['updatedate'].toString())),*/
+        updatedate: DateTime.parse(map['updatedate'].toString()),
         status: $enumDecode(_$UserStatusEnumMap, map['status'],
             unknownValue: UserStatus.needVerify));
   }
 
-  final DateTime createdate;
-  final String email;
-  final String firstname;
   final String id;
   final int idx;
+  final String firstname;
+  final String email;
   final String lastname;
   final String mobile;
   final String password;
   final String salt;
+  final DateTime createdate;
+
   final DateTime updatedate;
   @JsonKey(unknownEnumValue: UserStatus.needVerify)
   final UserStatus status;
@@ -128,14 +129,12 @@ class User extends Equatable {
         password: map['password'] ?? password,
         salt: map['salt'] ?? salt,
         mobile: map['mobile'] ?? mobile,
-        createdate: (map['updatedate'] == null
+        createdate: (map['createdate'] == null
             ? createdate
-            : DateTime.fromMillisecondsSinceEpoch(
-                int.parse(map['updatedate'].toString()))),
+            : DateTime.parse(map['createdate'].toString())),
         updatedate: (map['updatedate'] == null
             ? updatedate
-            : DateTime.fromMillisecondsSinceEpoch(
-                int.parse(map['updatedate'].toString()))),
+            : DateTime.parse(map['updatedate'].toString())),
         status: map['status'] == null
             ? status
             : $enumDecode(_$UserStatusEnumMap, map['status'],
@@ -152,8 +151,8 @@ class User extends Equatable {
       'password': password,
       'salt': salt,
       'mobile': mobile,
-      'createdate': createdate.millisecondsSinceEpoch,
-      'updatedate': updatedate.millisecondsSinceEpoch,
+      'createdate': createdate.toIso8601String(),
+      'updatedate': updatedate.toIso8601String(),
       'status': _$UserStatusEnumMap[status],
     };
   }

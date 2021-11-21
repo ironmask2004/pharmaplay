@@ -2,8 +2,10 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 13.4
--- Dumped by pg_dump version 13.4
+-- Dumped from database version 14.1
+-- Dumped by pg_dump version 14.1
+
+-- Started on 2021-11-22 00:03:26 EET
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -21,6 +23,7 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
+-- TOC entry 224 (class 1259 OID 16604)
 -- Name: users000; Type: TABLE; Schema: pharmaplay; Owner: pharmaadmin
 --
 
@@ -33,14 +36,17 @@ CREATE TABLE pharmaplay.users000 (
     password character varying(512) NOT NULL,
     salt character varying(256),
     mobile character varying(56),
-    createdate numeric(20,0),
-    updatedate numeric(20,0)
+    status smallint DEFAULT 0 NOT NULL,
+    updatedate timestamp without time zone,
+    createdate timestamp without time zone
 );
 
 
 ALTER TABLE pharmaplay.users000 OWNER TO pharmaadmin;
 
 --
+-- TOC entry 4360 (class 0 OID 0)
+-- Dependencies: 224
 -- Name: TABLE users000; Type: COMMENT; Schema: pharmaplay; Owner: pharmaadmin
 --
 
@@ -51,6 +57,7 @@ FROM pharmaplay.users000;';
 
 
 --
+-- TOC entry 225 (class 1259 OID 16610)
 -- Name: users000__id_seq; Type: SEQUENCE; Schema: pharmaplay; Owner: pharmaadmin
 --
 
@@ -65,22 +72,25 @@ ALTER TABLE pharmaplay.users000 ALTER COLUMN idx ADD GENERATED ALWAYS AS IDENTIT
 
 
 --
+-- TOC entry 4353 (class 0 OID 16604)
+-- Dependencies: 224
 -- Data for Name: users000; Type: TABLE DATA; Schema: pharmaplay; Owner: pharmaadmin
 --
 
-COPY pharmaplay.users000 (idx, id, firstname, lastname, email, password, salt, mobile, createdate, updatedate) FROM stdin;
-15	618efa44a3a22765ecc20d25	khawled	flihwan	kfwlihan@gmail.com	c1538fcea1128aedcd3ad3043e2fb76c97791e388ada8b1b1b5b237ecf4a2aa7	tHbxzu4/mw+ruYtH7UcJ4VQHPJqOPFIfUaaXKnUsxEI=	093963f838	1636760132571	1636760132571
-\.
+INSERT INTO pharmaplay.users000 OVERRIDING SYSTEM VALUE VALUES (52, '619ac1a5d1199c77d7fc767d', 'drd1', 'dd1rd', 'rrrrr@gmail.com', '6d6c77d598db557332a3edf985234a85524faf151637412c0bece2852f98131a', 'hYq5qK10zuiwHUnVZvYFH3GM1o+Us3kn2tl/miLneF8=', '85671rx5735675', 2, '2021-11-22 00:01:09.828779', '2021-11-22 00:01:09.828778');
 
 
 --
+-- TOC entry 4362 (class 0 OID 0)
+-- Dependencies: 225
 -- Name: users000__id_seq; Type: SEQUENCE SET; Schema: pharmaplay; Owner: pharmaadmin
 --
 
-SELECT pg_catalog.setval('pharmaplay.users000__id_seq', 15, true);
+SELECT pg_catalog.setval('pharmaplay.users000__id_seq', 52, true);
 
 
 --
+-- TOC entry 4209 (class 2606 OID 16619)
 -- Name: users000 users000_pkey; Type: CONSTRAINT; Schema: pharmaplay; Owner: pharmaadmin
 --
 
@@ -89,6 +99,7 @@ ALTER TABLE ONLY pharmaplay.users000
 
 
 --
+-- TOC entry 4210 (class 1259 OID 16622)
 -- Name: users_email_index_001; Type: INDEX; Schema: pharmaplay; Owner: pharmaadmin
 --
 
@@ -96,6 +107,7 @@ CREATE UNIQUE INDEX users_email_index_001 ON pharmaplay.users000 USING btree (em
 
 
 --
+-- TOC entry 4211 (class 1259 OID 16623)
 -- Name: users_id_index_001; Type: INDEX; Schema: pharmaplay; Owner: pharmaadmin
 --
 
@@ -103,6 +115,7 @@ CREATE UNIQUE INDEX users_id_index_001 ON pharmaplay.users000 USING btree (id);
 
 
 --
+-- TOC entry 4212 (class 1259 OID 16624)
 -- Name: users_name_f_l_index_001; Type: INDEX; Schema: pharmaplay; Owner: pharmaadmin
 --
 
@@ -110,11 +123,15 @@ CREATE UNIQUE INDEX users_name_f_l_index_001 ON pharmaplay.users000 USING btree 
 
 
 --
+-- TOC entry 4361 (class 0 OID 0)
+-- Dependencies: 224
 -- Name: TABLE users000; Type: ACL; Schema: pharmaplay; Owner: pharmaadmin
 --
 
 GRANT ALL ON TABLE pharmaplay.users000 TO pharmauser;
 
+
+-- Completed on 2021-11-22 00:03:31 EET
 
 --
 -- PostgreSQL database dump complete

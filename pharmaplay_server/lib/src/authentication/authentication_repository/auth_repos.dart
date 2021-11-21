@@ -82,7 +82,7 @@ Future<Response> resendVerificationCode(
       "   UPDATE  pharmaplay.$authStore SET     updatedate = @updatedate where id= @id");
   paramslist.add(params = {
     "id": user['id'],
-    "updatedate": DateTime.now().millisecondsSinceEpoch
+    "updatedate": DateTime.now() //.millisecondsSinceEpoch
   });
 
   sqllist.add('DELETE  FROM pharmaplay.verificationcodes WHERE userid =  @id ');
@@ -248,8 +248,8 @@ Future<Response> createUserWithVerifcationCode(
     "password": hashedPassword,
     "salt": salt,
     "mobile": mobile,
-    "createdate": DateTime.now().millisecondsSinceEpoch,
-    "updatedate": DateTime.now().millisecondsSinceEpoch
+    "createdate": DateTime.now(),
+    "updatedate": DateTime.now() //.millisecondsSinceEpoch
   });
 
   sqllist
@@ -287,7 +287,7 @@ Future<Response> createUserWithVerifcationCode(
   }
 
   return Response.ok(
-      "{ \"error\" : \"Successfully registered user $verificationcode\"   ,  \"errorNo\" : \"200\" }");
+      "{ \"error\" : \"Successfully registered user   \"   ,  \"errorNo\" : \"200\" }");
 }
 
 ///----------------- Login User
@@ -368,17 +368,16 @@ Future<Response> userLogin(var userRequestInfo, DB db, String authStore,
   print('User ID:' + user['id']);
   // final userId = (user['id'] as ObjectId).toHexString();
   final userId = ObjectId.fromHexString(user['id']).toString();
-  print('User ID:' + userId);
-
+  print('------User ID:---' + userId);
   try {
     final tokenPair = await tokenService.createTokenPair(userId);
-    user['token'] = tokenPair.toJson()['token'];
-    user['refreshToken'] = tokenPair.toJson()['refreshToken'];
-    user["'error'"] = "\"" + 'Suucess' + "\"";
-    user["'errorNo'"] = "\"" + '200' + "\"";
+    final userWithToken = User.fromMap(user).toJson();
+    userWithToken['token'] = tokenPair.toJson()['token'];
+    userWithToken['refreshToken'] = tokenPair.toJson()['refreshToken'];
+    userWithToken["'error'"] = "\"" + 'Suucess' + "\"";
+    userWithToken["'errorNo'"] = "\"" + '200' + "\"";
 
-    print('------------------' + user.toString());
-    var jsonString = json.encode(user);
+    var jsonString = json.encode(userWithToken);
 
     print('-----======================================--' + jsonString);
     return Response.ok(jsonString, headers: {
