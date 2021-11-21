@@ -3,14 +3,14 @@ import 'package:mailer/smtp_server.dart';
 import 'package:pharmaplay_server/src/utilites/config.dart';
 
 sendVerificationCodeByMail(String verificationcode, String email) async {
-  print('The MAil with Code $verificationcode');
-
   print('  hase been Cent to $email');
-  // try {
-  sendMail(email, 'Verifcation code from pharmaplay', verificationcode);
-  // } catch (err) {
-  //   print(err.toString());
-//  }
+  try {
+    final String mailBody =
+        "<h1> your verification code is:  $verificationcode  </h1>\n<p>الرجاء اعادة الدخول إلى البرنامج واستخدام كود التحقق الوارد في هذه الرسالة </p>";
+    sendMail(email, 'Verifcation code from pharmaplay', mailBody);
+  } catch (err) {
+    print(err.toString());
+  }
 }
 
 void sendMail(String toEmail, String mailSubject, String mailBody,
@@ -37,8 +37,8 @@ void sendMail(String toEmail, String mailSubject, String mailBody,
     ..subject = '$mailSubject:: ${DateTime.now()}'
     //..text =
     //     mailBody; //  'This is the plain text.\nThis is line 2 of the text part.'
-    ..html =
-        "<h1> $mailBody </h1>\n<p>الرجاء اعادة الدخول إلى البرنامج واستخدام كود التحقق الوارد في هذه الرسالة </p>";
+    ..html = mailBody;
+  //   "<h1> mailBody  </h1>\n<p>الرجاء اعادة الدخول إلى البرنامج واستخدام كود التحقق الوارد في هذه الرسالة </p>";
 
   await send(equivalentMessage, smtpServer);
 }

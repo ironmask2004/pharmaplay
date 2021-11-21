@@ -124,7 +124,7 @@ Future<Response> resendVerificationCode(
   }
 
   return Response.ok(
-      "{ \"error\" : \"Successfully resend new  user  verificationcode  $verificationcode\"   ,  \"errorNo\" : \"200\" }");
+      "{ \"error\" : \"Successfully resend new  user  verificationcode  \"   ,  \"errorNo\" : \"200\" }");
 }
 
 //----------------------
@@ -160,7 +160,7 @@ Future<bool> userVerifyCode(
 
       return true;
     } else {
-      print(' User with verificationcode: $verificationcode   Not Found ');
+      print(' User with verificationcode   Not Found ');
       return false;
     }
   } catch (err) {
@@ -291,4 +291,190 @@ Future<Response> createUserWithVerifcationCode(
 
   return Response.ok(
       "{ \"error\" : \"Successfully registered user $verificationcode\"   ,  \"errorNo\" : \"200\" }");
+}
+
+///----------------- Login User
+
+Future<Response> userLogin(var userRequestInfo, DB db, String authStore,
+    TokenService tokenService) async {
+  final email = userRequestInfo['email'];
+  final password = userRequestInfo['password'];
+
+  // Ensure email and password fields are present
+  if (email == null || email.isEmpty || password == null || password.isEmpty) {
+    return Response(HttpStatus.badRequest,
+        body: '"{ \"error\" : \"Please provide your email and password\" }"');
+  }
+  if (!EmailValidator.validate(email)) {
+    return Response(HttpStatus.badRequest,
+        body: '"{ \"error\" : \"Please provide a vaild  Email \" }"');
+  }
+
+  //final user = await store.findOne(where.eq('email', email));
+  String sql = "SELECT *  FROM pharmaplay.$authStore WHERE email =  @email ";
+  Map<String, dynamic> params = {"email": email};
+  dynamic resultSet = await db.query(sql, values: params);
+
+  if (resultSet.length == 0) {
+    return Response.forbidden(
+        "{ \"error\" : \"Incorrect user  Login\" ,  \"errorNo\" : \"403\"  }");
+  }
+  print(resultSet.first.toString());
+
+  final user = resultSet.first['$authStore'];
+  // User Myuser = User.fromMap(user);
+
+  // print("My userrrrrr: " + Myuser.toString());
+
+  print('fided user :   ======== ');
+  print(user.toString());
+
+  final hashedPassword = hashPassword(password, user['salt']);
+  if (hashedPassword != user['password']) {
+    return Response.forbidden(
+        "{ \"error\" : \"Incorrect  password!!\" ,  \"errorNo\" : \"403\"  }");
+  }
+
+  if (user['status'] == 0) {
+    print(userRequestInfo['verificationcode']);
+    if (userRequestInfo['verificationcode'] == null) {
+      return Response.forbidden(
+          "{ \"error\" : \"User Need Verifcation!\" ,  \"errorNo\" : \"403\"  }");
+    } else {
+      print('user code verificationcode');
+      bool ans = await userVerifyCode(
+          user['id'], db, authStore, userRequestInfo['verificationcode']);
+
+      if (!ans) {
+        return Response.forbidden(
+            "{ \"error\" : \"User   verification Code Error!!!\" ,  \"errorNo\" : \"403\"  }");
+      }
+    }
+  }
+
+//---change status to logedin
+  if (user['status'] != UserStatusEnumMap[UserStatus.loggedIn]) {
+    try {
+      user['status'] = await changeUserStatus(
+          user['id'], UserStatus.loggedIn, authStore, db);
+    } catch (e) {
+      return Response.internalServerError(
+          body:
+              '{ \"error\" : \" There was a problem change status to  loggedIn. Please try again.\" ' +
+                  e.toString() +
+                  '\" , \"errorNo\" : \"199991\" }');
+    }
+  }
+//---
+
+  // Generate JWT and send with response
+  print('User ID:' + user['id']);
+  // final userId = (user['id'] as ObjectId).toHexString();
+  final userId = ObjectId.fromHexString(user['id']).toString();
+  print('User ID:' + userId);
+
+  try {
+    final tokenPair = await tokenService.createTokenPair(userId);
+    user['token'] = tokenPair.toJson()['token'];
+    user['refreshToken'] = tokenPair.toJson()['refreshToken'];
+    user["'error'"] = "\"" + 'Suucess' + "\"";
+    user["'errorNo'"] = "\"" + '200' + "\"";
+
+    print('------------------' + user.toString());
+    var jsonString = json.encode(user);
+
+    print('-----======================================--' + jsonString);
+    return Response.ok(jsonString, headers: {
+      HttpHeaders.contentTypeHeader: ContentType.json.mimeType,
+    });
+  } catch (e) {
+    print('----------end Login Request--------------');
+
+    return Response.internalServerError(
+        body:
+            '{ \"error\" : \" There was a problem logging you in. Please try again.\" ' +
+                e.toString() +
+                '\" , \"errorNo\" : \"199991\" }');
+  }
+}
+
+//==================mLogout user ==================//
+Future<Response> userLogout(
+    var auth, String authStore, DB db, TokenService tokenService) async {
+  if (auth == null) {
+    return Response.forbidden(
+        '"{ \"error\" : \"Not authorised to perform this operation."  ,  \"errorNo\" : \"403\" }");');
+  }
+
+  final userId = ((auth as JWT)).subject.toString();
+  try {
+    Map<dynamic, dynamic> result =
+        await tokenService.AllRefreshTokenByScanUserId(userId);
+    print('llllllllllllllllllllll' + result.toString());
+    print(result.length);
+    if (result.length == 1) {
+//---change status to logedout
+
+      try {
+        await changeUserStatus(userId, UserStatus.loggedOut, authStore, db);
+      } catch (e) {
+        return Response.internalServerError(
+            body:
+                '{ \"error\" : \" There was a problem change status to  loggedOut  Please try again.\" ' +
+                    e.toString() +
+                    '\" , \"errorNo\" : \"199991\" }');
+      }
+//---
+    }
+  } catch (e) {
+    return Response.internalServerError(
+        body:
+            '{ \"error\" : \"There was an issue getting sessions  out $e. Please check and try again.\"   ,  \"errorNo\" : \"199991\" }');
+  }
+
+  try {
+    print('iiiiiiiiiiiiiiiiiiiiiii    subject   rrrrrrrrrrrr:  $userId');
+
+    await tokenService.removeRefreshToken(
+        ((auth as JWT)).jwtId.toString(), userId);
+  } catch (e) {
+    return Response.internalServerError(
+        body:
+            '{ \"error\" : \"There was an issue logging out. Please check and try again.\"   ,  \"errorNo\" : \"199991\" }');
+  }
+
+  return Response.ok(
+      '{ \"error\" : \"Successfully Loggedout user\"   ,  \"errorNo\" : \"200\" }');
+}
+
+//=========== User Unrigster ====================//
+
+userunRegister(var auth, JWT authDetails, String authStore, DB db,
+    TokenService tokenService) async {
+  print('Unirgster id : $auth  ::::: JWT $authDetails');
+  try {
+//-----------
+    final String id = authDetails.subject.toString();
+    String sql =
+        "delete  FROM pharmaplay.$authStore WHERE id =  @id returning 1 ";
+    Map<String, dynamic> params = {"id": id};
+    dynamic resultSet = await db.query(sql, values: params);
+
+    if (resultSet.length == 0) {
+      return Response.forbidden(
+          "{ \"error\" : \"Failed to remove user\" ,  \"errorNo\" : \"403\"  }");
+    }
+    print(resultSet.first.toString());
+//------------
+    final userId = ((auth as JWT)).subject.toString();
+    print(userId);
+    await tokenService.removeAllRefreshTokenByUserId(userId);
+  } catch (e) {
+    return Response.internalServerError(
+        body:
+            '{ \"error\" : \"There was an issue unregistering  user. Please check and try again.\"   ,  \"errorNo\" : \"199991\" }');
+  }
+
+  return Response.ok(
+      '{ \"error\" : \"Successfully Unrigested  user \"   ,  \"errorNo\" : \"200\" }');
 }
