@@ -68,11 +68,6 @@ class AuthApi {
       }
 
       final auth = req.context['authDetails'];
-      if (auth == null) {
-        return Response.forbidden(
-            '"{ \"error\" : \"Not authorised to perform this operation."  ,  \"errorNo\" : \"403\" }");');
-      }
-
       final userId = ((auth as JWT)).subject.toString();
 
 //---change status to logedin
@@ -85,8 +80,6 @@ class AuthApi {
                     e.toString() +
                     '\" , \"errorNo\" : \"199991\" }');
       }
-
-//---
 
       try {
         print('iiiiiiiiiiiiiiiiiiiiiii    subject   rrrrrrrrrrrr:  $userId');
