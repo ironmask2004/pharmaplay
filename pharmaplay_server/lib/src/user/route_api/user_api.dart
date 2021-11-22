@@ -45,8 +45,7 @@ class UserApi {
       sendMail('ironmask2004@gmail.com', 'Veervication Cdoe from Pharma Play',
           'The Code is: ${RandomCode.nextInter()} ');
       return Response.internalServerError(
-          body: '{ \"VerCode\" : \" ؟؟؟-؟؟؟ .\" ' +
-              '\" , \"errorNo\" : \"199991\" }');
+          body: '{ "VerCode" : " ؟؟؟-؟؟؟ " , "errorNo" : "199991" }');
     });
 
 //============= /users/userstatuslist  ROUTE
@@ -65,16 +64,26 @@ class UserApi {
     router.get('/info/', (Request req) async {
       final authDetails = req.context['authDetails'] as JWT;
       print('authDetails.subject.toString ' + authDetails.subject.toString());
+      User userInfo;
+      try {
+        userInfo =
+            await findUserByID(authDetails.subject.toString(), db, authStore);
 
-      User userInfo =
-          await findUserByID(authDetails.subject.toString(), db, authStore);
+        print("founded_user------:" + userInfo.toString());
+      } catch (err) {
+        return Response.forbidden(
+            '{"requestResult": {"error": "$err", "errNO": "9004"}',
+            headers: {
+              'content-type': 'application/json',
+            });
+      }
 
-      print("founded_user------:" + userInfo.toString());
+      final Map<String, dynamic> userWithresault = {
+        "userinfo": userInfo.toMap(),
+        "requestResult": {'error': 'Success', 'errNO': '200'}
+      };
 
-      final userWithresault = userInfo.toJson();
-      userWithresault["'error'"] = "\"" + 'Suucess' + "\"";
-      userWithresault["'errorNo'"] = "\"" + '200' + "\"";
-
+      print(userWithresault);
       var jsonString = json.encode(userWithresault);
 
       return Response.ok(jsonString, headers: {
@@ -87,13 +96,29 @@ class UserApi {
     router.post('/', (Request req) async {
       final authDetails = req.context['authDetails'] as JWT;
       print('authDetails.subject.toString ' + authDetails.subject.toString());
+      User userInfo;
+      try {
+        userInfo =
+            await findUserByID(authDetails.subject.toString(), db, authStore);
 
-      User userInfo =
-          await findUserByID(authDetails.subject.toString(), db, authStore);
-      print("founded_user------:" + userInfo.toString());
-      print(userInfo.toJson().toString());
+        print("founded_user------:" + userInfo.toString());
+      } catch (err) {
+        return Response.forbidden(
+            '{"requestResult": {"error": "$err", "errNO": "9004"}',
+            headers: {
+              'content-type': 'application/json',
+            });
+      }
 
-      return Response.ok(userInfo.toJson().toString(), headers: {
+      final Map<String, dynamic> userWithresault = {
+        "userinfo": userInfo.toMap(),
+        "requestResult": {'error': 'Success', 'errNO': '200'}
+      };
+
+      print(userWithresault);
+      var jsonString = json.encode(userWithresault);
+
+      return Response.ok(jsonString, headers: {
         'content-type': 'application/json',
       });
     });

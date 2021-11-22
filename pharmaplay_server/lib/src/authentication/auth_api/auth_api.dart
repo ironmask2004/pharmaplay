@@ -9,6 +9,8 @@ class AuthApi {
   DB db;
   AuthApi(this.db, this.authStore, this.secret, this.tokenService);
 
+// TODO AADing Forget password route!!
+
   Router get router {
     final router = Router();
     // =============== authraize /register route ===========================//

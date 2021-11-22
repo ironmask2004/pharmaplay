@@ -314,7 +314,10 @@ Future<Response> userLogin(var userRequestInfo, DB db, String authStore,
 
   if (resultSet.length == 0) {
     return Response.forbidden(
-        "{ \"error\" : \"Incorrect user  Login\" ,  \"errorNo\" : \"403\"  }");
+        '{"requestResult": {"error": "Incorrect user  Login!!", "errNO": "9004"}',
+        headers: {
+          'content-type': 'application/json',
+        });
   }
   print(resultSet.first.toString());
 
@@ -329,14 +332,20 @@ Future<Response> userLogin(var userRequestInfo, DB db, String authStore,
   final hashedPassword = hashPassword(password, user['salt']);
   if (hashedPassword != user['password']) {
     return Response.forbidden(
-        "{ \"error\" : \"Incorrect  password!!\" ,  \"errorNo\" : \"403\"  }");
+        '{"requestResult": {"error": "Incorrect Paswword ", "errNO": "9005"}',
+        headers: {
+          'content-type': 'application/json',
+        });
   }
 
   if (user['status'] == 0) {
     print(userRequestInfo['verificationcode']);
     if (userRequestInfo['verificationcode'] == null) {
       return Response.forbidden(
-          "{ \"error\" : \"User Need Verifcation!\" ,  \"errorNo\" : \"403\"  }");
+          '{"requestResult": {"error": "User Need Verification !", "errNO": "9006"}',
+          headers: {
+            'content-type': 'application/json',
+          });
     } else {
       print('user code verificationcode');
       bool ans = await userVerifyCode(
@@ -344,7 +353,10 @@ Future<Response> userLogin(var userRequestInfo, DB db, String authStore,
 
       if (!ans) {
         return Response.forbidden(
-            "{ \"error\" : \"User   verification Code Error!!!\" ,  \"errorNo\" : \"403\"  }");
+            '{"requestResult": {"error": "  user Verification Error!!   ", "errNO": "9007"}',
+            headers: {
+              'content-type': 'application/json',
+            });
       }
     }
   }
@@ -357,27 +369,33 @@ Future<Response> userLogin(var userRequestInfo, DB db, String authStore,
     } catch (e) {
       return Response.internalServerError(
           body:
-              '{ \"error\" : \" There was a problem change status to  loggedIn. Please try again.\" ' +
-                  e.toString() +
-                  '\" , \"errorNo\" : \"199991\" }');
+              '{"requestResult": {"error": " There was a problem change status to  loggedIn:"  ${e.toString()} , "errNO": "9004"}',
+          headers: {
+            'content-type': 'application/json',
+          });
     }
   }
 //---
-
-  // Generate JWT and send with response
-  print('User ID:' + user['id']);
-  // final userId = (user['id'] as ObjectId).toHexString();
-  final userId = ObjectId.fromHexString(user['id']).toString();
-  print('------User ID:---' + userId);
   try {
+    // Generate JWT and send with response
+    print('User ID:' + user['id']);
+    // final userId = (user['id'] as ObjectId).toHexString();
+    final userId = ObjectId.fromHexString(user['id']).toString();
+    print('------User ID:---' + userId);
     final tokenPair = await tokenService.createTokenPair(userId);
-    final userWithToken = User.fromMap(user).toJson();
-    userWithToken['token'] = tokenPair.toJson()['token'];
-    userWithToken['refreshToken'] = tokenPair.toJson()['refreshToken'];
-    userWithToken["'error'"] = "\"" + 'Suucess' + "\"";
-    userWithToken["'errorNo'"] = "\"" + '200' + "\"";
+    final Map<String, dynamic> userInfo = {
+      "userInfo": User.fromMap(user).toJson(),
+      "tokenInfo": {
+        "token": tokenPair.toJson().toString(),
+        "refreshToken": tokenPair.toJson().toString()
+      },
+      "reqResult": {
+        "error": "Suucess",
+        "errNO": "200",
+      }
+    };
 
-    var jsonString = json.encode(userWithToken);
+    var jsonString = json.encode(userInfo);
 
     print('-----======================================--' + jsonString);
     return Response.ok(jsonString, headers: {

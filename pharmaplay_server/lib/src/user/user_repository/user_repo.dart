@@ -84,9 +84,8 @@ Future<User> findUserByID(String id, DB db, String authStore) async {
 
   dynamic resultSet = await db.query(sql, values: params);
 
-  print('founded by id: ' + resultSet.first[authStore].toString());
-
   if (resultSet.length > 0) {
+    print('founded by id: ' + resultSet.first[authStore].toString());
     return User.fromMap((resultSet.first[authStore]));
   } else {
     print(' User ID($id) Not Found ');
