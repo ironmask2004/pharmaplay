@@ -11,7 +11,7 @@ class AuthApi {
   DB db;
   AuthApi(this.db, this.authStore, this.secret, this.tokenService);
 
-// TODO AADing Forget password route!!
+// TODO signout  user's  other sessions!!
 
   Router get router {
     final router = Router();
