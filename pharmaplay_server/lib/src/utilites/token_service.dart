@@ -69,6 +69,27 @@ class TokenService {
     print("========list + list" + resaultList.toString());
   }
 
+  Future<void> removeOtherRefreshTokenByUserId(String id, String userId) async {
+    print('remove all ohter refresh token: userId:$userId:$_prefix:$id: ');
+
+    int iterator = 0;
+    var resaultList = [];
+    do {
+      resaultList = await _cache
+          .send_object(['SCAN', '$iterator', 'MATCH', 'userId:$userId:*']);
+      var keys = resaultList[1];
+      for (var i = 0; i < keys.length; i++) {
+        if (keys[i] != 'userId:$userId:$_prefix:$id:') {
+          await _cache.send_object(['EXPIRE', '${keys[i]}', '-1']);
+        }
+      }
+      iterator = int.parse(resaultList[0].toString());
+
+      print('X=$iterator');
+    } while (iterator != 0);
+    print("========list + list" + resaultList.toString());
+  }
+
   Future<dynamic> AllRefreshTokenByScanUserId(String userId) async {
     var list = [];
 

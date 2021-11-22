@@ -11,7 +11,7 @@ class AuthApi {
   DB db;
   AuthApi(this.db, this.authStore, this.secret, this.tokenService);
 
-// TODO signout  user's  other sessions!!
+// TODO
 
   Router get router {
     final router = Router();
@@ -63,6 +63,32 @@ class AuthApi {
 
       var resault = await userLogout(auth, authStore, db, tokenService);
       return resault;
+    });
+
+// ================== authrizee / logout All Other Sessions  route ================//
+    router.post('/logout/othersessions', (Request req) async {
+      if (req.context['authDetails'] == null) {
+        return Response.forbidden(
+            '"{ "error" : "Not authorised to perform this operation."  ,  "errNo" : "403"}');
+      }
+
+      final auth = req.context['authDetails'];
+      final userId = ((auth as JWT)).subject.toString();
+
+//---change status to logedin
+
+      try {
+        final tokenId = ((auth as JWT)).jwtId.toString();
+
+        await tokenService.removeOtherRefreshTokenByUserId(tokenId, userId);
+      } catch (e) {
+        return Response.internalServerError(
+            body:
+                '{ "error" : "There was an issue logging others out. Please check and try again."   ,  "errNo" : "199991"}');
+      }
+
+      return Response.ok(
+          '{ "error" : "Successfully Loggedout other  sessions  for User  "   ,  "errNo" : "200"}');
     });
 
 // ================== authrizee / logout All Sessions  route ================//
