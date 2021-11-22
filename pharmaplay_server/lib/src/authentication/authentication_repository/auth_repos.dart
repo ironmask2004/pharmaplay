@@ -1,6 +1,7 @@
 library authentication_repository;
 
 import 'package:pharmaplay_server/pharmaplay_server.dart';
+import 'package:pharmaplay_server/src/utilites/error_response.dart';
 
 //----------------------
 Future<int?> changeUserStatus(
@@ -40,12 +41,18 @@ Future<Response> resendVerificationCode(
 
   // Ensure email and password fields are present
   if (email == null || email.isEmpty || password == null || password.isEmpty) {
-    return Response(HttpStatus.badRequest,
-        body: '"{ \"error\" : \"Please provide your email and password\" }"');
+    return Response.forbidden(
+        responseErrMsg(' Please provide your email and password ', "403"),
+        headers: {
+          'content-type': 'application/json',
+        });
   }
   if (!EmailValidator.validate(email)) {
-    return Response(HttpStatus.badRequest,
-        body: '"{ \"error\" : \"Please provide a vaild  Email \" }"');
+    return Response.forbidden(
+        responseErrMsg(' Please provide a vaild  Email ', "403"),
+        headers: {
+          'content-type': 'application/json',
+        });
   }
 
   //final user = await store.findOne(where.eq('email', email));
@@ -54,8 +61,10 @@ Future<Response> resendVerificationCode(
   dynamic resultSet = await db.query(sql, values: params);
 
   if (resultSet.length == 0) {
-    return Response.forbidden(
-        "{ \"error\" : \"Incorrect user  Login\" ,  \"errorNo\" : \"403\"  }");
+    return Response.forbidden(responseErrMsg('Incorrect user  Login', "403"),
+        headers: {
+          'content-type': 'application/json',
+        });
   }
   print(resultSet.first.toString());
 
@@ -67,12 +76,20 @@ Future<Response> resendVerificationCode(
   final hashedPassword = hashPassword(password, user['salt']);
   if (hashedPassword != user['password']) {
     return Response.forbidden(
-        "{ \"error\" : \"Incorrect  password!!\" ,  \"errorNo\" : \"403\"  }");
+        responseErrMsg('Incorrect  password!! ! ', "3003"),
+        headers: {
+          'content-type': 'application/json',
+        });
   }
 
   if (user['status'] != 0) {
     return Response.forbidden(
-        "{ \"error\" : \"User Email ${user['email']} & Mobile ${user['mobile']}  Already Verifide!!\" ,  \"errorNo\" : \"403\"  }");
+        responseErrMsg(
+            'User Email ${user["email"]} & Mobile ${user["mobile"]}  Already Verifide!! ',
+            "3003"),
+        headers: {
+          'content-type': 'application/json',
+        });
   }
 
   List<Map<String, dynamic>> paramslist = [];
@@ -121,7 +138,11 @@ Future<Response> resendVerificationCode(
   }
 
   return Response.ok(
-      "{ \"error\" : \"Successfully resend new  user  verificationcode  \"   ,  \"errorNo\" : \"200\" }");
+      responseErrMsg(
+          "Successfully resend new  user  verificationcode  ", "200"),
+      headers: {
+        'content-type': 'application/json',
+      });
 }
 
 //----------------------
@@ -181,11 +202,11 @@ Future<Response> createUserWithVerifcationCode(
     // body: 'Please provide your email and password');
 
     return Response.forbidden(
-        "{ \"error\" : \"Please provide your email and password \" ,  \"errorNo\" : \"403\"  }");
+        '{ "error" : "Please provide your email and password " ,  "errorNo" :  "403"  }');
   }
   if (!EmailValidator.validate(email)) {
     return Response(HttpStatus.badRequest,
-        body: '"{ \"error\" : \"Please provide a vaild  Email \" }"');
+        body: '"{ "error" : "Please provide a vaild  Email " }"');
   }
 
   print(firstname);
@@ -195,12 +216,12 @@ Future<Response> createUserWithVerifcationCode(
       lastname == null ||
       lastname.isEmpty) {
     return Response.forbidden(
-        "{ \"error\" : \"Please provide your firstname and lastname \" ,  \"errorNo\" : \"403\"  }");
+        '{ "error" : "Please provide your firstname and lastname " ,  "errorNo" :  "403"  }');
   }
 
   if (mobile == null || mobile.isEmpty) {
     return Response.forbidden(
-        "{ \"error\" : \"Please provide your Mobile Number!! \" ,  \"errorNo\" : \"403\"  }");
+        '{ "error" : "Please provide your Mobile Number!! " ,  "errorNo" :  "403"  }');
   }
   String sql = "SELECT idx  FROM pharmaplay.$authStore WHERE email =  @email ";
   Map<String, dynamic> params = {"email": email};
@@ -208,7 +229,7 @@ Future<Response> createUserWithVerifcationCode(
 
   if (resultSet.length > 0) {
     return Response.forbidden(
-        "{ \"error\" : \"Email:  $email  was already registerd!!\" ,  \"errorNo\" : \"403\"  }");
+        '{ "error" : "Email:  $email  was already registerd!!" ,  "errorNo" : "403" }');
   }
 
   sql =
@@ -218,7 +239,7 @@ Future<Response> createUserWithVerifcationCode(
 
   if (resultSet.length > 0) {
     return Response.forbidden(
-        "{ \"error\" : \"User name:  $firstname $lastname  was already registerd!!\" ,  \"errorNo\" : \"403\"  }");
+        '{ "error" : "User name:  $firstname $lastname  was already registerd!!" ,  "errorNo" :  "403"  }');
   }
 
   sql = "SELECT idx  FROM pharmaplay.$authStore WHERE mobile =  @mobile ";
@@ -227,13 +248,17 @@ Future<Response> createUserWithVerifcationCode(
 
   if (resultSet.length > 0) {
     return Response.forbidden(
-        "{ \"error\" : \"mobile Number:  $mobile  was already registerd!!\" ,  \"errorNo\" : \"403\"  }");
+        responseErrMsg(
+            "mobile Number:  $mobile  was already registerd!!", "403"),
+        headers: {
+          'content-type': 'application/json',
+        });
   }
 
   final id = ObjectId().toString();
   final salt = generateSalt();
   final hashedPassword = hashPassword(password, salt);
-  String vrifycode;
+  // String vrifycode;
 
   List<Map<String, dynamic>> paramslist = [];
   List<String> sqllist = [];
@@ -286,8 +311,10 @@ Future<Response> createUserWithVerifcationCode(
     rethrow;
   }
 
-  return Response.ok(
-      "{ \"error\" : \"Successfully registered user   \"   ,  \"errorNo\" : \"200\" }");
+  return Response.ok(responseErrMsg("Successfully registered user   ", "200"),
+      headers: {
+        'content-type': 'application/json',
+      });
 }
 
 ///----------------- Login User
@@ -300,11 +327,18 @@ Future<Response> userLogin(var userRequestInfo, DB db, String authStore,
   // Ensure email and password fields are present
   if (email == null || email.isEmpty || password == null || password.isEmpty) {
     return Response(HttpStatus.badRequest,
-        body: '"{ \"error\" : \"Please provide your email and password\" }"');
+        body:
+            responseErrMsg("Please provide your email and password!!", "9004"),
+        headers: {
+          'content-type': 'application/json',
+        });
   }
   if (!EmailValidator.validate(email)) {
-    return Response(HttpStatus.badRequest,
-        body: '"{ \"error\" : \"Please provide a vaild  Email \" }"');
+    return Response.forbidden(
+        responseErrMsg("Please provide a vaild  Email!!", "9004"),
+        headers: {
+          'content-type': 'application/json',
+        });
   }
 
   //final user = await store.findOne(where.eq('email', email));
@@ -313,8 +347,7 @@ Future<Response> userLogin(var userRequestInfo, DB db, String authStore,
   dynamic resultSet = await db.query(sql, values: params);
 
   if (resultSet.length == 0) {
-    return Response.forbidden(
-        '{"requestResult": {"error": "Incorrect user  Login!!", "errNO": "9004"}',
+    return Response.forbidden(responseErrMsg("Incorrect user  Login!!", "9004"),
         headers: {
           'content-type': 'application/json',
         });
@@ -331,8 +364,7 @@ Future<Response> userLogin(var userRequestInfo, DB db, String authStore,
 
   final hashedPassword = hashPassword(password, user['salt']);
   if (hashedPassword != user['password']) {
-    return Response.forbidden(
-        '{"requestResult": {"error": "Incorrect Paswword ", "errNO": "9005"}',
+    return Response.forbidden(responseErrMsg("Incorrect Paswword ", "9005"),
         headers: {
           'content-type': 'application/json',
         });
@@ -342,7 +374,7 @@ Future<Response> userLogin(var userRequestInfo, DB db, String authStore,
     print(userRequestInfo['verificationcode']);
     if (userRequestInfo['verificationcode'] == null) {
       return Response.forbidden(
-          '{"requestResult": {"error": "User Need Verification !", "errNO": "9006"}',
+          responseErrMsg("User Need Verification !", "9006"),
           headers: {
             'content-type': 'application/json',
           });
@@ -353,7 +385,7 @@ Future<Response> userLogin(var userRequestInfo, DB db, String authStore,
 
       if (!ans) {
         return Response.forbidden(
-            '{"requestResult": {"error": "  user Verification Error!!   ", "errNO": "9007"}',
+            responseErrMsg("  user Verification Error!!   ", "9007"),
             headers: {
               'content-type': 'application/json',
             });
@@ -368,8 +400,9 @@ Future<Response> userLogin(var userRequestInfo, DB db, String authStore,
           user['id'], UserStatus.loggedIn, authStore, db);
     } catch (e) {
       return Response.internalServerError(
-          body:
-              '{"requestResult": {"error": " There was a problem change status to  loggedIn:"  ${e.toString()} , "errNO": "9004"}',
+          body: responseErrMsg(
+              ' There was a problem change status to  loggedIn:  ${e.toString()}',
+              "9004"),
           headers: {
             'content-type': 'application/json',
           });
@@ -386,8 +419,8 @@ Future<Response> userLogin(var userRequestInfo, DB db, String authStore,
     final Map<String, dynamic> userInfo = {
       "userInfo": User.fromMap(user).toJson(),
       "tokenInfo": {
-        "token": tokenPair.toJson().toString(),
-        "refreshToken": tokenPair.toJson().toString()
+        "token": tokenPair.idToken,
+        "refreshToken": tokenPair.refreshToken
       },
       "reqResult": {
         "error": "Suucess",
@@ -406,9 +439,9 @@ Future<Response> userLogin(var userRequestInfo, DB db, String authStore,
 
     return Response.internalServerError(
         body:
-            '{ \"error\" : \" There was a problem logging you in. Please try again.\" ' +
+            '{ "error" : " There was a problem logging you in. Please try again." ' +
                 e.toString() +
-                '\" , \"errorNo\" : \"199991\" }');
+                '" , "errorNo" :  "199991" }');
   }
 }
 
@@ -417,7 +450,7 @@ Future<Response> userLogout(
     var auth, String authStore, DB db, TokenService tokenService) async {
   if (auth == null) {
     return Response.forbidden(
-        '"{ \"error\" : \"Not authorised to perform this operation."  ,  \"errorNo\" : \"403\" }");');
+        '"{ "error" : "Not authorised to perform this operation."  ,  "errorNo" :  "403" }");');
   }
 
   final userId = ((auth as JWT)).subject.toString();
@@ -434,16 +467,16 @@ Future<Response> userLogout(
       } catch (e) {
         return Response.internalServerError(
             body:
-                '{ \"error\" : \" There was a problem change status to  loggedOut  Please try again.\" ' +
+                '{ "error" : " There was a problem change status to  loggedOut  Please try again." ' +
                     e.toString() +
-                    '\" , \"errorNo\" : \"199991\" }');
+                    '" , "errorNo" :  "199991" }');
       }
 //---
     }
   } catch (e) {
     return Response.internalServerError(
         body:
-            '{ \"error\" : \"There was an issue getting sessions  out $e. Please check and try again.\"   ,  \"errorNo\" : \"199991\" }');
+            '{ "error" : "There was an issue getting sessions  out $e. Please check and try again."   ,  "errorNo" :  "199991" }');
   }
 
   try {
@@ -454,11 +487,11 @@ Future<Response> userLogout(
   } catch (e) {
     return Response.internalServerError(
         body:
-            '{ \"error\" : \"There was an issue logging out. Please check and try again.\"   ,  \"errorNo\" : \"199991\" }');
+            '{ "error" : "There was an issue logging out. Please check and try again."   ,  "errorNo" :  "199991" }');
   }
 
   return Response.ok(
-      '{ \"error\" : \"Successfully Loggedout user\"   ,  \"errorNo\" : \"200\" }');
+      '{ "error" : "Successfully Loggedout user"   ,  "errorNo" :  "200" }');
 }
 
 //=========== User Unrigster ====================//
@@ -476,7 +509,7 @@ userunRegister(var auth, JWT authDetails, String authStore, DB db,
 
     if (resultSet.length == 0) {
       return Response.forbidden(
-          "{ \"error\" : \"Failed to remove user\" ,  \"errorNo\" : \"403\"  }");
+          '{ "error" : "Failed to remove user" ,  "errorNo" :  "403"  }');
     }
     print(resultSet.first.toString());
 //------------
@@ -486,9 +519,9 @@ userunRegister(var auth, JWT authDetails, String authStore, DB db,
   } catch (e) {
     return Response.internalServerError(
         body:
-            '{ \"error\" : \"There was an issue unregistering  user. Please check and try again.\"   ,  \"errorNo\" : \"199991\" }');
+            '{ "error" : "There was an issue unregistering  user. Please check and try again."   ,  "errorNo" :  "199991" }');
   }
 
   return Response.ok(
-      '{ \"error\" : \"Successfully Unrigested  user \"   ,  \"errorNo\" : \"200\" }');
+      '{ "error" : "Successfully Unrigested  user "   ,  "errorNo" :  "200" }');
 }
