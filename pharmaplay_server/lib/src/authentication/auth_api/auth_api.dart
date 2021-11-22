@@ -25,6 +25,8 @@ class AuthApi {
           createUserWithVerifcationCode(userRequestInfo, db, authStore);
       return (resault);
     });
+    //============= Resend Verifiy Code =================//
+
     router.post('/resendcode', (Request req) async {
       final payload = await req.readAsString();
       final userRequestInfo = json.decode(payload);
@@ -32,15 +34,7 @@ class AuthApi {
       var resault = resendVerificationCode(userRequestInfo, db, authStore);
       return (resault);
     });
-/*
-    router.post('/resendcode', (Request req) async {
-      final payload = await req.readAsString();
-      final userRequestInfo = json.decode(payload);
-      print(userRequestInfo);
-      var resault = resendVerificationCode(userRequestInfo, db, authStore);
-      return (resault);
-    });
-*/
+
     //=============== authraize /LOGiN route
 
     router.post('/login', (Request req) async {
