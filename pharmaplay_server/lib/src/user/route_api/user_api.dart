@@ -36,9 +36,9 @@ class UserApi {
         print('----------end test  Request--------------');
 
         return Response.internalServerError(
-            body: '{ \"error\" : \" There was a problem test  .\" ' +
+            body: '{"error" :" There was a problem test  ." ' +
                 e.toString() +
-                '\" , \"errorNo\" : \"199991\" }');
+                '" ,"errorNo" :"199991" }');
       }
     }
     */
@@ -147,66 +147,72 @@ class UserApi {
       print("founded_old_user_data: ------:" + oldUserInfo.toString());
       //print(oldUserInfo);
       userInfo['updatedate'] = DateTime.now();
-      User UpdatedUserInfo = oldUserInfo.copyWithFromMap(userInfo);
 
-      print("updared _user_data: ------:" + UpdatedUserInfo.toString());
+      if (userInfo['password'] != null) {
+        userInfo['password'] = hashPassword(password, oldUserInfo.salt);
+      }
 
-      if (oldUserInfo.email != UpdatedUserInfo.email) {
-        if (!EmailValidator.validate(UpdatedUserInfo.email)) {
+      ;
+      User updatedUserInfo = oldUserInfo.copyWithFromMap(userInfo);
+
+      print("updared _user_data: ------:" + updatedUserInfo.toString());
+
+      if (oldUserInfo.email != updatedUserInfo.email) {
+        if (!EmailValidator.validate(updatedUserInfo.email)) {
           return Response(HttpStatus.badRequest,
-              body: '"{ \"error\" : \"Please provide a vaild  Email \" }"');
+              body: '{"error" :"Please provide a vaild  Email" }');
         }
         sql =
             "SELECT idx  FROM pharmaplay.$authStore WHERE email =  @email  and idx != @idx";
-        params = {"email": UpdatedUserInfo.email, "idx": UpdatedUserInfo.idx};
+        params = {"email": updatedUserInfo.email, "idx": updatedUserInfo.idx};
         resultSet = await db.query(sql, values: params);
 
         if (resultSet.length > 0) {
           print(resultSet.toString());
           return Response.forbidden(
-              "{ \"error\" : \"Email:  $email  was already registerd! with some one else !\" ,  \"errorNo\" : \"403\"  }");
+              '{"error" :"Email:  $email  was already registerd! with some one else !" , "errorNo" :"403"  }');
         }
       }
 
-      if (oldUserInfo.firstname != UpdatedUserInfo.firstname ||
-          oldUserInfo.lastname != UpdatedUserInfo.lastname) {
+      if (oldUserInfo.firstname != updatedUserInfo.firstname ||
+          oldUserInfo.lastname != updatedUserInfo.lastname) {
         sql =
             "SELECT idx  FROM pharmaplay.$authStore WHERE firstname= @firstname and lastname =  @lastname   and idx != @idx";
         params = {
-          "firstname": UpdatedUserInfo.firstname,
-          "lastname": UpdatedUserInfo.lastname,
-          "idx": UpdatedUserInfo.idx
+          "firstname": updatedUserInfo.firstname,
+          "lastname": updatedUserInfo.lastname,
+          "idx": updatedUserInfo.idx
         };
         resultSet = await db.query(sql, values: params);
 
         if (resultSet.length > 0) {
           return Response.forbidden(
-              "{ \"error\" : \"User name:  $firstname $lastname  was already takedn for some one else !!\" ,  \"errorNo\" : \"403\"  }");
+              '{"error" :"User name:  $firstname $lastname  was already takedn for some one else !!" , "errorNo" :"403"  }');
         }
       }
 
-      if (oldUserInfo.mobile != UpdatedUserInfo.mobile) {
+      if (oldUserInfo.mobile != updatedUserInfo.mobile) {
         sql =
             "SELECT idx  FROM pharmaplay.$authStore WHERE mobile =  @mobile and idx != @idx  ";
-        params = {"mobile": mobile, "idx": UpdatedUserInfo.idx};
+        params = {"mobile": mobile, "idx": updatedUserInfo.idx};
         resultSet = await db.query(sql, values: params);
 
         if (resultSet.length > 0) {
           return Response.forbidden(
-              "{ \"error\" : \"mobile Number:  $mobile  was already taken !!\" ,  \"errorNo\" : \"403\"  }");
+              '{"error" :"mobile Number:  $mobile  was already taken !!" , "errorNo" :"403"  }');
         }
       }
       try {
-        // UpdatedUserInfo.updatedate = DateTime.now();
+        // updatedUserInfo.updatedate = DateTime.now();
         sql =
             'update pharmaplay.$authStore SET   id=@id, firstname=@firstname, lastname=@lastname, email=@email, password=@password, salt=@salt, mobile=@mobile, createdate=@createdate, updatedate=@updatedate ,  status=@status 	where idx= @idx returning idx';
-        params = UpdatedUserInfo.toMap();
+        params = updatedUserInfo.toMap();
         resultSet = await db.query(sql, values: params);
 
         print(resultSet.first.toString());
         if (resultSet.length == 0) {
           return Response.forbidden(
-              "{ \"error\" : \" facing error while updating  user\" ,  \"errorNo\" : \"403\"  }");
+              '{"error" :" facing error while updating  user" , "errorNo" :"403"  }');
         }
       } catch (error) {
         print(' error while Updating  user  ' + error.toString());
@@ -214,7 +220,7 @@ class UserApi {
             body: 'error while Updateing  user');
       }
       return Response.ok(
-          "{ \"error\" : \"Successfully Updated user\"   ,  \"errorNo\" : \"200\" }");
+          '{"error" :"Successfully Updated user"   , "errorNo" :"200" }');
     });
 
     final handler =

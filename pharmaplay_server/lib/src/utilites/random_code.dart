@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:math';
 
 abstract class RandomCode {
@@ -10,4 +11,10 @@ abstract class RandomCode {
 
   static String nextInter() =>
       '${(_min + rnd2.nextInt(_max - _min))}-${(_min + rnd2.nextInt(_max - _min))}';
+
+  static String randomdString(int len) {
+    var random = Random.secure();
+    var values = List<int>.generate(len, (i) => random.nextInt(255));
+    return base64UrlEncode(values);
+  }
 }

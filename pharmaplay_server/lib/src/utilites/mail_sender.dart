@@ -13,6 +13,17 @@ sendVerificationCodeByMail(String verificationcode, String email) async {
   }
 }
 
+sendVrandomPasswdByMail(String passwd, String email) async {
+  print('  hase been Cent to $email');
+  try {
+    final String mailBody =
+        "<h1> yourgenerated passwd is:  $passwd  </h1>\n<p>الرجاء  الدخول إلى البرنامج واستخدام  كلمة المرور  الواردة في هذه الرسالة </p>";
+    sendMail(email, 'Password  Generated from pharmaplay', mailBody);
+  } catch (err) {
+    print(err.toString());
+  }
+}
+
 void sendMail(String toEmail, String mailSubject, String mailBody,
     {String? SenderMail}) async {
   final Env sysEnv = Env();

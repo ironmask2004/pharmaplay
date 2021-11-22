@@ -93,6 +93,26 @@ Future<User> findUserByID(String id, DB db, String authStore) async {
   }
 }
 
+///---------------------
+
+//----------------------
+Future<User> findUserByEmail(String email, DB db, String authStore) async {
+  String sql = "SELECT *  FROM pharmaplay.$authStore WHERE email =  @email ";
+  print(id);
+  Map<String, dynamic> params = {"email": email};
+  print(sql);
+
+  dynamic resultSet = await db.query(sql, values: params);
+
+  if (resultSet.length > 0) {
+    print('founded by email: ' + resultSet.first[authStore].toString());
+    return User.fromMap((resultSet.first[authStore]));
+  } else {
+    print(' User email($email) Not Found ');
+    throw ' User email($email) Not Found ';
+  }
+}
+
 Future<List<User>> findUserAll(DB db, String authStore) async {
   List<User> resultUsers = <User>[];
   String sql = "SELECT *  FROM pharmaplay.$authStore   ";
