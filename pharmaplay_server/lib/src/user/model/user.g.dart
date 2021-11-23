@@ -15,6 +15,7 @@ User _$UserFromJson(Map<String, dynamic> json) => User(
       password: json['password'] as String,
       salt: json['salt'] as String,
       mobile: json['mobile'] as String,
+      avatar: json['avatar'] as String,
       createdate: DateTime.parse(json['createdate'] as String),
       updatedate: DateTime.parse(json['updatedate'] as String),
       status: $enumDecode(_$UserStatusEnumMap, json['status'],
@@ -22,16 +23,17 @@ User _$UserFromJson(Map<String, dynamic> json) => User(
     );
 
 Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
-      'idx': instance.idx,
       'id': instance.id,
+      'idx': instance.idx,
       'firstname': instance.firstname,
-      'lastname': instance.lastname,
       'email': instance.email,
+      'lastname': instance.lastname,
       'mobile': instance.mobile,
+      'avatar': instance.avatar,
       'password': instance.password,
       'salt': instance.salt,
-      'updatedate': instance.updatedate.toIso8601String(),
       'createdate': instance.createdate.toIso8601String(),
+      'updatedate': instance.updatedate.toIso8601String(),
       'status': _$UserStatusEnumMap[instance.status],
     };
 

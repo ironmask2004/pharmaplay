@@ -5,6 +5,8 @@ import 'package:pharmaplay_server/pharmaplay_server.dart';
 import 'package:pharmaplay_server/src/user/model/usersstatus.dart';
 part 'user.g.dart';
 
+// TODO  adding profile photo
+
 /*
 SELECT  createdate,  current_timestamp,
 TIMESTAMP WITH TIME ZONE 'epoch' + updatedate  * INTERVAL '1 millisecond'  , updatedate
@@ -30,6 +32,7 @@ class User extends Equatable {
       required this.password,
       required this.salt,
       required this.mobile,
+      required this.avatar,
       required this.createdate,
       required this.updatedate,
       required this.status});
@@ -46,6 +49,7 @@ class User extends Equatable {
         password: map['password'],
         salt: map['salt'],
         mobile: map['mobile'],
+        avatar: map['avatar'],
         createdate: DateTime.parse(map['createdate'].toString()),
         /* updatedate: DateTime.fromMillisecondsSinceEpoch(
             int.parse(map['updatedate'].toString())),*/
@@ -60,6 +64,7 @@ class User extends Equatable {
   final String email;
   final String lastname;
   final String mobile;
+  final String avatar;
   final String password;
   final String salt;
   final DateTime createdate;
@@ -79,6 +84,7 @@ class User extends Equatable {
       password,
       salt,
       mobile,
+      avatar,
       createdate,
       updatedate,
       status
@@ -97,6 +103,7 @@ class User extends Equatable {
       String? password,
       String? salt,
       String? mobile,
+      String? avatar,
       DateTime? createdate,
       DateTime? updatedate,
       UserStatus? status}) {
@@ -109,6 +116,7 @@ class User extends Equatable {
         password: password ?? this.password,
         salt: salt ?? this.salt,
         mobile: mobile ?? this.mobile,
+        avatar: avatar ?? this.avatar,
         createdate: createdate ?? this.createdate,
         updatedate: updatedate ?? this.updatedate,
         status: status == null
@@ -129,6 +137,7 @@ class User extends Equatable {
         password: map['password'] ?? password,
         salt: map['salt'] ?? salt,
         mobile: map['mobile'] ?? mobile,
+        avatar: map['avatar'] ?? avatar,
         createdate: (map['createdate'] == null
             ? createdate
             : DateTime.parse(map['createdate'].toString())),
@@ -151,6 +160,7 @@ class User extends Equatable {
       'password': password,
       'salt': salt,
       'mobile': mobile,
+      'avatar': avatar,
       'createdate': createdate.toIso8601String(),
       'updatedate': updatedate.toIso8601String(),
       'status': _$UserStatusEnumMap[status],

@@ -195,6 +195,7 @@ Future<Response> createUserWithVerifcationCode(
   final firstname = userRequestInfo['firstname'];
   final lastname = userRequestInfo['lastname'];
   final mobile = userRequestInfo['mobile'];
+  final String avatar = userRequestInfo['avatar'] ?? "0";
 
   // Ensure email and password fields are present
   if (email == null || email.isEmpty || password == null || password.isEmpty) {
@@ -264,7 +265,7 @@ Future<Response> createUserWithVerifcationCode(
   List<String> sqllist = [];
 
   sqllist.add(
-      "insert into  pharmaplay.$authStore (firstname,lastname, id, email, password,salt,mobile, createdate, updatedate) values (@firstname,@lastname, @id, @email, @password,@salt , @mobile ,  @createdate, @updatedate ) returning idx");
+      "insert into  pharmaplay.$authStore (firstname,lastname, id, email, password,salt,mobile, avatar, createdate, updatedate) values (@firstname,@lastname, @id, @email, @password,@salt , @mobile , @avatar ,  @createdate, @updatedate ) returning idx");
   paramslist.add(params = {
     "firstname": firstname,
     "lastname": lastname,
@@ -273,6 +274,7 @@ Future<Response> createUserWithVerifcationCode(
     "password": hashedPassword,
     "salt": salt,
     "mobile": mobile,
+    "avatar": avatar,
     "createdate": DateTime.now(),
     "updatedate": DateTime.now() //.millisecondsSinceEpoch
   });
