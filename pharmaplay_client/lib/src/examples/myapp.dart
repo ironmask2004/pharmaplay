@@ -3,20 +3,20 @@ import 'package:pharmaplay_client/src/examples/login.dart';
 import 'package:pharmaplay_client/src/examples/profile.dart';
 import 'package:pharmaplay_client/src/utiites/shared_pref.dart';
 
-class MyApp extends StatefulWidget {
+class examApp extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return MyAppState();
+    return examAppState();
   }
 }
 
-class MyAppState extends State<MyApp> {
+class examAppState extends State<examApp> {
   // This widget is the root of your application.
 
   bool isLoggedIn = false;
 
-  MyAppState() {
+  examAppState() {
     getLoginValue();
   }
 
