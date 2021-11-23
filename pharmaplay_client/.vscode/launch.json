@@ -4,12 +4,12 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-        {
+ {
             "name": "pharmaplay_client",
             "request": "launch",
             "type": "dart",
             "program": "lib/main.dart"
-
+            "args": [ "--web-port", "8000"] 
         },
         {
             "name": "pharmaplay_client (profile mode)",
@@ -17,6 +17,7 @@
             "type": "dart",
             "flutterMode": "profile",
             "program": "lib/main.dart"
+            "args": [ "--web-port", "8000"] 
         }
     ]
 }
