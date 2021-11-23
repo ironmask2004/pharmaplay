@@ -295,7 +295,7 @@ class AuthApi {
       print(payload);
       final payloadMap = json.decode(payload);
 
-      print(payloadMap['refreshToken'].toString());
+      print('Rewuest refreshToken ' + payloadMap['refreshToken'].toString());
 
       final token = verifyJwt(payloadMap['refreshToken'], secret);
       if (token == null) {
