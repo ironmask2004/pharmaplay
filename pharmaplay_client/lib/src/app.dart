@@ -8,8 +8,8 @@ import 'settings/settings_controller.dart';
 import 'settings/settings_view.dart';
 
 /// The Widget that configures your application.
-class App extends StatelessWidget {
-  const App({
+class MyApp extends StatelessWidget {
+  const MyApp({
     Key? key,
     required this.settingsController,
   }) : super(key: key);
