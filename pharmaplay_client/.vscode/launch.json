@@ -9,7 +9,7 @@
             "type": "dart",
             "request": "launch",
             "program": "lib/main.dart"
-            "args": ["--web-port", "9099"]
+            "args": ["-d" , "chrome" -  "--web-port", "9099"]
         }
   
     ]
