@@ -1,7 +1,7 @@
+import 'package:authentication_repository/authentication_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pharmaplay_client/src/login/login.dart';
-import 'package:pharmaplay_client/src/packages/authentication_repository/lib/authentication_repository.dart';
 
 class LoginPage extends StatelessWidget {
   static Route route() {

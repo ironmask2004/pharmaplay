@@ -1,8 +1,8 @@
+import 'package:authentication_repository/authentication_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:formz/formz.dart';
 import 'package:pharmaplay_client/src/login/login.dart';
-import 'package:pharmaplay_client/src/packages/authentication_repository/lib/authentication_repository.dart';
 
 part 'login_event.dart';
 part 'login_state.dart';
