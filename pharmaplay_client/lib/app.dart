@@ -48,29 +48,29 @@ class _AppViewState extends State<AppView> {
       navigatorKey: _navigatorKey,
       builder: (context, child) {
         return BlocListener<AuthenticationBloc, AuthenticationState>(
-          listener: (context, state) {
-            print(child.toString());
-            switch (state.status) {
-              case AuthenticationStatus.authenticated:
-                print(child.toString());
-                _navigator.pushAndRemoveUntil<void>(
-                  HomePage.route(),
-                  (route) => false,
-                );
-                break;
-              case AuthenticationStatus.unauthenticated:
-                print(child.toString());
-                _navigator.pushAndRemoveUntil<void>(
-                  LoginPage.route(),
-                  (route) => false,
-                );
-                break;
-              default:
-                break;
-            }
-          },
-          child: child,
-        );
+            listener: (context, state) {
+              print('_navigatorKey' + _navigatorKey.toString());
+              print('listenr:' + child.toString());
+              switch (state.status) {
+                case AuthenticationStatus.authenticated:
+                  print('Auth : ' + child.toString());
+                  _navigator.pushAndRemoveUntil<void>(
+                    HomePage.route(),
+                    (route) => false,
+                  );
+                  break;
+                case AuthenticationStatus.unauthenticated:
+                  print('un Auth : ' + child.toString());
+                  _navigator.pushAndRemoveUntil<void>(
+                    LoginPage.route(),
+                    (route) => false,
+                  );
+                  break;
+                default:
+                  break;
+              }
+            },
+            child: child);
       },
       onGenerateRoute: (_) => SplashPage.route(),
     );
