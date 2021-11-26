@@ -18,6 +18,8 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   google_fonts: ^2.1.0
+  json_annotation: ^4.3.0
+  json_serializable: ^6.0.0
   shared_preferences: ^2.0.9
   user_repository:
     path: packages/user_repository
