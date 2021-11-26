@@ -23,6 +23,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     LoginUsernameChanged event,
     Emitter<LoginState> emit,
   ) {
+    print('_onUsernameChanged');
     final username = Username.dirty(event.username);
     emit(state.copyWith(
       username: username,
@@ -34,6 +35,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     LoginPasswordChanged event,
     Emitter<LoginState> emit,
   ) {
+    print('_onpasswordChanged');
     final password = Password.dirty(event.password);
     emit(state.copyWith(
       password: password,

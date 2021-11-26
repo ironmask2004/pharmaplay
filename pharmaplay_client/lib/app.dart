@@ -25,7 +25,7 @@ class App extends StatelessWidget {
         create: (_) => AuthenticationBloc(
           authenticationRepository: authenticationRepository,
           userRepository: userRepository,
-        ),
+        )..add(AuthenticationLandingRequested()),
         child: AppView(),
       ),
     );
