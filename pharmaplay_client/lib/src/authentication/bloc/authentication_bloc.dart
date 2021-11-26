@@ -48,7 +48,6 @@ class AuthenticationBloc
         return emit(const AuthenticationState.unauthenticated());
       case AuthenticationStatus.authenticated:
         final user = await _tryGetUser(userId: state.user.id);
-
         print('try to Get User : ${user}');
         if (user!.id != '-') {
           MySharedPreferences.instance.setStringValue("user_id", user.id);
@@ -88,7 +87,7 @@ class AuthenticationBloc
     if (logFlag) {
       try {
         await _authenticationRepository.logInByID(userID: userId);
-        // emit(AuthenticationState.authenticated(User00(userId)));
+        emit(AuthenticationState.authenticated(User00(userId)));
 
         // emit();
       } catch (_) {
@@ -109,6 +108,7 @@ class AuthenticationBloc
   Future<User00?> _tryGetUser({String? userId}) async {
     try {
       final user;
+      print('User Id to try get :$userId');
       if (userId != '-') {
         user = await _userRepository.getUser(user_id: userId);
       } else {
