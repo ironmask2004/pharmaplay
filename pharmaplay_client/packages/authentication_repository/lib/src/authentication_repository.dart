@@ -5,14 +5,13 @@ enum AuthenticationStatus { unknown, authenticated, unauthenticated }
 class AuthenticationRepository {
   AuthenticationRepository(this.loggedinFlag);
 
-  final loggedinFlag;
+  final bool loggedinFlag;
   final _controller = StreamController<AuthenticationStatus>();
 
   Stream<AuthenticationStatus> get status async* {
     await Future<void>.delayed(const Duration(seconds: 1));
 
-    //bool logFlag =
-    //    await MySharedPreferences.instance.getBooleanValue("loggedin");
+    //bool loggedinFlag = await MySharedPreferences.instance.getBooleanValue("loggedin");
     if (loggedinFlag) {
       yield AuthenticationStatus.authenticated;
     } else {
