@@ -27,31 +27,35 @@ class AuthenticationRepository {
     yield* _controller.stream;
   }
 
-  Future<dartz.Either<ApiResponse, TokenPair>> logIn(
+  Future<dartz.Either<ApiError, TokenPair>> logIn(
       {required String email, required String password}) async {
     ApiResponse _apiResponse = ApiResponse();
-    //-----
+    ApiError _apiError;
 
-    final dartz.Either<ApiResponse, TokenPair> _tokenInfo;
+    var _loginUserResponse;
+
     try {
       //TokenPair _tokenInfo;
-      _tokenInfo = await loginUser(email, password, baseUrl);
+      _loginUserResponse = await loginUser(email, password, baseUrl);
 
-      _tokenInfo.fold((left) {
+      return _loginUserResponse.fold((left) {
         print((left.ApiError as ApiError).error.toString());
+
         _controller.add(AuthenticationStatus.unauthenticated);
+
         return (left);
       }, (right) {
         //showInSnackBar(context, ("Login Successs!!"));
+        var _tokenPair = TokenPair.fromMap(right);
         _controller.add(AuthenticationStatus.authenticated);
-        return (right);
+        return (_tokenPair);
       });
     } catch (err) {
       print('Error connectiing to server ' + err.toString());
-      throw (err);
+      // throw (err);
+      return dartz.left(ApiError(error: '$err', errorNo: '1900202'));
       // showInSnackBar(context, err.toString());
     }
-    return dartz.left(_apiResponse);
   }
 
   Future<void> logInByID({required String userID}) async {

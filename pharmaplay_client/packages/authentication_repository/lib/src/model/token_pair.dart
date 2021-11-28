@@ -1,21 +1,21 @@
 import 'dart:convert';
 
 class TokenPair {
-  TokenPair(this.idToken, this.refreshToken);
+  TokenPair(this.tokenId, this.refreshToken);
 
-  final String idToken;
+  final String tokenId;
   final String refreshToken;
 
   Map<String, dynamic> toMap() {
     return {
-      'idToken': idToken,
+      'tokenId': tokenId,
       'refreshToken': refreshToken,
     };
   }
 
   factory TokenPair.fromMap(Map<String, dynamic> map) {
     return TokenPair(
-      map['idToken'],
+      map['tokenId'],
       map['refreshToken'],
     );
   }

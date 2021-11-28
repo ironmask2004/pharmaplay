@@ -13,10 +13,10 @@ eyJpYXQiOjE2MzIyNTQzMjksImV4cCI6MTYzMjI1NDQ1OSwic3ViIjoiNjE0OGRmM2M1NW
 E5NjQ2NzdiNDMxOGZiIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdCIsImp0aSI6IjMyYTBmODllLTY3YTItNDgyZC1iZmUzLTMzMzQzYjRjNjMwYiJ9.KQyxOPodML_Zqam7LKGauYCJ0IBqlXKCfjiuGu3WIII'
  */
 
-Future<Either<ApiResponse, TokenPair>> loginUser(
+Future<Either<ApiResponse, ApiError>> loginUser(
     String email, String password, String baseUrl) async {
   ApiResponse _apiResponse = ApiResponse();
-  TokenPair _tokenPair;
+  ApiError _apiError; // = ApiError(error: error, errorNo: errorNo);
   try {
     final _url = Uri.parse('http://' + baseUrl + "/auth/login");
     final _headers = {"Content-type": "application/json"};
@@ -30,30 +30,25 @@ Future<Either<ApiResponse, TokenPair>> loginUser(
 
     if (response.statusCode == 200) {
       final Map<String, dynamic> _responseMap = json.decode(response.body);
-      print(_responseMap);
-
-      Map<String, String> _tokenMap = _responseMap['tokenInfo'];
-      Map<String, dynamic> _userMap = _responseMap['userInfo'];
       Map<String, dynamic> _reqResultMap = _responseMap['reqResult'];
 
-      var token = TokenPair.fromMap(_tokenMap);
-      print(token);
+      _apiResponse.Data = _responseMap['tokenInfo'];
 
-      _apiResponse.Data = token.toString(); //TokenPair.fromMap(token);
-
-      print('TOOTOTOTOTOTOT:' + _apiResponse.Data.toString());
-
-      _apiResponse.ApiError = ApiError(error: "Login suscess", errorNo: "200");
-      return right(token);
+      _apiResponse.ApiError =
+          ApiError.fromJson(json.decode(_reqResultMap.toString()));
+      print('response date : ' + _apiResponse.Data.toString());
+      print('response error' + _apiResponse.ApiError.toString());
+      return left(_apiResponse);
     } else {
-      print('else -----------');
-      _apiResponse.ApiError = ApiError.fromJson(json.decode(response.body));
+      _apiError = ApiError(
+          error: "Server error. Please retry",
+          errorNo: response.statusCode.toString());
+      return right(_apiError);
     }
-  } on SocketException {
-    _apiResponse.ApiError =
-        ApiError(error: "Server error. Please retry", errorNo: "199991");
+  } catch (err) {
+    _apiError = ApiError(error: '$err', errorNo: "199991");
+    return right(_apiError);
   }
-  return left(_apiResponse);
 }
 
 Future<Either<ApiResponse, String>> logOutUser(
