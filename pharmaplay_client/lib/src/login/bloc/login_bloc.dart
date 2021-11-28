@@ -56,9 +56,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       try {
         //TokenPair _tokenInfo;
         _tokenInfo = await _authenticationRepository.logIn(
-            email: state.email.value,
-            password: state.password.value,
-            baseUrl: 'baseUrl');
+          email: state.email.value,
+          password: state.password.value,
+        );
         _tokenInfo.fold((left) {
           print((left.ApiError as ApiError).error.toString());
           // return (left);

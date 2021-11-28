@@ -28,9 +28,7 @@ class AuthenticationRepository {
   }
 
   Future<dartz.Either<ApiResponse, TokenPair>> logIn(
-      {required String email,
-      required String password,
-      required String baseUrl}) async {
+      {required String email, required String password}) async {
     ApiResponse _apiResponse = ApiResponse();
     //-----
 
