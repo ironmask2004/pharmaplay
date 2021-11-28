@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:pharmaplay_client/src/utiites/shared_pref.dart';
+import 'package:pharmaplay_client/src/utlites/shared_pref.dart';
 import 'package:user_repository/user_repository.dart';
 
 part 'authentication_event.dart';
