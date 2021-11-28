@@ -29,12 +29,14 @@ Future<Either<ApiResponse, TokenPair>> loginUser(
         response.statusCode.toString());
 
     if (response.statusCode == 200) {
-      final Map<String, dynamic> _tokeninfo = json.decode(response.body);
+      final Map<String, dynamic> _responseMap = json.decode(response.body);
+      print(_responseMap);
 
-      print('TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT' +
-          _tokeninfo['tokenInfo'].toString());
+      Map<String, String> _tokenMap = _responseMap['tokenInfo'];
+      Map<String, dynamic> _userMap = _responseMap['userInfo'];
+      Map<String, dynamic> _reqResultMap = _responseMap['reqResult'];
 
-      var token = TokenPair.fromMap(_tokeninfo['tokenInfo']);
+      var token = TokenPair.fromMap(_tokenMap);
       print(token);
 
       _apiResponse.Data = token.toString(); //TokenPair.fromMap(token);

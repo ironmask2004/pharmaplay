@@ -421,7 +421,7 @@ Future<Response> userLogin(var userRequestInfo, DB db, String authStore,
     final Map<String, dynamic> userInfo = {
       "userInfo": User.fromMap(user).toJson(),
       "tokenInfo": {
-        "token": tokenPair.idToken,
+        "tokenId": tokenPair.tokenId,
         "refreshToken": tokenPair.refreshToken
       },
       "reqResult": {

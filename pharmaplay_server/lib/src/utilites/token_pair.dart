@@ -1,11 +1,11 @@
 class TokenPair {
-  TokenPair(this.idToken, this.refreshToken);
+  TokenPair(this.tokenId, this.refreshToken);
 
-  final String idToken;
+  final String tokenId;
   final String refreshToken;
 
   Map<String, dynamic> toJson() => {
-        'token': idToken,
+        'tokenId': tokenId,
         'refreshToken': refreshToken,
         'error': 'Suucess',
         'errorNo': '200'
