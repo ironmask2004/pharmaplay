@@ -51,7 +51,7 @@ class AuthApi {
     router.post('/logout', (Request req) async {
       if (req.context['authDetails'] == null) {
         return Response.forbidden(
-            '"{ "error" : "Not authorised to perform this operation."  ,  "errNo" : "403"}');
+            '"{ "error" : "Not authorised to perform this operation."  ,  "errorNo" : "403"}');
       }
       final auth = req.context['authDetails'];
 
@@ -63,7 +63,7 @@ class AuthApi {
     router.post('/logout/othersessions', (Request req) async {
       if (req.context['authDetails'] == null) {
         return Response.forbidden(
-            '"{ "error" : "Not authorised to perform this operation."  ,  "errNo" : "403"}');
+            '"{ "error" : "Not authorised to perform this operation."  ,  "errorNo" : "403"}');
       }
 
       final auth = req.context['authDetails'];
@@ -78,18 +78,18 @@ class AuthApi {
       } catch (e) {
         return Response.internalServerError(
             body:
-                '{ "error" : "There was an issue logging others out. Please check and try again."   ,  "errNo" : "199991"}');
+                '{ "error" : "There was an issue logging others out. Please check and try again."   ,  "errorNo" : "199991"}');
       }
 
       return Response.ok(
-          '{ "error" : "Successfully Loggedout other  sessions  for User  "   ,  "errNo" : "200"}');
+          '{ "error" : "Successfully Loggedout other  sessions  for User  "   ,  "errorNo" : "200"}');
     });
 
 // ================== authrizee / logout All Sessions  route ================//
     router.post('/logout/allsessions', (Request req) async {
       if (req.context['authDetails'] == null) {
         return Response.forbidden(
-            '"{ "error" : "Not authorised to perform this operation."  ,  "errNo" : "403"}');
+            '"{ "error" : "Not authorised to perform this operation."  ,  "errorNo" : "403"}');
       }
 
       final auth = req.context['authDetails'];
@@ -101,7 +101,7 @@ class AuthApi {
       } catch (e) {
         return Response.internalServerError(
             body:
-                '{ "error" : " There was a problem change status to  loggedOut. Please try again. ${e.toString()}", "errNo" : "199991"}');
+                '{ "error" : " There was a problem change status to  loggedOut. Please try again. ${e.toString()}", "errorNo" : "199991"}');
       }
 
       try {
@@ -111,11 +111,11 @@ class AuthApi {
       } catch (e) {
         return Response.internalServerError(
             body:
-                '{ "error" : "There was an issue logging out. Please check and try again."   ,  "errNo" : "199991"}');
+                '{ "error" : "There was an issue logging out. Please check and try again."   ,  "errorNo" : "199991"}');
       }
 
       return Response.ok(
-          '{ "error" : "Successfully Loggedout from All USer sessions  "   ,  "errNo" : "200"}');
+          '{ "error" : "Successfully Loggedout from All USer sessions  "   ,  "errorNo" : "200"}');
     });
 
     ///----------------------- Change PAssword  ----------/
@@ -123,7 +123,7 @@ class AuthApi {
     router.post('/password/change', (Request req) async {
       if (req.context['authDetails'] == null) {
         return Response.forbidden(
-            '"{ "error" : "Not authorised to perform this operation."  ,  "errNo" : "403"}');
+            '"{ "error" : "Not authorised to perform this operation."  ,  "errorNo" : "403"}');
       }
       final payload = await req.readAsString();
 
@@ -134,7 +134,7 @@ class AuthApi {
       final userId = ((auth as JWT)).subject.toString();
       if (userInfo['password'] == null) {
         return Response.forbidden(
-            '"{ "error" : " New PAssword need to be provided!!."  ,  "errNo" : "403" }');
+            '"{ "error" : " New PAssword need to be provided!!."  ,  "errorNo" : "403" }');
       }
       User oldUserInfo = await findUserByID(userId, db, authStore);
 
@@ -162,7 +162,7 @@ class AuthApi {
         throw ('No Password  Changed!!!');
       } else {
         return Response.ok(
-            '{ "error" : "Successfully password Changed  you may need to signout All USer sessions  "   ,  "errNo" : "200"}');
+            '{ "error" : "Successfully password Changed  you may need to signout All USer sessions  "   ,  "errorNo" : "200"}');
       }
     });
 
@@ -244,7 +244,7 @@ class AuthApi {
         }
 
         return Response.ok(
-            '{ "error" : "Successfully password reseted and cent to you By Email    Go and SignIn now with new passwd "   ,  "errNo" : "200"}');
+            '{ "error" : "Successfully password reseted and cent to you By Email    Go and SignIn now with new passwd "   ,  "errorNo" : "200"}');
       }
     });
 
@@ -253,7 +253,7 @@ class AuthApi {
       dynamic result;
       if (req.context['authDetails'] == null) {
         return Response.forbidden(
-            '"{ "error" : "Not authorised to perform this operation."  ,  "errNo" : "403"}');
+            '"{ "error" : "Not authorised to perform this operation."  ,  "errorNo" : "403"}');
       }
       final auth = req.context['authDetails'];
       try {
@@ -263,7 +263,7 @@ class AuthApi {
       } catch (err) {
         return Response.internalServerError(
             body:
-                '{ "error" : "There was an issue getting sessions  out $err. Please check and try again."   ,  "errNo" : "199991"}');
+                '{ "error" : "There was an issue getting sessions  out $err. Please check and try again."   ,  "errorNo" : "199991"}');
       }
 
       //var json1 = json.encode(result.toString());
@@ -277,7 +277,7 @@ class AuthApi {
     router.post('/unregister/', (Request req) async {
       if (req.context['authDetails'] == null) {
         return Response.forbidden(
-            '"{ "error" : "Not authorised to perform this operation."  ,  "errNo" : "403"}');
+            '"{ "error" : "Not authorised to perform this operation."  ,  "errorNo" : "403"}');
       }
       final auth = req.context['authDetails'];
       final authDetails = req.context['authDetails'] as JWT;
@@ -332,7 +332,7 @@ class AuthApi {
       } catch (e) {
         return Response.internalServerError(
             body:
-                '{ "error" : "There was a problem creating a new token.(${e.toString()}) Please try again."   ,  "errNo" : "199991"}');
+                '{ "error" : "There was a problem creating a new token.(${e.toString()}) Please try again."   ,  "errorNo" : "199991"}');
       }
     });
 

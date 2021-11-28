@@ -29,10 +29,15 @@ Future<Either<ApiResponse, ApiError>> loginUser(
         response.statusCode.toString());
 
     if (response.statusCode == 200) {
-      final Map<String, dynamic> _responseMap = json.decode(response.body);
-      Map<String, dynamic> _reqResultMap = _responseMap['reqResult'];
+      print('202020202020');
+      final _responseMap = json.decode(response.body);
+      print(_responseMap);
+      final _reqResultMap = _responseMap['reqResult'];
+
+      print(_reqResultMap);
 
       _apiResponse.Data = _responseMap['tokenInfo'];
+      print('----------------------' + _apiResponse.Data.toString());
 
       _apiResponse.ApiError =
           ApiError.fromJson(json.decode(_reqResultMap.toString()));
@@ -40,6 +45,7 @@ Future<Either<ApiResponse, ApiError>> loginUser(
       print('response error' + _apiResponse.ApiError.toString());
       return left(_apiResponse);
     } else {
+      print('4345654345678p-098765434567890-09876');
       _apiError = ApiError(
           error: "Server error. Please retry",
           errorNo: response.statusCode.toString());
