@@ -70,9 +70,10 @@ class AuthenticationRepository {
     }
   }
 
-  Future<void> logInByID({required String userID}) async {
+  Future<void> logInByID({required String userId}) async {
+    print('login By ID: $userId');
     await Future.delayed(const Duration(milliseconds: 300),
-        () => _controller.add(AuthRepoState.authenticated(userID)));
+        () => _controller.add(AuthRepoState.authenticated(userId)));
   }
 
   void logOut() {

@@ -2,7 +2,7 @@ part of 'authentication_bloc.dart';
 
 class AuthenticationState extends Equatable {
   const AuthenticationState._(
-      {this.status = AuthenticationStatus.unknown, this.userId = '-'});
+      {this.status = AuthenticationStatus.unknown, this.userId = ''});
 
   const AuthenticationState.unknown() : this._();
 

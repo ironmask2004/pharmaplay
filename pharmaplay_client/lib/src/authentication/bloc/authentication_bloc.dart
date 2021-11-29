@@ -47,14 +47,16 @@ class AuthenticationBloc
       case AuthenticationStatus.unauthenticated:
         return emit(const AuthenticationState.unauthenticated());
       case AuthenticationStatus.authenticated:
-        final user = await _tryGetUser(userId: state.userId);
-        print('try to Get User : ${user}');
-        if (user!.id != '-') {
+        print("999999999999999999999999999999999999999999999999999999999999" +
+            event.userId!);
+        final user = await _tryGetUser(event.userId!);
+        // print('try to Get User id : ${user.id}');
+        if (user!.id != null) {
           MySharedPreferences.instance.setStringValue("user_id", user.id);
           print('Saved try to Get User : ${user.id}');
           //MySharedPreferences.instance.setStringValue("password", getPassword);
           MySharedPreferences.instance.setBooleanValue("loggedin", true);
-          return emit(AuthenticationState.authenticated(state.userId));
+          return emit(AuthenticationState.authenticated(event.userId!));
         } else {
           print('unauthenticated--------------------');
           return emit(const AuthenticationState.unauthenticated());
@@ -70,6 +72,7 @@ class AuthenticationBloc
     Emitter<AuthenticationState> emit,
   ) {
     _authenticationRepository.logOut();
+    print('LOOOOOOgOOOOOUT!!');
     MySharedPreferences.instance.removeValue("user_id");
     //MySharedPreferences.instance.setStringValue("password", getPassword);
     MySharedPreferences.instance.setBooleanValue("loggedin", false);
@@ -86,7 +89,7 @@ class AuthenticationBloc
         await MySharedPreferences.instance.getBooleanValue("loggedin");
     if (logFlag) {
       try {
-        await _authenticationRepository.logInByID(userID: userId);
+        await _authenticationRepository.logInByID(userId: userId);
         emit(AuthenticationState.authenticated((userId)));
 
         // emit();
@@ -105,18 +108,17 @@ class AuthenticationBloc
     }
   }
 
-  Future<User00?> _tryGetUser({String? userId}) async {
+  Future<User00?> _tryGetUser(String userId) async {
     try {
       final user;
-      print('User Id to try get :$userId');
-      if (userId != '-') {
-        user = await _userRepository.getUser(user_id: userId);
-      } else {
-        user = await _userRepository.getUser();
-      }
+      print(
+          'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxx User Id to try get :$userId');
+
+      user = await _userRepository.getUser(userId);
+
       return user;
     } catch (_err) {
-      print(_err.toString());
+      print('Eroror Happend: ' + _err.toString());
       return null;
     }
   }
