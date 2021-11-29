@@ -24,7 +24,7 @@ class AuthenticationBloc
 
     AuthRepoStateubscription = _authenticationRepository.status.listen(
       (status) =>
-          add(AuthenticationStatusChanged(status.status, status.userId)),
+          add(AuthenticationStatusChanged(status.status, status.tokenPair)),
     );
   }
 
@@ -48,15 +48,19 @@ class AuthenticationBloc
         return emit(const AuthenticationState.unauthenticated());
       case AuthenticationStatus.authenticated:
         print("999999999999999999999999999999999999999999999999999999999999" +
-            event.userId!);
-        final user = await _tryGetUser(event.userId!);
+            event.tokenPair!.tokenId);
+        final user = await _tryGetUser(event.tokenPair!.tokenId);
         // print('try to Get User id : ${user.id}');
         if (user!.id != null) {
-          MySharedPreferences.instance.setStringValue("user_id", user.id);
+          MySharedPreferences.instance
+              .setStringValue("tokenId", event.tokenPair!.tokenId);
+          MySharedPreferences.instance
+              .setStringValue("refreshToken", event.tokenPair!.refreshToken);
+
           print('Saved try to Get User : ${user.id}');
           //MySharedPreferences.instance.setStringValue("password", getPassword);
           MySharedPreferences.instance.setBooleanValue("loggedin", true);
-          return emit(AuthenticationState.authenticated(event.userId!));
+          return emit(AuthenticationState.authenticated(event.tokenPair!));
         } else {
           print('unauthenticated--------------------');
           return emit(const AuthenticationState.unauthenticated());
@@ -73,7 +77,8 @@ class AuthenticationBloc
   ) {
     _authenticationRepository.logOut();
     print('LOOOOOOgOOOOOUT!!');
-    MySharedPreferences.instance.removeValue("user_id");
+    MySharedPreferences.instance.removeValue("tokenId");
+    MySharedPreferences.instance.removeValue("refreshToken");
     //MySharedPreferences.instance.setStringValue("password", getPassword);
     MySharedPreferences.instance.setBooleanValue("loggedin", false);
   }
@@ -83,14 +88,22 @@ class AuthenticationBloc
     Emitter<AuthenticationState> emit,
   ) async {
     print('Start LAnding');
-    var userId = await MySharedPreferences.instance.getStringValue("user_id");
+    // var userId = await MySharedPreferences.instance.getStringValue("user_id");
     //MySharedPreferences.instance.setStringValue("password", getPassword);
     bool logFlag =
         await MySharedPreferences.instance.getBooleanValue("loggedin");
     if (logFlag) {
+      String tokenId =
+          await MySharedPreferences.instance.getStringValue("tokenId");
+      String refreshToken =
+          await MySharedPreferences.instance.getStringValue("refreshToken");
+
+      TokenPair _tokenPair = TokenPair(tokenId, refreshToken);
+      print('TokenPair: ${_tokenPair.tokenId}  ${_tokenPair.refreshToken} ');
+
       try {
-        await _authenticationRepository.logInByID(userId: userId);
-        emit(AuthenticationState.authenticated((userId)));
+        await _authenticationRepository.logInByID(tokenPair: _tokenPair);
+        emit(AuthenticationState.authenticated((_tokenPair)));
 
         // emit();
       } catch (_) {

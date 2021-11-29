@@ -10,7 +10,7 @@
             "request": "launch",
             "program": "lib/main.dart",
         //    "args": ["-d" , "chrome" -  "--web-port", "9099"]
-        "args": [   "--web-port", "9099"]
+        "args": [   "--web-port", "9098"]
         }
     ]
 }

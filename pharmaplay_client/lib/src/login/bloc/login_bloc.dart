@@ -72,7 +72,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         });
       } catch (err) {
         print('Error connectiing to server ' + err.toString());
-        throw (err);
+        rethrow;
         // showInSnackBar(context, err.toString());
       }
 

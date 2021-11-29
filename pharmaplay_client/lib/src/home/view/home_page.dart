@@ -17,10 +17,10 @@ class HomePage extends StatelessWidget {
           children: <Widget>[
             Builder(
               builder: (context) {
-                final userId = context.select(
-                  (AuthenticationBloc bloc) => bloc.state.userId,
+                final tokenId = context.select(
+                  (AuthenticationBloc bloc) => bloc.state.tokenPair!.tokenId,
                 );
-                return Text('UserID: $userId');
+                return Text('UserID: $tokenId');
               },
             ),
             ElevatedButton(

@@ -12,10 +12,10 @@ part 'auth_status.dart';
 enum AuthenticationStatus { unknown, authenticated, unauthenticated }
 
 class AuthenticationRepository {
-  AuthenticationRepository(this.loggedinFlag, this.loggedUserid, this.baseUrl);
+  AuthenticationRepository(this.loggedinFlag, this.tokenPair, this.baseUrl);
 
   final bool loggedinFlag;
-  final String loggedUserid;
+  final TokenPair tokenPair;
   final String baseUrl;
   final _controller = StreamController<AuthRepoState>();
 
@@ -35,7 +35,7 @@ class AuthenticationRepository {
   Stream<AuthRepoState> get status async* {
     //bool loggedinFlag = await MySharedPreferences.instance.getBooleanValue("loggedin");
     if (loggedinFlag) {
-      yield AuthRepoState.authenticated(loggedUserid);
+      yield AuthRepoState.authenticated(tokenPair);
     } else {
       yield AuthRepoState.unauthenticated();
     }
@@ -55,7 +55,7 @@ class AuthenticationRepository {
         print('left1');
         var _tokenPair = TokenPair.fromJson(json.encode(left.Data));
         print('left2');
-        _controller.add(AuthRepoState.authenticated(_tokenPair.tokenId));
+        _controller.add(AuthRepoState.authenticated(_tokenPair));
 
         return dartz.left(_tokenPair);
       }, (right) {
@@ -70,10 +70,10 @@ class AuthenticationRepository {
     }
   }
 
-  Future<void> logInByID({required String userId}) async {
-    print('login By ID: $userId');
+  Future<void> logInByID({required TokenPair tokenPair}) async {
+    print('login By ID: ${tokenPair.tokenId}');
     await Future.delayed(const Duration(milliseconds: 300),
-        () => _controller.add(AuthRepoState.authenticated(userId)));
+        () => _controller.add(AuthRepoState.authenticated(tokenPair)));
   }
 
   void logOut() {
