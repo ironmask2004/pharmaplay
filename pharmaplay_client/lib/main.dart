@@ -7,11 +7,13 @@ import 'package:user_repository/user_repository.dart';
 Future<void> main() async {
   bool loggedinFlag =
       await MySharedPreferences.instance.getBooleanValue("loggedin");
+  String loggedUserid =
+      await MySharedPreferences.instance.getStringValue("userId");
   print(loggedinFlag);
 
   runApp(App(
-    authenticationRepository:
-        AuthenticationRepository(loggedinFlag, 'pharmaplay.mywire.org:9093'),
+    authenticationRepository: AuthenticationRepository(
+        loggedinFlag, loggedUserid, 'pharmaplay.mywire.org:9093'),
     userRepository: UserRepository(),
   ));
 }

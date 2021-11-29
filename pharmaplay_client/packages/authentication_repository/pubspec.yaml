@@ -6,7 +6,9 @@ environment:
   sdk: ">=2.12.0-0 <3.0.0"
 
 dependencies:
-  equatable: ^2.0.3
-  uuid: ^3.0.0
-  http: ^0.13.4
   dartz: ^0.10.0
+ # equatable: ^2.0.3
+  http: ^0.13.4
+  uuid: ^3.0.0
+dev_dependencies:
+  equatable: ^2.0.3

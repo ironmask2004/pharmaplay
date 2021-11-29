@@ -1,21 +1,25 @@
 import 'dart:async';
+import 'dart:convert';
+import 'package:equatable/equatable.dart';
 import 'package:authentication_repository/src/api/authentication_api.dart';
 import 'package:authentication_repository/src/model/api_error.dart';
 import 'package:authentication_repository/src/model/token_pair.dart';
 import 'package:dartz/dartz.dart' as dartz;
 
 import 'package:authentication_repository/src/model/api_response.dart';
+part 'auth_status.dart';
 
 enum AuthenticationStatus { unknown, authenticated, unauthenticated }
 
 class AuthenticationRepository {
-  AuthenticationRepository(this.loggedinFlag, this.baseUrl);
+  AuthenticationRepository(this.loggedinFlag, this.loggedUserid, this.baseUrl);
 
   final bool loggedinFlag;
+  final String loggedUserid;
   final String baseUrl;
-  final _controller = StreamController<AuthenticationStatus>();
+  final _controller = StreamController<AuthRepoState>();
 
-  Stream<AuthenticationStatus> get status async* {
+/*Stream<AuthenticationStatus> get status async* {
     await Future<void>.delayed(const Duration(seconds: 1));
 
     //bool loggedinFlag = await MySharedPreferences.instance.getBooleanValue("loggedin");
@@ -26,47 +30,53 @@ class AuthenticationRepository {
     }
     yield* _controller.stream;
   }
+*/
 
-  Future<dartz.Either<ApiError, TokenPair>> logIn(
+  Stream<AuthRepoState> get status async* {
+    //bool loggedinFlag = await MySharedPreferences.instance.getBooleanValue("loggedin");
+    if (loggedinFlag) {
+      yield AuthRepoState.authenticated(loggedUserid);
+    } else {
+      yield AuthRepoState.unauthenticated();
+    }
+    yield* _controller.stream;
+  }
+
+  Future<dartz.Either<TokenPair, ApiError>> logIn(
       {required String email, required String password}) async {
-    ApiResponse _apiResponse = ApiResponse();
-    ApiError _apiError;
-
-    var _loginUserResponse;
+    dartz.Either<ApiResponse, ApiError> _loginUserResponse;
 
     try {
-      //TokenPair _tokenInfo;
       _loginUserResponse = await loginUser(email, password, baseUrl);
+      print('login response :' + _loginUserResponse.toString());
 
       return _loginUserResponse.fold((left) {
-        print((left.ApiError as ApiError).error.toString());
+        //print((right as ApiError).error.toString());
+        print('left1');
+        var _tokenPair = TokenPair.fromJson(json.encode(left.Data));
+        print('left2');
+        _controller.add(AuthRepoState.authenticated(_tokenPair.tokenId));
 
-        _controller.add(AuthenticationStatus.unauthenticated);
-
-        return (left);
+        return dartz.left(_tokenPair);
       }, (right) {
-        //showInSnackBar(context, ("Login Successs!!"));
-        var _tokenPair = TokenPair.fromMap(right);
-        _controller.add(AuthenticationStatus.authenticated);
-        return (_tokenPair);
+        _controller.add(AuthRepoState.unauthenticated());
+        print('right');
+        return dartz.right(right as ApiError);
       });
     } catch (err) {
       print('Error connectiing to server ' + err.toString());
-      // throw (err);
-      return dartz.left(ApiError(error: '$err', errorNo: '1900202'));
-      // showInSnackBar(context, err.toString());
+      throw (err);
+      // return dartz.right(ApiError(error: '$err', errorNo: '1900202'));
     }
   }
 
   Future<void> logInByID({required String userID}) async {
-    await Future.delayed(
-      const Duration(milliseconds: 300),
-      () => _controller.add(AuthenticationStatus.authenticated),
-    );
+    await Future.delayed(const Duration(milliseconds: 300),
+        () => _controller.add(AuthRepoState.authenticated(userID)));
   }
 
   void logOut() {
-    _controller.add(AuthenticationStatus.unauthenticated);
+    _controller.add(AuthRepoState.unauthenticated());
   }
 
   void dispose() => _controller.close();

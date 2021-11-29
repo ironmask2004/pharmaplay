@@ -22,19 +22,19 @@ class AuthenticationBloc
     on<AuthenticationStatusChanged>(_onAuthenticationStatusChanged);
     on<AuthenticationLogoutRequested>(_onAuthenticationLogoutRequested);
 
-    _authenticationStatusSubscription = _authenticationRepository.status.listen(
-      (status) => add(AuthenticationStatusChanged(status)),
+    AuthRepoStateubscription = _authenticationRepository.status.listen(
+      (status) =>
+          add(AuthenticationStatusChanged(status.status, status.userId)),
     );
   }
 
   final AuthenticationRepository _authenticationRepository;
   final UserRepository _userRepository;
-  late StreamSubscription<AuthenticationStatus>
-      _authenticationStatusSubscription;
+  late StreamSubscription<AuthRepoState> AuthRepoStateubscription;
 
   @override
   Future<void> close() {
-    _authenticationStatusSubscription.cancel();
+    AuthRepoStateubscription.cancel();
     _authenticationRepository.dispose();
     return super.close();
   }
@@ -47,14 +47,14 @@ class AuthenticationBloc
       case AuthenticationStatus.unauthenticated:
         return emit(const AuthenticationState.unauthenticated());
       case AuthenticationStatus.authenticated:
-        final user = await _tryGetUser(userId: state.user.id);
+        final user = await _tryGetUser(userId: state.userId);
         print('try to Get User : ${user}');
         if (user!.id != '-') {
           MySharedPreferences.instance.setStringValue("user_id", user.id);
           print('Saved try to Get User : ${user.id}');
           //MySharedPreferences.instance.setStringValue("password", getPassword);
           MySharedPreferences.instance.setBooleanValue("loggedin", true);
-          return emit(AuthenticationState.authenticated(user));
+          return emit(AuthenticationState.authenticated(state.userId));
         } else {
           print('unauthenticated--------------------');
           return emit(const AuthenticationState.unauthenticated());
@@ -87,7 +87,7 @@ class AuthenticationBloc
     if (logFlag) {
       try {
         await _authenticationRepository.logInByID(userID: userId);
-        emit(AuthenticationState.authenticated(User00(userId)));
+        emit(AuthenticationState.authenticated((userId)));
 
         // emit();
       } catch (_) {

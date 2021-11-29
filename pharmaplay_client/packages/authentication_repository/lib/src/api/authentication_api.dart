@@ -2,7 +2,7 @@ import 'package:authentication_repository/src/model/api_error.dart';
 import 'package:authentication_repository/src/model/token_pair.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:dartz/dartz.dart';
+import 'package:dartz/dartz.dart' as dartz;
 import 'dart:io';
 import '../model/api_response.dart';
 
@@ -13,7 +13,7 @@ eyJpYXQiOjE2MzIyNTQzMjksImV4cCI6MTYzMjI1NDQ1OSwic3ViIjoiNjE0OGRmM2M1NW
 E5NjQ2NzdiNDMxOGZiIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdCIsImp0aSI6IjMyYTBmODllLTY3YTItNDgyZC1iZmUzLTMzMzQzYjRjNjMwYiJ9.KQyxOPodML_Zqam7LKGauYCJ0IBqlXKCfjiuGu3WIII'
  */
 
-Future<Either<ApiResponse, ApiError>> loginUser(
+Future<dartz.Either<ApiResponse, ApiError>> loginUser(
     String email, String password, String baseUrl) async {
   ApiResponse _apiResponse = ApiResponse();
   ApiError _apiError; // = ApiError(error: error, errorNo: errorNo);
@@ -39,25 +39,26 @@ Future<Either<ApiResponse, ApiError>> loginUser(
       _apiResponse.Data = _responseMap['tokenInfo'];
       print('----------------------' + _apiResponse.Data.toString());
 
-      _apiResponse.ApiError =
-          ApiError.fromJson(json.decode(_reqResultMap.toString()));
-      print('response date : ' + _apiResponse.Data.toString());
+      _apiResponse.ApiError = ApiError(error: 'sucess', errorNo: '200');
+      //    ApiError.fromJson(json.decode(_reqResultMap.toString()));
+
       print('response error' + _apiResponse.ApiError.toString());
-      return left(_apiResponse);
+      return dartz.left(_apiResponse);
     } else {
       print('4345654345678p-098765434567890-09876');
       _apiError = ApiError(
           error: "Server error. Please retry",
           errorNo: response.statusCode.toString());
-      return right(_apiError);
+      print('0000000000000000000000000000');
+      return dartz.right(_apiError);
     }
   } catch (err) {
     _apiError = ApiError(error: '$err', errorNo: "199991");
-    return right(_apiError);
+    return dartz.right(_apiError);
   }
 }
 
-Future<Either<ApiResponse, String>> logOutUser(
+Future<dartz.Either<ApiResponse, String>> logOutUser(
     String userToken, String baseUrl) async {
   ApiResponse _apiResponse = ApiResponse();
   try {
@@ -77,7 +78,7 @@ Future<Either<ApiResponse, String>> logOutUser(
       // _apiResponse.Data = User.fromJson(response.body);
       _apiResponse.ApiError = ApiError.fromJson(
           {"error": "Get User LogOut Success", "errorNo": "200"});
-      return right("Get User LogOut Success");
+      return dartz.right("Get User LogOut Success");
     } else {
       _apiResponse.ApiError = ApiError(
           error: json.decode(response.body), errorNo: _response.toString());
@@ -87,5 +88,5 @@ Future<Either<ApiResponse, String>> logOutUser(
         error: "Server SocketException error. Please retry",
         errorNo: "1999991");
   }
-  return left(_apiResponse);
+  return dartz.left(_apiResponse);
 }

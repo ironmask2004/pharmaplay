@@ -52,19 +52,21 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     if (state.status.isValidated) {
       emit(state.copyWith(status: FormzStatus.submissionInProgress));
 //-----------------
-      final dartz.Either<ApiError, TokenPair> _tokenInfo;
+      final dartz.Either<TokenPair, ApiError> _loginResponse;
       try {
         //TokenPair _tokenInfo;
-        _tokenInfo = await _authenticationRepository.logIn(
+        _loginResponse = await _authenticationRepository.logIn(
             email: state.email.value, password: state.password.value);
-        _tokenInfo.fold((left) {
-          print((left as ApiError).error.toString());
+
+        _loginResponse.fold((left) {
+          print('left');
           // return (left);
-          emit(state.copyWith(status: FormzStatus.submissionFailure));
+          print(left.toJson().toString());
+          emit(state.copyWith(status: FormzStatus.submissionSuccess));
         }, (right) {
           //showInSnackBar(context, ("Login Successs!!"));
-          print(right.toString());
-          emit(state.copyWith(status: FormzStatus.submissionSuccess));
+          print('right');
+          emit(state.copyWith(status: FormzStatus.submissionFailure));
 
           //return (right);
         });
