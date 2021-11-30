@@ -45,13 +45,13 @@ class AuthenticationBloc
     print('changed status ${event.status}');
     switch (event.status) {
       case AuthenticationStatus.unauthenticated:
-        return emit(const AuthenticationState.unauthenticated());
+        return emit(AuthenticationState.unauthenticated(TokenPair.empty()));
       case AuthenticationStatus.authenticated:
         print("999999999999999999999999999999999999999999999999999999999999" +
             event.tokenPair!.tokenId);
         if (event.tokenPair!.tokenId == '') {
           print('TokinId is Empty');
-          return emit(const AuthenticationState.unauthenticated());
+          return emit(AuthenticationState.unauthenticated(TokenPair.empty()));
         }
         final user = await _tryGetUser(event.tokenPair!.tokenId);
         // print('try to Get User id : ${user.id}');
@@ -67,7 +67,7 @@ class AuthenticationBloc
           return emit(AuthenticationState.authenticated(event.tokenPair!));
         } else {
           print('unauthenticated--------------------');
-          return emit(const AuthenticationState.unauthenticated());
+          return emit(AuthenticationState.unauthenticated(TokenPair.empty()));
         }
 
       default:
