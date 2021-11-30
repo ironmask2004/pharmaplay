@@ -24,4 +24,14 @@ class TokenPair {
 
   factory TokenPair.fromJson(String source) =>
       TokenPair.fromMap(json.decode(source));
+
+  factory TokenPair.empty() {
+    return TokenPair(
+      '',
+      '',
+    );
+  }
+  bool isEmpty() {
+    return (tokenId == '' && refreshToken == '');
+  }
 }

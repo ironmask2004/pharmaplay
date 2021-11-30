@@ -17,5 +17,5 @@ class AuthRepoState extends Equatable {
   final TokenPair? tokenPair;
 
   @override
-  List<Object> get props => [status, tokenPair!];
+  List<Object> get props => [status, tokenPair ?? (TokenPair.empty())];
 }

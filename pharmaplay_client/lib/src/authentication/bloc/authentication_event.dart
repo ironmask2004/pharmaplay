@@ -14,7 +14,7 @@ class AuthenticationStatusChanged extends AuthenticationEvent {
   final TokenPair? tokenPair;
 
   @override
-  List<Object> get props => [status, tokenPair!];
+  List<Object> get props => [status, tokenPair ?? TokenPair.empty()];
 }
 
 class AuthenticationLogoutRequested extends AuthenticationEvent {}

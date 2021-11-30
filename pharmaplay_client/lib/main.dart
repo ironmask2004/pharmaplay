@@ -12,6 +12,7 @@ Future<void> main() async {
       await MySharedPreferences.instance.getStringValue("refreshToken");
 
   TokenPair _tokenPair = TokenPair(tokenId, refreshToken);
+  print('Token Saved Pair:' + _tokenPair.toJson().toString());
   print(loggedinFlag);
 
   runApp(App(

@@ -11,11 +11,11 @@ class AuthenticationState extends Equatable {
             status: AuthenticationStatus.authenticated, tokenPair: tokenPair);
 
   const AuthenticationState.unauthenticated()
-      : this._(status: AuthenticationStatus.unauthenticated);
+      : this._(status: AuthenticationStatus.unauthenticated, tokenPair: null);
 
   final AuthenticationStatus status;
   final TokenPair? tokenPair;
 
   @override
-  List<Object> get props => [status, tokenPair!];
+  List<Object> get props => [status, tokenPair ?? TokenPair.empty()];
 }

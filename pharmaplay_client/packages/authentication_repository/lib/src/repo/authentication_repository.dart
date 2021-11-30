@@ -35,10 +35,13 @@ class AuthenticationRepository {
   Stream<AuthRepoState> get status async* {
     //bool loggedinFlag = await MySharedPreferences.instance.getBooleanValue("loggedin");
     if (loggedinFlag) {
+      print('loggedinFlag is true');
       yield AuthRepoState.authenticated(tokenPair);
     } else {
+      print('loggedinFlag is false');
       yield AuthRepoState.unauthenticated();
     }
+    print('yield* _controller.stream');
     yield* _controller.stream;
   }
 
@@ -83,4 +86,4 @@ class AuthenticationRepository {
   void dispose() => _controller.close();
 }
 
-mixin _email {}
+//mixin _email {}

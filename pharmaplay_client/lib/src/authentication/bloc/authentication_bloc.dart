@@ -18,23 +18,22 @@ class AuthenticationBloc
         _userRepository = userRepository,
         super(const AuthenticationState.unknown()) {
     on<AuthenticationLandingRequested>(_onAuthenticationLandingRequested);
-
     on<AuthenticationStatusChanged>(_onAuthenticationStatusChanged);
     on<AuthenticationLogoutRequested>(_onAuthenticationLogoutRequested);
 
-    AuthRepoStateubscription = _authenticationRepository.status.listen(
-      (status) =>
-          add(AuthenticationStatusChanged(status.status, status.tokenPair)),
+    authRepoStateubscription = _authenticationRepository.status.listen(
+      (status) => add(AuthenticationStatusChanged(
+          status.status, status.tokenPair ?? TokenPair.empty())),
     );
   }
 
   final AuthenticationRepository _authenticationRepository;
   final UserRepository _userRepository;
-  late StreamSubscription<AuthRepoState> AuthRepoStateubscription;
+  late StreamSubscription<AuthRepoState> authRepoStateubscription;
 
   @override
   Future<void> close() {
-    AuthRepoStateubscription.cancel();
+    authRepoStateubscription.cancel();
     _authenticationRepository.dispose();
     return super.close();
   }
@@ -43,12 +42,17 @@ class AuthenticationBloc
     AuthenticationStatusChanged event,
     Emitter<AuthenticationState> emit,
   ) async {
+    print('changed status ${event.status}');
     switch (event.status) {
       case AuthenticationStatus.unauthenticated:
         return emit(const AuthenticationState.unauthenticated());
       case AuthenticationStatus.authenticated:
         print("999999999999999999999999999999999999999999999999999999999999" +
             event.tokenPair!.tokenId);
+        if (event.tokenPair!.tokenId == '') {
+          print('TokinId is Empty');
+          return emit(const AuthenticationState.unauthenticated());
+        }
         final user = await _tryGetUser(event.tokenPair!.tokenId);
         // print('try to Get User id : ${user.id}');
         if (user!.id != null) {
@@ -81,18 +85,20 @@ class AuthenticationBloc
     MySharedPreferences.instance.removeValue("refreshToken");
     //MySharedPreferences.instance.setStringValue("password", getPassword);
     MySharedPreferences.instance.setBooleanValue("loggedin", false);
+    print('LOOOOOOgOOOOOUT!! ---- outttt');
   }
 
   void _onAuthenticationLandingRequested(
     AuthenticationLandingRequested event,
     Emitter<AuthenticationState> emit,
   ) async {
-    print('Start LAnding');
+    print('Start LAnding 11');
     // var userId = await MySharedPreferences.instance.getStringValue("user_id");
     //MySharedPreferences.instance.setStringValue("password", getPassword);
     bool logFlag =
         await MySharedPreferences.instance.getBooleanValue("loggedin");
     if (logFlag) {
+      print('Start LAnding 10000');
       String tokenId =
           await MySharedPreferences.instance.getStringValue("tokenId");
       String refreshToken =
@@ -101,13 +107,19 @@ class AuthenticationBloc
       TokenPair _tokenPair = TokenPair(tokenId, refreshToken);
       print('TokenPair: ${_tokenPair.tokenId}  ${_tokenPair.refreshToken} ');
 
-      try {
-        await _authenticationRepository.logInByID(tokenPair: _tokenPair);
-        emit(AuthenticationState.authenticated((_tokenPair)));
+      if (_tokenPair.isEmpty()) {
+        print('Start LAnding 22');
+        print('TokenPair: isEmpty');
+        // emit(const AuthenticationState.unknown());
+      } else {
+        try {
+          await _authenticationRepository.logInByID(tokenPair: _tokenPair);
+          emit(AuthenticationState.authenticated((_tokenPair)));
 
-        // emit();
-      } catch (_) {
-        emit(const AuthenticationState.unknown());
+          // emit();
+        } catch (_) {
+          emit(const AuthenticationState.unknown());
+        }
       }
 /*
       final user = await _tryGetUser(userId: userId);
@@ -119,6 +131,7 @@ class AuthenticationBloc
         return emit(const AuthenticationState.unknown());
       }*/
     }
+    print('Start LAnding 33');
   }
 
   Future<User00?> _tryGetUser(String userId) async {
