@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:authentication_repository/authentication_repository.dart';
+import 'package:dartz/dartz.dart' as dartz;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:pharmaplay_client/src/utlites/shared_pref.dart';
@@ -53,7 +54,11 @@ class AuthenticationBloc
           print('TokinId is Empty');
           return emit(AuthenticationState.unauthenticated(TokenPair.empty()));
         }
-        final user = await _tryGetUser(event.tokenPair!.tokenId);
+        User? user = await _tryGetUser(event.tokenPair!.tokenId);
+        print('Get user returnd 9999999');
+        print(user.toString());
+        print('Get user returnd 00000000');
+
         // print('try to Get User id : ${user.id}');
         if (user!.id != null) {
           MySharedPreferences.instance
@@ -134,18 +139,31 @@ class AuthenticationBloc
     print('Start LAnding 33');
   }
 
-  Future<User00?> _tryGetUser(String userId) async {
+  Future<User?> _tryGetUser(String userId) async {
+    print(
+        'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxx User Id to try get :$userId');
+
+    final _getUserByIdResponse;
+
     try {
-      final user;
-      print(
-          'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxx User Id to try get :$userId');
+      _getUserByIdResponse = await _userRepository.getUserById(tokenId: userId);
 
-      user = await _userRepository.getUser(userId);
+      return _getUserByIdResponse.fold((left) {
+        print('left33');
+        // return (left);
+        print(left.toJson().toString());
 
-      return user;
-    } catch (_err) {
-      print('Eroror Happend: ' + _err.toString());
-      return null;
+        print(left.toString());
+        return (left);
+      }, (right) {
+        //showInSnackBar(context, ("Login Successs!!"));
+        print('right');
+        return (null);
+      });
+    } catch (err) {
+      print('Error connectiing to server ' + err.toString());
+      rethrow;
+      // showInSnackBar(context, err.toString());
     }
   }
 }

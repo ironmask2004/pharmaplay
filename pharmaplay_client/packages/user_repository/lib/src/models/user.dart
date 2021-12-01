@@ -55,7 +55,6 @@ class User extends Equatable {
   final String password;
   final String salt;
   final DateTime createdate;
-
   final DateTime updatedate;
   @JsonKey(unknownEnumValue: UserStatus.needVerify)
   final UserStatus status;

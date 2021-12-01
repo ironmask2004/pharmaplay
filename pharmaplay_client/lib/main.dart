@@ -18,6 +18,6 @@ Future<void> main() async {
   runApp(App(
     authenticationRepository: AuthenticationRepository(
         loggedinFlag, _tokenPair, 'pharmaplay.mywire.org:9093'),
-    userRepository: UserRepository(),
+    userRepository: UserRepository('pharmaplay.mywire.org:9093'),
   ));
 }
