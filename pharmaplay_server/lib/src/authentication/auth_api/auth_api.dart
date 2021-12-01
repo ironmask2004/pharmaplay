@@ -51,7 +51,10 @@ class AuthApi {
     router.post('/logout', (Request req) async {
       if (req.context['authDetails'] == null) {
         return Response.forbidden(
-            '"{ "error" : "Not authorised to perform this operation."  ,  "errorNo" : "403"}');
+            responseErrMsg(' Not authorised to perform this operation.', "403"),
+            headers: {
+              'content-type': 'application/json',
+            });
       }
       final auth = req.context['authDetails'];
 
@@ -63,7 +66,10 @@ class AuthApi {
     router.post('/logout/othersessions', (Request req) async {
       if (req.context['authDetails'] == null) {
         return Response.forbidden(
-            '"{ "error" : "Not authorised to perform this operation."  ,  "errorNo" : "403"}');
+            responseErrMsg(' Not authorised to perform this operation.', "403"),
+            headers: {
+              'content-type': 'application/json',
+            });
       }
 
       final auth = req.context['authDetails'];
@@ -89,7 +95,10 @@ class AuthApi {
     router.post('/logout/allsessions', (Request req) async {
       if (req.context['authDetails'] == null) {
         return Response.forbidden(
-            '"{ "error" : "Not authorised to perform this operation."  ,  "errorNo" : "403"}');
+            responseErrMsg(' Not authorised to perform this operation.', "403"),
+            headers: {
+              'content-type': 'application/json',
+            });
       }
 
       final auth = req.context['authDetails'];
@@ -123,7 +132,10 @@ class AuthApi {
     router.post('/password/change', (Request req) async {
       if (req.context['authDetails'] == null) {
         return Response.forbidden(
-            '"{ "error" : "Not authorised to perform this operation."  ,  "errorNo" : "403"}');
+            responseErrMsg(' Not authorised to perform this operation.', "403"),
+            headers: {
+              'content-type': 'application/json',
+            });
       }
       final payload = await req.readAsString();
 
@@ -253,7 +265,10 @@ class AuthApi {
       dynamic result;
       if (req.context['authDetails'] == null) {
         return Response.forbidden(
-            '"{ "error" : "Not authorised to perform this operation."  ,  "errorNo" : "403"}');
+            responseErrMsg(' Not authorised to perform this operation.', "403"),
+            headers: {
+              'content-type': 'application/json',
+            });
       }
       final auth = req.context['authDetails'];
       try {
@@ -277,7 +292,10 @@ class AuthApi {
     router.post('/unregister/', (Request req) async {
       if (req.context['authDetails'] == null) {
         return Response.forbidden(
-            '"{ "error" : "Not authorised to perform this operation."  ,  "errorNo" : "403"}');
+            responseErrMsg(' Not authorised to perform this operation.', "403"),
+            headers: {
+              'content-type': 'application/json',
+            });
       }
       final auth = req.context['authDetails'];
       final authDetails = req.context['authDetails'] as JWT;

@@ -62,11 +62,15 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           print('left');
           // return (left);
           print(left.toJson().toString());
-          emit(state.copyWith(status: FormzStatus.submissionSuccess));
+          emit(state.copyWith(
+              status: FormzStatus.submissionSuccess,
+              errMsg: left.toJson().toString()));
         }, (right) {
           //showInSnackBar(context, ("Login Successs!!"));
           print('right');
-          emit(state.copyWith(status: FormzStatus.submissionFailure));
+          emit(state.copyWith(
+              status: FormzStatus.submissionFailure,
+              errMsg: right.toJson().toString()));
 
           //return (right);
         });

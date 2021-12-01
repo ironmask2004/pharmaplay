@@ -64,6 +64,7 @@ class AuthenticationRepository {
       }, (right) {
         _controller.add(AuthRepoState.unauthenticated(TokenPair.empty()));
         print('right');
+        print(right.toJson().toString());
         return dartz.right(right as ApiError);
       });
     } catch (err) {

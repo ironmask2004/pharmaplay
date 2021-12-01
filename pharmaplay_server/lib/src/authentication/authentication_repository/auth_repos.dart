@@ -424,7 +424,7 @@ Future<Response> userLogin(var userRequestInfo, DB db, String authStore,
         "tokenId": tokenPair.tokenId,
         "refreshToken": tokenPair.refreshToken
       },
-      "reqResult": {
+      "requestResult": {
         "error": "Suucess",
         "errNO": "200",
       }
@@ -452,7 +452,10 @@ Future<Response> userLogout(
     var auth, String authStore, DB db, TokenService tokenService) async {
   if (auth == null) {
     return Response.forbidden(
-        '"{ "error" : "Not authorised to perform this operation."  ,  "errorNo" :  "403" }");');
+        responseErrMsg(' Not authorised to perform this operation.', "403"),
+        headers: {
+          'content-type': 'application/json',
+        });
   }
 
   final userId = ((auth as JWT)).subject.toString();

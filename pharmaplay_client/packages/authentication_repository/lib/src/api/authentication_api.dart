@@ -25,29 +25,32 @@ Future<dartz.Either<ApiResponse, ApiError>> loginUser(
         await http.post(_url, headers: _headers, body: _json);
 
     print(response.body.toString() +
-        'error No:' +
+        '    ==== error No:' +
         response.statusCode.toString());
+
+    final _responseMap = json.decode(response.body);
+    final _reqResultMap = _responseMap['requestResult'];
+    print(_reqResultMap.toString());
 
     if (response.statusCode == 200) {
       print('202020202020');
-      final _responseMap = json.decode(response.body);
       print(_responseMap);
-      final _reqResultMap = _responseMap['reqResult'];
 
       print(_reqResultMap);
-
       _apiResponse.Data = _responseMap['tokenInfo'];
       print('----------------------' + _apiResponse.Data.toString());
 
-      _apiResponse.ApiError = ApiError(error: 'sucess', errorNo: '200');
+      _apiResponse.ApiError = ApiError(error: 'Login Success', errorNo: '200');
       //    ApiError.fromJson(json.decode(_reqResultMap.toString()));
 
       print('response error' + _apiResponse.ApiError.toString());
       return dartz.left(_apiResponse);
     } else {
-      print('4345654345678p-098765434567890-09876');
+      print('4345654345678p-098765434567890-09876' +
+          _responseMap['requestResult'].toString());
+
       _apiError = ApiError(
-          error: "Server error. Please retry",
+          error: _responseMap['requestResult']['error'].toString(),
           errorNo: response.statusCode.toString());
       print('0000000000000000000000000000');
       return dartz.right(_apiError);
