@@ -11,7 +11,6 @@ dependencies:
   dartz: ^0.10.0
   equatable: ^2.0.3
   json_annotation: ^4.3.0
-  json_serializable: ^6.0.0
   objectid: ^2.0.0
   postgres: ^2.4.2
   shelf: ^1.2.0
@@ -22,6 +21,7 @@ dev_dependencies:
   dotenv: ^3.0.0
   email_validator: ^2.0.1
   http: ^0.13.4
+  json_serializable: ^6.1.1
   lints: ^1.0.0
   mailer: ^5.0.2
   redis: ^2.2.0
