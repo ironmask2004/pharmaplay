@@ -7,6 +7,8 @@ import 'package:shelf/shelf.dart';
 import 'package:crypto/crypto.dart';
 import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
 
+import 'error_response.dart';
+
 Middleware handleCors() {
   const corsHeaders = {
     "Access-Control-Allow-Origin": "*",
@@ -112,7 +114,7 @@ Middleware checkAuthorisation() {
       if (request.context['authDetails'] == null) {
         //return Response.forbidden('Not authorised to perform this action.');
         return Response.forbidden(
-            "{ \"error\" : \"Not authorised to perform this action\"   ,  \"errorNo\" : \"403\" }");
+            responseErrMsg("Not authorised to perform this action", "403"));
       }
       return null;
     },

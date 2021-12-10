@@ -83,12 +83,13 @@ class AuthApi {
         await tokenService.removeOtherRefreshTokenByUserId(tokenId, userId);
       } catch (e) {
         return Response.internalServerError(
-            body:
-                '{ "error" : "There was an issue logging others out. Please check and try again."   ,  "errorNo" : "199991"}');
+            body: responseErrMsg(
+                'There was an issue logging others out. Please check and try again',
+                "199991"));
       }
 
-      return Response.ok(
-          '{ "error" : "Successfully Loggedout other  sessions  for User  "   ,  "errorNo" : "200"}');
+      return Response.ok(responseErrMsg(
+          "Successfully Loggedout other  sessions  for User  ", "200"));
     });
 
 // ================== authrizee / logout All Sessions  route ================//
@@ -109,8 +110,9 @@ class AuthApi {
         await changeUserStatus(userId, UserStatus.loggedOut, authStore, db);
       } catch (e) {
         return Response.internalServerError(
-            body:
-                '{ "error" : " There was a problem change status to  loggedOut. Please try again. ${e.toString()}", "errorNo" : "199991"}');
+            body: responseErrMsg(
+                'There was a problem change status to  loggedOut. Please try again. ${e.toString()}',
+                '199991'));
       }
 
       try {
@@ -119,12 +121,13 @@ class AuthApi {
         await tokenService.removeAllRefreshTokenByUserId(userId);
       } catch (e) {
         return Response.internalServerError(
-            body:
-                '{ "error" : "There was an issue logging out. Please check and try again."   ,  "errorNo" : "199991"}');
+            body: responseErrMsg(
+                "There was an issue logging out. Please check and try again.",
+                '199991'));
       }
 
-      return Response.ok(
-          '{ "error" : "Successfully Loggedout from All USer sessions  "   ,  "errorNo" : "200"}');
+      return Response.ok(responseErrMsg(
+          "Successfully Loggedout from All USer sessions  ", "200"));
     });
 
     ///----------------------- Change PAssword  ----------/
@@ -146,7 +149,7 @@ class AuthApi {
       final userId = ((auth as JWT)).subject.toString();
       if (userInfo['password'] == null) {
         return Response.forbidden(
-            '"{ "error" : " New PAssword need to be provided!!."  ,  "errorNo" : "403" }');
+            responseErrMsg(" New PAssword need to be provided!!.", "403"));
       }
       User oldUserInfo = await findUserByID(userId, db, authStore);
 
@@ -173,8 +176,9 @@ class AuthApi {
       if (resault == 0) {
         throw ('No Password  Changed!!!');
       } else {
-        return Response.ok(
-            '{ "error" : "Successfully password Changed  you may need to signout All USer sessions  "   ,  "errorNo" : "200"}');
+        return Response.ok(responseErrMsg(
+            "Successfully password Changed  you may need to signout All USer sessions  ",
+            "200"));
       }
     });
 
@@ -219,11 +223,9 @@ class AuthApi {
 
         print("founded_user------:" + userInfo.toString());
       } catch (err) {
-        return Response.forbidden(
-            '{"requestResult": {"error": "$err", "errNO": "9004"}',
-            headers: {
-              'content-type': 'application/json',
-            });
+        return Response.forbidden(responseErrMsg("$err", "9004"), headers: {
+          'content-type': 'application/json',
+        });
       }
       final randomPasswd = RandomCode.randomdString(8);
       print(randomPasswd);
@@ -255,8 +257,9 @@ class AuthApi {
           rethrow;
         }
 
-        return Response.ok(
-            '{ "error" : "Successfully password reseted and cent to you By Email    Go and SignIn now with new passwd "   ,  "errorNo" : "200"}');
+        return Response.ok(responseErrMsg(
+            "Successfully password reseted and cent to you By Email    Go and SignIn now with new passwd ",
+            "200"));
       }
     });
 
@@ -277,8 +280,9 @@ class AuthApi {
         result = await tokenService.AllRefreshTokenByScanUserId(userId);
       } catch (err) {
         return Response.internalServerError(
-            body:
-                '{ "error" : "There was an issue getting sessions  out $err. Please check and try again."   ,  "errorNo" : "199991"}');
+            body: responseErrMsg(
+                "There was an issue getting sessions  out $err. Please check and try again.",
+                "199991"));
       }
 
       //var json1 = json.encode(result.toString());
@@ -317,7 +321,8 @@ class AuthApi {
 
       final token = verifyJwt(payloadMap['refreshToken'], secret);
       if (token == null) {
-        return Response(400, body: 'Refresh token is not valid.');
+        return Response(400,
+            body: responseErrMsg('Refresh token is not valid.', '400'));
       }
 
 //-----------------
@@ -329,7 +334,8 @@ class AuthApi {
       final dbToken = await tokenService.getRefreshToken(
           (token as JWT).jwtId.toString(), userId);
       if (dbToken == null) {
-        return Response(400, body: 'Refresh token is not recognised.');
+        return Response(400,
+            body: responseErrMsg('Refresh token is not recognised.', '400'));
       }
 
       // Generate new token pair
@@ -349,8 +355,9 @@ class AuthApi {
         );
       } catch (e) {
         return Response.internalServerError(
-            body:
-                '{ "error" : "There was a problem creating a new token.(${e.toString()}) Please try again."   ,  "errorNo" : "199991"}');
+            body: responseErrMsg(
+                "There was a problem creating a new token.(${e.toString()}) Please try again.",
+                "199991"));
       }
     });
 

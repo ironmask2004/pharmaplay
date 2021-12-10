@@ -2,6 +2,7 @@ import 'package:pharmaplay_server/pharmaplay_server.dart';
 import 'package:pharmaplay_server/src/repository/database_api.dart';
 import 'package:pharmaplay_server/src/user/model/user.dart';
 import 'package:pharmaplay_server/src/user/user_repository/user_repo.dart';
+import 'package:pharmaplay_server/src/utilites/error_response.dart';
 import 'package:pharmaplay_server/src/utilites/random_code.dart';
 
 class UserApi {
@@ -45,7 +46,7 @@ class UserApi {
       sendMail('ironmask2004@gmail.com', 'Veervication Cdoe from Pharma Play',
           'The Code is: ${RandomCode.nextInter()} ');
       return Response.internalServerError(
-          body: '{ "VerCode" : " ؟؟؟-؟؟؟ " , "errorNo" : "199991" }');
+          body: responseErrMsg("VerCode ???-??? ", "199991"));
     });
 
 //============= /users/userstatuslist  ROUTE
@@ -71,11 +72,9 @@ class UserApi {
 
         print("founded_user------:" + userInfo.toString());
       } catch (err) {
-        return Response.forbidden(
-            '{"requestResult": {"error": "$err", "errNO": "9004"}',
-            headers: {
-              'content-type': 'application/json',
-            });
+        return Response.forbidden(responseErrMsg("$err", "9004"), headers: {
+          'content-type': 'application/json',
+        });
       }
 
       final Map<String, dynamic> userWithresault = {
@@ -103,11 +102,9 @@ class UserApi {
 
         print("founded_user------:" + userInfo.toString());
       } catch (err) {
-        return Response.forbidden(
-            '{"requestResult": {"error": "$err", "errNO": "9004"}',
-            headers: {
-              'content-type': 'application/json',
-            });
+        return Response.forbidden(responseErrMsg("$err", "9004"), headers: {
+          'content-type': 'application/json',
+        });
       }
 
       final Map<String, dynamic> userWithresault = {
@@ -160,7 +157,7 @@ class UserApi {
       if (oldUserInfo.email != updatedUserInfo.email) {
         if (!EmailValidator.validate(updatedUserInfo.email)) {
           return Response(HttpStatus.badRequest,
-              body: '{"error" :"Please provide a vaild  Email" }');
+              body: responseErrMsg("Please provide a vaild  Email", '403'));
         }
         sql =
             "SELECT idx  FROM pharmaplay.$authStore WHERE email =  @email  and idx != @idx";
@@ -169,8 +166,9 @@ class UserApi {
 
         if (resultSet.length > 0) {
           print(resultSet.toString());
-          return Response.forbidden(
-              '{"error" :"Email:  $email  was already registerd! with some one else !" , "errorNo" :"403"  }');
+          return Response.forbidden(responseErrMsg(
+              "Email:  $email  was already registerd! with some one else !",
+              "403"));
         }
       }
 
@@ -186,8 +184,9 @@ class UserApi {
         resultSet = await db.query(sql, values: params);
 
         if (resultSet.length > 0) {
-          return Response.forbidden(
-              '{"error" :"User name:  $firstname $lastname  was already takedn for some one else !!" , "errorNo" :"403"  }');
+          return Response.forbidden(responseErrMsg(
+              "User name:  $firstname $lastname  was already takedn for some one else !!",
+              "403"));
         }
       }
 
@@ -198,8 +197,8 @@ class UserApi {
         resultSet = await db.query(sql, values: params);
 
         if (resultSet.length > 0) {
-          return Response.forbidden(
-              '{"error" :"mobile Number:  $mobile  was already taken !!" , "errorNo" :"403"  }');
+          return Response.forbidden(responseErrMsg(
+              "mobile Number:  $mobile  was already taken !!", "403"));
         }
       }
       try {
@@ -212,15 +211,14 @@ class UserApi {
         print(resultSet.first.toString());
         if (resultSet.length == 0) {
           return Response.forbidden(
-              '{"error" :" facing error while updating  user" , "errorNo" :"403"  }');
+              responseErrMsg(' facing error while updating  user', "403"));
         }
       } catch (error) {
         print(' error while Updating  user  ' + error.toString());
         return Response(HttpStatus.badRequest,
-            body: 'error while Updateing  user');
+            body: responseErrMsg('error while Updateing  user', '403'));
       }
-      return Response.ok(
-          '{"error" :"Successfully Updated user"   , "errorNo" :"200" }');
+      return Response.ok(responseErrMsg("Successfully Updated user", "200"));
     });
 
     final handler =

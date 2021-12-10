@@ -67,7 +67,7 @@ Future<dartz.Either<ApiResponse, ApiError>> getUserByTokenId(
     final http.Response response = await client.get(url, headers: _headers);
     final _response = response.statusCode;
     print(response.body.toString());
-    print('kkkkkkkkkkkkkkkkkkkkkkkkkkkk');
+    print('kkkkkkkkkkkkkkkkkkkk');
     final _responseMap = json.decode(response.body);
     final _reqResultMap = _responseMap['requestResult'];
     print(_reqResultMap.toString());

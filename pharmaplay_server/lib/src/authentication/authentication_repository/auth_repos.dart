@@ -203,11 +203,11 @@ Future<Response> createUserWithVerifcationCode(
     // body: 'Please provide your email and password');
 
     return Response.forbidden(
-        '{ "error" : "Please provide your email and password " ,  "errorNo" :  "403"  }');
+        responseErrMsg("Please provide your email and password ", "403"));
   }
   if (!EmailValidator.validate(email)) {
     return Response(HttpStatus.badRequest,
-        body: '"{ "error" : "Please provide a vaild  Email " }"');
+        body: responseErrMsg("Please provide a vaild  Email ", '403'));
   }
 
   print(firstname);
@@ -217,12 +217,12 @@ Future<Response> createUserWithVerifcationCode(
       lastname == null ||
       lastname.isEmpty) {
     return Response.forbidden(
-        '{ "error" : "Please provide your firstname and lastname " ,  "errorNo" :  "403"  }');
+        responseErrMsg("Please provide your firstname and lastname ", "403"));
   }
 
   if (mobile == null || mobile.isEmpty) {
     return Response.forbidden(
-        '{ "error" : "Please provide your Mobile Number!! " ,  "errorNo" :  "403"  }');
+        responseErrMsg("Please provide your Mobile Number!! ", "403"));
   }
   String sql = "SELECT idx  FROM pharmaplay.$authStore WHERE email =  @email ";
   Map<String, dynamic> params = {"email": email};
@@ -230,7 +230,7 @@ Future<Response> createUserWithVerifcationCode(
 
   if (resultSet.length > 0) {
     return Response.forbidden(
-        '{ "error" : "Email:  $email  was already registerd!!" ,  "errorNo" : "403" }');
+        responseErrMsg("Email:  $email  was already registerd!!", "403"));
   }
 
   sql =
@@ -239,8 +239,8 @@ Future<Response> createUserWithVerifcationCode(
   resultSet = await db.query(sql, values: params);
 
   if (resultSet.length > 0) {
-    return Response.forbidden(
-        '{ "error" : "User name:  $firstname $lastname  was already registerd!!" ,  "errorNo" :  "403"  }');
+    return Response.forbidden(responseErrMsg(
+        "User name:  $firstname $lastname  was already registerd!!", "403"));
   }
 
   sql = "SELECT idx  FROM pharmaplay.$authStore WHERE mobile =  @mobile ";
@@ -440,10 +440,9 @@ Future<Response> userLogin(var userRequestInfo, DB db, String authStore,
     print('----------end Login Request--------------');
 
     return Response.internalServerError(
-        body:
-            '{ "error" : " There was a problem logging you in. Please try again." ' +
-                e.toString() +
-                '" , "errorNo" :  "199991" }');
+        body: responseErrMsg(
+            " There was a problem logging you in. Please try again. ${e.toString()}",
+            "199991"));
   }
 }
 
@@ -471,17 +470,17 @@ Future<Response> userLogout(
         await changeUserStatus(userId, UserStatus.loggedOut, authStore, db);
       } catch (e) {
         return Response.internalServerError(
-            body:
-                '{ "error" : " There was a problem change status to  loggedOut  Please try again." ' +
-                    e.toString() +
-                    '" , "errorNo" :  "199991" }');
+            body: responseErrMsg(
+                " There was a problem change status to  loggedOut  Please try again. ${e.toString()}",
+                "199991"));
       }
 //---
     }
   } catch (e) {
     return Response.internalServerError(
-        body:
-            '{ "error" : "There was an issue getting sessions  out $e. Please check and try again."   ,  "errorNo" :  "199991" }');
+        body: responseErrMsg(
+            "There was an issue getting sessions  out $e. Please check and try again.",
+            "199991"));
   }
 
   try {
@@ -491,12 +490,12 @@ Future<Response> userLogout(
         ((auth as JWT)).jwtId.toString(), userId);
   } catch (e) {
     return Response.internalServerError(
-        body:
-            '{ "error" : "There was an issue logging out. Please check and try again."   ,  "errorNo" :  "199991" }');
+        body: responseErrMsg(
+            "There was an issue logging out. Please check and try again.",
+            "199991"));
   }
 
-  return Response.ok(
-      '{ "error" : "Successfully Loggedout user"   ,  "errorNo" :  "200" }');
+  return Response.ok(responseErrMsg("Successfully Loggedout user", "200"));
 }
 
 //=========== User Unrigster ====================//
@@ -513,8 +512,7 @@ userunRegister(var auth, JWT authDetails, String authStore, DB db,
     dynamic resultSet = await db.query(sql, values: params);
 
     if (resultSet.length == 0) {
-      return Response.forbidden(
-          '{ "error" : "Failed to remove user" ,  "errorNo" :  "403"  }');
+      return Response.forbidden(responseErrMsg("Failed to remove user", "403"));
     }
     print(resultSet.first.toString());
 //------------
@@ -523,10 +521,10 @@ userunRegister(var auth, JWT authDetails, String authStore, DB db,
     await tokenService.removeAllRefreshTokenByUserId(userId);
   } catch (e) {
     return Response.internalServerError(
-        body:
-            '{ "error" : "There was an issue unregistering  user. Please check and try again."   ,  "errorNo" :  "199991" }');
+        body: responseErrMsg(
+            "There was an issue unregistering  user. Please check and try again.",
+            "199991"));
   }
 
-  return Response.ok(
-      '{ "error" : "Successfully Unrigested  user "   ,  "errorNo" :  "200" }');
+  return Response.ok(responseErrMsg("Successfully Unrigested  user ", "200"));
 }
