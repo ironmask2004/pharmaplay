@@ -56,11 +56,10 @@ class AuthenticationBloc
         }
         User? user = await _tryGetUser(event.tokenPair!.tokenId);
         print('Get user returnd 9999999');
-        print(user.toString());
-        print('Get user returnd 00000000');
 
         // print('try to Get User id : ${user.id}');
-        if (user!.id != null) {
+        if (user != null) {
+          print(user.toString());
           MySharedPreferences.instance
               .setStringValue("tokenId", event.tokenPair!.tokenId);
           MySharedPreferences.instance
