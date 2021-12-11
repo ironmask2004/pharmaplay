@@ -385,6 +385,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.0.2"
+  login_forms:
+    dependency: "direct main"
+    description:
+      path: "packages/login_forms"
+      relative: true
+    source: path
+    version: "1.0.0+2"
   mailer:
     dependency: "direct dev"
     description:
