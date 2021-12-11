@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pharmaplay_client/src/login/login.dart';
 
+import 'login_forms.dart';
+
 class LoginPage extends StatelessWidget {
   static Route route() {
     return MaterialPageRoute<void>(builder: (_) => LoginPage());
@@ -21,7 +23,7 @@ class LoginPage extends StatelessWidget {
                   RepositoryProvider.of<AuthenticationRepository>(context),
             );
           },
-          child: LoginForm(),
+          child: MyLoginForm(), // LoginForm(),
         ),
       ),
     );

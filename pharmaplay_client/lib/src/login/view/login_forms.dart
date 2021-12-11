@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:login_forms/login_forms.dart';
 
-void main1() => runApp(MyApp());
-
-class MyApp extends StatefulWidget {
+class MyLoginForm extends StatefulWidget {
   @override
   _MyAppState createState() => _MyAppState();
 }
@@ -16,7 +14,7 @@ enum _State {
   create,
 }
 
-class _MyAppState extends State<MyApp> {
+class _MyAppState extends State<MyLoginForm> {
   late LoginFormsStyle style;
   _State state = _State.signIn;
 
@@ -157,7 +155,7 @@ class _MyAppState extends State<MyApp> {
       ),
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Flutter Login Template'),
+          title: const Text('Flutter Login Forms'),
         ),
         body: SingleChildScrollView(
           child: body,
