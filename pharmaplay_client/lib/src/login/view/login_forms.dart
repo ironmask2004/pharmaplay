@@ -17,12 +17,12 @@ enum _State {
   signUp,
   forgot,
   confirm,
-  confirmSignup,
   create,
 }
 
 class _MyAppState extends State<MyLoginForm> {
   late LoginFormsStyle style;
+  bool backfromSighUp = false;
   _State state = _State.signIn;
 
   @override
@@ -45,7 +45,7 @@ class _MyAppState extends State<MyLoginForm> {
       onPressedSignIn: () {
         context.read<LoginBloc>().add(const LoginSubmitted());
       },
-      onChangedUser: (email) =>
+      onChangedEmail: (email) =>
           context.read<LoginBloc>().add(LoginEmailChanged(email)),
       onChangedPassword: (password) =>
           context.read<LoginBloc>().add(LoginPasswordChanged(password)),
@@ -143,6 +143,7 @@ class _MyAppState extends State<MyLoginForm> {
     Widget body;
     switch (state) {
       case _State.signUp:
+        backfromSighUp = true;
         body = signUpPage;
         break;
       case _State.forgot:
@@ -152,7 +153,12 @@ class _MyAppState extends State<MyLoginForm> {
         body = confirmCodePage;
         break;
       case _State.create:
-        body = createPassword;
+        if (backfromSighUp) {
+          backfromSighUp = false;
+          body = signInPage;
+        } else {
+          body = createPassword;
+        }
         break;
       case _State.signIn:
       default:

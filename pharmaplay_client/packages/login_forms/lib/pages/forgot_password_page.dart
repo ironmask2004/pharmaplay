@@ -49,13 +49,13 @@ class LoginFormsForgotPasswordPage extends StatelessWidget {
     required this.onPressedNext,
     this.textInputActionUser: TextInputAction.next,
     this.keyboardTypeUser: TextInputType.emailAddress,
-    this.hintTextUser: 'Email / Phone number',
+    this.hintTextUser: 'Email',
     this.errorTextUser,
     this.inputFormattersUser,
     this.onTapUser,
     this.controllerUser,
     this.textMessage:
-        'Enter the email or phone number associated with your account and we will send an introductions to reset your password.',
+        'Enter the email associated with your account and we will send an introductions to reset your password.',
   }) : super(key: key);
 
   @override
