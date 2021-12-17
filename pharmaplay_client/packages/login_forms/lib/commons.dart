@@ -592,6 +592,9 @@ class LoginFormsTextField extends StatelessWidget {
   /// See onTap in [TextField]
   final Function()? onTap;
 
+  /// See onChanged in [TextField]
+  final Function(String)? onChanged;
+
   /// See controller in [TextEditingController]
   final TextEditingController? controller;
 
@@ -604,6 +607,7 @@ class LoginFormsTextField extends StatelessWidget {
     this.errorText,
     this.inputFormatters,
     this.onTap,
+    this.onChanged,
     this.controller,
   }) : super(key: key);
 
@@ -636,6 +640,7 @@ class LoginFormsTextField extends StatelessWidget {
             cursorColor: style.primary,
             inputFormatters: inputFormatters,
             onTap: onTap,
+            onChanged: onChanged,
             controller: controller,
             decoration: InputDecoration(
               hintText: hintText,

@@ -1,5 +1,11 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:login_forms/login_forms.dart';
+
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:formz/formz.dart';
+import 'package:pharmaplay_client/src/login/login.dart';
 
 class MyLoginForm extends StatefulWidget {
   @override
@@ -35,7 +41,13 @@ class _MyAppState extends State<MyLoginForm> {
     var signInPage = LoginFormsSignInPage(
       logo: logo,
       style: style,
-      onPressedSignIn: () {},
+      onPressedSignIn: () {
+        context.read<LoginBloc>().add(const LoginSubmitted());
+      },
+      onChangedUser: (email) =>
+          context.read<LoginBloc>().add(LoginEmailChanged(email)),
+      onChangedPassword: (password) =>
+          context.read<LoginBloc>().add(LoginPasswordChanged(password)),
       onPressedSignUp: () {
         setState(() {
           state = _State.signUp;
@@ -147,11 +159,11 @@ class _MyAppState extends State<MyLoginForm> {
         break;
     }
 
+/*
     return MaterialApp(
-      title: 'Example',
+      title: 'PharmaPlay',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-        accentColor: Colors.orangeAccent,
+        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue).copyWith(secondary: Colors.orangeAccent),
       ),
       home: Scaffold(
         appBar: AppBar(
@@ -159,7 +171,22 @@ class _MyAppState extends State<MyLoginForm> {
         ),
         body: SingleChildScrollView(
           child: body,
+      ),
         ),
+    );*/
+
+    return BlocListener<LoginBloc, LoginState>(
+      listener: (context, state) {
+        if (state.status.isSubmissionFailure) {
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(
+              SnackBar(content: Text('-- Login Failed: ${state.errMsg}--')),
+            );
+        }
+      },
+      child: SingleChildScrollView(
+        child: body,
       ),
     );
   }
