@@ -17,6 +17,7 @@ enum _State {
   signUp,
   forgot,
   confirm,
+  confirmSignup,
   create,
 }
 
