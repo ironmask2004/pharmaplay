@@ -28,3 +28,43 @@ class LoginPasswordChanged extends LoginEvent {
 class LoginSubmitted extends LoginEvent {
   const LoginSubmitted();
 }
+
+class LoginFirstNameChanged extends LoginEvent {
+  const LoginFirstNameChanged(this.firstName);
+
+  final String firstName;
+
+  @override
+  List<Object> get props => [firstName];
+}
+
+class LoginLastNameChanged extends LoginEvent {
+  const LoginLastNameChanged(this.lastName);
+
+  final String lastName;
+
+  @override
+  List<Object> get props => [lastName];
+}
+
+class LoginConfirmPasswordChanged extends LoginEvent {
+  const LoginConfirmPasswordChanged(this.confirmPassword);
+
+  final String confirmPassword;
+
+  @override
+  List<Object> get props => [confirmPassword];
+}
+
+class LoginMobileChanged extends LoginEvent {
+  const LoginMobileChanged(this.mobile);
+
+  final String mobile;
+
+  @override
+  List<Object> get props => [mobile];
+}
+
+class SignUpSubmitted extends LoginEvent {
+  const SignUpSubmitted();
+}

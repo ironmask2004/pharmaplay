@@ -46,6 +46,7 @@ class LoginFormsSignUpPage extends StatelessWidget {
 
   /// Use for the TextField lets the emails input their email or phone number. See also [LoginFormsTextField]
   final Function()? onTapEmail;
+  final Function(String)? onchangeEmail;
 
   /// Use for the TextField lets the emails input their email or phone number. See also [LoginFormsTextField]
   final TextEditingController? controllerEmail;
@@ -179,6 +180,7 @@ class LoginFormsSignUpPage extends StatelessWidget {
     this.errorTextEmail,
     this.inputFormattersEmail,
     this.onTapEmail,
+    this.onchangeEmail,
     this.controllerEmail,
     this.textInputActionFirstName: TextInputAction.done,
     this.keyboardTypeFirstName: TextInputType.name,
@@ -297,6 +299,7 @@ class LoginFormsSignUpPage extends StatelessWidget {
               hintText: hintTextEmail,
               controller: controllerEmail,
               onTap: onTapEmail,
+              onChanged: onchangeEmail,
               errorText: errorTextEmail,
               inputFormatters: inputFormattersEmail,
             ),

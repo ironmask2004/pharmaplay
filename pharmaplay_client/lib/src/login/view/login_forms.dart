@@ -97,10 +97,25 @@ class _MyAppState extends State<MyLoginForm> {
         });
       },
       onPressedSignUp: () {
+        context.read<LoginBloc>().add(const SignUpSubmitted());
+
         setState(() {
           state = _State.confirm;
         });
       },
+      onChangeFirstName: (firstName) =>
+          context.read<LoginBloc>().add(LoginFirstNameChanged(firstName)),
+      onChangeLastName: (lastName) =>
+          context.read<LoginBloc>().add(LoginLastNameChanged(lastName)),
+      onChangeMobile: (mobile) =>
+          context.read<LoginBloc>().add(LoginMobileChanged(mobile)),
+      onchangeEmail: (email) =>
+          context.read<LoginBloc>().add(LoginEmailChanged(email)),
+      onChangePassword: (password) =>
+          context.read<LoginBloc>().add(LoginPasswordChanged(password)),
+      onChangeConfirmPassword: (confirmPassword) => context
+          .read<LoginBloc>()
+          .add(LoginConfirmPasswordChanged(confirmPassword)),
       term: LoginFormsTerm(
         style: style,
         onPressedTermOfService: () {},
