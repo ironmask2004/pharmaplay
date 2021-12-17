@@ -90,7 +90,7 @@ class LoginFormsSignInPage extends StatelessWidget {
     required this.style,
     this.textInputActionUser: TextInputAction.next,
     this.keyboardTypeUser: TextInputType.emailAddress,
-    this.hintTextUser: 'User name / Email / Phone number',
+    this.hintTextUser: 'Email',
     this.errorTextUser,
     this.inputFormattersUser,
     this.onTapUser,
