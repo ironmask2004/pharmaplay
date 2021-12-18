@@ -98,10 +98,17 @@ class _MyAppState extends State<MyLoginForm> {
       },
       onPressedSignUp: () {
         context.read<LoginBloc>().add(const SignUpSubmitted());
+        print(context.read<LoginBloc>().state.status.toString());
+        if (context.read<LoginBloc>().state.status.isInvalid) {
+          print(context.read<LoginBloc>().state.status.toString());
+        } else {
+          print(context.read<LoginBloc>().state.status.toString());
 
-        setState(() {
-          state = _State.confirm;
-        });
+          setState(() {
+            state = _State.confirm;
+          });
+        }
+        ;
       },
       onChangeFirstName: (firstName) =>
           context.read<LoginBloc>().add(LoginFirstNameChanged(firstName)),

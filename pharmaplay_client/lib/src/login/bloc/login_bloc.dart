@@ -175,7 +175,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       final dartz.Either<TokenPair, ApiError> _repoResponse;
       print('_SignUpSubmitted');
       print(state.toString());
-      emit(state.copyWith(status: FormzStatus.submissionSuccess, errMsg: ''));
+      emit(state.copyWith(
+          status: FormzStatus.submissionFailure, errMsg: state.toString()));
 
       /* try {
         //TokenPair _tokenInfo;
