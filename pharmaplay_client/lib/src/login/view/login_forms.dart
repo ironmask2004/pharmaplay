@@ -100,7 +100,7 @@ class _MyAppState extends State<MyLoginForm> {
         context.read<LoginBloc>().add(const SignUpSubmitted());
         do {
           print(context.read<LoginBloc>().state.status.toString());
-          await Future.delayed(const Duration(seconds: 1), () {});
+          await Future.delayed(const Duration(seconds: 1), () {}); // ======
         } while (context.read<LoginBloc>().state.status ==
             FormzStatus.submissionInProgress);
 
