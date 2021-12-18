@@ -96,11 +96,17 @@ class _MyAppState extends State<MyLoginForm> {
           state = _State.signIn;
         });
       },
-      onPressedSignUp: () {
+      onPressedSignUp: () async {
         context.read<LoginBloc>().add(const SignUpSubmitted());
-        print(context.read<LoginBloc>().state.status.toString());
-        if (context.read<LoginBloc>().state.status.isInvalid) {
+        do {
           print(context.read<LoginBloc>().state.status.toString());
+          await Future.delayed(const Duration(seconds: 1), () {});
+        } while (context.read<LoginBloc>().state.status ==
+            FormzStatus.submissionInProgress);
+
+        if (context.read<LoginBloc>().state.status.isSubmissionFailure) {
+          print(' Failed SignUp: ' +
+              context.read<LoginBloc>().state.status.toString());
         } else {
           print(context.read<LoginBloc>().state.status.toString());
 
@@ -111,18 +117,18 @@ class _MyAppState extends State<MyLoginForm> {
         ;
       },
       onChangeFirstName: (firstName) =>
-          context.read<LoginBloc>().add(LoginFirstNameChanged(firstName)),
+          context.read<LoginBloc>().add(SignUpFirstNameChanged(firstName)),
       onChangeLastName: (lastName) =>
-          context.read<LoginBloc>().add(LoginLastNameChanged(lastName)),
+          context.read<LoginBloc>().add(SignUpLastNameChanged(lastName)),
       onChangeMobile: (mobile) =>
-          context.read<LoginBloc>().add(LoginMobileChanged(mobile)),
+          context.read<LoginBloc>().add(SignUpMobileChanged(mobile)),
       onchangeEmail: (email) =>
-          context.read<LoginBloc>().add(LoginEmailChanged(email)),
+          context.read<LoginBloc>().add(SignUpEmailChanged(email)),
       onChangePassword: (password) =>
-          context.read<LoginBloc>().add(LoginPasswordChanged(password)),
+          context.read<LoginBloc>().add(SignUpPasswordChanged(password)),
       onChangeConfirmPassword: (confirmPassword) => context
           .read<LoginBloc>()
-          .add(LoginConfirmPasswordChanged(confirmPassword)),
+          .add(SignUpConfirmPasswordChanged(confirmPassword)),
       term: LoginFormsTerm(
         style: style,
         onPressedTermOfService: () {},
@@ -210,7 +216,7 @@ class _MyAppState extends State<MyLoginForm> {
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(
-              SnackBar(content: Text('-- Login Failed: ${state.errMsg}--')),
+              SnackBar(content: Text('Operation  Failed: ${state.errMsg}')),
             );
         }
       },

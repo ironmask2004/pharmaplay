@@ -13,24 +13,25 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     required AuthenticationRepository authenticationRepository,
   })  : _authenticationRepository = authenticationRepository,
         super(const LoginState()) {
-    on<LoginFirstNameChanged>(_onLoginFirstNameChanged);
-    on<LoginLastNameChanged>(_onLoginLastNameChanged);
-    on<LoginMobileChanged>(_onLoginMobileChanged);
-    on<LoginConfirmPasswordChanged>(_onLoginConfirmPasswordChanged);
-
-    on<LoginEmailChanged>(_onEmailChanged);
-    on<LoginPasswordChanged>(_onPasswordChanged);
-    on<LoginSubmitted>(_onSubmitted);
-    on<SignUpSubmitted>(_SignUpSubmitted);
+    on<SignUpFirstNameChanged>(_onSignUpFirstNameChanged);
+    on<SignUpLastNameChanged>(_onSignUpLastNameChanged);
+    on<SignUpMobileChanged>(_onSignUpMobileChanged);
+    on<SignUpEmailChanged>(_onSignUpEmailChanged);
+    on<SignUpPasswordChanged>(_onSignUpPasswordChanged);
+    on<SignUpConfirmPasswordChanged>(_onSignUpConfirmPasswordChanged);
+    on<SignUpSubmitted>(_onSignUpSubmitted);
+    on<LoginEmailChanged>(_onLoginEmailChanged);
+    on<LoginPasswordChanged>(_onLoginPasswordChanged);
+    on<LoginSubmitted>(_onLoginSubmitted);
   }
 
   final AuthenticationRepository _authenticationRepository;
 
-  void _onLoginFirstNameChanged(
-    LoginFirstNameChanged event,
+  void _onSignUpFirstNameChanged(
+    SignUpFirstNameChanged event,
     Emitter<LoginState> emit,
   ) {
-    print('_onLoginFirstNameChanged');
+    print('_onSignUpFirstNameChanged');
     final firstName = InputString.dirty(event.firstName);
     emit(state.copyWith(
       firstName: firstName,
@@ -45,11 +46,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     ));
   }
 
-  void _onLoginLastNameChanged(
-    LoginLastNameChanged event,
+  void _onSignUpLastNameChanged(
+    SignUpLastNameChanged event,
     Emitter<LoginState> emit,
   ) {
-    print('_onLoginLastNameChanged');
+    print('_onSignUpLastNameChanged');
     final lastName = InputString.dirty(event.lastName);
     emit(state.copyWith(
       lastName: lastName,
@@ -64,11 +65,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     ));
   }
 
-  void _onLoginMobileChanged(
-    LoginMobileChanged event,
+  void _onSignUpMobileChanged(
+    SignUpMobileChanged event,
     Emitter<LoginState> emit,
   ) {
-    print('_onLoginMobileChanged');
+    print('_onSignUpMobileChanged');
     final mobile = Mobile.dirty(event.mobile);
     emit(state.copyWith(
       mobile: mobile,
@@ -83,11 +84,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     ));
   }
 
-  void _onLoginConfirmPasswordChanged(
-    LoginConfirmPasswordChanged event,
+  void _onSignUpConfirmPasswordChanged(
+    SignUpConfirmPasswordChanged event,
     Emitter<LoginState> emit,
   ) {
-    print('_onLoginConfirmPasswordChanged');
+    print('_onSignUpConfirmPasswordChanged');
     final confirmPassword = Password.dirty(event.confirmPassword);
     emit(state.copyWith(
       confirmPassword: confirmPassword,
@@ -102,7 +103,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     ));
   }
 
-  void _onEmailChanged(
+  void _onLoginEmailChanged(
     LoginEmailChanged event,
     Emitter<LoginState> emit,
   ) {
@@ -114,7 +115,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     ));
   }
 
-  void _onPasswordChanged(
+  void _onLoginPasswordChanged(
     LoginPasswordChanged event,
     Emitter<LoginState> emit,
   ) {
@@ -126,7 +127,45 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     ));
   }
 
-  void _onSubmitted(
+  void _onSignUpEmailChanged(
+    SignUpEmailChanged event,
+    Emitter<LoginState> emit,
+  ) {
+    print('_onSignUpEmailChanged');
+    final email = Email.dirty(event.email);
+    emit(state.copyWith(
+      email: email,
+      status: Formz.validate([
+        state.firstName,
+        state.lastName,
+        state.mobile,
+        state.email,
+        state.password,
+        state.confirmPassword
+      ]),
+    ));
+  }
+
+  void _onSignUpPasswordChanged(
+    SignUpPasswordChanged event,
+    Emitter<LoginState> emit,
+  ) {
+    print('_onSignUpPasswordChanged');
+    final password = Password.dirty(event.password);
+    emit(state.copyWith(
+      password: password,
+      status: Formz.validate([
+        state.firstName,
+        state.lastName,
+        state.mobile,
+        state.email,
+        state.password,
+        state.confirmPassword
+      ]),
+    ));
+  }
+
+  void _onLoginSubmitted(
     LoginSubmitted event,
     Emitter<LoginState> emit,
   ) async {
@@ -165,7 +204,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   //========================
 
-  void _SignUpSubmitted(
+  void _onSignUpSubmitted(
     SignUpSubmitted event,
     Emitter<LoginState> emit,
   ) async {
@@ -176,7 +215,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       print('_SignUpSubmitted');
       print(state.toString());
       emit(state.copyWith(
-          status: FormzStatus.submissionFailure, errMsg: state.toString()));
+          status: FormzStatus.submissionFailure, errMsg: 'submissionFailure'));
 
       /* try {
         //TokenPair _tokenInfo;

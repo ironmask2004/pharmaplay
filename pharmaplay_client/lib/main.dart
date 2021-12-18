@@ -5,7 +5,7 @@ import 'package:pharmaplay_client/src/utlites/shared_pref.dart';
 import 'package:user_repository/user_repository.dart';
 
 Future<void> main() async {
-  bool loggedinFlag =
+  bool loggedInFlag =
       await MySharedPreferences.instance.getBooleanValue("loggedin");
   String tokenId = await MySharedPreferences.instance.getStringValue("tokenId");
   String refreshToken =
@@ -13,11 +13,11 @@ Future<void> main() async {
 
   TokenPair _tokenPair = TokenPair(tokenId, refreshToken);
   print('Token Saved Pair:' + _tokenPair.toJson().toString());
-  print(loggedinFlag);
+  print(loggedInFlag);
 
   runApp(App(
     authenticationRepository: AuthenticationRepository(
-        loggedinFlag, _tokenPair, 'pharmaplay.mywire.org:9093'),
+        loggedInFlag, _tokenPair, 'pharmaplay.mywire.org:9093'),
     userRepository: UserRepository('pharmaplay.mywire.org:9093'),
   ));
 }

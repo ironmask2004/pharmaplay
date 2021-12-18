@@ -12,9 +12,9 @@ part 'auth_status.dart';
 enum AuthenticationStatus { unknown, authenticated, unauthenticated }
 
 class AuthenticationRepository {
-  AuthenticationRepository(this.loggedinFlag, this.tokenPair, this.baseUrl);
+  AuthenticationRepository(this.loggedInFlag, this.tokenPair, this.baseUrl);
 
-  final bool loggedinFlag;
+  final bool loggedInFlag;
   final TokenPair tokenPair;
   final String baseUrl;
   final _controller = StreamController<AuthRepoState>();
@@ -22,8 +22,8 @@ class AuthenticationRepository {
 /*Stream<AuthenticationStatus> get status async* {
     await Future<void>.delayed(const Duration(seconds: 1));
 
-    //bool loggedinFlag = await MySharedPreferences.instance.getBooleanValue("loggedin");
-    if (loggedinFlag) {
+    //bool loggedInFlag = await MySharedPreferences.instance.getBooleanValue("loggedin");
+    if (loggedInFlag) {
       yield AuthenticationStatus.authenticated;
     } else {
       yield AuthenticationStatus.unauthenticated;
@@ -33,12 +33,12 @@ class AuthenticationRepository {
 */
 
   Stream<AuthRepoState> get status async* {
-    //bool loggedinFlag = await MySharedPreferences.instance.getBooleanValue("loggedin");
-    if (loggedinFlag) {
-      print('loggedinFlag is true');
+    //bool loggedInFlag = await MySharedPreferences.instance.getBooleanValue("loggedin");
+    if (loggedInFlag) {
+      print('loggedInFlag is true');
       yield AuthRepoState.authenticated(tokenPair);
     } else {
-      print('loggedinFlag is false');
+      print('loggedInFlag is false');
       yield AuthRepoState.unauthenticated(TokenPair.empty());
     }
     print('yield* _controller.stream');
