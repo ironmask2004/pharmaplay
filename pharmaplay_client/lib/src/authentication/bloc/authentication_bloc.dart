@@ -47,13 +47,13 @@ class AuthenticationBloc
     print('changed status ${event.status}');
     switch (event.status) {
       case AuthenticationStatus.unauthenticated:
-        return emit(AuthenticationState.unauthenticated());
+        return emit(AuthenticationState.unauthenticated(TokenPair.empty()));
       case AuthenticationStatus.authenticated:
         print("999999999999999999999999999999999999999999999999999999999999" +
             event.tokenPair!.tokenId);
         if (event.tokenPair!.tokenId == '') {
           print('TokinId is Empty');
-          return emit(AuthenticationState.unauthenticated());
+          return emit(AuthenticationState.unauthenticated(TokenPair.empty()));
         }
         User? user = await _tryGetUser(event.tokenPair!.tokenId);
         print('Get user returnd 9999999');
@@ -72,7 +72,7 @@ class AuthenticationBloc
           return emit(AuthenticationState.authenticated(event.tokenPair!));
         } else {
           print('unauthenticated--------------------');
-          return emit(AuthenticationState.unauthenticated());
+          return emit(AuthenticationState.unauthenticated(TokenPair.empty()));
         }
 
       default:
@@ -128,12 +128,12 @@ class AuthenticationBloc
 
           // emit();
         } catch (_) {
-          emit(const AuthenticationState.unauthenticated());
+          emit(AuthenticationState.unauthenticated(TokenPair.empty()));
         }
       }
     } else {
       print('131313');
-      emit(const AuthenticationState.unauthenticated());
+      emit(AuthenticationState.unauthenticated(TokenPair.empty()));
     }
     print('Start LAnding 33');
   }

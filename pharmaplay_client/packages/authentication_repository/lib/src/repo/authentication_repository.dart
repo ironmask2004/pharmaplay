@@ -46,7 +46,7 @@ class AuthenticationRepository {
       yield AuthRepoState.authenticated(tokenPair);
     } else {
       print('loggedInFlag is false');
-      yield AuthRepoState.unauthenticated(TokenPair.empty());
+      yield AuthRepoState.unauthenticated();
     }
     print('yield* _controller.stream');
     yield* _controller.stream;
@@ -69,7 +69,7 @@ class AuthenticationRepository {
 
         return dartz.left(_tokenPair);
       }, (right) {
-        _controller.add(AuthRepoState.unauthenticated(TokenPair.empty()));
+        _controller.add(AuthRepoState.unauthenticated());
         print('right');
         print(right.toJson().toString());
         return dartz.right(right as ApiError);
@@ -100,7 +100,7 @@ class AuthenticationRepository {
 
         return dartz.left(_tokenPair);
       }, (right) {
-        _controller.add(AuthRepoState.unauthenticated(TokenPair.empty()));
+        _controller.add(AuthRepoState.unauthenticated());
         print('right');
         print(right.toJson().toString());
         return dartz.right(right as ApiError);
@@ -119,7 +119,7 @@ class AuthenticationRepository {
   }
 
   void logOut() {
-    _controller.add(AuthRepoState.unauthenticated(TokenPair.empty()));
+    _controller.add(AuthRepoState.unauthenticated());
   }
 
   void dispose() => _controller.close();
