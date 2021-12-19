@@ -104,7 +104,10 @@ class _MyAppState extends State<MyLoginForm> {
         } while (context.read<LoginBloc>().state.status ==
             FormzStatus.submissionInProgress);
 
-        if (context.read<LoginBloc>().state.status.isSubmissionFailure) {
+        var _frmStatus = context.read<LoginBloc>().state.status;
+        print(_frmStatus);
+
+        if (_frmStatus.isSubmissionFailure || _frmStatus.isInvalid) {
           print(' Failed SignUp: ' +
               context.read<LoginBloc>().state.status.toString());
         } else {
