@@ -6,7 +6,7 @@ import 'package:user_repository/user_repository.dart';
 
 Future<void> main() async {
   bool loggedInFlag =
-      await MySharedPreferences.instance.getBooleanValue("loggedin");
+      await MySharedPreferences.instance.getBooleanValue("loggedIn");
   String tokenId = await MySharedPreferences.instance.getStringValue("tokenId");
   String refreshToken =
       await MySharedPreferences.instance.getStringValue("refreshToken");

@@ -19,10 +19,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     on<SignUpEmailChanged>(_onSignUpEmailChanged);
     on<SignUpPasswordChanged>(_onSignUpPasswordChanged);
     on<SignUpConfirmPasswordChanged>(_onSignUpConfirmPasswordChanged);
-    on<SignUpSubmitted>(_onSignUpSubmitted);
+    on<SignUpSubmitted>(_onSignUpSubmited);
     on<LoginEmailChanged>(_onLoginEmailChanged);
     on<LoginPasswordChanged>(_onLoginPasswordChanged);
     on<LoginSubmitted>(_onLoginSubmitted);
+    // on<RoutToSignUpPageSubmitted>(_onRoutToSignUpPageSubmitted);
   }
 
   final AuthenticationRepository _authenticationRepository;
@@ -202,9 +203,16 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     }
   }
 
+  //========
+
+  void _onRoutToSignUpPageSubmitted(
+      SignUpSubmitted event, Emitter<LoginState> emit) async {
+    print('test');
+  }
+
   //========================
 
-  void _onSignUpSubmitted(
+  void _onSignUpSubmited(
     SignUpSubmitted event,
     Emitter<LoginState> emit,
   ) async {

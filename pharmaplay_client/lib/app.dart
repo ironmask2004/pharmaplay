@@ -62,7 +62,14 @@ class _AppViewState extends State<AppView> {
                 case AuthenticationStatus.unauthenticated:
                   print('un Auth : ' + child.toString());
                   _navigator.pushAndRemoveUntil<void>(
-                    LoginPage.route(),
+                    SignInPage.route(),
+                    (route) => false,
+                  );
+                  break;
+                case AuthenticationStatus.authenticateSignUp:
+                  print('un Auth : ' + child.toString());
+                  _navigator.pushAndRemoveUntil<void>(
+                    SignUpPage.route(),
                     (route) => false,
                   );
                   break;

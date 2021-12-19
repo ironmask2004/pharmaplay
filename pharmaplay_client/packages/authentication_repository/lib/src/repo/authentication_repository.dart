@@ -9,7 +9,14 @@ import 'package:dartz/dartz.dart' as dartz;
 import 'package:authentication_repository/src/model/api_response.dart';
 part 'auth_status.dart';
 
-enum AuthenticationStatus { unknown, authenticated, unauthenticated }
+enum AuthenticationStatus {
+  unknown,
+  authenticated,
+  unauthenticated,
+  authenticateSignUp,
+  authenticateConfirmCode,
+  authenticateChangePassword
+}
 
 class AuthenticationRepository {
   AuthenticationRepository(this.loggedInFlag, this.tokenPair, this.baseUrl);
@@ -22,7 +29,7 @@ class AuthenticationRepository {
 /*Stream<AuthenticationStatus> get status async* {
     await Future<void>.delayed(const Duration(seconds: 1));
 
-    //bool loggedInFlag = await MySharedPreferences.instance.getBooleanValue("loggedin");
+    //bool loggedInFlag = await MySharedPreferences.instance.getBooleanValue("loggedIn");
     if (loggedInFlag) {
       yield AuthenticationStatus.authenticated;
     } else {
@@ -33,7 +40,7 @@ class AuthenticationRepository {
 */
 
   Stream<AuthRepoState> get status async* {
-    //bool loggedInFlag = await MySharedPreferences.instance.getBooleanValue("loggedin");
+    //bool loggedInFlag = await MySharedPreferences.instance.getBooleanValue("loggedIn");
     if (loggedInFlag) {
       print('loggedInFlag is true');
       yield AuthRepoState.authenticated(tokenPair);

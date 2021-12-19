@@ -21,6 +21,7 @@ class AuthenticationBloc
     on<AuthenticationLandingRequested>(_onAuthenticationLandingRequested);
     on<AuthenticationStatusChanged>(_onAuthenticationStatusChanged);
     on<AuthenticationLogoutRequested>(_onAuthenticationLogoutRequested);
+    on<AuthenticationSignUpRequested>(_onAuthenticationSignUpRequested);
 
     authRepoStateubscription = _authenticationRepository.status.listen(
       (status) => add(AuthenticationStatusChanged(
@@ -67,7 +68,7 @@ class AuthenticationBloc
 
           print('Saved try to Get User : ${user.id}');
           //MySharedPreferences.instance.setStringValue("password", getPassword);
-          MySharedPreferences.instance.setBooleanValue("loggedin", true);
+          MySharedPreferences.instance.setBooleanValue("loggedIn", true);
           return emit(AuthenticationState.authenticated(event.tokenPair!));
         } else {
           print('unauthenticated--------------------');
@@ -79,6 +80,11 @@ class AuthenticationBloc
     }
   }
 
+  _onAuthenticationSignUpRequested(
+      AuthenticationSignUpRequested event, Emitter<AuthenticationState> emit) {
+    emit(const AuthenticationState.authenticationSignUp());
+  }
+
   void _onAuthenticationLogoutRequested(
     AuthenticationLogoutRequested event,
     Emitter<AuthenticationState> emit,
@@ -88,7 +94,7 @@ class AuthenticationBloc
     MySharedPreferences.instance.removeValue("tokenId");
     MySharedPreferences.instance.removeValue("refreshToken");
     //MySharedPreferences.instance.setStringValue("password", getPassword);
-    MySharedPreferences.instance.setBooleanValue("loggedin", false);
+    MySharedPreferences.instance.setBooleanValue("loggedIn", false);
     print('LOOOOOOgOOOOOUT!! ---- outttt');
   }
 
@@ -99,9 +105,9 @@ class AuthenticationBloc
     print('Start LAnding 11');
     // var userId = await MySharedPreferences.instance.getStringValue("user_id");
     //MySharedPreferences.instance.setStringValue("password", getPassword);
-    bool logFlag =
-        await MySharedPreferences.instance.getBooleanValue("loggedin");
-    if (logFlag) {
+    bool loggedInFlag =
+        await MySharedPreferences.instance.getBooleanValue("loggedIn");
+    if (loggedInFlag) {
       print('Start LAnding 10000');
       String tokenId =
           await MySharedPreferences.instance.getStringValue("tokenId");
