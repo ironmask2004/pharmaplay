@@ -51,6 +51,7 @@ class _AppViewState extends State<AppView> {
             listener: (context, state) {
               print('_navigatorKey' + _navigatorKey.toString());
               print('listenr:' + child.toString());
+              print(state.status);
               switch (state.status) {
                 case AuthenticationStatus.authenticated:
                   print('Auth : ' + child.toString());

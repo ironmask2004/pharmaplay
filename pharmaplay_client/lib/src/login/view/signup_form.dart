@@ -5,6 +5,7 @@ import 'package:login_forms/login_forms.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
+import 'package:pharmaplay_client/src/authentication/authentication.dart';
 import 'package:pharmaplay_client/src/login/login.dart';
 
 class SignUpForm extends StatelessWidget {
@@ -22,7 +23,11 @@ class SignUpForm extends StatelessWidget {
     var signUpPage = LoginFormsSignUpPage(
       logo: logo,
       style: style,
-      onPressedSignIn: () {},
+      onPressedSignIn: () {
+        context
+            .read<AuthenticationBloc>()
+            .add(AuthenticationLandingRequested());
+      },
       onPressedSignUp: () async {
         context.read<LoginBloc>().add(const SignUpSubmitted());
         do {

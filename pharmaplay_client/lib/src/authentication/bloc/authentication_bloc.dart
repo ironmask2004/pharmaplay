@@ -47,13 +47,13 @@ class AuthenticationBloc
     print('changed status ${event.status}');
     switch (event.status) {
       case AuthenticationStatus.unauthenticated:
-        return emit(AuthenticationState.unauthenticated(TokenPair.empty()));
+        return emit(AuthenticationState.unauthenticated());
       case AuthenticationStatus.authenticated:
         print("999999999999999999999999999999999999999999999999999999999999" +
             event.tokenPair!.tokenId);
         if (event.tokenPair!.tokenId == '') {
           print('TokinId is Empty');
-          return emit(AuthenticationState.unauthenticated(TokenPair.empty()));
+          return emit(AuthenticationState.unauthenticated());
         }
         User? user = await _tryGetUser(event.tokenPair!.tokenId);
         print('Get user returnd 9999999');
@@ -72,7 +72,7 @@ class AuthenticationBloc
           return emit(AuthenticationState.authenticated(event.tokenPair!));
         } else {
           print('unauthenticated--------------------');
-          return emit(AuthenticationState.unauthenticated(TokenPair.empty()));
+          return emit(AuthenticationState.unauthenticated());
         }
 
       default:
@@ -128,18 +128,12 @@ class AuthenticationBloc
 
           // emit();
         } catch (_) {
-          emit(const AuthenticationState.unknown());
+          emit(const AuthenticationState.unauthenticated());
         }
       }
-/*
-      final user = await _tryGetUser(userId: userId);
-      if (user != null) {
-        print('try get user from landifng ${user}');
-        return emit(AuthenticationState.authenticated(user));
-      } else {
-        print('try get user from landifng NULLL ');
-        return emit(const AuthenticationState.unknown());
-      }*/
+    } else {
+      print('131313');
+      emit(const AuthenticationState.unauthenticated());
     }
     print('Start LAnding 33');
   }
