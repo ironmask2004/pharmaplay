@@ -52,7 +52,7 @@ class AuthenticationRepository {
     yield* _controller.stream;
   }
 
-  Future<dartz.Either<TokenPair, ApiError>> logIn(
+  Future<dartz.Either<TokenPair, ApiError>> logInUser(
       {required String email, required String password}) async {
     dartz.Either<ApiResponse, ApiError> _loginUserResponse;
 
@@ -81,28 +81,32 @@ class AuthenticationRepository {
     }
   }
 
-  Future<dartz.Either<TokenPair, ApiError>> signUp(
-      {required String email, required String password}) async {
-    dartz.Either<ApiResponse, ApiError> _loginUserResponse;
+  Future<dartz.Either<TokenPair, ApiError>> signUpUser(
+      {required String firstname,
+      required String lastname,
+      required String mobile,
+      required String email,
+      required String password}) async {
+    dartz.Either<ApiResponse, ApiError> _SignUpUserResponse;
 
     try {
-      // TODO  repace login with signup/rigster new user
+      _SignUpUserResponse = await registerUser(
+          firstname, lastname, mobile, email, password, baseUrl);
+      print('registerUser response :' + _SignUpUserResponse.toString());
 
-      _loginUserResponse = await loginUser(email, password, baseUrl);
-      print('login response :' + _loginUserResponse.toString());
-
-      return _loginUserResponse.fold((left) {
+      return _SignUpUserResponse.fold((left) {
         //print((right as ApiError).error.toString());
         print('left1');
-        var _tokenPair = TokenPair.fromJson(json.encode(left.Data));
+        // var _tokenPair = TokenPair.fromJson(json.encode(left.Data));
         print('left2');
-        _controller.add(AuthRepoState.authenticated(_tokenPair));
+        _controller
+            .add(AuthRepoState.authenticateConfirmCode(TokenPair.empty()));
 
-        return dartz.left(_tokenPair);
+        return dartz.left(TokenPair.empty());
       }, (right) {
-        _controller.add(AuthRepoState.unauthenticated());
+        // _controller.add(AuthRepoState.unauthenticated());
         print('right');
-        print(right.toJson().toString());
+        // print(right.toJson().toString());
         return dartz.right(right as ApiError);
       });
     } catch (err) {
