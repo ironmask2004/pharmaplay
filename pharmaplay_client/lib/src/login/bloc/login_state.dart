@@ -9,6 +9,7 @@ class LoginState extends Equatable {
       this.email = const Email.pure(),
       this.password = const Password.pure(),
       this.confirmPassword = const Password.pure(),
+      this.confirmCode = const InputString.pure(),
       this.errMsg = ''});
 
   final FormzStatus status;
@@ -18,6 +19,7 @@ class LoginState extends Equatable {
   final Email email;
   final Password password;
   final Password confirmPassword;
+  final InputString confirmCode;
 
   final String errMsg;
 
@@ -29,6 +31,7 @@ class LoginState extends Equatable {
       Email? email,
       Password? password,
       Password? confirmPassword,
+      InputString? confirmCode,
       String? errMsg}) {
     return LoginState(
       status: status ?? this.status,
@@ -38,6 +41,7 @@ class LoginState extends Equatable {
       email: email ?? this.email,
       password: password ?? this.password,
       confirmPassword: confirmPassword ?? this.confirmPassword,
+      confirmCode: confirmCode ?? this.confirmCode,
       errMsg: errMsg ?? this.errMsg,
     );
   }
@@ -51,6 +55,7 @@ class LoginState extends Equatable {
         email,
         password,
         confirmPassword,
+        confirmCode,
         errMsg
       ];
 }

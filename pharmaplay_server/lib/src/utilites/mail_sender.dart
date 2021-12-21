@@ -7,7 +7,7 @@ sendVerificationCodeByMail(String verificationcode, String email) async {
   try {
     final String mailBody =
         "<h1> your verification code is:  $verificationcode  </h1>\n<p>الرجاء اعادة الدخول إلى البرنامج واستخدام كود التحقق الوارد في هذه الرسالة </p>";
-    sendMail(email, 'Verifcation code from pharmaplay', mailBody);
+    // sendMail(email, 'Verifcation code from pharmaplay', mailBody);
   } catch (err) {
     print(err.toString());
   }

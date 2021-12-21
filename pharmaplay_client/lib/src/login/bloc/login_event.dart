@@ -86,3 +86,20 @@ class SignUpMobileChanged extends LoginEvent {
 class SignUpSubmitted extends LoginEvent {
   const SignUpSubmitted();
 }
+
+class ConfirmCodeChanged extends LoginEvent {
+  const ConfirmCodeChanged(this.confirmCode);
+
+  final String confirmCode;
+
+  @override
+  List<Object> get props => [confirmCode];
+}
+
+class ConfirmCodeSubmitted extends LoginEvent {
+  const ConfirmCodeSubmitted();
+}
+
+class ResendConfirmCodeSubmitted extends LoginEvent {
+  const ResendConfirmCodeSubmitted();
+}

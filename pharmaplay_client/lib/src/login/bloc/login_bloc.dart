@@ -22,7 +22,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     on<SignUpSubmitted>(_onSignUpSubmited);
     on<LoginEmailChanged>(_onLoginEmailChanged);
     on<LoginPasswordChanged>(_onLoginPasswordChanged);
+    on<ConfirmCodeChanged>(_onConfirmCodeChanged);
     on<LoginSubmitted>(_onLoginSubmitted);
+    on<ConfirmCodeSubmitted>(_onConfirmCodeSubmitted);
+
     // on<RoutToSignUpPageSubmitted>(_onRoutToSignUpPageSubmitted);
   }
 
@@ -82,6 +85,19 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         state.password,
         state.confirmPassword
       ]),
+    ));
+  }
+
+  void _onConfirmCodeChanged(
+    ConfirmCodeChanged event,
+    Emitter<LoginState> emit,
+  ) {
+    print('_onConfirmCodeChanged');
+    final confirmCode = InputString.dirty(event.confirmCode);
+    print('${state.email}, ${state.password}');
+    emit(state.copyWith(
+      confirmCode: confirmCode,
+      status: Formz.validate([state.email, state.password, state.confirmCode]),
     ));
   }
 
@@ -202,12 +218,56 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       }
     }
   }
+  //=======================
+  //
 
-  //========
+  void _onConfirmCodeSubmitted(
+    ConfirmCodeSubmitted event,
+    Emitter<LoginState> emit,
+  ) async {
+    print('formstate: ${state.status}');
+    print(state.email.value +
+        ' password: ' +
+        state.password.value +
+        ' confirmCode: ' +
+        state.confirmCode.value);
+    if (!state.status.isValidated) {
+      emit(state.copyWith(
+          status: FormzStatus.submissionFailure,
+          errMsg: 'Inpuut Data Error!!'));
+      return;
+    }
+    emit(state.copyWith(status: FormzStatus.submissionInProgress));
+//-----------------
+    final dartz.Either<TokenPair, ApiError> _repoResponse;
+    try {
+      //TokenPair _tokenInfo;
+      _repoResponse = await _authenticationRepository.logInUserWithVerfication(
+          email: state.email.value,
+          password: state.password.value,
+          confirmCode: state.confirmCode.value);
 
-  void _onRoutToSignUpPageSubmitted(
-      SignUpSubmitted event, Emitter<LoginState> emit) async {
-    print('test');
+      _repoResponse.fold((left) {
+        print('left');
+        // return (left);
+        print(left.toJson().toString());
+        emit(state.copyWith(
+            status: FormzStatus.submissionSuccess,
+            errMsg: left.toJson().toString()));
+      }, (right) {
+        //showInSnackBar(context, ("Login Successs!!"));
+        print('right');
+        emit(state.copyWith(
+            status: FormzStatus.submissionFailure,
+            errMsg: right.toJson().toString()));
+
+        //return (right);
+      });
+    } catch (err) {
+      print('Error connectiing to server ' + err.toString());
+      rethrow;
+      // showInSnackBar(context, err.toString());
+    }
   }
 
   //========================

@@ -22,8 +22,15 @@ class ConfirmCodeForm extends StatelessWidget {
     var confirmCodePage = LoginFormsConfirmCodePage(
       logo: logo,
       style: style,
-      onPressedNext: () {},
-      onPressedResend: () {},
+      onChangedConfirmCode: (confirmCode) =>
+          context.read<LoginBloc>().add(ConfirmCodeChanged(confirmCode)),
+      onPressedNext: () {
+        print('Confirm Pressd!');
+        context.read<LoginBloc>().add(const ConfirmCodeSubmitted());
+      },
+      onPressedResend: () {
+        context.read<LoginBloc>().add(const ResendConfirmCodeSubmitted());
+      },
     );
 
     return BlocListener<LoginBloc, LoginState>(

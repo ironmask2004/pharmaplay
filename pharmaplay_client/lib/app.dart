@@ -68,14 +68,14 @@ class _AppViewState extends State<AppView> {
                   );
                   break;
                 case AuthenticationStatus.authenticateSignUp:
-                  print('un Auth : ' + child.toString());
+                  print('SignUp Auth : ' + child.toString());
                   _navigator.pushAndRemoveUntil<void>(
                     SignUpPage.route(),
                     (route) => false,
                   );
                   break;
                 case AuthenticationStatus.authenticateConfirmCode:
-                  print('authenticateConfirmCode: ' + child.toString());
+                  print('authenticate ConfirmCode: ' + child.toString());
                   _navigator.pushAndRemoveUntil<void>(
                     ConfirmCodePage.route(),
                     (route) => false,

@@ -45,6 +45,7 @@ class LoginFormsConfirmCodePage extends StatelessWidget {
 
   /// Use for the TextField lets the users input the OTP code. See also [LoginFormsTextField]
   final Function()? onTapCode;
+  final Function(String)? onChangedConfirmCode;
 
   /// Use for the TextField lets the users input the OTP code. See also [LoginFormsTextField]
   final TextEditingController? controllerCode;
@@ -63,6 +64,7 @@ class LoginFormsConfirmCodePage extends StatelessWidget {
     this.errorTextCode,
     this.inputFormattersCode,
     this.onTapCode,
+    this.onChangedConfirmCode,
     this.controllerCode,
     this.buttonTextResend: 'Resend',
     required this.onPressedResend,
@@ -104,6 +106,7 @@ class LoginFormsConfirmCodePage extends StatelessWidget {
               hintText: hintTextCode,
               controller: controllerCode,
               onTap: onTapCode,
+              onChanged: onChangedConfirmCode,
               errorText: errorTextCode,
               inputFormatters: inputFormattersCode,
             ),
