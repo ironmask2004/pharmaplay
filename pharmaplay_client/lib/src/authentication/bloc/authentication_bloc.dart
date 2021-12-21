@@ -4,6 +4,7 @@ import 'package:authentication_repository/authentication_repository.dart';
 import 'package:dartz/dartz.dart' as dartz;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:pharmaplay_client/src/login/login.dart';
 import 'package:pharmaplay_client/src/utlites/shared_pref.dart';
 import 'package:user_repository/user_repository.dart';
 
@@ -77,7 +78,7 @@ class AuthenticationBloc
       case AuthenticationStatus.authenticateConfirmCode:
         print('authenticateConfirmCode');
         return emit(
-            AuthenticationState.authenticateConfirmCode(TokenPair.empty()));
+            AuthenticationState.authenticateConfirmCode(event.tokenPair!));
 
       default:
         return emit(const AuthenticationState.unknown());

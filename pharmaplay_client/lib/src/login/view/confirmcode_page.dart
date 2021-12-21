@@ -4,16 +4,20 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pharmaplay_client/src/login/login.dart';
 
 class ConfirmCodePage extends StatelessWidget {
-  const ConfirmCodePage({Key? key}) : super(key: key);
+  const ConfirmCodePage(this.email, this.password, {Key? key})
+      : super(key: key);
+  final String email;
+  final String password;
 
-  static Route route() {
-    return MaterialPageRoute<void>(builder: (_) => const ConfirmCodePage());
+  static Route route(String email, String password) {
+    return MaterialPageRoute<void>(
+        builder: (_) => ConfirmCodePage(email, password));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Login')),
+      appBar: AppBar(title: const Text('ConfirmCode')),
       body: Padding(
         padding: const EdgeInsets.all(12),
         child: BlocProvider(
@@ -23,7 +27,7 @@ class ConfirmCodePage extends StatelessWidget {
                   RepositoryProvider.of<AuthenticationRepository>(context),
             );
           },
-          child: ConfirmCodeForm(), // LoginForm(),
+          child: ConfirmCodeForm(email, password), // LoginForm(),
         ),
       ),
     );

@@ -77,7 +77,8 @@ class _AppViewState extends State<AppView> {
                 case AuthenticationStatus.authenticateConfirmCode:
                   print('authenticate ConfirmCode: ' + child.toString());
                   _navigator.pushAndRemoveUntil<void>(
-                    ConfirmCodePage.route(),
+                    ConfirmCodePage.route(state.tokenPair!.tokenId,
+                        state.tokenPair!.refreshToken),
                     (route) => false,
                   );
                   break;

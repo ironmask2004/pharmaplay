@@ -135,8 +135,8 @@ class AuthenticationRepository {
         print('left1');
         // var _tokenPair = TokenPair.fromJson(json.encode(left.Data));
         print('left2');
-        _controller
-            .add(AuthRepoState.authenticateConfirmCode(TokenPair.empty()));
+        _controller.add(
+            AuthRepoState.authenticateConfirmCode(TokenPair(email, password)));
 
         return dartz.left(TokenPair.empty());
       }, (right) {

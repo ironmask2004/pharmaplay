@@ -96,6 +96,24 @@ class ConfirmCodeChanged extends LoginEvent {
   List<Object> get props => [confirmCode];
 }
 
+class ConfirmFormEmailChanged extends LoginEvent {
+  const ConfirmFormEmailChanged(this.email);
+
+  final String email;
+
+  @override
+  List<Object> get props => [email];
+}
+
+class ConfirmFormPasswordChanged extends LoginEvent {
+  const ConfirmFormPasswordChanged(this.password);
+
+  final String password;
+
+  @override
+  List<Object> get props => [password];
+}
+
 class ConfirmCodeSubmitted extends LoginEvent {
   const ConfirmCodeSubmitted();
 }

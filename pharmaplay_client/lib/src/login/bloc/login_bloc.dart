@@ -22,6 +22,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     on<SignUpSubmitted>(_onSignUpSubmited);
     on<LoginEmailChanged>(_onLoginEmailChanged);
     on<LoginPasswordChanged>(_onLoginPasswordChanged);
+
+    on<ConfirmFormEmailChanged>(_onConfirmFormEmailChanged);
+    on<ConfirmFormPasswordChanged>(_onConfirmFormPasswordChanged);
+
     on<ConfirmCodeChanged>(_onConfirmCodeChanged);
     on<LoginSubmitted>(_onLoginSubmitted);
     on<ConfirmCodeSubmitted>(_onConfirmCodeSubmitted);
@@ -97,6 +101,32 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     print('${state.email}, ${state.password}');
     emit(state.copyWith(
       confirmCode: confirmCode,
+      status: Formz.validate([state.email, state.password, state.confirmCode]),
+    ));
+  }
+
+  void _onConfirmFormEmailChanged(
+    ConfirmFormEmailChanged event,
+    Emitter<LoginState> emit,
+  ) {
+    print('_onConfirmFormEmailChanged');
+    final email = Email.dirty(event.email);
+    print('${state.email}, ${state.password}');
+    emit(state.copyWith(
+      email: email,
+      status: Formz.validate([state.email, state.password, state.confirmCode]),
+    ));
+  }
+
+  void _onConfirmFormPasswordChanged(
+    ConfirmFormPasswordChanged event,
+    Emitter<LoginState> emit,
+  ) {
+    print('_onConfirmFormPasswordChanged');
+    final password = Password.dirty(event.password);
+    print('${state.email}, ${state.password}');
+    emit(state.copyWith(
+      password: password,
       status: Formz.validate([state.email, state.password, state.confirmCode]),
     ));
   }

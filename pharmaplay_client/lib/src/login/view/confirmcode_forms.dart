@@ -9,7 +9,9 @@ import 'package:pharmaplay_client/src/login/login.dart';
 
 class ConfirmCodeForm extends StatelessWidget {
   final LoginFormsStyle style = LoginFormsStyle.defaultTemplate;
-  ConfirmCodeForm({Key? key}) : super(key: key);
+  final String email;
+  final String password;
+  ConfirmCodeForm(this.email, this.password, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,10 +24,14 @@ class ConfirmCodeForm extends StatelessWidget {
     var confirmCodePage = LoginFormsConfirmCodePage(
       logo: logo,
       style: style,
-      onChangedConfirmCode: (confirmCode) =>
-          context.read<LoginBloc>().add(ConfirmCodeChanged(confirmCode)),
+      onChangedConfirmCode: (confirmCode) {
+        context.read<LoginBloc>().add(ConfirmFormEmailChanged(email));
+        context.read<LoginBloc>().add(ConfirmFormPasswordChanged(password));
+        context.read<LoginBloc>().add(ConfirmCodeChanged(confirmCode));
+      },
       onPressedNext: () {
         print('Confirm Pressd!');
+
         context.read<LoginBloc>().add(const ConfirmCodeSubmitted());
       },
       onPressedResend: () {
