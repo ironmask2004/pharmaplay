@@ -13,8 +13,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     required AuthenticationRepository authenticationRepository,
   })  : _authenticationRepository = authenticationRepository,
         super(const LoginState()) {
-    on<SignUpFirstNameChanged>(_onSignUpFirstNameChanged);
-    on<SignUpLastNameChanged>(_onSignUpLastNameChanged);
+    on<SignUpFirstnameChanged>(_onSignUpFirstnameChanged);
+    on<SignUpLastnameChanged>(_onSignUpLastnameChanged);
     on<SignUpMobileChanged>(_onSignUpMobileChanged);
     on<SignUpEmailChanged>(_onSignUpEmailChanged);
     on<SignUpPasswordChanged>(_onSignUpPasswordChanged);
@@ -28,17 +28,17 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   final AuthenticationRepository _authenticationRepository;
 
-  void _onSignUpFirstNameChanged(
-    SignUpFirstNameChanged event,
+  void _onSignUpFirstnameChanged(
+    SignUpFirstnameChanged event,
     Emitter<LoginState> emit,
   ) {
-    print('_onSignUpFirstNameChanged');
-    final firstName = InputString.dirty(event.firstName);
+    print('_onSignUpFirstnameChanged');
+    final firstname = InputString.dirty(event.firstname);
     emit(state.copyWith(
-      firstName: firstName,
+      firstname: firstname,
       status: Formz.validate([
-        state.firstName,
-        state.lastName,
+        state.firstname,
+        state.lastname,
         state.mobile,
         state.email,
         state.password,
@@ -47,17 +47,17 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     ));
   }
 
-  void _onSignUpLastNameChanged(
-    SignUpLastNameChanged event,
+  void _onSignUpLastnameChanged(
+    SignUpLastnameChanged event,
     Emitter<LoginState> emit,
   ) {
-    print('_onSignUpLastNameChanged');
-    final lastName = InputString.dirty(event.lastName);
+    print('_onSignUpLastnameChanged');
+    final lastname = InputString.dirty(event.lastname);
     emit(state.copyWith(
-      lastName: lastName,
+      lastname: lastname,
       status: Formz.validate([
-        state.firstName,
-        state.lastName,
+        state.firstname,
+        state.lastname,
         state.mobile,
         state.email,
         state.password,
@@ -75,8 +75,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     emit(state.copyWith(
       mobile: mobile,
       status: Formz.validate([
-        state.firstName,
-        state.lastName,
+        state.firstname,
+        state.lastname,
         state.mobile,
         state.email,
         state.password,
@@ -94,8 +94,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     emit(state.copyWith(
       confirmPassword: confirmPassword,
       status: Formz.validate([
-        state.firstName,
-        state.lastName,
+        state.firstname,
+        state.lastname,
         state.mobile,
         state.email,
         state.password,
@@ -137,8 +137,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     emit(state.copyWith(
       email: email,
       status: Formz.validate([
-        state.firstName,
-        state.lastName,
+        state.firstname,
+        state.lastname,
         state.mobile,
         state.email,
         state.password,
@@ -156,8 +156,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     emit(state.copyWith(
       password: password,
       status: Formz.validate([
-        state.firstName,
-        state.lastName,
+        state.firstname,
+        state.lastname,
         state.mobile,
         state.email,
         state.password,
@@ -176,7 +176,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       final dartz.Either<TokenPair, ApiError> _repoResponse;
       try {
         //TokenPair _tokenInfo;
-        _repoResponse = await _authenticationRepository.logIn(
+        _repoResponse = await _authenticationRepository.logInUser(
             email: state.email.value, password: state.password.value);
 
         _repoResponse.fold((left) {
@@ -216,41 +216,56 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     SignUpSubmitted event,
     Emitter<LoginState> emit,
   ) async {
-    if (state.status.isValidated) {
-      emit(state.copyWith(status: FormzStatus.submissionInProgress));
-//-----------------
-      final dartz.Either<TokenPair, ApiError> _repoResponse;
-      print('_SignUpSubmitted');
-      print(state.toString());
+    print('formstate: ${state.status}');
+    if (!state.status.isValidated) {
       emit(state.copyWith(
-          status: FormzStatus.submissionFailure, errMsg: 'submissionFailure'));
+          status: FormzStatus.submissionFailure,
+          errMsg: 'Inpuut Data Error!!'));
+      return;
+    }
+    emit(state.copyWith(status: FormzStatus.submissionInProgress));
 
-      /* try {
-        //TokenPair _tokenInfo;
-        _repoResponse = await _authenticationRepository.signUp(
-            email: state.email.value, password: state.password.value);
+    final dartz.Either<TokenPair, ApiError> _repoResponse;
 
-        _repoResponse.fold((left) {
-          print('left');
-          // return (left);
-          print(left.toJson().toString());
-          emit(state.copyWith(
-              status: FormzStatus.submissionSuccess,
-              errMsg: left.toJson().toString()));
-        }, (right) {
-          //showInSnackBar(context, ("Login Successs!!"));
-          print('right');
-          emit(state.copyWith(
-              status: FormzStatus.submissionFailure,
-              errMsg: right.toJson().toString()));
+    print('_SignUpSubmitted');
+    print(state.toString());
 
-          //return (right);
-        });
-      } catch (err) {
-        print('Error connectiing to server ' + err.toString());
-        rethrow;
-        // showInSnackBar(context, err.toString());
-      }*/
+    if (state.password.value != state.confirmPassword.value) {
+      emit(state.copyWith(
+          status: FormzStatus.submissionFailure,
+          errMsg: 'Confirm Password Not Equal Password!!'));
+      return;
+    }
+
+    try {
+      //TokenPair _tokenInfo;
+      _repoResponse = await _authenticationRepository.signUpUser(
+        firstname: state.firstname.value,
+        lastname: state.lastname.value,
+        mobile: state.mobile.value,
+        email: state.email.value,
+        password: state.password.value,
+      );
+
+      _repoResponse.fold((left) {
+        print('left');
+        // return (left);
+        print(left.toJson().toString());
+        emit(state.copyWith(
+            status: FormzStatus.submissionSuccess,
+            errMsg: left.toJson().toString()));
+      }, (right) {
+        print('right');
+        emit(state.copyWith(
+            status: FormzStatus.submissionFailure,
+            errMsg: right.toJson().toString()));
+
+        //return (right);
+      });
+    } catch (err) {
+      print('Error From server ' + err.toString());
+      rethrow;
+      // showInSnackBar(context, err.toString());
     }
   }
 }

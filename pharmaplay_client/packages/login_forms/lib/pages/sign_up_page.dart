@@ -52,26 +52,26 @@ class LoginFormsSignUpPage extends StatelessWidget {
   final TextEditingController? controllerEmail;
 
   /// Use for the TextField lets the emails input their full name. See also [LoginFormsTextField]
-  final TextInputAction textInputActionFirstName;
+  final TextInputAction textInputActionFirstname;
 
   /// Use for the TextField lets the emails input their full name. See also [LoginFormsTextField]
-  final TextInputType keyboardTypeFirstName;
+  final TextInputType keyboardTypeFirstname;
 
   /// Use for the TextField lets the emails input their full name. See also [LoginFormsTextField]
-  final String hintTextFirstName;
+  final String hintTextFirstname;
 
   /// Use for the TextField lets the emails input their full name. See also [LoginFormsTextField]
-  final String? errorTextFirstName;
+  final String? errorTextFirstname;
 
   /// Use for the TextField lets the emails input their full name. See also [LoginFormsTextField]
-  final List<TextInputFormatter>? inputFormattersFirstName;
+  final List<TextInputFormatter>? inputFormattersFirstname;
 
   /// Use for the TextField lets the emails input their full name. See also [LoginFormsTextField]
-  final Function()? onTapFirstName;
-  final Function(String)? onChangeFirstName;
+  final Function()? onTapFirstname;
+  final Function(String)? onChangeFirstname;
 
   /// Use for the TextField lets the emails input their full name. See also [LoginFormsTextField]
-  final TextEditingController? controllerFirstName;
+  final TextEditingController? controllerFirstname;
 
   /// Use for the TextField lets the emails input their full name. See also [LoginFormsTextField]
   final TextInputAction textInputActionMobile;
@@ -138,26 +138,26 @@ class LoginFormsSignUpPage extends StatelessWidget {
   final TextEditingController? controllerConfirmPassword;
 
   /// Use for the TextField lets the emails input their full name. See also [LoginFormsTextField]
-  final TextInputAction textInputActionLastName;
+  final TextInputAction textInputActionLastname;
 
   /// Use for the TextField lets the emails input their full name. See also [LoginFormsTextField]
-  final TextInputType keyboardTypeLastName;
+  final TextInputType keyboardTypeLastname;
 
   /// Use for the TextField lets the emails input their full name. See also [LoginFormsTextField]
-  final String hintTextLastName;
+  final String hintTextLastname;
 
   /// Use for the TextField lets the emails input their full name. See also [LoginFormsTextField]
-  final String? errorTextLastName;
+  final String? errorTextLastname;
 
   /// Use for the TextField lets the emails input their full name. See also [LoginFormsTextField]
-  final List<TextInputFormatter>? inputFormattersLastName;
+  final List<TextInputFormatter>? inputFormattersLastname;
 
   /// Use for the TextField lets the emails input their full name. See also [LoginFormsTextField]
-  final Function()? onTapLastName;
-  final Function(String)? onChangeLastName;
+  final Function()? onTapLastname;
+  final Function(String)? onChangeLastname;
 
   /// Use for the TextField lets the emails input their full name. See also [LoginFormsTextField]
-  final TextEditingController? controllerLastName;
+  final TextEditingController? controllerLastname;
 
 /*
 {  
@@ -182,22 +182,22 @@ class LoginFormsSignUpPage extends StatelessWidget {
     this.onTapEmail,
     this.onchangeEmail,
     this.controllerEmail,
-    this.textInputActionFirstName: TextInputAction.done,
-    this.keyboardTypeFirstName: TextInputType.name,
-    this.hintTextFirstName: 'First name',
-    this.errorTextFirstName,
-    this.inputFormattersFirstName,
-    this.onTapFirstName,
-    this.onChangeFirstName,
-    this.controllerFirstName,
-    this.textInputActionLastName: TextInputAction.done,
-    this.keyboardTypeLastName: TextInputType.name,
-    this.hintTextLastName: 'Last name',
-    this.errorTextLastName,
-    this.inputFormattersLastName,
-    this.onTapLastName,
-    this.onChangeLastName,
-    this.controllerLastName,
+    this.textInputActionFirstname: TextInputAction.done,
+    this.keyboardTypeFirstname: TextInputType.name,
+    this.hintTextFirstname: 'First name',
+    this.errorTextFirstname,
+    this.inputFormattersFirstname,
+    this.onTapFirstname,
+    this.onChangeFirstname,
+    this.controllerFirstname,
+    this.textInputActionLastname: TextInputAction.done,
+    this.keyboardTypeLastname: TextInputType.name,
+    this.hintTextLastname: 'Last name',
+    this.errorTextLastname,
+    this.inputFormattersLastname,
+    this.onTapLastname,
+    this.onChangeLastname,
+    this.controllerLastname,
     this.textInputActionMobile: TextInputAction.done,
     this.keyboardTypeMobile: TextInputType.name,
     this.hintTextMobile: 'Mobile Number',
@@ -248,14 +248,14 @@ class LoginFormsSignUpPage extends StatelessWidget {
               top: style.screenPadding.top + style.verticalSpacingBetweenGroup,
             ),
             child: LoginFormsTextField(
-              textInputAction: textInputActionFirstName,
-              keyboardType: keyboardTypeFirstName,
-              hintText: hintTextFirstName,
-              controller: controllerFirstName,
-              onTap: onTapFirstName,
-              onChanged: onChangeFirstName,
-              errorText: errorTextFirstName,
-              inputFormatters: inputFormattersFirstName,
+              textInputAction: textInputActionFirstname,
+              keyboardType: keyboardTypeFirstname,
+              hintText: hintTextFirstname,
+              controller: controllerFirstname,
+              onTap: onTapFirstname,
+              onChanged: onChangeFirstname,
+              errorText: errorTextFirstname,
+              inputFormatters: inputFormattersFirstname,
               style: style,
             ),
           ),
@@ -263,14 +263,14 @@ class LoginFormsSignUpPage extends StatelessWidget {
             padding:
                 EdgeInsets.only(top: style.verticalSpacingBetweenComponents),
             child: LoginFormsTextField(
-              textInputAction: textInputActionLastName,
-              keyboardType: keyboardTypeLastName,
-              hintText: hintTextLastName,
-              controller: controllerLastName,
-              onTap: onTapLastName,
-              onChanged: onChangeLastName,
-              errorText: errorTextLastName,
-              inputFormatters: inputFormattersLastName,
+              textInputAction: textInputActionLastname,
+              keyboardType: keyboardTypeLastname,
+              hintText: hintTextLastname,
+              controller: controllerLastname,
+              onTap: onTapLastname,
+              onChanged: onChangeLastname,
+              errorText: errorTextLastname,
+              inputFormatters: inputFormattersLastname,
               style: style,
             ),
           ),

@@ -29,22 +29,22 @@ class LoginSubmitted extends LoginEvent {
   const LoginSubmitted();
 }
 
-class SignUpFirstNameChanged extends LoginEvent {
-  const SignUpFirstNameChanged(this.firstName);
+class SignUpFirstnameChanged extends LoginEvent {
+  const SignUpFirstnameChanged(this.firstname);
 
-  final String firstName;
+  final String firstname;
 
   @override
-  List<Object> get props => [firstName];
+  List<Object> get props => [firstname];
 }
 
-class SignUpLastNameChanged extends LoginEvent {
-  const SignUpLastNameChanged(this.lastName);
+class SignUpLastnameChanged extends LoginEvent {
+  const SignUpLastnameChanged(this.lastname);
 
-  final String lastName;
+  final String lastname;
 
   @override
-  List<Object> get props => [lastName];
+  List<Object> get props => [lastname];
 }
 
 class SignUpEmailChanged extends LoginEvent {

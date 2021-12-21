@@ -10,6 +10,11 @@ class AuthRepoState extends Equatable {
       : this._(
             status: AuthenticationStatus.authenticated, tokenPair: tokenPair);
 
+  const AuthRepoState.authenticateConfirmCode(TokenPair tokenPair)
+      : this._(
+            status: AuthenticationStatus.authenticateConfirmCode,
+            tokenPair: tokenPair);
+
   const AuthRepoState.unauthenticated()
       : this._(status: AuthenticationStatus.unauthenticated);
 

@@ -45,12 +45,11 @@ class SignUpForm extends StatelessWidget {
         } else {
           print(context.read<LoginBloc>().state.status.toString());
         }
-        ;
       },
-      onChangeFirstName: (firstName) =>
-          context.read<LoginBloc>().add(SignUpFirstNameChanged(firstName)),
-      onChangeLastName: (lastName) =>
-          context.read<LoginBloc>().add(SignUpLastNameChanged(lastName)),
+      onChangeFirstname: (firstname) =>
+          context.read<LoginBloc>().add(SignUpFirstnameChanged(firstname)),
+      onChangeLastname: (lastname) =>
+          context.read<LoginBloc>().add(SignUpLastnameChanged(lastname)),
       onChangeMobile: (mobile) =>
           context.read<LoginBloc>().add(SignUpMobileChanged(mobile)),
       onchangeEmail: (email) =>

@@ -93,3 +93,60 @@ Future<dartz.Either<ApiResponse, String>> logOutUser(
   }
   return dartz.left(_apiResponse);
 }
+
+Future<dartz.Either<ApiResponse, ApiError>> registerUser(
+    String firstname,
+    String lastname,
+    String mobile,
+    String email,
+    String password,
+    String baseUrl) async {
+  ApiResponse _apiResponse = ApiResponse();
+  ApiError _apiError; // = ApiError(error: error, errorNo: errorNo);
+  try {
+    final _url = Uri.parse('http://' + baseUrl + "/auth/register");
+    final _headers = {"Content-type": "application/json"};
+    final _json =
+        '{ \"firstname\": \"$firstname\" ,  \"lastname\": \"$lastname\" , \"mobile\": \"$mobile\" ,  \"email\": \"$email\", \"password\": \"$password\"  }';
+    print('body to cent for sign up $_json');
+    final http.Response response =
+        await http.post(_url, headers: _headers, body: _json);
+
+    print(response.body.toString() +
+        '    ==== error No:' +
+        response.statusCode.toString());
+
+    final _responseMap = json.decode(response.body);
+    final _reqResultMap = _responseMap['requestResult'];
+    print(_reqResultMap.toString());
+
+    if (response.statusCode == 200) {
+      print('3434343');
+      print(_responseMap);
+
+      print(_reqResultMap);
+      _apiResponse.Data = TokenPair.empty().toJson().toString();
+      print('----------------------' + _apiResponse.Data.toString());
+
+      _apiResponse.ApiError = ApiError(
+          error: 'SignUp Success Email Cent to $email with verifcation Code',
+          errorNo: '200');
+      //    ApiError.fromJson(json.decode(_reqResultMap.toString()));
+
+      print('response error' + _apiResponse.ApiError.toString());
+      return dartz.left(_apiResponse);
+    } else {
+      print('4345654345678p-098765434567890-09876' +
+          _responseMap['requestResult'].toString());
+
+      _apiError = ApiError(
+          error: _responseMap['requestResult']['error'].toString(),
+          errorNo: response.statusCode.toString());
+      print('00000000rtrtrt00000000000000');
+      return dartz.right(_apiError);
+    }
+  } catch (err) {
+    _apiError = ApiError(error: '$err', errorNo: "199993");
+    return dartz.right(_apiError);
+  }
+}
