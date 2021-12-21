@@ -74,6 +74,13 @@ class _AppViewState extends State<AppView> {
                     (route) => false,
                   );
                   break;
+                case AuthenticationStatus.authenticateConfirmCode:
+                  print('authenticateConfirmCode: ' + child.toString());
+                  _navigator.pushAndRemoveUntil<void>(
+                    ConfirmCodePage.route(),
+                    (route) => false,
+                  );
+                  break;
                 default:
                   break;
               }

@@ -74,6 +74,10 @@ class AuthenticationBloc
           print('unauthenticated--------------------');
           return emit(AuthenticationState.unauthenticated(TokenPair.empty()));
         }
+      case AuthenticationStatus.authenticateConfirmCode:
+        print('authenticateConfirmCode');
+        return emit(
+            AuthenticationState.authenticateConfirmCode(TokenPair.empty()));
 
       default:
         return emit(const AuthenticationState.unknown());

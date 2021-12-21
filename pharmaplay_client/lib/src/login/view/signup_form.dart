@@ -30,7 +30,7 @@ class SignUpForm extends StatelessWidget {
       },
       onPressedSignUp: () async {
         context.read<LoginBloc>().add(const SignUpSubmitted());
-        do {
+        /*  do {
           print(context.read<LoginBloc>().state.status.toString());
           await Future.delayed(const Duration(seconds: 1), () {}); // ======
         } while (context.read<LoginBloc>().state.status ==
@@ -44,7 +44,7 @@ class SignUpForm extends StatelessWidget {
               context.read<LoginBloc>().state.status.toString());
         } else {
           print(context.read<LoginBloc>().state.status.toString());
-        }
+        }*/
       },
       onChangeFirstname: (firstname) =>
           context.read<LoginBloc>().add(SignUpFirstnameChanged(firstname)),
