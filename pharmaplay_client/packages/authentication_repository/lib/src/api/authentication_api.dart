@@ -71,7 +71,7 @@ Future<dartz.Either<ApiResponse, ApiError>> apiLoginUserWithVerfication(
     final _url = Uri.parse('http://' + baseUrl + "/auth/login");
     final _headers = {"Content-type": "application/json"};
     final _json =
-        '{ \"email\": \"$email\" ,  \"password\": \"$password\" ,  \"confirmcode\": \"$confirmCode\"}';
+        '{ \"email\": \"$email\" ,  \"password\": \"$password\" ,  \"verificationcode\": \"$confirmCode\"}';
     final http.Response response =
         await http.post(_url, headers: _headers, body: _json);
 

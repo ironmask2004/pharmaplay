@@ -98,7 +98,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   ) {
     print('_onConfirmCodeChanged');
     final confirmCode = InputString.dirty(event.confirmCode);
-    print('${state.email}, ${state.password}');
+    print('${state.email}, ${state.password}   ${state.confirmCode} ');
     emit(state.copyWith(
       confirmCode: confirmCode,
       status: Formz.validate([state.email, state.password, state.confirmCode]),
@@ -111,7 +111,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   ) {
     print('_onConfirmFormEmailChanged');
     final email = Email.dirty(event.email);
-    print('${state.email}, ${state.password}');
+    print('${state.email}, ${state.password}   ${state.confirmCode} ');
     emit(state.copyWith(
       email: email,
       status: Formz.validate([state.email, state.password, state.confirmCode]),
@@ -124,7 +124,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   ) {
     print('_onConfirmFormPasswordChanged');
     final password = Password.dirty(event.password);
-    print('${state.email}, ${state.password}');
+    print('${state.email}, ${state.password}   ${state.confirmCode} ');
     emit(state.copyWith(
       password: password,
       status: Formz.validate([state.email, state.password, state.confirmCode]),
