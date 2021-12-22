@@ -69,7 +69,44 @@ class AuthenticationRepository {
 
         return dartz.left(_tokenPair);
       }, (right) {
-        _controller.add(AuthRepoState.unauthenticated());
+        print('right');
+        print(right.toJson().toString());
+        if (right.errorNo == "9006") {
+          _controller.add(AuthRepoState.authenticateConfirmCode(
+              TokenPair(email, password)));
+        } else {
+          _controller.add(AuthRepoState.unknown());
+        }
+        return dartz.right(right as ApiError);
+      });
+    } catch (err) {
+      print('Error connectiing to server ' + err.toString());
+      throw (err);
+      // return dartz.right(ApiError(error: '$err', errorNo: '1900202'));
+    }
+  }
+
+//-----===== resendVerficationCode
+
+  Future<dartz.Either<TokenPair, ApiError>> resendVerficationCode(
+      {required String email, required String password}) async {
+    dartz.Either<ApiResponse, ApiError> _loginUserResponse;
+
+    try {
+      _loginUserResponse =
+          await apiresendVerficationCode(email, password, baseUrl);
+      print('login response :' + _loginUserResponse.toString());
+
+      return _loginUserResponse.fold((left) {
+        //print((right as ApiError).error.toString());
+        print('left1');
+        var _tokenPair = TokenPair.fromJson(json.encode(left.Data));
+        print('left2');
+        _controller.add(AuthRepoState.authenticated(_tokenPair));
+
+        return dartz.left(_tokenPair);
+      }, (right) {
+        _controller.add(AuthRepoState.unknown());
         print('right');
         print(right.toJson().toString());
         return dartz.right(right as ApiError);

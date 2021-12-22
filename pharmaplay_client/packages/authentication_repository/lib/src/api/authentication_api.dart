@@ -51,7 +51,57 @@ Future<dartz.Either<ApiResponse, ApiError>> apiLoginUser(
 
       _apiError = ApiError(
           error: _responseMap['requestResult']['error'].toString(),
-          errorNo: response.statusCode.toString());
+          errorNo: _responseMap['requestResult']['errNO'].toString());
+      print('0000000000000000000000000000');
+      return dartz.right(_apiError);
+    }
+  } catch (err) {
+    _apiError = ApiError(error: '$err', errorNo: "199991");
+    return dartz.right(_apiError);
+  }
+}
+//==================
+
+Future<dartz.Either<ApiResponse, ApiError>> apiresendVerficationCode(
+    String email, String password, String baseUrl) async {
+  ApiResponse _apiResponse = ApiResponse();
+  ApiError _apiError; // = ApiError(error: error, errorNo: errorNo);
+  try {
+    final _url = Uri.parse('http://' + baseUrl + "/auth/resendcode");
+    final _headers = {"Content-type": "application/json"};
+    final _json = '{ \"email\": \"$email\" ,  \"password\": \"$password\" }';
+    final http.Response response =
+        await http.post(_url, headers: _headers, body: _json);
+
+    print(response.body.toString() +
+        '    ==== error No:' +
+        response.statusCode.toString());
+
+    final _responseMap = json.decode(response.body);
+    final _reqResultMap = _responseMap['requestResult'];
+    print(_reqResultMap.toString());
+
+    if (response.statusCode == 200) {
+      print('202020202020');
+      print(_responseMap);
+
+      print(_reqResultMap);
+      _apiResponse.Data = _responseMap['tokenInfo'];
+      print('----------------------' + _apiResponse.Data.toString());
+
+      _apiResponse.ApiError = ApiError(
+          error: 'Successfully resend new verification }ode', errorNo: '200');
+      //    ApiError.fromJson(json.decode(_reqResultMap.toString()));
+
+      print('response error' + _apiResponse.ApiError.toString());
+      return dartz.left(_apiResponse);
+    } else {
+      print('4345654345678p-098765434567890-09876' +
+          _responseMap['requestResult'].toString());
+
+      _apiError = ApiError(
+          error: _responseMap['requestResult']['error'].toString(),
+          errorNo: _responseMap['requestResult']['errNo'].toString());
       print('0000000000000000000000000000');
       return dartz.right(_apiError);
     }
@@ -61,6 +111,7 @@ Future<dartz.Either<ApiResponse, ApiError>> apiLoginUser(
   }
 }
 
+//======================
 //== apiLoginUserWithVerfication
 
 Future<dartz.Either<ApiResponse, ApiError>> apiLoginUserWithVerfication(

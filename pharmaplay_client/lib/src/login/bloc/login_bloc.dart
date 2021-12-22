@@ -29,6 +29,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     on<ConfirmCodeChanged>(_onConfirmCodeChanged);
     on<LoginSubmitted>(_onLoginSubmitted);
     on<ConfirmCodeSubmitted>(_onConfirmCodeSubmitted);
+    on<ResendConfirmCodeSubmitted>(_onResendConfirmCodeSubmitted);
 
     // on<RoutToSignUpPageSubmitted>(_onRoutToSignUpPageSubmitted);
   }
@@ -300,6 +301,50 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     }
   }
 
+  //-==========
+
+  void _onResendConfirmCodeSubmitted(
+    ResendConfirmCodeSubmitted event,
+    Emitter<LoginState> emit,
+  ) async {
+    print('formstate: ${state.status}');
+    print(state.email.value + ' password: ' + state.password.value);
+    if (!state.status.isValidated) {
+      emit(state.copyWith(
+          status: FormzStatus.submissionFailure,
+          errMsg: 'Inpuut Data Error!!'));
+      return;
+    }
+    emit(state.copyWith(status: FormzStatus.submissionInProgress));
+//-----------------
+    final dartz.Either<TokenPair, ApiError> _repoResponse;
+    try {
+      //TokenPair _tokenInfo;
+      _repoResponse = await _authenticationRepository.resendVerficationCode(
+          email: state.email.value, password: state.password.value);
+
+      _repoResponse.fold((left) {
+        print('left');
+        // return (left);
+        print(left.toJson().toString());
+        emit(state.copyWith(
+            status: FormzStatus.submissionSuccess,
+            errMsg: left.toJson().toString()));
+      }, (right) {
+        //showInSnackBar(context, ("Login Successs!!"));
+        print('right');
+        emit(state.copyWith(
+            status: FormzStatus.submissionFailure,
+            errMsg: right.toJson().toString()));
+
+        //return (right);
+      });
+    } catch (err) {
+      print('Error connectiing to server ' + err.toString());
+      rethrow;
+      // showInSnackBar(context, err.toString());
+    }
+  }
   //========================
 
   void _onSignUpSubmited(

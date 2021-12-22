@@ -35,6 +35,9 @@ class ConfirmCodeForm extends StatelessWidget {
         context.read<LoginBloc>().add(const ConfirmCodeSubmitted());
       },
       onPressedResend: () {
+        context.read<LoginBloc>().add(ConfirmFormEmailChanged(email));
+        context.read<LoginBloc>().add(ConfirmFormPasswordChanged(password));
+        context.read<LoginBloc>().add(const ConfirmCodeChanged('test'));
         context.read<LoginBloc>().add(const ResendConfirmCodeSubmitted());
       },
     );
