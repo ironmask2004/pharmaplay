@@ -23,6 +23,7 @@ class AuthenticationBloc
     on<AuthenticationStatusChanged>(_onAuthenticationStatusChanged);
     on<AuthenticationLogoutRequested>(_onAuthenticationLogoutRequested);
     on<AuthenticationSignUpRequested>(_onAuthenticationSignUpRequested);
+    on<AuthenticationForgotRequested>(_onAuthenticationForgotRequested);
 
     authRepoStateubscription = _authenticationRepository.status.listen(
       (status) => add(AuthenticationStatusChanged(
@@ -88,6 +89,11 @@ class AuthenticationBloc
   _onAuthenticationSignUpRequested(
       AuthenticationSignUpRequested event, Emitter<AuthenticationState> emit) {
     emit(const AuthenticationState.authenticationSignUp());
+  }
+
+  _onAuthenticationForgotRequested(
+      AuthenticationForgotRequested event, Emitter<AuthenticationState> emit) {
+    emit(const AuthenticationState.authenticationForgotPassword());
   }
 
   void _onAuthenticationLogoutRequested(

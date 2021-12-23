@@ -96,6 +96,15 @@ class ConfirmCodeChanged extends LoginEvent {
   List<Object> get props => [confirmCode];
 }
 
+class ForgotEmailChanged extends LoginEvent {
+  const ForgotEmailChanged(this.email);
+
+  final String email;
+
+  @override
+  List<Object> get props => [email];
+}
+
 class ConfirmFormEmailChanged extends LoginEvent {
   const ConfirmFormEmailChanged(this.email);
 
@@ -120,4 +129,8 @@ class ConfirmCodeSubmitted extends LoginEvent {
 
 class ResendConfirmCodeSubmitted extends LoginEvent {
   const ResendConfirmCodeSubmitted();
+}
+
+class ForgotPasswordSubmitted extends LoginEvent {
+  const ForgotPasswordSubmitted();
 }

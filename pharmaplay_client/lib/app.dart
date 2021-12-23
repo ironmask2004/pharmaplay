@@ -82,6 +82,14 @@ class _AppViewState extends State<AppView> {
                     (route) => false,
                   );
                   break;
+
+                case AuthenticationStatus.authenticationForgotPassword:
+                  print('authenticate  ForgotPassword: ' + child.toString());
+                  _navigator.pushAndRemoveUntil<void>(
+                    ForgotPasswordPage.route(),
+                    (route) => false,
+                  );
+                  break;
                 default:
                   break;
               }

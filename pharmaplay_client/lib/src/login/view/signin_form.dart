@@ -33,7 +33,9 @@ class SignInForm extends StatelessWidget {
       onPressedSignUp: () {
         context.read<AuthenticationBloc>().add(AuthenticationSignUpRequested());
       },
-      onPressedForgot: () {},
+      onPressedForgot: () {
+        context.read<AuthenticationBloc>().add(AuthenticationForgotRequested());
+      },
       term: LoginFormsTerm(
         style: style,
         onPressedTermOfService: () {},

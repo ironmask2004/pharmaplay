@@ -15,7 +15,8 @@ enum AuthenticationStatus {
   unauthenticated,
   authenticateSignUp,
   authenticateConfirmCode,
-  authenticateChangePassword
+  authenticateChangePassword,
+  authenticationForgotPassword
 }
 
 class AuthenticationRepository {
@@ -105,6 +106,37 @@ class AuthenticationRepository {
         _controller.add(AuthRepoState.authenticated(_tokenPair));
 
         return dartz.left(_tokenPair);
+      }, (right) {
+        _controller.add(AuthRepoState.unknown());
+        print('right');
+        print(right.toJson().toString());
+        return dartz.right(right as ApiError);
+      });
+    } catch (err) {
+      print('Error connectiing to server ' + err.toString());
+      throw (err);
+      // return dartz.right(ApiError(error: '$err', errorNo: '1900202'));
+    }
+  }
+
+//===
+
+  Future<dartz.Either<TokenPair, ApiError>> forgotpassword(
+      {required String email}) async {
+    dartz.Either<ApiResponse, ApiError> _loginUserResponse;
+
+    try {
+      _loginUserResponse = await apiforgotpassword(email, baseUrl);
+      print('login response :' + _loginUserResponse.toString());
+
+      return _loginUserResponse.fold((left) {
+        //print((right as ApiError).error.toString());
+        print('left1');
+        // var _tokenPair = TokenPair.fromJson(json.encode(left.Data));
+        print('left2');
+        //  _controller.add(AuthRepoState.authenticated(TokenPair.empty()));
+
+        return dartz.left(TokenPair.empty());
       }, (right) {
         _controller.add(AuthRepoState.unknown());
         print('right');

@@ -14,7 +14,7 @@ sendVerificationCodeByMail(String verificationcode, String email) async {
 }
 
 sendVrandomPasswdByMail(String passwd, String email) async {
-  print('  hase been Cent to $email');
+  print('New Password (  $passwd  )  hase been Cent to $email');
   try {
     final String mailBody =
         "<h1> yourgenerated passwd is:  $passwd  </h1>\n<p>الرجاء  الدخول إلى البرنامج واستخدام  كلمة المرور  الواردة في هذه الرسالة </p>";

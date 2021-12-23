@@ -22,3 +22,5 @@ class AuthenticationLogoutRequested extends AuthenticationEvent {}
 class AuthenticationLandingRequested extends AuthenticationEvent {}
 
 class AuthenticationSignUpRequested extends AuthenticationEvent {}
+
+class AuthenticationForgotRequested extends AuthenticationEvent {}

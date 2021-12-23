@@ -21,6 +21,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     on<SignUpConfirmPasswordChanged>(_onSignUpConfirmPasswordChanged);
     on<SignUpSubmitted>(_onSignUpSubmited);
     on<LoginEmailChanged>(_onLoginEmailChanged);
+    on<ForgotEmailChanged>(_onforgotEmailChanged);
+
     on<LoginPasswordChanged>(_onLoginPasswordChanged);
 
     on<ConfirmFormEmailChanged>(_onConfirmFormEmailChanged);
@@ -103,6 +105,19 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     emit(state.copyWith(
       confirmCode: confirmCode,
       status: Formz.validate([state.email, state.password, state.confirmCode]),
+    ));
+  }
+
+  void _onforgotEmailChanged(
+    ForgotEmailChanged event,
+    Emitter<LoginState> emit,
+  ) {
+    print('_onforgotEmailChanged');
+    final email = Email.dirty(event.email);
+    print('${state.email},   ');
+    emit(state.copyWith(
+      email: email,
+      status: Formz.validate([state.email]),
     ));
   }
 
@@ -347,6 +362,51 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   }
   //========================
 
+//-==========
+
+  void _onForgotPasswordSubmitted(
+    ResendConfirmCodeSubmitted event,
+    Emitter<LoginState> emit,
+  ) async {
+    print('formstate: ${state.status}');
+    print(state.email.value + ' password: ' + state.password.value);
+    if (!state.status.isValidated) {
+      emit(state.copyWith(
+          status: FormzStatus.submissionFailure,
+          errMsg: 'Inpuut Data Error!!'));
+      return;
+    }
+    emit(state.copyWith(status: FormzStatus.submissionInProgress));
+//-----------------
+    final dartz.Either<TokenPair, ApiError> _repoResponse;
+    try {
+      //TokenPair _tokenInfo;
+      _repoResponse = await _authenticationRepository.forgotpassword(
+          email: state.email.value);
+
+      _repoResponse.fold((left) {
+        print('left');
+        // return (left);
+        print(left.toJson().toString());
+        emit(state.copyWith(
+            status: FormzStatus.submissionSuccess,
+            errMsg: left.toJson().toString()));
+      }, (right) {
+        print('right');
+        emit(state.copyWith(
+            status: FormzStatus.submissionFailure,
+            errMsg: right.toJson().toString()));
+
+        //return (right);
+      });
+    } catch (err) {
+      print('Error connectiing to server ' + err.toString());
+      rethrow;
+      // showInSnackBar(context, err.toString());
+    }
+  }
+
+//===
   void _onSignUpSubmited(
     SignUpSubmitted event,
     Emitter<LoginState> emit,
