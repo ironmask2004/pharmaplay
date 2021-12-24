@@ -32,6 +32,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     on<LoginSubmitted>(_onLoginSubmitted);
     on<ConfirmCodeSubmitted>(_onConfirmCodeSubmitted);
     on<ResendConfirmCodeSubmitted>(_onResendConfirmCodeSubmitted);
+    on<ForgotPasswordSubmitted>(_onForgotPasswordSubmitted);
 
     // on<RoutToSignUpPageSubmitted>(_onRoutToSignUpPageSubmitted);
   }
@@ -365,7 +366,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 //-==========
 
   void _onForgotPasswordSubmitted(
-    ResendConfirmCodeSubmitted event,
+    ForgotPasswordSubmitted event,
     Emitter<LoginState> emit,
   ) async {
     print('formstate: ${state.status}');

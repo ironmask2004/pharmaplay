@@ -123,23 +123,23 @@ class AuthenticationRepository {
 
   Future<dartz.Either<TokenPair, ApiError>> forgotpassword(
       {required String email}) async {
-    dartz.Either<ApiResponse, ApiError> _loginUserResponse;
+    dartz.Either<ApiResponse, ApiError> _apiForgotResponse;
 
     try {
-      _loginUserResponse = await apiforgotpassword(email, baseUrl);
-      print('login response :' + _loginUserResponse.toString());
+      _apiForgotResponse = await apiforgotpassword(email, baseUrl);
+      print('forgot  response :' + _apiForgotResponse.toString());
 
-      return _loginUserResponse.fold((left) {
+      return _apiForgotResponse.fold((left) {
         //print((right as ApiError).error.toString());
         print('left1');
         // var _tokenPair = TokenPair.fromJson(json.encode(left.Data));
         print('left2');
-        //  _controller.add(AuthRepoState.authenticated(TokenPair.empty()));
+        _controller.add(AuthRepoState.unauthenticated());
 
         return dartz.left(TokenPair.empty());
       }, (right) {
         _controller.add(AuthRepoState.unknown());
-        print('right');
+        print('right ff');
         print(right.toJson().toString());
         return dartz.right(right as ApiError);
       });

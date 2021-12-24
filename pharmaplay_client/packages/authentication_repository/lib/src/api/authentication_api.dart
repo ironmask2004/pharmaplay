@@ -136,7 +136,7 @@ Future<dartz.Either<ApiResponse, ApiError>> apiforgotpassword(
       print(_responseMap);
 
       print(_reqResultMap);
-      _apiResponse.Data = _responseMap['tokenInfo'];
+      _apiResponse.Data = TokenPair.empty().toString;
       print('----------------------' + _apiResponse.Data.toString());
 
       _apiResponse.ApiError =
