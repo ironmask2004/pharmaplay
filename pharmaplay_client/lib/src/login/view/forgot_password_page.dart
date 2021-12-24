@@ -7,7 +7,7 @@ class ForgotPasswordPage extends StatelessWidget {
   const ForgotPasswordPage({Key? key}) : super(key: key);
 
   static Route route() {
-    return MaterialPageRoute<void>(builder: (_) => ForgotPasswordPage());
+    return MaterialPageRoute<void>(builder: (_) => const ForgotPasswordPage());
   }
 
   @override
