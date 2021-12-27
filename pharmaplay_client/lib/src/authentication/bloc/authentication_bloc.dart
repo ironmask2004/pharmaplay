@@ -63,15 +63,25 @@ class AuthenticationBloc
         // print('try to Get User id : ${user.id}');
         if (user != null) {
           print(user.toString());
-          MySharedPreferences.instance
-              .setStringValue("tokenId", event.tokenPair!.tokenId);
-          MySharedPreferences.instance
-              .setStringValue("refreshToken", event.tokenPair!.refreshToken);
 
-          print('Saved try to Get User : ${user.id}');
-          //MySharedPreferences.instance.setStringValue("password", getPassword);
-          MySharedPreferences.instance.setBooleanValue("loggedIn", true);
-          return emit(AuthenticationState.authenticated(event.tokenPair!));
+          //==== refresh Token  authRefreshToken
+          final _newTorkenPair = await getNewAuthRefreshToken(event.tokenPair!);
+          if (_newTorkenPair != null) {
+            //=====
+            MySharedPreferences.instance
+                .setStringValue("tokenId", _newTorkenPair.tokenId);
+            MySharedPreferences.instance
+                .setStringValue("refreshToken", _newTorkenPair.refreshToken);
+
+            print('Saved New ToeknID : ${_newTorkenPair.tokenId}');
+            //MySharedPreferences.instance.setStringValue("password", getPassword);
+            MySharedPreferences.instance.setBooleanValue("loggedIn", true);
+
+            return emit(AuthenticationState.authenticated(_newTorkenPair));
+          } else {
+            print('unauthenticated--------------------');
+            return emit(AuthenticationState.unauthenticated(TokenPair.empty()));
+          }
         } else {
           print('unauthenticated--------------------');
           return emit(AuthenticationState.unauthenticated(TokenPair.empty()));
@@ -177,4 +187,32 @@ class AuthenticationBloc
       // showInSnackBar(context, err.toString());
     }
   }
+
+  //=====
+  Future<TokenPair?> getNewAuthRefreshToken(TokenPair _tokenPair) async {
+    print('Get Refresh Token');
+
+    try {
+      final _authRefreshTokenResponse = await _authenticationRepository
+          .authRefreshToken(tokenPair: _tokenPair);
+
+      return _authRefreshTokenResponse.fold((left) {
+        print('left3fff6663');
+        // return (left);
+        print(left.toJson().toString());
+
+        print(left.toString());
+        return (left);
+      }, (right) {
+        //showInSnackBar(context, ("Login Successs!!"));
+        print('rightffff');
+        return (null);
+      });
+    } catch (err) {
+      print('Error connectiing to server ' + err.toString());
+      rethrow;
+      // showInSnackBar(context, err.toString());
+    }
+  }
+  //====
 }

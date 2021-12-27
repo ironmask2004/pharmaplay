@@ -130,10 +130,11 @@ class AuthenticationRepository {
           // registerUser(
           tokenPair,
           baseUrl);
-      print('registerUser response :' + _apiResponse.toString());
 
       return _apiResponse.fold((left) {
         //print((right as ApiError).error.toString());
+        print('apiAuthRefreshToken response :' + left.Data.toString());
+
         print('left1');
         var _tokenPair = TokenPair.fromJson(json.encode(left.Data));
         print('left2');
