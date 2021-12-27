@@ -121,6 +121,41 @@ class AuthenticationRepository {
 
 //===
 
+  Future<dartz.Either<TokenPair, ApiError>> authRefreshToken(
+      {required TokenPair tokenPair}) async {
+    dartz.Either<ApiResponse, ApiError> _apiResponse;
+
+    try {
+      _apiResponse = await apiAuthRefreshToken(
+          // registerUser(
+          tokenPair,
+          baseUrl);
+      print('registerUser response :' + _apiResponse.toString());
+
+      return _apiResponse.fold((left) {
+        //print((right as ApiError).error.toString());
+        print('left1');
+        var _tokenPair = TokenPair.fromJson(json.encode(left.Data));
+        print('left2');
+        // _controller.add(AuthRepoState.authenticated(_tokenPair));
+
+        return dartz.left(_tokenPair);
+        print('left2');
+      }, (right) {
+        // _controller.add(AuthRepoState.unauthenticated());
+        print('right');
+        // print(right.toJson().toString());
+        return dartz.right(right as ApiError);
+      });
+    } catch (err) {
+      print('Error connectiing to server ' + err.toString());
+      throw (err);
+      // return dartz.right(ApiError(error: '$err', errorNo: '1900202'));
+    }
+  }
+
+//============
+
   Future<dartz.Either<TokenPair, ApiError>> forgotpassword(
       {required String email}) async {
     dartz.Either<ApiResponse, ApiError> _apiForgotResponse;

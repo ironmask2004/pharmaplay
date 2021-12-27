@@ -313,11 +313,12 @@ class AuthApi {
 //  ================ authreize / refresh token route
 
     router.post('/refreshToken', (Request req) async {
+      // sdfsdfsdfsdfsd
       final payload = await req.readAsString();
       print(payload);
       final payloadMap = json.decode(payload);
 
-      print('Rewuest refreshToken ' + payloadMap['refreshToken'].toString());
+      print('Request refreshToken ' + payloadMap['refreshToken'].toString());
 
       final token = verifyJwt(payloadMap['refreshToken'], secret);
       if (token == null) {
@@ -347,8 +348,19 @@ class AuthApi {
 
         final tokenPair =
             await tokenService.createTokenPair(oldJwt.subject.toString());
+
+        final Map<String, dynamic> tokenInfo = {
+          "tokenInfo": {
+            "tokenId": tokenPair.tokenId,
+            "refreshToken": tokenPair.refreshToken
+          },
+          "requestResult": {
+            "error": "Suucess",
+            "errNO": "200",
+          }
+        };
         return Response.ok(
-          json.encode(tokenPair.toJson()),
+          json.encode(tokenInfo),
           headers: {
             HttpHeaders.contentTypeHeader: ContentType.json.mimeType,
           },

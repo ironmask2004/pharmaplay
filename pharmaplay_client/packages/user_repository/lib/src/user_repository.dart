@@ -23,7 +23,7 @@ class UserRepository {
     dartz.Either<ApiResponse, ApiError> _getUserResponse;
 
     try {
-      _getUserResponse = await getUserByTokenId(tokenId, baseUrl);
+      _getUserResponse = await apiGetUserByTokenId(tokenId, baseUrl);
       print('login response :' + _getUserResponse.toString());
 
       return _getUserResponse.fold((left) {

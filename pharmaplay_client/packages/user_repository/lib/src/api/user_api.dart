@@ -49,7 +49,7 @@ Future<Either<ApiResponse, User>> getUserInfo(
  */
 */
 
-Future<dartz.Either<ApiResponse, ApiError>> getUserByTokenId(
+Future<dartz.Either<ApiResponse, ApiError>> apiGetUserByTokenId(
     String tokenId, String baseUrl) async {
   ApiResponse _apiResponse = ApiResponse();
   ApiError _apiError; // = ApiError(error: error, errorNo: errorNo);
@@ -63,7 +63,7 @@ Future<dartz.Either<ApiResponse, ApiError>> getUserByTokenId(
     };
     print(_headers.toString());
     final client = http.Client();
-    print('kkkkkkkkkkkkk0000000000000000000kkkkkkkkkkkkkkk');
+    print('-000-0--0-0-0-0--0');
     final http.Response response = await client.get(url, headers: _headers);
     final _response = response.statusCode;
     print(response.body.toString());

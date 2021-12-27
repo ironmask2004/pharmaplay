@@ -135,6 +135,7 @@ class AuthenticationBloc
       } else {
         try {
           await _authenticationRepository.logInByID(tokenPair: _tokenPair);
+
           emit(AuthenticationState.authenticated((_tokenPair)));
 
           // emit();

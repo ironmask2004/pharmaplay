@@ -62,6 +62,62 @@ Future<dartz.Either<ApiResponse, ApiError>> apiLoginUser(
 }
 //==================
 
+Future<dartz.Either<ApiResponse, ApiError>> apiAuthRefreshToken(
+    TokenPair tokenPair, String baseUrl) async {
+  ApiResponse _apiResponse = ApiResponse();
+  ApiError _apiError; // = ApiError(error: error, errorNo: errorNo);
+  try {
+    final _url = Uri.parse('http://' + baseUrl + "/auth/refreshToken");
+
+    final Map<String, String> _headers = {
+      'content-type': 'application/json',
+      'accept': 'application/json',
+      'authorization': 'Bearer ${tokenPair.tokenId}'
+    };
+
+    final _json = '{ \"refreshToken\": \"${tokenPair.refreshToken}\"   }';
+    final http.Response response =
+        await http.post(_url, headers: _headers, body: _json);
+
+    print(response.body.toString() +
+        '    ==== error No:' +
+        response.statusCode.toString());
+
+    final _responseMap = json.decode(response.body);
+    final _reqResultMap = _responseMap['requestResult'];
+    print(_reqResultMap.toString());
+
+    if (response.statusCode == 200) {
+      print('202020202020');
+      print(_responseMap);
+
+      print(_reqResultMap);
+      _apiResponse.Data = _responseMap['tokenInfo'];
+
+      _apiResponse.ApiError =
+          ApiError(error: 'refresh Token  Success', errorNo: '200');
+      //    ApiError.fromJson(json.decode(_reqResultMap.toString()));
+
+      print('response error' + _apiResponse.ApiError.toString());
+      print('----------------------' + _apiResponse.Data.toString());
+      print('response error' + _apiResponse.ApiError.toString());
+      return dartz.left(_apiResponse);
+    } else {
+      print('6666666666-6666-6666' + _responseMap['requestResult'].toString());
+
+      _apiError = ApiError(
+          error: _responseMap['requestResult']['error'].toString(),
+          errorNo: _responseMap['requestResult']['errNO'].toString());
+      print('0000000000000000000000000000');
+      return dartz.right(_apiError);
+    }
+  } catch (err) {
+    _apiError = ApiError(error: '$err', errorNo: "199991");
+    return dartz.right(_apiError);
+  }
+}
+//=========
+
 Future<dartz.Either<ApiResponse, ApiError>> apiresendVerficationCode(
     String email, String password, String baseUrl) async {
   ApiResponse _apiResponse = ApiResponse();
