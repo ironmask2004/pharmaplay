@@ -63,25 +63,15 @@ class AuthenticationBloc
         // print('try to Get User id : ${user.id}');
         if (user != null) {
           print(user.toString());
+          MySharedPreferences.instance
+              .setStringValue("tokenId", event.tokenPair!.tokenId);
+          MySharedPreferences.instance
+              .setStringValue("refreshToken", event.tokenPair!.refreshToken);
 
-          //==== refresh Token  authRefreshToken
-          final _newTorkenPair = await getNewAuthRefreshToken(event.tokenPair!);
-          if (_newTorkenPair != null) {
-            //=====
-            MySharedPreferences.instance
-                .setStringValue("tokenId", _newTorkenPair.tokenId);
-            MySharedPreferences.instance
-                .setStringValue("refreshToken", _newTorkenPair.refreshToken);
-
-            print('Saved New ToeknID : ${_newTorkenPair.tokenId}');
-            //MySharedPreferences.instance.setStringValue("password", getPassword);
-            MySharedPreferences.instance.setBooleanValue("loggedIn", true);
-
-            return emit(AuthenticationState.authenticated(_newTorkenPair));
-          } else {
-            print('unauthenticated--------------------');
-            return emit(AuthenticationState.unauthenticated(TokenPair.empty()));
-          }
+          print('Saved try to Get User : ${user.id}');
+          //MySharedPreferences.instance.setStringValue("password", getPassword);
+          MySharedPreferences.instance.setBooleanValue("loggedIn", true);
+          return emit(AuthenticationState.authenticated(event.tokenPair!));
         } else {
           print('unauthenticated--------------------');
           return emit(AuthenticationState.unauthenticated(TokenPair.empty()));
@@ -144,10 +134,26 @@ class AuthenticationBloc
         // emit(const AuthenticationState.unknown());
       } else {
         try {
-          await _authenticationRepository.logInByID(tokenPair: _tokenPair);
+//====
+          final _newTorkenPair = await getNewAuthRefreshToken(_tokenPair);
+          if (_newTorkenPair != null) {
+            //=====
+            MySharedPreferences.instance
+                .setStringValue("tokenId", _newTorkenPair.tokenId);
+            MySharedPreferences.instance
+                .setStringValue("refreshToken", _newTorkenPair.refreshToken);
 
-          emit(AuthenticationState.authenticated((_tokenPair)));
+            print('Saved New ToeknID : ${_newTorkenPair.tokenId}');
+            //MySharedPreferences.instance.setStringValue("password", getPassword);
+            MySharedPreferences.instance.setBooleanValue("loggedIn", true);
 
+//==
+
+            await _authenticationRepository.logInByID(
+                tokenPair: _newTorkenPair);
+
+            emit(AuthenticationState.authenticated((_newTorkenPair)));
+          }
           // emit();
         } catch (_) {
           emit(AuthenticationState.unauthenticated(TokenPair.empty()));
@@ -158,34 +164,6 @@ class AuthenticationBloc
       emit(AuthenticationState.unauthenticated(TokenPair.empty()));
     }
     print('Start LAnding 33');
-  }
-
-  Future<User?> _tryGetUser(String userId) async {
-    print(
-        'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxx User Id to try get :$userId');
-
-    final _getUserByIdResponse;
-
-    try {
-      _getUserByIdResponse = await _userRepository.getUserById(tokenId: userId);
-
-      return _getUserByIdResponse.fold((left) {
-        print('left33');
-        // return (left);
-        print(left.toJson().toString());
-
-        print(left.toString());
-        return (left);
-      }, (right) {
-        //showInSnackBar(context, ("Login Successs!!"));
-        print('right');
-        return (null);
-      });
-    } catch (err) {
-      print('Error connectiing to server ' + err.toString());
-      rethrow;
-      // showInSnackBar(context, err.toString());
-    }
   }
 
   //=====
@@ -215,4 +193,32 @@ class AuthenticationBloc
     }
   }
   //====
+
+  Future<User?> _tryGetUser(String userId) async {
+    print(
+        'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxx User Id to try get :$userId');
+
+    final _getUserByIdResponse;
+
+    try {
+      _getUserByIdResponse = await _userRepository.getUserById(tokenId: userId);
+
+      return _getUserByIdResponse.fold((left) {
+        print('left33');
+        // return (left);
+        print(left.toJson().toString());
+
+        print(left.toString());
+        return (left);
+      }, (right) {
+        //showInSnackBar(context, ("Login Successs!!"));
+        print('right');
+        return (null);
+      });
+    } catch (err) {
+      print('Error connectiing to server ' + err.toString());
+      rethrow;
+      // showInSnackBar(context, err.toString());
+    }
+  }
 }

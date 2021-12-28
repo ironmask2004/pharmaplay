@@ -89,9 +89,7 @@ Future<dartz.Either<ApiResponse, ApiError>> apiAuthRefreshToken(
 
     if (response.statusCode == 200) {
       print('202020202020');
-      print(_responseMap);
 
-      print(_reqResultMap);
       _apiResponse.Data = _responseMap['tokenInfo'];
 
       _apiResponse.ApiError =
