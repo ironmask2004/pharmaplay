@@ -263,8 +263,34 @@ class AuthenticationRepository {
         () => _controller.add(AuthRepoState.authenticated(tokenPair)));
   }
 
-  void logOut() {
-    _controller.add(AuthRepoState.unauthenticated());
+//=======================
+  Future<void> logOut(String _tokenId) async {
+    try {
+      final _LogOutUserResponse = await apiLogOutUser(_tokenId, baseUrl);
+      print('_LogOutUser  response :' + _LogOutUserResponse.toString());
+
+      return _LogOutUserResponse.fold((left) {
+        //print((right as ApiError).error.toString());
+        print('left1');
+        // var _tokenPair = TokenPair.fromJson(json.encode(left.Data));
+        print('left2');
+        _controller.add(AuthRepoState.unauthenticated());
+
+        return dartz.left(TokenPair.empty());
+      }, (right) {
+        // _controller.add(AuthRepoState.unauthenticated());
+        print('right');
+        // print(right.toJson().toString());
+        _controller.add(AuthRepoState.unauthenticated());
+        return dartz.right(right as ApiError);
+      });
+    } catch (err) {
+      print('Error connectiing to server ' + err.toString());
+      _controller.add(AuthRepoState.unauthenticated());
+      throw (err);
+
+      // return dartz.right(ApiError(error: '$err', errorNo: '1900202'));
+    }
   }
 
   void dispose() => _controller.close();

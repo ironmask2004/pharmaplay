@@ -268,17 +268,18 @@ Future<dartz.Either<ApiResponse, ApiError>> apiLoginUserWithVerfication(
 
 //===
 
-Future<dartz.Either<ApiResponse, String>> logOutUser(
+Future<dartz.Either<ApiResponse, ApiError>> apiLogOutUser(
     String userToken, String baseUrl) async {
   ApiResponse _apiResponse = ApiResponse();
   try {
-    var url = new Uri.http(baseUrl, "users/logout");
+    var url = new Uri.http(baseUrl, "/auth/logout");
     Map<String, String> _headers = {
       'content-type': 'application/json',
       'accept': 'application/json',
       'authorization': 'Bearer $userToken'
     };
     print(url.toString() + " Headrs:  " + _headers.toString());
+
     final client = http.Client();
     final http.Response response = await client.post(url, headers: _headers);
     final _response = response.statusCode;
@@ -287,11 +288,12 @@ Future<dartz.Either<ApiResponse, String>> logOutUser(
     if (_response == 200) {
       // _apiResponse.Data = User.fromJson(response.body);
       _apiResponse.ApiError = ApiError.fromJson(
-          {"error": "Get User LogOut Success", "errorNo": "200"});
-      return dartz.right("Get User LogOut Success");
+          {"error": "  User LogOut Success", "errorNo": "200"});
+      return dartz.left(_apiResponse);
     } else {
       _apiResponse.ApiError = ApiError(
           error: json.decode(response.body), errorNo: _response.toString());
+      return dartz.right(_apiResponse.ApiError as ApiError);
     }
   } on SocketException {
     _apiResponse.ApiError = ApiError(

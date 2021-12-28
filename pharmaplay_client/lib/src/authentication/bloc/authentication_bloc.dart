@@ -99,8 +99,10 @@ class AuthenticationBloc
   void _onAuthenticationLogoutRequested(
     AuthenticationLogoutRequested event,
     Emitter<AuthenticationState> emit,
-  ) {
-    _authenticationRepository.logOut();
+  ) async {
+    final tokenId =
+        await MySharedPreferences.instance.getStringValue("tokenId");
+    _authenticationRepository.logOut(tokenId);
     print('LOOOOOOgOOOOOUT!!');
     MySharedPreferences.instance.removeValue("tokenId");
     MySharedPreferences.instance.removeValue("refreshToken");
