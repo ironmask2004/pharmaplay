@@ -7,6 +7,7 @@ sendVerificationCodeByMail(String verificationcode, String email) async {
   try {
     final String mailBody =
         "<h1> your verification code is:  $verificationcode  </h1>\n<p>الرجاء اعادة الدخول إلى البرنامج واستخدام كود التحقق الوارد في هذه الرسالة </p>";
+    print(mailBody);
     // sendMail(email, 'Verifcation code from pharmaplay', mailBody);
   } catch (err) {
     print(err.toString());
@@ -18,7 +19,8 @@ sendVrandomPasswdByMail(String passwd, String email) async {
   try {
     final String mailBody =
         "<h1> yourgenerated passwd is:  $passwd  </h1>\n<p>الرجاء  الدخول إلى البرنامج واستخدام  كلمة المرور  الواردة في هذه الرسالة </p>";
-    sendMail(email, 'Password  Generated from pharmaplay', mailBody);
+    print(mailBody);
+    // sendMail(email, 'Password  Generated from pharmaplay', mailBody);
   } catch (err) {
     print(err.toString());
   }
