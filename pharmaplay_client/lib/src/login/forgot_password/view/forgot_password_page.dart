@@ -1,7 +1,10 @@
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pharmaplay_client/src/login/login.dart';
+import 'package:pharmaplay_client/src/login/forgot_password/forgot_password.dart';
+//import 'package:pharmaplay_client/src/login/login.dart';
+
+//import '../forgot_password.dart';
 
 class ForgotPasswordPage extends StatelessWidget {
   const ForgotPasswordPage({Key? key}) : super(key: key);
@@ -18,7 +21,7 @@ class ForgotPasswordPage extends StatelessWidget {
         padding: const EdgeInsets.all(12),
         child: BlocProvider(
           create: (context) {
-            return LoginBloc(
+            return ForgotPasswordBloc(
               authenticationRepository:
                   RepositoryProvider.of<AuthenticationRepository>(context),
             );

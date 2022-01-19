@@ -8,13 +8,29 @@ class LoginForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<LoginBloc, LoginState>(
       listener: (context, state) {
+        print(
+            '-------------------Subemission status -----------: ${state.status.toString()} ');
         if (state.status.isSubmissionFailure) {
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(
-              SnackBar(content: Text('-- Login Failed: ${state.errMsg}--')),
+              SnackBar(content: Text('Login Failed: ${state.errMsg}')),
+            );
+        } /*else if (state.status.isSubmissionSuccess) {
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(
+              SnackBar(content: Text('isSubmissionSuccess: ${state.errMsg}')),
             );
         }
+        else if (state.status.isSubmissionInProgress) {
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(
+              SnackBar(
+                  content: Text('isSubmissionInProgress :  ${state.errMsg}')),
+            );
+        }*/
       },
       child: Align(
         alignment: const Alignment(0, -1 / 3),
