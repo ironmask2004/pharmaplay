@@ -65,7 +65,7 @@ class ForgotPasswordBloc
         print(left.toJson().toString());
         emit(state.copyWith(
             status: FormzStatus.submissionSuccess,
-            errMsg: 'تم ارسال كلمة سر جديدة على الايميل المحدد'));
+            errMsg: 'new PAssword Has Been cent to your Email'));
       }, (right) {
         print('right');
         emit(state.copyWith(
