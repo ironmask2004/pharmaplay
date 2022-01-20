@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pharmaplay_client/src/authentication/authentication.dart';
 import 'package:pharmaplay_client/src/home/home.dart';
+import 'package:pharmaplay_client/src/login/confirm_code/confirm_code.dart';
 import 'package:pharmaplay_client/src/login/forgot_password/forgot_password.dart';
 import 'package:pharmaplay_client/src/login/login.dart';
 import 'package:pharmaplay_client/src/splash/splash.dart';

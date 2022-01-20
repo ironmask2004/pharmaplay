@@ -1,7 +1,9 @@
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pharmaplay_client/src/login/login.dart';
+import 'package:pharmaplay_client/src/login/confirm_code/bloc/confirm_code_bloc.dart';
+
+import 'confirmcode_forms.dart';
 
 class ConfirmCodePage extends StatelessWidget {
   const ConfirmCodePage(this.email, this.password, {Key? key})
@@ -22,7 +24,7 @@ class ConfirmCodePage extends StatelessWidget {
         padding: const EdgeInsets.all(12),
         child: BlocProvider(
           create: (context) {
-            return LoginBloc(
+            return ConfirmCodeBloc(
               authenticationRepository:
                   RepositoryProvider.of<AuthenticationRepository>(context),
             );

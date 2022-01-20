@@ -13,15 +13,7 @@ class ForgotPasswordState extends Equatable {
   final String errMsg;
 
   ForgotPasswordState copyWith(
-      {FormzStatus? status,
-      InputString? firstname,
-      InputString? lastname,
-      Mobile? mobile,
-      Email? email,
-      Password? password,
-      Password? confirmPassword,
-      InputString? confirmCode,
-      String? errMsg}) {
+      {FormzStatus? status, Email? email, String? errMsg}) {
     return ForgotPasswordState(
       status: status ?? this.status,
       email: email ?? this.email,
