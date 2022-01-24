@@ -5,9 +5,9 @@ import 'package:login_forms/login_forms.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
+import 'package:pharmaplay_client/generated/l10n.dart';
 import 'package:pharmaplay_client/src/authentication/authentication.dart';
 import 'package:pharmaplay_client/src/login/login.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SignInForm extends StatelessWidget {
   final LoginFormsStyle style = LoginFormsStyle.defaultTemplate;
@@ -24,11 +24,11 @@ class SignInForm extends StatelessWidget {
     var signInPage = LoginFormsSignInPage(
       logo: logo,
       style: style,
-      hintTextUser: AppLocalizations.of(context)!.email,
-      hintTextPassword: AppLocalizations.of(context)!.password,
-      buttonTextSignIn: AppLocalizations.of(context)!.signIn,
-      buttonTextForgotPassword: AppLocalizations.of(context)!.forgotPassword,
-      buttonTextSignUp: AppLocalizations.of(context)!.signUp,
+      hintTextUser: SLang.of(context).email,
+      hintTextPassword: SLang.of(context).password,
+      buttonTextSignIn: SLang.of(context).signIn,
+      buttonTextForgotPassword: SLang.of(context).forgotPassword,
+      buttonTextSignUp: SLang.of(context).signUp,
       onPressedSignIn: () {
         context.read<LoginBloc>().add(const LoginSubmitted());
       },

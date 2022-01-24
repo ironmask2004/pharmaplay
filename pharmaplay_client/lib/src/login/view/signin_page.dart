@@ -1,8 +1,8 @@
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pharmaplay_client/generated/l10n.dart';
 import 'package:pharmaplay_client/src/login/login.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SignInPage extends StatelessWidget {
   const SignInPage({Key? key}) : super(key: key);
@@ -14,7 +14,7 @@ class SignInPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(AppLocalizations.of(context)!.loginPage)),
+      appBar: AppBar(title: Text(SLang.of(context).loginPage)),
       body: Padding(
         padding: const EdgeInsets.all(12),
         child: BlocProvider(
