@@ -1,6 +1,8 @@
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:pharmaplay_client/src/authentication/authentication.dart';
 import 'package:pharmaplay_client/src/home/home.dart';
 import 'package:pharmaplay_client/src/login/confirm_code/confirm_code.dart';
@@ -47,13 +49,23 @@ class _AppViewState extends State<AppView> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      locale: const Locale('ar', 'SA'),
       navigatorKey: _navigatorKey,
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('en', ''), // English, no country code
+        Locale('ar', ''), // Arabic, no country code
+      ],
+      onGenerateTitle: (BuildContext context) =>
+          AppLocalizations.of(context)!.appTitle,
       builder: (context, child) {
         return BlocListener<AuthenticationBloc, AuthenticationState>(
             listener: (context, state) {
-              print('_navigatorKey' + _navigatorKey.toString());
-              print('listenr:' + child.toString());
-              print(state.status);
               switch (state.status) {
                 case AuthenticationStatus.authenticated:
                   print('Auth : ' + child.toString());

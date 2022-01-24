@@ -6,6 +6,7 @@ import 'package:login_forms/login_forms.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:pharmaplay_client/src/login/login.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MyLoginForm extends StatefulWidget {
   @override
@@ -42,6 +43,11 @@ class _MyAppState extends State<MyLoginForm> {
     var signInPage = LoginFormsSignInPage(
       logo: logo,
       style: style,
+      hintTextUser: AppLocalizations.of(context)!.email,
+      hintTextPassword: AppLocalizations.of(context)!.password,
+      buttonTextSignIn: AppLocalizations.of(context)!.signIn,
+      buttonTextForgotPassword: AppLocalizations.of(context)!.forgotPassword,
+      buttonTextSignUp: AppLocalizations.of(context)!.signUp,
       onPressedSignIn: () {
         context.read<LoginBloc>().add(const LoginSubmitted());
       },

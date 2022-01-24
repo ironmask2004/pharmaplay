@@ -3,6 +3,7 @@ import 'package:pharmaplay_client/app.dart';
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:pharmaplay_client/src/utlites/shared_pref.dart';
 import 'package:user_repository/user_repository.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 Future<void> main() async {
   bool loggedInFlag =
