@@ -201,6 +201,26 @@ class SLang {
       args: [],
     );
   }
+
+  /// `_onSignUpLastnameChanged`
+  String get onsignuplastnamechanged {
+    return Intl.message(
+      '_onSignUpLastnameChanged',
+      name: 'onsignuplastnamechanged',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email`
+  String get emailaddress {
+    return Intl.message(
+      'Email',
+      name: 'emailaddress',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<SLang> {

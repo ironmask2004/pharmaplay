@@ -62,7 +62,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     SignUpLastnameChanged event,
     Emitter<LoginState> emit,
   ) {
-    print('_onSignUpLastnameChanged');
+    //print(SLang.of(context).onsignuplastnamechanged);
     final lastname = InputString.dirty(event.lastname);
     emit(state.copyWith(
       lastname: lastname,

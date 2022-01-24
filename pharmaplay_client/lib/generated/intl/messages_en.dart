@@ -37,10 +37,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "appTitle": MessageLookupByLibrary.simpleMessage("Pharmaplay Market"),
         "confirmCode": MessageLookupByLibrary.simpleMessage("Confirm-Code"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
+        "emailaddress": MessageLookupByLibrary.simpleMessage("Email"),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("forgotPassword"),
         "loginPage": MessageLookupByLibrary.simpleMessage(
             "Wellcome Login To PahrmaPlay"),
+        "onsignuplastnamechanged":
+            MessageLookupByLibrary.simpleMessage("_onSignUpLastnameChanged"),
         "pageHomeListTitle":
             MessageLookupByLibrary.simpleMessage("Some localized strings:"),
         "pageHomeSampleCurrentDateTime": m0,

@@ -37,10 +37,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "appTitle": MessageLookupByLibrary.simpleMessage("الصيدلية"),
         "confirmCode": MessageLookupByLibrary.simpleMessage("رمز التحقق"),
         "email": MessageLookupByLibrary.simpleMessage("الإيميل"),
+        "emailaddress": MessageLookupByLibrary.simpleMessage("Email"),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("نسيت كلمة السر"),
         "loginPage":
             MessageLookupByLibrary.simpleMessage("تسجيل الدخول إلى الصيدلية"),
+        "onsignuplastnamechanged":
+            MessageLookupByLibrary.simpleMessage("_onSignUpLastnameChanged"),
         "pageHomeListTitle":
             MessageLookupByLibrary.simpleMessage("بعض النصوص المعربة:"),
         "pageHomeSampleCurrentDateTime": m0,

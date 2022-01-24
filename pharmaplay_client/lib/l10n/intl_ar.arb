@@ -1,6 +1,4 @@
 {
-
-
   "@@locale": "ar",
   "pageHomeListTitle": "بعض النصوص المعربة:",
   "pageHomeSamplePlaceholder": "اهلا {name}",
@@ -43,7 +41,8 @@
         "type": "DateTime",
         "format": "Hm"
       }
-    }},
+    }
+  },
   "appTitle": "الصيدلية",
   "@appTitle": {
     "description": "عنوان التطبيق"
@@ -54,8 +53,7 @@
   "password": "كلمة السر",
   "signIn": "تسجيل دخول",
   "forgotPassword": "نسيت كلمة السر",
-  "signUp": "تسجيل جديد"
-
-
- }
-
+  "signUp": "تسجيل جديد",
+  "onsignuplastnamechanged": "_onSignUpLastnameChanged",
+  "emailaddress": "Email"
+}
