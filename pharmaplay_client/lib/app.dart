@@ -11,16 +11,19 @@ import 'package:pharmaplay_client/src/login/login.dart';
 import 'package:pharmaplay_client/src/splash/splash.dart';
 import 'package:user_repository/user_repository.dart';
 
+import 'src/settings/settings_controller.dart';
+
 class App extends StatelessWidget {
   const App({
     Key? key,
+    required this.settingsController,
     required this.authenticationRepository,
     required this.userRepository,
   }) : super(key: key);
 
   final AuthenticationRepository authenticationRepository;
   final UserRepository userRepository;
-
+  final SettingsController settingsController;
   @override
   Widget build(BuildContext context) {
     return RepositoryProvider.value(
