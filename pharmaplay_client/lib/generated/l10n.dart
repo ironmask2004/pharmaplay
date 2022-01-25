@@ -221,6 +221,36 @@ class SLang {
       args: [],
     );
   }
+
+  /// `_onforgotEmailChanged`
+  String get onforgotemailchanged {
+    return Intl.message(
+      '_onforgotEmailChanged',
+      name: 'onforgotemailchanged',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reset Password`
+  String get resetPassword {
+    return Intl.message(
+      'Reset Password',
+      name: 'resetPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Back To`
+  String get backTo {
+    return Intl.message(
+      'Back To',
+      name: 'backTo',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<SLang> {

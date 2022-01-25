@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:login_forms/login_forms.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
+import 'package:pharmaplay_client/generated/l10n.dart';
+import 'package:pharmaplay_client/src/authentication/authentication.dart';
 import 'package:pharmaplay_client/src/login/forgot_password/forgot_password.dart';
 //import 'package:pharmaplay_client/src/login/login.dart';
 
@@ -21,6 +23,12 @@ class ForgotPasswordForm extends StatelessWidget {
     var forgotPasswordPage = LoginFormsForgotPasswordPage(
         logo: logo,
         style: style,
+        buttonTextSignIn: SLang.current.backTo + SLang.current.signIn,
+        onPressedSignIn: () {
+          context
+              .read<AuthenticationBloc>()
+              .add(AuthenticationLandingRequested());
+        },
         onChangeEmail: (email) {
           context.read<ForgotPasswordBloc>().add(ForgotEmailChanged(email));
         },

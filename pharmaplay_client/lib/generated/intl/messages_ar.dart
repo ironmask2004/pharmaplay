@@ -35,6 +35,7 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "appTitle": MessageLookupByLibrary.simpleMessage("الصيدلية"),
+        "backTo": MessageLookupByLibrary.simpleMessage("عودة إلى "),
         "confirmCode": MessageLookupByLibrary.simpleMessage("رمز التحقق"),
         "email": MessageLookupByLibrary.simpleMessage("الإيميل"),
         "emailaddress": MessageLookupByLibrary.simpleMessage("Email"),
@@ -42,6 +43,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("نسيت كلمة السر"),
         "loginPage":
             MessageLookupByLibrary.simpleMessage("تسجيل الدخول إلى الصيدلية"),
+        "onforgotemailchanged":
+            MessageLookupByLibrary.simpleMessage("تغيير في البريد الاكتروني"),
         "onsignuplastnamechanged":
             MessageLookupByLibrary.simpleMessage("_onSignUpLastnameChanged"),
         "pageHomeListTitle":
@@ -52,6 +55,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "pageHomeSamplePlural": m3,
         "pageHomeSampleTotalAmount": m4,
         "password": MessageLookupByLibrary.simpleMessage("كلمة السر"),
+        "resetPassword":
+            MessageLookupByLibrary.simpleMessage("اعادة تعيين كلمة السر"),
         "signIn": MessageLookupByLibrary.simpleMessage("تسجيل دخول"),
         "signUp": MessageLookupByLibrary.simpleMessage("تسجيل جديد")
       };

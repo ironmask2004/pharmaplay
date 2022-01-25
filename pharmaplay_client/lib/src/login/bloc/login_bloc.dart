@@ -4,6 +4,7 @@ import 'package:equatable/equatable.dart';
 import 'package:formz/formz.dart';
 import 'package:pharmaplay_client/src/login/login.dart';
 import 'package:dartz/dartz.dart' as dartz;
+import 'package:pharmaplay_client/generated/l10n.dart';
 
 part 'login_event.dart';
 part 'login_state.dart';
@@ -113,7 +114,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     ForgotEmailChanged event,
     Emitter<LoginState> emit,
   ) {
-    print('_onforgotEmailChanged');
+    print(SLang.current.onforgotemailchanged);
     final email = Email.dirty(event.email);
     print('${state.email},   ');
     emit(state.copyWith(

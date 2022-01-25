@@ -2,6 +2,7 @@ import 'dart:html';
 
 import 'package:flutter/material.dart';
 import 'package:login_forms/login_forms.dart';
+import 'package:pharmaplay_client/generated/l10n.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
@@ -23,6 +24,7 @@ class SignUpForm extends StatelessWidget {
     var signUpPage = LoginFormsSignUpPage(
       logo: logo,
       style: style,
+      buttonTextSignIn: SLang.current.backTo + SLang.current.signIn,
       onPressedSignIn: () {
         context
             .read<AuthenticationBloc>()

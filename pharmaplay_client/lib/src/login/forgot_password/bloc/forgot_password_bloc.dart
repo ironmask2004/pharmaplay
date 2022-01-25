@@ -2,8 +2,10 @@ import 'package:authentication_repository/authentication_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:formz/formz.dart';
+import 'package:pharmaplay_client/generated/l10n.dart';
 import 'package:pharmaplay_client/src/login/login.dart';
 import 'package:dartz/dartz.dart' as dartz;
+//import 'package:pharmaplay_client/generated/l10n.dart';
 
 part 'forgot_password_event.dart';
 part 'forgot_password_state.dart';
@@ -26,7 +28,8 @@ class ForgotPasswordBloc
     ForgotEmailChanged event,
     Emitter<ForgotPasswordState> emit,
   ) {
-    print('_onforgotEmailChanged');
+    print(SLang.current.onforgotemailchanged);
+
     final email = Email.dirty(event.email);
     print('${state.email},   ');
     emit(state.copyWith(

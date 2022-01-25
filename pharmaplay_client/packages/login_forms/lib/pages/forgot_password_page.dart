@@ -28,6 +28,13 @@ class LoginFormsForgotPasswordPage extends StatelessWidget {
   /// Use for the TextField lets the users input their email or phone number to confirm for creating new password. See also [LoginFormsTextField]
   final String hintTextEmail;
 
+  /// The text of SignIn button.
+  final String buttonTextSignIn;
+
+  /// The action of SignIn button to navigate to [LoginFormsSignInPage]
+
+  final Function() onPressedSignIn;
+
   /// Use for the TextField lets the users input their email or phone number to confirm for creating new password. See also [LoginFormsTextField]
   final String? errorTextEmail;
 
@@ -46,6 +53,7 @@ class LoginFormsForgotPasswordPage extends StatelessWidget {
     Key? key,
     required this.logo,
     required this.style,
+    required this.onPressedSignIn,
     this.buttonTextNext: 'Send',
     required this.onPressedNext,
     this.textInputActionEmail: TextInputAction.next,
@@ -56,6 +64,7 @@ class LoginFormsForgotPasswordPage extends StatelessWidget {
     this.onTapEmail,
     this.onChangeEmail,
     this.controllerEmail,
+    this.buttonTextSignIn: 'Sign In',
     this.textMessage:
         'Enter the email associated with your account and we will send an introductions to reset your password.',
   }) : super(key: key);
@@ -107,6 +116,21 @@ class LoginFormsForgotPasswordPage extends StatelessWidget {
               text: buttonTextNext,
               onPressed: onPressedNext,
               style: style,
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(
+              top: style.verticalSpacingBetweenGroup,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                LoginFormsInlineButton(
+                  text: buttonTextSignIn,
+                  onPressed: onPressedSignIn,
+                  style: style,
+                ),
+              ],
             ),
           ),
         ],

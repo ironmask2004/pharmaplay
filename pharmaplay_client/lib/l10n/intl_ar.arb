@@ -55,5 +55,9 @@
   "forgotPassword": "نسيت كلمة السر",
   "signUp": "تسجيل جديد",
   "onsignuplastnamechanged": "_onSignUpLastnameChanged",
-  "emailaddress": "Email"
+  "emailaddress": "Email",
+  "onforgotemailchanged": "تغيير في البريد الاكتروني",
+  "resetPassword": "اعادة تعيين كلمة السر",
+  "backTo": "عودة إلى "
+
 }

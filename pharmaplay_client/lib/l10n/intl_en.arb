@@ -55,5 +55,9 @@
   "forgotPassword": "forgotPassword",
   "signUp": "signUp",
   "onsignuplastnamechanged": "_onSignUpLastnameChanged",
-  "emailaddress": "Email"
+  "emailaddress": "Email",
+  "onforgotemailchanged": "_onforgotEmailChanged",
+  "resetPassword": "Reset Password",
+  "backTo": "Back To"
+
 }

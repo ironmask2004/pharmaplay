@@ -35,6 +35,7 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "appTitle": MessageLookupByLibrary.simpleMessage("Pharmaplay Market"),
+        "backTo": MessageLookupByLibrary.simpleMessage("Back To"),
         "confirmCode": MessageLookupByLibrary.simpleMessage("Confirm-Code"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "emailaddress": MessageLookupByLibrary.simpleMessage("Email"),
@@ -42,6 +43,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("forgotPassword"),
         "loginPage": MessageLookupByLibrary.simpleMessage(
             "Wellcome Login To PahrmaPlay"),
+        "onforgotemailchanged":
+            MessageLookupByLibrary.simpleMessage("_onforgotEmailChanged"),
         "onsignuplastnamechanged":
             MessageLookupByLibrary.simpleMessage("_onSignUpLastnameChanged"),
         "pageHomeListTitle":
@@ -52,6 +55,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "pageHomeSamplePlural": m3,
         "pageHomeSampleTotalAmount": m4,
         "password": MessageLookupByLibrary.simpleMessage("password"),
+        "resetPassword": MessageLookupByLibrary.simpleMessage("Reset Password"),
         "signIn": MessageLookupByLibrary.simpleMessage("signIn"),
         "signUp": MessageLookupByLibrary.simpleMessage("signUp")
       };

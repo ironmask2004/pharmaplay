@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pharmaplay_client/src/login/forgot_password/forgot_password.dart';
 //import 'package:pharmaplay_client/src/login/login.dart';
+import 'package:pharmaplay_client/generated/l10n.dart';
 
 //import '../forgot_password.dart';
 
@@ -16,7 +17,7 @@ class ForgotPasswordPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('ConfirmCode')),
+      appBar: AppBar(title: Text(SLang.of(context).resetPassword)),
       body: Padding(
         padding: const EdgeInsets.all(12),
         child: BlocProvider(
