@@ -20,32 +20,49 @@ class SettingsView extends StatelessWidget {
         title: const Text('Settings'),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16),
-        // Glue the SettingsController to the theme selection DropdownButton.
-        //
-        // When a user selects a theme from the dropdown list, the
-        // SettingsController is updated, which rebuilds the MaterialApp.
-        child: DropdownButton<ThemeMode>(
-          // Read the selected themeMode from the controller
-          value: controller.themeMode,
-          // Call the updateThemeMode method any time the user selects a theme.
-          onChanged: controller.updateThemeMode,
-          items: const [
-            DropdownMenuItem(
-              value: ThemeMode.system,
-              child: Text('System Theme'),
+          padding: const EdgeInsets.all(16),
+          // Glue the SettingsController to the theme selection DropdownButton.
+          //
+          // When a user selects a theme from the dropdown list, the
+          // SettingsController is updated, which rebuilds the MaterialApp.
+          child: Column(children: [
+            DropdownButton<ThemeMode>(
+              // Read the selected themeMode from the controller
+              value: controller.themeMode,
+              // Call the updateThemeMode method any time the user selects a theme.
+              onChanged: controller.updateThemeMode,
+              items: const [
+                DropdownMenuItem(
+                  value: ThemeMode.system,
+                  child: Text('System Theme'),
+                ),
+                DropdownMenuItem(
+                  value: ThemeMode.light,
+                  child: Text('Light Theme'),
+                ),
+                DropdownMenuItem(
+                  value: ThemeMode.dark,
+                  child: Text('Dark Theme'),
+                )
+              ],
             ),
-            DropdownMenuItem(
-              value: ThemeMode.light,
-              child: Text('Light Theme'),
+            DropdownButton<Locale>(
+              // Read the selected themeMode from the controller
+              value: controller.UIlocale,
+              // Call the updateThemeMode method any time the user selects a theme.
+              onChanged: controller.updateUILocale,
+              items: const [
+                DropdownMenuItem(
+                  value: Locale('ar'),
+                  child: Text('اللغة العربية'),
+                ),
+                DropdownMenuItem(
+                  value: Locale('en'),
+                  child: Text('English Language'),
+                )
+              ],
             ),
-            DropdownMenuItem(
-              value: ThemeMode.dark,
-              child: Text('Dark Theme'),
-            )
-          ],
-        ),
-      ),
+          ])),
     );
   }
 }
