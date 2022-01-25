@@ -242,11 +242,21 @@ class SLang {
     );
   }
 
-  /// `Back To`
+  /// `Back To `
   String get backTo {
     return Intl.message(
-      'Back To',
+      'Back To ',
       name: 'backTo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Change Language`
+  String get SetLanguage {
+    return Intl.message(
+      'Change Language',
+      name: 'SetLanguage',
       desc: '',
       args: [],
     );

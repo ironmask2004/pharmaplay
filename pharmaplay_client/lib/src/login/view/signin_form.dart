@@ -28,7 +28,13 @@ class SignInForm extends StatelessWidget {
       hintTextPassword: SLang.of(context).password,
       buttonTextSignIn: SLang.of(context).signIn,
       buttonTextForgotPassword: SLang.of(context).forgotPassword,
+      buttonTextSetLanguage: SLang.of(context).SetLanguage,
       buttonTextSignUp: SLang.of(context).signUp,
+      onPressedSetLanguage: () {
+        context
+            .read<AuthenticationBloc>()
+            .add(AuthenticationLandingRequested());
+      },
       onPressedSignIn: () {
         context.read<LoginBloc>().add(const LoginSubmitted());
       },

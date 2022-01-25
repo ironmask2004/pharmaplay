@@ -16,12 +16,14 @@ class LoginFormsSignInPage extends StatelessWidget {
 
   /// The action of SignUp button to navigate to [LoginFormsSignUpPage]
   final Function() onPressedSignUp;
+  final Function() onPressedSetLanguage;
 
   /// Your product logo
   final Widget logo;
 
   /// The text of SignIn button.
   final String buttonTextSignIn;
+  final String buttonTextSetLanguage;
 
   /// The text of ForgotPassword button.
   final String buttonTextForgotPassword;
@@ -87,6 +89,7 @@ class LoginFormsSignInPage extends StatelessWidget {
     required this.onPressedSignIn,
     required this.onPressedForgot,
     required this.onPressedSignUp,
+    required this.onPressedSetLanguage,
     required this.style,
     this.textInputActionUser: TextInputAction.next,
     this.keyboardTypeUser: TextInputType.emailAddress,
@@ -105,6 +108,7 @@ class LoginFormsSignInPage extends StatelessWidget {
     this.onChangedPassword,
     this.controllerPassword,
     this.buttonTextSignIn: 'Sign In',
+    this.buttonTextSetLanguage: 'Change Language',
     this.buttonTextForgotPassword: 'Forgot password?',
     this.buttonTextSignUp: 'Sign Up',
     this.socialButtons,
@@ -185,6 +189,16 @@ class LoginFormsSignInPage extends StatelessWidget {
                 LoginFormsInlineButton(
                   text: buttonTextSignUp,
                   onPressed: onPressedSignUp,
+                  style: style,
+                ),
+                Text(
+                  ' | ',
+                  style: style.messageTextStyle,
+                ),
+                //buttonTextSetLanguage
+                LoginFormsInlineButton(
+                  text: buttonTextSetLanguage,
+                  onPressed: onPressedSetLanguage,
                   style: style,
                 ),
               ],

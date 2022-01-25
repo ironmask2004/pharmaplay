@@ -58,6 +58,7 @@
   "emailaddress": "Email",
   "onforgotemailchanged": "تغيير في البريد الاكتروني",
   "resetPassword": "اعادة تعيين كلمة السر",
-  "backTo": "عودة إلى "
+  "backTo": "عودة إلى ",
+  "SetLanguage": "تغيير اللغة"
 
 }
