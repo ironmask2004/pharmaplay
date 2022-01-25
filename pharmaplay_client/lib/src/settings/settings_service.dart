@@ -24,6 +24,6 @@ class SettingsService {
 
   Future<void> updateUILocale(Locale UILocale) async {
     await MySharedPreferences.instance
-        .setStringValue("UILocale", UILocale.countryCode ?? 'en');
+        .setStringValue("UILocale", UILocale.languageCode);
   }
 }
