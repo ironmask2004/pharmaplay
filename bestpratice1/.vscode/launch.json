@@ -9,7 +9,8 @@
             "type": "dart",
             "request": "launch",
             "program": "lib/main.dart",
-            "args" : [ "-d" , "chrome" , "--web-port" , "9019", "--web-renderer" ,  "html"],
+            "args" : [ "-d" , "chrome" , "--web-port" , "9019"],
+            //"args" : [ "-d" , "chrome" , "--web-port" , "9019", "--web-renderer" ,  "html"],
         }
     ]
 }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:pharmaplay_client/generated/l10n.dart';
 
 import 'settings_controller.dart';
+//import 'package:flutter_localizations/flutter_localizations.dart';
 
 /// Displays the various settings that can be customized by the user.
 ///
@@ -17,7 +19,7 @@ class SettingsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Settings'),
+        title: Text(SLang.of(context).settings),
       ),
       body: Padding(
           padding: const EdgeInsets.all(16),

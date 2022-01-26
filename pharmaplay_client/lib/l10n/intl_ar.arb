@@ -59,6 +59,7 @@
   "onforgotemailchanged": "تغيير في البريد الاكتروني",
   "resetPassword": "اعادة تعيين كلمة السر",
   "backTo": "عودة إلى ",
-  "SetLanguage": "تغيير اللغة"
+  "SetLanguage": "تغيير اللغة",
+  "settings": "اﻷعدادات!"
 
 }

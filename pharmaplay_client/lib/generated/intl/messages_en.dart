@@ -57,6 +57,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "pageHomeSampleTotalAmount": m4,
         "password": MessageLookupByLibrary.simpleMessage("password"),
         "resetPassword": MessageLookupByLibrary.simpleMessage("Reset Password"),
+        "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "signIn": MessageLookupByLibrary.simpleMessage("signIn"),
         "signUp": MessageLookupByLibrary.simpleMessage("signUp")
       };

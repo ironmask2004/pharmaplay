@@ -59,6 +59,7 @@
   "onforgotemailchanged": "_onforgotEmailChanged",
   "resetPassword": "Reset Password",
   "backTo": "Back To ",
-  "SetLanguage": "Change Language"
+  "SetLanguage": "Change Language",
+  "settings": "Settings"
 
 }
