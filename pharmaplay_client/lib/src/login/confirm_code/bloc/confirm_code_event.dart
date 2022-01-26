@@ -39,5 +39,9 @@ class ConfirmCodeSubmitted extends ConfirmCodeEvent {
 }
 
 class ResendConfirmCodeSubmitted extends ConfirmCodeEvent {
-  const ResendConfirmCodeSubmitted();
+  final String email;
+  final String password;
+  const ResendConfirmCodeSubmitted(this.email, this.password);
+  @override
+  List<Object> get props => [email, password];
 }

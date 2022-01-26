@@ -18,6 +18,7 @@ class ConfirmCodeBloc extends Bloc<ConfirmCodeEvent, ConfirmCodeState> {
     on<ConfirmFormPasswordChanged>(_onConfirmFormPasswordChanged);
     on<ConfirmCodeChanged>(_onConfirmCodeChanged);
     on<ConfirmCodeSubmitted>(_onConfirmCodeSubmitted);
+    on<ResendConfirmCodeSubmitted>(_onResendConfirmCodeSubmitted);
   }
 
   final AuthenticationRepository _authenticationRepository;
@@ -62,6 +63,46 @@ class ConfirmCodeBloc extends Bloc<ConfirmCodeEvent, ConfirmCodeState> {
 
   //=======================
   //
+
+  //-==========
+
+  void _onResendConfirmCodeSubmitted(
+    ResendConfirmCodeSubmitted event,
+    Emitter<ConfirmCodeState> emit,
+  ) async {
+    print('Emailll: ' + event.email + ' password: ' + event.password);
+
+    emit(state.copyWith(status: FormzStatus.submissionInProgress));
+//-----------------
+    final dartz.Either<TokenPair, ApiError> _repoResponse;
+    try {
+      //TokenPair _tokenInfo;
+      _repoResponse = await _authenticationRepository.resendVerficationCode(
+          email: event.email, password: event.password);
+
+      _repoResponse.fold((left) {
+        print('left');
+        // return (left);
+        print(left.toJson().toString());
+        emit(state.copyWith(
+            status: FormzStatus.submissionSuccess,
+            errMsg: left.toJson().toString()));
+      }, (right) {
+        //showInSnackBar(context, ("Login Successs!!"));
+        print('right');
+        emit(state.copyWith(
+            status: FormzStatus.submissionFailure,
+            errMsg: right.toJson().toString()));
+
+        //return (right);
+      });
+    } catch (err) {
+      print('Error connectiing to server ' + err.toString());
+      rethrow;
+      // showInSnackBar(context, err.toString());
+    }
+  }
+  //========================
 
   void _onConfirmCodeSubmitted(
     ConfirmCodeSubmitted event,
