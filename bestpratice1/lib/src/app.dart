@@ -42,7 +42,8 @@ class MyApp extends StatelessWidget {
             GlobalCupertinoLocalizations.delegate,
           ],
           supportedLocales: const [
-            Locale('en', ''), // English, no country code
+            Locale('en', ''),
+            Locale('ar', ''), // English, no country code
           ],
 
           // Use AppLocalizations to configure the correct application title
@@ -59,6 +60,7 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(),
           darkTheme: ThemeData.dark(),
           themeMode: settingsController.themeMode,
+          locale: settingsController.UIlocale,
 
           // Define a function to handle named routes in order to support
           // Flutter web url navigation and deep linking.
