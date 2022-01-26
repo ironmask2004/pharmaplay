@@ -33,7 +33,7 @@ class SignInForm extends StatelessWidget {
       onPressedSetLanguage: () {
         context
             .read<AuthenticationBloc>()
-            .add(AuthenticationLandingRequested());
+            .add(AuthenticationSettingsRequested());
       },
       onPressedSignIn: () {
         context.read<LoginBloc>().add(const LoginSubmitted());

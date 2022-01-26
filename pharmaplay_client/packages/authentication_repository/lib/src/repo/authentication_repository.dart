@@ -16,7 +16,8 @@ enum AuthenticationStatus {
   authenticateSignUp,
   authenticateConfirmCode,
   authenticateChangePassword,
-  authenticationForgotPassword
+  authenticationForgotPassword,
+  authenticationSettings
 }
 
 class AuthenticationRepository {

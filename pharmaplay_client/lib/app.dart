@@ -2,6 +2,7 @@ import 'package:authentication_repository/authentication_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:pharmaplay_client/src/settings/settings_page.dart';
 import 'generated/l10n.dart';
 import 'package:pharmaplay_client/src/authentication/authentication.dart';
 import 'package:pharmaplay_client/src/home/home.dart';
@@ -33,26 +34,25 @@ class App extends StatelessWidget {
           authenticationRepository: authenticationRepository,
           userRepository: userRepository,
         )..add(AuthenticationLandingRequested()),
-        child: AppView(),
+        child: AppView(settingsController: settingsController),
       ),
     );
   }
 }
 
-class AppView extends StatefulWidget {
-  @override
-  _AppViewState createState() => _AppViewState();
-}
-
-class _AppViewState extends State<AppView> {
+class AppView extends StatelessWidget {
+  AppView({
+    Key? key,
+    required this.settingsController,
+  }) : super(key: key);
   final _navigatorKey = GlobalKey<NavigatorState>();
+  final SettingsController settingsController;
 
   NavigatorState get _navigator => _navigatorKey.currentState!;
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      locale: const Locale('ar', 'SA'),
       navigatorKey: _navigatorKey,
       localizationsDelegates: const [
         SLang.delegate,
@@ -64,6 +64,10 @@ class _AppViewState extends State<AppView> {
         Locale('en', ''), // English, no country code
         Locale('ar', ''), // Arabic, no country code
       ],
+      theme: ThemeData(),
+      darkTheme: ThemeData.dark(),
+      themeMode: settingsController.themeMode,
+      locale: settingsController.UIlocale,
       onGenerateTitle: (BuildContext context) => SLang.of(context).appTitle,
       builder: (context, child) {
         return BlocListener<AuthenticationBloc, AuthenticationState>(
@@ -96,6 +100,14 @@ class _AppViewState extends State<AppView> {
                     ConfirmCodePage.route(state.tokenPair!.tokenId,
                         state.tokenPair!.refreshToken),
                     (route) => false,
+                  );
+                  break;
+
+                case AuthenticationStatus.authenticationSettings:
+                  print('authenticate Settings: ' + child.toString());
+                  _navigator.push<void>(
+                    SettingsPage.route(settingsController),
+                    //(route) => false,
                   );
                   break;
 
