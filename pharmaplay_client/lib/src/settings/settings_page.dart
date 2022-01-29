@@ -7,9 +7,9 @@ import 'settings_controller.dart';
 class SettingsPage extends StatelessWidget {
   const SettingsPage(this.settingsController, {Key? key}) : super(key: key);
 
-  final SettingsController settingsController;
+  final SettingsController1 settingsController;
 
-  static Route route(SettingsController settingsController) {
+  static Route route(SettingsController1 settingsController) {
     return MaterialPageRoute<void>(
         builder: (_) => SettingsPage(settingsController));
   }

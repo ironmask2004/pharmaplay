@@ -13,7 +13,7 @@ class SettingsForm extends StatelessWidget {
 
   static const routeName = '/settings';
 
-  final SettingsController settingsController;
+  final SettingsController1 settingsController;
 
   @override
   Widget build(BuildContext context) {
