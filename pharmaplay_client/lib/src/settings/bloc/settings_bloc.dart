@@ -19,14 +19,31 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     SettingsInitialRequested event,
     Emitter<SettingsState> emit,
   ) async {
+    ThemeMode currentThemeMode;
+    String savedThemeMode =
+        await MySharedPreferences.instance.getStringValue("ThemeMode");
+    switch (savedThemeMode) {
+      case 'light':
+        currentThemeMode = ThemeMode.light;
+        break;
+      case 'dark':
+        currentThemeMode = ThemeMode.dark;
+        break;
+      default:
+        currentThemeMode = ThemeMode.system;
+    }
+    print('emit UITHemeChanged' + currentThemeMode.toString());
+
+    emit(SettingsStateUIThemeModeChanged(currentThemeMode));
+
     print('SettingsInitialRequested !!!');
     String currentLocale =
         await MySharedPreferences.instance.getStringValue("UILocale");
 
     print('emit SettingsStateUILocaleChanged ' + currentLocale);
- emit(
-      state.copyWith(uiLocale: Locale(currentLocale == 'ar' ? 'ar' : 'en')));
-     print('  state uiLocale : ' + state.uiLocale.languageCode);
+    emit(SettingsStateUILocaleChanged(
+        Locale(currentLocale == 'ar' ? 'ar' : 'en')));
+    print('  state uiLocale : ' + state.uiLocale.languageCode);
   }
 
   /// Loads the User's preferred ThemeMode from local or remote storage.
@@ -51,11 +68,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     }
     print('emit UITHemeChanged' + currentThemeMode.toString());
 
-    emit(
-      state.copyWith(
-        uiThemeMode: currentThemeMode,
-      ),
-    );
+    emit(SettingsStateUIThemeModeChanged(currentThemeMode));
     // emit(SettingsStateUIThemeModeChanged(currentThemeMode));
   }
 
@@ -68,11 +81,13 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
         await MySharedPreferences.instance.getStringValue("UILocale");
     print('  state uiLocale : ' + state.uiLocale.languageCode);
     print('emit SettingsStateUILocaleChanged ' + currentLocale);
-    emit(
+    /*emit(
       state.copyWith(
         uiLocale: Locale(currentLocale == 'ar' ? 'ar' : 'en'),
       ),
-    );
+    );*/
+    emit(SettingsStateUILocaleChanged(
+        Locale(currentLocale == 'ar' ? 'ar' : 'en')));
   }
 
   /// Persists the user's preferred ThemeMode to local or remote storage.
@@ -82,8 +97,12 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   ) async {
     // Use the shared_preferences package to persist settings locally or the
     // http package to persist settings over the network.
+    print('--');
     await MySharedPreferences.instance
         .setStringValue("ThemeMode", event.uiThemeMode.name);
+    emit(SettingsStateUIThemeModeChanged(event.uiThemeMode)
+        // state.copyWith(uiLocale: event.uiLocale),
+        );
   }
 
   Future<void> _onUILocalChanged(
@@ -97,8 +116,8 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
         ' to ' +
         event.uiLocale.languageCode);
 
-    emit(
-      state.copyWith(uiLocale: event.uiLocale),
-    );
+    emit(SettingsStateUILocaleChanged(event.uiLocale)
+        // state.copyWith(uiLocale: event.uiLocale),
+        );
   }
 }

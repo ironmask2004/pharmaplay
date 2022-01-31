@@ -32,15 +32,15 @@ class SignInForm extends StatelessWidget {
       buttonTextSetLanguage: SLang.of(context).SetLanguage,
       buttonTextSignUp: SLang.of(context).signUp,
       onPressedSetLanguage: () {
-        /* context
+        context
             .read<AuthenticationBloc>()
-            .add(AuthenticationSettingsRequested());*/
-        Locale currentLocale = context.read<SettingsBloc>().state.uiLocale;
+            .add(AuthenticationSettingsRequested());
+        /*Locale currentLocale = context.read<SettingsBloc>().state.uiLocale;
         print('Chaneg Language pressed + current : $currentLocale');
         context.read<SettingsBloc>().add(UILocalChanged(
             currentLocale.languageCode == 'ar'
                 ? const Locale('en')
-                : const Locale('ar')));
+                : const Locale('ar')));*/
       },
       onPressedSignIn: () {
         context.read<LoginBloc>().add(const LoginSubmitted());
