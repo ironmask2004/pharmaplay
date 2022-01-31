@@ -60,6 +60,7 @@
   "resetPassword": "اعادة تعيين كلمة السر",
   "backTo": "عودة إلى ",
   "SetLanguage": "تغيير اللغة",
-  "settings": "اﻷعدادات!"
-
+  "settings": "اﻷعدادات!",
+  "applyNewSettings": "تطبيق الاعدادات الجديدة",
+  "back": "عودة"
 }

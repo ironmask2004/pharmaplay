@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:pharmaplay_client/generated/l10n.dart';
 import 'package:pharmaplay_client/src/settings/bloc/settings_bloc.dart';
-import 'package:pharmaplay_client/src/utlites/commons.dart';
+import 'package:pharmaplay_client/src/utlites/sforms_style.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 //import 'package:flutter_localizations/flutter_localizations.dart';
@@ -16,7 +17,9 @@ class SettingsForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final LoginFormsStyle style = LoginFormsStyle.defaultTemplate;
+    final SFormsStyle style = SFormsStyle.defaultTemplate;
+    Locale newLocale = context.read<SettingsBloc>().state.uiLocale;
+    ThemeMode newThemeMode = context.read<SettingsBloc>().state.uiThemeMode;
     return BlocBuilder<SettingsBloc, SettingsState>(
       buildWhen: (previousState, currentState) => previousState != currentState,
       builder: (_, settingsState) => Scaffold(
@@ -29,15 +32,6 @@ class SettingsForm extends StatelessWidget {
                         crossAxisAlignment: WrapCrossAlignment.center,
                         alignment: WrapAlignment.center,
                         children: [
-                          Text(
-                            'textMessageResend',
-                            style: style.messageTextStyle,
-                          ),
-                          LoginFormsInlineButton(
-                            text: 'buttonTextResend',
-                            onPressed: null,
-                            style: style,
-                          ),
                           DropdownButton<ThemeMode>(
                             // Read the selected themeMode from the controller
                             value:
@@ -45,9 +39,8 @@ class SettingsForm extends StatelessWidget {
                             // Call the updateThemeMode method any time the user selects a theme.
                             onChanged: (value) {
                               print(value);
-                              context
-                                  .read<SettingsBloc>()
-                                  .add(UIThemeModeChanged(value!));
+                              newThemeMode = value ?? ThemeMode.system;
+                              print(newThemeMode);
                             },
                             items: const [
                               DropdownMenuItem(
@@ -70,8 +63,9 @@ class SettingsForm extends StatelessWidget {
                             // Call the updateThemeMode method any time the user selects a theme.
                             onChanged: (value) {
                               print(value);
-                              context.read<SettingsBloc>().add(
-                                  UILocalChanged(Locale(value.toString())));
+                              newLocale = value ??
+                                  context.read<SettingsBloc>().state.uiLocale;
+                              print(newLocale);
                             },
                             items: const [
                               DropdownMenuItem(
@@ -108,16 +102,34 @@ class SettingsForm extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.only(
                           top: style.verticalSpacingBetweenComponents),
-                      child: LoginFormsButton(
-                        text: 'buttonTextNext',
-                        onPressed: null,
+                      child: SFormsButton(
+                        text: SLang.of(context).applyNewSettings,
+                        onPressed: () {
+                          context
+                              .read<SettingsBloc>()
+                              .add(UIThemeModeChanged(newThemeMode));
+                          context
+                              .read<SettingsBloc>()
+                              .add(UILocalChanged(newLocale));
+                        },
                         style: style,
                       ),
                     ),
+                    Padding(
+                        padding: EdgeInsets.only(
+                          top: style.verticalSpacingBetweenGroup,
+                        ),
+                        child: Text(
+                          'textMessageResend',
+                          style: style.messageTextStyle,
+                        )),
+                    SFormsInlineButton(
+                      text: SLang.of(context).back,
+                      onPressed: null,
+                      style: style,
+                    ),
                   ]))),
     );
-
-    ///----
   }
 }
 

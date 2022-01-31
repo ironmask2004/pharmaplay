@@ -271,6 +271,26 @@ class SLang {
       args: [],
     );
   }
+
+  /// `Apply New Settings`
+  String get applyNewSettings {
+    return Intl.message(
+      'Apply New Settings',
+      name: 'applyNewSettings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Back`
+  String get back {
+    return Intl.message(
+      'Back',
+      name: 'back',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<SLang> {

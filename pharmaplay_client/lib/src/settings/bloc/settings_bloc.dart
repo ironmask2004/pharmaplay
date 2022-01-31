@@ -34,15 +34,18 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     }
     print('emit UITHemeChanged' + currentThemeMode.toString());
 
-    emit(SettingsStateUIThemeModeChanged(currentThemeMode));
+    //  emit(SettingsStateUIThemeModeChanged(currentThemeMode));
+    //emit(SettingsState(currentThemeMode));
+    emit(state.copyWith(uiThemeMode: currentThemeMode));
 
     print('SettingsInitialRequested !!!');
     String currentLocale =
         await MySharedPreferences.instance.getStringValue("UILocale");
 
     print('emit SettingsStateUILocaleChanged ' + currentLocale);
-    emit(SettingsStateUILocaleChanged(
-        Locale(currentLocale == 'ar' ? 'ar' : 'en')));
+    // emit(SettingsStateUILocaleChanged(
+    //    Locale(currentLocale == 'ar' ? 'ar' : 'en')));
+    emit(state.copyWith(uiLocale: Locale(currentLocale == 'ar' ? 'ar' : 'en')));
     print('  state uiLocale : ' + state.uiLocale.languageCode);
   }
 
@@ -68,8 +71,9 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     }
     print('emit UITHemeChanged' + currentThemeMode.toString());
 
-    emit(SettingsStateUIThemeModeChanged(currentThemeMode));
-    // emit(SettingsStateUIThemeModeChanged(currentThemeMode));
+    //emit(SettingsStateUIThemeModeChanged(currentThemeMode));
+
+    emit(state.copyWith(uiThemeMode: currentThemeMode));
   }
 
   Future<void> _onReloadUILocaleRequsted(
@@ -81,13 +85,12 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
         await MySharedPreferences.instance.getStringValue("UILocale");
     print('  state uiLocale : ' + state.uiLocale.languageCode);
     print('emit SettingsStateUILocaleChanged ' + currentLocale);
-    /*emit(
-      state.copyWith(
-        uiLocale: Locale(currentLocale == 'ar' ? 'ar' : 'en'),
-      ),
-    );*/
-    emit(SettingsStateUILocaleChanged(
-        Locale(currentLocale == 'ar' ? 'ar' : 'en')));
+    emit(state.copyWith(
+      uiLocale: Locale(currentLocale == 'ar' ? 'ar' : 'en'),
+    ));
+
+    ///  emit(SettingsStateUILocaleChanged(
+    //    Locale(currentLocale == 'ar' ? 'ar' : 'en')));
   }
 
   /// Persists the user's preferred ThemeMode to local or remote storage.
@@ -107,17 +110,19 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     await MySharedPreferences.instance
         .setStringValue("ThemeMode", event.uiThemeMode.name);
 
-    emit(SettingsStateUIThemeModeChanged(event.uiThemeMode)
-        // state.copyWith(uiLocale: event.uiLocale),
-        );
+    emit(state.copyWith(uiThemeMode: event.uiThemeMode));
   }
 
   Future<void> _onUILocalChanged(
     UILocalChanged event,
     Emitter<SettingsState> emit,
   ) async {
+    print('new Locale: ' +
+        event.uiLocale.languageCode +
+        ' OLD LocLE : + ' +
+        state.uiLocale.languageCode);
     // Dot not perform any work if new and old ThemeMode are identical
-    if ((event.uiLocale) == state.uiLocale) return;
+    if (event.uiLocale.languageCode == state.uiLocale.languageCode) return;
 
     await MySharedPreferences.instance
         .setStringValue("UILocale", event.uiLocale.languageCode);
@@ -126,8 +131,9 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
         ' to ' +
         event.uiLocale.languageCode);
 
-    emit(SettingsStateUILocaleChanged(event.uiLocale)
-        // state.copyWith(uiLocale: event.uiLocale),
-        );
+    //  emit(SettingsStateUILocaleChanged(event.uiLocale)
+    // state.copyWith(uiLocale: event.uiLocale),
+    //  );
+    emit(state.copyWith(uiLocale: event.uiLocale));
   }
 }

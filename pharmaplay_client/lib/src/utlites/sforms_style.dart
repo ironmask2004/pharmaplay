@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:login_forms/login_forms.dart';
 
 const _kColorPrimary = Color(0xffffab00);
 const _kColorPrimaryDark = Color(0xffc67c00);
@@ -15,12 +14,12 @@ const _kFontSizeMedium = 11.0;
 const _kFontSizeSmall = 10.0;
 const _kBorderRadius = 4.0;
 
-/// LoginFormsStyle defines style for every single components of every pages.
-/// There are [LoginFormsSignInPage], [LoginFormsSignUpPage], [LoginFormsConfirmCodePage], [LoginFormsForgotPasswordPage], [LoginFormsCreatePasswordPage]
+/// SFormsStyle defines style for every single components of every pages.
+/// There are [SFormsSignInPage], [SFormsSignUpPage], [SFormsConfirmCodePage], [SFormsForgotPasswordPage], [SFormsCreatePasswordPage]
 /// {@tool snippet}
-/// This is a sample of a [LoginFormsStyle].
+/// This is a sample of a [SFormsStyle].
 /// ```dart
-///   LoginFormsStyle(
+///   SFormsStyle(
 ///      primary: Color(0xffffab00),
 ///      primaryDark: Color(0xffc67c00),
 ///      primaryLight: Color(0xffffdd4b),
@@ -111,7 +110,7 @@ const _kBorderRadius = 4.0;
 ///    )
 /// ```
 /// {@end-tool}
-class LoginFormsStyle {
+class SFormsStyle {
   /// The padding from the border ơf screen to a page.
   final EdgeInsets screenPadding;
 
@@ -173,7 +172,7 @@ class LoginFormsStyle {
   final EdgeInsets textFieldPadding;
 
   /// Constructor
-  LoginFormsStyle({
+  SFormsStyle({
     required this.textFieldHintTextStyle,
     required this.textFieldErrorTextStyle,
     required this.socialButtonStyle,
@@ -196,9 +195,9 @@ class LoginFormsStyle {
     required this.textFieldPadding,
   });
 
-  static LoginFormsStyle _resolve(LoginFormsStyle? style) {
+  static SFormsStyle _resolve(SFormsStyle? style) {
     return style ??
-        LoginFormsStyle(
+        SFormsStyle(
           primary: _kColorPrimary,
           primaryDark: _kColorPrimaryDark,
           primaryLight: _kColorPrimaryLight,
@@ -290,10 +289,10 @@ class LoginFormsStyle {
   }
 
   /// Create a default style.
-  static final LoginFormsStyle defaultTemplate = _resolve(null);
+  static final SFormsStyle defaultTemplate = _resolve(null);
 
   /// Create your own style that only change some child styles.
-  static LoginFormsStyle only({
+  static SFormsStyle only({
     EdgeInsets? screenPadding,
     double? verticalSpacingBetweenComponents,
     double? verticalSpacingBetweenSubComponents,
@@ -340,7 +339,7 @@ class LoginFormsStyle {
   }
 
   /// Create a new instance using copy this instance
-  LoginFormsStyle copyWith({
+  SFormsStyle copyWith({
     EdgeInsets? screenPadding,
     double? verticalSpacingBetweenComponents,
     double? verticalSpacingBetweenSubComponents,
@@ -403,7 +402,7 @@ class LoginFormsStyle {
       return this;
     }
 
-    return new LoginFormsStyle(
+    return SFormsStyle(
       screenPadding: screenPadding ?? this.screenPadding,
       verticalSpacingBetweenComponents: verticalSpacingBetweenComponents ??
           this.verticalSpacingBetweenComponents,
@@ -436,19 +435,19 @@ class LoginFormsStyle {
   }
 }
 
-/// LoginFormsInlineButton is placed inline a RichText.
-class LoginFormsInlineButton extends StatelessWidget {
+/// SFormsInlineButton is placed inline a RichText.
+class SFormsInlineButton extends StatelessWidget {
   /// The button text.
   final String text;
 
   /// The action.
   final Function()? onPressed;
 
-  /// The [LoginFormsStyle] defines this widget style.
-  final LoginFormsStyle style;
+  /// The [SFormsStyle] defines this widget style.
+  final SFormsStyle style;
 
   /// Constructor
-  const LoginFormsInlineButton({
+  const SFormsInlineButton({
     Key? key,
     required this.text,
     this.onPressed,
@@ -473,19 +472,19 @@ class LoginFormsInlineButton extends StatelessWidget {
   }
 }
 
-/// LoginFormsButton is used for normal case.
-class LoginFormsButton extends StatelessWidget {
+/// SFormsButton is used for normal case.
+class SFormsButton extends StatelessWidget {
   /// The button text.
   final String text;
 
   /// The action.
   final Function()? onPressed;
 
-  /// The [LoginFormsStyle] defines this widget style.
-  final LoginFormsStyle style;
+  /// The [SFormsStyle] defines this widget style.
+  final SFormsStyle style;
 
   /// Constructor
-  const LoginFormsButton({
+  const SFormsButton({
     Key? key,
     required this.text,
     this.onPressed,
@@ -512,21 +511,21 @@ class LoginFormsButton extends StatelessWidget {
   }
 }
 
-/// LoginFormsSocialButton is used for sign in/up by a social account.
-class LoginFormsSocialButton extends StatelessWidget {
+/// SFormsSocialButton is used for sign in/up by a social account.
+class SFormsSocialButton extends StatelessWidget {
   /// The button text.
   final String text;
 
   /// The action.
   final Function()? onPressed;
 
-  /// The [LoginFormsStyle] defines this widget style.
-  final LoginFormsStyle style;
+  /// The [SFormsStyle] defines this widget style.
+  final SFormsStyle style;
 
   /// The icon is placed at the left side of this button.
   final Widget icon;
 
-  const LoginFormsSocialButton({
+  const SFormsSocialButton({
     Key? key,
     required this.text,
     this.onPressed,
@@ -567,10 +566,10 @@ class LoginFormsSocialButton extends StatelessWidget {
   }
 }
 
-/// LoginFormsTextField is used for inputting user information, such as: email, password, name, ...
-class LoginFormsTextField extends StatelessWidget {
-  /// See [LoginFormsStyle]
-  final LoginFormsStyle style;
+/// SFormsTextField is used for inputting user information, such as: email, password, name, ...
+class SFormsTextField extends StatelessWidget {
+  /// See [SFormsStyle]
+  final SFormsStyle style;
 
   /// See [TextInputAction]
   final TextInputAction textInputAction;
@@ -596,7 +595,7 @@ class LoginFormsTextField extends StatelessWidget {
   /// See controller in [TextEditingController]
   final TextEditingController? controller;
 
-  const LoginFormsTextField({
+  const SFormsTextField({
     Key? key,
     required this.style,
     required this.textInputAction,
@@ -667,10 +666,10 @@ class LoginFormsTextField extends StatelessWidget {
   }
 }
 
-/// LoginFormsTerm is used for showing the product term of service and privacy policy message. It is placed at the bottom on each page.
-class LoginFormsTerm extends StatelessWidget {
-  /// See [LoginFormsStyle]
-  final LoginFormsStyle style;
+/// SFormsTerm is used for showing the product term of service and privacy policy message. It is placed at the bottom on each page.
+class SFormsTerm extends StatelessWidget {
+  /// See [SFormsStyle]
+  final SFormsStyle style;
 
   /// The action to navigate to your TermOfService screen.
   final Function() onPressedTermOfService;
@@ -687,7 +686,7 @@ class LoginFormsTerm extends StatelessWidget {
   /// Text in Privacy Policy button.
   final String privacyPolicyButtonText;
 
-  const LoginFormsTerm({
+  const SFormsTerm({
     Key? key,
     required this.style,
     required this.onPressedTermOfService,
@@ -712,7 +711,7 @@ class LoginFormsTerm extends StatelessWidget {
             text,
             style: style.messageTextStyle,
           ),
-          LoginFormsInlineButton(
+          SFormsInlineButton(
             text: termOfServiceButtonText,
             style: style,
             onPressed: onPressedTermOfService,
@@ -721,7 +720,7 @@ class LoginFormsTerm extends StatelessWidget {
             ' & ',
             style: style.messageTextStyle,
           ),
-          LoginFormsInlineButton(
+          SFormsInlineButton(
             text: privacyPolicyButtonText,
             style: style,
             onPressed: onPressedPrivacyPolicy,

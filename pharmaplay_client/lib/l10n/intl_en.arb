@@ -60,6 +60,7 @@
   "resetPassword": "Reset Password",
   "backTo": "Back To ",
   "SetLanguage": "Change Language",
-  "settings": "Settings"
-
+  "settings": "Settings",
+  "applyNewSettings": "Apply New Settings",
+  "back": "Back"
 }
