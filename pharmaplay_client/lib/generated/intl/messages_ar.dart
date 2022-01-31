@@ -43,6 +43,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirmCode": MessageLookupByLibrary.simpleMessage("رمز التحقق"),
         "email": MessageLookupByLibrary.simpleMessage("الإيميل"),
         "emailaddress": MessageLookupByLibrary.simpleMessage("Email"),
+        "englishLanguage":
+            MessageLookupByLibrary.simpleMessage("اللغة اﻷنكليزية"),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("نسيت كلمة السر"),
         "loginPage":

@@ -40,6 +40,10 @@ class SettingsForm extends StatelessWidget {
                             onChanged: (value) {
                               print(value);
                               newThemeMode = value ?? ThemeMode.system;
+                              context
+                                  .read<SettingsBloc>()
+                                  .add(UIThemeModeChanged(newThemeMode));
+
                               print(newThemeMode);
                             },
                             items: const [
@@ -65,6 +69,9 @@ class SettingsForm extends StatelessWidget {
                               print(value);
                               newLocale = value ??
                                   context.read<SettingsBloc>().state.uiLocale;
+                              context
+                                  .read<SettingsBloc>()
+                                  .add(UILocalChanged(newLocale));
                               print(newLocale);
                             },
                             items: const [
@@ -82,16 +89,6 @@ class SettingsForm extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.only(
                         top: style.verticalSpacingBetweenGroup,
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                        top: style.screenPadding.top +
-                            style.verticalSpacingBetweenGroup,
-                      ),
-                      child: Text(
-                        'textMessage',
-                        style: style.messageTextStyle,
                       ),
                     ),
                     Padding(
@@ -115,14 +112,6 @@ class SettingsForm extends StatelessWidget {
                         style: style,
                       ),
                     ),
-                    Padding(
-                        padding: EdgeInsets.only(
-                          top: style.verticalSpacingBetweenGroup,
-                        ),
-                        child: Text(
-                          'textMessageResend',
-                          style: style.messageTextStyle,
-                        )),
                     SFormsInlineButton(
                       text: SLang.of(context).back,
                       onPressed: null,
@@ -132,15 +121,3 @@ class SettingsForm extends StatelessWidget {
     );
   }
 }
-
- /*
-
-
-
-          Padding(
-            padding: EdgeInsets.only(
-              top: style.verticalSpacingBetweenGroup,
-            ),
-            child:
-            )
-*/

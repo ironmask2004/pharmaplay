@@ -35,6 +35,9 @@ class SignInForm extends StatelessWidget {
         context
             .read<AuthenticationBloc>()
             .add(AuthenticationSettingsRequested());
+        Locale currentLocale = context.read<SettingsBloc>().state.uiLocale;
+        print('Chaneg Language pressed + current : $currentLocale');
+
         /*Locale currentLocale = context.read<SettingsBloc>().state.uiLocale;
         print('Chaneg Language pressed + current : $currentLocale');
         context.read<SettingsBloc>().add(UILocalChanged(

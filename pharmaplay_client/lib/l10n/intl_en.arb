@@ -62,5 +62,6 @@
   "SetLanguage": "Change Language",
   "settings": "Settings",
   "applyNewSettings": "Apply New Settings",
-  "back": "Back"
+  "back": "Back",
+  "englishLanguage": "English Language"
 }

@@ -291,6 +291,16 @@ class SLang {
       args: [],
     );
   }
+
+  /// `English Language`
+  String get englishLanguage {
+    return Intl.message(
+      'English Language',
+      name: 'englishLanguage',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<SLang> {
