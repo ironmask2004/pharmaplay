@@ -26,6 +26,8 @@ class UIThemeModeChanged extends SettingsEvent {
   List<Object> get props => [uiThemeMode];
 }
 
+class SettingsInitialRequested extends SettingsEvent {}
+
 class ReloadUILocaleRequsted extends SettingsEvent {}
 
 class ReloadUIThemeModeRequsted extends SettingsEvent {}

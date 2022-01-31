@@ -8,6 +8,7 @@ import 'package:formz/formz.dart';
 import 'package:pharmaplay_client/generated/l10n.dart';
 import 'package:pharmaplay_client/src/authentication/authentication.dart';
 import 'package:pharmaplay_client/src/login/login.dart';
+import 'package:pharmaplay_client/src/settings/bloc/settings_bloc.dart';
 
 class SignInForm extends StatelessWidget {
   final LoginFormsStyle style = LoginFormsStyle.defaultTemplate;
@@ -31,9 +32,15 @@ class SignInForm extends StatelessWidget {
       buttonTextSetLanguage: SLang.of(context).SetLanguage,
       buttonTextSignUp: SLang.of(context).signUp,
       onPressedSetLanguage: () {
-        context
+        /* context
             .read<AuthenticationBloc>()
-            .add(AuthenticationSettingsRequested());
+            .add(AuthenticationSettingsRequested());*/
+        Locale currentLocale = context.read<SettingsBloc>().state.uiLocale;
+        print('Chaneg Language pressed + current : $currentLocale');
+        context.read<SettingsBloc>().add(UILocalChanged(
+            currentLocale.languageCode == 'ar'
+                ? const Locale('en')
+                : const Locale('ar')));
       },
       onPressedSignIn: () {
         context.read<LoginBloc>().add(const LoginSubmitted());
