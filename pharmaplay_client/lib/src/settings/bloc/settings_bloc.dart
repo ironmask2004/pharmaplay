@@ -95,11 +95,18 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     UIThemeModeChanged event,
     Emitter<SettingsState> emit,
   ) async {
+    //  if (event.uiThemeMode == null) return;
+
+    // Dot not perform any work if new and old ThemeMode are identical
+    if (event.uiThemeMode == state.uiThemeMode) return;
+
+    // Otherwise, store the new theme mode in memory
     // Use the shared_preferences package to persist settings locally or the
     // http package to persist settings over the network.
-    print('--');
+    print('_onUIThemeModeChanged: ' + event.uiThemeMode.toString());
     await MySharedPreferences.instance
         .setStringValue("ThemeMode", event.uiThemeMode.name);
+
     emit(SettingsStateUIThemeModeChanged(event.uiThemeMode)
         // state.copyWith(uiLocale: event.uiLocale),
         );
@@ -109,6 +116,9 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     UILocalChanged event,
     Emitter<SettingsState> emit,
   ) async {
+    // Dot not perform any work if new and old ThemeMode are identical
+    if ((event.uiLocale) == state.uiLocale) return;
+
     await MySharedPreferences.instance
         .setStringValue("UILocale", event.uiLocale.languageCode);
     print('emit SettingsStateUILocaleChanged   form ' +
