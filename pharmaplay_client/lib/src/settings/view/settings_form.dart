@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pharmaplay_client/generated/l10n.dart';
+import 'package:pharmaplay_client/src/authentication/authentication.dart';
 import 'package:pharmaplay_client/src/settings/bloc/settings_bloc.dart';
 import 'package:pharmaplay_client/src/utlites/sforms_style.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -96,7 +97,7 @@ class SettingsForm extends StatelessWidget {
                         top: style.verticalSpacingBetweenGroup,
                       ),
                     ),
-                    Padding(
+                    /* Padding(
                       padding: EdgeInsets.only(
                           top: style.verticalSpacingBetweenComponents),
                       child: SFormsButton(
@@ -111,10 +112,20 @@ class SettingsForm extends StatelessWidget {
                         },
                         style: style,
                       ),
+                    ),*/
+                    Padding(
+                      padding: EdgeInsets.only(
+                        top: style.verticalSpacingBetweenGroup,
+                      ),
                     ),
                     SFormsInlineButton(
                       text: SLang.of(context).back,
-                      onPressed: null,
+                      onPressed: () {
+                        /* context
+                            .read<AuthenticationBloc>()
+                            .add(AuthenticationSettingsDoneRequested());*/
+                        Navigator.of(context).pop();
+                      },
                       style: style,
                     ),
                   ]))),

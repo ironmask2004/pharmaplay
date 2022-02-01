@@ -301,6 +301,16 @@ class SLang {
       args: [],
     );
   }
+
+  /// `اللغة العربية`
+  String get SignInchangeLanguage {
+    return Intl.message(
+      'اللغة العربية',
+      name: 'SignInchangeLanguage',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<SLang> {

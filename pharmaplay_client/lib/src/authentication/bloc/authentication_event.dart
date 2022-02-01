@@ -25,4 +25,6 @@ class AuthenticationSignUpRequested extends AuthenticationEvent {}
 
 class AuthenticationForgotRequested extends AuthenticationEvent {}
 
-class AuthenticationSettingsRequested extends AuthenticationEvent {}
+//class AuthenticationSettingsRequested extends AuthenticationEvent {}
+
+//class AuthenticationSettingsDoneRequested extends AuthenticationEvent {}

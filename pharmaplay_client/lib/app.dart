@@ -12,7 +12,6 @@ import 'package:pharmaplay_client/src/splash/splash.dart';
 import 'package:user_repository/user_repository.dart';
 
 import 'src/settings/bloc/settings_bloc.dart';
-import 'src/settings/view/settings_page.dart';
 
 class App extends StatelessWidget {
   const App({
@@ -125,14 +124,14 @@ class AppView extends StatelessWidget {
                       );
                       break;
 
-                    case AuthenticationStatus.authenticationSettings:
+                    /*   case AuthenticationStatus.authenticationSettings:
                       print('authenticate Settings: ' + child.toString());
                       _navigator.push<void>(
                         SettingsPage.route(),
                         //(route) => false,
                       );
                       break;
-
+*/
                     case AuthenticationStatus.authenticationForgotPassword:
                       print(
                           'authenticate  ForgotPassword: ' + child.toString());

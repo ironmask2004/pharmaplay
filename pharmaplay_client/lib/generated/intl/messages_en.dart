@@ -35,6 +35,8 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "SetLanguage": MessageLookupByLibrary.simpleMessage("Change Language"),
+        "SignInchangeLanguage":
+            MessageLookupByLibrary.simpleMessage("اللغة العربية"),
         "appTitle": MessageLookupByLibrary.simpleMessage("Pharmaplay Market"),
         "applyNewSettings":
             MessageLookupByLibrary.simpleMessage("Apply New Settings"),

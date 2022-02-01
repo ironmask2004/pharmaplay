@@ -23,7 +23,9 @@ class AuthenticationBloc
     on<AuthenticationStatusChanged>(_onAuthenticationStatusChanged);
     on<AuthenticationLogoutRequested>(_onAuthenticationLogoutRequested);
     on<AuthenticationSignUpRequested>(_onAuthenticationSignUpRequested);
-    on<AuthenticationSettingsRequested>(_onAuthenticationSettingsRequested);
+    // on<AuthenticationSettingsRequested>(_onAuthenticationSettingsRequested);
+    //on<AuthenticationSettingsDoneRequested>(
+    //    _onAuthenticationSettingsDoneRequested);
 
     on<AuthenticationForgotRequested>(_onAuthenticationForgotRequested);
 
@@ -93,12 +95,19 @@ class AuthenticationBloc
     emit(const AuthenticationState.authenticationSignUp());
   }
 
+  /*
   //authenticationSettings
   _onAuthenticationSettingsRequested(AuthenticationSettingsRequested event,
       Emitter<AuthenticationState> emit) {
     emit(const AuthenticationState.authenticationSettings());
   }
 
+  _onAuthenticationSettingsDoneRequested(
+      AuthenticationSettingsDoneRequested event,
+      Emitter<AuthenticationState> emit) {
+    emit(const AuthenticationState.authenticationSettingsDone());
+  }
+*/
   _onAuthenticationForgotRequested(
       AuthenticationForgotRequested event, Emitter<AuthenticationState> emit) {
     emit(const AuthenticationState.authenticationForgotPassword());
