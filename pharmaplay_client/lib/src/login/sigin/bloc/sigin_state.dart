@@ -1,7 +1,7 @@
 part of 'sigin_bloc.dart';
 
-class LoginState extends Equatable {
-  const LoginState(
+class SiginState extends Equatable {
+  const SiginState(
       {this.status = FormzStatus.pure,
       this.firstname = const InputString.pure(),
       this.lastname = const InputString.pure(),
@@ -23,7 +23,7 @@ class LoginState extends Equatable {
 
   final String errMsg;
 
-  LoginState copyWith(
+  SiginState copyWith(
       {FormzStatus? status,
       InputString? firstname,
       InputString? lastname,
@@ -33,7 +33,7 @@ class LoginState extends Equatable {
       Password? confirmPassword,
       InputString? confirmCode,
       String? errMsg}) {
-    return LoginState(
+    return SiginState(
       status: status ?? this.status,
       firstname: firstname ?? this.firstname,
       lastname: lastname ?? this.lastname,

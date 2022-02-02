@@ -48,12 +48,12 @@ class SignInForm extends StatelessWidget {
         // context.read<SettingsBloc>().add(UIThemeModeChanged(ThemeMode.light));
       },
       onPressedSignIn: () {
-        context.read<LoginBloc>().add(const LoginSubmitted());
+        context.read<SiginBloc>().add(const LoginSubmitted());
       },
       onChangedEmail: (email) =>
-          context.read<LoginBloc>().add(LoginEmailChanged(email)),
+          context.read<SiginBloc>().add(SiginEmailChanged(email)),
       onChangedPassword: (password) =>
-          context.read<LoginBloc>().add(LoginPasswordChanged(password)),
+          context.read<SiginBloc>().add(SiginPasswordChanged(password)),
       onPressedSignUp: () {
         context.read<AuthenticationBloc>().add(AuthenticationSignUpRequested());
       },
@@ -67,7 +67,7 @@ class SignInForm extends StatelessWidget {
       ),
     );
 
-    return BlocListener<LoginBloc, LoginState>(
+    return BlocListener<SiginBloc, SiginState>(
       listener: (context, state) {
         if (state.status.isSubmissionFailure) {
           ScaffoldMessenger.of(context)

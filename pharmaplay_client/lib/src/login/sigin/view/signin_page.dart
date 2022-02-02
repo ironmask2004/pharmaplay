@@ -20,7 +20,7 @@ class SignInPage extends StatelessWidget {
         padding: const EdgeInsets.all(12),
         child: BlocProvider(
           create: (context) {
-            return LoginBloc(
+            return SiginBloc(
               authenticationRepository:
                   RepositoryProvider.of<AuthenticationRepository>(context),
             );

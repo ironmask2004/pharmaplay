@@ -1,14 +1,14 @@
 part of 'sigin_bloc.dart';
 
-abstract class LoginEvent extends Equatable {
-  const LoginEvent();
+abstract class SiginEvent extends Equatable {
+  const SiginEvent();
 
   @override
   List<Object> get props => [];
 }
 
-class LoginEmailChanged extends LoginEvent {
-  const LoginEmailChanged(this.email);
+class SiginEmailChanged extends SiginEvent {
+  const SiginEmailChanged(this.email);
 
   final String email;
 
@@ -16,8 +16,8 @@ class LoginEmailChanged extends LoginEvent {
   List<Object> get props => [email];
 }
 
-class LoginPasswordChanged extends LoginEvent {
-  const LoginPasswordChanged(this.password);
+class SiginPasswordChanged extends SiginEvent {
+  const SiginPasswordChanged(this.password);
 
   final String password;
 
@@ -25,14 +25,14 @@ class LoginPasswordChanged extends LoginEvent {
   List<Object> get props => [password];
 }
 
-class LoginSubmitted extends LoginEvent {
+class LoginSubmitted extends SiginEvent {
   const LoginSubmitted();
 }
 
-class SignUpSubmitted extends LoginEvent {
+class SignUpSubmitted extends SiginEvent {
   const SignUpSubmitted();
 }
 
-class ForgotPasswordSubmitted extends LoginEvent {
+class ForgotPasswordSubmitted extends SiginEvent {
   const ForgotPasswordSubmitted();
 }

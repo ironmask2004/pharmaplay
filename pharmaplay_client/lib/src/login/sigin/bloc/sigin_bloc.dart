@@ -9,14 +9,14 @@ import 'package:pharmaplay_client/generated/l10n.dart';
 part 'sigin_event.dart';
 part 'sigin_state.dart';
 
-class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  LoginBloc({
+class SiginBloc extends Bloc<SiginEvent, SiginState> {
+  SiginBloc({
     required AuthenticationRepository authenticationRepository,
   })  : _authenticationRepository = authenticationRepository,
-        super(const LoginState()) {
-    on<LoginEmailChanged>(_onLoginEmailChanged);
+        super(const SiginState()) {
+    on<SiginEmailChanged>(_onSiginEmailChanged);
 
-    on<LoginPasswordChanged>(_onLoginPasswordChanged);
+    on<SiginPasswordChanged>(_onSiginPasswordChanged);
 
     on<LoginSubmitted>(_onLoginSubmitted);
     on<ForgotPasswordSubmitted>(_onForgotPasswordSubmitted);
@@ -26,9 +26,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   final AuthenticationRepository _authenticationRepository;
 
-  void _onLoginEmailChanged(
-    LoginEmailChanged event,
-    Emitter<LoginState> emit,
+  void _onSiginEmailChanged(
+    SiginEmailChanged event,
+    Emitter<SiginState> emit,
   ) {
     print('_onEmailChanged');
     final email = Email.dirty(event.email);
@@ -38,9 +38,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     ));
   }
 
-  void _onLoginPasswordChanged(
-    LoginPasswordChanged event,
-    Emitter<LoginState> emit,
+  void _onSiginPasswordChanged(
+    SiginPasswordChanged event,
+    Emitter<SiginState> emit,
   ) {
     print('_onpasswordChanged');
     final password = Password.dirty(event.password);
@@ -52,7 +52,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   void _onLoginSubmitted(
     LoginSubmitted event,
-    Emitter<LoginState> emit,
+    Emitter<SiginState> emit,
   ) async {
     if (state.status.isValidated) {
       emit(state.copyWith(status: FormzStatus.submissionInProgress));
@@ -91,7 +91,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   void _onForgotPasswordSubmitted(
     ForgotPasswordSubmitted event,
-    Emitter<LoginState> emit,
+    Emitter<SiginState> emit,
   ) async {
     print('formstate: ${state.status}');
     print(state.email.value + ' password: ' + state.password.value);
@@ -134,7 +134,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 //===
   void _onSignUpSubmited(
     SignUpSubmitted event,
-    Emitter<LoginState> emit,
+    Emitter<SiginState> emit,
   ) async {
     print('formstate: ${state.status}');
     if (!state.status.isValidated) {
