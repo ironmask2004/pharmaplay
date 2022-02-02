@@ -1,14 +1,14 @@
-part of 'login_bloc.dart';
+part of 'signup_bloc.dart';
 
-abstract class LoginEvent extends Equatable {
-  const LoginEvent();
+abstract class SignupEvent extends Equatable {
+  const SignupEvent();
 
   @override
   List<Object> get props => [];
 }
 
-class LoginEmailChanged extends LoginEvent {
-  const LoginEmailChanged(this.email);
+class SignupEmailChanged extends SignupEvent {
+  const SignupEmailChanged(this.email);
 
   final String email;
 
@@ -16,8 +16,8 @@ class LoginEmailChanged extends LoginEvent {
   List<Object> get props => [email];
 }
 
-class LoginPasswordChanged extends LoginEvent {
-  const LoginPasswordChanged(this.password);
+class SignupPasswordChanged extends SignupEvent {
+  const SignupPasswordChanged(this.password);
 
   final String password;
 
@@ -25,11 +25,11 @@ class LoginPasswordChanged extends LoginEvent {
   List<Object> get props => [password];
 }
 
-class LoginSubmitted extends LoginEvent {
-  const LoginSubmitted();
+class SignupSubmitted extends SignupEvent {
+  const SignupSubmitted();
 }
 
-class SignUpFirstnameChanged extends LoginEvent {
+class SignUpFirstnameChanged extends SignupEvent {
   const SignUpFirstnameChanged(this.firstname);
 
   final String firstname;
@@ -38,7 +38,7 @@ class SignUpFirstnameChanged extends LoginEvent {
   List<Object> get props => [firstname];
 }
 
-class SignUpLastnameChanged extends LoginEvent {
+class SignUpLastnameChanged extends SignupEvent {
   const SignUpLastnameChanged(this.lastname);
 
   final String lastname;
@@ -47,7 +47,7 @@ class SignUpLastnameChanged extends LoginEvent {
   List<Object> get props => [lastname];
 }
 
-class SignUpEmailChanged extends LoginEvent {
+class SignUpEmailChanged extends SignupEvent {
   const SignUpEmailChanged(this.email);
 
   final String email;
@@ -56,7 +56,7 @@ class SignUpEmailChanged extends LoginEvent {
   List<Object> get props => [email];
 }
 
-class SignUpPasswordChanged extends LoginEvent {
+class SignUpPasswordChanged extends SignupEvent {
   const SignUpPasswordChanged(this.password);
 
   final String password;
@@ -65,7 +65,7 @@ class SignUpPasswordChanged extends LoginEvent {
   List<Object> get props => [password];
 }
 
-class SignUpConfirmPasswordChanged extends LoginEvent {
+class SignUpConfirmPasswordChanged extends SignupEvent {
   const SignUpConfirmPasswordChanged(this.confirmPassword);
 
   final String confirmPassword;
@@ -74,7 +74,7 @@ class SignUpConfirmPasswordChanged extends LoginEvent {
   List<Object> get props => [confirmPassword];
 }
 
-class SignUpMobileChanged extends LoginEvent {
+class SignUpMobileChanged extends SignupEvent {
   const SignUpMobileChanged(this.mobile);
 
   final String mobile;
@@ -83,11 +83,11 @@ class SignUpMobileChanged extends LoginEvent {
   List<Object> get props => [mobile];
 }
 
-class SignUpSubmitted extends LoginEvent {
+class SignUpSubmitted extends SignupEvent {
   const SignUpSubmitted();
 }
 
-class ConfirmCodeChanged extends LoginEvent {
+class ConfirmCodeChanged extends SignupEvent {
   const ConfirmCodeChanged(this.confirmCode);
 
   final String confirmCode;
@@ -96,7 +96,7 @@ class ConfirmCodeChanged extends LoginEvent {
   List<Object> get props => [confirmCode];
 }
 
-class ForgotEmailChanged extends LoginEvent {
+class ForgotEmailChanged extends SignupEvent {
   const ForgotEmailChanged(this.email);
 
   final String email;
@@ -105,7 +105,7 @@ class ForgotEmailChanged extends LoginEvent {
   List<Object> get props => [email];
 }
 
-class ConfirmFormEmailChanged extends LoginEvent {
+class ConfirmFormEmailChanged extends SignupEvent {
   const ConfirmFormEmailChanged(this.email);
 
   final String email;
@@ -114,7 +114,7 @@ class ConfirmFormEmailChanged extends LoginEvent {
   List<Object> get props => [email];
 }
 
-class ConfirmFormPasswordChanged extends LoginEvent {
+class ConfirmFormPasswordChanged extends SignupEvent {
   const ConfirmFormPasswordChanged(this.password);
 
   final String password;
@@ -123,14 +123,14 @@ class ConfirmFormPasswordChanged extends LoginEvent {
   List<Object> get props => [password];
 }
 
-class ConfirmCodeSubmitted extends LoginEvent {
+class ConfirmCodeSubmitted extends SignupEvent {
   const ConfirmCodeSubmitted();
 }
 
-class ResendConfirmCodeSubmitted extends LoginEvent {
+class ResendConfirmCodeSubmitted extends SignupEvent {
   const ResendConfirmCodeSubmitted();
 }
 
-class ForgotPasswordSubmitted extends LoginEvent {
+class ForgotPasswordSubmitted extends SignupEvent {
   const ForgotPasswordSubmitted();
 }

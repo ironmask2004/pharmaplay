@@ -11,6 +11,8 @@ import 'package:pharmaplay_client/src/login/login.dart';
 import 'package:pharmaplay_client/src/splash/splash.dart';
 import 'package:user_repository/user_repository.dart';
 
+import 'src/login/sigin/sigin.dart';
+import 'src/login/signup/signup.dart';
 import 'src/settings/bloc/settings_bloc.dart';
 
 class App extends StatelessWidget {

@@ -3,8 +3,9 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:formz/formz.dart';
 import 'package:pharmaplay_client/generated/l10n.dart';
-import 'package:pharmaplay_client/src/login/login.dart';
 import 'package:dartz/dartz.dart' as dartz;
+
+import '../../login.dart';
 //import 'package:pharmaplay_client/generated/l10n.dart';
 
 part 'forgot_password_event.dart';

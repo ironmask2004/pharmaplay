@@ -7,8 +7,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:pharmaplay_client/generated/l10n.dart';
 import 'package:pharmaplay_client/src/authentication/authentication.dart';
-import 'package:pharmaplay_client/src/login/login.dart';
 import 'package:pharmaplay_client/src/settings/bloc/settings_bloc.dart';
+
+import '../sigin.dart';
 
 class SignInForm extends StatelessWidget {
   final LoginFormsStyle style = LoginFormsStyle.defaultTemplate;
@@ -44,6 +45,7 @@ class SignInForm extends StatelessWidget {
             currentLocale.languageCode == 'ar'
                 ? const Locale('en')
                 : const Locale('ar')));
+        // context.read<SettingsBloc>().add(UIThemeModeChanged(ThemeMode.light));
       },
       onPressedSignIn: () {
         context.read<LoginBloc>().add(const LoginSubmitted());

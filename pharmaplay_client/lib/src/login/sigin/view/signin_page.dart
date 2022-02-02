@@ -1,20 +1,21 @@
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pharmaplay_client/src/login/login.dart';
 import 'package:pharmaplay_client/generated/l10n.dart';
 
-class SignUpPage extends StatelessWidget {
-  const SignUpPage({Key? key}) : super(key: key);
+import '../sigin.dart';
+
+class SignInPage extends StatelessWidget {
+  const SignInPage({Key? key}) : super(key: key);
 
   static Route route() {
-    return MaterialPageRoute<void>(builder: (_) => const SignUpPage());
+    return MaterialPageRoute<void>(builder: (_) => const SignInPage());
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(SLang.of(context).signUp)),
+      appBar: AppBar(title: Text(SLang.of(context).loginPage)),
       body: Padding(
         padding: const EdgeInsets.all(12),
         child: BlocProvider(
@@ -24,7 +25,7 @@ class SignUpPage extends StatelessWidget {
                   RepositoryProvider.of<AuthenticationRepository>(context),
             );
           },
-          child: SignUpForm(), // LoginForm(),
+          child: SignInForm(), // LoginForm(),
         ),
       ),
     );

@@ -2,18 +2,18 @@ import 'package:authentication_repository/authentication_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:formz/formz.dart';
-import 'package:pharmaplay_client/src/login/login.dart';
 import 'package:dartz/dartz.dart' as dartz;
 import 'package:pharmaplay_client/generated/l10n.dart';
+import 'package:pharmaplay_client/src/login/login.dart';
 
-part 'login_event.dart';
-part 'login_state.dart';
+part 'signup_event.dart';
+part 'signup_state.dart';
 
-class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  LoginBloc({
+class SignupBloc extends Bloc<SignupEvent, SignupState> {
+  SignupBloc({
     required AuthenticationRepository authenticationRepository,
   })  : _authenticationRepository = authenticationRepository,
-        super(const LoginState()) {
+        super(const SignupState()) {
     on<SignUpFirstnameChanged>(_onSignUpFirstnameChanged);
     on<SignUpLastnameChanged>(_onSignUpLastnameChanged);
     on<SignUpMobileChanged>(_onSignUpMobileChanged);
@@ -21,16 +21,16 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     on<SignUpPasswordChanged>(_onSignUpPasswordChanged);
     on<SignUpConfirmPasswordChanged>(_onSignUpConfirmPasswordChanged);
     on<SignUpSubmitted>(_onSignUpSubmited);
-    on<LoginEmailChanged>(_onLoginEmailChanged);
+    //on<SignupEmailChanged>(_onSignupEmailChanged);
     on<ForgotEmailChanged>(_onforgotEmailChanged);
 
-    on<LoginPasswordChanged>(_onLoginPasswordChanged);
+    //on<SignupPasswordChanged>(_onSignupPasswordChanged);
 
     on<ConfirmFormEmailChanged>(_onConfirmFormEmailChanged);
     on<ConfirmFormPasswordChanged>(_onConfirmFormPasswordChanged);
 
     on<ConfirmCodeChanged>(_onConfirmCodeChanged);
-    on<LoginSubmitted>(_onLoginSubmitted);
+    //on<SignupSubmitted>(_onSignupSubmitted);
     on<ConfirmCodeSubmitted>(_onConfirmCodeSubmitted);
     on<ResendConfirmCodeSubmitted>(_onResendConfirmCodeSubmitted);
     on<ForgotPasswordSubmitted>(_onForgotPasswordSubmitted);
@@ -42,7 +42,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   void _onSignUpFirstnameChanged(
     SignUpFirstnameChanged event,
-    Emitter<LoginState> emit,
+    Emitter<SignupState> emit,
   ) {
     print('_onSignUpFirstnameChanged');
     final firstname = InputString.dirty(event.firstname);
@@ -61,9 +61,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   void _onSignUpLastnameChanged(
     SignUpLastnameChanged event,
-    Emitter<LoginState> emit,
+    Emitter<SignupState> emit,
   ) {
-    //print(SLang.of(context).onsignuplastnamechanged);
+    print(SLang.current.onsignuplastnamechanged);
     final lastname = InputString.dirty(event.lastname);
     emit(state.copyWith(
       lastname: lastname,
@@ -80,7 +80,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   void _onSignUpMobileChanged(
     SignUpMobileChanged event,
-    Emitter<LoginState> emit,
+    Emitter<SignupState> emit,
   ) {
     print('_onSignUpMobileChanged');
     final mobile = Mobile.dirty(event.mobile);
@@ -99,7 +99,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   void _onConfirmCodeChanged(
     ConfirmCodeChanged event,
-    Emitter<LoginState> emit,
+    Emitter<SignupState> emit,
   ) {
     print('_onConfirmCodeChanged');
     final confirmCode = InputString.dirty(event.confirmCode);
@@ -112,7 +112,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   void _onforgotEmailChanged(
     ForgotEmailChanged event,
-    Emitter<LoginState> emit,
+    Emitter<SignupState> emit,
   ) {
     print(SLang.current.onforgotemailchanged);
     final email = Email.dirty(event.email);
@@ -125,7 +125,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   void _onConfirmFormEmailChanged(
     ConfirmFormEmailChanged event,
-    Emitter<LoginState> emit,
+    Emitter<SignupState> emit,
   ) {
     print('_onConfirmFormEmailChanged');
     final email = Email.dirty(event.email);
@@ -138,7 +138,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   void _onConfirmFormPasswordChanged(
     ConfirmFormPasswordChanged event,
-    Emitter<LoginState> emit,
+    Emitter<SignupState> emit,
   ) {
     print('_onConfirmFormPasswordChanged');
     final password = Password.dirty(event.password);
@@ -151,7 +151,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   void _onSignUpConfirmPasswordChanged(
     SignUpConfirmPasswordChanged event,
-    Emitter<LoginState> emit,
+    Emitter<SignupState> emit,
   ) {
     print('_onSignUpConfirmPasswordChanged');
     final confirmPassword = Password.dirty(event.confirmPassword);
@@ -168,9 +168,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     ));
   }
 
-  void _onLoginEmailChanged(
-    LoginEmailChanged event,
-    Emitter<LoginState> emit,
+  void _onSignupEmailChanged(
+    SignupEmailChanged event,
+    Emitter<SignupState> emit,
   ) {
     print('_onEmailChanged');
     final email = Email.dirty(event.email);
@@ -180,9 +180,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     ));
   }
 
-  void _onLoginPasswordChanged(
-    LoginPasswordChanged event,
-    Emitter<LoginState> emit,
+  void _onSignupPasswordChanged(
+    SignupPasswordChanged event,
+    Emitter<SignupState> emit,
   ) {
     print('_onpasswordChanged');
     final password = Password.dirty(event.password);
@@ -194,7 +194,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   void _onSignUpEmailChanged(
     SignUpEmailChanged event,
-    Emitter<LoginState> emit,
+    Emitter<SignupState> emit,
   ) {
     print('_onSignUpEmailChanged');
     final email = Email.dirty(event.email);
@@ -213,7 +213,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   void _onSignUpPasswordChanged(
     SignUpPasswordChanged event,
-    Emitter<LoginState> emit,
+    Emitter<SignupState> emit,
   ) {
     print('_onSignUpPasswordChanged');
     final password = Password.dirty(event.password);
@@ -230,9 +230,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     ));
   }
 
-  void _onLoginSubmitted(
-    LoginSubmitted event,
-    Emitter<LoginState> emit,
+  void _onSignupSubmitted(
+    SignupSubmitted event,
+    Emitter<SignupState> emit,
   ) async {
     if (state.status.isValidated) {
       emit(state.copyWith(status: FormzStatus.submissionInProgress));
@@ -251,7 +251,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
               status: FormzStatus.submissionSuccess,
               errMsg: left.toJson().toString()));
         }, (right) {
-          //showInSnackBar(context, ("Login Successs!!"));
+          //showInSnackBar(context, ("Signup Successs!!"));
           print('right');
           emit(state.copyWith(
               status: FormzStatus.submissionFailure,
@@ -271,7 +271,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   void _onConfirmCodeSubmitted(
     ConfirmCodeSubmitted event,
-    Emitter<LoginState> emit,
+    Emitter<SignupState> emit,
   ) async {
     print('formstate: ${state.status}');
     print(state.email.value +
@@ -303,7 +303,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
             status: FormzStatus.submissionSuccess,
             errMsg: left.toJson().toString()));
       }, (right) {
-        //showInSnackBar(context, ("Login Successs!!"));
+        //showInSnackBar(context, ("Signup Successs!!"));
         print('right');
         emit(state.copyWith(
             status: FormzStatus.submissionFailure,
@@ -322,7 +322,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   void _onResendConfirmCodeSubmitted(
     ResendConfirmCodeSubmitted event,
-    Emitter<LoginState> emit,
+    Emitter<SignupState> emit,
   ) async {
     print('formstate: ${state.status}');
     print(state.email.value + ' password: ' + state.password.value);
@@ -348,7 +348,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
             status: FormzStatus.submissionSuccess,
             errMsg: left.toJson().toString()));
       }, (right) {
-        //showInSnackBar(context, ("Login Successs!!"));
+        //showInSnackBar(context, ("Signup Successs!!"));
         print('right');
         emit(state.copyWith(
             status: FormzStatus.submissionFailure,
@@ -368,7 +368,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   void _onForgotPasswordSubmitted(
     ForgotPasswordSubmitted event,
-    Emitter<LoginState> emit,
+    Emitter<SignupState> emit,
   ) async {
     print('formstate: ${state.status}');
     print(state.email.value + ' password: ' + state.password.value);
@@ -411,7 +411,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 //===
   void _onSignUpSubmited(
     SignUpSubmitted event,
-    Emitter<LoginState> emit,
+    Emitter<SignupState> emit,
   ) async {
     print('formstate: ${state.status}');
     if (!state.status.isValidated) {
