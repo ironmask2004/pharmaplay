@@ -1,9 +1,6 @@
 import 'package:pharmaplay_server/pharmaplay_server.dart';
-import 'package:pharmaplay_server/src/repository/database_api.dart';
-import 'package:pharmaplay_server/src/user/model/user.dart';
 import 'package:pharmaplay_server/src/user/user_repository/user_repo.dart';
 import 'package:pharmaplay_server/src/utilites/error_response.dart';
-import 'package:pharmaplay_server/src/utilites/random_code.dart';
 
 class PharmaApi {
   String authStore;
