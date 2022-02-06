@@ -64,5 +64,6 @@
   "applyNewSettings": "Apply New Settings",
   "back": "Back",
   "englishLanguage": "English Language",
-  "SignInchangeLanguage": "اللغة العربية"
+  "SignInchangeLanguage": "اللغة العربية",
+  "homelogout": "LogOut"
 }

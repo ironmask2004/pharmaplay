@@ -103,7 +103,15 @@ class AppView extends StatelessWidget {
                         (route) => false,
                       );
                       break;
+                    // authenticateSignIn
                     case AuthenticationStatus.unauthenticated:
+                      print('un Auth : ' + child.toString());
+                      _navigator.pushAndRemoveUntil<void>(
+                        HomePage.route(),
+                        (route) => false,
+                      );
+                      break;
+                    case AuthenticationStatus.authenticateSignIn:
                       print('un Auth : ' + child.toString());
                       _navigator.pushAndRemoveUntil<void>(
                         SignInPage.route(),
@@ -132,8 +140,7 @@ class AppView extends StatelessWidget {
                         SettingsPage.route(),
                         //(route) => false,
                       );
-                      break;
-*/
+                      break;*/
                     case AuthenticationStatus.authenticationForgotPassword:
                       print(
                           'authenticate  ForgotPassword: ' + child.toString());
@@ -143,6 +150,8 @@ class AppView extends StatelessWidget {
                       );
                       break;
                     default:
+                      print('Lisnter find default switch!!!!!!!!! : ' +
+                          AuthenticationStatus.values.toString());
                       break;
                   }
                 }),

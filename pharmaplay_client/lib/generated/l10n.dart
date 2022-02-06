@@ -311,6 +311,16 @@ class SLang {
       args: [],
     );
   }
+
+  /// `LogOut`
+  String get homelogout {
+    return Intl.message(
+      'LogOut',
+      name: 'homelogout',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<SLang> {

@@ -49,6 +49,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("اللغة اﻷنكليزية"),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("نسيت كلمة السر"),
+        "homelogout": MessageLookupByLibrary.simpleMessage("تسجيل خروج"),
         "loginPage":
             MessageLookupByLibrary.simpleMessage("تسجيل الدخول إلى الصيدلية"),
         "onforgotemailchanged":

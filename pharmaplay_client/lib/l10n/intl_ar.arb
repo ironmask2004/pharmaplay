@@ -63,6 +63,7 @@
   "settings": "اﻷعدادات!",
   "applyNewSettings": "تطبيق الاعدادات الجديدة",
   "back": "عودة",
-  "englishLanguage": "اللغة اﻷنكليزية"  ,
-  "SignInchangeLanguage": "English Language"
+  "englishLanguage": "اللغة اﻷنكليزية",
+  "SignInchangeLanguage": "English Language",
+  "homelogout": "تسجيل خروج"
 }

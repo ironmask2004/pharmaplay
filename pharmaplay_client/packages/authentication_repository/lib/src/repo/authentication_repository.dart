@@ -14,6 +14,7 @@ enum AuthenticationStatus {
   authenticated,
   unauthenticated,
   authenticateSignUp,
+  authenticateSignIn,
   authenticateConfirmCode,
   authenticateChangePassword,
   authenticationForgotPassword

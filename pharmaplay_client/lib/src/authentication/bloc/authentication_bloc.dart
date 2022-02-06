@@ -4,7 +4,6 @@ import 'package:authentication_repository/authentication_repository.dart';
 import 'package:dartz/dartz.dart' as dartz;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:pharmaplay_client/src/login/login.dart';
 import 'package:pharmaplay_client/src/utlites/shared_pref.dart';
 import 'package:user_repository/user_repository.dart';
 
@@ -22,6 +21,9 @@ class AuthenticationBloc
     on<AuthenticationLandingRequested>(_onAuthenticationLandingRequested);
     on<AuthenticationStatusChanged>(_onAuthenticationStatusChanged);
     on<AuthenticationLogoutRequested>(_onAuthenticationLogoutRequested);
+
+    on<AuthenticateSignInRequested>(_onAuthenticateSignInRequested);
+
     on<AuthenticationSignUpRequested>(_onAuthenticationSignUpRequested);
     // on<AuthenticationSettingsRequested>(_onAuthenticationSettingsRequested);
     //on<AuthenticationSettingsDoneRequested>(
@@ -52,6 +54,9 @@ class AuthenticationBloc
   ) async {
     print('changed status ${event.status}');
     switch (event.status) {
+      case AuthenticationStatus.authenticateSignIn:
+        return emit(AuthenticationState.authenticationSignIn());
+
       case AuthenticationStatus.unauthenticated:
         return emit(AuthenticationState.unauthenticated(TokenPair.empty()));
       case AuthenticationStatus.authenticated:
@@ -111,6 +116,18 @@ class AuthenticationBloc
   _onAuthenticationForgotRequested(
       AuthenticationForgotRequested event, Emitter<AuthenticationState> emit) {
     emit(const AuthenticationState.authenticationForgotPassword());
+  }
+
+  void _onAuthenticateSignInRequested(
+    AuthenticateSignInRequested event,
+    Emitter<AuthenticationState> emit,
+  ) async {
+    final tokenId = await MySharedPreferences.instance.removeValue("tokenId");
+    await MySharedPreferences.instance.removeValue("refreshToken");
+
+    await MySharedPreferences.instance.setBooleanValue("loggedIn", false);
+
+    emit(const AuthenticationState.authenticationSignIn());
   }
 
   void _onAuthenticationLogoutRequested(
