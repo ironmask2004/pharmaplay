@@ -16,6 +16,8 @@ dependencies:
     path: ../packages/login_forms
   user_repository:
     path: ../packages/user_repository
+  pharma_repository:
+    path: ../packages/pharma_repository
   auto_size_text: ^3.0.0
   flutter:
     sdk: flutter

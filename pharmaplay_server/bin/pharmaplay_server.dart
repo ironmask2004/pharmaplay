@@ -6,6 +6,8 @@ import 'package:pharmaplay_server/src/repository/database_api.dart';
 import 'package:pharmaplay_server/src/authentication/auth_api/auth_api.dart';
 import 'package:pharmaplay_server/src/router_api/static_assets_api.dart';
 import 'package:pharmaplay_server/src/user/route_api/user_api.dart';
+import 'package:pharmaplay_server/src/pharma/route_api/pharma_api.dart';
+
 import 'package:pharmaplay_server/src/utilites/config.dart';
 import 'package:shelf/shelf.dart';
 import 'package:shelf/shelf_io.dart';
@@ -45,6 +47,7 @@ void main(List<String> args) async {
     ..mount('/auth/',
         AuthApi(dbApi.db, authStore, sysEnv.secretKey, tokenService).router)
     ..mount('/users/', UserApi(dbApi.db, authStore).router)
+    ..mount('/pharma/', PharmaApi(dbApi.db, authStore).router)
     ..mount('/assets/', StaticAssetsApi('public').router)
     ..all('/<name|.*>', fallback('public/index.html'));
 
