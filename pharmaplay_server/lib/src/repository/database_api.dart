@@ -44,6 +44,7 @@ class DB {
   Future<List<dynamic>> query(String sql,
       {Map<String, dynamic>? values}) async {
     try {
+      print(sql);
       return await _connection.mappedResultsQuery(sql,
           substitutionValues: values);
     } catch (e) {

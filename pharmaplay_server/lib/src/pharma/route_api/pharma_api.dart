@@ -1,17 +1,18 @@
 import 'package:pharmaplay_server/pharmaplay_server.dart';
-import 'package:pharmaplay_server/src/user/user_repository/user_repo.dart';
 import 'package:pharmaplay_server/src/utilites/error_response.dart';
 
+import '../pharma_repository/pharma_repo.dart';
+
 class PharmaApi {
-  String authStore;
+  String medicineStore;
   DB db;
-  PharmaApi(this.db, this.authStore);
+  PharmaApi(this.db, this.medicineStore);
   Handler get router {
     final router = Router();
 
-    //============= /users/test  ROUTE
+    //============= /medicine/test  ROUTE
 
-    router.post('/test', (Request req) async {
+    router.get('/medicine/test', (Request req) async {
       /*  // final authDetails = req.context['authDetails'] as JWT;
       try {
         final payload = await req.readAsString();
@@ -19,12 +20,12 @@ class PharmaApi {
         final Map<String, dynamic> querybody = json.decode(payload);
         print(querybody);
 
-        List<User> usersInfo = await findUserByParams(db, authStore, querybody);
-        print("founded_user------:" + usersInfo.toString());
-        print(usersInfo.toString());
+        List<Medicine> medicinesInfo = await findMedicineByParams(db, medicineStore, querybody);
+        print("founded_medicine------:" + medicinesInfo.toString());
+        print(medicinesInfo.toString());
         String response = "";
-        for (int i = 0; i < usersInfo.length; i++) {
-          response = response + (usersInfo[i].toJson().toString());
+        for (int i = 0; i < medicinesInfo.length; i++) {
+          response = response + (medicinesInfo[i].toJson().toString());
         }
 
         return Response.ok(response, headers: {
@@ -40,125 +41,115 @@ class PharmaApi {
       }
     }
     */
-      sendMail('ironmask2004@gmail.com', 'Veervication Cdoe from Pharma Play',
-          'The Code is: ${RandomCode.nextInter()} ');
+      // sendMail('ironmask2004@gmail.com', 'Veervication Cdoe from Pharma Play',
+      //    'The Code is: ${RandomCode.nextInter()} ');
       return Response.internalServerError(
-          body: responseErrMsg("VerCode ???-??? ", "199991"));
+          body: responseErrMsg("medicine test route", "333333"));
     });
 
-//============= /users/userstatuslist  ROUTE
-
-    router.post('/userstatuslist', (Request req) async {
-      // final authDetails = req.context['authDetails'] as JWT;
-
-      String response = UserStatusEnumMap.toString();
-
-      return Response.ok(response, headers: {
-        'content-type': 'application/json',
-      });
-    });
-
-    //============= /users/INFO ROUTE
+    //============= /medicines/INFO ROUTE
     router.get('/info/', (Request req) async {
       final authDetails = req.context['authDetails'] as JWT;
       print('authDetails.subject.toString ' + authDetails.subject.toString());
-      User userInfo;
+      Medicine medicineInfo;
       try {
-        userInfo =
-            await findUserByID(authDetails.subject.toString(), db, authStore);
+        medicineInfo = await findMedicineByID(
+            authDetails.subject.toString(), db, medicineStore);
 
-        print("founded_user------:" + userInfo.toString());
+        print("founded_medicine------:" + medicineInfo.toString());
       } catch (err) {
         return Response.forbidden(responseErrMsg("$err", "9004"), headers: {
           'content-type': 'application/json',
         });
       }
 
-      final Map<String, dynamic> userWithresault = {
-        "userinfo": userInfo.toMap(),
+      final Map<String, dynamic> medicineWithresault = {
+        "medicineinfo": medicineInfo.toMap(),
         "requestResult": {'error': 'Success', 'errNO': '200'}
       };
 
-      print(userWithresault);
-      var jsonString = json.encode(userWithresault);
+      print(medicineWithresault);
+      var jsonString = json.encode(medicineWithresault);
 
       return Response.ok(jsonString, headers: {
         'content-type': 'application/json',
       });
     });
 
-    //============= /users/  ROUTE
+    //============= /medicine/  ROUTE
 
-    router.post('/', (Request req) async {
-      final authDetails = req.context['authDetails'] as JWT;
-      print('authDetails.subject.toString ' + authDetails.subject.toString());
-      User userInfo;
+    router.get('/medicine/id', (Request req) async {
+      //final authDetails = req.context['authDetails'] as JWT;
+      print(req.context.toString());
+      Medicine medicineInfo;
+      final payload = await req.readAsString();
+      final Map<String, dynamic> requestBody = json.decode(payload);
+      print(requestBody);
       try {
-        userInfo =
-            await findUserByID(authDetails.subject.toString(), db, authStore);
+        medicineInfo = await findMedicineByID(
+            requestBody['medicineID'].toString(), db, medicineStore);
 
-        print("founded_user------:" + userInfo.toString());
+        print("founded_medicine------:" + medicineInfo.toString());
       } catch (err) {
         return Response.forbidden(responseErrMsg("$err", "9004"), headers: {
           'content-type': 'application/json',
         });
       }
 
-      final Map<String, dynamic> userWithresault = {
-        "userinfo": userInfo.toMap(),
+      final Map<String, dynamic> medicineWithresault = {
+        "medicineinfo": medicineInfo.toMap(),
         "requestResult": {'error': 'Success', 'errNO': '200'}
       };
 
-      print(userWithresault);
-      var jsonString = json.encode(userWithresault);
+      print(medicineWithresault);
+      var jsonString = json.encode(medicineWithresault);
 
       return Response.ok(jsonString, headers: {
         'content-type': 'application/json',
       });
     });
 
-    //============= /users/UPDATE  ROUTE
+    //============= /medicines/UPDATE  ROUTE
 
-    router.post('/update/', (Request req) async {
+    /* router.post('/update/', (Request req) async {
       String sql;
       Map<String, dynamic> params;
       dynamic resultSet;
       final authDetails = req.context['authDetails'] as JWT;
       print('authDetails.subject.toString ' + authDetails.subject.toString());
       final payload = await req.readAsString();
-      final Map<String, dynamic> userInfo = json.decode(payload);
-      print(userInfo);
-      final email = userInfo['email'];
-      final password = userInfo['password'];
-      final firstname = userInfo['firstname'];
-      final lastname = userInfo['lastname'];
-      final mobile = userInfo['mobile'];
+      final Map<String, dynamic> medicineInfo = json.decode(payload);
+      print(medicineInfo);
+      final email = medicineInfo['email'];
+      final password = medicineInfo['password'];
+      final firstname = medicineInfo['firstname'];
+      final lastname = medicineInfo['lastname'];
+      final mobile = medicineInfo['mobile'];
 
       print('-------------------------');
-      User oldUserInfo =
-          await findUserByID(authDetails.subject.toString(), db, authStore);
+      Medicine oldMedicineInfo = await findMedicineByID(
+          authDetails.subject.toString(), db, medicineStore);
       print('-------------------------');
-      print("founded_old_user_data: ------:" + oldUserInfo.toString());
-      //print(oldUserInfo);
-      userInfo['updatedate'] = DateTime.now();
+      print("founded_old_medicine_data: ------:" + oldMedicineInfo.toString());
+      //print(oldMedicineInfo);
+      medicineInfo['updatedate'] = DateTime.now();
 
-      if (userInfo['password'] != null) {
-        userInfo['password'] = hashPassword(password, oldUserInfo.salt);
-      }
+      Medicine updatedMedicineInfo =
+          oldMedicineInfo.copyWithFromMap(medicineInfo);
 
-      ;
-      User updatedUserInfo = oldUserInfo.copyWithFromMap(userInfo);
+      print("updared _medicine_data: ------:" + updatedMedicineInfo.toString());
 
-      print("updared _user_data: ------:" + updatedUserInfo.toString());
-
-      if (oldUserInfo.email != updatedUserInfo.email) {
-        if (!EmailValidator.validate(updatedUserInfo.email)) {
+      if (oldMedicineInfo.email != updatedMedicineInfo.email) {
+        if (!EmailValidator.validate(updatedMedicineInfo.email)) {
           return Response(HttpStatus.badRequest,
               body: responseErrMsg("Please provide a vaild  Email", '403'));
         }
         sql =
-            "SELECT idx  FROM pharmaplay.$authStore WHERE email =  @email  and idx != @idx";
-        params = {"email": updatedUserInfo.email, "idx": updatedUserInfo.idx};
+            "SELECT idx  FROM pharmaplay.$medicineStore WHERE email =  @email  and idx != @idx";
+        params = {
+          "email": updatedMedicineInfo.email,
+          "idx": updatedMedicineInfo.idx
+        };
         resultSet = await db.query(sql, values: params);
 
         if (resultSet.length > 0) {
@@ -169,28 +160,28 @@ class PharmaApi {
         }
       }
 
-      if (oldUserInfo.firstname != updatedUserInfo.firstname ||
-          oldUserInfo.lastname != updatedUserInfo.lastname) {
+      if (oldMedicineInfo.firstname != updatedMedicineInfo.firstname ||
+          oldMedicineInfo.lastname != updatedMedicineInfo.lastname) {
         sql =
-            "SELECT idx  FROM pharmaplay.$authStore WHERE firstname= @firstname and lastname =  @lastname   and idx != @idx";
+            "SELECT idx  FROM pharmaplay.$medicineStore WHERE firstname= @firstname and lastname =  @lastname   and idx != @idx";
         params = {
-          "firstname": updatedUserInfo.firstname,
-          "lastname": updatedUserInfo.lastname,
-          "idx": updatedUserInfo.idx
+          "firstname": updatedMedicineInfo.firstname,
+          "lastname": updatedMedicineInfo.lastname,
+          "idx": updatedMedicineInfo.idx
         };
         resultSet = await db.query(sql, values: params);
 
         if (resultSet.length > 0) {
           return Response.forbidden(responseErrMsg(
-              "User name:  $firstname $lastname  was already takedn for some one else !!",
+              "Medicine name:  $firstname $lastname  was already takedn for some one else !!",
               "403"));
         }
       }
 
-      if (oldUserInfo.mobile != updatedUserInfo.mobile) {
+      if (oldMedicineInfo.mobile != updatedMedicineInfo.mobile) {
         sql =
-            "SELECT idx  FROM pharmaplay.$authStore WHERE mobile =  @mobile and idx != @idx  ";
-        params = {"mobile": mobile, "idx": updatedUserInfo.idx};
+            "SELECT idx  FROM pharmaplay.$medicineStore WHERE mobile =  @mobile and idx != @idx  ";
+        params = {"mobile": mobile, "idx": updatedMedicineInfo.idx};
         resultSet = await db.query(sql, values: params);
 
         if (resultSet.length > 0) {
@@ -199,27 +190,29 @@ class PharmaApi {
         }
       }
       try {
-        // updatedUserInfo.updatedate = DateTime.now();
+        // updatedMedicineInfo.updatedate = DateTime.now();
         sql =
-            'update pharmaplay.$authStore SET   id=@id, firstname=@firstname, lastname=@lastname, email=@email, password=@password, salt=@salt, mobile=@mobile, createdate=@createdate, updatedate=@updatedate ,  status=@status 	where idx= @idx returning idx';
-        params = updatedUserInfo.toMap();
+            'update pharmaplay.$medicineStore SET   id=@id, firstname=@firstname, lastname=@lastname, email=@email, password=@password, salt=@salt, mobile=@mobile, createdate=@createdate, updatedate=@updatedate ,  status=@status 	where idx= @idx returning idx';
+        params = updatedMedicineInfo.toMap();
         resultSet = await db.query(sql, values: params);
 
         print(resultSet.first.toString());
         if (resultSet.length == 0) {
           return Response.forbidden(
-              responseErrMsg(' facing error while updating  user', "403"));
+              responseErrMsg(' facing error while updating  medicine', "403"));
         }
       } catch (error) {
-        print(' error while Updating  user  ' + error.toString());
+        print(' error while Updating  medicine  ' + error.toString());
         return Response(HttpStatus.badRequest,
-            body: responseErrMsg('error while Updateing  user', '403'));
+            body: responseErrMsg('error while Updateing  medicine', '403'));
       }
-      return Response.ok(responseErrMsg("Successfully Updated user", "200"));
-    });
+      return Response.ok(
+          responseErrMsg("Successfully Updated medicine", "200"));
+    });*/
 
-    final handler =
-        Pipeline().addMiddleware(checkAuthorisation()).addHandler(router);
+    final handler = Pipeline().addHandler(router);
+
+    //    Pipeline().addMiddleware(checkAuthorisation()).addHandler(router);
     return handler;
   }
 }

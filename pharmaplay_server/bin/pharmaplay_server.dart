@@ -43,11 +43,12 @@ void main(List<String> args) async {
   //final _handler = Pipeline().addMiddleware(logRequests()).addHandler(_router);
 
   final authStore = 'users000';
+  final medicineStore = 'medicinesview000';
   final app = Router()
     ..mount('/auth/',
         AuthApi(dbApi.db, authStore, sysEnv.secretKey, tokenService).router)
     ..mount('/users/', UserApi(dbApi.db, authStore).router)
-    ..mount('/pharma/', PharmaApi(dbApi.db, authStore).router)
+    ..mount('/pharma/', PharmaApi(dbApi.db, medicineStore).router)
     ..mount('/assets/', StaticAssetsApi('public').router)
     ..all('/<name|.*>', fallback('public/index.html'));
 
