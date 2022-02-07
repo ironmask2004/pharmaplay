@@ -80,11 +80,11 @@ Future<List<Medicine>> findMedicineByParams(
 Future<MedicineRecord> findMedicineByID(
     String medicineID, DB db, String medicineStore) async {
   String sql = '''  SELECT md0."medicineID",
-    md0.tradename,md0.caliber,
+    md0."tradeName",md0.caliber,
     md0."formulaID",frm0."formulaID",frm0."formulaName",
     md0."medicineFactoryID",fac0."medicineFactoryID",fac0."medicineFactoryName",
     md0."chemicalNameID", chmn0."chemicalNameID",chmn0."chemicalName",
-    md0."genericnameID",grn0."genericnameID",grn0.genericname,
+    md0."genericNameID",grn0."genericNameID",grn0."genericName",
     md0."pharmaFormID",ff0."pharmaFormID",  ff0."pharmaForm" ,
     md0."licenseNumber",md0."licenseDate"
     FROM pharmaplay.medicine md0
@@ -92,7 +92,7 @@ Future<MedicineRecord> findMedicineByID(
     LEFT JOIN pharmaplay."pharmaForm" ff0 ON md0."pharmaFormID" = ff0."pharmaFormID"
     LEFT JOIN pharmaplay.formula frm0 ON md0."formulaID" = frm0."formulaID"
     LEFT JOIN pharmaplay."chemicalName" chmn0 ON md0."chemicalNameID" = chmn0."chemicalNameID"
-    LEFT JOIN pharmaplay."genericName" grn0 ON md0."genericnameID" = grn0."genericnameID"
+    LEFT JOIN pharmaplay."genericName" grn0 ON md0."genericNameID" = grn0."genericNameID"
     WHERE  md0."medicineID"  =  @medicineID ''';
   print('-------------- medicine ID-----:' + medicineID);
   Map<String, dynamic> params = {"medicineID": medicineID};
@@ -120,13 +120,13 @@ Future<List<MedicineRecord>> findMedicineAll(
     DB db, String medicineStore) async {
   List<MedicineRecord> resultMedicines = <MedicineRecord>[];
   String sql = '''  SELECT md0."medicineID",
-    md0.tradename,    md0.caliber,
+    md0.tradeName,    md0.caliber,
     md0."formulaID",    frm0."formulaName",
     fac0."medicineFactoryID",    fac0."medicineFactoryName",
     chmn0."chemicalNameID",
     chmn0."chemicalName",
-    grn0."genericnameID",
-    grn0.genericname,
+    grn0."genericNameID",
+    grn0."genericName",
     ff0."pharmaFormID",
     ff0."pharmaForm",
     md0."licenseNumber",
@@ -136,7 +136,7 @@ Future<List<MedicineRecord>> findMedicineAll(
      LEFT JOIN pharmaplay."pharmaForm" ff0 ON md0."pharmaFormID" = ff0."pharmaFormID"
      LEFT JOIN pharmaplay.formula frm0 ON md0."formulaID" = frm0."formulaID"
      LEFT JOIN pharmaplay."chemicalName" chmn0 ON md0."chemicalNameID" = chmn0."chemicalNameID"
-     LEFT JOIN pharmaplay."genericName" grn0 ON md0."genericnameID" = grn0."genericnameID"
+     LEFT JOIN pharmaplay."genericName" grn0 ON md0."genericNameID" = grn0."genericNameID"
       ''';
 
   dynamic resultSet = await db.query(sql);

@@ -5,7 +5,7 @@
 -- Dumped from database version 14.1
 -- Dumped by pg_dump version 14.1
 
--- Started on 2022-02-08 00:20:40 EET
+-- Started on 2022-02-08 00:38:41 EET
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -94,8 +94,8 @@ ALTER TABLE pharmaplay."medicineFactory" ALTER COLUMN "medicineFactoryID" ADD GE
 --
 
 CREATE TABLE pharmaplay."genericName" (
-    "genericnameID" integer NOT NULL,
-    genericname character varying(512) NOT NULL
+    "genericNameID" integer NOT NULL,
+    "genericName" character varying(512) NOT NULL
 );
 
 
@@ -106,7 +106,7 @@ ALTER TABLE pharmaplay."genericName" OWNER TO pharmaadmin;
 -- Name: GenericNames_genericname_ID_seq; Type: SEQUENCE; Schema: pharmaplay; Owner: pharmaadmin
 --
 
-ALTER TABLE pharmaplay."genericName" ALTER COLUMN "genericnameID" ADD GENERATED ALWAYS AS IDENTITY (
+ALTER TABLE pharmaplay."genericName" ALTER COLUMN "genericNameID" ADD GENERATED ALWAYS AS IDENTITY (
     SEQUENCE NAME pharmaplay."GenericNames_genericname_ID_seq"
     START WITH 1
     INCREMENT BY 1
@@ -179,12 +179,12 @@ ALTER TABLE pharmaplay.formula ALTER COLUMN "formulaID" ADD GENERATED ALWAYS AS 
 
 CREATE TABLE pharmaplay.medicine (
     "medicineID" integer NOT NULL,
-    tradename character varying(256),
+    "tradeName" character varying(256),
     caliber character varying(256),
     "formulaID" integer,
     "medicineFactoryID" integer,
     "chemicalNameID" integer,
-    "genericnameID" integer,
+    "genericNameID" integer,
     "pharmaFormID" integer,
     "licenseNumber" character varying(256),
     "licenseDate" character varying(256)
@@ -17067,7 +17067,7 @@ GRANT ALL ON TABLE pharmaplay.verificationcodes TO pharmauser;
 ALTER DEFAULT PRIVILEGES FOR ROLE pharmaadmin IN SCHEMA pharmaplay GRANT ALL ON TABLES  TO pharmauser;
 
 
--- Completed on 2022-02-08 00:20:44 EET
+-- Completed on 2022-02-08 00:38:44 EET
 
 --
 -- PostgreSQL database dump complete

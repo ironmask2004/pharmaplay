@@ -69,7 +69,7 @@ redisPort = '6379'
 
 -----------
  SELECT md0."medicineID",
-    md0.tradename,
+    md0.tradeName,
     md0.caliber,
     md0."formulaID",
     frm0.formula,
@@ -77,8 +77,8 @@ redisPort = '6379'
     fac0."medicineFactoryName",
     md0."chemicalNameID",
     chmn0."chemicalName",
-    md0."genericnameID",
-    grn0.genericname,
+    md0."genericNameID",
+    grn0.genericName,
     md0."pharmaFormID",
     ff0."pharmaForm",
     md0."licenseNumber",
@@ -88,4 +88,4 @@ redisPort = '6379'
      LEFT JOIN pharmaplay."pharmaForm000" ff0 ON md0."pharmaFormID" = ff0."pharmaFormID"
      LEFT JOIN pharmaplay.formula000 frm0 ON md0."formulaID" = frm0."formulaID"
      LEFT JOIN pharmaplay."chemicalNames000" chmn0 ON md0."chemicalNameID" = chmn0."chemicalNameID"
-     LEFT JOIN pharmaplay."genericNames000" grn0 ON md0."genericnameID" = grn0."genericnameID";
+     LEFT JOIN pharmaplay."genericNames000" grn0 ON md0."genericNameID" = grn0."genericNameID";

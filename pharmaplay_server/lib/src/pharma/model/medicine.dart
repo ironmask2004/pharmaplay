@@ -5,7 +5,7 @@ part 'medicine.g.dart';
 @JsonSerializable(explicitToJson: true)
 class Medicine extends Equatable {
   final int medicineID;
-  final String tradename;
+  final String tradeName;
   final String caliber;
   final int formulaID;
   final int medicineFactoryID;
@@ -16,7 +16,7 @@ class Medicine extends Equatable {
   final String licenseDate;
   Medicine({
     required this.medicineID,
-    required this.tradename,
+    required this.tradeName,
     required this.caliber,
     required this.formulaID,
     required this.medicineFactoryID,
@@ -33,7 +33,7 @@ class Medicine extends Equatable {
 
   Medicine copyWith({
     int? medicineID,
-    String? tradename,
+    String? tradeName,
     String? caliber,
     int? formulaID,
     int? medicineFactoryID,
@@ -45,7 +45,7 @@ class Medicine extends Equatable {
   }) {
     return Medicine(
       medicineID: medicineID ?? this.medicineID,
-      tradename: tradename ?? this.tradename,
+      tradeName: tradeName ?? this.tradeName,
       caliber: caliber ?? this.caliber,
       formulaID: formulaID ?? this.formulaID,
       medicineFactoryID: medicineFactoryID ?? this.medicineFactoryID,
@@ -60,7 +60,7 @@ class Medicine extends Equatable {
   Map<String, dynamic> toMap() {
     return {
       'medicineID': medicineID,
-      'tradename': tradename,
+      'tradeName': tradeName,
       'caliber': caliber,
       'formulaID': formulaID,
       'medicineFactoryID': medicineFactoryID,
@@ -75,7 +75,7 @@ class Medicine extends Equatable {
   factory Medicine.fromMap(Map<String, dynamic> map) {
     return Medicine(
       medicineID: map['medicineID']?.toInt() ?? 0,
-      tradename: map['tradename'] ?? '',
+      tradeName: map['tradeName'] ?? '',
       caliber: map['caliber'] ?? '',
       formulaID: map['formulaID']?.toInt() ?? 0,
       medicineFactoryID: map['medicineFactoryID']?.toInt() ?? 0,
@@ -88,14 +88,14 @@ class Medicine extends Equatable {
   }
   @override
   String toString() {
-    return 'Medicine(medicineID: $medicineID, tradename: $tradename, caliber: $caliber, formulaID: $formulaID, medicineFactoryID: $medicineFactoryID, chemicalNameID: $chemicalNameID, genericNameID: $genericNameID, pharmaFormID: $pharmaFormID, licenseNumber: $licenseNumber, licenseDate: $licenseDate)';
+    return 'Medicine(medicineID: $medicineID, tradeName: $tradeName, caliber: $caliber, formulaID: $formulaID, medicineFactoryID: $medicineFactoryID, chemicalNameID: $chemicalNameID, genericNameID: $genericNameID, pharmaFormID: $pharmaFormID, licenseNumber: $licenseNumber, licenseDate: $licenseDate)';
   }
 
   @override
   List<Object> get props {
     return [
       medicineID,
-      tradename,
+      tradeName,
       caliber,
       formulaID,
       medicineFactoryID,

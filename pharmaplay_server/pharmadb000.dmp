@@ -95,7 +95,7 @@ ALTER TABLE pharmaplay."Factory000" ALTER COLUMN "Factory_ID" ADD GENERATED ALWA
 
 CREATE TABLE pharmaplay."GenericNames000" (
     "genericname_ID" integer NOT NULL,
-    genericname character varying(512) NOT NULL
+    genericName character varying(512) NOT NULL
 );
 
 
@@ -179,7 +179,7 @@ ALTER TABLE pharmaplay.formula000 ALTER COLUMN "formula_ID" ADD GENERATED ALWAYS
 
 CREATE TABLE pharmaplay.medicines000 (
     "medicine_ID" integer NOT NULL,
-    tradename character varying(256),
+    tradeName character varying(256),
     caliber character varying(256),
     "formula_ID" integer,
     "factory_ID" integer,
