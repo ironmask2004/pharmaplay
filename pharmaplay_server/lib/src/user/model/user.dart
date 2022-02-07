@@ -37,8 +37,6 @@ class User extends Equatable {
       required this.updatedate,
       required this.status});
 
-  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
-
   factory User.fromMap(Map<String, dynamic> map) {
     return User(
         idx: map['idx'],
@@ -126,6 +124,7 @@ class User extends Equatable {
   }
 
   Map<String, dynamic> toJson() => _$UserToJson(this);
+  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 
   User copyWithFromMap(Map<String, dynamic> map) {
     return User(

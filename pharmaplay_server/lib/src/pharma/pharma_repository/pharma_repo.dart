@@ -2,6 +2,8 @@
 
 import 'package:pharmaplay_server/pharmaplay_server.dart';
 
+import '../model/medicinerecord.dart';
+
 // !using EITHER
 /*
 Future<Either<ApiResponse, String>> logOutMedicine(String MedicineToken) async {
@@ -75,20 +77,23 @@ Future<List<Medicine>> findMedicineByParams(
 }
 
 //----------------------
-Future<Medicine> findMedicineByID(
+Future<MedicineRecord> findMedicineByID(
     String medicineID, DB db, String medicineStore) async {
   String sql = '''  SELECT md0."medicineID",
-    md0.tradename,md0.caliber,md0."formulaID",frm0.formula,
-    md0."factoryID",fac0."factoryName",md0."chemicalNameID",chmn0."chemicalName",
-    md0."genericnameID",grn0.genericname,md0."pharmaFormID",
-    ff0."pharmaForm" ,md0."licenseNumber",md0."licenseDate" AS licensedate
-   FROM pharmaplay.medicines000 md0
-     LEFT JOIN pharmaplay.factory000 fac0 ON md0."factoryID" = fac0."factoryID"
-     LEFT JOIN pharmaplay."pharmaForm000" ff0 ON md0."pharmaFormID" = ff0."pharmaFormID"
-     LEFT JOIN pharmaplay.formula000 frm0 ON md0."formulaID" = frm0."formulaID"
-     LEFT JOIN pharmaplay."chemicalNames000" chmn0 ON md0."chemicalNameID" = chmn0."chemicalNameID"
-     LEFT JOIN pharmaplay."genericNames000" grn0 ON md0."genericnameID" = grn0."genericnameID"
-     where  md0."medicineID"  =  @medicineID ''';
+    md0.tradename,md0.caliber,
+    md0."formulaID",frm0."formulaID",frm0."formulaName",
+    md0."medicineFactoryID",fac0."medicineFactoryID",fac0."medicineFactoryName",
+    md0."chemicalNameID", chmn0."chemicalNameID",chmn0."chemicalName",
+    md0."genericnameID",grn0."genericnameID",grn0.genericname,
+    md0."pharmaFormID",ff0."pharmaFormID",  ff0."pharmaForm" ,
+    md0."licenseNumber",md0."licenseDate"
+    FROM pharmaplay.medicine md0
+    LEFT JOIN pharmaplay."medicineFactory" fac0 ON md0."medicineFactoryID" = fac0."medicineFactoryID"
+    LEFT JOIN pharmaplay."pharmaForm" ff0 ON md0."pharmaFormID" = ff0."pharmaFormID"
+    LEFT JOIN pharmaplay.formula frm0 ON md0."formulaID" = frm0."formulaID"
+    LEFT JOIN pharmaplay."chemicalName" chmn0 ON md0."chemicalNameID" = chmn0."chemicalNameID"
+    LEFT JOIN pharmaplay."genericName" grn0 ON md0."genericnameID" = grn0."genericnameID"
+    WHERE  md0."medicineID"  =  @medicineID ''';
   print('-------------- medicine ID-----:' + medicineID);
   Map<String, dynamic> params = {"medicineID": medicineID};
   print(params);
@@ -97,9 +102,12 @@ Future<Medicine> findMedicineByID(
   print('No Rows: ' + resultSet.length.toString());
   if (resultSet.length > 0) {
     print(resultSet.first);
-    print(
-        'founded by medicineID: ' + resultSet.first['medicines000'].toString());
-    return Medicine.fromMap((resultSet.first['medicines000']));
+    print('founded by medicineID: ' + resultSet.first.toString());
+
+    // print('medicineFactory founded by medicineID: ' +
+    //    resultSet.first.map['medicineFactory'].toString());
+
+    return MedicineRecord.fromMap((resultSet.first));
   } else {
     print(' Medicine ID($medicineID) Not Found ');
     throw ' Medicine ID($medicineID) Not Found ';
@@ -108,26 +116,27 @@ Future<Medicine> findMedicineByID(
 
 ///---------------------
 
-Future<List<Medicine>> findMedicineAll(DB db, String medicineStore) async {
-  List<Medicine> resultMedicines = <Medicine>[];
+Future<List<MedicineRecord>> findMedicineAll(
+    DB db, String medicineStore) async {
+  List<MedicineRecord> resultMedicines = <MedicineRecord>[];
   String sql = '''  SELECT md0."medicineID",
     md0.tradename,    md0.caliber,
-    md0."formulaID",    frm0.formula,
-    md0."factoryID",    fac0."factoryName",
-    md0."chemicalNameID",
+    md0."formulaID",    frm0."formulaName",
+    fac0."medicineFactoryID",    fac0."medicineFactoryName",
+    chmn0."chemicalNameID",
     chmn0."chemicalName",
-    md0."genericnameID",
+    grn0."genericnameID",
     grn0.genericname,
-    md0."pharmaFormID",
+    ff0."pharmaFormID",
     ff0."pharmaForm",
     md0."licenseNumber",
-    md0."licenseDate" AS licensedate
-   FROM pharmaplay.medicines000 md0
-     LEFT JOIN pharmaplay.factory000 fac0 ON md0."factoryID" = fac0."factoryID"
-     LEFT JOIN pharmaplay."pharmaForm000" ff0 ON md0."pharmaFormID" = ff0."pharmaFormID"
-     LEFT JOIN pharmaplay.formula000 frm0 ON md0."formulaID" = frm0."formulaID"
-     LEFT JOIN pharmaplay."chemicalNames000" chmn0 ON md0."chemicalNameID" = chmn0."chemicalNameID"
-     LEFT JOIN pharmaplay."genericNames000" grn0 ON md0."genericnameID" = grn0."genericnameID"
+    md0."licenseDate" 
+   FROM pharmaplay.medicine md0
+     LEFT JOIN pharmaplay.factory fac0 ON md0."medicineFactoryID" = fac0."medicineFactoryID"
+     LEFT JOIN pharmaplay."pharmaForm" ff0 ON md0."pharmaFormID" = ff0."pharmaFormID"
+     LEFT JOIN pharmaplay.formula frm0 ON md0."formulaID" = frm0."formulaID"
+     LEFT JOIN pharmaplay."chemicalName" chmn0 ON md0."chemicalNameID" = chmn0."chemicalNameID"
+     LEFT JOIN pharmaplay."genericName" grn0 ON md0."genericnameID" = grn0."genericnameID"
       ''';
 
   dynamic resultSet = await db.query(sql);
@@ -135,7 +144,7 @@ Future<List<Medicine>> findMedicineAll(DB db, String medicineStore) async {
   if (resultSet.length > 0) {
     resultSet.forEach((element) {
       // print(element);
-      resultMedicines.add(Medicine.fromJson(element));
+      resultMedicines.add(MedicineRecord.fromJson(element));
     });
 
     return (resultMedicines);

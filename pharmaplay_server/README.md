@@ -73,8 +73,8 @@ redisPort = '6379'
     md0.caliber,
     md0."formulaID",
     frm0.formula,
-    md0."factoryID",
-    fac0."factoryName",
+    md0."medicineFactoryID",
+    fac0."medicineFactoryName",
     md0."chemicalNameID",
     chmn0."chemicalName",
     md0."genericnameID",
@@ -84,7 +84,7 @@ redisPort = '6379'
     md0."licenseNumber",
     md0."licenseDate" AS licensedate
    FROM pharmaplay.medicines000 md0
-     LEFT JOIN pharmaplay.factory000 fac0 ON md0."factoryID" = fac0."factoryID"
+     LEFT JOIN pharmaplay.factory000 fac0 ON md0."medicineFactoryID" = fac0."medicineFactoryID"
      LEFT JOIN pharmaplay."pharmaForm000" ff0 ON md0."pharmaFormID" = ff0."pharmaFormID"
      LEFT JOIN pharmaplay.formula000 frm0 ON md0."formulaID" = frm0."formulaID"
      LEFT JOIN pharmaplay."chemicalNames000" chmn0 ON md0."chemicalNameID" = chmn0."chemicalNameID"

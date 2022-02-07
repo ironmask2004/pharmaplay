@@ -8,15 +8,10 @@ class Medicine extends Equatable {
   final String tradename;
   final String caliber;
   final int formulaID;
-  final String formula;
-  final int factoryID;
-  final String factoryName;
+  final int medicineFactoryID;
   final int chemicalNameID;
-  final String chemicalName;
-  final int genericnameID;
-  final String genericname;
+  final int genericNameID;
   final int pharmaFormID;
-  final String pharmaForm;
   final String licenseNumber;
   final String licenseDate;
   Medicine({
@@ -24,35 +19,91 @@ class Medicine extends Equatable {
     required this.tradename,
     required this.caliber,
     required this.formulaID,
-    required this.formula,
-    required this.factoryID,
-    required this.factoryName,
+    required this.medicineFactoryID,
     required this.chemicalNameID,
-    required this.chemicalName,
-    required this.genericnameID,
-    required this.genericname,
+    required this.genericNameID,
     required this.pharmaFormID,
-    required this.pharmaForm,
     required this.licenseNumber,
     required this.licenseDate,
   });
 
-  Medicine copyWithFromMap(Map<String, dynamic> map) {
+  Map<String, dynamic> toJson() => _$MedicineToJson(this);
+  factory Medicine.fromJson(Map<String, dynamic> json) =>
+      _$MedicineFromJson(json);
+
+  Medicine copyWith({
+    int? medicineID,
+    String? tradename,
+    String? caliber,
+    int? formulaID,
+    int? medicineFactoryID,
+    int? chemicalNameID,
+    int? genericNameID,
+    int? pharmaFormID,
+    String? licenseNumber,
+    String? licenseDate,
+  }) {
     return Medicine(
-        medicineID: map['medicineID']?.toInt() ?? medicineID,
-        tradename: map['tradename'] ?? tradename,
-        caliber: map['caliber'] ?? caliber,
-        formulaID: map['formulaID']?.toInt() ?? formulaID,
-        formula: map['formula'] ?? formula,
-        factoryID: map['factoryID']?.toInt() ?? factoryID,
-        factoryName: map['factoryName'] ?? factoryName,
-        chemicalNameID: map['chemicalNameID']?.toInt() ?? chemicalNameID,
-        chemicalName: map['chemicalName'] ?? chemicalName,
-        genericnameID: map['genericnameID']?.toInt() ?? genericnameID,
-        genericname: map['genericname'] ?? genericname,
-        pharmaFormID: map['pharmaFormID']?.toInt() ?? pharmaFormID,
-        pharmaForm: map['pharmaForm'] ?? pharmaForm,
-        licenseNumber: map['licenseNumber'] ?? licenseNumber,
-        licenseDate: map['licenseDate'] ?? licenseDate);
+      medicineID: medicineID ?? this.medicineID,
+      tradename: tradename ?? this.tradename,
+      caliber: caliber ?? this.caliber,
+      formulaID: formulaID ?? this.formulaID,
+      medicineFactoryID: medicineFactoryID ?? this.medicineFactoryID,
+      chemicalNameID: chemicalNameID ?? this.chemicalNameID,
+      genericNameID: genericNameID ?? this.genericNameID,
+      pharmaFormID: pharmaFormID ?? this.pharmaFormID,
+      licenseNumber: licenseNumber ?? this.licenseNumber,
+      licenseDate: licenseDate ?? this.licenseDate,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'medicineID': medicineID,
+      'tradename': tradename,
+      'caliber': caliber,
+      'formulaID': formulaID,
+      'medicineFactoryID': medicineFactoryID,
+      'chemicalNameID': chemicalNameID,
+      'genericNameID': genericNameID,
+      'pharmaFormID': pharmaFormID,
+      'licenseNumber': licenseNumber,
+      'licenseDate': licenseDate,
+    };
+  }
+
+  factory Medicine.fromMap(Map<String, dynamic> map) {
+    return Medicine(
+      medicineID: map['medicineID']?.toInt() ?? 0,
+      tradename: map['tradename'] ?? '',
+      caliber: map['caliber'] ?? '',
+      formulaID: map['formulaID']?.toInt() ?? 0,
+      medicineFactoryID: map['medicineFactoryID']?.toInt() ?? 0,
+      chemicalNameID: map['chemicalNameID']?.toInt() ?? 0,
+      genericNameID: map['genericNameID']?.toInt() ?? 0,
+      pharmaFormID: map['pharmaFormID']?.toInt() ?? 0,
+      licenseNumber: map['licenseNumber'] ?? '',
+      licenseDate: map['licenseDate'] ?? '',
+    );
+  }
+  @override
+  String toString() {
+    return 'Medicine(medicineID: $medicineID, tradename: $tradename, caliber: $caliber, formulaID: $formulaID, medicineFactoryID: $medicineFactoryID, chemicalNameID: $chemicalNameID, genericNameID: $genericNameID, pharmaFormID: $pharmaFormID, licenseNumber: $licenseNumber, licenseDate: $licenseDate)';
+  }
+
+  @override
+  List<Object> get props {
+    return [
+      medicineID,
+      tradename,
+      caliber,
+      formulaID,
+      medicineFactoryID,
+      chemicalNameID,
+      genericNameID,
+      pharmaFormID,
+      licenseNumber,
+      licenseDate,
+    ];
   }
 }

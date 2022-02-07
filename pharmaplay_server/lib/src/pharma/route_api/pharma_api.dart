@@ -1,6 +1,7 @@
 import 'package:pharmaplay_server/pharmaplay_server.dart';
 import 'package:pharmaplay_server/src/utilites/error_response.dart';
 
+import '../model/medicinerecord.dart';
 import '../pharma_repository/pharma_repo.dart';
 
 class PharmaApi {
@@ -51,7 +52,7 @@ class PharmaApi {
     router.get('/info/', (Request req) async {
       final authDetails = req.context['authDetails'] as JWT;
       print('authDetails.subject.toString ' + authDetails.subject.toString());
-      Medicine medicineInfo;
+      MedicineRecord medicineInfo;
       try {
         medicineInfo = await findMedicineByID(
             authDetails.subject.toString(), db, medicineStore);
@@ -81,7 +82,7 @@ class PharmaApi {
     router.get('/medicine/id', (Request req) async {
       //final authDetails = req.context['authDetails'] as JWT;
       print(req.context.toString());
-      Medicine medicineInfo;
+      MedicineRecord medicineInfo;
       final payload = await req.readAsString();
       final Map<String, dynamic> requestBody = json.decode(payload);
       print(requestBody);
