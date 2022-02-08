@@ -41,38 +41,60 @@ Future<Either<ApiResponse, String>> logOutMedicine(String MedicineToken) async {
 
 //----------------------
 
-Future<List<Medicine>> findMedicineByParams(
-    DB db, String medicineStore, Map<String, dynamic> params) async {
-  String sql;
+Future<List<MedicineRecord>> findMedicineByParams(
+    {required int startFromPage,
+    required int pageLength,
+    required String orderByfields,
+    required Map<String, dynamic> params,
+    required DB db,
+    required String medicineStore}) async {
+  // String sql;
 
 //---- params to where condetion
   String whereCond = '';
   params.forEach((k, v) => whereCond =
-      (whereCond.isEmpty ? 'WHERE ' : whereCond + ' and ') + '${k} = @${k} ');
+      (whereCond.isEmpty ? 'WHERE ' : whereCond + ' and ') +
+          '${k} = ${v}'); // @${k} ');
 
 //---
 
-  dynamic resultSet;
-  sql = 'SELECT *  FROM pharmaplay.$medicineStore  $whereCond ';
-  print(sql + '    ' + params.toString());
-  try {
-    resultSet = await db.query(sql, values: params);
-  } catch (err) {
-    throw params.toString() + err.toString();
-  }
-  print(resultSet);
-  List<Medicine> resaultMedicines = [];
+  // dynamic resultSet;
+  // sql = 'SELECT *  FROM pharmaplay.$medicineStore  $whereCond ';
+  final String startFromRow = ((startFromPage - 1) * pageLength).toString();
+  List<MedicineRecord> resultMedicines = <MedicineRecord>[];
+  String sql = '''  SELECT medicine."medicineID",
+    medicine."tradeName",medicine.caliber,
+    medicine."formulaID",formula."formulaID",formula."formulaName",
+    medicine."medicFactoryID",medicFactory."medicFactoryID",medicFactory."medicFactoryName",
+    medicine."chemicalNameID", chemicalName."chemicalNameID",chemicalName."chemicalName",
+    medicine."genericNameID",genericName."genericNameID",genericName."genericName",
+    medicine."pharmaFormID",pharmaForm."pharmaFormID",  pharmaForm."pharmaForm" ,
+    medicine."licenseNumber",medicine."licenseDate"
+    FROM pharmaplay.medicine medicine
+    LEFT JOIN pharmaplay."medicFactory" medicFactory ON medicine."medicFactoryID" = medicFactory."medicFactoryID"
+    LEFT JOIN pharmaplay."pharmaForm" pharmaForm ON medicine."pharmaFormID" = pharmaForm."pharmaFormID"
+    LEFT JOIN pharmaplay.formula formula ON medicine."formulaID" = formula."formulaID"
+    LEFT JOIN pharmaplay."chemicalName" chemicalName ON medicine."chemicalNameID" = chemicalName."chemicalNameID"
+    LEFT JOIN pharmaplay."genericName" genericName ON medicine."genericNameID" = genericName."genericNameID"
+    $whereCond
+    ORDER BY   $orderByfields
+    LIMIT $pageLength  OFFSET  $startFromRow  ''';
 
-  for (final row in resultSet) {
-    resaultMedicines.add(Medicine.fromMap(row[medicineStore]));
-  }
+  // resultSet = await db.query(sql);
+  dynamic resultSet = await db.query(sql, values: params);
 
   if (resultSet.length > 0) {
-    print(resaultMedicines);
-    return resaultMedicines;
+    resultSet.forEach((element) {
+      print(element);
+      print('----------------');
+      resultMedicines.add(MedicineRecord.fromJson(element));
+    });
+    print('---- return------------');
+
+    return (resultMedicines);
   } else {
-    print(params.toString() + '  Not Found ');
-    throw params.toString() + '  Not Found ';
+    print(' Medicine is Empty ');
+    throw ' Medicine is Empty ';
   }
 }
 
@@ -159,6 +181,7 @@ Future<List<MedicineRecord>> findMedicineByPage(
     {required int startFromPage,
     required int pageLength,
     required String orderByfields,
+    required String weherCond,
     required DB db,
     required String medicineStore}) async {
   final String startFromRow = ((startFromPage - 1) * pageLength).toString();
@@ -177,6 +200,7 @@ Future<List<MedicineRecord>> findMedicineByPage(
     LEFT JOIN pharmaplay.formula formula ON medicine."formulaID" = formula."formulaID"
     LEFT JOIN pharmaplay."chemicalName" chemicalName ON medicine."chemicalNameID" = chemicalName."chemicalNameID"
     LEFT JOIN pharmaplay."genericName" genericName ON medicine."genericNameID" = genericName."genericNameID"
+    $weherCond
     ORDER BY   $orderByfields
     LIMIT $pageLength  OFFSET  $startFromRow  ''';
 

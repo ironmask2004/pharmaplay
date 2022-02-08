@@ -51,11 +51,11 @@ class PharmaApi {
     //============= /medicines/INFO ROUTE
     ///----------------------
     //{ "startfrompage": "3" , "pagelength": "2" , "orderbyfields": "medicine.\"chemicalNameID\",medicine.\"tradeName\""  }
-    router.get('/medicine/listbypage', (Request req) async {
+    router.get('/medicine/findlistbypage', (Request req) async {
       List<MedicineRecord> medicineInfo;
       try {
         final payload = await req.readAsString();
-
+        final String weherCond = json.decode(payload)['wherecond'] ?? '';
         final Map<String, dynamic> listpagesparms = json.decode(payload);
         print(listpagesparms);
 
@@ -67,20 +67,11 @@ class PharmaApi {
         final String orderByfields = listpagesparms['orderbyfields'] ?? '';
         print('startFromPage :   $startFromPage   -- pagelength : $pageLength');
 
-        if (pageLength <= 0 || startFromPage <= 0) {
+        if (pageLength <= 0 || startFromPage <= 0 || orderByfields.isEmpty) {
           return Response.forbidden(
-              responseErrMsg(
-                  ' Please provide pageLength/startFromPage corerct values ( > 1 )',
-                  "403"),
-              headers: {
-                'content-type': 'application/json',
-              });
-        }
-
-        if (orderByfields.isEmpty) {
-          return Response.forbidden(
-              responseErrMsg(
-                  ' Please provide   corerct values Fro "orderbyfields"  (f1,f1,... )',
+              responseErrMsg(''' { "startfrompage": "1" , "pagelength": "12" , 
+                  "orderbyfields": "medicine.\"chemicalNameID\",medicine.\"tradeName\""  , 
+                   "wherecond": "WHERE medicine.\"pharmaFormID\" = 30 and medicine.\"medicineID\" <=10  "  }''',
                   "403"),
               headers: {
                 'content-type': 'application/json',
@@ -91,6 +82,70 @@ class PharmaApi {
             startFromPage: startFromPage,
             pageLength: pageLength,
             orderByfields: orderByfields,
+            weherCond: weherCond,
+            db: db,
+            medicineStore: medicineStore);
+
+        // print("founded_medicine------:" + medicineInfo.toString());
+      } catch (err) {
+        return Response.forbidden(responseErrMsg("$err", "9004"), headers: {
+          'content-type': 'application/json',
+        });
+      }
+
+      var jsonString = json.encode(medicineInfo);
+      //print('--------------0-0-0-0-0-\n' + jsonString);
+
+      return Response.ok(jsonString, headers: {
+        'content-type': 'application/json',
+      });
+    });
+
+    //=========================================================
+    //{ "startfrompage": "1" , "pagelength": "10" ,
+    //"weher": { "medicine.\"pharmaFormID\"": 30 } ,
+    // "orderbyfields": "medicine.\"chemicalNameID\",medicine.\"tradeName\""  }
+    //==== byparam
+    router.get('/medicine/byparam', (Request req) async {
+      List<MedicineRecord> medicineInfo;
+      try {
+        final payload = await req.readAsString();
+
+        final Map<String, dynamic> params = json.decode(payload)['weher'] ?? {};
+
+        final Map<String, dynamic> listpagesparms = json.decode(payload) ?? {};
+        print(listpagesparms);
+
+        final int startFromPage =
+            int.parse(listpagesparms['startfrompage'] ?? 0);
+
+        final int pageLength = int.parse(listpagesparms['pagelength'] ?? 0);
+
+        final String orderByfields = listpagesparms['orderbyfields'] ?? '';
+        print('startFromPage :   $startFromPage   -- pagelength : $pageLength');
+
+        if (pageLength <= 0 ||
+            startFromPage <= 0 ||
+            orderByfields == null ||
+            orderByfields.isEmpty ||
+            params == null ||
+            params.isEmpty) {
+          return Response.forbidden(
+              responseErrMsg('''  Kindly provide correcet values:
+                    { "startfrompage": "1" , "pagelength": "10" ,
+                     "weher": { "medicine.\"pharmaFormID\"": 30 } ,
+                     "orderbyfields": "medicine.\"chemicalNameID\",medicine.\"tradeName\""  }''',
+                  "403"),
+              headers: {
+                'content-type': 'application/json',
+              });
+        }
+
+        medicineInfo = await findMedicineByParams(
+            startFromPage: startFromPage,
+            pageLength: pageLength,
+            orderByfields: orderByfields,
+            params: params,
             db: db,
             medicineStore: medicineStore);
 
@@ -118,6 +173,16 @@ class PharmaApi {
       final payload = await req.readAsString();
       final Map<String, dynamic> requestBody = json.decode(payload);
       print(requestBody);
+      if (requestBody['medicineID'] == null ||
+          requestBody['medicineID'].isEmpty) {
+        return Response.forbidden(
+            responseErrMsg(
+                '  Kindly provide correcet values:    {"medicineID": "63"}',
+                "403"),
+            headers: {
+              'content-type': 'application/json',
+            });
+      }
       try {
         medicineInfo = await findMedicineByID(
             requestBody['medicineID'].toString(), db, medicineStore);
