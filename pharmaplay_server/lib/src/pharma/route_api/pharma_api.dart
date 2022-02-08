@@ -49,6 +49,8 @@ class PharmaApi {
     });
 
     //============= /medicines/INFO ROUTE
+    ///----------------------
+    //{ "startfrompage": "3" , "pagelength": "2" , "orderbyfields": "medicine.\"chemicalNameID\",medicine.\"tradeName\""  }
     router.get('/medicine/listbypage', (Request req) async {
       List<MedicineRecord> medicineInfo;
       try {
@@ -59,7 +61,10 @@ class PharmaApi {
 
         final int startFromPage =
             int.parse(listpagesparms['startfrompage'] ?? 0);
+
         final int pageLength = int.parse(listpagesparms['pagelength'] ?? 0);
+
+        final String orderByfields = listpagesparms['orderbyfields'] ?? '';
         print('startFromPage :   $startFromPage   -- pagelength : $pageLength');
 
         if (pageLength <= 0 || startFromPage <= 0) {
@@ -72,9 +77,20 @@ class PharmaApi {
               });
         }
 
+        if (orderByfields.isEmpty) {
+          return Response.forbidden(
+              responseErrMsg(
+                  ' Please provide   corerct values Fro "orderbyfields"  (f1,f1,... )',
+                  "403"),
+              headers: {
+                'content-type': 'application/json',
+              });
+        }
+
         medicineInfo = await findMedicineByPage(
             startFromPage: startFromPage,
             pageLength: pageLength,
+            orderByfields: orderByfields,
             db: db,
             medicineStore: medicineStore);
 

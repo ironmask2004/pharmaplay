@@ -79,21 +79,21 @@ Future<List<Medicine>> findMedicineByParams(
 //----------------------
 Future<MedicineRecord> findMedicineByID(
     String medicineID, DB db, String medicineStore) async {
-  String sql = '''  SELECT md0."medicineID",
-    md0."tradeName",md0.caliber,
-    md0."formulaID",frm0."formulaID",frm0."formulaName",
-    md0."medicFactoryID",fac0."medicFactoryID",fac0."medicFactoryName",
-    md0."chemicalNameID", chmn0."chemicalNameID",chmn0."chemicalName",
-    md0."genericNameID",grn0."genericNameID",grn0."genericName",
-    md0."pharmaFormID",ff0."pharmaFormID",  ff0."pharmaForm" ,
-    md0."licenseNumber",md0."licenseDate"
-    FROM pharmaplay.medicine md0
-    LEFT JOIN pharmaplay."medicFactory" fac0 ON md0."medicFactoryID" = fac0."medicFactoryID"
-    LEFT JOIN pharmaplay."pharmaForm" ff0 ON md0."pharmaFormID" = ff0."pharmaFormID"
-    LEFT JOIN pharmaplay.formula frm0 ON md0."formulaID" = frm0."formulaID"
-    LEFT JOIN pharmaplay."chemicalName" chmn0 ON md0."chemicalNameID" = chmn0."chemicalNameID"
-    LEFT JOIN pharmaplay."genericName" grn0 ON md0."genericNameID" = grn0."genericNameID"
-    WHERE  md0."medicineID"  =  @medicineID ''';
+  String sql = '''  SELECT medicine."medicineID",
+    medicine."tradeName",medicine.caliber,
+    medicine."formulaID",formula."formulaID",formula."formulaName",
+    medicine."medicFactoryID",medicFactory."medicFactoryID",medicFactory."medicFactoryName",
+    medicine."chemicalNameID", chemicalName."chemicalNameID",chemicalName."chemicalName",
+    medicine."genericNameID",genericName."genericNameID",genericName."genericName",
+    medicine."pharmaFormID",pharmaForm."pharmaFormID",  pharmaForm."pharmaForm" ,
+    medicine."licenseNumber",medicine."licenseDate"
+    FROM pharmaplay.medicine medicine
+    LEFT JOIN pharmaplay."medicFactory" medicFactory ON medicine."medicFactoryID" = medicFactory."medicFactoryID"
+    LEFT JOIN pharmaplay."pharmaForm" pharmaForm ON medicine."pharmaFormID" = pharmaForm."pharmaFormID"
+    LEFT JOIN pharmaplay.formula formula ON medicine."formulaID" = formula."formulaID"
+    LEFT JOIN pharmaplay."chemicalName" chemicalName ON medicine."chemicalNameID" = chemicalName."chemicalNameID"
+    LEFT JOIN pharmaplay."genericName" genericName ON medicine."genericNameID" = genericName."genericNameID"
+    WHERE  medicine."medicineID"  =  @medicineID ''';
   print('-------------- medicine ID-----:' + medicineID);
   Map<String, dynamic> params = {"medicineID": medicineID};
   print(params);
@@ -119,20 +119,20 @@ Future<MedicineRecord> findMedicineByID(
 Future<List<MedicineRecord>> findMedicineAll(
     DB db, String medicineStore) async {
   List<MedicineRecord> resultMedicines = <MedicineRecord>[];
-  String sql = '''  SELECT md0."medicineID",
-    md0."tradeName",md0.caliber,
-    md0."formulaID",frm0."formulaID",frm0."formulaName",
-    md0."medicFactoryID",fac0."medicFactoryID",fac0."medicFactoryName",
-    md0."chemicalNameID", chmn0."chemicalNameID",chmn0."chemicalName",
-    md0."genericNameID",grn0."genericNameID",grn0."genericName",
-    md0."pharmaFormID",ff0."pharmaFormID",  ff0."pharmaForm" ,
-    md0."licenseNumber",md0."licenseDate"
-    FROM pharmaplay.medicine md0
-    LEFT JOIN pharmaplay."medicFactory" fac0 ON md0."medicFactoryID" = fac0."medicFactoryID"
-    LEFT JOIN pharmaplay."pharmaForm" ff0 ON md0."pharmaFormID" = ff0."pharmaFormID"
-    LEFT JOIN pharmaplay.formula frm0 ON md0."formulaID" = frm0."formulaID"
-    LEFT JOIN pharmaplay."chemicalName" chmn0 ON md0."chemicalNameID" = chmn0."chemicalNameID"
-    LEFT JOIN pharmaplay."genericName" grn0 ON md0."genericNameID" = grn0."genericNameID"
+  String sql = '''  SELECT medicine."medicineID",
+    medicine."tradeName",medicine.caliber,
+    medicine."formulaID",formula."formulaID",formula."formulaName",
+    medicine."medicFactoryID",medicFactory."medicFactoryID",medicFactory."medicFactoryName",
+    medicine."chemicalNameID", chemicalName."chemicalNameID",chemicalName."chemicalName",
+    medicine."genericNameID",genericName."genericNameID",genericName."genericName",
+    medicine."pharmaFormID",pharmaForm."pharmaFormID",  pharmaForm."pharmaForm" ,
+    medicine."licenseNumber",medicine."licenseDate"
+    FROM pharmaplay.medicine medicine
+    LEFT JOIN pharmaplay."medicFactory" medicFactory ON medicine."medicFactoryID" = medicFactory."medicFactoryID"
+    LEFT JOIN pharmaplay."pharmaForm" pharmaForm ON medicine."pharmaFormID" = pharmaForm."pharmaFormID"
+    LEFT JOIN pharmaplay.formula formula ON medicine."formulaID" = formula."formulaID"
+    LEFT JOIN pharmaplay."chemicalName" chemicalName ON medicine."chemicalNameID" = chemicalName."chemicalNameID"
+    LEFT JOIN pharmaplay."genericName" genericName ON medicine."genericNameID" = genericName."genericNameID"
     LIMIT 10  ''';
 
   dynamic resultSet = await db.query(sql);
@@ -152,30 +152,32 @@ Future<List<MedicineRecord>> findMedicineAll(
   }
 }
 
-///---------------------
-
+///----------------------
+//{ "startfrompage": "3" , "pagelength": "2" , "orderbyfields": "medicine.\"chemicalNameID\",medicine.\"tradeName\""  }
+//----
 Future<List<MedicineRecord>> findMedicineByPage(
     {required int startFromPage,
     required int pageLength,
+    required String orderByfields,
     required DB db,
     required String medicineStore}) async {
   final String startFromRow = ((startFromPage - 1) * pageLength).toString();
   List<MedicineRecord> resultMedicines = <MedicineRecord>[];
-  String sql = '''  SELECT md0."medicineID",
-    md0."tradeName",md0.caliber,
-    md0."formulaID",frm0."formulaID",frm0."formulaName",
-    md0."medicFactoryID",fac0."medicFactoryID",fac0."medicFactoryName",
-    md0."chemicalNameID", chmn0."chemicalNameID",chmn0."chemicalName",
-    md0."genericNameID",grn0."genericNameID",grn0."genericName",
-    md0."pharmaFormID",ff0."pharmaFormID",  ff0."pharmaForm" ,
-    md0."licenseNumber",md0."licenseDate"
-    FROM pharmaplay.medicine md0
-    LEFT JOIN pharmaplay."medicFactory" fac0 ON md0."medicFactoryID" = fac0."medicFactoryID"
-    LEFT JOIN pharmaplay."pharmaForm" ff0 ON md0."pharmaFormID" = ff0."pharmaFormID"
-    LEFT JOIN pharmaplay.formula frm0 ON md0."formulaID" = frm0."formulaID"
-    LEFT JOIN pharmaplay."chemicalName" chmn0 ON md0."chemicalNameID" = chmn0."chemicalNameID"
-    LEFT JOIN pharmaplay."genericName" grn0 ON md0."genericNameID" = grn0."genericNameID"
-    ORDER BY  md0."medicineID"
+  String sql = '''  SELECT medicine."medicineID",
+    medicine."tradeName",medicine.caliber,
+    medicine."formulaID",formula."formulaID",formula."formulaName",
+    medicine."medicFactoryID",medicFactory."medicFactoryID",medicFactory."medicFactoryName",
+    medicine."chemicalNameID", chemicalName."chemicalNameID",chemicalName."chemicalName",
+    medicine."genericNameID",genericName."genericNameID",genericName."genericName",
+    medicine."pharmaFormID",pharmaForm."pharmaFormID",  pharmaForm."pharmaForm" ,
+    medicine."licenseNumber",medicine."licenseDate"
+    FROM pharmaplay.medicine medicine
+    LEFT JOIN pharmaplay."medicFactory" medicFactory ON medicine."medicFactoryID" = medicFactory."medicFactoryID"
+    LEFT JOIN pharmaplay."pharmaForm" pharmaForm ON medicine."pharmaFormID" = pharmaForm."pharmaFormID"
+    LEFT JOIN pharmaplay.formula formula ON medicine."formulaID" = formula."formulaID"
+    LEFT JOIN pharmaplay."chemicalName" chemicalName ON medicine."chemicalNameID" = chemicalName."chemicalNameID"
+    LEFT JOIN pharmaplay."genericName" genericName ON medicine."genericNameID" = genericName."genericNameID"
+    ORDER BY   $orderByfields
     LIMIT $pageLength  OFFSET  $startFromRow  ''';
 
   dynamic resultSet = await db.query(sql);
