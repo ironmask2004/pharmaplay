@@ -49,28 +49,44 @@ class PharmaApi {
     });
 
     //============= /medicines/INFO ROUTE
-    router.get('/info/', (Request req) async {
-      final authDetails = req.context['authDetails'] as JWT;
-      print('authDetails.subject.toString ' + authDetails.subject.toString());
-      MedicineRecord medicineInfo;
+    router.get('/medicine/listbypage', (Request req) async {
+      List<MedicineRecord> medicineInfo;
       try {
-        medicineInfo = await findMedicineByID(
-            authDetails.subject.toString(), db, medicineStore);
+        final payload = await req.readAsString();
 
-        print("founded_medicine------:" + medicineInfo.toString());
+        final Map<String, dynamic> listpagesparms = json.decode(payload);
+        print(listpagesparms);
+
+        final int startFromPage =
+            int.parse(listpagesparms['startfrompage'] ?? 0);
+        final int pageLength = int.parse(listpagesparms['pagelength'] ?? 0);
+        print('startFromPage :   $startFromPage   -- pagelength : $pageLength');
+
+        if (pageLength <= 0 || startFromPage <= 0) {
+          return Response.forbidden(
+              responseErrMsg(
+                  ' Please provide pageLength/startFromPage corerct values ( > 1 )',
+                  "403"),
+              headers: {
+                'content-type': 'application/json',
+              });
+        }
+
+        medicineInfo = await findMedicineByPage(
+            startFromPage: startFromPage,
+            pageLength: pageLength,
+            db: db,
+            medicineStore: medicineStore);
+
+        // print("founded_medicine------:" + medicineInfo.toString());
       } catch (err) {
         return Response.forbidden(responseErrMsg("$err", "9004"), headers: {
           'content-type': 'application/json',
         });
       }
 
-      final Map<String, dynamic> medicineWithresault = {
-        "medicineinfo": medicineInfo.toMap(),
-        "requestResult": {'error': 'Success', 'errNO': '200'}
-      };
-
-      print(medicineWithresault);
-      var jsonString = json.encode(medicineWithresault);
+      var jsonString = json.encode(medicineInfo);
+      //print('--------------0-0-0-0-0-\n' + jsonString);
 
       return Response.ok(jsonString, headers: {
         'content-type': 'application/json',
