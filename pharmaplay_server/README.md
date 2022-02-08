@@ -66,26 +66,3 @@ dbServerPort = '5432'
 dbServerHost = 'localhost'
 redisHost = 'localhost'
 redisPort = '6379'
-
------------
- SELECT md0."medicineID",
-    md0.tradeName,
-    md0.caliber,
-    md0."formulaID",
-    frm0.formula,
-    md0."medicineFactoryID",
-    fac0."medicineFactoryName",
-    md0."chemicalNameID",
-    chmn0."chemicalName",
-    md0."genericNameID",
-    grn0.genericName,
-    md0."pharmaFormID",
-    ff0."pharmaForm",
-    md0."licenseNumber",
-    md0."licenseDate" AS licensedate
-   FROM pharmaplay.medicines000 md0
-     LEFT JOIN pharmaplay.factory000 fac0 ON md0."medicineFactoryID" = fac0."medicineFactoryID"
-     LEFT JOIN pharmaplay."pharmaForm000" ff0 ON md0."pharmaFormID" = ff0."pharmaFormID"
-     LEFT JOIN pharmaplay.formula000 frm0 ON md0."formulaID" = frm0."formulaID"
-     LEFT JOIN pharmaplay."chemicalNames000" chmn0 ON md0."chemicalNameID" = chmn0."chemicalNameID"
-     LEFT JOIN pharmaplay."genericNames000" grn0 ON md0."genericNameID" = grn0."genericNameID";

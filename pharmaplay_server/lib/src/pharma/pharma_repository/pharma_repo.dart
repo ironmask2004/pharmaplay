@@ -82,13 +82,13 @@ Future<MedicineRecord> findMedicineByID(
   String sql = '''  SELECT md0."medicineID",
     md0."tradeName",md0.caliber,
     md0."formulaID",frm0."formulaID",frm0."formulaName",
-    md0."medicineFactoryID",fac0."medicineFactoryID",fac0."medicineFactoryName",
+    md0."medicFactoryID",fac0."medicFactoryID",fac0."medicFactoryName",
     md0."chemicalNameID", chmn0."chemicalNameID",chmn0."chemicalName",
     md0."genericNameID",grn0."genericNameID",grn0."genericName",
     md0."pharmaFormID",ff0."pharmaFormID",  ff0."pharmaForm" ,
     md0."licenseNumber",md0."licenseDate"
     FROM pharmaplay.medicine md0
-    LEFT JOIN pharmaplay."medicineFactory" fac0 ON md0."medicineFactoryID" = fac0."medicineFactoryID"
+    LEFT JOIN pharmaplay."medicFactory" fac0 ON md0."medicFactoryID" = fac0."medicFactoryID"
     LEFT JOIN pharmaplay."pharmaForm" ff0 ON md0."pharmaFormID" = ff0."pharmaFormID"
     LEFT JOIN pharmaplay.formula frm0 ON md0."formulaID" = frm0."formulaID"
     LEFT JOIN pharmaplay."chemicalName" chmn0 ON md0."chemicalNameID" = chmn0."chemicalNameID"
@@ -104,8 +104,8 @@ Future<MedicineRecord> findMedicineByID(
     print(resultSet.first);
     print('founded by medicineID: ' + resultSet.first.toString());
 
-    // print('medicineFactory founded by medicineID: ' +
-    //    resultSet.first.map['medicineFactory'].toString());
+    // print('medicFactory founded by medicineID: ' +
+    //    resultSet.first.map['medicFactory'].toString());
 
     return MedicineRecord.fromMap((resultSet.first));
   } else {
@@ -122,7 +122,7 @@ Future<List<MedicineRecord>> findMedicineAll(
   String sql = '''  SELECT md0."medicineID",
     md0.tradeName,    md0.caliber,
     md0."formulaID",    frm0."formulaName",
-    fac0."medicineFactoryID",    fac0."medicineFactoryName",
+    fac0."medicFactoryID",    fac0."medicFactoryName",
     chmn0."chemicalNameID",
     chmn0."chemicalName",
     grn0."genericNameID",
@@ -132,7 +132,7 @@ Future<List<MedicineRecord>> findMedicineAll(
     md0."licenseNumber",
     md0."licenseDate" 
    FROM pharmaplay.medicine md0
-     LEFT JOIN pharmaplay.factory fac0 ON md0."medicineFactoryID" = fac0."medicineFactoryID"
+     LEFT JOIN pharmaplay.factory fac0 ON md0."medicFactoryID" = fac0."medicFactoryID"
      LEFT JOIN pharmaplay."pharmaForm" ff0 ON md0."pharmaFormID" = ff0."pharmaFormID"
      LEFT JOIN pharmaplay.formula frm0 ON md0."formulaID" = frm0."formulaID"
      LEFT JOIN pharmaplay."chemicalName" chmn0 ON md0."chemicalNameID" = chmn0."chemicalNameID"

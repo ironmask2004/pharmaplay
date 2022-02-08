@@ -9,8 +9,8 @@ part of 'medicinerecord.dart';
 MedicineRecord _$MedicineRecordFromJson(Map<String, dynamic> json) =>
     MedicineRecord(
       medicine: Medicine.fromJson(json['medicine'] as Map<String, dynamic>),
-      medicineFactory: MedicineFactory.fromJson(
-          json['medicineFactory'] as Map<String, dynamic>),
+      medicFactory:
+          MedicFactory.fromJson(json['medicFactory'] as Map<String, dynamic>),
       chemicalName:
           ChemicalName.fromJson(json['chemicalName'] as Map<String, dynamic>),
       genericName:
@@ -23,7 +23,7 @@ MedicineRecord _$MedicineRecordFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$MedicineRecordToJson(MedicineRecord instance) =>
     <String, dynamic>{
       'medicine': instance.medicine.toJson(),
-      'medicineFactory': instance.medicineFactory.toJson(),
+      'medicFactory': instance.medicFactory.toJson(),
       'chemicalName': instance.chemicalName.toJson(),
       'genericName': instance.genericName.toJson(),
       'pharmaForm': instance.pharmaForm.toJson(),

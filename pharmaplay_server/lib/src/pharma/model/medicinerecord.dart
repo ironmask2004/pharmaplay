@@ -7,7 +7,7 @@ import 'package:pharmaplay_server/src/pharma/model/formula.dart';
 
 import 'chemicalname.dart';
 import 'genericname.dart';
-import 'medicinefactory.dart';
+import 'medicfactory.dart';
 import 'pharmaform.dart';
 
 part 'medicinerecord.g.dart';
@@ -15,14 +15,14 @@ part 'medicinerecord.g.dart';
 @JsonSerializable(explicitToJson: true)
 class MedicineRecord extends Equatable {
   final Medicine medicine;
-  final MedicineFactory medicineFactory;
+  final MedicFactory medicFactory;
   final ChemicalName chemicalName;
   final GenericName genericName;
   final PharmaForm pharmaForm;
   final Formula formula;
   MedicineRecord({
     required this.medicine,
-    required this.medicineFactory,
+    required this.medicFactory,
     required this.chemicalName,
     required this.genericName,
     required this.pharmaForm,
@@ -37,7 +37,7 @@ class MedicineRecord extends Equatable {
 
   MedicineRecord copyWith({
     Medicine? medicine,
-    MedicineFactory? medicineFactory,
+    MedicFactory? medicFactory,
     ChemicalName? chemicalName,
     GenericName? genericName,
     PharmaForm? pharmaForm,
@@ -45,7 +45,7 @@ class MedicineRecord extends Equatable {
   }) {
     return MedicineRecord(
       medicine: medicine ?? this.medicine,
-      medicineFactory: medicineFactory ?? this.medicineFactory,
+      medicFactory: medicFactory ?? this.medicFactory,
       chemicalName: chemicalName ?? this.chemicalName,
       genericName: genericName ?? this.genericName,
       pharmaForm: pharmaForm ?? this.pharmaForm,
@@ -56,7 +56,7 @@ class MedicineRecord extends Equatable {
   Map<String, dynamic> toMap() {
     return {
       'medicine': medicine.toMap(),
-      'medicineFactory': medicineFactory.toMap(),
+      'medicFactory': medicFactory.toMap(),
       'chemicalName': chemicalName.toMap(),
       'genericName': genericName.toMap(),
       'pharmaForm': pharmaForm.toMap(),
@@ -67,7 +67,7 @@ class MedicineRecord extends Equatable {
   factory MedicineRecord.fromMap(Map<String, dynamic> map) {
     return MedicineRecord(
       medicine: Medicine.fromMap(map['medicine']),
-      medicineFactory: MedicineFactory.fromMap(map['medicineFactory']),
+      medicFactory: MedicFactory.fromMap(map['medicFactory']),
       chemicalName: ChemicalName.fromMap(map['chemicalName']),
       genericName: GenericName.fromMap(map['genericName']),
       pharmaForm: PharmaForm.fromMap(map['pharmaForm']),
@@ -77,14 +77,14 @@ class MedicineRecord extends Equatable {
 
   @override
   String toString() {
-    return 'MedicineRecord(medicine: $medicine, medicineFactory: $medicineFactory, chemicalName: $chemicalName, genericName: $genericName, pharmaForm: $pharmaForm, formula: $formula)';
+    return 'MedicineRecord(medicine: $medicine, medicFactory: $medicFactory, chemicalName: $chemicalName, genericName: $genericName, pharmaForm: $pharmaForm, formula: $formula)';
   }
 
   @override
   List<Object> get props {
     return [
       medicine,
-      medicineFactory,
+      medicFactory,
       chemicalName,
       genericName,
       pharmaForm,

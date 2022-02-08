@@ -8,7 +8,7 @@ class Medicine extends Equatable {
   final String tradeName;
   final String caliber;
   final int formulaID;
-  final int medicineFactoryID;
+  final int medicFactoryID;
   final int chemicalNameID;
   final int genericNameID;
   final int pharmaFormID;
@@ -19,7 +19,7 @@ class Medicine extends Equatable {
     required this.tradeName,
     required this.caliber,
     required this.formulaID,
-    required this.medicineFactoryID,
+    required this.medicFactoryID,
     required this.chemicalNameID,
     required this.genericNameID,
     required this.pharmaFormID,
@@ -36,7 +36,7 @@ class Medicine extends Equatable {
     String? tradeName,
     String? caliber,
     int? formulaID,
-    int? medicineFactoryID,
+    int? medicFactoryID,
     int? chemicalNameID,
     int? genericNameID,
     int? pharmaFormID,
@@ -48,7 +48,7 @@ class Medicine extends Equatable {
       tradeName: tradeName ?? this.tradeName,
       caliber: caliber ?? this.caliber,
       formulaID: formulaID ?? this.formulaID,
-      medicineFactoryID: medicineFactoryID ?? this.medicineFactoryID,
+      medicFactoryID: medicFactoryID ?? this.medicFactoryID,
       chemicalNameID: chemicalNameID ?? this.chemicalNameID,
       genericNameID: genericNameID ?? this.genericNameID,
       pharmaFormID: pharmaFormID ?? this.pharmaFormID,
@@ -63,7 +63,7 @@ class Medicine extends Equatable {
       'tradeName': tradeName,
       'caliber': caliber,
       'formulaID': formulaID,
-      'medicineFactoryID': medicineFactoryID,
+      'medicFactoryID': medicFactoryID,
       'chemicalNameID': chemicalNameID,
       'genericNameID': genericNameID,
       'pharmaFormID': pharmaFormID,
@@ -78,7 +78,7 @@ class Medicine extends Equatable {
       tradeName: map['tradeName'] ?? '',
       caliber: map['caliber'] ?? '',
       formulaID: map['formulaID']?.toInt() ?? 0,
-      medicineFactoryID: map['medicineFactoryID']?.toInt() ?? 0,
+      medicFactoryID: map['medicFactoryID']?.toInt() ?? 0,
       chemicalNameID: map['chemicalNameID']?.toInt() ?? 0,
       genericNameID: map['genericNameID']?.toInt() ?? 0,
       pharmaFormID: map['pharmaFormID']?.toInt() ?? 0,
@@ -88,7 +88,7 @@ class Medicine extends Equatable {
   }
   @override
   String toString() {
-    return 'Medicine(medicineID: $medicineID, tradeName: $tradeName, caliber: $caliber, formulaID: $formulaID, medicineFactoryID: $medicineFactoryID, chemicalNameID: $chemicalNameID, genericNameID: $genericNameID, pharmaFormID: $pharmaFormID, licenseNumber: $licenseNumber, licenseDate: $licenseDate)';
+    return 'Medicine(medicineID: $medicineID, tradeName: $tradeName, caliber: $caliber, formulaID: $formulaID, medicFactoryID: $medicFactoryID, chemicalNameID: $chemicalNameID, genericNameID: $genericNameID, pharmaFormID: $pharmaFormID, licenseNumber: $licenseNumber, licenseDate: $licenseDate)';
   }
 
   @override
@@ -98,7 +98,7 @@ class Medicine extends Equatable {
       tradeName,
       caliber,
       formulaID,
-      medicineFactoryID,
+      medicFactoryID,
       chemicalNameID,
       genericNameID,
       pharmaFormID,
