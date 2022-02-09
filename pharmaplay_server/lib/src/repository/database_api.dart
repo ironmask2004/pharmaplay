@@ -1,8 +1,6 @@
 import 'package:pharmaplay_server/pharmaplay_server.dart';
 import 'package:pharmaplay_server/src/utilites/config.dart';
 
-import 'package:postgres/postgres.dart';
-
 class DB {
   late PostgreSQLConnection _connection;
   late final Env _sysEnv;

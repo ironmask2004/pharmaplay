@@ -211,6 +211,89 @@ CREATE TABLE pharmaplay.pharma000 (
 ALTER TABLE pharmaplay.pharma000 OWNER TO pharmaadmin;
 
 --
+-- Name: pharmaclass; Type: TABLE; Schema: pharmaplay; Owner: pharmaadmin
+--
+
+CREATE TABLE pharmaplay.pharmaclass (
+    "pharmaclassID" integer NOT NULL,
+    "pharmagroupID" integer NOT NULL,
+    "ar__pharmaclassName" character(255) NOT NULL,
+    "en__pharmaclassName" character(255) NOT NULL
+);
+
+
+ALTER TABLE pharmaplay.pharmaclass OWNER TO pharmaadmin;
+
+--
+-- Name: pharmagroup; Type: TABLE; Schema: pharmaplay; Owner: pharmaadmin
+--
+
+CREATE TABLE pharmaplay.pharmagroup (
+    "pharmaclassID" integer NOT NULL,
+    "pharmatypeID" integer NOT NULL,
+    "ar__pharmagroupName" character(255) NOT NULL,
+    "en__pharmagroupName" character(255) NOT NULL
+);
+
+
+ALTER TABLE pharmaplay.pharmagroup OWNER TO pharmaadmin;
+
+--
+-- Name: pharmaclass_pharmaclassID_seq; Type: SEQUENCE; Schema: pharmaplay; Owner: pharmaadmin
+--
+
+ALTER TABLE pharmaplay.pharmagroup ALTER COLUMN "pharmaclassID" ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME pharmaplay."pharmaclass_pharmaclassID_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- Name: pharmaclass_pharmaclassID_seq1; Type: SEQUENCE; Schema: pharmaplay; Owner: pharmaadmin
+--
+
+ALTER TABLE pharmaplay.pharmaclass ALTER COLUMN "pharmaclassID" ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME pharmaplay."pharmaclass_pharmaclassID_seq1"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- Name: pharmatype; Type: TABLE; Schema: pharmaplay; Owner: pharmaadmin
+--
+
+CREATE TABLE pharmaplay.pharmatype (
+    "pharmatypeID" integer NOT NULL,
+    "ar__pharmatypeName" character(255) NOT NULL,
+    "en__pharmatypeName" character(255) NOT NULL
+);
+
+
+ALTER TABLE pharmaplay.pharmatype OWNER TO pharmaadmin;
+
+--
+-- Name: pharmagenricclasss_pharmaGenricClasssID_seq; Type: SEQUENCE; Schema: pharmaplay; Owner: pharmaadmin
+--
+
+ALTER TABLE pharmaplay.pharmatype ALTER COLUMN "pharmatypeID" ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME pharmaplay."pharmagenricclasss_pharmaGenricClasssID_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
 -- Name: pharmaview000; Type: VIEW; Schema: pharmaplay; Owner: pharmaadmin
 --
 
@@ -16761,6 +16844,113 @@ COPY pharmaplay."pharmaForm" ("pharmaFormID", "pharmaForm") FROM stdin;
 
 
 --
+-- Data for Name: pharmaclass; Type: TABLE DATA; Schema: pharmaplay; Owner: pharmaadmin
+--
+
+COPY pharmaplay.pharmaclass ("pharmaclassID", "pharmagroupID", "ar__pharmaclassName", "en__pharmaclassName") FROM stdin;
+1	32	المضادات الحيوية البتالاكتامية                                                                                                                                                                                                                                 	BETA-LACTAM ANTIBIOTICS                                                                                                                                                                                                                                        
+2	32	مضادات الجراثيم -متفرقات                                                                                                                                                                                                                                       	OTHER ANTIBACTERIAL DRUGS                                                                                                                                                                                                                                      
+3	32	الأدوية المضادة للجذام                                                                                                                                                                                                                                         	ANTILEPROSY DRUGS                                                                                                                                                                                                                                              
+4	32	الأدوية المضادة للسل                                                                                                                                                                                                                                           	ANTITUBERCULOSIS DRUGS                                                                                                                                                                                                                                         
+\.
+
+
+--
+-- Data for Name: pharmagroup; Type: TABLE DATA; Schema: pharmaplay; Owner: pharmaadmin
+--
+
+COPY pharmaplay.pharmagroup ("pharmaclassID", "pharmatypeID", "ar__pharmagroupName", "en__pharmagroupName") FROM stdin;
+7	1	أدوية التخدير العام                                                                                                                                                                                                                                            	GENERAL ANAESTHETICS AND OXYGEN                                                                                                                                                                                                                                
+8	1	أدوية التخديرالموضعي                                                                                                                                                                                                                                           	LOCAL ANAESTHETICS                                                                                                                                                                                                                                             
+9	1	أدوية ما قبل العمليات                                                                                                                                                                                                                                          	PREOPERATIVE MEDICATION & SEDATION FOR SHORT –TERM PROCEDURES                                                                                                                                                                                                  
+10	2	المرخيات العضلية و مثبطات الكولين استراز                                                                                                                                                                                                                       	MUSCLE RELAXANTS & CHOLINESTERASE INHIBITORS                                                                                                                                                                                                                   
+11	3	الغليكوزيدات القلبية                                                                                                                                                                                                                                           	CARDIAC  GLYCOSIDES                                                                                                                                                                                                                                            
+12	3	مضادات اضطراب النظم                                                                                                                                                                                                                                            	ANTI-ARRHYTHMIC DRUGS                                                                                                                                                                                                                                          
+13	3	أدوية  نقص التروية الإكليلية                                                                                                                                                                                                                                   	ISCHEMIC HEART DISEASE DRUGS         :                                                                                                                                                                                                                         
+14	3	أدوية فرط التوتر الشريانى                                                                                                                                                                                                                                      	ANTIHYPERTENSIVE DRUGS                                                                                                                                                                                                                                         
+15	3	حاصرات بيتا                                                                                                                                                                                                                                                    	BETA-ADRENOCEPTOR BLOCKING AGENTS                                                                                                                                                                                                                              
+16	3	أدوية الصدمة (رافعات الضغط)                                                                                                                                                                                                                                    	DRUGS USED IN VASCULAR SHOCK (ANTIHYPOTENSIVE DRUGS)\n                                                                                                                                                                                                          
+17	3	خافضات الدسم                                                                                                                                                                                                                                                   	LIPID – LOWERING DRUGS                                                                                                                                                                                                                                         
+18	3	موسعات دماغية ومحيطية                                                                                                                                                                                                                                          	CEREBRAL & PERIPHERAL VASODILATORS                                                                                                                                                                                                                             
+19	3	الأدوية المضادة للخثار                                                                                                                                                                                                                                         	ANTITHROMBOTIC  DRUGS                                                                                                                                                                                                                                          
+20	4	المدرات                                                                                                                                                                                                                                                        	DIURETICS                                                                                                                                                                                                                                                      
+21	5	هرمونات الكظر  و البدائل الاصطناعية                                                                                                                                                                                                                            	ADRENAL HORMONES AND SYNTHETIC SUBSTITUTES                                                                                                                                                                                                                     
+22	5	الأندروجينات                                                                                                                                                                                                                                                   	ANDROGENS                                                                                                                                                                                                                                                      
+23	5	الاستروجينات                                                                                                                                                                                                                                                   	OESTROGENS                                                                                                                                                                                                                                                     
+24	5	البروجستوجينات                                                                                                                                                                                                                                                 	PROGESTOGENS                                                                                                                                                                                                                                                   
+25	5	الأدوية المضادة للسكري                                                                                                                                                                                                                                         	ANTIDIABETIC AGENTS                                                                                                                                                                                                                                            
+26	5	الأدوية الرافعة لسكر الدم                                                                                                                                                                                                                                      	HYPERGLYCEMIC  AGENTS                                                                                                                                                                                                                                          
+27	5	هرمونات الدرق والأدوية المضادة للدرق وأدوية نظير الدرق                                                                                                                                                                                                         	THYROID HORMONES & ANTITHYROID DRUGS AND PARATHYROID DRUGS                                                                                                                                                                                                     
+28	5	هرمونات النخامى وتحت المهاد                                                                                                                                                                                                                                    	PITUITARY AND HYPOTHALAMIC                                                                                                                                                                                                                                     
+29	5	هرمونات متفرقات                                                                                                                                                                                                                                                	MISCELLANEOUS HORMONES                                                                                                                                                                                                                                         
+30	6	مثبطات المناعة                                                                                                                                                                                                                                                 	IMMUNOSUPPRESSIVE DRUGS                                                                                                                                                                                                                                        
+32	7	مضادات الجراثيم                                                                                                                                                                                                                                                	ANTIBACTERIALS                                                                                                                                                                                                                                                 
+35	7	الأدوية الطاردة للديدان                                                                                                                                                                                                                                        	ANTHELMINTICS                                                                                                                                                                                                                                                  
+31	6	المضادة للأورام                                                                                                                                                                                                                                                	CYTOTOXIC DRUGS                                                                                                                                                                                                                                                
+33	7	المضادة للفطور                                                                                                                                                                                                                                                 	ANTIFUNGAL DRUGS  :                                                                                                                                                                                                                                            
+34	7	المضادة لوحيدات الخلية                                                                                                                                                                                                                                         	ANTIPROTOZOAL DRUGS                                                                                                                                                                                                                                            
+37	7	المضادة للحُمات                                                                                                                                                                                                                                                	ANTIVIRAL DRUGS                                                                                                                                                                                                                                                
+38	8	المسكنات الافيونية                                                                                                                                                                                                                                             	OPIOM ANALGESICS                                                                                                                                                                                                                                               
+39	8	مسكنات الألم خافضات  الحرارة                                                                                                                                                                                                                                   	NON-OPIOID ANALGESICS AND ANTIPYRETICS\n                                                                                                                                                                                                                        
+40	8	مضادات الارتكاس الالتهابي غير الستيروئيدية                                                                                                                                                                                                                     	NONSTEROIDAL ANTI-INFLAMMATORY DRUGS                                                                                                                                                                                                                           
+41	8	أدوية النقرس                                                                                                                                                                                                                                                   	DRUGS  TREAT GOUT                                                                                                                                                                                                                                              
+42	8	مسكنات متفرقات                                                                                                                                                                                                                                                 	ANALGESICS MISCELLANEOUS                                                                                                                                                                                                                                       
+43	16	الأدوية المنومة و المهدئة                                                                                                                                                                                                                                      	HYPNOTICS & SEDATIVES                                                                                                                                                                                                                                          
+44	16	مضادات القلق و المهدئات النفسية                                                                                                                                                                                                                                	ANXIOLYTICS                                                                                                                                                                                                                                                    
+45	16	مضادات الذهان                                                                                                                                                                                                                                                  	ANTIPSYCHOTICS                                                                                                                                                                                                                                                 
+46	16	مضادات الاكتئاب                                                                                                                                                                                                                                                	ANTIDEPRESSANTS                                                                                                                                                                                                                                                
+47	16	ادوية نفسية متفرقات                                                                                                                                                                                                                                            	PSYCHOTHERAPEUTIC DRUGS \nMISCELLANEOUS                                                                                                                                                                                                                         
+48	19	الترياقات العامة                                                                                                                                                                                                                                               	NON-SPECIFIC ANTIDOTES                                                                                                                                                                                                                                         
+49	19	الترياقات الخاصة                                                                                                                                                                                                                                               	SPECIFIC ANTIDOTES                                                                                                                                                                                                                                             
+50	20	أدوية فقر الدم                                                                                                                                                                                                                                                 	ANTIANAEMIA DRUGS                                                                                                                                                                                                                                              
+51	20	الأدوية المؤثرة في التخثر                                                                                                                                                                                                                                      	DRUGS AFFECTING COAGULATION                                                                                                                                                                                                                                    
+52	20	بدائل البلازما                                                                                                                                                                                                                                                 	PLASMA SUBSTITUTES                                                                                                                                                                                                                                             
+53	20	أجزاء البلازما لاستعمالات معينة                                                                                                                                                                                                                                	PLASMA FRACTIONS FOR SPECIFIC                                                                                                                                                                                                                                  
+54	20	ادوية مؤثرة بالدم-متفرقات                                                                                                                                                                                                                                      	DRUGS AFFECTING THE \nMISCELLANEOUS                                                                                                                                                                                                                             
+55	23	مضادات الحموضة                                                                                                                                                                                                                                                 	ANTACIDS                                                                                                                                                                                                                                                       
+56	23	أدوية القرحة                                                                                                                                                                                                                                                   	ANTIULCER DRUGS                                                                                                                                                                                                                                                
+57	23	مضادات التشنج و مضادات الاقياء                                                                                                                                                                                                                                 	ANTISPASMODIC DRUGS AND ANTIEMETICS                                                                                                                                                                                                                            
+58	23	المسهلات                                                                                                                                                                                                                                                       	CATHARTIC DRUGS                                                                                                                                                                                                                                                
+59	23	الأدوية المضادة للإسهال                                                                                                                                                                                                                                        	ANTIDIARRHOEAL DRUGS                                                                                                                                                                                                                                           
+60	23	أدوية مضادة للالتهاب                                                                                                                                                                                                                                           	ANTI-INFLAMMATORY DRUGS                                                                                                                                                                                                                                        
+61	23	الخمائر الهاضمة                                                                                                                                                                                                                                                	DIGESTIVE ENZYMES                                                                                                                                                                                                                                              
+62	23	الأدوية المضادة للبواسير                                                                                                                                                                                                                                       	ANTIHEMORRHOIDAL DRUGS                                                                                                                                                                                                                                         
+63	23	متفرقات الجهاز الهضمي                                                                                                                                                                                                                                          	MISCELLANEOUS                                                                                                                                                                                                                                                  
+\.
+
+
+--
+-- Data for Name: pharmatype; Type: TABLE DATA; Schema: pharmaplay; Owner: pharmaadmin
+--
+
+COPY pharmaplay.pharmatype ("pharmatypeID", "ar__pharmatypeName", "en__pharmatypeName") FROM stdin;
+1	أدوية التخدير                                                                                                                                                                                                                                                  	ANAESTHETICS                                                                                                                                                                                                                                                   
+2	المرخيات العضلية و مثبطات الكولين استراز                                                                                                                                                                                                                       	MUSCLE RELAXANTS & CHOLINESTERASE INHIBITORS                                                                                                                                                                                                                   
+3	المرخيات العضلية و مثبطات الكولين استراز                                                                                                                                                                                                                       	CARDIOVASCULAR DRUGS                                                                                                                                                                                                                                           
+4	المدرات                                                                                                                                                                                                                                                        	DIURETICS                                                                                                                                                                                                                                                      
+5	الهرمونات                                                                                                                                                                                                                                                      	HORMONES& OTHER ENDOCRINE DRUGS                                                                                                                                                                                                                                
+6	الأدوية السرطانية و مثبطات المناعة                                                                                                                                                                                                                             	ANTINEOPLASTIC AND IMMUNOSUPPRESSIVE DRUGS                                                                                                                                                                                                                     
+7	مضادات الانتان                                                                                                                                                                                                                                                 	ANTI-INFECTIVE DRUGS                                                                                                                                                                                                                                           
+8	المسكنات                                                                                                                                                                                                                                                       	ANALGESICS                                                                                                                                                                                                                                                     
+9	خافضات الحرارة                                                                                                                                                                                                                                                 	ANTIPYRETICS                                                                                                                                                                                                                                                   
+10	المضادة للالتهاب غير الستيروئيدية                                                                                                                                                                                                                              	NONSTEROIDAL ANTI-INFLAMMATORY                                                                                                                                                                                                                                 
+11	دوية النقرس وغيرها                                                                                                                                                                                                                                             	DRUGS USED TO TREAT GOUT                                                                                                                                                                                                                                       
+12	أدوية الشقيقة                                                                                                                                                                                                                                                  	ANTIMIGRAINE DRUGS                                                                                                                                                                                                                                             
+13	مضادات باركنسون                                                                                                                                                                                                                                                	ANTIPARKINSONSIM DRUGS                                                                                                                                                                                                                                         
+14	مضادات الاختلاج و مضادات الصرع                                                                                                                                                                                                                                 	ANTICONVULSANTS & ANTIEPILEPTICS\n                                                                                                                                                                                                                              
+15	خمائر مضادة للالتهاب                                                                                                                                                                                                                                           	ANTI-INFLAMMATORY ENZYMES (SOFT TISSUE)                                                                                                                                                                                                                        
+16	الأدوية النفسية                                                                                                                                                                                                                                                	PSYCHOTHERAPEUTIC DRUGS                                                                                                                                                                                                                                        
+17	مضادات التحسس                                                                                                                                                                                                                                                  	ANTIALLERGICS                                                                                                                                                                                                                                                  
+23	أدوية الجهاز الهضمي                                                                                                                                                                                                                                            	GASTROINTESTINAL DRUGS                                                                                                                                                                                                                                         
+19	الترياقات و أدوية الانسمام                                                                                                                                                                                                                                     	ANTIDOTES AND OTHER SUBSTANCES USED IN POISONINGS                                                                                                                                                                                                              
+18	الأدوية المستعملة في التأق                                                                                                                                                                                                                                     	ANAPHYLAXIS DRUGS                                                                                                                                                                                                                                              
+20	الأدوية المؤثرة في الدم                                                                                                                                                                                                                                        	DRUGS AFFECTING THE BLOOD                                                                                                                                                                                                                                      
+21	المحاليل المصححة لاضطرابات الماء و الشوارد                                                                                                                                                                                                                     	SOLUTIONS CORRECTING  WATER,ELECTROLYTE AND ACID-BASE DISTURBANCES                                                                                                                                                                                             
+22	الفيتامينات و المعادن                                                                                                                                                                                                                                          	VITAMINS AND MINERALS                                                                                                                                                                                                                                          
+\.
+
+
+--
 -- Data for Name: users000; Type: TABLE DATA; Schema: pharmaplay; Owner: pharmaadmin
 --
 
@@ -16840,6 +17030,27 @@ SELECT pg_catalog.setval('pharmaplay."medicines_medicine_ID_seq"', 7535, true);
 
 
 --
+-- Name: pharmaclass_pharmaclassID_seq; Type: SEQUENCE SET; Schema: pharmaplay; Owner: pharmaadmin
+--
+
+SELECT pg_catalog.setval('pharmaplay."pharmaclass_pharmaclassID_seq"', 63, true);
+
+
+--
+-- Name: pharmaclass_pharmaclassID_seq1; Type: SEQUENCE SET; Schema: pharmaplay; Owner: pharmaadmin
+--
+
+SELECT pg_catalog.setval('pharmaplay."pharmaclass_pharmaclassID_seq1"', 4, true);
+
+
+--
+-- Name: pharmagenricclasss_pharmaGenricClasssID_seq; Type: SEQUENCE SET; Schema: pharmaplay; Owner: pharmaadmin
+--
+
+SELECT pg_catalog.setval('pharmaplay."pharmagenricclasss_pharmaGenricClasssID_seq"', 23, true);
+
+
+--
 -- Name: users000__id_seq; Type: SEQUENCE SET; Schema: pharmaplay; Owner: pharmaadmin
 --
 
@@ -16867,6 +17078,30 @@ ALTER TABLE ONLY pharmaplay."pharmaForm"
 
 ALTER TABLE ONLY pharmaplay.formula
     ADD CONSTRAINT formual_pkey PRIMARY KEY ("formulaID");
+
+
+--
+-- Name: pharmagroup pharmaclass_pkey; Type: CONSTRAINT; Schema: pharmaplay; Owner: pharmaadmin
+--
+
+ALTER TABLE ONLY pharmaplay.pharmagroup
+    ADD CONSTRAINT pharmaclass_pkey PRIMARY KEY ("pharmaclassID");
+
+
+--
+-- Name: pharmaclass pharmaclasss_pkey; Type: CONSTRAINT; Schema: pharmaplay; Owner: pharmaadmin
+--
+
+ALTER TABLE ONLY pharmaplay.pharmaclass
+    ADD CONSTRAINT pharmaclasss_pkey PRIMARY KEY ("pharmaclassID");
+
+
+--
+-- Name: pharmatype pharmagenricclasss_pkey; Type: CONSTRAINT; Schema: pharmaplay; Owner: pharmaadmin
+--
+
+ALTER TABLE ONLY pharmaplay.pharmatype
+    ADD CONSTRAINT pharmagenricclasss_pkey PRIMARY KEY ("pharmatypeID");
 
 
 --
@@ -16968,6 +17203,27 @@ GRANT ALL ON TABLE pharmaplay.medicine TO pharmauser;
 --
 
 GRANT ALL ON TABLE pharmaplay.pharma000 TO pharmauser;
+
+
+--
+-- Name: TABLE pharmaclass; Type: ACL; Schema: pharmaplay; Owner: pharmaadmin
+--
+
+GRANT ALL ON TABLE pharmaplay.pharmaclass TO pharmauser;
+
+
+--
+-- Name: TABLE pharmagroup; Type: ACL; Schema: pharmaplay; Owner: pharmaadmin
+--
+
+GRANT ALL ON TABLE pharmaplay.pharmagroup TO pharmauser;
+
+
+--
+-- Name: TABLE pharmatype; Type: ACL; Schema: pharmaplay; Owner: pharmaadmin
+--
+
+GRANT ALL ON TABLE pharmaplay.pharmatype TO pharmauser;
 
 
 --
