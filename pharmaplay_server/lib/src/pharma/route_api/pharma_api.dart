@@ -1,7 +1,7 @@
 import 'package:pharmaplay_server/pharmaplay_server.dart';
 import 'package:pharmaplay_server/src/utilites/error_response.dart';
 
-import '../model/medicinerecord.dart';
+import '../model/drugrecord.dart';
 import '../pharma_repository/pharma_repo.dart';
 
 class PharmaApi {
@@ -50,9 +50,9 @@ class PharmaApi {
 
     //============= /medicines/INFO ROUTE
     ///----------------------
-    //{ "startfrompage": "3" , "pagelength": "2" , "orderbyfields": "medicine.\"chemicalNameID\",medicine.\"tradeName\""  }
+    //{ "startfrompage": "3" , "pagelength": "2" , "orderbyfields": "medicine.\"chemicalDrugID\",medicine.\"tradeName\""  }
     router.get('/medicine/findlistbypage', (Request req) async {
-      List<MedicineRecord> medicineInfo;
+      List<DrugRecord> medicineInfo;
       try {
         final payload = await req.readAsString();
         final String weherCond = json.decode(payload)['wherecond'] ?? '';
@@ -70,8 +70,8 @@ class PharmaApi {
         if (pageLength <= 0 || startFromPage <= 0 || orderByfields.isEmpty) {
           return Response.forbidden(
               responseErrMsg(''' { "startfrompage": "1" , "pagelength": "12" , 
-                  "orderbyfields": "medicine.\"chemicalNameID\",medicine.\"tradeName\""  , 
-                   "wherecond": "WHERE medicine.\"pharmaFormID\" = 30 and medicine.\"medicineID\" <=10  "  }''',
+                  "orderbyfields": "medicine.\"chemicalDrugID\",medicine.\"tradeName\""  , 
+                   "wherecond": "WHERE medicine.\"dosageFormID\" = 30 and medicine.\"medicineID\" <=10  "  }''',
                   "403"),
               headers: {
                 'content-type': 'application/json',
@@ -103,11 +103,11 @@ class PharmaApi {
 
     //=========================================================
     //{ "startfrompage": "1" , "pagelength": "10" ,
-    //"weher": { "medicine.\"pharmaFormID\"": 30 } ,
-    // "orderbyfields": "medicine.\"chemicalNameID\",medicine.\"tradeName\""  }
+    //"weher": { "medicine.\"dosageFormID\"": 30 } ,
+    // "orderbyfields": "medicine.\"chemicalDrugID\",medicine.\"tradeName\""  }
     //==== byparam
     router.get('/medicine/byparam', (Request req) async {
-      List<MedicineRecord> medicineInfo;
+      List<DrugRecord> medicineInfo;
       try {
         final payload = await req.readAsString();
 
@@ -133,8 +133,8 @@ class PharmaApi {
           return Response.forbidden(
               responseErrMsg('''  Kindly provide correcet values:
                     { "startfrompage": "1" , "pagelength": "10" ,
-                     "weher": { "medicine.\"pharmaFormID\"": 30 } ,
-                     "orderbyfields": "medicine.\"chemicalNameID\",medicine.\"tradeName\""  }''',
+                     "weher": { "medicine.\"dosageFormID\"": 30 } ,
+                     "orderbyfields": "medicine.\"chemicalDrugID\",medicine.\"tradeName\""  }''',
                   "403"),
               headers: {
                 'content-type': 'application/json',
@@ -169,7 +169,7 @@ class PharmaApi {
     router.get('/medicine/id', (Request req) async {
       //final authDetails = req.context['authDetails'] as JWT;
       print(req.context.toString());
-      MedicineRecord medicineInfo;
+      DrugRecord medicineInfo;
       final payload = await req.readAsString();
       final Map<String, dynamic> requestBody = json.decode(payload);
       print(requestBody);
