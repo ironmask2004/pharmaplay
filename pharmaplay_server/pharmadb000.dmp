@@ -39,7 +39,7 @@ SET default_table_access_method = heap;
 
 CREATE TABLE pharmaplay."ChemicalNames000" (
     "ChemicalName_ID" integer NOT NULL,
-    "ChemicalName" character varying(512)
+    "ChemicalDrug" character varying(512)
 );
 
 
@@ -95,7 +95,7 @@ ALTER TABLE pharmaplay."Factory000" ALTER COLUMN "Factory_ID" ADD GENERATED ALWA
 
 CREATE TABLE pharmaplay."GenericNames000" (
     "genericname_ID" integer NOT NULL,
-    genericName character varying(512) NOT NULL
+    genericDrugName character varying(512) NOT NULL
 );
 
 
@@ -123,7 +123,7 @@ ALTER TABLE pharmaplay."GenericNames000" ALTER COLUMN "genericname_ID" ADD GENER
 
 CREATE TABLE pharmaplay."PharmaForm000" (
     "PharmaForm_ID" integer NOT NULL,
-    "PharmaForm" character varying(256)
+    "DosageForm" character varying(256)
 );
 
 
@@ -244,7 +244,7 @@ CREATE VIEW pharmaplay.pharmaview000 AS
     ff0."PharmaForm_ID"
    FROM (((pharmaplay.pharma000 ph0
      LEFT JOIN pharmaplay."Factory000" fac0 ON (((ph0."Factory")::text = (fac0."FactoryName")::text)))
-     LEFT JOIN pharmaplay."PharmaForm000" ff0 ON (((ph0."Pharma_form")::text = (ff0."PharmaForm")::text)))
+     LEFT JOIN pharmaplay."PharmaForm000" ff0 ON (((ph0."Pharma_form")::text = (ff0."DosageForm")::text)))
      LEFT JOIN pharmaplay.formula000 f0 ON (((ph0.formula)::text = (f0.formula)::text)));
 
 

@@ -8,10 +8,10 @@ class Medicine extends Equatable {
   final String tradeName;
   final String caliber;
   final int formulaID;
-  final int medicFactoryID;
-  final int chemicalNameID;
-  final int genericNameID;
-  final int pharmaFormID;
+  final int manufactoryID;
+  final int chemicalDrugID;
+  final int genericDrugID;
+  final int dosageFormID;
   final String licenseNumber;
   final String licenseDate;
   Medicine({
@@ -19,10 +19,10 @@ class Medicine extends Equatable {
     required this.tradeName,
     required this.caliber,
     required this.formulaID,
-    required this.medicFactoryID,
-    required this.chemicalNameID,
-    required this.genericNameID,
-    required this.pharmaFormID,
+    required this.manufactoryID,
+    required this.chemicalDrugID,
+    required this.genericDrugID,
+    required this.dosageFormID,
     required this.licenseNumber,
     required this.licenseDate,
   });
@@ -36,10 +36,10 @@ class Medicine extends Equatable {
     String? tradeName,
     String? caliber,
     int? formulaID,
-    int? medicFactoryID,
-    int? chemicalNameID,
-    int? genericNameID,
-    int? pharmaFormID,
+    int? manufactoryID,
+    int? chemicalDrugID,
+    int? genericDrugID,
+    int? dosageFormID,
     String? licenseNumber,
     String? licenseDate,
   }) {
@@ -48,10 +48,10 @@ class Medicine extends Equatable {
       tradeName: tradeName ?? this.tradeName,
       caliber: caliber ?? this.caliber,
       formulaID: formulaID ?? this.formulaID,
-      medicFactoryID: medicFactoryID ?? this.medicFactoryID,
-      chemicalNameID: chemicalNameID ?? this.chemicalNameID,
-      genericNameID: genericNameID ?? this.genericNameID,
-      pharmaFormID: pharmaFormID ?? this.pharmaFormID,
+      manufactoryID: manufactoryID ?? this.manufactoryID,
+      chemicalDrugID: chemicalDrugID ?? this.chemicalDrugID,
+      genericDrugID: genericDrugID ?? this.genericDrugID,
+      dosageFormID: dosageFormID ?? this.dosageFormID,
       licenseNumber: licenseNumber ?? this.licenseNumber,
       licenseDate: licenseDate ?? this.licenseDate,
     );
@@ -63,10 +63,10 @@ class Medicine extends Equatable {
       'tradeName': tradeName,
       'caliber': caliber,
       'formulaID': formulaID,
-      'medicFactoryID': medicFactoryID,
-      'chemicalNameID': chemicalNameID,
-      'genericNameID': genericNameID,
-      'pharmaFormID': pharmaFormID,
+      'manufactoryID': manufactoryID,
+      'chemicalDrugID': chemicalDrugID,
+      'genericDrugID': genericDrugID,
+      'dosageFormID': dosageFormID,
       'licenseNumber': licenseNumber,
       'licenseDate': licenseDate,
     };
@@ -78,17 +78,17 @@ class Medicine extends Equatable {
       tradeName: map['tradeName'] ?? '',
       caliber: map['caliber'] ?? '',
       formulaID: map['formulaID']?.toInt() ?? 0,
-      medicFactoryID: map['medicFactoryID']?.toInt() ?? 0,
-      chemicalNameID: map['chemicalNameID']?.toInt() ?? 0,
-      genericNameID: map['genericNameID']?.toInt() ?? 0,
-      pharmaFormID: map['pharmaFormID']?.toInt() ?? 0,
+      manufactoryID: map['manufactoryID']?.toInt() ?? 0,
+      chemicalDrugID: map['chemicalDrugID']?.toInt() ?? 0,
+      genericDrugID: map['genericDrugID']?.toInt() ?? 0,
+      dosageFormID: map['dosageFormID']?.toInt() ?? 0,
       licenseNumber: map['licenseNumber'] ?? '',
       licenseDate: map['licenseDate'] ?? '',
     );
   }
   @override
   String toString() {
-    return 'Medicine(medicineID: $medicineID, tradeName: $tradeName, caliber: $caliber, formulaID: $formulaID, medicFactoryID: $medicFactoryID, chemicalNameID: $chemicalNameID, genericNameID: $genericNameID, pharmaFormID: $pharmaFormID, licenseNumber: $licenseNumber, licenseDate: $licenseDate)';
+    return 'Medicine(medicineID: $medicineID, tradeName: $tradeName, caliber: $caliber, formulaID: $formulaID, manufactoryID: $manufactoryID, chemicalDrugID: $chemicalDrugID, genericDrugID: $genericDrugID, dosageFormID: $dosageFormID, licenseNumber: $licenseNumber, licenseDate: $licenseDate)';
   }
 
   @override
@@ -98,10 +98,10 @@ class Medicine extends Equatable {
       tradeName,
       caliber,
       formulaID,
-      medicFactoryID,
-      chemicalNameID,
-      genericNameID,
-      pharmaFormID,
+      manufactoryID,
+      chemicalDrugID,
+      genericDrugID,
+      dosageFormID,
       licenseNumber,
       licenseDate,
     ];

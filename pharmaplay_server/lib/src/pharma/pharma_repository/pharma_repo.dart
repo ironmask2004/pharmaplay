@@ -145,7 +145,7 @@ Future<List<DrugRecord>> findMedicineAll(DB db, String medicineStore) async {
     drug."licenseNumber",drug."licenseDate"
     
     FROM pharmaplay.drug drug
-    
+    edicineRecord
     LEFT JOIN pharmaplay."manufactory" manufactory ON drug."manufactoryID" = manufactory."manufactoryID"
     LEFT JOIN pharmaplay."dosageForm" dosageForm ON drug."dosageFormID" = dosageForm."dosageFormID"
     LEFT JOIN pharmaplay."chemicalDrug" chemicalDrug ON drug."chemicalDrugID" = chemicalDrug."chemicalDrugID"
