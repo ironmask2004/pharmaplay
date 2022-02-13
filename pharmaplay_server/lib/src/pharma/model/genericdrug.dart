@@ -9,12 +9,10 @@ part 'genericdrug.g.dart';
 @JsonSerializable(explicitToJson: true)
 class GenericDrug extends Equatable {
   final int genericDrugID;
-  final String en__genericDrugName;
-  final String ar__genericDrugName;
+  final String genericDrugName;
   GenericDrug({
     required this.genericDrugID,
-    required this.en__genericDrugName,
-    required this.ar__genericDrugName,
+    required this.genericDrugName,
   });
 
   factory GenericDrug.fromJson(Map<String, dynamic> json) =>
@@ -25,37 +23,32 @@ class GenericDrug extends Equatable {
 
   GenericDrug copyWith({
     int? genericDrugID,
-    String? en__genericDrugName,
-    String? ar__genericDrugName,
+    String? genericDrugName,
   }) {
     return GenericDrug(
       genericDrugID: genericDrugID ?? this.genericDrugID,
-      en__genericDrugName: en__genericDrugName ?? this.en__genericDrugName,
-      ar__genericDrugName: ar__genericDrugName ?? this.ar__genericDrugName,
+      genericDrugName: genericDrugName ?? this.genericDrugName,
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
       'genericDrugID': genericDrugID,
-      'en__genericDrugName': en__genericDrugName,
-      'ar__genericDrugName': ar__genericDrugName,
+      'genericDrugName': genericDrugName,
     };
   }
 
   factory GenericDrug.fromMap(Map<String, dynamic> map) {
     return GenericDrug(
       genericDrugID: map['genericDrugID']?.toInt() ?? 0,
-      en__genericDrugName: map['en__genericDrugName'] ?? '',
-      ar__genericDrugName: map['ar__genericDrugName'] ?? '',
+      genericDrugName: map['genericDrugName'] ?? '',
     );
   }
 
   @override
   String toString() =>
-      'GenericDrug(genericDrugID: $genericDrugID, en__genericDrugName: $en__genericDrugName, ar__genericDrugName: $ar__genericDrugName)';
+      'GenericDrug(genericDrugID: $genericDrugID, genericDrugName: $genericDrugName)';
 
   @override
-  List<Object> get props =>
-      [genericDrugID, en__genericDrugName, ar__genericDrugName];
+  List<Object> get props => [genericDrugID, genericDrugName];
 }

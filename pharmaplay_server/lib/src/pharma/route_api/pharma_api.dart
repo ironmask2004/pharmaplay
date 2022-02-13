@@ -5,15 +5,15 @@ import '../model/drugrecord.dart';
 import '../pharma_repository/pharma_repo.dart';
 
 class PharmaApi {
-  String medicineStore;
+  String drugStore;
   DB db;
-  PharmaApi(this.db, this.medicineStore);
+  PharmaApi(this.db, this.drugStore);
   Handler get router {
     final router = Router();
 
-    //============= /medicine/test  ROUTE
+    //============= /drug/test  ROUTE
 
-    router.get('/medicine/test', (Request req) async {
+    router.get('/drug/test', (Request req) async {
       /*  // final authDetails = req.context['authDetails'] as JWT;
       try {
         final payload = await req.readAsString();
@@ -21,12 +21,12 @@ class PharmaApi {
         final Map<String, dynamic> querybody = json.decode(payload);
         print(querybody);
 
-        List<Medicine> medicinesInfo = await findMedicineByParams(db, medicineStore, querybody);
-        print("founded_medicine------:" + medicinesInfo.toString());
-        print(medicinesInfo.toString());
+        List<Drug> drugsInfo = await findDrugByParams(db, drugStore, querybody);
+        print("founded_drug------:" + drugsInfo.toString());
+        print(drugsInfo.toString());
         String response = "";
-        for (int i = 0; i < medicinesInfo.length; i++) {
-          response = response + (medicinesInfo[i].toJson().toString());
+        for (int i = 0; i < drugsInfo.length; i++) {
+          response = response + (drugsInfo[i].toJson().toString());
         }
 
         return Response.ok(response, headers: {
@@ -45,55 +45,54 @@ class PharmaApi {
       // sendMail('ironmask2004@gmail.com', 'Veervication Cdoe from Pharma Play',
       //    'The Code is: ${RandomCode.nextInter()} ');
       return Response.internalServerError(
-          body: responseErrMsg("medicine test route", "333333"));
+          body: responseErrMsg("drug test route", "333333"));
     });
 
-    //============= /medicines/INFO ROUTE
+    //============= /drugs/INFO ROUTE
     ///----------------------
-    //{ "startfrompage": "3" , "pagelength": "2" , "orderbyfields": "medicine.\"chemicalDrugID\",medicine.\"tradeName\""  }
-    router.get('/medicine/findlistbypage', (Request req) async {
-      List<DrugRecord> medicineInfo;
-      try {
-        final payload = await req.readAsString();
-        final String weherCond = json.decode(payload)['wherecond'] ?? '';
-        final Map<String, dynamic> listpagesparms = json.decode(payload);
-        print(listpagesparms);
+    //{ "startfrompage": "3" , "pagelength": "2" , "orderbyfields": "drug.\"chemicalDrugID\",drug.\"tradeName\""  }
+    router.get('/drug/findlistbypage', (Request req) async {
+      List<DrugRecord> drugInfo;
+      // try {
+      final payload = await req.readAsString();
+      final String weherCond = json.decode(payload)['wherecond'] ?? '';
+      final Map<String, dynamic> listpagesparms = json.decode(payload);
+      print(listpagesparms);
 
-        final int startFromPage =
-            int.parse(listpagesparms['startfrompage'] ?? 0);
+      final int startFromPage = int.parse(listpagesparms['startfrompage'] ?? 0);
 
-        final int pageLength = int.parse(listpagesparms['pagelength'] ?? 0);
+      final int pageLength = int.parse(listpagesparms['pagelength'] ?? 0);
 
-        final String orderByfields = listpagesparms['orderbyfields'] ?? '';
-        print('startFromPage :   $startFromPage   -- pagelength : $pageLength');
+      final String orderByfields = listpagesparms['orderbyfields'] ?? '';
+      print('startFromPage :   $startFromPage   -- pagelength : $pageLength');
 
-        if (pageLength <= 0 || startFromPage <= 0 || orderByfields.isEmpty) {
-          return Response.forbidden(
-              responseErrMsg(''' { "startfrompage": "1" , "pagelength": "12" , 
-                  "orderbyfields": "medicine.\"chemicalDrugID\",medicine.\"tradeName\""  , 
-                   "wherecond": "WHERE medicine.\"dosageFormID\" = 30 and medicine.\"medicineID\" <=10  "  }''',
-                  "403"),
-              headers: {
-                'content-type': 'application/json',
-              });
-        }
+      if (pageLength <= 0 || startFromPage <= 0 || orderByfields.isEmpty) {
+        return Response.forbidden(
+            responseErrMsg(''' { "startfrompage": "1" , "pagelength": "2" ,
+               "orderbyfields": "drug.\"chemicalDrugID\",drug.\"en__brandName\""  ,
+               "wherecond": "WHERE drug.\"dosageFormID\" = 44 and drug.\"drugID\" <=8810  "  }''',
+                "403"),
+            headers: {
+              'content-type': 'application/json',
+            });
+      }
 
-        medicineInfo = await findMedicineByPage(
-            startFromPage: startFromPage,
-            pageLength: pageLength,
-            orderByfields: orderByfields,
-            weherCond: weherCond,
-            db: db,
-            medicineStore: medicineStore);
+      drugInfo = await findDrugByPage(
+          startFromPage: startFromPage,
+          pageLength: pageLength,
+          orderByfields: orderByfields,
+          weherCond: weherCond,
+          db: db,
+          drugStore: drugStore);
 
-        // print("founded_medicine------:" + medicineInfo.toString());
-      } catch (err) {
+      print("founded_drug------:" + drugInfo.toString());
+      /*} catch (err) {
         return Response.forbidden(responseErrMsg("$err", "9004"), headers: {
           'content-type': 'application/json',
         });
-      }
+      }*/
 
-      var jsonString = json.encode(medicineInfo);
+      var jsonString = json.encode(drugInfo);
       //print('--------------0-0-0-0-0-\n' + jsonString);
 
       return Response.ok(jsonString, headers: {
@@ -103,11 +102,11 @@ class PharmaApi {
 
     //=========================================================
     //{ "startfrompage": "1" , "pagelength": "10" ,
-    //"weher": { "medicine.\"dosageFormID\"": 30 } ,
-    // "orderbyfields": "medicine.\"chemicalDrugID\",medicine.\"tradeName\""  }
+    //"weher": { "drug.\"dosageFormID\"": 30 } ,
+    // "orderbyfields": "drug.\"chemicalDrugID\",drug.\"tradeName\""  }
     //==== byparam
-    router.get('/medicine/byparam', (Request req) async {
-      List<DrugRecord> medicineInfo;
+    router.get('/drug/byparam', (Request req) async {
+      List<DrugRecord> drugInfo;
       try {
         final payload = await req.readAsString();
 
@@ -133,30 +132,30 @@ class PharmaApi {
           return Response.forbidden(
               responseErrMsg('''  Kindly provide correcet values:
                     { "startfrompage": "1" , "pagelength": "10" ,
-                     "weher": { "medicine.\"dosageFormID\"": 30 } ,
-                     "orderbyfields": "medicine.\"chemicalDrugID\",medicine.\"tradeName\""  }''',
+                     "weher": { "drug.\"dosageFormID\"": 30 } ,
+                     "orderbyfields": "drug.\"chemicalDrugID\",drug.\"tradeName\""  }''',
                   "403"),
               headers: {
                 'content-type': 'application/json',
               });
         }
 
-        medicineInfo = await findMedicineByParams(
+        drugInfo = await findDrugByParams(
             startFromPage: startFromPage,
             pageLength: pageLength,
             orderByfields: orderByfields,
             params: params,
             db: db,
-            medicineStore: medicineStore);
+            drugStore: drugStore);
 
-        // print("founded_medicine------:" + medicineInfo.toString());
+        // print("founded_drug------:" + drugInfo.toString());
       } catch (err) {
         return Response.forbidden(responseErrMsg("$err", "9004"), headers: {
           'content-type': 'application/json',
         });
       }
 
-      var jsonString = json.encode(medicineInfo);
+      var jsonString = json.encode(drugInfo);
       //print('--------------0-0-0-0-0-\n' + jsonString);
 
       return Response.ok(jsonString, headers: {
@@ -164,50 +163,48 @@ class PharmaApi {
       });
     });
 
-    //============= /medicine/  ROUTE
+    //============= /drug/  ROUTE
 
-    router.get('/medicine/id', (Request req) async {
+    router.get('/drug/id', (Request req) async {
       //final authDetails = req.context['authDetails'] as JWT;
       print(req.context.toString());
-      DrugRecord medicineInfo;
+      DrugRecord drugInfo;
       final payload = await req.readAsString();
       final Map<String, dynamic> requestBody = json.decode(payload);
       print(requestBody);
-      if (requestBody['medicineID'] == null ||
-          requestBody['medicineID'].isEmpty) {
+      if (requestBody['drugID'] == null || requestBody['drugID'].isEmpty) {
         return Response.forbidden(
             responseErrMsg(
-                '  Kindly provide correcet values:    {"medicineID": "63"}',
-                "403"),
+                '  Kindly provide correcet values:    {"drugID": "63"}', "403"),
             headers: {
               'content-type': 'application/json',
             });
       }
       try {
-        medicineInfo = await findMedicineByID(
-            requestBody['medicineID'].toString(), db, medicineStore);
+        drugInfo =
+            await findDrugByID(requestBody['drugID'].toString(), db, drugStore);
 
-        print("founded_medicine------:" + medicineInfo.toString());
+        print("founded_drug------:" + drugInfo.toString());
       } catch (err) {
         return Response.forbidden(responseErrMsg("$err", "9004"), headers: {
           'content-type': 'application/json',
         });
       }
 
-      final Map<String, dynamic> medicineWithresault = {
-        "medicineinfo": medicineInfo.toMap(),
+      final Map<String, dynamic> drugWithresault = {
+        "druginfo": drugInfo.toMap(),
         "requestResult": {'error': 'Success', 'errNO': '200'}
       };
 
-      print(medicineWithresault);
-      var jsonString = json.encode(medicineWithresault);
+      print(drugWithresault);
+      var jsonString = json.encode(drugWithresault);
 
       return Response.ok(jsonString, headers: {
         'content-type': 'application/json',
       });
     });
 
-    //============= /medicines/UPDATE  ROUTE
+    //============= /drugs/UPDATE  ROUTE
 
     /* router.post('/update/', (Request req) async {
       String sql;
@@ -216,37 +213,37 @@ class PharmaApi {
       final authDetails = req.context['authDetails'] as JWT;
       print('authDetails.subject.toString ' + authDetails.subject.toString());
       final payload = await req.readAsString();
-      final Map<String, dynamic> medicineInfo = json.decode(payload);
-      print(medicineInfo);
-      final email = medicineInfo['email'];
-      final password = medicineInfo['password'];
-      final firstname = medicineInfo['firstname'];
-      final lastname = medicineInfo['lastname'];
-      final mobile = medicineInfo['mobile'];
+      final Map<String, dynamic> drugInfo = json.decode(payload);
+      print(drugInfo);
+      final email = drugInfo['email'];
+      final password = drugInfo['password'];
+      final firstname = drugInfo['firstname'];
+      final lastname = drugInfo['lastname'];
+      final mobile = drugInfo['mobile'];
 
       print('-------------------------');
-      Medicine oldMedicineInfo = await findMedicineByID(
-          authDetails.subject.toString(), db, medicineStore);
+      Drug oldDrugInfo = await findDrugByID(
+          authDetails.subject.toString(), db, drugStore);
       print('-------------------------');
-      print("founded_old_medicine_data: ------:" + oldMedicineInfo.toString());
-      //print(oldMedicineInfo);
-      medicineInfo['updatedate'] = DateTime.now();
+      print("founded_old_drug_data: ------:" + oldDrugInfo.toString());
+      //print(oldDrugInfo);
+      drugInfo['updatedate'] = DateTime.now();
 
-      Medicine updatedMedicineInfo =
-          oldMedicineInfo.copyWithFromMap(medicineInfo);
+      Drug updatedDrugInfo =
+          oldDrugInfo.copyWithFromMap(drugInfo);
 
-      print("updared _medicine_data: ------:" + updatedMedicineInfo.toString());
+      print("updared _drug_data: ------:" + updatedDrugInfo.toString());
 
-      if (oldMedicineInfo.email != updatedMedicineInfo.email) {
-        if (!EmailValidator.validate(updatedMedicineInfo.email)) {
+      if (oldDrugInfo.email != updatedDrugInfo.email) {
+        if (!EmailValidator.validate(updatedDrugInfo.email)) {
           return Response(HttpStatus.badRequest,
               body: responseErrMsg("Please provide a vaild  Email", '403'));
         }
         sql =
-            "SELECT idx  FROM pharmaplay.$medicineStore WHERE email =  @email  and idx != @idx";
+            "SELECT idx  FROM pharmaplay.$drugStore WHERE email =  @email  and idx != @idx";
         params = {
-          "email": updatedMedicineInfo.email,
-          "idx": updatedMedicineInfo.idx
+          "email": updatedDrugInfo.email,
+          "idx": updatedDrugInfo.idx
         };
         resultSet = await db.query(sql, values: params);
 
@@ -258,28 +255,28 @@ class PharmaApi {
         }
       }
 
-      if (oldMedicineInfo.firstname != updatedMedicineInfo.firstname ||
-          oldMedicineInfo.lastname != updatedMedicineInfo.lastname) {
+      if (oldDrugInfo.firstname != updatedDrugInfo.firstname ||
+          oldDrugInfo.lastname != updatedDrugInfo.lastname) {
         sql =
-            "SELECT idx  FROM pharmaplay.$medicineStore WHERE firstname= @firstname and lastname =  @lastname   and idx != @idx";
+            "SELECT idx  FROM pharmaplay.$drugStore WHERE firstname= @firstname and lastname =  @lastname   and idx != @idx";
         params = {
-          "firstname": updatedMedicineInfo.firstname,
-          "lastname": updatedMedicineInfo.lastname,
-          "idx": updatedMedicineInfo.idx
+          "firstname": updatedDrugInfo.firstname,
+          "lastname": updatedDrugInfo.lastname,
+          "idx": updatedDrugInfo.idx
         };
         resultSet = await db.query(sql, values: params);
 
         if (resultSet.length > 0) {
           return Response.forbidden(responseErrMsg(
-              "Medicine name:  $firstname $lastname  was already takedn for some one else !!",
+              "Drug name:  $firstname $lastname  was already takedn for some one else !!",
               "403"));
         }
       }
 
-      if (oldMedicineInfo.mobile != updatedMedicineInfo.mobile) {
+      if (oldDrugInfo.mobile != updatedDrugInfo.mobile) {
         sql =
-            "SELECT idx  FROM pharmaplay.$medicineStore WHERE mobile =  @mobile and idx != @idx  ";
-        params = {"mobile": mobile, "idx": updatedMedicineInfo.idx};
+            "SELECT idx  FROM pharmaplay.$drugStore WHERE mobile =  @mobile and idx != @idx  ";
+        params = {"mobile": mobile, "idx": updatedDrugInfo.idx};
         resultSet = await db.query(sql, values: params);
 
         if (resultSet.length > 0) {
@@ -288,24 +285,24 @@ class PharmaApi {
         }
       }
       try {
-        // updatedMedicineInfo.updatedate = DateTime.now();
+        // updatedDrugInfo.updatedate = DateTime.now();
         sql =
-            'update pharmaplay.$medicineStore SET   id=@id, firstname=@firstname, lastname=@lastname, email=@email, password=@password, salt=@salt, mobile=@mobile, createdate=@createdate, updatedate=@updatedate ,  status=@status 	where idx= @idx returning idx';
-        params = updatedMedicineInfo.toMap();
+            'update pharmaplay.$drugStore SET   id=@id, firstname=@firstname, lastname=@lastname, email=@email, password=@password, salt=@salt, mobile=@mobile, createdate=@createdate, updatedate=@updatedate ,  status=@status 	where idx= @idx returning idx';
+        params = updatedDrugInfo.toMap();
         resultSet = await db.query(sql, values: params);
 
         print(resultSet.first.toString());
         if (resultSet.length == 0) {
           return Response.forbidden(
-              responseErrMsg(' facing error while updating  medicine', "403"));
+              responseErrMsg(' facing error while updating  drug', "403"));
         }
       } catch (error) {
-        print(' error while Updating  medicine  ' + error.toString());
+        print(' error while Updating  drug  ' + error.toString());
         return Response(HttpStatus.badRequest,
-            body: responseErrMsg('error while Updateing  medicine', '403'));
+            body: responseErrMsg('error while Updateing  drug', '403'));
       }
       return Response.ok(
-          responseErrMsg("Successfully Updated medicine", "200"));
+          responseErrMsg("Successfully Updated drug", "200"));
     });*/
 
     final handler = Pipeline().addHandler(router);

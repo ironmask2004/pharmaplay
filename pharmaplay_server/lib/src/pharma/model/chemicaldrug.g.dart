@@ -8,13 +8,11 @@ part of 'chemicaldrug.dart';
 
 ChemicalDrug _$ChemicalDrugFromJson(Map<String, dynamic> json) => ChemicalDrug(
       chemicalDrugID: json['chemicalDrugID'] as int,
-      ar__chemicalDrugName: json['ar__chemicalDrugName'] as String,
-      en__chemicalDrugName: json['en__chemicalDrugName'] as String,
+      chemicalDrugName: json['chemicalDrugName'] as String,
     );
 
 Map<String, dynamic> _$ChemicalDrugToJson(ChemicalDrug instance) =>
     <String, dynamic>{
       'chemicalDrugID': instance.chemicalDrugID,
-      'ar__chemicalDrugName': instance.ar__chemicalDrugName,
-      'en__chemicalDrugName': instance.en__chemicalDrugName,
+      'chemicalDrugName': instance.chemicalDrugName,
     };

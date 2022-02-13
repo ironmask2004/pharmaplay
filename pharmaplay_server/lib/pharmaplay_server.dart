@@ -20,7 +20,7 @@ export 'package:equatable/equatable.dart';
 export 'package:pharmaplay_server/src/user/model/user.dart';
 export 'package:email_validator/email_validator.dart';
 export 'package:pharmaplay_server/src/user/model/usersstatus.dart';
-export 'package:pharmaplay_server/src/pharma/model/medicine.dart';
+export 'package:pharmaplay_server/src/pharma/model/drug.dart';
 export 'package:json_annotation/json_annotation.dart';
 
 export 'package:pharmaplay_server/src/repository/database_api.dart';

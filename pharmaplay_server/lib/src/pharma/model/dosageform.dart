@@ -9,12 +9,10 @@ part 'dosageform.g.dart';
 @JsonSerializable(explicitToJson: true)
 class DosageForm extends Equatable {
   final int dosageFormID;
-  final String en__dosageForm;
-  final String ar__dosageForm;
+  final String dosageForm;
   DosageForm({
     required this.dosageFormID,
-    required this.en__dosageForm,
-    required this.ar__dosageForm,
+    required this.dosageForm,
   });
 
   factory DosageForm.fromJson(Map<String, dynamic> json) =>
@@ -25,36 +23,32 @@ class DosageForm extends Equatable {
 
   DosageForm copyWith({
     int? dosageFormID,
-    String? en__dosageForm,
-    String? ar__dosageForm,
+    String? dosageForm,
   }) {
     return DosageForm(
       dosageFormID: dosageFormID ?? this.dosageFormID,
-      en__dosageForm: en__dosageForm ?? this.en__dosageForm,
-      ar__dosageForm: ar__dosageForm ?? this.ar__dosageForm,
+      dosageForm: dosageForm ?? this.dosageForm,
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
       'dosageFormID': dosageFormID,
-      'en__dosageForm': en__dosageForm,
-      'ar__dosageForm': ar__dosageForm,
+      'dosageForm': dosageForm,
     };
   }
 
   factory DosageForm.fromMap(Map<String, dynamic> map) {
     return DosageForm(
       dosageFormID: map['dosageFormID']?.toInt() ?? 0,
-      en__dosageForm: map['en__dosageForm'] ?? '',
-      ar__dosageForm: map['ar__dosageForm'] ?? '',
+      dosageForm: map['dosageForm'] ?? '',
     );
   }
 
   @override
   String toString() =>
-      'DosageForm(dosageFormID: $dosageFormID, en__dosageForm: $en__dosageForm, ar__dosageForm: $ar__dosageForm)';
+      'DosageForm(dosageFormID: $dosageFormID, dosageForm: $dosageForm)';
 
   @override
-  List<Object> get props => [dosageFormID, en__dosageForm, ar__dosageForm];
+  List<Object> get props => [dosageFormID, dosageForm];
 }
