@@ -8,25 +8,14 @@ import 'drugclass.dart';
 
 part 'drugfamily.g.dart';
 
-/*CREATE TABLE IF NOT EXISTS pharmaplay."drugFamily"
-(
-    "drugFamilyID" integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
-    "drugFamilyID" integer NOT NULL,
-    "ar__drugFamilyName" character(255) COLLATE pg_catalog."default" NOT NULL,
-    "en__drugFamilyName" character(255) COLLATE pg_catalog."default" NOT NULL,
-    CONSTRAINT pharmaFamilys_pkey PRIMARY KEY ("drugFamilyID")
-)
-
-
-*/
 @JsonSerializable(explicitToJson: true)
 class DrugFamily extends Equatable {
   final int drugFamilyID;
-  final DrugClass drugClass;
+  final int drugClassID;
   final String drugFamilyName;
   DrugFamily({
     required this.drugFamilyID,
-    required this.drugClass,
+    required this.drugClassID,
     required this.drugFamilyName,
   });
 
@@ -38,12 +27,12 @@ class DrugFamily extends Equatable {
 
   DrugFamily copyWith({
     int? drugFamilyID,
-    DrugClass? drugClass,
+    int? drugClassID,
     String? drugFamilyName,
   }) {
     return DrugFamily(
       drugFamilyID: drugFamilyID ?? this.drugFamilyID,
-      drugClass: drugClass ?? this.drugClass,
+      drugClassID: drugClassID ?? this.drugClassID,
       drugFamilyName: drugFamilyName ?? this.drugFamilyName,
     );
   }
@@ -51,7 +40,7 @@ class DrugFamily extends Equatable {
   Map<String, dynamic> toMap() {
     return {
       'drugFamilyID': drugFamilyID,
-      'drugClass': drugClass.toMap(),
+      'drugClassID': drugClassID,
       'drugFamilyName': drugFamilyName,
     };
   }
@@ -59,15 +48,15 @@ class DrugFamily extends Equatable {
   factory DrugFamily.fromMap(Map<String, dynamic> map) {
     return DrugFamily(
       drugFamilyID: map['drugFamilyID']?.toInt() ?? 0,
-      drugClass: DrugClass.fromMap(map['drugClass']),
+      drugClassID: map['drugClassID']?.toInt() ?? 0,
       drugFamilyName: map['drugFamilyName'] ?? '',
     );
   }
 
   @override
   String toString() =>
-      'DrugFamily(drugFamilyID: $drugFamilyID, drugClass: $drugClass, drugFamilyName: $drugFamilyName)';
+      'DrugFamily(drugFamilyID: $drugFamilyID, drugClassID: $drugClassID, drugFamilyName: $drugFamilyName)';
 
   @override
-  List<Object> get props => [drugFamilyID, drugClass, drugFamilyName];
+  List<Object> get props => [drugFamilyID, drugClassID, drugFamilyName];
 }

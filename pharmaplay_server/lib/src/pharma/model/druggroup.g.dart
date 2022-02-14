@@ -7,11 +7,11 @@ part of 'druggroup.dart';
 // **************************************************************************
 
 DrugGroup _$DrugGroupFromJson(Map<String, dynamic> json) => DrugGroup(
-      druggroupID: json['druggroupID'] as int,
-      druggroupName: json['druggroupName'] as String,
+      drugGroupID: json['drugGroupID'] as int,
+      drugGroupName: json['drugGroupName'] as String,
     );
 
 Map<String, dynamic> _$DrugGroupToJson(DrugGroup instance) => <String, dynamic>{
-      'druggroupID': instance.druggroupID,
-      'druggroupName': instance.druggroupName,
+      'drugGroupID': instance.drugGroupID,
+      'drugGroupName': instance.drugGroupName,
     };

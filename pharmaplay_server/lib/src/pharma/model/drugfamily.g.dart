@@ -8,13 +8,13 @@ part of 'drugfamily.dart';
 
 DrugFamily _$DrugFamilyFromJson(Map<String, dynamic> json) => DrugFamily(
       drugFamilyID: json['drugFamilyID'] as int,
-      drugClass: DrugClass.fromJson(json['drugClass'] as Map<String, dynamic>),
+      drugClassID: json['drugClassID'] as int,
       drugFamilyName: json['drugFamilyName'] as String,
     );
 
 Map<String, dynamic> _$DrugFamilyToJson(DrugFamily instance) =>
     <String, dynamic>{
       'drugFamilyID': instance.drugFamilyID,
-      'drugClass': instance.drugClass.toJson(),
+      'drugClassID': instance.drugClassID,
       'drugFamilyName': instance.drugFamilyName,
     };

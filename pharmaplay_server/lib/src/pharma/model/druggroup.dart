@@ -18,11 +18,11 @@ CREATE TABLE IF NOT EXISTS pharmaplay."drugGroup"
 */
 @JsonSerializable(explicitToJson: true)
 class DrugGroup extends Equatable {
-  final int druggroupID;
-  final String druggroupName;
+  final int drugGroupID;
+  final String drugGroupName;
   DrugGroup({
-    required this.druggroupID,
-    required this.druggroupName,
+    required this.drugGroupID,
+    required this.drugGroupName,
   });
 
   factory DrugGroup.fromJson(Map<String, dynamic> json) =>
@@ -32,33 +32,33 @@ class DrugGroup extends Equatable {
   Map<String, dynamic> toJson() => _$DrugGroupToJson(this);
 
   DrugGroup copyWith({
-    int? druggroupID,
-    String? druggroupName,
+    int? drugGroupID,
+    String? drugGroupName,
   }) {
     return DrugGroup(
-      druggroupID: druggroupID ?? this.druggroupID,
-      druggroupName: druggroupName ?? this.druggroupName,
+      drugGroupID: drugGroupID ?? this.drugGroupID,
+      drugGroupName: drugGroupName ?? this.drugGroupName,
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
-      'druggroupID': druggroupID,
-      'druggroupName': druggroupName,
+      'drugGroupID': drugGroupID,
+      'drugGroupName': drugGroupName,
     };
   }
 
   factory DrugGroup.fromMap(Map<String, dynamic> map) {
     return DrugGroup(
-      druggroupID: map['druggroupID']?.toInt() ?? 0,
-      druggroupName: map['druggroupName'] ?? '',
+      drugGroupID: map['drugGroupID']?.toInt() ?? 0,
+      drugGroupName: map['drugGroupName'] ?? '',
     );
   }
 
   @override
   String toString() =>
-      'DrugGroup(druggroupID: $druggroupID, druggroupName: $druggroupName)';
+      'DrugGroup(drugGroupID: $drugGroupID, drugGroupName: $drugGroupName)';
 
   @override
-  List<Object> get props => [druggroupID, druggroupName];
+  List<Object> get props => [drugGroupID, drugGroupName];
 }

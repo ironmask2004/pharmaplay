@@ -8,33 +8,11 @@ import 'chemicaldrug.dart';
 import 'dosageform.dart';
 import 'drugclass.dart';
 import 'drugfamily.dart';
+import 'druggroup.dart';
 import 'genericdrug.dart';
 import 'manufactory.dart';
 
 part 'drugrecord.g.dart';
-/*
-
-CREATE TABLE IF NOT EXISTS pharmaplay.drug
-(
-  --  "drugNo" character varying(556) COLLATE pg_catalog."default",
-   -- "en__brandName" character varying(556) COLLATE pg_catalog."default",
-  --  caliber character varying(556) COLLATE pg_catalog."default",
- --   "genericDrugID" integer,
- --   "manufactoryID" integer,
-  --  "dosageFormID" integer,
-  --  "licenseNumber" character varying(128) COLLATE pg_catalog."default",
---    "licenseDate" character varying(128) COLLATE pg_catalog."default",
- --   "drugGroupID" integer,
- ----   "drugClassID" integer,
-  --  "drugFamilyID" integer,
-  --  "ar__brandName" character varying(512) COLLATE pg_catalog."default",
-   -- "drugID" integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
-    "chemicalDrugID" integer,
-    CONSTRAINT drug_pkey PRIMARY KEY ("drugID")
-)
-
-
-*/
 
 @JsonSerializable(explicitToJson: true)
 class DrugRecord extends Equatable {
@@ -44,6 +22,7 @@ class DrugRecord extends Equatable {
   final Manufactory manufactory;
   final DosageForm dosageForm;
   final DrugClass drugClass;
+  final DrugGroup drugGroup;
   final DrugFamily drugFamily;
   DrugRecord({
     required this.drug,
@@ -52,10 +31,12 @@ class DrugRecord extends Equatable {
     required this.manufactory,
     required this.dosageForm,
     required this.drugClass,
+    required this.drugGroup,
     required this.drugFamily,
   });
 
   Map<String, dynamic> toJson() => _$DrugRecordToJson(this);
+
   factory DrugRecord.fromJson(Map<String, dynamic> json) =>
       _$DrugRecordFromJson(json);
 
@@ -66,6 +47,7 @@ class DrugRecord extends Equatable {
     Manufactory? manufactory,
     DosageForm? dosageForm,
     DrugClass? drugClass,
+    DrugGroup? drugGroup,
     DrugFamily? drugFamily,
   }) {
     return DrugRecord(
@@ -75,6 +57,7 @@ class DrugRecord extends Equatable {
       manufactory: manufactory ?? this.manufactory,
       dosageForm: dosageForm ?? this.dosageForm,
       drugClass: drugClass ?? this.drugClass,
+      drugGroup: drugGroup ?? this.drugGroup,
       drugFamily: drugFamily ?? this.drugFamily,
     );
   }
@@ -87,6 +70,7 @@ class DrugRecord extends Equatable {
       'manufactory': manufactory.toMap(),
       'dosageForm': dosageForm.toMap(),
       'drugClass': drugClass.toMap(),
+      'drugGroup': drugGroup.toMap(),
       'drugFamily': drugFamily.toMap(),
     };
   }
@@ -99,13 +83,14 @@ class DrugRecord extends Equatable {
       manufactory: Manufactory.fromMap(map['manufactory']),
       dosageForm: DosageForm.fromMap(map['dosageForm']),
       drugClass: DrugClass.fromMap(map['drugClass']),
+      drugGroup: DrugGroup.fromMap(map['drugGroup']),
       drugFamily: DrugFamily.fromMap(map['drugFamily']),
     );
   }
 
   @override
   String toString() {
-    return 'DrugRecord(drug: $drug, genericDrug: $genericDrug, chemicalDrug: $chemicalDrug, manufactory: $manufactory, dosageForm: $dosageForm, drugClass: $drugClass, drugFamily: $drugFamily)';
+    return 'DrugRecord(drug: $drug, genericDrug: $genericDrug, chemicalDrug: $chemicalDrug, manufactory: $manufactory, dosageForm: $dosageForm, drugClass: $drugClass, drugGroup: $drugGroup, drugFamily: $drugFamily)';
   }
 
   @override
@@ -117,6 +102,7 @@ class DrugRecord extends Equatable {
       manufactory,
       dosageForm,
       drugClass,
+      drugGroup,
       drugFamily,
     ];
   }

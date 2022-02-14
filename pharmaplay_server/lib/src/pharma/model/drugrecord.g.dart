@@ -17,6 +17,7 @@ DrugRecord _$DrugRecordFromJson(Map<String, dynamic> json) => DrugRecord(
       dosageForm:
           DosageForm.fromJson(json['dosageForm'] as Map<String, dynamic>),
       drugClass: DrugClass.fromJson(json['drugClass'] as Map<String, dynamic>),
+      drugGroup: DrugGroup.fromJson(json['drugGroup'] as Map<String, dynamic>),
       drugFamily:
           DrugFamily.fromJson(json['drugFamily'] as Map<String, dynamic>),
     );
@@ -29,5 +30,6 @@ Map<String, dynamic> _$DrugRecordToJson(DrugRecord instance) =>
       'manufactory': instance.manufactory.toJson(),
       'dosageForm': instance.dosageForm.toJson(),
       'drugClass': instance.drugClass.toJson(),
+      'drugGroup': instance.drugGroup.toJson(),
       'drugFamily': instance.drugFamily.toJson(),
     };

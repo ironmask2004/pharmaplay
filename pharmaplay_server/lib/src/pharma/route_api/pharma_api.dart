@@ -56,6 +56,7 @@ class PharmaApi {
       // try {
       final payload = await req.readAsString();
       final String weherCond = json.decode(payload)['wherecond'] ?? '';
+      final String localUI = json.decode(payload)['localUI'] ?? 'en';
       final Map<String, dynamic> listpagesparms = json.decode(payload);
       print(listpagesparms);
 
@@ -70,7 +71,7 @@ class PharmaApi {
         return Response.forbidden(
             responseErrMsg(''' { "startfrompage": "1" , "pagelength": "2" ,
                "orderbyfields": "drug.\"chemicalDrugID\",drug.\"en__brandName\""  ,
-               "wherecond": "WHERE drug.\"dosageFormID\" = 44 and drug.\"drugID\" <=8810  "  }''',
+               "wherecond": "WHERE drug.\"dosageFormID\" = 44 and drug.\"drugID\" <=8810  " , "localUI": "en" }''',
                 "403"),
             headers: {
               'content-type': 'application/json',
@@ -83,7 +84,8 @@ class PharmaApi {
           orderByfields: orderByfields,
           weherCond: weherCond,
           db: db,
-          drugStore: drugStore);
+          drugStore: drugStore,
+          localUI: localUI);
 
       print("founded_drug------:" + drugInfo.toString());
       /*} catch (err) {
@@ -120,6 +122,8 @@ class PharmaApi {
 
         final int pageLength = int.parse(listpagesparms['pagelength'] ?? 0);
 
+        final String localUI = listpagesparms['localUI'] ?? 'en';
+
         final String orderByfields = listpagesparms['orderbyfields'] ?? '';
         print('startFromPage :   $startFromPage   -- pagelength : $pageLength');
 
@@ -133,7 +137,7 @@ class PharmaApi {
               responseErrMsg('''  Kindly provide correcet values:
                     { "startfrompage": "1" , "pagelength": "10" ,
                      "weher": { "drug.\"dosageFormID\"": 30 } ,
-                     "orderbyfields": "drug.\"chemicalDrugID\",drug.\"tradeName\""  }''',
+                     "orderbyfields": "drug.\"chemicalDrugID\",drug.\"tradeName\"" , "localUI": "en"   }''',
                   "403"),
               headers: {
                 'content-type': 'application/json',
@@ -146,7 +150,8 @@ class PharmaApi {
             orderByfields: orderByfields,
             params: params,
             db: db,
-            drugStore: drugStore);
+            drugStore: drugStore,
+            localUI: localUI);
 
         // print("founded_drug------:" + drugInfo.toString());
       } catch (err) {
@@ -170,6 +175,7 @@ class PharmaApi {
       print(req.context.toString());
       DrugRecord drugInfo;
       final payload = await req.readAsString();
+      final String localUI = json.decode(payload)['localUI'] ?? 'en';
       final Map<String, dynamic> requestBody = json.decode(payload);
       print(requestBody);
       if (requestBody['drugID'] == null || requestBody['drugID'].isEmpty) {
@@ -181,8 +187,8 @@ class PharmaApi {
             });
       }
       try {
-        drugInfo =
-            await findDrugByID(requestBody['drugID'].toString(), db, drugStore);
+        drugInfo = await findDrugByID(
+            requestBody['drugID'].toString(), db, drugStore, localUI);
 
         print("founded_drug------:" + drugInfo.toString());
       } catch (err) {
