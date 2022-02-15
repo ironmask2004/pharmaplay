@@ -18,6 +18,8 @@ dependencies:
     path: ../packages/user_repository
   pharma_repository:
     path: ../packages/pharma_repository
+  pharma_shared_models:
+    path: ../packages/pharma_shared_models
   auto_size_text: ^3.0.0
   flutter:
     sdk: flutter

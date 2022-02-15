@@ -20,6 +20,7 @@ SET row_security = off;
 -- Name: pharmaplay; Type: SCHEMA; Schema: -; Owner: pharmaadmin
 --
 
+drop SCHEMA pharmaplay cascade;
 CREATE SCHEMA pharmaplay;
 
 

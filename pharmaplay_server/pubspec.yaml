@@ -1,11 +1,14 @@
 name: pharmaplay_server
 description: A server app using the shelf package and Docker.
 version: 1.0.0
+publish_to: none
 # homepage: https://www.example.com
 environment:
   sdk: '>=2.14.4 <3.0.0'
 
 dependencies:
+  pharma_shared_models:
+    path: ../packages/pharma_shared_models
   args: ^2.0.0
   dart_jsonwebtoken: ^2.4.0
   dartz: ^0.10.0

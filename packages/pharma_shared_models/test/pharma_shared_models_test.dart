@@ -1,4 +1,4 @@
-import 'package:pha';
+import 'package:pharma_shared_models/pharma_shared_models.dart';
 
 import 'package:test/test.dart';
 

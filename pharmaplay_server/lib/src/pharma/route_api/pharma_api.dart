@@ -1,7 +1,6 @@
 import 'package:pharmaplay_server/pharmaplay_server.dart';
 import 'package:pharmaplay_server/src/utilites/error_response.dart';
 
-import '../model/drugrecord.dart';
 import '../pharma_repository/pharma_repo.dart';
 
 class PharmaApi {

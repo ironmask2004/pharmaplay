@@ -379,6 +379,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.11.1"
+  pharma_shared_models:
+    dependency: "direct main"
+    description:
+      path: "../packages/pharma_shared_models"
+      relative: true
+    source: path
+    version: "1.0.0"
   pointycastle:
     dependency: transitive
     description:
@@ -632,4 +639,4 @@ packages:
     source: hosted
     version: "3.1.0"
 sdks:
-  dart: ">=2.16.0-100.0.dev <3.0.0"
+  dart: ">=2.16.0 <3.0.0"

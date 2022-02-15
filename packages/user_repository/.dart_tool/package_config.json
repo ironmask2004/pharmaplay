@@ -3,373 +3,373 @@
   "packages": [
     {
       "name": "_fe_analyzer_shared",
-      "rootUri": "file:///home/kflihan/.pub-cache/hosted/mirrors.sjtug.sjtu.edu.cn%2547dart-pub%2547/_fe_analyzer_shared-34.0.0",
+      "rootUri": "file:///home/kflihan/.pub-cache/hosted/pub.flutter-io.cn/_fe_analyzer_shared-34.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "analyzer",
-      "rootUri": "file:///home/kflihan/.pub-cache/hosted/mirrors.sjtug.sjtu.edu.cn%2547dart-pub%2547/analyzer-3.2.0",
+      "rootUri": "file:///home/kflihan/.pub-cache/hosted/pub.flutter-io.cn/analyzer-3.2.0",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
     {
       "name": "args",
-      "rootUri": "file:///home/kflihan/.pub-cache/hosted/mirrors.sjtug.sjtu.edu.cn%2547dart-pub%2547/args-2.3.0",
+      "rootUri": "file:///home/kflihan/.pub-cache/hosted/pub.flutter-io.cn/args-2.3.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "async",
-      "rootUri": "file:///home/kflihan/.pub-cache/hosted/mirrors.sjtug.sjtu.edu.cn%2547dart-pub%2547/async-2.8.2",
+      "rootUri": "file:///home/kflihan/.pub-cache/hosted/pub.flutter-io.cn/async-2.8.2",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "build",
-      "rootUri": "file:///home/kflihan/.pub-cache/hosted/mirrors.sjtug.sjtu.edu.cn%2547dart-pub%2547/build-2.2.1",
+      "rootUri": "file:///home/kflihan/.pub-cache/hosted/pub.flutter-io.cn/build-2.2.1",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
     {
       "name": "build_config",
-      "rootUri": "file:///home/kflihan/.pub-cache/hosted/mirrors.sjtug.sjtu.edu.cn%2547dart-pub%2547/build_config-1.0.0",
+      "rootUri": "file:///home/kflihan/.pub-cache/hosted/pub.flutter-io.cn/build_config-1.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "build_daemon",
-      "rootUri": "file:///home/kflihan/.pub-cache/hosted/mirrors.sjtug.sjtu.edu.cn%2547dart-pub%2547/build_daemon-3.0.1",
+      "rootUri": "file:///home/kflihan/.pub-cache/hosted/pub.flutter-io.cn/build_daemon-3.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
     {
       "name": "build_resolvers",
-      "rootUri": "file:///home/kflihan/.pub-cache/hosted/mirrors.sjtug.sjtu.edu.cn%2547dart-pub%2547/build_resolvers-2.0.6",
+      "rootUri": "file:///home/kflihan/.pub-cache/hosted/pub.flutter-io.cn/build_resolvers-2.0.6",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
     {
       "name": "build_runner",
-      "rootUri": "file:///home/kflihan/.pub-cache/hosted/mirrors.sjtug.sjtu.edu.cn%2547dart-pub%2547/build_runner-2.1.7",
+      "rootUri": "file:///home/kflihan/.pub-cache/hosted/pub.flutter-io.cn/build_runner-2.1.7",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
     {
       "name": "build_runner_core",
-      "rootUri": "file:///home/kflihan/.pub-cache/hosted/mirrors.sjtug.sjtu.edu.cn%2547dart-pub%2547/build_runner_core-7.2.3",
+      "rootUri": "file:///home/kflihan/.pub-cache/hosted/pub.flutter-io.cn/build_runner_core-7.2.3",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
     {
       "name": "built_collection",
-      "rootUri": "file:///home/kflihan/.pub-cache/hosted/mirrors.sjtug.sjtu.edu.cn%2547dart-pub%2547/built_collection-5.1.1",
+      "rootUri": "file:///home/kflihan/.pub-cache/hosted/pub.flutter-io.cn/built_collection-5.1.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "built_value",
-      "rootUri": "file:///home/kflihan/.pub-cache/hosted/mirrors.sjtug.sjtu.edu.cn%2547dart-pub%2547/built_value-8.1.4",
+      "rootUri": "file:///home/kflihan/.pub-cache/hosted/pub.flutter-io.cn/built_value-8.1.4",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "charcode",
-      "rootUri": "file:///home/kflihan/.pub-cache/hosted/mirrors.sjtug.sjtu.edu.cn%2547dart-pub%2547/charcode-1.3.1",
+      "rootUri": "file:///home/kflihan/.pub-cache/hosted/pub.flutter-io.cn/charcode-1.3.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "checked_yaml",
-      "rootUri": "file:///home/kflihan/.pub-cache/hosted/mirrors.sjtug.sjtu.edu.cn%2547dart-pub%2547/checked_yaml-2.0.1",
+      "rootUri": "file:///home/kflihan/.pub-cache/hosted/pub.flutter-io.cn/checked_yaml-2.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "cli_util",
-      "rootUri": "file:///home/kflihan/.pub-cache/hosted/mirrors.sjtug.sjtu.edu.cn%2547dart-pub%2547/cli_util-0.3.5",
+      "rootUri": "file:///home/kflihan/.pub-cache/hosted/pub.flutter-io.cn/cli_util-0.3.5",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "code_builder",
-      "rootUri": "file:///home/kflihan/.pub-cache/hosted/mirrors.sjtug.sjtu.edu.cn%2547dart-pub%2547/code_builder-4.1.0",
+      "rootUri": "file:///home/kflihan/.pub-cache/hosted/pub.flutter-io.cn/code_builder-4.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "collection",
-      "rootUri": "file:///home/kflihan/.pub-cache/hosted/mirrors.sjtug.sjtu.edu.cn%2547dart-pub%2547/collection-1.15.0",
+      "rootUri": "file:///home/kflihan/.pub-cache/hosted/pub.flutter-io.cn/collection-1.15.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "convert",
-      "rootUri": "file:///home/kflihan/.pub-cache/hosted/mirrors.sjtug.sjtu.edu.cn%2547dart-pub%2547/convert-3.0.1",
+      "rootUri": "file:///home/kflihan/.pub-cache/hosted/pub.flutter-io.cn/convert-3.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "crypto",
-      "rootUri": "file:///home/kflihan/.pub-cache/hosted/mirrors.sjtug.sjtu.edu.cn%2547dart-pub%2547/crypto-3.0.1",
+      "rootUri": "file:///home/kflihan/.pub-cache/hosted/pub.flutter-io.cn/crypto-3.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "dart_style",
-      "rootUri": "file:///home/kflihan/.pub-cache/hosted/mirrors.sjtug.sjtu.edu.cn%2547dart-pub%2547/dart_style-2.2.1",
+      "rootUri": "file:///home/kflihan/.pub-cache/hosted/pub.flutter-io.cn/dart_style-2.2.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "dartz",
-      "rootUri": "file:///home/kflihan/.pub-cache/hosted/mirrors.sjtug.sjtu.edu.cn%2547dart-pub%2547/dartz-0.10.1",
+      "rootUri": "file:///home/kflihan/.pub-cache/hosted/pub.flutter-io.cn/dartz-0.10.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "dependencies",
-      "rootUri": "file:///home/kflihan/.pub-cache/hosted/mirrors.sjtug.sjtu.edu.cn%2547dart-pub%2547/dependencies-0.1.5",
+      "rootUri": "file:///home/kflihan/.pub-cache/hosted/pub.flutter-io.cn/dependencies-0.1.5",
       "packageUri": "lib/",
       "languageVersion": "2.0"
     },
     {
       "name": "disposables",
-      "rootUri": "file:///home/kflihan/.pub-cache/hosted/mirrors.sjtug.sjtu.edu.cn%2547dart-pub%2547/disposables-0.1.2",
+      "rootUri": "file:///home/kflihan/.pub-cache/hosted/pub.flutter-io.cn/disposables-0.1.2",
       "packageUri": "lib/",
       "languageVersion": "2.0"
     },
     {
       "name": "equatable",
-      "rootUri": "file:///home/kflihan/.pub-cache/hosted/mirrors.sjtug.sjtu.edu.cn%2547dart-pub%2547/equatable-2.0.3",
+      "rootUri": "file:///home/kflihan/.pub-cache/hosted/pub.flutter-io.cn/equatable-2.0.3",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "file",
-      "rootUri": "file:///home/kflihan/.pub-cache/hosted/mirrors.sjtug.sjtu.edu.cn%2547dart-pub%2547/file-6.1.2",
+      "rootUri": "file:///home/kflihan/.pub-cache/hosted/pub.flutter-io.cn/file-6.1.2",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "fixnum",
-      "rootUri": "file:///home/kflihan/.pub-cache/hosted/mirrors.sjtug.sjtu.edu.cn%2547dart-pub%2547/fixnum-1.0.0",
+      "rootUri": "file:///home/kflihan/.pub-cache/hosted/pub.flutter-io.cn/fixnum-1.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "frontend_server_client",
-      "rootUri": "file:///home/kflihan/.pub-cache/hosted/mirrors.sjtug.sjtu.edu.cn%2547dart-pub%2547/frontend_server_client-2.1.2",
+      "rootUri": "file:///home/kflihan/.pub-cache/hosted/pub.flutter-io.cn/frontend_server_client-2.1.2",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "glob",
-      "rootUri": "file:///home/kflihan/.pub-cache/hosted/mirrors.sjtug.sjtu.edu.cn%2547dart-pub%2547/glob-2.0.2",
+      "rootUri": "file:///home/kflihan/.pub-cache/hosted/pub.flutter-io.cn/glob-2.0.2",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
     {
       "name": "graphs",
-      "rootUri": "file:///home/kflihan/.pub-cache/hosted/mirrors.sjtug.sjtu.edu.cn%2547dart-pub%2547/graphs-2.1.0",
+      "rootUri": "file:///home/kflihan/.pub-cache/hosted/pub.flutter-io.cn/graphs-2.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "http",
-      "rootUri": "file:///home/kflihan/.pub-cache/hosted/mirrors.sjtug.sjtu.edu.cn%2547dart-pub%2547/http-0.13.4",
+      "rootUri": "file:///home/kflihan/.pub-cache/hosted/pub.flutter-io.cn/http-0.13.4",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
     {
       "name": "http_multi_server",
-      "rootUri": "file:///home/kflihan/.pub-cache/hosted/mirrors.sjtug.sjtu.edu.cn%2547dart-pub%2547/http_multi_server-3.0.1",
+      "rootUri": "file:///home/kflihan/.pub-cache/hosted/pub.flutter-io.cn/http_multi_server-3.2.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "http_parser",
-      "rootUri": "file:///home/kflihan/.pub-cache/hosted/mirrors.sjtug.sjtu.edu.cn%2547dart-pub%2547/http_parser-4.0.0",
+      "rootUri": "file:///home/kflihan/.pub-cache/hosted/pub.flutter-io.cn/http_parser-4.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "io",
-      "rootUri": "file:///home/kflihan/.pub-cache/hosted/mirrors.sjtug.sjtu.edu.cn%2547dart-pub%2547/io-1.0.3",
+      "rootUri": "file:///home/kflihan/.pub-cache/hosted/pub.flutter-io.cn/io-1.0.3",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "js",
-      "rootUri": "file:///home/kflihan/.pub-cache/hosted/mirrors.sjtug.sjtu.edu.cn%2547dart-pub%2547/js-0.6.4",
+      "rootUri": "file:///home/kflihan/.pub-cache/hosted/pub.flutter-io.cn/js-0.6.4",
       "packageUri": "lib/",
       "languageVersion": "2.16"
     },
     {
       "name": "json_annotation",
-      "rootUri": "file:///home/kflihan/.pub-cache/hosted/mirrors.sjtug.sjtu.edu.cn%2547dart-pub%2547/json_annotation-4.4.0",
+      "rootUri": "file:///home/kflihan/.pub-cache/hosted/pub.flutter-io.cn/json_annotation-4.4.0",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
     {
       "name": "json_serializable",
-      "rootUri": "file:///home/kflihan/.pub-cache/hosted/mirrors.sjtug.sjtu.edu.cn%2547dart-pub%2547/json_serializable-6.1.4",
+      "rootUri": "file:///home/kflihan/.pub-cache/hosted/pub.flutter-io.cn/json_serializable-6.1.4",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
     {
       "name": "logging",
-      "rootUri": "file:///home/kflihan/.pub-cache/hosted/mirrors.sjtug.sjtu.edu.cn%2547dart-pub%2547/logging-1.0.2",
+      "rootUri": "file:///home/kflihan/.pub-cache/hosted/pub.flutter-io.cn/logging-1.0.2",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "matcher",
-      "rootUri": "file:///home/kflihan/.pub-cache/hosted/mirrors.sjtug.sjtu.edu.cn%2547dart-pub%2547/matcher-0.12.11",
+      "rootUri": "file:///home/kflihan/.pub-cache/hosted/pub.flutter-io.cn/matcher-0.12.11",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "meta",
-      "rootUri": "file:///home/kflihan/.pub-cache/hosted/mirrors.sjtug.sjtu.edu.cn%2547dart-pub%2547/meta-1.7.0",
+      "rootUri": "file:///home/kflihan/.pub-cache/hosted/pub.flutter-io.cn/meta-1.7.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "mime",
-      "rootUri": "file:///home/kflihan/.pub-cache/hosted/mirrors.sjtug.sjtu.edu.cn%2547dart-pub%2547/mime-1.0.1",
+      "rootUri": "file:///home/kflihan/.pub-cache/hosted/pub.flutter-io.cn/mime-1.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "package_config",
-      "rootUri": "file:///home/kflihan/.pub-cache/hosted/mirrors.sjtug.sjtu.edu.cn%2547dart-pub%2547/package_config-2.0.2",
+      "rootUri": "file:///home/kflihan/.pub-cache/hosted/pub.flutter-io.cn/package_config-2.0.2",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "path",
-      "rootUri": "file:///home/kflihan/.pub-cache/hosted/mirrors.sjtug.sjtu.edu.cn%2547dart-pub%2547/path-1.8.1",
+      "rootUri": "file:///home/kflihan/.pub-cache/hosted/pub.flutter-io.cn/path-1.8.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "pool",
-      "rootUri": "file:///home/kflihan/.pub-cache/hosted/mirrors.sjtug.sjtu.edu.cn%2547dart-pub%2547/pool-1.5.0",
+      "rootUri": "file:///home/kflihan/.pub-cache/hosted/pub.flutter-io.cn/pool-1.5.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "pub_semver",
-      "rootUri": "file:///home/kflihan/.pub-cache/hosted/mirrors.sjtug.sjtu.edu.cn%2547dart-pub%2547/pub_semver-2.1.0",
+      "rootUri": "file:///home/kflihan/.pub-cache/hosted/pub.flutter-io.cn/pub_semver-2.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "pubspec_parse",
-      "rootUri": "file:///home/kflihan/.pub-cache/hosted/mirrors.sjtug.sjtu.edu.cn%2547dart-pub%2547/pubspec_parse-1.2.0",
+      "rootUri": "file:///home/kflihan/.pub-cache/hosted/pub.flutter-io.cn/pubspec_parse-1.2.0",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
     {
       "name": "quiver",
-      "rootUri": "file:///home/kflihan/.pub-cache/hosted/mirrors.sjtug.sjtu.edu.cn%2547dart-pub%2547/quiver-2.1.5",
+      "rootUri": "file:///home/kflihan/.pub-cache/hosted/pub.flutter-io.cn/quiver-2.1.5",
       "packageUri": "lib/",
       "languageVersion": "2.0"
     },
     {
       "name": "shelf",
-      "rootUri": "file:///home/kflihan/.pub-cache/hosted/mirrors.sjtug.sjtu.edu.cn%2547dart-pub%2547/shelf-1.2.0",
+      "rootUri": "file:///home/kflihan/.pub-cache/hosted/pub.flutter-io.cn/shelf-1.2.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "shelf_web_socket",
-      "rootUri": "file:///home/kflihan/.pub-cache/hosted/mirrors.sjtug.sjtu.edu.cn%2547dart-pub%2547/shelf_web_socket-1.0.1",
+      "rootUri": "file:///home/kflihan/.pub-cache/hosted/pub.flutter-io.cn/shelf_web_socket-1.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "source_gen",
-      "rootUri": "file:///home/kflihan/.pub-cache/hosted/mirrors.sjtug.sjtu.edu.cn%2547dart-pub%2547/source_gen-1.2.1",
+      "rootUri": "file:///home/kflihan/.pub-cache/hosted/pub.flutter-io.cn/source_gen-1.2.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "source_helper",
-      "rootUri": "file:///home/kflihan/.pub-cache/hosted/mirrors.sjtug.sjtu.edu.cn%2547dart-pub%2547/source_helper-1.3.1",
+      "rootUri": "file:///home/kflihan/.pub-cache/hosted/pub.flutter-io.cn/source_helper-1.3.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "source_span",
-      "rootUri": "file:///home/kflihan/.pub-cache/hosted/mirrors.sjtug.sjtu.edu.cn%2547dart-pub%2547/source_span-1.8.2",
+      "rootUri": "file:///home/kflihan/.pub-cache/hosted/pub.flutter-io.cn/source_span-1.8.2",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
     {
       "name": "stack_trace",
-      "rootUri": "file:///home/kflihan/.pub-cache/hosted/mirrors.sjtug.sjtu.edu.cn%2547dart-pub%2547/stack_trace-1.10.0",
+      "rootUri": "file:///home/kflihan/.pub-cache/hosted/pub.flutter-io.cn/stack_trace-1.10.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "stream_channel",
-      "rootUri": "file:///home/kflihan/.pub-cache/hosted/mirrors.sjtug.sjtu.edu.cn%2547dart-pub%2547/stream_channel-2.1.0",
+      "rootUri": "file:///home/kflihan/.pub-cache/hosted/pub.flutter-io.cn/stream_channel-2.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "stream_transform",
-      "rootUri": "file:///home/kflihan/.pub-cache/hosted/mirrors.sjtug.sjtu.edu.cn%2547dart-pub%2547/stream_transform-2.0.0",
+      "rootUri": "file:///home/kflihan/.pub-cache/hosted/pub.flutter-io.cn/stream_transform-2.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "string_scanner",
-      "rootUri": "file:///home/kflihan/.pub-cache/hosted/mirrors.sjtug.sjtu.edu.cn%2547dart-pub%2547/string_scanner-1.1.0",
+      "rootUri": "file:///home/kflihan/.pub-cache/hosted/pub.flutter-io.cn/string_scanner-1.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "term_glyph",
-      "rootUri": "file:///home/kflihan/.pub-cache/hosted/mirrors.sjtug.sjtu.edu.cn%2547dart-pub%2547/term_glyph-1.2.0",
+      "rootUri": "file:///home/kflihan/.pub-cache/hosted/pub.flutter-io.cn/term_glyph-1.2.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "timing",
-      "rootUri": "file:///home/kflihan/.pub-cache/hosted/mirrors.sjtug.sjtu.edu.cn%2547dart-pub%2547/timing-1.0.0",
+      "rootUri": "file:///home/kflihan/.pub-cache/hosted/pub.flutter-io.cn/timing-1.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "typed_data",
-      "rootUri": "file:///home/kflihan/.pub-cache/hosted/mirrors.sjtug.sjtu.edu.cn%2547dart-pub%2547/typed_data-1.3.0",
+      "rootUri": "file:///home/kflihan/.pub-cache/hosted/pub.flutter-io.cn/typed_data-1.3.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "uuid",
-      "rootUri": "file:///home/kflihan/.pub-cache/hosted/mirrors.sjtug.sjtu.edu.cn%2547dart-pub%2547/uuid-3.0.5",
+      "rootUri": "file:///home/kflihan/.pub-cache/hosted/pub.flutter-io.cn/uuid-3.0.5",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "watcher",
-      "rootUri": "file:///home/kflihan/.pub-cache/hosted/mirrors.sjtug.sjtu.edu.cn%2547dart-pub%2547/watcher-1.0.1",
+      "rootUri": "file:///home/kflihan/.pub-cache/hosted/pub.flutter-io.cn/watcher-1.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
     {
       "name": "web_socket_channel",
-      "rootUri": "file:///home/kflihan/.pub-cache/hosted/mirrors.sjtug.sjtu.edu.cn%2547dart-pub%2547/web_socket_channel-2.1.0",
+      "rootUri": "file:///home/kflihan/.pub-cache/hosted/pub.flutter-io.cn/web_socket_channel-2.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "yaml",
-      "rootUri": "file:///home/kflihan/.pub-cache/hosted/mirrors.sjtug.sjtu.edu.cn%2547dart-pub%2547/yaml-3.1.0",
+      "rootUri": "file:///home/kflihan/.pub-cache/hosted/pub.flutter-io.cn/yaml-3.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -380,7 +380,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2022-02-07T07:18:50.702168Z",
+  "generated": "2022-02-15T18:35:21.103810Z",
   "generator": "pub",
   "generatorVersion": "2.16.0"
 }
