@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:infogames/repository/models/model_barrel.dart';
-import 'package:infogames/ui/home/widgets/all_games_widget/all_games_barrel.dart';
+
+import 'all_games_item_button.dart';
+import 'all_games_item_image.dart';
+import 'all_games_item_rating.dart';
 
 class AllGamesItem extends StatelessWidget {
   const AllGamesItem({
@@ -35,7 +37,7 @@ class AllGamesItem extends StatelessWidget {
               width: MediaQuery.of(context).size.width * .5,
               child: Text(
                 game.name ?? '',
-                style: TextStyle(
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 14.0,
                 ),
@@ -48,7 +50,7 @@ class AllGamesItem extends StatelessWidget {
             top: 45.0,
             child: Text(
               game.genres?.first.name ?? '',
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 12.0,
               ),
             ),

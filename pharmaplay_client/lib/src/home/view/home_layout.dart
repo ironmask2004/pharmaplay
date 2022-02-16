@@ -15,7 +15,7 @@ class HomeLayout extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          HeaderTitle(),
+          const HeaderTitle(),
           const SizedBox(height: 20.0),
           ContainerBody(
             children: [
@@ -30,7 +30,7 @@ class HomeLayout extends StatelessWidget {
                       builder: (context) {
                         //   final tokenId = context.select((AuthenticationBloc bloc) =>
                         //     bloc.state.tokenPair!.tokenId ?? '---');
-                        return Text('UserID: 888');
+                        return const Text('UserID: 888');
                       },
                     ), ////
                     ElevatedButton(

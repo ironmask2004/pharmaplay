@@ -24,10 +24,10 @@ class AllGamesItemImage extends StatelessWidget {
           ),
         ),
       ),
-      placeholder: (context, url) => Center(
+      placeholder: (context, url) => const Center(
         child: CircularProgressIndicator(),
       ),
-      errorWidget: (context, url, error) => Icon(
+      errorWidget: (context, url, error) => const Icon(
         Icons.error,
         color: Colors.deepOrangeAccent,
       ),

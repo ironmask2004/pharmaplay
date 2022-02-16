@@ -17,7 +17,7 @@ class HeaderTitle extends StatelessWidget {
                 fontSize: 25.0,
               ),
             ),
-            SizedBox(height: 8.0),
+            SizedBox(height: 18.0),
             Text(
               'What would you Buy?  __',
               style: TextStyle(
@@ -27,7 +27,7 @@ class HeaderTitle extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(width: 18.0),
+        const SizedBox(width: 8.0),
         const CircleAvatar(
           radius: 35,
           backgroundImage: NetworkImage(
