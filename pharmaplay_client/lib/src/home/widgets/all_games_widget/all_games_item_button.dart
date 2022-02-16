@@ -18,7 +18,7 @@ class AllGamesItemButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(12.0),
           color: Colors.amberAccent,
         ),
-        child: Text(
+        child: const Text(
           'View more',
           textAlign: TextAlign.center,
           style: TextStyle(
