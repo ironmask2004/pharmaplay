@@ -1,10 +1,4 @@
-import 'dart:convert';
-
-import 'package:equatable/equatable.dart';
-
 import 'package:pharma_shared_models/pharma_shared_models.dart';
-
-import 'drugclass.dart';
 
 part 'drugfamily.g.dart';
 

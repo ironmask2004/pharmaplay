@@ -1,17 +1,4 @@
-import 'dart:convert';
-
-import 'package:equatable/equatable.dart';
-
 import 'package:pharma_shared_models/pharma_shared_models.dart';
-
-import 'chemicaldrug.dart';
-import 'dosageform.dart';
-import 'drugclass.dart';
-import 'drugfamily.dart';
-import 'druggroup.dart';
-import 'genericdrug.dart';
-import 'manufactory.dart';
-import 'drug.dart';
 
 part 'drugrecord.g.dart';
 

@@ -1,7 +1,3 @@
-import 'dart:convert';
-
-import 'package:equatable/equatable.dart';
-
 import 'package:pharma_shared_models/pharma_shared_models.dart';
 
 part 'genericdrug.g.dart';

@@ -13,6 +13,7 @@ class LoginFormsSignInPage extends StatelessWidget {
 
   /// The action of ForgotPassword button to navigate to [LoginFormsForgotPasswordPage]
   final Function() onPressedForgot;
+  final Function() onPressedBack;
 
   /// The action of SignUp button to navigate to [LoginFormsSignUpPage]
   final Function() onPressedSignUp;
@@ -27,6 +28,7 @@ class LoginFormsSignInPage extends StatelessWidget {
 
   /// The text of ForgotPassword button.
   final String buttonTextForgotPassword;
+  final String buttonTextBack;
 
   /// The text of SignUp button.
   final String buttonTextSignUp;
@@ -88,6 +90,7 @@ class LoginFormsSignInPage extends StatelessWidget {
     required this.logo,
     required this.onPressedSignIn,
     required this.onPressedForgot,
+    required this.onPressedBack,
     required this.onPressedSignUp,
     required this.onPressedSetLanguage,
     required this.style,
@@ -110,6 +113,7 @@ class LoginFormsSignInPage extends StatelessWidget {
     this.buttonTextSignIn: 'Sign In',
     this.buttonTextSetLanguage: 'Change Language',
     this.buttonTextForgotPassword: 'Forgot password?',
+    this.buttonTextBack: 'Back?',
     this.buttonTextSignUp: 'Sign Up',
     this.socialButtons,
     this.term,
@@ -199,6 +203,16 @@ class LoginFormsSignInPage extends StatelessWidget {
                 LoginFormsInlineButton(
                   text: buttonTextSetLanguage,
                   onPressed: onPressedSetLanguage,
+                  style: style,
+                ),
+                Text(
+                  ' | ',
+                  style: style.messageTextStyle,
+                ),
+                //buttonTextSetLanguage
+                LoginFormsInlineButton(
+                  text: buttonTextBack,
+                  onPressed: onPressedBack,
                   style: style,
                 ),
               ],

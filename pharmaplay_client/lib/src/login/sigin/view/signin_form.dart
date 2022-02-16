@@ -30,6 +30,7 @@ class SignInForm extends StatelessWidget {
       hintTextPassword: SLang.of(context).password,
       buttonTextSignIn: SLang.of(context).signIn,
       buttonTextForgotPassword: SLang.of(context).forgotPassword,
+      buttonTextBack: SLang.of(context).back,
       buttonTextSetLanguage: SLang.of(context).SignInchangeLanguage,
       buttonTextSignUp: SLang.of(context).signUp,
       onPressedSetLanguage: () {
@@ -59,6 +60,12 @@ class SignInForm extends StatelessWidget {
       },
       onPressedForgot: () {
         context.read<AuthenticationBloc>().add(AuthenticationForgotRequested());
+      },
+      onPressedBack: () {
+        context
+            .read<AuthenticationBloc>()
+            .add(AuthenticationLandingRequested());
+        ;
       },
       term: LoginFormsTerm(
         style: style,

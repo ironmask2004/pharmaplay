@@ -72,6 +72,7 @@ class AppView extends StatelessWidget {
           // another state that can be emitted.
           return MaterialApp(
             navigatorKey: _navigatorKey,
+            debugShowCheckedModeBanner: false,
             localizationsDelegates: const [
               SLang.delegate,
               GlobalMaterialLocalizations.delegate,
