@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:infogames/ui/home/widgets/all_games_widget/all_games_barrel.dart';
-import 'package:infogames/ui/widgets/error_widget.dart';
+import 'package:pharmaplay_client/src/widgets/error_widget.dart';
+
+import 'all_games_barrel.dart';
 
 class AllGamesWidget extends StatelessWidget {
   const AllGamesWidget({
@@ -21,11 +22,14 @@ class AllGamesWidget extends StatelessWidget {
                 games: state.games.results,
               )
             : state.status.isLoading
-                ? Center(
-                    child: CircularProgressIndicator(),
+                ? RepositoryProvider(
+                    create: (context) => SubjectRepository(),
+                    child: const Center(
+                      child: CircularProgressIndicator(),
+                    ),
                   )
                 : state.status.isError
-                    ? ErrorGameWidget()
+                    ? const ErrorGameWidget()
                     : const SizedBox();
       },
     );

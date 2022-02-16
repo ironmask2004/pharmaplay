@@ -12,14 +12,6 @@ environment:
 dependencies:
   authentication_repository:
     path: ../packages/authentication_repository
-  login_forms:
-    path: ../packages/login_forms
-  user_repository:
-    path: ../packages/user_repository
-  pharma_repository:
-    path: ../packages/pharma_repository
-  pharma_shared_models:
-    path: ../packages/pharma_shared_models
   auto_size_text: ^3.0.0
   flutter:
     sdk: flutter
@@ -29,17 +21,26 @@ dependencies:
   intl: ^0.17.0-nullsafety.2
   json_annotation: ^4.3.0
   json_serializable: ^6.0.0
+  login_forms:
+    path: ../packages/login_forms
+  pharma_repository:
+    path: ../packages/pharma_repository
+  pharma_shared_models:
+    path: ../packages/pharma_shared_models
   shared_preferences: ^2.0.9
-
+  user_repository:
+    path: ../packages/user_repository
 
 dev_dependencies:
   bloc: ^8.0.1
   build_runner: ^2.1.5
+  cached_network_image: ^3.2.0
   dartz: ^0.10.0
   dotenv: ^3.0.0
   equatable: ^2.0.3
   flutter_bloc: ^8.0.0
   flutter_lints: ^1.0.4
+  flutter_rating_bar: ^4.0.0
   flutter_spinkit: ^5.1.0
   flutter_test:
     sdk: flutter
@@ -63,4 +64,4 @@ flutter:
 flutter_intl:
   enabled: true # Required. Must be set to true to activate the plugin. Default: false
   class_name: SLang # Optional. Sets the name for the generated localization class. Default: S
-  main_locale: en #
+  main_locale: en
