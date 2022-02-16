@@ -1,6 +1,3 @@
-/// Support for doing something awesome.
-///
-/// More dartdocs go here.
 library pharma_shared_models;
 
 export 'src/pharma_shared_models_base.dart';
