@@ -2,7 +2,7 @@
 
 import 'package:pharmaplay_server/pharmaplay_server.dart';
 
-//import '../model/drugrecord.dart';
+import 'dart:convert';
 
 // !using EITHER
 /*
@@ -147,10 +147,7 @@ Future<DrugRecord> findDrugByID(
     print(resultSet.first);
     print('founded by drugID: ' + resultSet.first.toString());
 
-    // print('medicFactory founded by drugID: ' +
-    //    resultSet.first.map['medicFactory'].toString());
-
-    return DrugRecord.fromMap((resultSet.first));
+    return (DrugRecord.fromJson(resultSet.first));
   } else {
     print(' Drug ID($drugID) Not Found ');
     throw ' Drug ID($drugID) Not Found ';

@@ -46,6 +46,9 @@ dev_dependencies:
     sdk: flutter
   font_awesome_flutter: ^9.2.0
   formz: ^0.4.1
+  foundation_fluttify: ^0.12.1+1
+  freezed: ^1.0.1
+  freezed_annotation: ^1.1.0
   http: ^0.13.4
   intl_generator: ^0.2.1
   mailer: ^5.0.2

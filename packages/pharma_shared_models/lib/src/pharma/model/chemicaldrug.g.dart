@@ -6,12 +6,13 @@ part of 'chemicaldrug.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-ChemicalDrug _$ChemicalDrugFromJson(Map<String, dynamic> json) => ChemicalDrug(
+_$_ChemicalDrug _$$_ChemicalDrugFromJson(Map<String, dynamic> json) =>
+    _$_ChemicalDrug(
       chemicalDrugID: json['chemicalDrugID'] as int,
       chemicalDrugName: json['chemicalDrugName'] as String,
     );
 
-Map<String, dynamic> _$ChemicalDrugToJson(ChemicalDrug instance) =>
+Map<String, dynamic> _$$_ChemicalDrugToJson(_$_ChemicalDrug instance) =>
     <String, dynamic>{
       'chemicalDrugID': instance.chemicalDrugID,
       'chemicalDrugName': instance.chemicalDrugName,

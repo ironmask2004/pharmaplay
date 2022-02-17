@@ -6,7 +6,8 @@ part of 'drugrecord.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-DrugRecord _$DrugRecordFromJson(Map<String, dynamic> json) => DrugRecord(
+_$_DrugRecord _$$_DrugRecordFromJson(Map<String, dynamic> json) =>
+    _$_DrugRecord(
       drug: Drug.fromJson(json['drug'] as Map<String, dynamic>),
       genericDrug:
           GenericDrug.fromJson(json['genericDrug'] as Map<String, dynamic>),
@@ -22,14 +23,14 @@ DrugRecord _$DrugRecordFromJson(Map<String, dynamic> json) => DrugRecord(
           DrugFamily.fromJson(json['drugFamily'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$DrugRecordToJson(DrugRecord instance) =>
+Map<String, dynamic> _$$_DrugRecordToJson(_$_DrugRecord instance) =>
     <String, dynamic>{
-      'drug': instance.drug.toJson(),
-      'genericDrug': instance.genericDrug.toJson(),
-      'chemicalDrug': instance.chemicalDrug.toJson(),
-      'manufactory': instance.manufactory.toJson(),
-      'dosageForm': instance.dosageForm.toJson(),
-      'drugClass': instance.drugClass.toJson(),
-      'drugGroup': instance.drugGroup.toJson(),
-      'drugFamily': instance.drugFamily.toJson(),
+      'drug': instance.drug,
+      'genericDrug': instance.genericDrug,
+      'chemicalDrug': instance.chemicalDrug,
+      'manufactory': instance.manufactory,
+      'dosageForm': instance.dosageForm,
+      'drugClass': instance.drugClass,
+      'drugGroup': instance.drugGroup,
+      'drugFamily': instance.drugFamily,
     };

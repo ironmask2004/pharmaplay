@@ -135,8 +135,8 @@ class PharmaApi {
           return Response.forbidden(
               responseErrMsg('''  Kindly provide correcet values:
                     { "startfrompage": "1" , "pagelength": "10" ,
-                     "weher": { "drug.\"dosageFormID\"": 30 } ,
-                     "orderbyfields": "drug.\"chemicalDrugID\",drug.\"tradeName\"" , "localUI": "en"   }''',
+                    "weher": { "drug.\"dosageFormID\"": 30 } ,
+                    "orderbyfields": "drug.\"chemicalDrugID\",drug.\"tradeName\"" , "localUI": "en"   }''',
                   "403"),
               headers: {
                 'content-type': 'application/json',
@@ -195,12 +195,13 @@ class PharmaApi {
           'content-type': 'application/json',
         });
       }
-
+      print('11111');
       final Map<String, dynamic> drugWithresault = {
-        "druginfo": drugInfo.toMap(),
+        "druginfo": drugInfo,
         "requestResult": {'error': 'Success', 'errNO': '200'}
       };
 
+      print('22222');
       print(drugWithresault);
       var jsonString = json.encode(drugWithresault);
 
