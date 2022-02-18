@@ -100,7 +100,66 @@ class PharmaApi {
         'content-type': 'application/json',
       });
     });
+//============== fuzzy search drug
 
+    //============= /drugs/INFO ROUTE
+    ///----------------------
+    //{ "startfrompage": "3" , "pagelength": "2" , "orderbyfields": "drug.\"chemicalDrugID\",drug.\"tradeName\""  }
+    router.get('/drug/fuzzyfindbypage', (Request req) async {
+      List<DrugRecord> drugInfo;
+      // try {
+      final payload = await req.readAsString();
+      final String fuzzyCond = json.decode(payload)['fuzzycond'] ?? '';
+      final String localUI = json.decode(payload)['localUI'] ?? 'en';
+      final Map<String, dynamic> listpagesparms = json.decode(payload);
+      print(listpagesparms);
+
+      final int startFromPage = int.parse(listpagesparms['startfrompage'] ?? 0);
+
+      final int pageLength = int.parse(listpagesparms['pagelength'] ?? 0);
+
+      final String orderByfields = listpagesparms['orderbyfields'] ?? '';
+      print('startFromPage :   $startFromPage   -- pagelength : $pageLength');
+
+      if (pageLength <= 0 ||
+          startFromPage <= 0 ||
+          orderByfields.isEmpty ||
+          fuzzyCond.isEmpty) {
+        return Response.forbidden(
+            responseErrMsg(''' { "startfrompage": "1" , "pagelength": "2" ,
+               "orderbyfields": "drug.\"chemicalDrugID\",drug.\"en__brandName\""  ,
+               "fuzzyCond": "رشد" , "localUI": "en" }''', "403"),
+            headers: {
+              'content-type': 'application/json',
+            });
+      }
+
+      print('fuzzyCond: $fuzzyCond');
+      drugInfo = await fuzzyFindDrugByPage(
+          startFromPage: startFromPage,
+          pageLength: pageLength,
+          orderByfields: orderByfields,
+          fuzzyCond: fuzzyCond,
+          db: db,
+          drugStore: drugStore,
+          localUI: localUI);
+
+      print("founded_drug------:" + drugInfo.toString());
+      /*} catch (err) {
+        return Response.forbidden(responseErrMsg("$err", "9004"), headers: {
+          'content-type': 'application/json',
+        });
+      }*/
+
+      var jsonString = json.encode(drugInfo);
+      //print('--------------0-0-0-0-0-\n' + jsonString);
+
+      return Response.ok(jsonString, headers: {
+        'content-type': 'application/json',
+      });
+    });
+
+    //=========================================================
     //=========================================================
     //{ "startfrompage": "1" , "pagelength": "10" ,
     //"weher": { "drug.\"dosageFormID\"": 30 } ,
