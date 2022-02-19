@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pharmaplay_client/generated/l10n.dart';
-import 'package:pharmaplay_client/src/mainboard/bloc/mainboard_bloc.dart';
+import 'package:pharmaplay_client/src/dashboard/bloc/mainboard_bloc.dart';
 import 'package:pharmaplay_client/src/utlites/sforms_style.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

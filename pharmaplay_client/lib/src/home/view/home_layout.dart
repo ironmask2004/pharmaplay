@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:pharmaplay_client/generated/l10n.dart';
-import 'package:pharmaplay_client/src/home/widgets/header_title/header_title.dart';
 import 'package:pharmaplay_client/src/widgets/container_body.dart';
 
 class HomeLayout extends StatelessWidget {
@@ -15,7 +14,7 @@ class HomeLayout extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const HeaderTitle(),
+          // const HeaderTitle(),
           const SizedBox(height: 20.0),
           ContainerBody(
             children: [
