@@ -66,6 +66,7 @@ flutter:
   assets:
     # Add assets from the images directory to the application.
     - assets/images/
+    - assets/icons/
 
 flutter_intl:
   enabled: true # Required. Must be set to true to activate the plugin. Default: false
