@@ -4,8 +4,8 @@ import 'package:pharmaplay_client/generated/l10n.dart';
 import 'package:pharmaplay_client/src/settings/settings.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SideMenu extends StatelessWidget {
-  const SideMenu({
+class RightMenu extends StatelessWidget {
+  const RightMenu({
     Key? key,
   }) : super(key: key);
 
@@ -14,34 +14,6 @@ class SideMenu extends StatelessWidget {
     return Drawer(
       child: ListView(
         children: [
-          DrawerHeader(
-            child: Image.asset("assets/images/logo.png"),
-          ),
-          DrawerListTile(
-            title: "Dashboard",
-            svgSrc: "assets/icons/menu_dashbord.svg",
-            press: () {},
-          ),
-          DrawerListTile(
-            title: "Transaction",
-            svgSrc: "assets/icons/menu_tran.svg",
-            press: () {},
-          ),
-          DrawerListTile(
-            title: "Task",
-            svgSrc: "assets/icons/menu_task.svg",
-            press: () {},
-          ),
-          DrawerListTile(
-            title: "Documents",
-            svgSrc: "assets/icons/menu_doc.svg",
-            press: () {},
-          ),
-          DrawerListTile(
-            title: "Store",
-            svgSrc: "assets/icons/menu_store.svg",
-            press: () {},
-          ),
           DrawerListTile(
             title: "Notification",
             svgSrc: "assets/icons/menu_notification.svg",

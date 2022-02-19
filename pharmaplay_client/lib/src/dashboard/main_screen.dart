@@ -3,6 +3,7 @@ import 'package:pharmaplay_client/src/dashboard/view/dashboard_screen.dart';
 import 'package:pharmaplay_client/src/utlites/responsive.dart';
 import 'package:provider/provider.dart';
 
+import 'components/right_menu.dart';
 import 'components/side_menu.dart';
 import 'controllers/MenuController.dart';
 
@@ -12,6 +13,7 @@ class MainScreen extends StatelessWidget {
     return Scaffold(
       key: context.read<MenuController>().scaffoldKey,
       drawer: const SideMenu(),
+      endDrawer: const RightMenu(),
       body: SafeArea(
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,

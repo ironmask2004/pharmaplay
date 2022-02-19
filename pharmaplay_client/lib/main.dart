@@ -16,13 +16,13 @@ Future<void> main() async {
   print('Token Saved Pair:' + _tokenPair.toJson().toString());
   print(loggedInFlag);
 
-  /* runApp(App(
+  runApp(MyApp(
     authenticationRepository: AuthenticationRepository(
         loggedInFlag, _tokenPair, 'pharmaplay.mywire.org:9093'),
     userRepository: UserRepository('pharmaplay.mywire.org:9093'),
   ));
 }
-*/
 
-  runApp(MyApp());
-}
+
+  //runApp(MyApp());
+
