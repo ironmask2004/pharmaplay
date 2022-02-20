@@ -1,23 +1,43 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:equatable/equatable.dart';
+
 import 'package:pharmaplay_client/src/utlites/shared_pref.dart';
 
-part 'settings_event.dart';
-part 'settings_state.dart';
+part 'dashboard_event.dart';
+part 'dashboard_state.dart';
 
-class SettingsBloc1 extends Bloc<SettingsEvent, SettingsState> {
-  SettingsBloc1() : super(SettingsInitial()) {
-    on<SettingsInitialRequested>(_onSettingsInitialRequested);
-    on<UIThemeModeChanged>(_onUIThemeModeChanged);
+class DashBoardBloc extends Bloc<DashBoardEvent, DashBoardState> {
+  DashBoardBloc() : super(DashBoardInitial()) {
+    on<DashBoardInitialRequested>(_onDashBoardInitialRequested);
+    on<SideMenuClicked>(_onSideMenuClicked);
+    on<RightMenuClicked>(_onRightMenuClicked);
     on<UILocalChanged>(_onUILocalChanged);
     on<ReloadUILocaleRequsted>(_onReloadUILocaleRequsted);
     on<ReloadUIThemeModeRequsted>(_onReloadUIThemeModeRequsted);
   }
 
-  Future<void> _onSettingsInitialRequested(
-    SettingsInitialRequested event,
-    Emitter<SettingsState> emit,
+  Future<void> _onSideMenuClicked(
+    SideMenuClicked event,
+    Emitter<DashBoardState> emit,
+  ) async {
+    if (!event._scaffoldKey.currentState!.isDrawerOpen) {
+      event._scaffoldKey.currentState!.openDrawer();
+    }
+  }
+
+  Future<void> _onRightMenuClicked(
+    RightMenuClicked event,
+    Emitter<DashBoardState> emit,
+  ) async {
+    if (!event._scaffoldKey.currentState!.isDrawerOpen) {
+      event._scaffoldKey.currentState!.openDrawer();
+    }
+  }
+
+  Future<void> _onDashBoardInitialRequested(
+    DashBoardInitialRequested event,
+    Emitter<DashBoardState> emit,
   ) async {
     ThemeMode currentThemeMode;
     String savedThemeMode =
@@ -34,16 +54,16 @@ class SettingsBloc1 extends Bloc<SettingsEvent, SettingsState> {
     }
     print('emit UITHemeChanged' + currentThemeMode.toString());
 
-    //  emit(SettingsStateUIThemeModeChanged(currentThemeMode));
-    //emit(SettingsState(currentThemeMode));
+    //  emit(DashBoardStateUIThemeModeChanged(currentThemeMode));
+    //emit(DashBoardState(currentThemeMode));
     emit(state.copyWith(uiThemeMode: currentThemeMode));
 
-    print('SettingsInitialRequested !!!');
+    print('DashBoardInitialRequested !!!');
     String currentLocale =
         await MySharedPreferences.instance.getStringValue("UILocale");
 
-    print('emit SettingsStateUILocaleChanged ' + currentLocale);
-    // emit(SettingsStateUILocaleChanged(
+    print('emit DashBoardStateUILocaleChanged ' + currentLocale);
+    // emit(DashBoardStateUILocaleChanged(
     //    Locale(currentLocale == 'ar' ? 'ar' : 'en')));
     emit(state.copyWith(uiLocale: Locale(currentLocale == 'ar' ? 'ar' : 'en')));
     print('  state uiLocale : ' + state.uiLocale.languageCode);
@@ -52,7 +72,7 @@ class SettingsBloc1 extends Bloc<SettingsEvent, SettingsState> {
   /// Loads the User's preferred ThemeMode from local or remote storage.
   Future<void> _onReloadUIThemeModeRequsted(
     ReloadUIThemeModeRequsted event,
-    Emitter<SettingsState> emit,
+    Emitter<DashBoardState> emit,
   ) async {
     print('_onReloadUIThemeModeRequsted!!');
     //=> ThemeMode.system;
@@ -71,32 +91,32 @@ class SettingsBloc1 extends Bloc<SettingsEvent, SettingsState> {
     }
     print('emit UITHemeChanged' + currentThemeMode.toString());
 
-    //emit(SettingsStateUIThemeModeChanged(currentThemeMode));
+    //emit(DashBoardStateUIThemeModeChanged(currentThemeMode));
 
     emit(state.copyWith(uiThemeMode: currentThemeMode));
   }
 
   Future<void> _onReloadUILocaleRequsted(
     ReloadUILocaleRequsted event,
-    Emitter<SettingsState> emit,
+    Emitter<DashBoardState> emit,
   ) async {
     print('_onReloadUILocaleRequsted!!');
     String currentLocale =
         await MySharedPreferences.instance.getStringValue("UILocale");
     print('  state uiLocale : ' + state.uiLocale.languageCode);
-    print('emit SettingsStateUILocaleChanged ' + currentLocale);
+    print('emit DashBoardStateUILocaleChanged ' + currentLocale);
     emit(state.copyWith(
       uiLocale: Locale(currentLocale == 'ar' ? 'ar' : 'en'),
     ));
 
-    ///  emit(SettingsStateUILocaleChanged(
+    ///  emit(DashBoardStateUILocaleChanged(
     //    Locale(currentLocale == 'ar' ? 'ar' : 'en')));
   }
 
   /// Persists the user's preferred ThemeMode to local or remote storage.
   Future<void> _onUIThemeModeChanged(
     UIThemeModeChanged event,
-    Emitter<SettingsState> emit,
+    Emitter<DashBoardState> emit,
   ) async {
     //  if (event.uiThemeMode == null) return;
 
@@ -104,8 +124,8 @@ class SettingsBloc1 extends Bloc<SettingsEvent, SettingsState> {
     if (event.uiThemeMode == state.uiThemeMode) return;
 
     // Otherwise, store the new theme mode in memory
-    // Use the shared_preferences package to persist settings locally or the
-    // http package to persist settings over the network.
+    // Use the shared_preferences package to persist dashboard locally or the
+    // http package to persist dashboard over the network.
     print('_onUIThemeModeChanged: ' + event.uiThemeMode.toString());
     await MySharedPreferences.instance
         .setStringValue("ThemeMode", event.uiThemeMode.name);
@@ -115,7 +135,7 @@ class SettingsBloc1 extends Bloc<SettingsEvent, SettingsState> {
 
   Future<void> _onUILocalChanged(
     UILocalChanged event,
-    Emitter<SettingsState> emit,
+    Emitter<DashBoardState> emit,
   ) async {
     print('new Locale: ' +
         event.uiLocale.languageCode +
@@ -126,12 +146,12 @@ class SettingsBloc1 extends Bloc<SettingsEvent, SettingsState> {
 
     await MySharedPreferences.instance
         .setStringValue("UILocale", event.uiLocale.languageCode);
-    print('emit SettingsStateUILocaleChanged   form ' +
+    print('emit DashBoardStateUILocaleChanged   form ' +
         state.uiLocale.languageCode +
         ' to ' +
         event.uiLocale.languageCode);
 
-    //  emit(SettingsStateUILocaleChanged(event.uiLocale)
+    //  emit(DashBoardStateUILocaleChanged(event.uiLocale)
     // state.copyWith(uiLocale: event.uiLocale),
     //  );
     emit(state.copyWith(uiLocale: event.uiLocale));

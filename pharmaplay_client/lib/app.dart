@@ -10,9 +10,10 @@ import 'package:pharmaplay_client/src/login/forgot_password/forgot_password.dart
 import 'package:pharmaplay_client/src/splash/splash.dart';
 import 'package:user_repository/user_repository.dart';
 
+import 'src/dashboard/bloc/dashboard_bloc.dart';
 import 'src/login/sigin/sigin.dart';
 import 'src/login/signup/signup.dart';
-import 'src/settings/bloc/settings_bloc.dart';
+import 'src/dashboard/bloc/dashboard_bloc.dart';
 
 class App extends StatelessWidget {
   const App({
@@ -35,10 +36,10 @@ class App extends StatelessWidget {
                 userRepository: userRepository,
               )..add(AuthenticationLandingRequested()),
             ),
-            BlocProvider<SettingsBloc>(
-              create: (_) => SettingsBloc()
+            BlocProvider<DashBoardBloc>(
+              create: (_) => DashBoardBloc()
                 // ..add(ReloadUILocaleRequsted())
-                ..add(SettingsInitialRequested()),
+                ..add(DashBoardInitialRequested()),
             ),
             /* BlocProvider<BlocC>(
       create: (BuildContext context) => BlocC(),
@@ -63,10 +64,10 @@ class AppView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SettingsBloc, SettingsState>(
+    return BlocBuilder<DashBoardBloc, DashBoardState>(
         buildWhen: (previousState, currentState) =>
             previousState != currentState,
-        builder: (_, settingsState) {
+        builder: (_, dashboardState) {
           // Since 'localeState' has only one STATE (SelectedLocale),
           // we don't need any if conditions here to check if there is
           // another state that can be emitted.
@@ -85,8 +86,8 @@ class AppView extends StatelessWidget {
             ],
             theme: ThemeData(),
             darkTheme: ThemeData.dark(),
-            themeMode: settingsState.uiThemeMode,
-            locale: settingsState.uiLocale, //getUIlocale(context),
+            themeMode: dashboardState.uiThemeMode,
+            locale: dashboardState.uiLocale, //getUIlocale(context),
             //Locale('ar'),
 
             onGenerateTitle: (BuildContext context) =>
@@ -134,10 +135,10 @@ class AppView extends StatelessWidget {
                       );
                       break;
 
-                    /*   case AuthenticationStatus.authenticationSettings:
-                      print('authenticate Settings: ' + child.toString());
+                    /*   case AuthenticationStatus.authenticationDashBoard:
+                      print('authenticate DashBoard: ' + child.toString());
                       _navigator.push<void>(
-                        SettingsPage.route(),
+                        DashBoardPage.route(),
                         //(route) => false,
                       );
                       break;*/
@@ -155,7 +156,7 @@ class AppView extends StatelessWidget {
                       break;
                   }
                 }),
-                BlocListener<SettingsBloc, SettingsState>(
+                BlocListener<DashBoardBloc, DashBoardState>(
                   listener: (context, state) {
                     print('Listner Lisner !!!!!!!!!' +
                         state.uiLocale.languageCode);
@@ -170,7 +171,7 @@ class AppView extends StatelessWidget {
 
   Locale getUIlocale(BuildContext context) {
     print('view get local ' +
-        context.read<SettingsBloc>().state.uiLocale.languageCode);
-    return context.read<SettingsBloc>().state.uiLocale;
+        context.read<DashBoardBloc>().state.uiLocale.languageCode);
+    return context.read<DashBoardBloc>().state.uiLocale;
   }
 }

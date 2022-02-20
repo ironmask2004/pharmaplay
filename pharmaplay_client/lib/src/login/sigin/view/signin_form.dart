@@ -7,7 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:pharmaplay_client/generated/l10n.dart';
 import 'package:pharmaplay_client/src/authentication/authentication.dart';
-import 'package:pharmaplay_client/src/settings/bloc/settings_bloc.dart';
+import 'package:pharmaplay_client/src/dashboard/bloc/dashboard_bloc.dart';
 
 import '../sigin.dart';
 
@@ -36,17 +36,17 @@ class SignInForm extends StatelessWidget {
       onPressedSetLanguage: () {
         /*context
             .read<AuthenticationBloc>()
-            .add(AuthenticationSettingsRequested());
-        Locale currentLocale = context.read<SettingsBloc>().state.uiLocale;
+            .add(AuthenticationDashBoardRequested());
+        Locale currentLocale = context.read<DashBoardBloc>().state.uiLocale;
         print('Chaneg Language pressed + current : $currentLocale');
 */
-        Locale currentLocale = context.read<SettingsBloc>().state.uiLocale;
+        Locale currentLocale = context.read<DashBoardBloc>().state.uiLocale;
         print('Chaneg Language pressed + current : $currentLocale');
-        context.read<SettingsBloc>().add(UILocalChanged(
+        context.read<DashBoardBloc>().add(UILocalChanged(
             currentLocale.languageCode == 'ar'
                 ? const Locale('en')
                 : const Locale('ar')));
-        // context.read<SettingsBloc>().add(UIThemeModeChanged(ThemeMode.light));
+        // context.read<DashBoardBloc>().add(UIThemeModeChanged(ThemeMode.light));
       },
       onPressedSignIn: () {
         context.read<SiginBloc>().add(const LoginSubmitted());

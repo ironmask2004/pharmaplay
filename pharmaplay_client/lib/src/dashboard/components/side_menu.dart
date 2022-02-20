@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pharmaplay_client/generated/l10n.dart';
-import 'package:pharmaplay_client/src/settings/settings.dart';
+import 'package:pharmaplay_client/src/dashboard/bloc/dashboard_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SideMenu extends StatelessWidget {
@@ -53,7 +53,7 @@ class SideMenu extends StatelessWidget {
             press: () {},
           ),
           DrawerListTile(
-            title: "Settings",
+            title: "DashBoard",
             svgSrc: "assets/icons/menu_setting.svg",
             press: () {},
           ),
@@ -62,13 +62,13 @@ class SideMenu extends StatelessWidget {
             svgSrc: "assets/icons/menu_setting.svg",
             press: () {
               Locale currentLocale =
-                  context.read<SettingsBloc>().state.uiLocale;
+                  context.read<DashBoardBloc>().state.uiLocale;
               print('Chaneg Language pressed + current : $currentLocale');
-              context.read<SettingsBloc>().add(UILocalChanged(
+              context.read<DashBoardBloc>().add(UILocalChanged(
                   currentLocale.languageCode == 'ar'
                       ? const Locale('en')
                       : const Locale('ar')));
-              // context.read<SettingsBloc>().add(UIThemeModeChanged(ThemeMode.light));
+              // context.read<DashBoardBloc>().add(UIThemeModeChanged(ThemeMode.light));
             },
           ),
         ],

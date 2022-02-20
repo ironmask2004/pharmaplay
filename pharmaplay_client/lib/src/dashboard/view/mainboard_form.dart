@@ -1,26 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:pharmaplay_client/generated/l10n.dart';
-import 'package:pharmaplay_client/src/dashboard/bloc/mainboard_bloc.dart';
 import 'package:pharmaplay_client/src/utlites/sforms_style.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../mainboard.dart';
 
 //import 'package:flutter_localizations/flutter_localizations.dart';
 
 /// Displays the various mainboard that can be customized by the user.
 ///
-/// When a user changes a setting, the MainboardController is updated and
-/// Widgets that listen to the MainboardController are rebuilt.
-class MainboardForm extends StatelessWidget {
-  const MainboardForm({Key? key}) : super(key: key);
+/// When a user changes a setting, the DashBoardController is updated and
+/// Widgets that listen to the DashBoardController are rebuilt.
+class DashBoardForm extends StatelessWidget {
+  const DashBoardForm({Key? key}) : super(key: key);
 
   static const routeName = '/mainboard';
 
   @override
   Widget build(BuildContext context) {
     final SFormsStyle style = SFormsStyle.defaultTemplate;
-    Locale newLocale = context.read<MainboardBloc>().state.uiLocale;
-    ThemeMode newThemeMode = context.read<MainboardBloc>().state.uiThemeMode;
-    return BlocBuilder<MainboardBloc, MainboardState>(
+    Locale newLocale = context.read<DashBoardBloc>().state.uiLocale;
+    ThemeMode newThemeMode = context.read<DashBoardBloc>().state.uiThemeMode;
+    return BlocBuilder<DashBoardBloc, DashBoardState>(
       buildWhen: (previousState, currentState) => previousState != currentState,
       builder: (_, mainboardState) => Scaffold(
           body: Padding(
@@ -35,13 +36,13 @@ class MainboardForm extends StatelessWidget {
                           DropdownButton<ThemeMode>(
                             // Read the selected themeMode from the controller
                             value:
-                                context.read<MainboardBloc>().state.uiThemeMode,
+                                context.read<DashBoardBloc>().state.uiThemeMode,
                             // Call the updateThemeMode method any time the user selects a theme.
                             onChanged: (value) {
                               print(value);
                               /*  newThemeMode = value ?? ThemeMode.system;
                               context
-                                  .read<MainboardBloc>()
+                                  .read<DashBoardBloc>()
                                   .add(UIThemeModeChanged(newThemeMode));
 */
                               print(newThemeMode);
@@ -63,14 +64,14 @@ class MainboardForm extends StatelessWidget {
                           ),
                           DropdownButton<Locale>(
                             // Read the selected themeMode from the controller
-                            value: context.read<MainboardBloc>().state.uiLocale,
+                            value: context.read<DashBoardBloc>().state.uiLocale,
                             // Call the updateThemeMode method any time the user selects a theme.
                             onChanged: (value) {
                               print(value);
                               /*  newLocale = value ??
-                                  context.read<MainboardBloc>().state.uiLocale;
+                                  context.read<DashBoardBloc>().state.uiLocale;
                               context
-                                  .read<MainboardBloc>()
+                                  .read<DashBoardBloc>()
                                   .add(UILocalChanged(newLocale));*/
                               print(newLocale);
                             },
@@ -100,13 +101,13 @@ class MainboardForm extends StatelessWidget {
                       padding: EdgeInsets.only(
                           top: style.verticalSpacingBetweenComponents),
                       child: SFormsButton(
-                        text: SLang.of(context).applyNewMainboard,
+                        text: SLang.of(context).applyNewDashBoard,
                         onPressed: () {
                           context
-                              .read<MainboardBloc>()
+                              .read<DashBoardBloc>()
                               .add(UIThemeModeChanged(newThemeMode));
                           context
-                              .read<MainboardBloc>()
+                              .read<DashBoardBloc>()
                               .add(UILocalChanged(newLocale));
                         },
                         style: style,
@@ -122,7 +123,7 @@ class MainboardForm extends StatelessWidget {
                       onPressed: () {
                         /* context
                             .read<AuthenticationBloc>()
-                            .add(AuthenticationMainboardDoneRequested());*/
+                            .add(AuthenticationDashBoardDoneRequested());*/
                         Navigator.of(context).pop();
                       },
                       style: style,

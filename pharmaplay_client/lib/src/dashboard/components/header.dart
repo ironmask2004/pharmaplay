@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pharmaplay_client/src/dashboard/bloc/dashboard_bloc.dart';
 
 import 'package:pharmaplay_client/src/dashboard/controllers/MenuController.dart';
-import 'package:pharmaplay_client/src/settings/settings.dart';
-import 'package:pharmaplay_client/src/utlites/constants.dart';
+requiredrequiredimport 'package:pharmaplay_client/src/utlites/constants.dart';
 import 'package:pharmaplay_client/src/utlites/responsive.dart';
 import 'package:provider/provider.dart';
 
@@ -43,7 +43,7 @@ class ProfileCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Locale newLocale = context.read<SettingsBloc>().state.uiLocale;
+    Locale newLocale = context.read<DashBoardBloc>().state.uiLocale;
 
     return Container(
       margin: const EdgeInsets.only(left: defaultPadding),
@@ -84,13 +84,13 @@ class ProfileCard extends StatelessWidget {
             },
           ),*/
 
-          BlocBuilder<SettingsBloc, SettingsState>(
+          BlocBuilder<DashBoardBloc, DashBoardState>(
             buildWhen: (previousState, currentState) =>
                 previousState != currentState,
             builder: (context, state) {
               return DropdownButton<Locale>(
                 // Read the selected themeMode from the controller
-                value: context.read<SettingsBloc>().state.uiLocale,
+                value: context.read<DashBoardBloc>().state.uiLocale,
                 borderRadius: const BorderRadius.all(Radius.circular(15.0)),
                 underline: null,
 
@@ -98,8 +98,8 @@ class ProfileCard extends StatelessWidget {
                 onChanged: (value) {
                   print(value);
                   newLocale =
-                      value ?? context.read<SettingsBloc>().state.uiLocale;
-                  context.read<SettingsBloc>().add(UILocalChanged(newLocale));
+                      value ?? context.read<DashBoardBloc>().state.uiLocale;
+                  context.read<DashBoardBloc>().add(UILocalChanged(newLocale));
                   print(newLocale);
                 },
                 items: const [

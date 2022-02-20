@@ -4,7 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:pharmaplay_client/generated/l10n.dart';
 import 'package:pharmaplay_client/src/authentication/authentication.dart';
 import 'package:pharmaplay_client/src/dashboard/controllers/MenuController.dart';
-import 'package:pharmaplay_client/src/settings/settings.dart';
 import 'package:pharmaplay_client/src/utlites/constants.dart';
 import 'package:provider/provider.dart';
 import 'package:user_repository/user_repository.dart';
@@ -12,6 +11,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'generated/l10n.dart';
 
+import 'src/dashboard/bloc/dashboard_bloc.dart';
 import 'src/dashboard/main_screen.dart';
 
 class MyApp extends StatelessWidget {
@@ -35,10 +35,10 @@ class MyApp extends StatelessWidget {
                 userRepository: userRepository,
               )..add(AuthenticationLandingRequested()),
             ),
-            BlocProvider<SettingsBloc>(
-              create: (_) => SettingsBloc()
+            BlocProvider<DashBoardBloc>(
+              create: (_) => DashBoardBloc()
                 // ..add(ReloadUILocaleRequsted())
-                ..add(SettingsInitialRequested()),
+                ..add(DashBoardInitialRequested()),
             ),
             /* BlocProvider<BlocC>(
       create: (BuildContext context) => BlocC(),
@@ -58,10 +58,10 @@ class AppView extends StatelessWidget {
   NavigatorState get _navigator => _navigatorKey.currentState!;
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SettingsBloc, SettingsState>(
+    return BlocBuilder<DashBoardBloc, DashBoardState>(
         buildWhen: (previousState, currentState) =>
             previousState != currentState,
-        builder: (_, settingsState) {
+        builder: (_, dashboardState) {
           return MaterialApp(
             navigatorKey: _navigatorKey,
             debugShowCheckedModeBanner: false,
@@ -76,8 +76,9 @@ class AppView extends StatelessWidget {
               Locale('ar', ''), // Arabic, no country code
             ],
             darkTheme: ThemeData.dark(),
-            themeMode: settingsState.uiThemeMode,
-            locale: settingsState.uiLocale, //getUIlocale(context),Locale('ar'),
+            themeMode: dashboardState.uiThemeMode,
+            locale:
+                dashboardState.uiLocale, //getUIlocale(context),Locale('ar'),
             onGenerateTitle: (BuildContext context) =>
                 SLang.of(context).appTitle,
             theme: ThemeData.dark().copyWith(

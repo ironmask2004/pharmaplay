@@ -3,15 +3,15 @@ import 'package:pharmaplay_client/src/dashboard/view/dashboard_screen.dart';
 import 'package:pharmaplay_client/src/utlites/responsive.dart';
 import 'package:provider/provider.dart';
 
+import 'bloc/dashboard_bloc.dart';
 import 'components/right_menu.dart';
 import 'components/side_menu.dart';
-import 'controllers/MenuController.dart';
 
 class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: context.read<MenuController>().scaffoldKey,
+      key: context.read<DashBoardBloc>().scaffoldKey,
       drawer: const SideMenu(),
       endDrawer: const RightMenu(),
       body: SafeArea(
