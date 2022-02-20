@@ -52,6 +52,7 @@
   "email": "Email",
   "password": "password",
   "signIn": "signIn",
+  "signOut": "signOut",
   "forgotPassword": "forgotPassword",
   "signUp": "signUp",
   "onsignuplastnamechanged": "_onSignUpLastnameChanged",

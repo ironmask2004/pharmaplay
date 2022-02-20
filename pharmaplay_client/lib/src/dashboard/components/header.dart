@@ -1,10 +1,14 @@
+import 'package:authentication_repository/authentication_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pharmaplay_client/src/authentication/authentication.dart';
 import 'package:pharmaplay_client/src/dashboard/bloc/dashboard_bloc.dart';
 
 import 'package:pharmaplay_client/src/utlites/constants.dart';
 import 'package:pharmaplay_client/src/utlites/responsive.dart';
+
+import '../../login/sigin/sigin.dart';
 
 class Header extends StatelessWidget {
   const Header({
@@ -30,7 +34,7 @@ class Header extends StatelessWidget {
         if (!Responsive.isMobile(context))
           Spacer(flex: Responsive.isDesktop(context) ? 2 : 1),
         const Expanded(child: SearchField()),
-        const ProfileCard()
+        const ProfileCard(),
       ],
     );
   }
@@ -67,23 +71,11 @@ class ProfileCard extends StatelessWidget {
                 print('hihhhii');
                 context.read<DashBoardBloc>().add(RightMenuClicked());
               }),
-
           if (!Responsive.isMobile(context))
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: defaultPadding / 2),
               child: Text("Angelina Jolie"),
             ),
-          // FloatingActionButton(onPressed: () => print('Hiii')),
-
-          /*IconButton(
-            icon: const Icon(Icons.keyboard_arrow_down),
-            tooltip: 'Facorite icon',
-            color: Colors.blue, //set color which you want
-            onPressed: () {
-              print('hiii'); // Do your work
-            },
-          ),*/
-
           BlocBuilder<DashBoardBloc, DashBoardState>(
             buildWhen: (previousState, currentState) =>
                 previousState != currentState,

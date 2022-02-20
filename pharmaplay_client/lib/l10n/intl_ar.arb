@@ -54,6 +54,7 @@
   "signIn": "تسجيل دخول",
   "forgotPassword": "نسيت كلمة السر",
   "signUp": "تسجيل جديد",
+  "signOut": "تسجيل خروج",
   "onsignuplastnamechanged": "_onSignUpLastnameChanged",
   "emailaddress": "Email",
   "onforgotemailchanged": "تغيير في البريد الاكتروني",

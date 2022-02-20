@@ -68,6 +68,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("اعادة تعيين كلمة السر"),
         "settings": MessageLookupByLibrary.simpleMessage("اﻷعدادات!"),
         "signIn": MessageLookupByLibrary.simpleMessage("تسجيل دخول"),
+        "signOut": MessageLookupByLibrary.simpleMessage("تسجيل خروج"),
         "signUp": MessageLookupByLibrary.simpleMessage("تسجيل جديد")
       };
 }

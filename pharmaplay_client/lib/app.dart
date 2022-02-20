@@ -14,7 +14,7 @@ import 'src/dashboard/bloc/dashboard_bloc.dart';
 import 'src/login/sigin/sigin.dart';
 import 'src/login/signup/signup.dart';
 import 'src/dashboard/bloc/dashboard_bloc.dart';
-
+/*
 class App extends StatelessWidget {
   const App({
     Key? key,
@@ -175,3 +175,4 @@ class AppView extends StatelessWidget {
     return context.read<DashBoardBloc>().state.uiLocale;
   }
 }
+*/

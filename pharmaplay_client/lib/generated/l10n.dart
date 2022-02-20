@@ -182,6 +182,16 @@ class SLang {
     );
   }
 
+  /// `signOut`
+  String get signOut {
+    return Intl.message(
+      'signOut',
+      name: 'signOut',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `forgotPassword`
   String get forgotPassword {
     return Intl.message(

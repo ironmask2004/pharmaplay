@@ -3,6 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pharmaplay_client/generated/l10n.dart';
 import 'package:pharmaplay_client/src/authentication/authentication.dart';
+import 'package:pharmaplay_client/src/login/confirm_code/confirm_code.dart';
+import 'package:pharmaplay_client/src/login/forgot_password/forgot_password.dart';
+import 'package:pharmaplay_client/src/login/sigin/sigin.dart';
+import 'package:pharmaplay_client/src/login/signup/signup.dart';
+import 'package:pharmaplay_client/src/splash/splash.dart';
 import 'package:pharmaplay_client/src/utlites/constants.dart';
 import 'package:user_repository/user_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,7 +15,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'generated/l10n.dart';
 
 import 'src/dashboard/bloc/dashboard_bloc.dart';
-import 'src/dashboard/main_screen.dart';
+import 'src/dashboard/view/main_screen_page.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({
@@ -51,9 +56,11 @@ class AppView extends StatelessWidget {
   AppView({
     Key? key,
   }) : super(key: key);
+
   final _navigatorKey = GlobalKey<NavigatorState>();
 
   NavigatorState get _navigator => _navigatorKey.currentState!;
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<DashBoardBloc, DashBoardState>(
@@ -86,7 +93,88 @@ class AppView extends StatelessWidget {
                       .apply(bodyColor: Colors.white),
               canvasColor: secondaryColor,
             ),
-            home: MainScreen(),
+            builder: (context, child) {
+              return MultiBlocListener(listeners: [
+                BlocListener<AuthenticationBloc, AuthenticationState>(
+                    listener: (context, state) {
+                  switch (state.status) {
+                    case AuthenticationStatus.authenticated:
+                      print('Auth : ' + state.toString());
+                      _navigator.push<void>(
+                        MainScreenPage.route(),
+                        //  (route) => false,
+                      );
+
+                      break;
+                    // authenticateSignIn
+                    case AuthenticationStatus.unauthenticated:
+                      print('un Auth : ' + state.toString());
+                      _navigator.push<void>(
+                        MainScreenPage.route(),
+                        // (route) => false,
+                      );
+
+                      break;
+                    case AuthenticationStatus.authenticateSignIn:
+                      print('authenticateSignIn : ' + state.toString());
+                      _navigator.push<void>(
+                        SignInPage.route(),
+                        //(route) => false,
+                      );
+                      break;
+                    case AuthenticationStatus.authenticateSignUp:
+                      print('SignUp Auth : ' + state.toString());
+                      _navigator.push<void>(
+                        SignUpPage.route(),
+                        //   (route) => false,
+                      );
+                      break;
+                    case AuthenticationStatus.authenticateConfirmCode:
+                      print('authenticate ConfirmCode: ' + state.toString());
+                      _navigator.push<void>(
+                        ConfirmCodePage.route(state.tokenPair!.tokenId,
+                            state.tokenPair!.refreshToken),
+                        // (route) => false,
+                      );
+                      break;
+
+                    /*   case AuthenticationStatus.authenticationDashBoard:
+                      print('authenticate DashBoard: ' +   state.toString());
+                      _navigator.push<void>(
+                        DashBoardPage.route(),
+                        //(route) => false,
+                      );
+                      break;*/
+                    case AuthenticationStatus.authenticationForgotPassword:
+                      print(
+                          'authenticate  ForgotPassword: ' + state.toString());
+                      _navigator.push<void>(
+                        ForgotPasswordPage.route(),
+                        // (route) => false,
+                      );
+                      break;
+                    default:
+                      print('Lisnter find default switch!!!!!!!!! : ' +
+                          state.toString());
+                      _navigator.push<void>(
+                        MainScreenPage.route(),
+                        // (route) => false,
+                      );
+
+                      break;
+                  }
+                }),
+                BlocListener<DashBoardBloc, DashBoardState>(
+                  listener: (context, state) {
+                    print('Listner Lisner !!!!!!!!!' +
+                        state.uiLocale.languageCode);
+                  },
+                ),
+              ], child: child!); //const MainScreen());
+            },
+            onGenerateRoute: (_) => SplashPage.route(),
+
+            // home: const MainScreen(),
           );
         });
   }

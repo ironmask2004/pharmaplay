@@ -14,6 +14,7 @@ class SignInPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('sssssssssiiiiiiiiggggiiiinnn');
     return Scaffold(
       appBar: AppBar(title: Text(SLang.of(context).loginPage)),
       body: Padding(
