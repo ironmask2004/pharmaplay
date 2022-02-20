@@ -8,10 +8,12 @@ import 'components/right_menu.dart';
 import 'components/side_menu.dart';
 
 class MainScreen extends StatelessWidget {
+  const MainScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: context.read<DashBoardBloc>().scaffoldKey,
+      key: context.read<DashBoardBloc>().state.scaffoldKey,
       drawer: const SideMenu(),
       endDrawer: const RightMenu(),
       body: SafeArea(

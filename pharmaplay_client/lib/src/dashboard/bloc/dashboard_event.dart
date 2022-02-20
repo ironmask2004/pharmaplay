@@ -32,22 +32,24 @@ class ReloadUILocaleRequsted extends DashBoardEvent {}
 
 class ReloadUIThemeModeRequsted extends DashBoardEvent {}
 
-class SideMenuClicked extends DashBoardEvent {
-  final GlobalKey<ScaffoldState> _scaffoldKey; //= GlobalKey<ScaffoldState>();
+class SideMenuClicked extends DashBoardEvent {}
+
+/*final GlobalKey<ScaffoldState> _scaffoldKey; //= GlobalKey<ScaffoldState>();
 
   const SideMenuClicked(this._scaffoldKey);
 
   @override
   List<Object> get props => [_scaffoldKey];
 }
+*/
+class RightMenuClicked extends DashBoardEvent {}
 
-class RightMenuClicked extends DashBoardEvent {
-  final GlobalKey<ScaffoldState> _scaffoldKey; //= GlobalKey<ScaffoldState>();
+/*final GlobalKey<ScaffoldState> _scaffoldKey; //= GlobalKey<ScaffoldState>();
 
   const RightMenuClicked(this._scaffoldKey);
 
   @override
   List<Object> get props => [_scaffoldKey];
 }
-
+*/
 class SettingsInitialRequested extends DashBoardEvent {}

@@ -3,10 +3,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pharmaplay_client/src/dashboard/bloc/dashboard_bloc.dart';
 
-import 'package:pharmaplay_client/src/dashboard/controllers/MenuController.dart';
-requiredrequiredimport 'package:pharmaplay_client/src/utlites/constants.dart';
+import 'package:pharmaplay_client/src/utlites/constants.dart';
 import 'package:pharmaplay_client/src/utlites/responsive.dart';
-import 'package:provider/provider.dart';
 
 class Header extends StatelessWidget {
   const Header({
@@ -20,7 +18,9 @@ class Header extends StatelessWidget {
         if (!Responsive.isDesktop(context))
           IconButton(
             icon: const Icon(Icons.menu),
-            onPressed: context.read<MenuController>().controlMenu,
+            onPressed: () {
+              context.read<DashBoardBloc>().add(SideMenuClicked());
+            },
           ),
         if (!Responsive.isMobile(context))
           Text(
@@ -65,7 +65,7 @@ class ProfileCard extends StatelessWidget {
               ),
               onPressed: () {
                 print('hihhhii');
-                context.read<MenuController>().controlRightMenu();
+                context.read<DashBoardBloc>().add(RightMenuClicked());
               }),
 
           if (!Responsive.isMobile(context))

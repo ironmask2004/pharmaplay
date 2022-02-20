@@ -5,12 +5,13 @@ class DashBoardState extends Equatable {
   const DashBoardState(
       {this.uiLocale = const Locale('en'),
       this.uiThemeMode = ThemeMode.system,
-      this.scaffoldKey = const GlobalKey<ScaffoldState>()});
+      required this.scaffoldKey});
 
+  //static final GlobalKey<ScaffoldState> scaffoldKey =       GlobalKey<ScaffoldState>();
+
+  final GlobalKey<ScaffoldState> scaffoldKey;
   final Locale uiLocale;
   final ThemeMode uiThemeMode;
-
-  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   DashBoardState copyWith({
     Locale? uiLocale,
@@ -18,20 +19,21 @@ class DashBoardState extends Equatable {
   }) {
     return DashBoardState(
         uiLocale: uiLocale ?? this.uiLocale,
-        uiThemeMode: uiThemeMode ?? this.uiThemeMode);
+        uiThemeMode: uiThemeMode ?? this.uiThemeMode,
+        scaffoldKey: scaffoldKey);
   }
 
   @override
-  List<Object> get props => [
-        uiLocale,
-        uiThemeMode,
-      ];
+  List<Object> get props => [uiLocale, scaffoldKey];
 }
 
-class DashBoardInitial extends DashBoardState {}
+class DashBoardInitial extends DashBoardState {
+  const DashBoardInitial({required GlobalKey<ScaffoldState> scaffoldKey})
+      : super(scaffoldKey: scaffoldKey);
+}
 
-/*class DashBoardStateUILocaleChanged extends DashBoardState {
-  const DashBoardStateUILocaleChanged(Locale uiLocale)
+/*class DashBoardStateuiLocaleChanged extends DashBoardState {
+  const DashBoardStateuiLocaleChanged(Locale uiLocale)
       : super(uiLocale: uiLocale);
 }
 

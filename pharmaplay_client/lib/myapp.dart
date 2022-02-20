@@ -3,9 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pharmaplay_client/generated/l10n.dart';
 import 'package:pharmaplay_client/src/authentication/authentication.dart';
-import 'package:pharmaplay_client/src/dashboard/controllers/MenuController.dart';
 import 'package:pharmaplay_client/src/utlites/constants.dart';
-import 'package:provider/provider.dart';
 import 'package:user_repository/user_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -88,14 +86,7 @@ class AppView extends StatelessWidget {
                       .apply(bodyColor: Colors.white),
               canvasColor: secondaryColor,
             ),
-            home: MultiProvider(
-              providers: [
-                ChangeNotifierProvider(
-                  create: (context) => MenuController(),
-                ),
-              ],
-              child: MainScreen(),
-            ),
+            home: MainScreen(),
           );
         });
   }
