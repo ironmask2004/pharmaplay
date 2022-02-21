@@ -91,6 +91,7 @@ class RightMenu extends StatelessWidget {
                   currentLocale.languageCode == 'ar'
                       ? const Locale('en')
                       : const Locale('ar')));
+              Navigator.of(context).pop();
               // context.read<DashBoardBloc>().add(UIThemeModeChanged(ThemeMode.light));
             },
           ),

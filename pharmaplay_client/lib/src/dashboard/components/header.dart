@@ -58,62 +58,72 @@ class ProfileCard extends StatelessWidget {
         borderRadius: const BorderRadius.all(Radius.circular(10)),
         border: Border.all(color: Colors.white10),
       ),
-      child: Row(
-        children: [
-          FloatingActionButton(
-              child: const CircleAvatar(
-                radius: 25,
-                backgroundImage: AssetImage("assets/images/profile_pic.png"),
-              ),
-              onPressed: () {
-                print('hihhhii');
-                context.read<DashBoardBloc>().add(RightMenuClicked(context));
-              }),
-          if (!Responsive.isMobile(context))
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: defaultPadding / 2),
-              child: BlocBuilder<AuthenticationBloc, AuthenticationState>(
-                builder: (context, state) {
-                  return Text(
-                      context.read<AuthenticationBloc>().state.user?.email ??
-                          'Guest');
-                },
-              ),
-            ),
-          BlocBuilder<DashBoardBloc, DashBoardState>(
-            buildWhen: (previousState, currentState) =>
-                previousState != currentState,
-            builder: (context, state) {
-              return DropdownButton<Locale>(
-                // Read the selected themeMode from the controller
-                value: context.read<DashBoardBloc>().state.uiLocale,
-                borderRadius: const BorderRadius.all(Radius.circular(15.0)),
-                underline: null,
+      child:
+          // ROW
 
-                // Call the updateThemeMode method any time the user selects a theme.
-                onChanged: (value) {
-                  print(value);
-                  newLocale =
-                      value ?? context.read<DashBoardBloc>().state.uiLocale;
-                  context.read<DashBoardBloc>().add(UILocalChanged(newLocale));
-                  print(newLocale);
-                },
-                items: const [
-                  DropdownMenuItem(
-                    value: Locale('ar'),
-                    child: Text('ع'),
+          Container(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10), // radius of 10
+                  border: Border.all(color: Colors.white10),
+                  color: secondaryColor // green as background color
                   ),
-                  DropdownMenuItem(
-                    value: Locale('en'),
-                    child: Text('e'),
+              child: Row(
+                children: [
+                  FloatingActionButton(child:
+                      BlocBuilder<AuthenticationBloc, AuthenticationState>(
+                    builder: (context, state) {
+                      // print(
+                      //    '---=-=-=-=-=-=-= state Avatar : ' + state.user!.id ??
+                      //        'nnnnn');
+                      return CircleAvatar(
+                        radius: 25,
+                        backgroundImage: (state.user?.IsGuest() == false)
+                            ? const AssetImage("assets/images/profile_pic.png")
+                            : const AssetImage(
+                                "assets/images/flutter_logo.png"),
+                      );
+                    },
+                  ), onPressed: () {
+                    print('hihhhii');
+                    context
+                        .read<DashBoardBloc>()
+                        .add(RightMenuClicked(context));
+                  }),
+                  if (!Responsive.isMobile(context))
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: defaultPadding / 2),
+                      child:
+                          BlocBuilder<AuthenticationBloc, AuthenticationState>(
+                        builder: (context, state) {
+                          return Text(context
+                                  .read<AuthenticationBloc>()
+                                  .state
+                                  .user
+                                  ?.email ??
+                              'Guest');
+                        },
+                      ),
+                    ),
+                  ClipOval(
+                    child: Material(
+                      color: secondaryColor, // button color
+                      child: InkWell(
+                        //splashColor: Colors.red, // inkwell color
+                        child: const SizedBox(
+                            width: 50,
+                            height: 50,
+                            child: Icon(Icons.more_vert_rounded)),
+                        onTap: () {
+                          context
+                              .read<DashBoardBloc>()
+                              .add(RightMenuClicked(context));
+                        },
+                      ),
+                    ),
                   )
                 ],
-              );
-            },
-          ),
-        ],
-      ),
+              )), //row-----------------------
     );
   }
 }

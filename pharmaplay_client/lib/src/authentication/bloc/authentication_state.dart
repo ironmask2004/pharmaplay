@@ -39,7 +39,9 @@ class AuthenticationState extends Equatable {
 
   AuthenticationState.unauthenticated(TokenPair tokenPair)
       : this._(
-            status: AuthenticationStatus.unauthenticated, tokenPair: tokenPair);
+            status: AuthenticationStatus.unauthenticated,
+            tokenPair: tokenPair,
+            user: User.Guest());
 
   @override
   List<Object> get props =>
