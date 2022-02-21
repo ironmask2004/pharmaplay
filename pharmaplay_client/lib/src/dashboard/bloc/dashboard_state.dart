@@ -4,12 +4,11 @@ part of 'dashboard_bloc.dart';
 class DashBoardState extends Equatable {
   const DashBoardState(
       {this.uiLocale = const Locale('en'),
-      this.uiThemeMode = ThemeMode.system,
-      required this.scaffoldKey});
+      this.uiThemeMode = ThemeMode.system});
 
   //static final GlobalKey<ScaffoldState> scaffoldKey =       GlobalKey<ScaffoldState>();
 
-  final GlobalKey<ScaffoldState> scaffoldKey;
+  //final GlobalKey<ScaffoldState> scaffoldKey;
   final Locale uiLocale;
   final ThemeMode uiThemeMode;
 
@@ -18,18 +17,17 @@ class DashBoardState extends Equatable {
     ThemeMode? uiThemeMode,
   }) {
     return DashBoardState(
-        uiLocale: uiLocale ?? this.uiLocale,
-        uiThemeMode: uiThemeMode ?? this.uiThemeMode,
-        scaffoldKey: scaffoldKey);
+      uiLocale: uiLocale ?? this.uiLocale,
+      uiThemeMode: uiThemeMode ?? this.uiThemeMode,
+    );
   }
 
   @override
-  List<Object> get props => [uiLocale, scaffoldKey];
+  List<Object> get props => [uiLocale];
 }
 
 class DashBoardInitial extends DashBoardState {
-  const DashBoardInitial({required GlobalKey<ScaffoldState> scaffoldKey})
-      : super(scaffoldKey: scaffoldKey);
+  const DashBoardInitial() : super();
 }
 
 /*class DashBoardStateuiLocaleChanged extends DashBoardState {

@@ -8,16 +8,18 @@ import '../components/right_menu.dart';
 import '../components/side_menu.dart';
 
 class MainScreenPage extends StatelessWidget {
-  const MainScreenPage({Key? key}) : super(key: key);
+  MainScreenPage({Key? key}) : super(key: key);
 
   static Route route() {
-    return MaterialPageRoute<void>(builder: (_) => const MainScreenPage());
+    return MaterialPageRoute<void>(builder: (_) => MainScreenPage());
   }
+
+  //final GlobalKey<ScaffoldState> _scaffoldkey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: context.read<DashBoardBloc>().state.scaffoldKey,
+      //  key: _scaffoldkey, //context.read<DashBoardBloc>().state.scaffoldKey,
       drawer: const SideMenu(),
       endDrawer: const RightMenu(),
       body: SafeArea(

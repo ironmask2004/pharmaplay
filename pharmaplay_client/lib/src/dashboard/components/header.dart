@@ -8,8 +8,6 @@ import 'package:pharmaplay_client/src/dashboard/bloc/dashboard_bloc.dart';
 import 'package:pharmaplay_client/src/utlites/constants.dart';
 import 'package:pharmaplay_client/src/utlites/responsive.dart';
 
-import '../../login/sigin/sigin.dart';
-
 class Header extends StatelessWidget {
   const Header({
     Key? key,
@@ -23,7 +21,7 @@ class Header extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.menu),
             onPressed: () {
-              context.read<DashBoardBloc>().add(SideMenuClicked());
+              context.read<DashBoardBloc>().add(SideMenuClicked(context));
             },
           ),
         if (!Responsive.isMobile(context))
@@ -69,7 +67,7 @@ class ProfileCard extends StatelessWidget {
               ),
               onPressed: () {
                 print('hihhhii');
-                context.read<DashBoardBloc>().add(RightMenuClicked());
+                context.read<DashBoardBloc>().add(RightMenuClicked(context));
               }),
           if (!Responsive.isMobile(context))
             const Padding(

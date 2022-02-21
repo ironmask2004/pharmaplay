@@ -58,7 +58,6 @@ class AppView extends StatelessWidget {
   }) : super(key: key);
 
   final _navigatorKey = GlobalKey<NavigatorState>();
-
   NavigatorState get _navigator => _navigatorKey.currentState!;
 
   @override

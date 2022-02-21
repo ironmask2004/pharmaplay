@@ -17,7 +17,7 @@ class AuthenticationBloc
     required UserRepository userRepository,
   })  : _authenticationRepository = authenticationRepository,
         _userRepository = userRepository,
-        super(const AuthenticationState.unknown()) {
+        super(AuthenticationState.unknown(TokenPair.empty())) {
     on<AuthenticationLandingRequested>(_onAuthenticationLandingRequested);
     on<AuthenticationStatusChanged>(_onAuthenticationStatusChanged);
     on<AuthenticationLogoutRequested>(_onAuthenticationLogoutRequested);
@@ -82,7 +82,7 @@ class AuthenticationBloc
           MySharedPreferences.instance.setBooleanValue("loggedIn", true);
           return emit(AuthenticationState.authenticated(event.tokenPair!));
         } else {
-          print('unauthenticated--------------------');
+          print('unauthenticated------- empty-------------');
           return emit(AuthenticationState.unauthenticated(TokenPair.empty()));
         }
       case AuthenticationStatus.authenticateConfirmCode:
@@ -91,7 +91,7 @@ class AuthenticationBloc
             AuthenticationState.authenticateConfirmCode(event.tokenPair!));
 
       default:
-        return emit(const AuthenticationState.unknown());
+        return emit(AuthenticationState.unknown(TokenPair.empty()));
     }
   }
 
@@ -143,6 +143,7 @@ class AuthenticationBloc
     //MySharedPreferences.instance.setStringValue("password", getPassword);
     MySharedPreferences.instance.setBooleanValue("loggedIn", false);
     print('LOOOOOOgOOOOOUT!! ---- outttt');
+    emit(AuthenticationState.unauthenticated(TokenPair.empty()));
   }
 
   void _onAuthenticationLandingRequested(

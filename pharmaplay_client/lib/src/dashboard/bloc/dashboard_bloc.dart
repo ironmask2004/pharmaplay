@@ -8,8 +8,7 @@ part 'dashboard_event.dart';
 part 'dashboard_state.dart';
 
 class DashBoardBloc extends Bloc<DashBoardEvent, DashBoardState> {
-  DashBoardBloc()
-      : super(DashBoardInitial(scaffoldKey: GlobalKey<ScaffoldState>())) {
+  DashBoardBloc() : super(DashBoardInitial()) {
     on<DashBoardInitialRequested>(_onDashBoardInitialRequested);
     on<SideMenuClicked>(_onSideMenuClicked);
     on<RightMenuClicked>(_onRightMenuClicked);
@@ -22,8 +21,8 @@ class DashBoardBloc extends Bloc<DashBoardEvent, DashBoardState> {
     SideMenuClicked event,
     Emitter<DashBoardState> emit,
   ) async {
-    if (!state.scaffoldKey.currentState!.isDrawerOpen) {
-      state.scaffoldKey.currentState!.openDrawer();
+    if (!Scaffold.of(event.context).isDrawerOpen) {
+      Scaffold.of(event.context).openDrawer();
     }
   }
 
@@ -31,8 +30,8 @@ class DashBoardBloc extends Bloc<DashBoardEvent, DashBoardState> {
     RightMenuClicked event,
     Emitter<DashBoardState> emit,
   ) async {
-    if (!state.scaffoldKey.currentState!.isEndDrawerOpen) {
-      state.scaffoldKey.currentState!.openEndDrawer();
+    if (!Scaffold.of(event.context).isEndDrawerOpen) {
+      Scaffold.of(event.context).openEndDrawer();
     }
   }
 
