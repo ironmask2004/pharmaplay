@@ -44,6 +44,25 @@ class User extends Equatable {
         status: $enumDecode(_$UserStatusEnumMap, map['status'],
             unknownValue: UserStatus.needVerify));
   }
+  factory User.Guest() {
+    return User(
+        idx: 0,
+        id: '0',
+        firstname: 'Guest',
+        lastname: 'User',
+        email: 'Guest',
+        password: 'Guest',
+        salt: 'Guest',
+        mobile: 'Guest',
+        avatar: 'Guest',
+        createdate: DateTime.now(),
+        updatedate: DateTime.now(),
+        status: UserStatus.verifyed);
+  }
+
+  bool IsGuest() {
+    return (idx == 0 && id == '0' && firstname == 'Guest');
+  }
 
   final String id;
   final int idx;

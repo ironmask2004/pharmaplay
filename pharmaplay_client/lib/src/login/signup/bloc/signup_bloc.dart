@@ -168,7 +168,7 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
     ));
   }
 
-  void _onSignupEmailChanged(
+  /*void _onSignupEmailChanged(
     SignupEmailChanged event,
     Emitter<SignupState> emit,
   ) {
@@ -178,9 +178,9 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
       email: email,
       status: Formz.validate([state.password, email]),
     ));
-  }
+  }*/
 
-  void _onSignupPasswordChanged(
+  /* void _onSignupPasswordChanged(
     SignupPasswordChanged event,
     Emitter<SignupState> emit,
   ) {
@@ -191,7 +191,7 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
       status: Formz.validate([password, state.email]),
     ));
   }
-
+*/
   void _onSignUpEmailChanged(
     SignUpEmailChanged event,
     Emitter<SignupState> emit,
@@ -230,7 +230,7 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
     ));
   }
 
-  void _onSignupSubmitted(
+  /*void _onSignupSubmitted(
     SignupSubmitted event,
     Emitter<SignupState> emit,
   ) async {
@@ -265,7 +265,7 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
         // showInSnackBar(context, err.toString());
       }
     }
-  }
+  }*/
   //=======================
   //
 

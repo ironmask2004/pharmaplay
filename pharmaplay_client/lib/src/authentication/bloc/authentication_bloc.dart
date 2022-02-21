@@ -77,10 +77,12 @@ class AuthenticationBloc
           MySharedPreferences.instance
               .setStringValue("refreshToken", event.tokenPair!.refreshToken);
 
-          print('Saved try to Get User : ${user.id}');
+          print('---------Saved try to Get User -------: ' + user.toString());
           //MySharedPreferences.instance.setStringValue("password", getPassword);
           MySharedPreferences.instance.setBooleanValue("loggedIn", true);
-          return emit(AuthenticationState.authenticated(event.tokenPair!));
+
+          emit(AuthenticationState.authenticated(event.tokenPair!, user));
+          return;
         } else {
           print('unauthenticated------- empty-------------');
           return emit(AuthenticationState.unauthenticated(TokenPair.empty()));
@@ -97,7 +99,7 @@ class AuthenticationBloc
 
   _onAuthenticationSignUpRequested(
       AuthenticationSignUpRequested event, Emitter<AuthenticationState> emit) {
-    emit(const AuthenticationState.authenticationSignUp());
+    emit(AuthenticationState.authenticationSignUp());
   }
 
   /*
@@ -115,7 +117,7 @@ class AuthenticationBloc
 */
   _onAuthenticationForgotRequested(
       AuthenticationForgotRequested event, Emitter<AuthenticationState> emit) {
-    emit(const AuthenticationState.authenticationForgotPassword());
+    emit(AuthenticationState.authenticationForgotPassword());
   }
 
   void _onAuthenticateSignInRequested(
@@ -127,7 +129,7 @@ class AuthenticationBloc
 
     await MySharedPreferences.instance.setBooleanValue("loggedIn", false);
 
-    emit(const AuthenticationState.authenticationSignIn());
+    emit(AuthenticationState.authenticationSignIn());
   }
 
   void _onAuthenticationLogoutRequested(
@@ -189,7 +191,9 @@ class AuthenticationBloc
             await _authenticationRepository.logInByID(
                 tokenPair: _newTorkenPair);
 
-            emit(AuthenticationState.authenticated((_newTorkenPair)));
+            print(' emmit with User.Guest() ');
+            emit(AuthenticationState.authenticated(
+                (_newTorkenPair), User.Guest()));
           }
           // emit();
         } catch (_) {

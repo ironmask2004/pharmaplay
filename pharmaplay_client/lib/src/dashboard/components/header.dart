@@ -70,9 +70,16 @@ class ProfileCard extends StatelessWidget {
                 context.read<DashBoardBloc>().add(RightMenuClicked(context));
               }),
           if (!Responsive.isMobile(context))
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: defaultPadding / 2),
-              child: Text("Angelina Jolie"),
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: defaultPadding / 2),
+              child: BlocBuilder<AuthenticationBloc, AuthenticationState>(
+                builder: (context, state) {
+                  return Text(
+                      context.read<AuthenticationBloc>().state.user?.email ??
+                          'Guest');
+                },
+              ),
             ),
           BlocBuilder<DashBoardBloc, DashBoardState>(
             buildWhen: (previousState, currentState) =>
