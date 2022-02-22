@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:data_table_2/data_table_2.dart';
+import 'package:pharmaplay_client/src/dashboard/dashboard.dart';
 
 import 'package:pharmaplay_client/src/dashboard/models/RecentFile.dart';
 
@@ -15,9 +16,9 @@ class RecentFiles extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(defaultPadding),
-      decoration: const BoxDecoration(
-        color: secondaryColor,
-        borderRadius: BorderRadius.all(Radius.circular(10)),
+      decoration: BoxDecoration(
+        color: context.read<DashBoardBloc>().state.secondaryColor,
+        borderRadius: const BorderRadius.all(Radius.circular(10)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

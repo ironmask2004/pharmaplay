@@ -65,6 +65,9 @@
   "applyNewSettings": "تطبيق الاعدادات الجديدة",
   "back": "عودة",
   "englishLanguage": "اللغة اﻷنكليزية",
+  "themeMode": "نمط اﻷلوان",
+  "darkMode": "نمط ألوان غامق",
+  "lightMode": "نمط ألوان فاتح" ,
   "SignInchangeLanguage": "English Language",
   "homelogout": "تسجيل خروج"
 }

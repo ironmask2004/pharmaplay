@@ -3,22 +3,27 @@ import 'package:login_forms/login_forms.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
+import 'package:pharmaplay_client/src/dashboard/dashboard.dart';
 import 'package:pharmaplay_client/src/login/login.dart';
 
 class ConfirmCodeForm extends StatelessWidget {
-  final LoginFormsStyle style = LoginFormsStyle.defaultTemplate.copyWith(
-    inlineButtonTextStyle: const TextStyle(color: fontbodyColor),
-    primary: primaryColor,
-    textFieldTextStyle: const TextStyle(color: fontbodyColor),
-  );
   final String email;
   final String password;
-  ConfirmCodeForm(this.email, this.password, {Key? key}) : super(key: key);
+  const ConfirmCodeForm(this.email, this.password, {Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     // ignore: prefer_const_constructors
-    var logo = Icon(
+    final LoginFormsStyle style = LoginFormsStyle.defaultTemplate.copyWith(
+      inlineButtonTextStyle:
+          TextStyle(color: context.read<DashBoardBloc>().state.fontbodyColor),
+      primary: context.read<DashBoardBloc>().state.primaryColor,
+      textFieldTextStyle:
+          TextStyle(color: context.read<DashBoardBloc>().state.fontbodyColor),
+    );
+
+    var logo = const Icon(
       Icons.android_rounded,
       size: 80,
     );

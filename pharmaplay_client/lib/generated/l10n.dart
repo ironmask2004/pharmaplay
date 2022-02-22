@@ -312,6 +312,36 @@ class SLang {
     );
   }
 
+  /// `Theme Mode`
+  String get themeMode {
+    return Intl.message(
+      'Theme Mode',
+      name: 'themeMode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Dark Mode`
+  String get darkMode {
+    return Intl.message(
+      'Dark Mode',
+      name: 'darkMode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Light Mode`
+  String get lightMode {
+    return Intl.message(
+      'Light Mode',
+      name: 'lightMode',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `اللغة العربية`
   String get SignInchangeLanguage {
     return Intl.message(

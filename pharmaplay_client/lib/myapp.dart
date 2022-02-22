@@ -76,15 +76,16 @@ class AppView extends StatelessWidget {
               Locale('ar', ''), // Arabic, no country code
             ],
             darkTheme: ThemeData.dark(),
-            theme: ThemeData.light().copyWith(
-              scaffoldBackgroundColor: bgColor,
+            theme: ThemeData.dark().copyWith(
+              scaffoldBackgroundColor:
+                  context.read<DashBoardBloc>().state.bgColor,
               textTheme:
                   GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme)
-                      .apply(bodyColor: fontbodyColor),
-              canvasColor: secondaryColor,
+                      .apply(bodyColor: dashboardState.fontbodyColor),
+              canvasColor: context.read<DashBoardBloc>().state.secondaryColor,
             ),
-            //themeMode: dashboardState.uiThemeMode,
-            themeMode: ThemeMode.system,
+            // themeMode: dashboardState.uiThemeMode,
+            // themeMode: ThemeMode.system,
             locale:
                 dashboardState.uiLocale, //getUIlocale(context),Locale('ar'),
             onGenerateTitle: (BuildContext context) =>

@@ -3,7 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pharmaplay_client/generated/l10n.dart';
 import 'package:pharmaplay_client/src/dashboard/bloc/dashboard_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pharmaplay_client/src/utlites/sforms_style.dart';
+import 'package:pharmaplay_client/src/utlites/responsive.dart';
 
 class SideMenu extends StatelessWidget {
   const SideMenu({
@@ -69,7 +69,10 @@ class SideMenu extends StatelessWidget {
                   currentLocale.languageCode == 'ar'
                       ? const Locale('en')
                       : const Locale('ar')));
-              Navigator.of(context).pop();
+              if (!Responsive.isDesktop(context)) {
+                Navigator.of(context).pop();
+              }
+
               // context.read<DashBoardBloc>().add(UIThemeModeChanged(ThemeMode.light));
             },
           ),
@@ -98,12 +101,13 @@ class DrawerListTile extends StatelessWidget {
       horizontalTitleGap: 0.0,
       leading: SvgPicture.asset(
         svgSrc,
-        color: fontbodyColor,
+        color: context.read<DashBoardBloc>().state.fontbodyColor,
         height: 16,
       ),
       title: Text(
         title,
-        style: const TextStyle(color: fontbodyColor),
+        style:
+            TextStyle(color: context.read<DashBoardBloc>().state.fontbodyColor),
       ),
     );
   }

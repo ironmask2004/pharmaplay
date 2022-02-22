@@ -43,6 +43,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "back": MessageLookupByLibrary.simpleMessage("Back"),
         "backTo": MessageLookupByLibrary.simpleMessage("Back To "),
         "confirmCode": MessageLookupByLibrary.simpleMessage("Confirm-Code"),
+        "darkMode": MessageLookupByLibrary.simpleMessage("Dark Mode"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "emailaddress": MessageLookupByLibrary.simpleMessage("Email"),
         "englishLanguage":
@@ -50,6 +51,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("forgotPassword"),
         "homelogout": MessageLookupByLibrary.simpleMessage("LogOut"),
+        "lightMode": MessageLookupByLibrary.simpleMessage("Light Mode"),
         "loginPage": MessageLookupByLibrary.simpleMessage(
             "Wellcome Login To PahrmaPlay"),
         "onforgotemailchanged":
@@ -68,6 +70,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "signIn": MessageLookupByLibrary.simpleMessage("signIn"),
         "signOut": MessageLookupByLibrary.simpleMessage("signOut"),
-        "signUp": MessageLookupByLibrary.simpleMessage("signUp")
+        "signUp": MessageLookupByLibrary.simpleMessage("signUp"),
+        "themeMode": MessageLookupByLibrary.simpleMessage("Theme Mode")
       };
 }

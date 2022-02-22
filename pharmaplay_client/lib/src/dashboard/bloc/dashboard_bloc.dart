@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:equatable/equatable.dart';
 
 import 'package:pharmaplay_client/src/utlites/shared_pref.dart';
+import 'package:pharmaplay_client/src/utlites/colortools.dart';
 
 part 'dashboard_event.dart';
 part 'dashboard_state.dart';
@@ -13,6 +14,9 @@ class DashBoardBloc extends Bloc<DashBoardEvent, DashBoardState> {
     on<SideMenuClicked>(_onSideMenuClicked);
     on<RightMenuClicked>(_onRightMenuClicked);
     on<UILocalChanged>(_onUILocalChanged);
+
+    on<UIThemeModeChanged>(_onUIThemeModeChanged);
+
     on<ReloadUILocaleRequsted>(_onReloadUILocaleRequsted);
     on<ReloadUIThemeModeRequsted>(_onReloadUIThemeModeRequsted);
   }
@@ -42,6 +46,16 @@ class DashBoardBloc extends Bloc<DashBoardEvent, DashBoardState> {
     ThemeMode currentThemeMode;
     String savedThemeMode =
         await MySharedPreferences.instance.getStringValue("ThemeMode");
+
+    Color primaryColor = Color(
+        await MySharedPreferences.instance.getIntegerValue("primaryColor"));
+    Color secondaryColor = Color(
+        await MySharedPreferences.instance.getIntegerValue("secondaryColor"));
+    Color bgColor =
+        Color(await MySharedPreferences.instance.getIntegerValue("bgColor"));
+    Color fontbodyColor = Color(
+        await MySharedPreferences.instance.getIntegerValue("fontbodyColor"));
+
     switch (savedThemeMode) {
       case 'light':
         currentThemeMode = ThemeMode.light;
@@ -54,9 +68,14 @@ class DashBoardBloc extends Bloc<DashBoardEvent, DashBoardState> {
     }
     print('emit UITHemeChanged' + currentThemeMode.toString());
 
-    //  emit(DashBoardStateUIThemeModeChanged(currentThemeMode));
-    //emit(DashBoardState(currentThemeMode));
-    emit(state.copyWith(uiThemeMode: currentThemeMode));
+    //emit(DashBoardStateUIThemeModeChanged(currentThemeMode));
+
+    emit(state.copyWith(
+        uiThemeMode: currentThemeMode,
+        primaryColor: primaryColor,
+        secondaryColor: secondaryColor,
+        bgColor: bgColor,
+        fontbodyColor: fontbodyColor));
 
     print('DashBoardInitialRequested !!!');
     String currentLocale =
@@ -73,12 +92,35 @@ class DashBoardBloc extends Bloc<DashBoardEvent, DashBoardState> {
   Future<void> _onReloadUIThemeModeRequsted(
     ReloadUIThemeModeRequsted event,
     Emitter<DashBoardState> emit,
+
+    /*
+    Color black = Colors.black; // example black color
+
+     String _storeColorValue = black.value.toString() ;
+
+This is will give 4278190080 as the black color value. you store this value as String to firebase.
+You can retrieve color value and change it back to color like this :
+
+int value = int.parse(_storeColorValue);
+
+Color color = Color(value).withOpacity(1); 
+    */
   ) async {
     print('_onReloadUIThemeModeRequsted!!');
     //=> ThemeMode.system;
     ThemeMode currentThemeMode;
     String savedThemeMode =
         await MySharedPreferences.instance.getStringValue("ThemeMode");
+
+    Color primaryColor = Color(
+        await MySharedPreferences.instance.getIntegerValue("primaryColor"));
+    Color secondaryColor = Color(
+        await MySharedPreferences.instance.getIntegerValue("secondaryColor"));
+    Color bgColor =
+        Color(await MySharedPreferences.instance.getIntegerValue("bgColor"));
+    Color fontbodyColor = Color(
+        await MySharedPreferences.instance.getIntegerValue("fontbodyColor"));
+
     switch (savedThemeMode) {
       case 'light':
         currentThemeMode = ThemeMode.light;
@@ -93,7 +135,12 @@ class DashBoardBloc extends Bloc<DashBoardEvent, DashBoardState> {
 
     //emit(DashBoardStateUIThemeModeChanged(currentThemeMode));
 
-    emit(state.copyWith(uiThemeMode: currentThemeMode));
+    emit(state.copyWith(
+        uiThemeMode: currentThemeMode,
+        primaryColor: primaryColor,
+        secondaryColor: secondaryColor,
+        bgColor: bgColor,
+        fontbodyColor: fontbodyColor));
   }
 
   Future<void> _onReloadUILocaleRequsted(
@@ -123,44 +170,79 @@ class DashBoardBloc extends Bloc<DashBoardEvent, DashBoardState> {
     // Dot not perform any work if new and old ThemeMode are identical
     if (event.uiThemeMode == state.uiThemeMode) return;
 
-    // Otherwise, store the new theme mode in memory
-    // Use the shared_preferences package to persist dashboard locally or the
-    // http package to persist dashboard over the network.
-    switch (state.uiThemeMode) {
-      case ThemeMode.dark:
-        {
-          emit(state.copyWith(
-              primaryColor: const Color(0xFF2697FF),
-              secondaryColor: const Color(0xFF2A2D3E),
-              bgColor: const Color(0xFF212332),
-              fontbodyColor: const Color.fromARGB(255, 51, 144, 236)));
-        }
-        break;
-      case ThemeMode.light:
-        {
-          emit(state.copyWith(
-              primaryColor: const Color.fromARGB(255, 41, 73, 102),
-              secondaryColor: const Color.fromARGB(255, 205, 200, 255),
-              bgColor: const Color.fromARGB(255, 205, 225, 255),
-              fontbodyColor: const Color.fromARGB(255, 2, 13, 24)));
-        }
-        break;
-      case ThemeMode.system:
-        {
-          emit(state.copyWith(
-              primaryColor: const Color.fromARGB(255, 41, 73, 102),
-              secondaryColor: const Color.fromARGB(255, 205, 200, 255),
-              bgColor: const Color.fromARGB(255, 205, 225, 255),
-              fontbodyColor: const Color.fromARGB(255, 2, 13, 24)));
-        }
-        break;
-    }
-
     print('_onUIThemeModeChanged: ' + event.uiThemeMode.toString());
     await MySharedPreferences.instance
         .setStringValue("ThemeMode", event.uiThemeMode.name);
 
-    emit(state.copyWith(uiThemeMode: event.uiThemeMode));
+    switch (event.uiThemeMode) {
+      case ThemeMode.dark:
+        {
+          print('Change to Dark MODE --------------' +
+              Color(0xFF2697FF).value.toString() +
+              int.parse(Color(0xFF2697FF).value.toString()).toString());
+          ;
+          await MySharedPreferences.instance
+              .setIntegerValue("primaryColor", const Color(0xFF2697FF).value);
+
+          await MySharedPreferences.instance
+              .setIntegerValue("secondaryColor", Color(0xFF2A2D3E).value);
+          await MySharedPreferences.instance
+              .setIntegerValue("bgColor", Color(0xFF212332).value);
+          await MySharedPreferences.instance
+              .setIntegerValue("fontbodyColor", Color(0xFF3390EC).value);
+
+          emit(state.copyWith(
+              uiThemeMode: event.uiThemeMode,
+              primaryColor: Color(0xFF2697FF),
+              secondaryColor: const Color(0xFF2A2D3E),
+              bgColor: const Color(0xFF212332),
+              fontbodyColor: Color(0xFF3390EC)));
+        }
+        break;
+      case ThemeMode.light:
+        {
+          print('Change to Mode Light --------------' +
+              Color(0xFF294966).value.toString() +
+              int.parse(Color(0xFF294966).value.toString()).toString());
+
+          await MySharedPreferences.instance
+              .setIntegerValue("primaryColor", Color(0xFF294966).value);
+          await MySharedPreferences.instance
+              .setIntegerValue("secondaryColor", Color(0xFFCDC8FF).value);
+          await MySharedPreferences.instance
+              .setIntegerValue("bgColor", Color(0xFFCDE1FF).value);
+          await MySharedPreferences.instance
+              .setIntegerValue("fontbodyColor", Color(0xFF020D18).value);
+
+          emit(state.copyWith(
+              uiThemeMode: event.uiThemeMode,
+              primaryColor: Color(0xFF294966),
+              secondaryColor: Color(0xFFCDC8FF),
+              bgColor: Color(0xFFCDE1FF),
+              fontbodyColor: Color(0xFF020D18)));
+        }
+        break;
+      case ThemeMode.system:
+        {
+          print('Change to System MODE --------------' +
+              Color(0xFF294966).value.toString());
+          await MySharedPreferences.instance
+              .setIntegerValue("primaryColor", Color(0xFF294966).value);
+          await MySharedPreferences.instance
+              .setIntegerValue("secondaryColor", Color(0xFFCDC8FF).value);
+          await MySharedPreferences.instance
+              .setIntegerValue("bgColor", Color(0xFFCDE1FF).value);
+          await MySharedPreferences.instance
+              .setIntegerValue("fontbodyColor", Color(0xFF020D18).value);
+
+          emit(state.copyWith(
+              uiThemeMode: event.uiThemeMode,
+              primaryColor: Color(0xFF294966),
+              secondaryColor: Color(0xFFCDC8FF),
+              bgColor: Color(0xFFCDE1FF),
+              fontbodyColor: Color(0xFF020D18)));
+        }
+    }
   }
 
   Future<void> _onUILocalChanged(

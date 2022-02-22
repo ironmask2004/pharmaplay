@@ -2,23 +2,25 @@ import 'dart:html';
 import 'package:flutter/material.dart';
 import 'package:login_forms/login_forms.dart';
 import 'package:pharmaplay_client/generated/l10n.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:pharmaplay_client/src/authentication/authentication.dart';
+import 'package:pharmaplay_client/src/dashboard/dashboard.dart';
 import 'package:pharmaplay_client/src/login/login.dart';
 
 //import 'package:pharmaplay_client/src/login/login.dart';
 
 class SignUpForm extends StatelessWidget {
-  final LoginFormsStyle style = LoginFormsStyle.defaultTemplate.copyWith(
-    inlineButtonTextStyle: const TextStyle(color: fontbodyColor),
-    primary: primaryColor,
-    textFieldTextStyle: const TextStyle(color: fontbodyColor),
-  );
   SignUpForm({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final LoginFormsStyle style = LoginFormsStyle.defaultTemplate.copyWith(
+      inlineButtonTextStyle:
+          TextStyle(color: context.read<DashBoardBloc>().state.fontbodyColor),
+      primary: context.read<DashBoardBloc>().state.primaryColor,
+      textFieldTextStyle:
+          TextStyle(color: context.read<DashBoardBloc>().state.fontbodyColor),
+    );
     // ignore: prefer_const_constructors
     var logo = Icon(
       Icons.android_rounded,

@@ -57,6 +57,38 @@ class RightMenu extends StatelessWidget {
               );
             },
           ),
+          BlocBuilder<DashBoardBloc, DashBoardState>(
+            builder: (context, state) {
+              return DrawerListTile(
+                title: SLang.of(context).darkMode,
+                visible: (context.read<DashBoardBloc>().state.uiThemeMode ==
+                    ThemeMode.light),
+                svgSrc: "assets/icons/menu_profile.svg",
+                press: () {
+                  context
+                      .read<DashBoardBloc>()
+                      .add(const UIThemeModeChanged(ThemeMode.dark));
+                  Navigator.of(context).pop();
+                },
+              );
+            },
+          ),
+          BlocBuilder<DashBoardBloc, DashBoardState>(
+            builder: (context, state) {
+              return DrawerListTile(
+                title: SLang.of(context).lightMode,
+                visible: (context.read<DashBoardBloc>().state.uiThemeMode ==
+                    ThemeMode.dark),
+                svgSrc: "assets/icons/menu_profile.svg",
+                press: () {
+                  context
+                      .read<DashBoardBloc>()
+                      .add(const UIThemeModeChanged(ThemeMode.light));
+                  Navigator.of(context).pop();
+                },
+              );
+            },
+          ),
           BlocBuilder<AuthenticationBloc, AuthenticationState>(
             builder: (context, state) {
               return DrawerListTile(
@@ -127,12 +159,13 @@ class DrawerListTile extends StatelessWidget {
           horizontalTitleGap: 0.0,
           leading: SvgPicture.asset(
             svgSrc,
-            color: fontbodyColor,
+            color: context.read<DashBoardBloc>().state.fontbodyColor,
             height: 16,
           ),
           title: Text(
             title,
-            style: const TextStyle(color: fontbodyColor),
+            style: TextStyle(
+                color: context.read<DashBoardBloc>().state.fontbodyColor),
           ),
         ));
   }

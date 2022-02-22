@@ -8,7 +8,7 @@ class DashBoardState extends Equatable {
       this.primaryColor = const Color(0xFF2697FF),
       this.secondaryColor = const Color(0xFF2A2D3E),
       this.bgColor = const Color(0xFF212332),
-      this.fontbodyColor = const Color.fromARGB(255, 51, 144, 236)});
+      this.fontbodyColor = const Color(0xFF3390EC)});
 
   //static final GlobalKey<ScaffoldState> scaffoldKey =       GlobalKey<ScaffoldState>();
 
@@ -25,6 +25,7 @@ class DashBoardState extends Equatable {
    secondaryColor = Color(0xFF2A2D3E);
    bgColor = Color(0xFF212332);
    fontbodyColor = Color.fromARGB(255, 51, 144, 236);
+
  primaryColor = Color.fromARGB(255, 41, 73, 102);
  secondaryColor = Color.fromARGB(255, 205, 200, 255);
  bgColor = Color.fromARGB(255, 205, 225, 255);

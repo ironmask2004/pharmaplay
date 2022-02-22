@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:pharmaplay_client/src/dashboard/dashboard.dart';
+
 /*
 const primaryColor = Color(0xFF2697FF);
 const secondaryColor = Color(0xFF2A2D3E);
 const bgColor = Color(0xFF212332);
 const fontbodyColor = Color.fromARGB(255, 51, 144, 236);
-*/
+
 
 const primaryColor = Color.fromARGB(255, 41, 73, 102);
 const secondaryColor = Color.fromARGB(255, 205, 200, 255);
 const bgColor = Color.fromARGB(255, 205, 225, 255);
 const fontbodyColor = Color.fromARGB(255, 2, 13, 24);
-
+*/
 const defaultPadding = 16.0;
 
 const _kColorPrimary = Color(0xFFFFAB00);
@@ -629,7 +631,7 @@ class SFormsTextField extends StatelessWidget {
         Container(
           padding: style.textFieldPadding,
           decoration: ShapeDecoration(
-            color: fontbodyColor,
+            color: context.read<DashBoardBloc>().state.fontbodyColor,
             shape: RoundedRectangleBorder(
               borderRadius: (style.buttonStyle.shape
                           ?.resolve(MaterialState.values.toSet())

@@ -43,6 +43,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "back": MessageLookupByLibrary.simpleMessage("عودة"),
         "backTo": MessageLookupByLibrary.simpleMessage("عودة إلى "),
         "confirmCode": MessageLookupByLibrary.simpleMessage("رمز التحقق"),
+        "darkMode": MessageLookupByLibrary.simpleMessage("نمط ألوان غامق"),
         "email": MessageLookupByLibrary.simpleMessage("الإيميل"),
         "emailaddress": MessageLookupByLibrary.simpleMessage("Email"),
         "englishLanguage":
@@ -50,6 +51,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("نسيت كلمة السر"),
         "homelogout": MessageLookupByLibrary.simpleMessage("تسجيل خروج"),
+        "lightMode": MessageLookupByLibrary.simpleMessage("نمط ألوان فاتح"),
         "loginPage":
             MessageLookupByLibrary.simpleMessage("تسجيل الدخول إلى الصيدلية"),
         "onforgotemailchanged":
@@ -69,6 +71,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "settings": MessageLookupByLibrary.simpleMessage("اﻷعدادات!"),
         "signIn": MessageLookupByLibrary.simpleMessage("تسجيل دخول"),
         "signOut": MessageLookupByLibrary.simpleMessage("تسجيل خروج"),
-        "signUp": MessageLookupByLibrary.simpleMessage("تسجيل جديد")
+        "signUp": MessageLookupByLibrary.simpleMessage("تسجيل جديد"),
+        "themeMode": MessageLookupByLibrary.simpleMessage("نمط اﻷلوان")
       };
 }

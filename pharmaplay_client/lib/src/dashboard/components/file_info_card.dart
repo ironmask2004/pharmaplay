@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:pharmaplay_client/src/dashboard/dashboard.dart';
 import 'package:pharmaplay_client/src/dashboard/models/MyFiles.dart';
-import 'package:pharmaplay_client/src/utlites/sforms_style.dart';
 import 'package:pharmaplay_client/src/utlites/sforms_style.dart';
 
 class FileInfoCard extends StatelessWidget {
@@ -16,8 +16,8 @@ class FileInfoCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(defaultPadding),
-      decoration: const BoxDecoration(
-        color: secondaryColor,
+      decoration: BoxDecoration(
+        color: context.read<DashBoardBloc>().state.secondaryColor,
         borderRadius: BorderRadius.all(Radius.circular(10)),
       ),
       child: Column(
@@ -40,7 +40,9 @@ class FileInfoCard extends StatelessWidget {
                   color: info.color,
                 ),
               ),
-              const Icon(Icons.more_vert, color: fontbodyColor) //+45
+              Icon(Icons.more_vert,
+                  color:
+                      context.read<DashBoardBloc>().state.fontbodyColor) //+45
             ],
           ),
           Text(
@@ -57,17 +59,16 @@ class FileInfoCard extends StatelessWidget {
             children: [
               Text(
                 "${info.numOfFiles} Files",
-                style: Theme.of(context)
-                    .textTheme
-                    .caption!
-                    .copyWith(color: fontbodyColor), //+70
+                style: Theme.of(context).textTheme.caption!.copyWith(
+                    color: context
+                        .read<DashBoardBloc>()
+                        .state
+                        .fontbodyColor), //+70
               ),
               Text(
                 info.totalStorage!,
-                style: Theme.of(context)
-                    .textTheme
-                    .caption!
-                    .copyWith(color: fontbodyColor),
+                style: Theme.of(context).textTheme.caption!.copyWith(
+                    color: context.read<DashBoardBloc>().state.fontbodyColor),
               ),
             ],
           )
@@ -80,7 +81,7 @@ class FileInfoCard extends StatelessWidget {
 class ProgressLine extends StatelessWidget {
   const ProgressLine({
     Key? key,
-    this.color = primaryColor,
+    this.color, // =  context.read<DashBoardBloc>().state.primaryColor,
     required this.percentage,
   }) : super(key: key);
 

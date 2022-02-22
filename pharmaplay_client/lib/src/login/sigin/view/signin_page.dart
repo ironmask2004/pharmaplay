@@ -16,7 +16,9 @@ class SignInPage extends StatelessWidget {
   Widget build(BuildContext context) {
     print('sssssssssiiiiiiiiggggiiiinnn');
     return Scaffold(
-      appBar: AppBar(title: Text(SLang.of(context).loginPage)),
+      appBar: AppBar(
+          title: Text(SLang.of(context).loginPage),
+          automaticallyImplyLeading: false),
       body: Padding(
         padding: const EdgeInsets.all(12),
         child: BlocProvider(

@@ -12,15 +12,17 @@ import 'package:pharmaplay_client/src/dashboard/bloc/dashboard_bloc.dart';
 import 'package:pharmaplay_client/src/login/login.dart';
 
 class SignInForm extends StatelessWidget {
-  final LoginFormsStyle style = LoginFormsStyle.defaultTemplate.copyWith(
-    inlineButtonTextStyle: const TextStyle(color: fontbodyColor),
-    primary: primaryColor,
-    textFieldTextStyle: const TextStyle(color: fontbodyColor),
-  );
-  SignInForm({Key? key}) : super(key: key);
+  const SignInForm({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final LoginFormsStyle style = LoginFormsStyle.defaultTemplate.copyWith(
+      inlineButtonTextStyle:
+          TextStyle(color: context.read<DashBoardBloc>().state.fontbodyColor),
+      primary: context.read<DashBoardBloc>().state.primaryColor,
+      textFieldTextStyle:
+          TextStyle(color: context.read<DashBoardBloc>().state.fontbodyColor),
+    );
     // ignore: prefer_const_constructors
     var logo = Icon(
       Icons.android_rounded,

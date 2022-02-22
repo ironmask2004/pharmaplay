@@ -65,6 +65,9 @@
   "applyNewSettings": "Apply New Settings",
   "back": "Back",
   "englishLanguage": "English Language",
+  "themeMode": "Theme Mode",
+  "darkMode": "Dark Mode",
+  "lightMode": "Light Mode" ,
   "SignInchangeLanguage": "اللغة العربية",
   "homelogout": "LogOut"
 }

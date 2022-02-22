@@ -1,5 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pharmaplay_client/src/dashboard/dashboard.dart';
 import 'package:pharmaplay_client/src/utlites/sforms_style.dart';
 
 class Chart extends StatelessWidget {
@@ -29,7 +31,8 @@ class Chart extends StatelessWidget {
                 Text(
                   "29.1",
                   style: Theme.of(context).textTheme.headline4!.copyWith(
-                        color: fontbodyColor,
+                        color:
+                            context.read<DashBoardBloc>().state.fontbodyColor,
                         fontWeight: FontWeight.w600,
                         height: 0.5,
                       ),
@@ -46,7 +49,7 @@ class Chart extends StatelessWidget {
 
 List<PieChartSectionData> paiChartSelectionDatas = [
   PieChartSectionData(
-    color: primaryColor,
+    color: const Color.fromARGB(255, 128, 255, 38),
     value: 25,
     showTitle: false,
     radius: 25,
@@ -70,7 +73,7 @@ List<PieChartSectionData> paiChartSelectionDatas = [
     radius: 16,
   ),
   PieChartSectionData(
-    color: primaryColor.withOpacity(0.1),
+    color: const Color.fromARGB(255, 38, 52, 255).withOpacity(0.1),
     value: 25,
     showTitle: false,
     radius: 13,
