@@ -346,6 +346,7 @@ Future<Response> userLogin(var userRequestInfo, DB db, String authStore,
   //final user = await store.findOne(where.eq('email', email));
   String sql = "SELECT *  FROM pharmaplay.$authStore WHERE email =  @email ";
   Map<String, dynamic> params = {"email": email};
+  print(sql);
   dynamic resultSet = await db.query(sql, values: params);
 
   if (resultSet.length == 0) {

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pharmaplay_client/src/dashboard/models/MyFiles.dart';
-import 'package:pharmaplay_client/src/utlites/constants.dart';
+import 'package:pharmaplay_client/src/utlites/sforms_style.dart';
+import 'package:pharmaplay_client/src/utlites/sforms_style.dart';
 
 class FileInfoCard extends StatelessWidget {
   const FileInfoCard({
@@ -39,7 +40,7 @@ class FileInfoCard extends StatelessWidget {
                   color: info.color,
                 ),
               ),
-              const Icon(Icons.more_vert, color: Colors.white54)
+              const Icon(Icons.more_vert, color: fontbodyColor) //+45
             ],
           ),
           Text(
@@ -59,14 +60,14 @@ class FileInfoCard extends StatelessWidget {
                 style: Theme.of(context)
                     .textTheme
                     .caption!
-                    .copyWith(color: Colors.white70),
+                    .copyWith(color: fontbodyColor), //+70
               ),
               Text(
                 info.totalStorage!,
                 style: Theme.of(context)
                     .textTheme
                     .caption!
-                    .copyWith(color: Colors.white),
+                    .copyWith(color: fontbodyColor),
               ),
             ],
           )

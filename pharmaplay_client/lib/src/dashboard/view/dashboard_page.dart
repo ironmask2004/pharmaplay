@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:pharmaplay_client/src/dashboard/view/dashboard_screen.dart';
 import 'package:pharmaplay_client/src/utlites/responsive.dart';
-import 'package:provider/provider.dart';
-
-import '../bloc/dashboard_bloc.dart';
 import '../components/right_menu.dart';
 import '../components/side_menu.dart';
 
-class MainScreenPage extends StatelessWidget {
-  MainScreenPage({Key? key}) : super(key: key);
+class DashBoardPage extends StatelessWidget {
+  const DashBoardPage({Key? key}) : super(key: key);
 
   static Route route() {
-    return MaterialPageRoute<void>(builder: (_) => MainScreenPage());
+    return MaterialPageRoute<void>(builder: (_) => const DashBoardPage());
   }
 
   //final GlobalKey<ScaffoldState> _scaffoldkey = GlobalKey<ScaffoldState>();

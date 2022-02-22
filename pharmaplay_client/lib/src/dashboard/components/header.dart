@@ -4,9 +4,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pharmaplay_client/src/authentication/authentication.dart';
 import 'package:pharmaplay_client/src/dashboard/bloc/dashboard_bloc.dart';
-
-import 'package:pharmaplay_client/src/utlites/constants.dart';
 import 'package:pharmaplay_client/src/utlites/responsive.dart';
+import 'package:pharmaplay_client/src/utlites/sforms_style.dart';
 
 class Header extends StatelessWidget {
   const Header({
@@ -56,7 +55,7 @@ class ProfileCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: secondaryColor,
         borderRadius: const BorderRadius.all(Radius.circular(10)),
-        border: Border.all(color: Colors.white10),
+        border: Border.all(color: fontbodyColor),
       ),
       child:
           // ROW
@@ -64,7 +63,7 @@ class ProfileCard extends StatelessWidget {
           Container(
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10), // radius of 10
-                  border: Border.all(color: Colors.white10),
+                  border: Border.all(color: fontbodyColor),
                   color: secondaryColor // green as background color
                   ),
               child: Row(
@@ -109,7 +108,7 @@ class ProfileCard extends StatelessWidget {
                     child: Material(
                       color: secondaryColor, // button color
                       child: InkWell(
-                        //splashColor: Colors.red, // inkwell color
+                        // splashColor: Colors.red, // inkwell color
                         child: const SizedBox(
                             width: 50,
                             height: 50,

@@ -10,7 +10,7 @@ abstract class RandomCode {
   static String ranodmCode() => '${(_min + rnd.nextInt(_max - _min))}';
 
   static String nextInter() =>
-      '${(_min + rnd2.nextInt(_max - _min))}-${(_min + rnd2.nextInt(_max - _min))}';
+      '${(_min + rnd2.nextInt(_max - _min))}${(_min + rnd2.nextInt(_max - _min))}';
 
   static String randomdString(int len) {
     var random = Random.secure();

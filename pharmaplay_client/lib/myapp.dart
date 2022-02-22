@@ -3,19 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pharmaplay_client/generated/l10n.dart';
 import 'package:pharmaplay_client/src/authentication/authentication.dart';
-import 'package:pharmaplay_client/src/login/confirm_code/confirm_code.dart';
-import 'package:pharmaplay_client/src/login/forgot_password/forgot_password.dart';
-import 'package:pharmaplay_client/src/login/sigin/sigin.dart';
-import 'package:pharmaplay_client/src/login/signup/signup.dart';
 import 'package:pharmaplay_client/src/splash/splash.dart';
-import 'package:pharmaplay_client/src/utlites/constants.dart';
+import 'package:pharmaplay_client/src/utlites/sforms_style.dart';
 import 'package:user_repository/user_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'generated/l10n.dart';
-
 import 'src/dashboard/bloc/dashboard_bloc.dart';
-import 'src/dashboard/view/main_screen_page.dart';
+import 'src/dashboard/view/dashboard_page.dart';
+import 'src/login/login.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({
@@ -80,18 +76,20 @@ class AppView extends StatelessWidget {
               Locale('ar', ''), // Arabic, no country code
             ],
             darkTheme: ThemeData.dark(),
-            themeMode: dashboardState.uiThemeMode,
+            theme: ThemeData.light().copyWith(
+              scaffoldBackgroundColor: bgColor,
+              textTheme:
+                  GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme)
+                      .apply(bodyColor: fontbodyColor),
+              canvasColor: secondaryColor,
+            ),
+            //themeMode: dashboardState.uiThemeMode,
+            themeMode: ThemeMode.system,
             locale:
                 dashboardState.uiLocale, //getUIlocale(context),Locale('ar'),
             onGenerateTitle: (BuildContext context) =>
                 SLang.of(context).appTitle,
-            theme: ThemeData.dark().copyWith(
-              scaffoldBackgroundColor: bgColor,
-              textTheme:
-                  GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme)
-                      .apply(bodyColor: Colors.white),
-              canvasColor: secondaryColor,
-            ),
+
             builder: (context, child) {
               return MultiBlocListener(listeners: [
                 BlocListener<AuthenticationBloc, AuthenticationState>(
@@ -100,7 +98,7 @@ class AppView extends StatelessWidget {
                     case AuthenticationStatus.authenticated:
                       print('Auth : ' + state.toString());
                       _navigator.push<void>(
-                        MainScreenPage.route(),
+                        DashBoardPage.route(),
                         //  (route) => false,
                       );
 
@@ -109,7 +107,7 @@ class AppView extends StatelessWidget {
                     case AuthenticationStatus.unauthenticated:
                       print('un Auth : ' + state.toString());
                       _navigator.push<void>(
-                        MainScreenPage.route(),
+                        DashBoardPage.route(),
                         // (route) => false,
                       );
 
@@ -137,13 +135,6 @@ class AppView extends StatelessWidget {
                       );
                       break;
 
-                    /*   case AuthenticationStatus.authenticationDashBoard:
-                      print('authenticate DashBoard: ' +   state.toString());
-                      _navigator.push<void>(
-                        DashBoardPage.route(),
-                        //(route) => false,
-                      );
-                      break;*/
                     case AuthenticationStatus.authenticationForgotPassword:
                       print(
                           'authenticate  ForgotPassword: ' + state.toString());
@@ -156,7 +147,7 @@ class AppView extends StatelessWidget {
                       print('Lisnter find default switch!!!!!!!!! : ' +
                           state.toString());
                       _navigator.push<void>(
-                        MainScreenPage.route(),
+                        DashBoardPage.route(),
                         // (route) => false,
                       );
 

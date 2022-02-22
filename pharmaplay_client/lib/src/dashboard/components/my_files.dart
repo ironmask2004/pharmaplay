@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pharmaplay_client/src/dashboard/models/MyFiles.dart';
-import 'package:pharmaplay_client/src/utlites/constants.dart';
+import 'package:pharmaplay_client/src/utlites/sforms_style.dart';
 import 'package:pharmaplay_client/src/utlites/responsive.dart';
 import 'file_info_card.dart';
 

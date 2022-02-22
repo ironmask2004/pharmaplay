@@ -29,10 +29,10 @@ class LoginSubmitted extends SiginEvent {
   const LoginSubmitted();
 }
 
-class SignUpSubmitted extends SiginEvent {
-  const SignUpSubmitted();
+class SiginSignUpSubmitted extends SiginEvent {
+  const SiginSignUpSubmitted();
 }
 
-class ForgotPasswordSubmitted extends SiginEvent {
-  const ForgotPasswordSubmitted();
+class SiginForgotPasswordSubmitted extends SiginEvent {
+  const SiginForgotPasswordSubmitted();
 }

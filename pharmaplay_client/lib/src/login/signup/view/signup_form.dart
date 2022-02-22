@@ -5,12 +5,16 @@ import 'package:pharmaplay_client/generated/l10n.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:pharmaplay_client/src/authentication/authentication.dart';
+import 'package:pharmaplay_client/src/login/login.dart';
 
-import '../signup.dart';
 //import 'package:pharmaplay_client/src/login/login.dart';
 
 class SignUpForm extends StatelessWidget {
-  final LoginFormsStyle style = LoginFormsStyle.defaultTemplate;
+  final LoginFormsStyle style = LoginFormsStyle.defaultTemplate.copyWith(
+    inlineButtonTextStyle: const TextStyle(color: fontbodyColor),
+    primary: primaryColor,
+    textFieldTextStyle: const TextStyle(color: fontbodyColor),
+  );
   SignUpForm({Key? key}) : super(key: key);
 
   @override

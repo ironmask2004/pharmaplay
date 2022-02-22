@@ -1,14 +1,16 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:login_forms/login_forms.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
-import 'package:pharmaplay_client/src/login/confirm_code/bloc/confirm_code_bloc.dart';
+import 'package:pharmaplay_client/src/login/login.dart';
 
 class ConfirmCodeForm extends StatelessWidget {
-  final LoginFormsStyle style = LoginFormsStyle.defaultTemplate;
+  final LoginFormsStyle style = LoginFormsStyle.defaultTemplate.copyWith(
+    inlineButtonTextStyle: const TextStyle(color: fontbodyColor),
+    primary: primaryColor,
+    textFieldTextStyle: const TextStyle(color: fontbodyColor),
+  );
   final String email;
   final String password;
   ConfirmCodeForm(this.email, this.password, {Key? key}) : super(key: key);

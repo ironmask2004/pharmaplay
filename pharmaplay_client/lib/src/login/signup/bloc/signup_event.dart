@@ -87,8 +87,8 @@ class SignUpSubmitted extends SignupEvent {
   const SignUpSubmitted();
 }
 
-class ConfirmCodeChanged extends SignupEvent {
-  const ConfirmCodeChanged(this.confirmCode);
+class SignUpConfirmCodeChanged extends SignupEvent {
+  const SignUpConfirmCodeChanged(this.confirmCode);
 
   final String confirmCode;
 
@@ -96,8 +96,8 @@ class ConfirmCodeChanged extends SignupEvent {
   List<Object> get props => [confirmCode];
 }
 
-class ForgotEmailChanged extends SignupEvent {
-  const ForgotEmailChanged(this.email);
+class SignUpForgotEmailChanged extends SignupEvent {
+  const SignUpForgotEmailChanged(this.email);
 
   final String email;
 
@@ -105,8 +105,8 @@ class ForgotEmailChanged extends SignupEvent {
   List<Object> get props => [email];
 }
 
-class ConfirmFormEmailChanged extends SignupEvent {
-  const ConfirmFormEmailChanged(this.email);
+class SignUpConfirmFormEmailChanged extends SignupEvent {
+  const SignUpConfirmFormEmailChanged(this.email);
 
   final String email;
 
@@ -114,8 +114,8 @@ class ConfirmFormEmailChanged extends SignupEvent {
   List<Object> get props => [email];
 }
 
-class ConfirmFormPasswordChanged extends SignupEvent {
-  const ConfirmFormPasswordChanged(this.password);
+class SignUpConfirmFormPasswordChanged extends SignupEvent {
+  const SignUpConfirmFormPasswordChanged(this.password);
 
   final String password;
 
@@ -123,14 +123,14 @@ class ConfirmFormPasswordChanged extends SignupEvent {
   List<Object> get props => [password];
 }
 
-class ConfirmCodeSubmitted extends SignupEvent {
-  const ConfirmCodeSubmitted();
+class SignUpCConfirmCodeSubmitted extends SignupEvent {
+  const SignUpCConfirmCodeSubmitted();
 }
 
-class ResendConfirmCodeSubmitted extends SignupEvent {
-  const ResendConfirmCodeSubmitted();
+class ResendSignUpCConfirmCodeSubmitted extends SignupEvent {
+  const ResendSignUpCConfirmCodeSubmitted();
 }
 
-class ForgotPasswordSubmitted extends SignupEvent {
-  const ForgotPasswordSubmitted();
+class SignupForgotPasswordSubmitted extends SignupEvent {
+  const SignupForgotPasswordSubmitted();
 }

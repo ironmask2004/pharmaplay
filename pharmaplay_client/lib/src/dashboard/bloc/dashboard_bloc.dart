@@ -8,7 +8,7 @@ part 'dashboard_event.dart';
 part 'dashboard_state.dart';
 
 class DashBoardBloc extends Bloc<DashBoardEvent, DashBoardState> {
-  DashBoardBloc() : super(DashBoardInitial()) {
+  DashBoardBloc() : super(const DashBoardInitial()) {
     on<DashBoardInitialRequested>(_onDashBoardInitialRequested);
     on<SideMenuClicked>(_onSideMenuClicked);
     on<RightMenuClicked>(_onRightMenuClicked);
@@ -126,6 +126,36 @@ class DashBoardBloc extends Bloc<DashBoardEvent, DashBoardState> {
     // Otherwise, store the new theme mode in memory
     // Use the shared_preferences package to persist dashboard locally or the
     // http package to persist dashboard over the network.
+    switch (state.uiThemeMode) {
+      case ThemeMode.dark:
+        {
+          emit(state.copyWith(
+              primaryColor: const Color(0xFF2697FF),
+              secondaryColor: const Color(0xFF2A2D3E),
+              bgColor: const Color(0xFF212332),
+              fontbodyColor: const Color.fromARGB(255, 51, 144, 236)));
+        }
+        break;
+      case ThemeMode.light:
+        {
+          emit(state.copyWith(
+              primaryColor: const Color.fromARGB(255, 41, 73, 102),
+              secondaryColor: const Color.fromARGB(255, 205, 200, 255),
+              bgColor: const Color.fromARGB(255, 205, 225, 255),
+              fontbodyColor: const Color.fromARGB(255, 2, 13, 24)));
+        }
+        break;
+      case ThemeMode.system:
+        {
+          emit(state.copyWith(
+              primaryColor: const Color.fromARGB(255, 41, 73, 102),
+              secondaryColor: const Color.fromARGB(255, 205, 200, 255),
+              bgColor: const Color.fromARGB(255, 205, 225, 255),
+              fontbodyColor: const Color.fromARGB(255, 2, 13, 24)));
+        }
+        break;
+    }
+
     print('_onUIThemeModeChanged: ' + event.uiThemeMode.toString());
     await MySharedPreferences.instance
         .setStringValue("ThemeMode", event.uiThemeMode.name);

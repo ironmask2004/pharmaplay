@@ -3,7 +3,7 @@ import 'package:pharmaplay_client/generated/l10n.dart';
 import 'package:pharmaplay_client/src/utlites/sforms_style.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../mainboard.dart';
+import '../dashboard.dart';
 
 //import 'package:flutter_localizations/flutter_localizations.dart';
 

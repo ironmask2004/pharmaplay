@@ -14,7 +14,7 @@ class ContainerBody extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
           color: Colors.grey[200],
-          borderRadius: BorderRadius.only(
+          borderRadius: const BorderRadius.only(
             topRight: Radius.circular(30.0),
             topLeft: Radius.circular(30.0),
           ),
@@ -23,7 +23,7 @@ class ContainerBody extends StatelessWidget {
               color: Colors.black.withOpacity(0.5),
               spreadRadius: 4,
               blurRadius: 6,
-              offset: Offset(0, 3), // changes position of shadow
+              offset: const Offset(0, 3), // changes position of shadow
             ),
           ],
         ),

@@ -1,6 +1,7 @@
 import 'dart:html';
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:login_forms/login_forms.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,11 +9,14 @@ import 'package:formz/formz.dart';
 import 'package:pharmaplay_client/generated/l10n.dart';
 import 'package:pharmaplay_client/src/authentication/authentication.dart';
 import 'package:pharmaplay_client/src/dashboard/bloc/dashboard_bloc.dart';
-
-import '../sigin.dart';
+import 'package:pharmaplay_client/src/login/login.dart';
 
 class SignInForm extends StatelessWidget {
-  final LoginFormsStyle style = LoginFormsStyle.defaultTemplate;
+  final LoginFormsStyle style = LoginFormsStyle.defaultTemplate.copyWith(
+    inlineButtonTextStyle: const TextStyle(color: fontbodyColor),
+    primary: primaryColor,
+    textFieldTextStyle: const TextStyle(color: fontbodyColor),
+  );
   SignInForm({Key? key}) : super(key: key);
 
   @override

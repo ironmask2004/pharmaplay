@@ -6,10 +6,15 @@ import 'package:formz/formz.dart';
 import 'package:pharmaplay_client/generated/l10n.dart';
 import 'package:pharmaplay_client/src/authentication/authentication.dart';
 import 'package:pharmaplay_client/src/login/forgot_password/forgot_password.dart';
+import 'package:pharmaplay_client/src/login/login.dart';
 //import 'package:pharmaplay_client/src/login/login.dart';
 
 class ForgotPasswordForm extends StatelessWidget {
-  final LoginFormsStyle style = LoginFormsStyle.defaultTemplate;
+  final LoginFormsStyle style = LoginFormsStyle.defaultTemplate.copyWith(
+    inlineButtonTextStyle: const TextStyle(color: fontbodyColor),
+    primary: primaryColor,
+    textFieldTextStyle: const TextStyle(color: fontbodyColor),
+  );
   ForgotPasswordForm({Key? key}) : super(key: key);
 
   @override

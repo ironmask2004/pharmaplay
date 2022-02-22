@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pharmaplay_client/src/utlites/constants.dart';
+import 'package:pharmaplay_client/src/utlites/sforms_style.dart';
 
 class CloudStorageInfo {
   final String? svgSrc, title, totalStorage;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:pharmaplay_client/src/utlites/constants.dart';
+import 'package:pharmaplay_client/src/utlites/sforms_style.dart';
 
 class StorageInfoCard extends StatelessWidget {
   const StorageInfoCard({
@@ -48,7 +48,7 @@ class StorageInfoCard extends StatelessWidget {
                     style: Theme.of(context)
                         .textTheme
                         .caption!
-                        .copyWith(color: Colors.white70),
+                        .copyWith(color: fontbodyColor),
                   ),
                 ],
               ),

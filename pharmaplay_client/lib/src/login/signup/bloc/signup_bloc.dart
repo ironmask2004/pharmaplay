@@ -22,18 +22,18 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
     on<SignUpConfirmPasswordChanged>(_onSignUpConfirmPasswordChanged);
     on<SignUpSubmitted>(_onSignUpSubmited);
     //on<SignupEmailChanged>(_onSignupEmailChanged);
-    on<ForgotEmailChanged>(_onforgotEmailChanged);
+    on<SignUpForgotEmailChanged>(_onsignUpForgotEmailChanged);
 
     //on<SignupPasswordChanged>(_onSignupPasswordChanged);
 
-    on<ConfirmFormEmailChanged>(_onConfirmFormEmailChanged);
-    on<ConfirmFormPasswordChanged>(_onConfirmFormPasswordChanged);
+    on<SignUpConfirmFormEmailChanged>(_onSignUpConfirmFormEmailChanged);
+    on<SignUpConfirmFormPasswordChanged>(_onSignUpConfirmFormPasswordChanged);
 
-    on<ConfirmCodeChanged>(_onConfirmCodeChanged);
-    //on<SignupSubmitted>(_onSignupSubmitted);
-    on<ConfirmCodeSubmitted>(_onConfirmCodeSubmitted);
-    on<ResendConfirmCodeSubmitted>(_onResendConfirmCodeSubmitted);
-    on<ForgotPasswordSubmitted>(_onForgotPasswordSubmitted);
+    on<SignUpConfirmCodeChanged>(_onSignUpConfirmCodeChanged);
+    //on<SignUpSubmitted>(_onSiginSignUpSubmitted);
+    on<SignUpCConfirmCodeSubmitted>(_onSignUpCConfirmCodeSubmitted);
+    on<ResendSignUpCConfirmCodeSubmitted>(_onResendSignUpCConfirmCodeSubmitted);
+    on<SignupForgotPasswordSubmitted>(_onSignupForgotPasswordSubmitted);
 
     // on<RoutToSignUpPageSubmitted>(_onRoutToSignUpPageSubmitted);
   }
@@ -97,11 +97,11 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
     ));
   }
 
-  void _onConfirmCodeChanged(
-    ConfirmCodeChanged event,
+  void _onSignUpConfirmCodeChanged(
+    SignUpConfirmCodeChanged event,
     Emitter<SignupState> emit,
   ) {
-    print('_onConfirmCodeChanged');
+    print('_onSignUpConfirmCodeChanged');
     final confirmCode = InputString.dirty(event.confirmCode);
     print('${state.email}, ${state.password}   ${state.confirmCode} ');
     emit(state.copyWith(
@@ -110,11 +110,11 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
     ));
   }
 
-  void _onforgotEmailChanged(
-    ForgotEmailChanged event,
+  void _onsignUpForgotEmailChanged(
+    SignUpForgotEmailChanged event,
     Emitter<SignupState> emit,
   ) {
-    print(SLang.current.onforgotemailchanged);
+    print(SLang.current.forgotPassword);
     final email = Email.dirty(event.email);
     print('${state.email},   ');
     emit(state.copyWith(
@@ -123,11 +123,11 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
     ));
   }
 
-  void _onConfirmFormEmailChanged(
-    ConfirmFormEmailChanged event,
+  void _onSignUpConfirmFormEmailChanged(
+    SignUpConfirmFormEmailChanged event,
     Emitter<SignupState> emit,
   ) {
-    print('_onConfirmFormEmailChanged');
+    print('_onSignUpConfirmFormEmailChanged');
     final email = Email.dirty(event.email);
     print('${state.email}, ${state.password}   ${state.confirmCode} ');
     emit(state.copyWith(
@@ -136,11 +136,11 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
     ));
   }
 
-  void _onConfirmFormPasswordChanged(
-    ConfirmFormPasswordChanged event,
+  void _onSignUpConfirmFormPasswordChanged(
+    SignUpConfirmFormPasswordChanged event,
     Emitter<SignupState> emit,
   ) {
-    print('_onConfirmFormPasswordChanged');
+    print('_onSignUpConfirmFormPasswordChanged');
     final password = Password.dirty(event.password);
     print('${state.email}, ${state.password}   ${state.confirmCode} ');
     emit(state.copyWith(
@@ -230,8 +230,8 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
     ));
   }
 
-  /*void _onSignupSubmitted(
-    SignupSubmitted event,
+  /*void _onSiginSignUpSubmitted(
+    SignUpSubmitted event,
     Emitter<SignupState> emit,
   ) async {
     if (state.status.isValidated) {
@@ -269,8 +269,8 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
   //=======================
   //
 
-  void _onConfirmCodeSubmitted(
-    ConfirmCodeSubmitted event,
+  void _onSignUpCConfirmCodeSubmitted(
+    SignUpCConfirmCodeSubmitted event,
     Emitter<SignupState> emit,
   ) async {
     print('formstate: ${state.status}');
@@ -320,8 +320,8 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
 
   //-==========
 
-  void _onResendConfirmCodeSubmitted(
-    ResendConfirmCodeSubmitted event,
+  void _onResendSignUpCConfirmCodeSubmitted(
+    ResendSignUpCConfirmCodeSubmitted event,
     Emitter<SignupState> emit,
   ) async {
     print('formstate: ${state.status}');
@@ -366,8 +366,8 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
 
 //-==========
 
-  void _onForgotPasswordSubmitted(
-    ForgotPasswordSubmitted event,
+  void _onSignupForgotPasswordSubmitted(
+    SignupForgotPasswordSubmitted event,
     Emitter<SignupState> emit,
   ) async {
     print('formstate: ${state.status}');
@@ -424,7 +424,7 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
 
     final dartz.Either<TokenPair, ApiError> _repoResponse;
 
-    print('_SignUpSubmitted');
+    print('_SiginSignUpSubmitted');
     print(state.toString());
 
     if (state.password.value != state.confirmPassword.value) {

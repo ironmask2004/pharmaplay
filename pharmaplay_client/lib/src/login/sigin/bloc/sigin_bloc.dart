@@ -2,9 +2,10 @@ import 'package:authentication_repository/authentication_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:formz/formz.dart';
-import 'package:pharmaplay_client/src/login/login.dart';
 import 'package:dartz/dartz.dart' as dartz;
 import 'package:pharmaplay_client/generated/l10n.dart';
+import 'package:pharmaplay_client/src/login/models/models.dart';
+//import 'package:pharmaplay_client/src/login/login.dart';
 
 part 'sigin_event.dart';
 part 'sigin_state.dart';
@@ -19,7 +20,7 @@ class SiginBloc extends Bloc<SiginEvent, SiginState> {
     on<SiginPasswordChanged>(_onSiginPasswordChanged);
 
     on<LoginSubmitted>(_onLoginSubmitted);
-    on<ForgotPasswordSubmitted>(_onForgotPasswordSubmitted);
+    on<SiginForgotPasswordSubmitted>(_onSiginForgotPasswordSubmitted);
 
     // on<RoutToSignUpPageSubmitted>(_onRoutToSignUpPageSubmitted);
   }
@@ -89,8 +90,8 @@ class SiginBloc extends Bloc<SiginEvent, SiginState> {
   //=======================
   //
 
-  void _onForgotPasswordSubmitted(
-    ForgotPasswordSubmitted event,
+  void _onSiginForgotPasswordSubmitted(
+    SiginForgotPasswordSubmitted event,
     Emitter<SiginState> emit,
   ) async {
     print('formstate: ${state.status}');
@@ -133,7 +134,7 @@ class SiginBloc extends Bloc<SiginEvent, SiginState> {
 
 //===
   void _onSignUpSubmited(
-    SignUpSubmitted event,
+    SiginSignUpSubmitted event,
     Emitter<SiginState> emit,
   ) async {
     print('formstate: ${state.status}');
@@ -147,7 +148,7 @@ class SiginBloc extends Bloc<SiginEvent, SiginState> {
 
     final dartz.Either<TokenPair, ApiError> _repoResponse;
 
-    print('_SignUpSubmitted');
+    print('_SiginSignUpSubmitted');
     print(state.toString());
 
     if (state.password.value != state.confirmPassword.value) {

@@ -1,6 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:pharmaplay_client/src/utlites/constants.dart';
+import 'package:pharmaplay_client/src/utlites/sforms_style.dart';
 
 class Chart extends StatelessWidget {
   const Chart({
@@ -29,7 +29,7 @@ class Chart extends StatelessWidget {
                 Text(
                   "29.1",
                   style: Theme.of(context).textTheme.headline4!.copyWith(
-                        color: Colors.white,
+                        color: fontbodyColor,
                         fontWeight: FontWeight.w600,
                         height: 0.5,
                       ),
