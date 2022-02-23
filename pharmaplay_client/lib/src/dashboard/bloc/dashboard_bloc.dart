@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:equatable/equatable.dart';
 
 import 'package:pharmaplay_client/src/utlites/shared_pref.dart';
-import 'package:pharmaplay_client/src/utlites/colortools.dart';
 
 part 'dashboard_event.dart';
 part 'dashboard_state.dart';
