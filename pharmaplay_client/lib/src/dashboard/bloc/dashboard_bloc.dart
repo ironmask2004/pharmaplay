@@ -55,6 +55,29 @@ class DashBoardBloc extends Bloc<DashBoardEvent, DashBoardState> {
         Color(await MySharedPreferences.instance.getIntegerValue("bgColor"));
     Color fontbodyColor = Color(
         await MySharedPreferences.instance.getIntegerValue("fontbodyColor"));
+    //emit(DashBoardStateUIThemeModeChanged(currentThemeMode));
+    print('''----------initial Color-----------
+    
+        primaryColor: $primaryColor,
+        secondaryColor: $secondaryColor,
+        bgColor: $bgColor,
+        fontbodyColor: $fontbodyColor
+        ---------
+        ''');
+
+    primaryColor = primaryColor != Color(0x00000000)
+        ? primaryColor
+        : const Color(0xFF2697FF);
+
+    secondaryColor = secondaryColor != Color(0x00000000)
+        ? secondaryColor
+        : const Color(0xFF2A2D3E);
+
+    bgColor = bgColor != Color(0x00000000) ? bgColor : const Color(0xFF212332);
+
+    fontbodyColor = fontbodyColor != Color(0x00000000)
+        ? fontbodyColor
+        : const Color(0xFF3390EC);
 
     switch (savedThemeMode) {
       case 'light':
@@ -64,7 +87,7 @@ class DashBoardBloc extends Bloc<DashBoardEvent, DashBoardState> {
         currentThemeMode = ThemeMode.dark;
         break;
       default:
-        currentThemeMode = ThemeMode.system;
+        currentThemeMode = ThemeMode.dark;
     }
     print('emit UITHemeChanged' + currentThemeMode.toString());
 
@@ -78,6 +101,7 @@ class DashBoardBloc extends Bloc<DashBoardEvent, DashBoardState> {
         fontbodyColor: fontbodyColor));
 
     print('DashBoardInitialRequested !!!');
+
     String currentLocale =
         await MySharedPreferences.instance.getStringValue("UILocale");
 

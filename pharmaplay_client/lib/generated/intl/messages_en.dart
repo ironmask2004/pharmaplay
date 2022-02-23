@@ -40,6 +40,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "appTitle": MessageLookupByLibrary.simpleMessage("Pharmaplay Market"),
         "applyNewSettings":
             MessageLookupByLibrary.simpleMessage("Apply New Settings"),
+        "areYouSureYouWantToExit": MessageLookupByLibrary.simpleMessage(
+            "Are you sure you want to exit?"),
         "back": MessageLookupByLibrary.simpleMessage("Back"),
         "backTo": MessageLookupByLibrary.simpleMessage("Back To "),
         "confirmCode": MessageLookupByLibrary.simpleMessage("Confirm-Code"),
@@ -48,12 +50,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "emailaddress": MessageLookupByLibrary.simpleMessage("Email"),
         "englishLanguage":
             MessageLookupByLibrary.simpleMessage("English Language"),
+        "exitapp": MessageLookupByLibrary.simpleMessage("Close Pharam Play"),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("forgotPassword"),
         "homelogout": MessageLookupByLibrary.simpleMessage("LogOut"),
         "lightMode": MessageLookupByLibrary.simpleMessage("Light Mode"),
         "loginPage": MessageLookupByLibrary.simpleMessage(
             "Wellcome Login To PahrmaPlay"),
+        "no": MessageLookupByLibrary.simpleMessage("No"),
         "onforgotemailchanged":
             MessageLookupByLibrary.simpleMessage("_onforgotEmailChanged"),
         "onsignuplastnamechanged":
@@ -71,6 +75,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "signIn": MessageLookupByLibrary.simpleMessage("signIn"),
         "signOut": MessageLookupByLibrary.simpleMessage("signOut"),
         "signUp": MessageLookupByLibrary.simpleMessage("signUp"),
-        "themeMode": MessageLookupByLibrary.simpleMessage("Theme Mode")
+        "themeMode": MessageLookupByLibrary.simpleMessage("Theme Mode"),
+        "warning": MessageLookupByLibrary.simpleMessage("Warning"),
+        "yes": MessageLookupByLibrary.simpleMessage("Yes")
       };
 }

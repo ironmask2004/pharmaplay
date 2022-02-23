@@ -67,7 +67,12 @@
   "englishLanguage": "English Language",
   "themeMode": "Theme Mode",
   "darkMode": "Dark Mode",
-  "lightMode": "Light Mode" ,
+  "lightMode": "Light Mode",
   "SignInchangeLanguage": "اللغة العربية",
-  "homelogout": "LogOut"
+  "homelogout": "LogOut",
+  "exitapp": "Close Pharam Play",
+  "warning": "Warning",
+  "yes": "Yes",
+  "no": "No",
+  "areYouSureYouWantToExit": "Are you sure you want to exit?"
 }

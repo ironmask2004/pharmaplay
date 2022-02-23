@@ -361,6 +361,56 @@ class SLang {
       args: [],
     );
   }
+
+  /// `Close Pharam Play`
+  String get exitapp {
+    return Intl.message(
+      'Close Pharam Play',
+      name: 'exitapp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Warning`
+  String get warning {
+    return Intl.message(
+      'Warning',
+      name: 'warning',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Yes`
+  String get yes {
+    return Intl.message(
+      'Yes',
+      name: 'yes',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No`
+  String get no {
+    return Intl.message(
+      'No',
+      name: 'no',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to exit?`
+  String get areYouSureYouWantToExit {
+    return Intl.message(
+      'Are you sure you want to exit?',
+      name: 'areYouSureYouWantToExit',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<SLang> {

@@ -34,28 +34,7 @@ class Header extends StatelessWidget {
         const ProfileCard(),
 
         //----
-        IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () => showDialog<bool>(
-            context: context,
-            builder: (c) => AlertDialog(
-              title: Text('Warning'),
-              content: Text('Are you sure you want to exit?'),
-            ),
-            actions: [
-              TextButton(
-                  child: Text('Yes'),
-                  onPressed: () {
-                    Navigator.pop(c, true);
-                    Navigator.pop(context);
-                  }),
-              TextButton(
-                child: Text('No'),
-                onPressed: () => Navigator.pop(c, false),
-              ),
-            ],
-          ),
-        )
+
         //---
       ],
     );

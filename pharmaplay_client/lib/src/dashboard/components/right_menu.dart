@@ -1,10 +1,13 @@
+import 'dart:html' as html;
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pharmaplay_client/generated/l10n.dart';
 import 'package:pharmaplay_client/src/authentication/bloc/authentication_bloc.dart';
 import 'package:pharmaplay_client/src/dashboard/bloc/dashboard_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pharmaplay_client/src/utlites/sforms_style.dart';
 
 class RightMenu extends StatelessWidget {
   const RightMenu({
@@ -128,6 +131,44 @@ class RightMenu extends StatelessWidget {
               // context.read<DashBoardBloc>().add(UIThemeModeChanged(ThemeMode.light));
             },
           ),
+
+//---
+
+          DrawerListTile(
+              title: SLang.of(context).exitapp,
+              svgSrc: "assets/icons/unknown.svg",
+              press: () => showDialog<bool>(
+                    context: context,
+                    builder: (c) => AlertDialog(
+                      title: Text(SLang.of(context).warning),
+                      content: Text(SLang.of(context).areYouSureYouWantToExit),
+                      actions: [
+                        TextButton(
+                            child: Text(SLang.of(context).yes),
+                            onPressed: () async {
+                              if (Platform.isAndroid) {
+                                Navigator.pop(c, true);
+                                Navigator.pop(context);
+                                exit(0);
+                              } else if (Platform.isIOS) {
+                                exit(0);
+                              } else if (Platform.isLinux) {
+                                exit(0);
+                                html.window.close();
+                              }
+                              html.window.close();
+                              exit(0);
+                              Navigator.pop(c, true);
+                              Navigator.pop(context);
+                            }),
+                        TextButton(
+                          child: Text(SLang.of(context).no),
+                          onPressed: () => Navigator.pop(c, false),
+                        ),
+                      ],
+                    ),
+                  ))
+//--
         ],
       ),
     );

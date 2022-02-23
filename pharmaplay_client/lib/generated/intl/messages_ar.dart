@@ -40,6 +40,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "appTitle": MessageLookupByLibrary.simpleMessage("الصيدلية"),
         "applyNewSettings":
             MessageLookupByLibrary.simpleMessage("تطبيق الاعدادات الجديدة"),
+        "areYouSureYouWantToExit": MessageLookupByLibrary.simpleMessage(
+            "هل أنت متأكد من الخروج النهائي؟"),
         "back": MessageLookupByLibrary.simpleMessage("عودة"),
         "backTo": MessageLookupByLibrary.simpleMessage("عودة إلى "),
         "confirmCode": MessageLookupByLibrary.simpleMessage("رمز التحقق"),
@@ -48,12 +50,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "emailaddress": MessageLookupByLibrary.simpleMessage("Email"),
         "englishLanguage":
             MessageLookupByLibrary.simpleMessage("اللغة اﻷنكليزية"),
+        "exitapp":
+            MessageLookupByLibrary.simpleMessage("إغلاق برنامج الصيدلية"),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("نسيت كلمة السر"),
         "homelogout": MessageLookupByLibrary.simpleMessage("تسجيل خروج"),
         "lightMode": MessageLookupByLibrary.simpleMessage("نمط ألوان فاتح"),
         "loginPage":
             MessageLookupByLibrary.simpleMessage("تسجيل الدخول إلى الصيدلية"),
+        "no": MessageLookupByLibrary.simpleMessage("لا"),
         "onforgotemailchanged":
             MessageLookupByLibrary.simpleMessage("تغيير في البريد الاكتروني"),
         "onsignuplastnamechanged":
@@ -72,6 +77,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "signIn": MessageLookupByLibrary.simpleMessage("تسجيل دخول"),
         "signOut": MessageLookupByLibrary.simpleMessage("تسجيل خروج"),
         "signUp": MessageLookupByLibrary.simpleMessage("تسجيل جديد"),
-        "themeMode": MessageLookupByLibrary.simpleMessage("نمط اﻷلوان")
+        "themeMode": MessageLookupByLibrary.simpleMessage("نمط اﻷلوان"),
+        "warning": MessageLookupByLibrary.simpleMessage("تحذير"),
+        "yes": MessageLookupByLibrary.simpleMessage("نعم")
       };
 }
