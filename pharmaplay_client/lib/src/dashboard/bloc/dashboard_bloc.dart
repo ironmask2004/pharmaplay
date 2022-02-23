@@ -38,6 +38,7 @@ class DashBoardBloc extends Bloc<DashBoardEvent, DashBoardState> {
       Scaffold.of(event.context).openEndDrawer();
     }
   }
+//TODO convert colors theme to class
 
   Future<void> _onDashBoardInitialRequested(
     DashBoardInitialRequested event,
@@ -57,7 +58,7 @@ class DashBoardBloc extends Bloc<DashBoardEvent, DashBoardState> {
         await MySharedPreferences.instance.getIntegerValue("fontbodyColor"));
     //emit(DashBoardStateUIThemeModeChanged(currentThemeMode));
     print('''----------initial Color-----------
-    
+
         primaryColor: $primaryColor,
         secondaryColor: $secondaryColor,
         bgColor: $bgColor,
