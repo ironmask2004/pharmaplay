@@ -1,8 +1,6 @@
-import 'dart:html' as html;
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pharmaplay_client/generated/l10n.dart';
 import 'package:pharmaplay_client/src/authentication/bloc/authentication_bloc.dart';
@@ -154,9 +152,7 @@ class RightMenu extends StatelessWidget {
                                 exit(0);
                               } else if (Platform.isLinux) {
                                 exit(0);
-                                html.window.close();
                               }
-                              html.window.close();
                               exit(0);
                               Navigator.pop(c, true);
                               Navigator.pop(context);
