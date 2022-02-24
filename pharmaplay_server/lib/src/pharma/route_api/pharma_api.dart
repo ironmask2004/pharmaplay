@@ -226,6 +226,36 @@ class PharmaApi {
       });
     });
 
+//======= getDrugGroupAll ====================
+
+    router.get('/drug/druggroups', (Request req) async {
+      List<DrugGroup> drugGroupInfo;
+      try {
+        final payload = await req.readAsString();
+
+        final Map<String, dynamic> listpagesparms = json.decode(payload) ?? {};
+        print(listpagesparms);
+
+        final String localUI = listpagesparms['localUI'] ?? 'en';
+
+        drugGroupInfo = await getDrugGroupAll(db: db, localUI: localUI);
+
+        // print("founded_drug------:" + drugInfo.toString());
+      } catch (err) {
+        return Response.forbidden(responseErrMsg("$err", "9004"), headers: {
+          'content-type': 'application/json',
+        });
+      }
+
+      var jsonString = json.encode(drugGroupInfo);
+      //print('--------------0-0-0-0-0-\n' + jsonString);
+
+      return Response.ok(jsonString, headers: {
+        'content-type': 'application/json',
+      });
+    });
+
+//=============
     //============= /drug/  ROUTE
 
     router.get('/drug/id', (Request req) async {

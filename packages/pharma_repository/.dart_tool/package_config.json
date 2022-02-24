@@ -158,6 +158,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "freezed_annotation",
+      "rootUri": "file:///home/kflihan/.pub-cache/hosted/pub.flutter-io.cn/freezed_annotation-1.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.14"
+    },
+    {
       "name": "frontend_server_client",
       "rootUri": "file:///home/kflihan/.pub-cache/hosted/pub.flutter-io.cn/frontend_server_client-2.1.2",
       "packageUri": "lib/",
@@ -207,13 +213,13 @@
     },
     {
       "name": "json_annotation",
-      "rootUri": "file:///home/kflihan/.pub-cache/hosted/pub.flutter-io.cn/json_annotation-4.3.0",
+      "rootUri": "file:///home/kflihan/.pub-cache/hosted/pub.flutter-io.cn/json_annotation-4.4.0",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
     {
       "name": "json_serializable",
-      "rootUri": "file:///home/kflihan/.pub-cache/hosted/pub.flutter-io.cn/json_serializable-6.0.1",
+      "rootUri": "file:///home/kflihan/.pub-cache/hosted/pub.flutter-io.cn/json_serializable-6.1.4",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
@@ -252,6 +258,12 @@
       "rootUri": "file:///home/kflihan/.pub-cache/hosted/pub.flutter-io.cn/path-1.8.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
+    },
+    {
+      "name": "pharma_shared_models",
+      "rootUri": "../../pharma_shared_models",
+      "packageUri": "lib/",
+      "languageVersion": "2.16"
     },
     {
       "name": "pool",
@@ -380,7 +392,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2022-02-06T21:29:36.889660Z",
+  "generated": "2022-02-24T20:45:57.726064Z",
   "generator": "pub",
-  "generatorVersion": "2.16.0"
+  "generatorVersion": "2.16.1"
 }

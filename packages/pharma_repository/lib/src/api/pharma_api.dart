@@ -17,49 +17,45 @@ curl --location --request GET 'localhost:9093/users/' \
  */
 */
 
-Future<dartz.Either<ApiResponse, ApiError>> apiGetUserByTokenId(
-    String tokenId, String baseUrl) async {
+Future<dartz.Either<ApiResponse, ApiError>> apiGetDrugGroupAll(
+    String localUI, String baseUrl) async {
   ApiResponse _apiResponse = ApiResponse();
   ApiError _apiError; // = ApiError(error: error, errorNo: errorNo);
 
   try {
-    var url = Uri.http(baseUrl, "users/info/");
+    var url = Uri.http(baseUrl, "pharma/drug/druggroups/");
     Map<String, String> _headers = {
       'content-type': 'application/json',
       'accept': 'application/json',
-      'authorization': 'Bearer $tokenId'
     };
     print(_headers.toString());
     final client = http.Client();
     print('-000-0--0-0-0-0--0');
     final http.Response response = await client.get(url, headers: _headers);
-    final _response = response.statusCode;
     print(response.body.toString());
     print('kkkkkkkkkkkkkkkkkkkk');
-    final _responseMap = json.decode(response.body);
-    final _reqResultMap = _responseMap['requestResult'];
-    print(_reqResultMap.toString());
+
+    final _response = json.decode(response.body);
 
     if (response.statusCode == 200) {
       print('202020202020');
-      print(_responseMap);
 
-      print(_reqResultMap);
-      _apiResponse.Data = _responseMap['userinfo'];
+      _apiResponse.Data = _response;
+
+      ;
       print('----------------------' + _apiResponse.Data.toString());
 
       _apiResponse.ApiError =
-          ApiError(error: 'Get USer By tokenID Success', errorNo: '200');
+          ApiError(error: 'Get GetDrugGroup Success', errorNo: '200');
       //    ApiError.fromJson(json.decode(_reqResultMap.toString()));
 
       print('response error' + _apiResponse.ApiError.toString());
       return dartz.left(_apiResponse);
     } else {
-      print('4345654345678p-6666666666-09876' +
-          _responseMap['requestResult'].toString());
+      print('4345654345678p-6666666666-09876' + _response.toString());
 
       _apiError = ApiError(
-          error: _responseMap['requestResult']['error'].toString(),
+          error: 'Error retriving DrugGroups from REpository',
           errorNo: response.statusCode.toString());
       print('0000000000000000000000000000');
       return dartz.right(_apiError);

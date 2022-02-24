@@ -10,6 +10,8 @@ dependencies:
   uuid: ^3.0.0
   dartz: ^0.10.0
   http: ^0.13.4
+  pharma_shared_models:
+    path: ../pharma_shared_models
 
 
 dev_dependencies:

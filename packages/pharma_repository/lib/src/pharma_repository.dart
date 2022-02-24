@@ -1,46 +1,46 @@
 import 'package:dartz/dartz.dart' as dartz;
 import 'package:pharma_repository/src/api/pharma_api.dart';
 import 'package:pharma_repository/pharma_repository.dart';
+import 'api/api_response.dart';
 
 class PharmaRepository {
   PharmaRepository(this.baseUrl);
-  User? _user; //= User.empty;
+  //drugGroup? _drugGroup; //= drugGroup.empty;
   final String baseUrl;
 
-  /*Future<User?> getUser1(String tokenId, String baseUrl) async {
-    /* print('GetUser1111: - "${_user.id}" - ');
-    if (_user.id != '') return _user;
-    print('GetUser222:' + user_id);
+  /*Future<drugGroup?> getdrugGroup1(String tokenId, String baseUrl) async {
+    /* print('GetdrugGroup1111: - "${_drugGroup.id}" - ');
+    if (_drugGroup.id != '') return _drugGroup;
+    print('GetdrugGroup222:' + drugGroup_id);
 */
     return Future.delayed(
       const Duration(milliseconds: 300),
-      () => _user = await getUserByTokenId(tokenId,   baseUrl), //user_id),
+      () => _drugGroup = await getdrugGroupByTokenId(tokenId,   baseUrl), //drugGroup_id),
     );
   }*/
 
-  Future<dartz.Either<User, ApiError>> getUserById(
-      {required String tokenId}) async {
-    dartz.Either<ApiResponse, ApiError> _getUserResponse;
+  Future<dartz.Either<List<DrugGroup>, ApiError>> getDrugGroupAll(
+      {required String localUI}) async {
+    dartz.Either<ApiResponse, ApiError> _getDrugGroupAllResponse;
 
     try {
-      _getUserResponse = await apiGetUserByTokenId(tokenId, baseUrl);
-      print('login response :' + _getUserResponse.toString());
+      _getDrugGroupAllResponse = await apiGetDrugGroupAll(localUI, baseUrl);
+      print('DrugGroup response :' + _getDrugGroupAllResponse.toString());
 
-      return _getUserResponse.fold((left) {
+      return _getDrugGroupAllResponse.fold((left) {
         //print((right as ApiError).error.toString());
         print('left1');
-        print((left.Data as Map<String, dynamic>).toString());
-        User _userInfo = User.fromMap(left.Data as Map<String, dynamic>);
-        print(_userInfo.toJson().toString());
+        print(left.Data);
+
         print('left2');
         //_controller.add(AuthRepoState.authenticated(_tokenPair));
 
-        return dartz.left(_userInfo);
+        return dartz.left(List<DrugGroup>.from((left.Data as List<DrugGroup>)));
       }, (right) {
         // _controller.add(AuthRepoState.unauthenticated(TokenPair.empty()));
         print('right');
         print(right.toJson().toString());
-        return dartz.right(right as ApiError);
+        return dartz.right(right);
       });
     } catch (err) {
       print('Error connectiing to server ' + err.toString());
