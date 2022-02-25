@@ -55,7 +55,7 @@ class DrugGroupBloc extends Bloc<DrugGroupEvent, DrugGroupState> {
         ''' "wherecond": " Where similarity (drugGroup.\\"ar__drugGroupName\\",'${event.whereCond}' )  > 0.2  OR similarity (drugGroup.\\"en__drugGroupName\\",'${event.whereCond}' )  > 0.2  "  ''';
 
     _WereCond =
-        ''' "wherecond": " Where   drugGroup.\\"ar__drugGroupName\\" like '%${event.whereCond}%'  OR  drugGroup.\\"en__drugGroupName\\" LIKE '%${event.whereCond}%' " ''';
+        ''' "wherecond": " Where    drugGroup.\\"ar__drugGroupName\\" like '%${event.whereCond}%'  OR  lower ( drugGroup.\\"en__drugGroupName\\") LIKE  lower ('%${event.whereCond}%') " ''';
 
     emit(state.copyWith(
         status: DrugGroupStatus.loading, errMsg: 'loading.....'));
