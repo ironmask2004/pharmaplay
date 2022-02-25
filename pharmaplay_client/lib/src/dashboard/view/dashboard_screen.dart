@@ -7,6 +7,8 @@ import 'package:pharmaplay_client/src/dashboard/druggroup/druggroup.dart';
 import 'package:pharmaplay_client/src/utlites/sforms_style.dart';
 import 'package:pharmaplay_client/src/utlites/responsive.dart';
 
+import '../druggroup/view/horizgrid.dart';
+
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({Key? key}) : super(key: key);
 
@@ -28,6 +30,7 @@ class DashboardScreen extends StatelessWidget {
                     children: [
                       //const MyFiles(),
                       const DrugGroupsView(),
+                      //HorizPage(),
                       const SizedBox(height: defaultPadding),
                       const RecentFiles(),
                       if (Responsive.isMobile(context))

@@ -1,4 +1,5 @@
 import 'package:authentication_repository/authentication_repository.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pharma_repository/pharma_repository.dart';
@@ -71,6 +72,17 @@ class AppView extends StatelessWidget {
         builder: (_, dashboardState) {
           return MaterialApp(
             navigatorKey: _navigatorKey,
+
+            //
+            scrollBehavior: const MaterialScrollBehavior().copyWith(
+              dragDevices: {
+                PointerDeviceKind.mouse,
+                PointerDeviceKind.touch,
+                PointerDeviceKind.stylus,
+                PointerDeviceKind.unknown
+              },
+            ),
+            //
             debugShowCheckedModeBanner: false,
             localizationsDelegates: const [
               SLang.delegate,

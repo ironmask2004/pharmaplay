@@ -45,7 +45,7 @@ class DrugGroupsView extends StatelessWidget {
           ),
           tablet: const Center(child: DrugGroupInfoCardGridView()),
           desktop: DrugGroupInfoCardGridView(
-            childAspectRatio: _size.width < 1400 ? 1.1 : 1.4,
+            childAspectRatio: _size.width < 1400 ? 0.8 : 0.8,
           ),
         ),
       ],
@@ -57,7 +57,7 @@ class DrugGroupInfoCardGridView extends StatelessWidget {
   const DrugGroupInfoCardGridView({
     Key? key,
     this.crossAxisCount = 4,
-    this.childAspectRatio = 1,
+    this.childAspectRatio = 1 / 2,
   }) : super(key: key);
 
   final int crossAxisCount;
@@ -65,18 +65,37 @@ class DrugGroupInfoCardGridView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
-      physics: const ScrollPhysics(), //NeverScrollableScrollPhysics(),
-      shrinkWrap: true,
-      itemCount: context.read<DrugGroupBloc>().state.drugGroups.length,
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: crossAxisCount,
-        crossAxisSpacing: defaultPadding,
-        mainAxisSpacing: defaultPadding,
-        childAspectRatio: childAspectRatio,
-      ),
-      itemBuilder: (context, index) => DrugGroupInfoCard(
-          dragGroupInfo: context.read<DrugGroupBloc>().state.drugGroups[index]),
+    return BlocBuilder<DrugGroupBloc, DrugGroupState>(
+      buildWhen: (previous, current) {
+        return previous != current;
+      },
+      builder: (context, state) {
+        return SafeArea(
+          child: SizedBox(
+            width: double.infinity,
+            height: 300,
+            child: GridView.builder(
+              //physics: const NeverScrollableScrollPhysics(),
+              //shrinkWrap: true,
+              itemCount: context.read<DrugGroupBloc>().state.drugGroups.length,
+              scrollDirection: Axis.horizontal,
+
+              gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                crossAxisSpacing: defaultPadding,
+                mainAxisSpacing: defaultPadding,
+                childAspectRatio: childAspectRatio,
+                maxCrossAxisExtent: 180,
+                // childAspectRatio: 1 / 2,
+                // crossAxisSpacing: 20,
+                // mainAxisSpacing: 20
+              ),
+              itemBuilder: (context, index) => DrugGroupInfoCard(
+                  dragGroupInfo:
+                      context.read<DrugGroupBloc>().state.drugGroups[index]),
+            ),
+          ),
+        );
+      },
     );
   }
 }
