@@ -21,6 +21,7 @@ class DrugGroupBloc extends Bloc<DrugGroupEvent, DrugGroupState> {
   }
 
   final PharmaRepository _pharmaRepository;
+  String _localUI = 'en';
 
   void _onLocalUIChanged(
     LocalUIChanged event,
@@ -28,12 +29,13 @@ class DrugGroupBloc extends Bloc<DrugGroupEvent, DrugGroupState> {
   ) {
     //print(SLang.current.onforgotemailchanged);
 
-    print('${event.localUI},   ');
+    print('_onLocalUIChanged ======================= ${event.localUI},   ');
+    _localUI = event.localUI;
     emit(state.copyWith(
       localUI: event.localUI,
       status: DrugGroupStatus.success,
     ));
-    add(const DrugGroupGetAll());
+    //add(const DrugGroupGetAll());
   }
 
 //-==========
@@ -42,7 +44,8 @@ class DrugGroupBloc extends Bloc<DrugGroupEvent, DrugGroupState> {
     DrugGroupGetAll event,
     Emitter<DrugGroupState> emit,
   ) async {
-    print('_onDrugGroupGetAll: ${state.status}');
+    print(
+        '_onDrugGroupGetAll LOCALEUIIIIIIIIIIIIIIIIIIIIIIIIIII : $_localUI ${state.localUI}');
     // print(state.email.value + ' password: ' + state.password.value);
 
     emit(state.copyWith(
@@ -53,7 +56,7 @@ class DrugGroupBloc extends Bloc<DrugGroupEvent, DrugGroupState> {
     try {
       //TokenPair _tokenInfo;
       _repoResponse =
-          await _pharmaRepository.getDrugGroupAll(localUI: state.localUI);
+          await _pharmaRepository.getDrugGroupAll(localUI: _localUI);
 
       _repoResponse.fold((left) {
         print('left from PAi get back');

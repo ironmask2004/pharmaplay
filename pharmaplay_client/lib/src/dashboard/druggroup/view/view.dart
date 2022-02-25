@@ -1,2 +1,2 @@
-//export 'druggroup_form.dart';
-//export 'druggroup_page.dart';
+export 'druggroup_info_card.dart';
+export 'druggroups_view.dart';

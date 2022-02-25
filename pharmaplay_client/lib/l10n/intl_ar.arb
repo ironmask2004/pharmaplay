@@ -74,5 +74,7 @@
   "warning": "تحذير",
   "yes": "نعم",
   "no": "لا",
-  "areYouSureYouWantToExit": "هل أنت متأكد من الخروج النهائي؟"
+  "areYouSureYouWantToExit": "هل أنت متأكد من الخروج النهائي؟",
+  "drugGroups": "أصناف اﻷدوية",
+  "search": "بحث"
 }

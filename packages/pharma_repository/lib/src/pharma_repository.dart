@@ -24,12 +24,14 @@ class PharmaRepository {
     dartz.Either<ApiResponse, ApiError> _getDrugGroupAllResponse;
 
     try {
+      print('localUI: $localUI');
       _getDrugGroupAllResponse = await apiGetDrugGroupAll(localUI, baseUrl);
+
       print('DrugGroup response :' + _getDrugGroupAllResponse.toString());
 
       return _getDrugGroupAllResponse.fold((left) {
         //print((right as ApiError).error.toString());
-        print('left1');
+        print('left11111111111111111');
         print(left.Data);
 
         print('left233333');

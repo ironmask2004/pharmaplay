@@ -23,7 +23,7 @@ Future<dartz.Either<ApiResponse, ApiError>> apiGetDrugGroupAll(
   ApiError _apiError; // = ApiError(error: error, errorNo: errorNo);
 
   try {
-    final _json = '{ \"localUI\": \"ar\"    }';
+    final _json = '{ \"localUI\": \"$localUI\"    }';
 
     var url = Uri.http(baseUrl, "pharma/drug/druggroups");
     Map<String, String> _headers = {

@@ -411,6 +411,26 @@ class SLang {
       args: [],
     );
   }
+
+  /// `Drug Groups`
+  String get drugGroups {
+    return Intl.message(
+      'Drug Groups',
+      name: 'drugGroups',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search`
+  String get search {
+    return Intl.message(
+      'Search',
+      name: 'search',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<SLang> {

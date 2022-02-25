@@ -2,6 +2,7 @@ import 'package:authentication_repository/authentication_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pharmaplay_client/generated/l10n.dart';
 import 'package:pharmaplay_client/src/authentication/authentication.dart';
 import 'package:pharmaplay_client/src/dashboard/bloc/dashboard_bloc.dart';
 import 'package:pharmaplay_client/src/dashboard/druggroup/druggroup.dart';
@@ -159,7 +160,7 @@ class SearchField extends StatelessWidget {
       builder: (context, state) {
         return TextField(
           decoration: InputDecoration(
-            hintText: "Search",
+            hintText: SLang.of(context).search,
             fillColor: context.read<DashBoardBloc>().state.secondaryColor,
             filled: true,
             border: const OutlineInputBorder(
@@ -168,8 +169,11 @@ class SearchField extends StatelessWidget {
             ),
             suffixIcon: InkWell(
               onTap: () {
-                print('Searching!!!!');
-                context.read<DrugGroupBloc>().add(DrugGroupGetAll());
+                print('Searching!!!!' +
+                    context.read<DashBoardBloc>().state.uiLocale.languageCode);
+                context.read<DrugGroupBloc>().add(LocalUIChanged(
+                    context.read<DashBoardBloc>().state.uiLocale.languageCode));
+                context.read<DrugGroupBloc>().add(const DrugGroupGetAll());
               },
               child: Container(
                 padding: const EdgeInsets.all(defaultPadding * 0.75),

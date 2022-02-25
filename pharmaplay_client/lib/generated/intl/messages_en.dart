@@ -46,6 +46,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "backTo": MessageLookupByLibrary.simpleMessage("Back To "),
         "confirmCode": MessageLookupByLibrary.simpleMessage("Confirm-Code"),
         "darkMode": MessageLookupByLibrary.simpleMessage("Dark Mode"),
+        "drugGroups": MessageLookupByLibrary.simpleMessage("Drug Groups"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "emailaddress": MessageLookupByLibrary.simpleMessage("Email"),
         "englishLanguage":
@@ -71,6 +72,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "pageHomeSampleTotalAmount": m4,
         "password": MessageLookupByLibrary.simpleMessage("password"),
         "resetPassword": MessageLookupByLibrary.simpleMessage("Reset Password"),
+        "search": MessageLookupByLibrary.simpleMessage("Search"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "signIn": MessageLookupByLibrary.simpleMessage("signIn"),
         "signOut": MessageLookupByLibrary.simpleMessage("signOut"),

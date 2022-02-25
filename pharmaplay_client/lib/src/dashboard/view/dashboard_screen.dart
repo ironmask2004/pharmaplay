@@ -3,6 +3,7 @@ import 'package:pharmaplay_client/src/dashboard/components/header.dart';
 import 'package:pharmaplay_client/src/dashboard/components/my_fields.dart';
 import 'package:pharmaplay_client/src/dashboard/components/recent_files.dart';
 import 'package:pharmaplay_client/src/dashboard/components/storage_details.dart';
+import 'package:pharmaplay_client/src/dashboard/druggroup/druggroup.dart';
 import 'package:pharmaplay_client/src/utlites/sforms_style.dart';
 import 'package:pharmaplay_client/src/utlites/responsive.dart';
 
@@ -25,7 +26,8 @@ class DashboardScreen extends StatelessWidget {
                   flex: 5,
                   child: Column(
                     children: [
-                      const MyFiles(),
+                      //const MyFiles(),
+                      const DrugGroupsView(),
                       const SizedBox(height: defaultPadding),
                       const RecentFiles(),
                       if (Responsive.isMobile(context))
