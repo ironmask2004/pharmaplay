@@ -197,6 +197,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "3.0.1"
+  dart_jsonwebtoken:
+    dependency: "direct dev"
+    description:
+      name: dart_jsonwebtoken
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.4.1"
   dart_style:
     dependency: transitive
     description:
@@ -651,6 +658,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.1.2"
+  pointycastle:
+    dependency: transitive
+    description:
+      name: pointycastle
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "3.5.1"
   pool:
     dependency: transitive
     description:

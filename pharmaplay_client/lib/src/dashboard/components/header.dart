@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pharmaplay_client/src/authentication/authentication.dart';
 import 'package:pharmaplay_client/src/dashboard/bloc/dashboard_bloc.dart';
+import 'package:pharmaplay_client/src/dashboard/druggroup/druggroup.dart';
 import 'package:pharmaplay_client/src/utlites/responsive.dart';
 import 'package:pharmaplay_client/src/utlites/sforms_style.dart';
 
@@ -166,7 +167,10 @@ class SearchField extends StatelessWidget {
               borderRadius: BorderRadius.all(Radius.circular(10)),
             ),
             suffixIcon: InkWell(
-              onTap: () {},
+              onTap: () {
+                print('Searching!!!!');
+                context.read<DrugGroupBloc>().add(DrugGroupGetAll());
+              },
               child: Container(
                 padding: const EdgeInsets.all(defaultPadding * 0.75),
                 margin:

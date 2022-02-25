@@ -32,10 +32,14 @@ class PharmaRepository {
         print('left1');
         print(left.Data);
 
-        print('left2');
+        print('left233333');
         //_controller.add(AuthRepoState.authenticated(_tokenPair));
 
-        return dartz.left(List<DrugGroup>.from((left.Data as List<DrugGroup>)));
+        var drugGroupList =
+            ((left.Data) as List).map((i) => DrugGroup.fromJson(i)).toList();
+        print('left2333gggggggg33');
+
+        return dartz.left(drugGroupList);
       }, (right) {
         // _controller.add(AuthRepoState.unauthenticated(TokenPair.empty()));
         print('right');
@@ -43,7 +47,7 @@ class PharmaRepository {
         return dartz.right(right);
       });
     } catch (err) {
-      print('Error connectiing to server ' + err.toString());
+      print('Error       ' + err.toString());
       throw (err);
       // return dartz.right(ApiError(error: '$err', errorNo: '1900202'));
     }

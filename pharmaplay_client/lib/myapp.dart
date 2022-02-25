@@ -1,10 +1,11 @@
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pharma_repository/pharma_repository.dart';
 import 'package:pharmaplay_client/generated/l10n.dart';
 import 'package:pharmaplay_client/src/authentication/authentication.dart';
+import 'package:pharmaplay_client/src/dashboard/druggroup/bloc/druggroup_bloc.dart';
 import 'package:pharmaplay_client/src/splash/splash.dart';
-import 'package:pharmaplay_client/src/utlites/sforms_style.dart';
 import 'package:user_repository/user_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -18,10 +19,12 @@ class MyApp extends StatelessWidget {
     Key? key,
     required this.authenticationRepository,
     required this.userRepository,
+    required this.pharmaRepository,
   }) : super(key: key);
 
   final AuthenticationRepository authenticationRepository;
   final UserRepository userRepository;
+  final PharmaRepository pharmaRepository;
   @override
   Widget build(BuildContext context) {
     return RepositoryProvider.value(
@@ -38,6 +41,10 @@ class MyApp extends StatelessWidget {
               create: (_) => DashBoardBloc()
                 // ..add(ReloadUILocaleRequsted())
                 ..add(DashBoardInitialRequested()),
+            ),
+            BlocProvider(
+              create: (_) => DrugGroupBloc(pharmaRepository: pharmaRepository)
+                ..add(const DrugGroupGetAll()),
             ),
             /* BlocProvider<BlocC>(
       create: (BuildContext context) => BlocC(),

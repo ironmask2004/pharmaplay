@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:pharmaplay_client/app.dart';
+import 'package:pharma_repository/pharma_repository.dart';
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:pharmaplay_client/myapp.dart';
 import 'package:pharmaplay_client/src/utlites/shared_pref.dart';
@@ -22,6 +22,7 @@ Future<void> main() async {
     authenticationRepository: AuthenticationRepository(
         loggedInFlag, _tokenPair, 'pharmaplay.mywire.org:9093'),
     userRepository: UserRepository('pharmaplay.mywire.org:9093'),
+    pharmaRepository: PharmaRepository('pharmaplay.mywire.org:9093'),
   ));
 }
 

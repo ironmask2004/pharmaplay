@@ -23,7 +23,9 @@ Future<dartz.Either<ApiResponse, ApiError>> apiGetDrugGroupAll(
   ApiError _apiError; // = ApiError(error: error, errorNo: errorNo);
 
   try {
-    var url = Uri.http(baseUrl, "pharma/drug/druggroups/");
+    final _json = '{ \"localUI\": \"ar\"    }';
+
+    var url = Uri.http(baseUrl, "pharma/drug/druggroups");
     Map<String, String> _headers = {
       'content-type': 'application/json',
       'accept': 'application/json',
@@ -31,7 +33,8 @@ Future<dartz.Either<ApiResponse, ApiError>> apiGetDrugGroupAll(
     print(_headers.toString());
     final client = http.Client();
     print('-000-0--0-0-0-0--0');
-    final http.Response response = await client.get(url, headers: _headers);
+    final http.Response response =
+        await client.post(url, headers: _headers, body: _json);
     print(response.body.toString());
     print('kkkkkkkkkkkkkkkkkkkk');
 

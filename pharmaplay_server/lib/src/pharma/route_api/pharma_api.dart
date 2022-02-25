@@ -228,7 +228,7 @@ class PharmaApi {
 
 //======= getDrugGroupAll ====================
 
-    router.get('/drug/druggroups', (Request req) async {
+    router.post('/drug/druggroups', (Request req) async {
       List<DrugGroup> drugGroupInfo;
       try {
         final payload = await req.readAsString();
