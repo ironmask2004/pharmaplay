@@ -8,12 +8,14 @@ class DashBoardState extends Equatable {
       this.primaryColor = const Color(0xFF2697FF),
       this.secondaryColor = const Color(0xFF2A2D3E),
       this.bgColor = const Color(0xFF212332),
-      this.fontbodyColor = const Color(0xFF3390EC)});
+      this.fontbodyColor = const Color(0xFF3390EC),
+      this.headerSerachField = ''});
 
   //static final GlobalKey<ScaffoldState> scaffoldKey =       GlobalKey<ScaffoldState>();
 
   //final GlobalKey<ScaffoldState> scaffoldKey;
   final Locale uiLocale;
+  final String headerSerachField;
   final ThemeMode uiThemeMode;
   final Color primaryColor;
   final Color secondaryColor;
@@ -39,14 +41,16 @@ class DashBoardState extends Equatable {
       Color? primaryColor,
       Color? secondaryColor,
       Color? bgColor,
-      Color? fontbodyColor}) {
+      Color? fontbodyColor,
+      String? headerSerachField}) {
     return DashBoardState(
         uiLocale: uiLocale ?? this.uiLocale,
         uiThemeMode: uiThemeMode ?? this.uiThemeMode,
         primaryColor: primaryColor ?? this.primaryColor,
         secondaryColor: secondaryColor ?? this.secondaryColor,
         bgColor: bgColor ?? this.bgColor,
-        fontbodyColor: fontbodyColor ?? this.fontbodyColor);
+        fontbodyColor: fontbodyColor ?? this.fontbodyColor,
+        headerSerachField: headerSerachField ?? this.headerSerachField);
   }
 
   @override
@@ -56,7 +60,8 @@ class DashBoardState extends Equatable {
         primaryColor,
         secondaryColor,
         bgColor,
-        fontbodyColor
+        fontbodyColor,
+        headerSerachField
       ];
 }
 

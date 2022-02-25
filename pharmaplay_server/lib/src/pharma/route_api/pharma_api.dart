@@ -54,7 +54,7 @@ class PharmaApi {
       List<DrugRecord> drugInfo;
       // try {
       final payload = await req.readAsString();
-      final String weherCond = json.decode(payload)['wherecond'] ?? '';
+      final String whereCond = json.decode(payload)['wherecond'] ?? '';
       final String localUI = json.decode(payload)['localUI'] ?? 'en';
       final Map<String, dynamic> listpagesparms = json.decode(payload);
       print(listpagesparms);
@@ -81,7 +81,7 @@ class PharmaApi {
           startFromPage: startFromPage,
           pageLength: pageLength,
           orderByfields: orderByfields,
-          weherCond: weherCond,
+          whereCond: whereCond,
           db: db,
           drugStore: drugStore,
           localUI: localUI);
@@ -237,8 +237,10 @@ class PharmaApi {
         print(listpagesparms);
 
         final String localUI = listpagesparms['localUI'] ?? 'en';
+        final String whereCond = listpagesparms['wherecond'] ?? ' ';
 
-        drugGroupInfo = await getDrugGroupAll(db: db, localUI: localUI);
+        drugGroupInfo = await getDrugGroupAll(
+            db: db, whereCond: whereCond, localUI: localUI);
 
         // print("founded_drug------:" + drugInfo.toString());
       } catch (err) {

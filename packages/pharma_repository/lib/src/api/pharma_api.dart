@@ -18,20 +18,22 @@ curl --location --request GET 'localhost:9093/users/' \
 */
 
 Future<dartz.Either<ApiResponse, ApiError>> apiGetDrugGroupAll(
-    String localUI, String baseUrl) async {
+    String localUI, String whereCond, String baseUrl) async {
   ApiResponse _apiResponse = ApiResponse();
   ApiError _apiError; // = ApiError(error: error, errorNo: errorNo);
 
   try {
-    final _json = '{ \"localUI\": \"$localUI\"    }';
+    whereCond = whereCond != '' ? ' ,  $whereCond ' : '';
+    final _json = '{ \"localUI\": \"$localUI\"   $whereCond     }';
 
     var url = Uri.http(baseUrl, "pharma/drug/druggroups");
     Map<String, String> _headers = {
       'content-type': 'application/json',
       'accept': 'application/json',
     };
-    print(_headers.toString());
+    print(_headers.toString() + 'Body :  $_json');
     final client = http.Client();
+
     print('-000-0--0-0-0-0--0');
     final http.Response response =
         await client.post(url, headers: _headers, body: _json);

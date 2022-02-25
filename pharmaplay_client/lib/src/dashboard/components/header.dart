@@ -159,6 +159,10 @@ class SearchField extends StatelessWidget {
     return BlocBuilder<DashBoardBloc, DashBoardState>(
       builder: (context, state) {
         return TextField(
+          onChanged: (value) {
+            //  print(value);
+            context.read<DashBoardBloc>().add(HeaderSerachFieldChanged(value));
+          },
           decoration: InputDecoration(
             hintText: SLang.of(context).search,
             fillColor: context.read<DashBoardBloc>().state.secondaryColor,
@@ -169,11 +173,20 @@ class SearchField extends StatelessWidget {
             ),
             suffixIcon: InkWell(
               onTap: () {
+                context
+                    .read<DashBoardBloc>()
+                    .add(const HeaderSerachSubmitted());
                 print('Searching!!!!' +
                     context.read<DashBoardBloc>().state.uiLocale.languageCode);
                 context.read<DrugGroupBloc>().add(LocalUIChanged(
                     context.read<DashBoardBloc>().state.uiLocale.languageCode));
-                context.read<DrugGroupBloc>().add(const DrugGroupGetAll());
+
+                var _serachValue =
+                    context.read<DashBoardBloc>().state.headerSerachField;
+
+                context
+                    .read<DrugGroupBloc>()
+                    .add(DrugGroupGetSearch(_serachValue));
               },
               child: Container(
                 padding: const EdgeInsets.all(defaultPadding * 0.75),

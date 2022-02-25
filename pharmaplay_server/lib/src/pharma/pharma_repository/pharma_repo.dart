@@ -209,7 +209,7 @@ Future<List<DrugRecord>> findDrugByPage(
     {required int startFromPage,
     required int pageLength,
     required String orderByfields,
-    required String weherCond,
+    required String whereCond,
     required DB db,
     required String drugStore,
     required String localUI}) async {
@@ -239,7 +239,7 @@ Future<List<DrugRecord>> findDrugByPage(
     LEFT JOIN pharmaplay."drugClass" drugClass ON drug."drugClassID" = drugClass."drugClassID"
     LEFT JOIN pharmaplay."drugGroup" drugGroup  ON drug."drugGroupID" = drugGroup."drugGroupID"
 
-    $weherCond
+    $whereCond
     ORDER BY   $orderByfields
     LIMIT $pageLength  OFFSET  $startFromRow  ''';
 
@@ -303,8 +303,8 @@ Future<List<DrugRecord>> fuzzyFindDrugByPage(
     OR       similarity (drug."ar__brandName" ,'$fuzzyCond' )  > 0.2
     OR       similarity (genericDrug."en__genericDrugName",'$fuzzyCond' )  > 0.2
     OR       similarity (genericDrug."ar__genericDrugName",'$fuzzyCond' )  > 0.2
-
- 
+    OR       similarity (drugGroup."ar__drugGroupName",'$fuzzyCond' )  > 0.2
+    OR       similarity (drugGroup."en__drugGroupName",'$fuzzyCond' )  > 0.2
 
     ORDER BY   $orderByfields
     LIMIT $pageLength  OFFSET  $startFromRow  ''';
@@ -330,11 +330,12 @@ Future<List<DrugRecord>> fuzzyFindDrugByPage(
 ///---------------------
 
 Future<List<DrugGroup>> getDrugGroupAll(
-    {required DB db, required String localUI}) async {
+    {required DB db, String whereCond = ' ', required String localUI}) async {
   List<DrugGroup> resultDrugGroup = <DrugGroup>[];
   String sql = '''SELECT    drugGroup."drugGroupID" ,
       drugGroup."${localUI}__drugGroupName" as "drugGroupName"
       FROM  pharmaplay."drugGroup" drugGroup
+      $whereCond
       ORDER BY   drugGroup."${localUI}__drugGroupName"
     ''';
 

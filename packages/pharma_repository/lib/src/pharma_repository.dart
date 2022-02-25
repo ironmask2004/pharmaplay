@@ -20,12 +20,14 @@ class PharmaRepository {
   }*/
 
   Future<dartz.Either<List<DrugGroup>, ApiError>> getDrugGroupAll(
-      {required String localUI}) async {
+      {required String localUI, String? whereCond}) async {
     dartz.Either<ApiResponse, ApiError> _getDrugGroupAllResponse;
 
     try {
+      whereCond = whereCond ?? '';
       print('localUI: $localUI');
-      _getDrugGroupAllResponse = await apiGetDrugGroupAll(localUI, baseUrl);
+      _getDrugGroupAllResponse =
+          await apiGetDrugGroupAll(localUI, whereCond, baseUrl);
 
       print('DrugGroup response :' + _getDrugGroupAllResponse.toString());
 

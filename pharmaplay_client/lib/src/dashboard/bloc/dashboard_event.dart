@@ -51,3 +51,16 @@ class RightMenuClicked extends DashBoardEvent {
 }
 
 class SettingsInitialRequested extends DashBoardEvent {}
+
+class HeaderSerachFieldChanged extends DashBoardEvent {
+  const HeaderSerachFieldChanged(this.headerSerachField);
+
+  final String headerSerachField;
+
+  @override
+  List<Object> get props => [headerSerachField];
+}
+
+class HeaderSerachSubmitted extends DashBoardEvent {
+  const HeaderSerachSubmitted();
+}

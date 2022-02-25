@@ -19,3 +19,12 @@ class LocalUIChanged extends DrugGroupEvent {
 class DrugGroupGetAll extends DrugGroupEvent {
   const DrugGroupGetAll();
 }
+
+class DrugGroupGetSearch extends DrugGroupEvent {
+  const DrugGroupGetSearch(this.whereCond);
+
+  final String whereCond;
+
+  @override
+  List<Object> get props => [whereCond];
+}

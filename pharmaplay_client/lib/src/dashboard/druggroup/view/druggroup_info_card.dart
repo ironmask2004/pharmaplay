@@ -51,7 +51,7 @@ class DrugGroupInfoCard extends StatelessWidget {
           ),
           Text(
             dragGroupInfo.drugGroupName,
-            maxLines: 1,
+            maxLines: 2,
             overflow: TextOverflow.ellipsis,
           ),
           const ProgressLine(

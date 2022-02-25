@@ -18,6 +18,8 @@ class DashBoardBloc extends Bloc<DashBoardEvent, DashBoardState> {
 
     on<ReloadUILocaleRequsted>(_onReloadUILocaleRequsted);
     on<ReloadUIThemeModeRequsted>(_onReloadUIThemeModeRequsted);
+    on<HeaderSerachFieldChanged>(_onHeaderSerachFieldChanged);
+    on<HeaderSerachSubmitted>(_onHeaderSerachSubmitted);
   }
 
   Future<void> _onSideMenuClicked(
@@ -116,19 +118,6 @@ class DashBoardBloc extends Bloc<DashBoardEvent, DashBoardState> {
   Future<void> _onReloadUIThemeModeRequsted(
     ReloadUIThemeModeRequsted event,
     Emitter<DashBoardState> emit,
-
-    /*
-    Color black = Colors.black; // example black color
-
-     String _storeColorValue = black.value.toString() ;
-
-This is will give 4278190080 as the black color value. you store this value as String to firebase.
-You can retrieve color value and change it back to color like this :
-
-int value = int.parse(_storeColorValue);
-
-Color color = Color(value).withOpacity(1); 
-    */
   ) async {
     print('_onReloadUIThemeModeRequsted!!');
     //=> ThemeMode.system;
@@ -166,6 +155,34 @@ Color color = Color(value).withOpacity(1);
         bgColor: bgColor,
         fontbodyColor: fontbodyColor));
   }
+
+//===========
+
+  void _onHeaderSerachFieldChanged(
+    HeaderSerachFieldChanged event,
+    Emitter<DashBoardState> emit,
+  ) {
+    print('_onHeaderSerachFieldChanged');
+    emit(state.copyWith(
+      headerSerachField: event.headerSerachField,
+    ));
+  }
+
+  void _onHeaderSerachSubmitted(
+    HeaderSerachSubmitted event,
+    Emitter<DashBoardState> emit,
+  ) async {
+    try {
+      print('_onHeaderSerachSubmitted headerSerachField:====' +
+          state.headerSerachField);
+    } catch (err) {
+      print('Error connectiing to server ' + err.toString());
+      rethrow;
+      // showInSnackBar(context, err.toString());
+    }
+  }
+
+  //=======================
 
   Future<void> _onReloadUILocaleRequsted(
     ReloadUILocaleRequsted event,
@@ -213,14 +230,14 @@ Color color = Color(value).withOpacity(1);
           await MySharedPreferences.instance
               .setIntegerValue("bgColor", Color(0xFF212332).value);
           await MySharedPreferences.instance
-              .setIntegerValue("fontbodyColor", Color(0xFF3390EC).value);
+              .setIntegerValue("fontbodyColor", Color(0xFF71CAE6).value);
 
           emit(state.copyWith(
               uiThemeMode: event.uiThemeMode,
               primaryColor: Color(0xFF2697FF),
               secondaryColor: const Color(0xFF2A2D3E),
               bgColor: const Color(0xFF212332),
-              fontbodyColor: Color(0xFF3390EC)));
+              fontbodyColor: Color(0xFF71CAE6)));
         }
         break;
       case ThemeMode.light:
