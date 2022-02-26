@@ -76,5 +76,6 @@
   "no": "No",
   "areYouSureYouWantToExit": "Are you sure you want to exit?",
   "drugGroups": "Drug Groups",
-  "search": "Search"
+  "search": "Search",
+  "drugs": "Drugs"
 }

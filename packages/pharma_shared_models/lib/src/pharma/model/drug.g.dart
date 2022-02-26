@@ -19,6 +19,7 @@ _$_Drug _$$_DrugFromJson(Map<String, dynamic> json) => _$_Drug(
       drugFamilyID: json['drugFamilyID'] as int,
       licenseNumber: json['licenseNumber'] as String,
       licenseDate: json['licenseDate'] as String,
+      drugPrice: json['drugPrice'] as int,
     );
 
 Map<String, dynamic> _$$_DrugToJson(_$_Drug instance) => <String, dynamic>{
@@ -34,4 +35,5 @@ Map<String, dynamic> _$$_DrugToJson(_$_Drug instance) => <String, dynamic>{
       'drugFamilyID': instance.drugFamilyID,
       'licenseNumber': instance.licenseNumber,
       'licenseDate': instance.licenseDate,
+      'drugPrice': instance.drugPrice,
     };

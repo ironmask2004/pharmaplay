@@ -12,7 +12,7 @@ class PharmaApi {
 
     //============= /drug/test  ROUTE
 
-    router.get('/drug/test', (Request req) async {
+    router.post('/drug/test', (Request req) async {
       /*  // final authDetails = req.context['authDetails'] as JWT;
       try {
         final payload = await req.readAsString();
@@ -50,10 +50,11 @@ class PharmaApi {
     //============= /drugs/INFO ROUTE
     ///----------------------
     //{ "startfrompage": "3" , "pagelength": "2" , "orderbyfields": "drug.\"chemicalDrugID\",drug.\"tradeName\""  }
-    router.get('/drug/findlistbypage', (Request req) async {
+    router.post('/drug/findlistbypage', (Request req) async {
       List<DrugRecord> drugInfo;
       // try {
       final payload = await req.readAsString();
+      print(payload);
       final String whereCond = json.decode(payload)['wherecond'] ?? '';
       final String localUI = json.decode(payload)['localUI'] ?? 'en';
       final Map<String, dynamic> listpagesparms = json.decode(payload);
@@ -105,7 +106,7 @@ class PharmaApi {
     //============= /drugs/INFO ROUTE
     ///----------------------
     //{ "startfrompage": "3" , "pagelength": "2" , "orderbyfields": "drug.\"chemicalDrugID\",drug.\"tradeName\""  }
-    router.get('/drug/fuzzyfindbypage', (Request req) async {
+    router.post('/drug/fuzzyfindbypage', (Request req) async {
       List<DrugRecord> drugInfo;
       // try {
       final payload = await req.readAsString();
@@ -165,7 +166,7 @@ class PharmaApi {
     //"weher": { "drug.\"dosageFormID\"": 30 } ,
     // "orderbyfields": "drug.\"chemicalDrugID\",drug.\"tradeName\""  }
     //==== byparam
-    router.get('/drug/byparam', (Request req) async {
+    router.post('/drug/byparam', (Request req) async {
       List<DrugRecord> drugInfo;
       try {
         final payload = await req.readAsString();
@@ -260,7 +261,7 @@ class PharmaApi {
 //=============
     //============= /drug/  ROUTE
 
-    router.get('/drug/id', (Request req) async {
+    router.post('/drug/id', (Request req) async {
       //final authDetails = req.context['authDetails'] as JWT;
       print(req.context.toString());
       DrugRecord drugInfo;

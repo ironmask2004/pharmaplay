@@ -18,7 +18,8 @@ class Drug with _$Drug {
       required final int drugClassID,
       required final int drugFamilyID,
       required final String licenseNumber,
-      required final String licenseDate}) = _Drug;
+      required final String licenseDate,
+      required final int drugPrice}) = _Drug;
 
   factory Drug.fromJson(Map<String, dynamic> json) => _$DrugFromJson(json);
 }

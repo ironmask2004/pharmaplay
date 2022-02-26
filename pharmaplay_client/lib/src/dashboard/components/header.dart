@@ -6,6 +6,7 @@ import 'package:pharmaplay_client/generated/l10n.dart';
 import 'package:pharmaplay_client/src/authentication/authentication.dart';
 import 'package:pharmaplay_client/src/dashboard/bloc/dashboard_bloc.dart';
 import 'package:pharmaplay_client/src/dashboard/druggroup/druggroup.dart';
+import 'package:pharmaplay_client/src/dashboard/drugs/drug.dart';
 import 'package:pharmaplay_client/src/utlites/responsive.dart';
 import 'package:pharmaplay_client/src/utlites/sforms_style.dart';
 
@@ -187,6 +188,7 @@ class SearchField extends StatelessWidget {
                 context
                     .read<DrugGroupBloc>()
                     .add(DrugGroupGetSearch(_serachValue));
+                context.read<DrugBloc>().add(DrugGetSearch(_serachValue));
               },
               child: Container(
                 padding: const EdgeInsets.all(defaultPadding * 0.75),

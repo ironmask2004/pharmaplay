@@ -431,6 +431,16 @@ class SLang {
       args: [],
     );
   }
+
+  /// `Drugs`
+  String get drugs {
+    return Intl.message(
+      'Drugs',
+      name: 'drugs',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<SLang> {

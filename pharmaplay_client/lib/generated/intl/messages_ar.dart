@@ -47,6 +47,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirmCode": MessageLookupByLibrary.simpleMessage("رمز التحقق"),
         "darkMode": MessageLookupByLibrary.simpleMessage("نمط ألوان غامق"),
         "drugGroups": MessageLookupByLibrary.simpleMessage("أصناف اﻷدوية"),
+        "drugs": MessageLookupByLibrary.simpleMessage("اﻷدوية"),
         "email": MessageLookupByLibrary.simpleMessage("الإيميل"),
         "emailaddress": MessageLookupByLibrary.simpleMessage("Email"),
         "englishLanguage":

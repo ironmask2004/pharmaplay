@@ -47,6 +47,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirmCode": MessageLookupByLibrary.simpleMessage("Confirm-Code"),
         "darkMode": MessageLookupByLibrary.simpleMessage("Dark Mode"),
         "drugGroups": MessageLookupByLibrary.simpleMessage("Drug Groups"),
+        "drugs": MessageLookupByLibrary.simpleMessage("Drugs"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "emailaddress": MessageLookupByLibrary.simpleMessage("Email"),
         "englishLanguage":

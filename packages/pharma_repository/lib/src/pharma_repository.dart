@@ -51,7 +51,61 @@ class PharmaRepository {
         return dartz.right(right);
       });
     } catch (err) {
-      print('Error       ' + err.toString());
+      print('Error ' + err.toString());
+      throw (err);
+      // return dartz.right(ApiError(error: '$err', errorNo: '1900202'));
+    }
+  }
+
+  /*-------------
+  // {String? startFromPage,
+    String? pageLength,
+    String? orderByFields,
+    String? localUI,
+    String? whereCond,
+  */
+
+  Future<dartz.Either<List<DrugRecord>, ApiError>> getDrugAll(
+      {String? startFromPage,
+      String? pageLength,
+      String? orderByFields,
+      String? localUI,
+      String? whereCond}) async {
+    dartz.Either<ApiResponse, ApiError> _getDrugRecoredAllResponse;
+
+    try {
+      print('localUI: $localUI');
+      _getDrugRecoredAllResponse = await apiGetDrugAll(
+          localUI: localUI,
+          startFromPage: startFromPage,
+          pageLength: pageLength,
+          orderByFields: orderByFields,
+          whereCond: whereCond,
+          baseUrl: baseUrl);
+
+      print('DrugRecored response :' + _getDrugRecoredAllResponse.toString());
+
+      return _getDrugRecoredAllResponse.fold((left) {
+        //print((right as ApiError).error.toString());
+        print('left11 getDrugAll');
+        print(left.Data);
+
+        print('left2 getDrugAll');
+        //_controller.add(AuthRepoState.authenticated(_tokenPair));
+
+        var DrugRecoredList =
+            ((left.Data) as List).map((i) => DrugRecord.fromJson(i)).toList();
+        print('left233 getDrugAll');
+
+        return dartz.left(DrugRecoredList);
+      }, (right) {
+        // _controller.add(AuthRepoState.unauthenticated(TokenPair.empty()));
+        print('right');
+        print(right.toJson().toString());
+        return dartz.right(right);
+      });
+    } catch (err) {
+      print('Error ' + err.toString());
       throw (err);
       // return dartz.right(ApiError(error: '$err', errorNo: '1900202'));
     }

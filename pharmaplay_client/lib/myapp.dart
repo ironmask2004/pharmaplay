@@ -6,6 +6,7 @@ import 'package:pharma_repository/pharma_repository.dart';
 import 'package:pharmaplay_client/generated/l10n.dart';
 import 'package:pharmaplay_client/src/authentication/authentication.dart';
 import 'package:pharmaplay_client/src/dashboard/druggroup/bloc/druggroup_bloc.dart';
+import 'package:pharmaplay_client/src/dashboard/drugs/drug.dart';
 import 'package:pharmaplay_client/src/splash/splash.dart';
 import 'package:user_repository/user_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -46,6 +47,10 @@ class MyApp extends StatelessWidget {
             BlocProvider(
               create: (_) => DrugGroupBloc(pharmaRepository: pharmaRepository)
                 ..add(const DrugGroupGetAll()),
+            ),
+            BlocProvider(
+              create: (_) => DrugBloc(pharmaRepository: pharmaRepository)
+                ..add(const DrugGetAll()),
             ),
             /* BlocProvider<BlocC>(
       create: (BuildContext context) => BlocC(),
