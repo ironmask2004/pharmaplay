@@ -51,12 +51,15 @@ class DrugBloc extends Bloc<DrugEvent, DrugState> {
     print(
         '_onDrugGetSearch LOCALEUIIIIIIIIIIIIIIIIIIIIIIIIIII :  ${state.localUI} + WhewrCond:::: ${event.whereCond} ');
     // print(state.email.value + ' password: ' + state.password.value);
-    var _WereCond =
-        ''' "wherecond": " Where similarity (drug.\\"ar__drugName\\",'${event.whereCond}' )  > 0.2  OR similarity (drug.\\"en__drugName\\",'${event.whereCond}' )  > 0.2  "  ''';
+    // _WereCond =
+    //    ''' "wherecond": " Where similarity (drug.\\"ar__drugName\\",'${event.whereCond}' )  > 0.2  OR similarity (drug.\\"en__drugName\\",'${event.whereCond}' )  > 0.2  "  ''';
 
-    _WereCond =
-        ''' "wherecond": " Where    drug.\\"ar__drugName\\" like '%${event.whereCond}%'  OR  lower ( drug.\\"en__drugName\\") LIKE  lower ('%${event.whereCond}%') " ''';
+    var _wereCond =
+        ''' "wherecond":  " Where    drug.\\"ar__brandName\\" like '%${event.whereCond}%'  OR  lower ( drug.\\"en__brandName\\") LIKE  lower ('%${event.whereCond}%')"  ''';
 
+    print("----------------------------");
+    print(_wereCond);
+    print("----------------------------");
     emit(state.copyWith(status: DrugStatus.loading, errMsg: 'loading.....'));
 
 //-----------------
@@ -64,7 +67,7 @@ class DrugBloc extends Bloc<DrugEvent, DrugState> {
     try {
       //TokenPair _tokenInfo;
       _repoResponse = await _pharmaRepository.getDrugAll(
-          localUI: state.localUI, whereCond: _WereCond);
+          localUI: state.localUI, whereCond: _wereCond);
 
       _repoResponse.fold((left) {
         print('left from PAi get back');

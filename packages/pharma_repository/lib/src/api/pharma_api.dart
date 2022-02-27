@@ -99,9 +99,9 @@ Future<dartz.Either<ApiResponse, ApiError>> apiGetDrugAll(
   ApiError _apiError; // = ApiError(error: error, errorNo: errorNo);
 
   try {
-    localUI = localUI == null
-        ? ' \"localUI\": \"en\" '
-        : ' \"localUI\": \"$localUI\" ';
+    localUI = localUI ?? 'en';
+
+    var _jsonlocalUI = ' \"localUI\": \"$localUI\" ';
 
     whereCond = whereCond == null ? ' ' : ' ,  $whereCond ';
 
@@ -109,14 +109,14 @@ Future<dartz.Either<ApiResponse, ApiError>> apiGetDrugAll(
         ? ' , "startfrompage": "1" '
         : ' , "startfrompage": "$startFromPage" ';
     pageLength = pageLength == null
-        ? ' , "pageLength": "25" '
-        : ' , "pageLength": "$pageLength" ';
+        ? ' , "pagelength": "25" '
+        : ' , "pagelength": "$pageLength" ';
     orderByFields = orderByFields == null
-        ? ' , drug.\"en__brandName\"" '
-        : ' ,  "orderByFields": "$orderByFields" ';
+        ? ' ,  "orderbyfields": "drug.\\"${localUI}__brandName\\"" '
+        : ' ,  "orderbyfields": "$orderByFields" ';
 
     final _json =
-        ' {  $localUI  $whereCond  "$startFromPage"  "$pageLength"   "$orderByFields"     }';
+        ' {  $_jsonlocalUI  $whereCond  $startFromPage  $pageLength   $orderByFields     }';
 
     var url = Uri.http(baseUrl, "pharma/drug/findlistbypage");
     Map<String, String> _headers = {
