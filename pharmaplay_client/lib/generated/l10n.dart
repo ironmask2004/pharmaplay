@@ -441,6 +441,16 @@ class SLang {
       args: [],
     );
   }
+
+  /// `S.P`
+  String get mony {
+    return Intl.message(
+      'S.P',
+      name: 'mony',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<SLang> {

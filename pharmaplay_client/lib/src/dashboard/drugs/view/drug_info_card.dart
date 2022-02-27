@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pharma_repository/pharma_repository.dart';
+import 'package:pharmaplay_client/generated/l10n.dart';
+import 'package:pharmaplay_client/src/dashboard/components/drug_rating.dart';
 import 'package:pharmaplay_client/src/dashboard/dashboard.dart';
 import 'package:pharmaplay_client/src/utlites/sforms_style.dart';
 
@@ -54,12 +56,17 @@ class DrugInfoCard extends StatelessWidget {
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
           ),
-          const ProgressLine(
-            color: Color(0xF3DAEB41),
-            percentage: 90,
+          DrugRating(
+            rating: (drugInfo.drug.drugRating),
           ),
+          /*ProgressLine(
+            color:
+                Color(int.parse('0xF3DAEB41') + drugInfo.drug.drugPrice * 1000),
+            percentage: (drugInfo.drug.drugPrice / 20000 * 100).toInt(),
+          ),*/
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Text(
                 drugInfo.manufactory.manufactoryName,
@@ -69,8 +76,14 @@ class DrugInfoCard extends StatelessWidget {
                         .state
                         .fontbodyColor), //+70
               ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
               Text(
-                '(${drugInfo.drug.drugPrice})',
+                '(${drugInfo.drug.drugPrice} ${SLang.of(context).mony} )',
                 style: Theme.of(context).textTheme.caption!.copyWith(
                     color: context.read<DashBoardBloc>().state.fontbodyColor),
               ),

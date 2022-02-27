@@ -28,7 +28,6 @@ class DashboardScreen extends StatelessWidget {
                     children: [
                       //const MyFiles(),
                       const DrugGroupsView(),
-                      //HorizPage(),
                       const SizedBox(height: defaultPadding),
                       //const RecentFiles(),
                       const DrugsView(),

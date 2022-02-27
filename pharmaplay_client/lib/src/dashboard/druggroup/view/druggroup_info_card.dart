@@ -54,10 +54,10 @@ class DrugGroupInfoCard extends StatelessWidget {
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
           ),
-          const ProgressLine(
+          /* const ProgressLine(
             color: Color(0xF3DAEB41),
             percentage: 90,
-          ),
+          ),*/
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

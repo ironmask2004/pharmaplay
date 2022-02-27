@@ -72,7 +72,7 @@ class DrugInfoCardGridView extends StatelessWidget {
         return SafeArea(
           child: SizedBox(
             width: double.infinity,
-            height: 300,
+            height: 390,
             child: GridView.builder(
               //physics: const NeverScrollableScrollPhysics(),
               //shrinkWrap: true,

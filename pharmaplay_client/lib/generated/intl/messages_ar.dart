@@ -60,6 +60,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lightMode": MessageLookupByLibrary.simpleMessage("نمط ألوان فاتح"),
         "loginPage":
             MessageLookupByLibrary.simpleMessage("تسجيل الدخول إلى الصيدلية"),
+        "mony": MessageLookupByLibrary.simpleMessage("ل.س"),
         "no": MessageLookupByLibrary.simpleMessage("لا"),
         "onforgotemailchanged":
             MessageLookupByLibrary.simpleMessage("تغيير في البريد الاكتروني"),

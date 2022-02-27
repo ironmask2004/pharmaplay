@@ -185,9 +185,12 @@ class SearchField extends StatelessWidget {
                 var _serachValue =
                     context.read<DashBoardBloc>().state.headerSerachField;
 
+                context.read<DrugBloc>().add(DrugLocalUIChanged(
+                    context.read<DashBoardBloc>().state.uiLocale.languageCode));
                 context
                     .read<DrugGroupBloc>()
                     .add(DrugGroupGetSearch(_serachValue));
+
                 context.read<DrugBloc>().add(DrugGetSearch(_serachValue));
               },
               child: Container(

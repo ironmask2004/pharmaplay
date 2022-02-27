@@ -35,7 +35,8 @@ class _$DrugTearOff {
       required int drugFamilyID,
       required String licenseNumber,
       required String licenseDate,
-      required int drugPrice}) {
+      required int drugPrice,
+      required double drugRating}) {
     return _Drug(
       drugID: drugID,
       drugNo: drugNo,
@@ -50,6 +51,7 @@ class _$DrugTearOff {
       licenseNumber: licenseNumber,
       licenseDate: licenseDate,
       drugPrice: drugPrice,
+      drugRating: drugRating,
     );
   }
 
@@ -76,6 +78,7 @@ mixin _$Drug {
   String get licenseNumber => throw _privateConstructorUsedError;
   String get licenseDate => throw _privateConstructorUsedError;
   int get drugPrice => throw _privateConstructorUsedError;
+  double get drugRating => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -99,7 +102,8 @@ abstract class $DrugCopyWith<$Res> {
       int drugFamilyID,
       String licenseNumber,
       String licenseDate,
-      int drugPrice});
+      int drugPrice,
+      double drugRating});
 }
 
 /// @nodoc
@@ -125,6 +129,7 @@ class _$DrugCopyWithImpl<$Res> implements $DrugCopyWith<$Res> {
     Object? licenseNumber = freezed,
     Object? licenseDate = freezed,
     Object? drugPrice = freezed,
+    Object? drugRating = freezed,
   }) {
     return _then(_value.copyWith(
       drugID: drugID == freezed
@@ -179,6 +184,10 @@ class _$DrugCopyWithImpl<$Res> implements $DrugCopyWith<$Res> {
           ? _value.drugPrice
           : drugPrice // ignore: cast_nullable_to_non_nullable
               as int,
+      drugRating: drugRating == freezed
+          ? _value.drugRating
+          : drugRating // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -201,7 +210,8 @@ abstract class _$DrugCopyWith<$Res> implements $DrugCopyWith<$Res> {
       int drugFamilyID,
       String licenseNumber,
       String licenseDate,
-      int drugPrice});
+      int drugPrice,
+      double drugRating});
 }
 
 /// @nodoc
@@ -228,6 +238,7 @@ class __$DrugCopyWithImpl<$Res> extends _$DrugCopyWithImpl<$Res>
     Object? licenseNumber = freezed,
     Object? licenseDate = freezed,
     Object? drugPrice = freezed,
+    Object? drugRating = freezed,
   }) {
     return _then(_Drug(
       drugID: drugID == freezed
@@ -282,6 +293,10 @@ class __$DrugCopyWithImpl<$Res> extends _$DrugCopyWithImpl<$Res>
           ? _value.drugPrice
           : drugPrice // ignore: cast_nullable_to_non_nullable
               as int,
+      drugRating: drugRating == freezed
+          ? _value.drugRating
+          : drugRating // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -302,7 +317,8 @@ class _$_Drug implements _Drug {
       required this.drugFamilyID,
       required this.licenseNumber,
       required this.licenseDate,
-      required this.drugPrice});
+      required this.drugPrice,
+      required this.drugRating});
 
   factory _$_Drug.fromJson(Map<String, dynamic> json) => _$$_DrugFromJson(json);
 
@@ -332,10 +348,12 @@ class _$_Drug implements _Drug {
   final String licenseDate;
   @override
   final int drugPrice;
+  @override
+  final double drugRating;
 
   @override
   String toString() {
-    return 'Drug(drugID: $drugID, drugNo: $drugNo, brandName: $brandName, caliber: $caliber, genericDrugID: $genericDrugID, chemicalDrugID: $chemicalDrugID, manufactoryID: $manufactoryID, dosageFormID: $dosageFormID, drugClassID: $drugClassID, drugFamilyID: $drugFamilyID, licenseNumber: $licenseNumber, licenseDate: $licenseDate, drugPrice: $drugPrice)';
+    return 'Drug(drugID: $drugID, drugNo: $drugNo, brandName: $brandName, caliber: $caliber, genericDrugID: $genericDrugID, chemicalDrugID: $chemicalDrugID, manufactoryID: $manufactoryID, dosageFormID: $dosageFormID, drugClassID: $drugClassID, drugFamilyID: $drugFamilyID, licenseNumber: $licenseNumber, licenseDate: $licenseDate, drugPrice: $drugPrice, drugRating: $drugRating)';
   }
 
   @override
@@ -363,7 +381,9 @@ class _$_Drug implements _Drug {
                 .equals(other.licenseNumber, licenseNumber) &&
             const DeepCollectionEquality()
                 .equals(other.licenseDate, licenseDate) &&
-            const DeepCollectionEquality().equals(other.drugPrice, drugPrice));
+            const DeepCollectionEquality().equals(other.drugPrice, drugPrice) &&
+            const DeepCollectionEquality()
+                .equals(other.drugRating, drugRating));
   }
 
   @override
@@ -381,7 +401,8 @@ class _$_Drug implements _Drug {
       const DeepCollectionEquality().hash(drugFamilyID),
       const DeepCollectionEquality().hash(licenseNumber),
       const DeepCollectionEquality().hash(licenseDate),
-      const DeepCollectionEquality().hash(drugPrice));
+      const DeepCollectionEquality().hash(drugPrice),
+      const DeepCollectionEquality().hash(drugRating));
 
   @JsonKey(ignore: true)
   @override
@@ -408,7 +429,8 @@ abstract class _Drug implements Drug {
       required int drugFamilyID,
       required String licenseNumber,
       required String licenseDate,
-      required int drugPrice}) = _$_Drug;
+      required int drugPrice,
+      required double drugRating}) = _$_Drug;
 
   factory _Drug.fromJson(Map<String, dynamic> json) = _$_Drug.fromJson;
 
@@ -438,6 +460,8 @@ abstract class _Drug implements Drug {
   String get licenseDate;
   @override
   int get drugPrice;
+  @override
+  double get drugRating;
   @override
   @JsonKey(ignore: true)
   _$DrugCopyWith<_Drug> get copyWith => throw _privateConstructorUsedError;

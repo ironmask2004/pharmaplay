@@ -78,7 +78,7 @@ Future<List<DrugRecord>> findDrugByParams(
     drugGroup."${localUI}__drugGroupName" as "drugGroupName",
     drug."drugFamilyID",drugFamily."drugFamilyID", drugFamily."drugClassID",
     drugFamily."${localUI}__drugFamilyName" as "drugFamilyName", drug."licenseNumber",
-    drug."licenseDate",drug."drugPrice" 
+    drug."licenseDate",drug."drugPrice",drug."drugRating"
     FROM pharmaplay.drug drug
     LEFT JOIN pharmaplay."manufactory" manufactory ON drug."manufactoryID" = manufactory."manufactoryID"
     LEFT JOIN pharmaplay."dosageForm" dosageForm ON drug."dosageFormID" = dosageForm."dosageFormID"
@@ -128,7 +128,7 @@ Future<DrugRecord> findDrugByID(
     drugGroup."${localUI}__drugGroupName" as "drugGroupName",
     drug."drugFamilyID",drugFamily."drugFamilyID", drugFamily."drugClassID",
     drugFamily."${localUI}__drugFamilyName" as "drugFamilyName", drug."licenseNumber",
-    drug."licenseDate",drug."drugPrice" 
+    drug."licenseDate",drug."drugPrice",drug."drugRating" 
     FROM pharmaplay.drug drug
     LEFT JOIN pharmaplay."manufactory" manufactory ON drug."manufactoryID" = manufactory."manufactoryID"
     LEFT JOIN pharmaplay."dosageForm" dosageForm ON drug."dosageFormID" = dosageForm."dosageFormID"
@@ -176,7 +176,7 @@ Future<List<DrugRecord>> findDrugAll(
     drugGroup."${localUI}__drugGroupName" as "drugGroupName",
     drug."drugFamilyID",drugFamily."drugFamilyID", drugFamily."drugClassID",
     drugFamily."${localUI}__drugFamilyName" as "drugFamilyName", drug."licenseNumber",
-    drug."licenseDate",drug."drugPrice" 
+    drug."licenseDate",drug."drugPrice",drug."drugRating" 
     FROM pharmaplay.drug drug
     LEFT JOIN pharmaplay."manufactory" manufactory ON drug."manufactoryID" = manufactory."manufactoryID"
     LEFT JOIN pharmaplay."dosageForm" dosageForm ON drug."dosageFormID" = dosageForm."dosageFormID"
@@ -233,7 +233,7 @@ Future<List<DrugRecord>> findDrugByPage(
     drugGroup."${localUI}__drugGroupName" as "drugGroupName",
     drug."drugFamilyID",drugFamily."drugFamilyID", drugFamily."drugClassID",
     drugFamily."${localUI}__drugFamilyName" as "drugFamilyName",
-    drug."licenseNumber",drug."licenseDate",drug."drugPrice"
+    drug."licenseNumber",drug."licenseDate",drug."drugPrice",drug."drugRating"
     FROM pharmaplay.drug drug
     LEFT JOIN pharmaplay."manufactory" manufactory ON drug."manufactoryID" = manufactory."manufactoryID"
     LEFT JOIN pharmaplay."dosageForm" dosageForm ON drug."dosageFormID" = dosageForm."dosageFormID"
@@ -293,7 +293,7 @@ Future<List<DrugRecord>> fuzzyFindDrugByPage(
     drugGroup."${localUI}__drugGroupName" as "drugGroupName",
     drug."drugFamilyID",drugFamily."drugFamilyID", drugFamily."drugClassID",
     drugFamily."${localUI}__drugFamilyName" as "drugFamilyName", drug."licenseNumber",
-    drug."licenseDate",drug."drugPrice" 
+    drug."licenseDate",drug."drugPrice",drug."drugRating" 
     FROM pharmaplay.drug drug
     LEFT JOIN pharmaplay."manufactory" manufactory ON drug."manufactoryID" = manufactory."manufactoryID"
     LEFT JOIN pharmaplay."dosageForm" dosageForm ON drug."dosageFormID" = dosageForm."dosageFormID"
