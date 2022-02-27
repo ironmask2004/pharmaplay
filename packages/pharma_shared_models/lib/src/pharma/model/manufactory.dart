@@ -7,7 +7,8 @@ part 'manufactory.g.dart';
 class Manufactory with _$Manufactory {
   factory Manufactory(
       {required final int manufactoryID,
-      required final String manufactoryName}) = _Manufactory;
+      required final String manufactoryName,
+      required final String manufactoryRating}) = _Manufactory;
 
   factory Manufactory.fromJson(Map<String, dynamic> json) =>
       _$ManufactoryFromJson(json);

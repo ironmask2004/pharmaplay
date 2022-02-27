@@ -26,7 +26,7 @@ Future<dartz.Either<ApiResponse, ApiError>> apiGetDrugGroupAll(
     whereCond = whereCond != '' ? ' ,  $whereCond ' : '';
     final _json = '{ \"localUI\": \"$localUI\"   $whereCond     }';
 
-    var url = Uri.http(baseUrl, "pharma/drug/druggroups");
+    var url = Uri.http(baseUrl, "pharma/druggroups/search");
     Map<String, String> _headers = {
       'content-type': 'application/json',
       'accept': 'application/json',

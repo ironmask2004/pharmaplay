@@ -2,11 +2,13 @@
 
 import 'dart:io';
 import 'package:pharmaplay_server/pharmaplay_server.dart';
+import 'package:pharmaplay_server/src/pharma/route_api/pharma_druggroup_api.dart';
+import 'package:pharmaplay_server/src/pharma/route_api/pharma_manufactory_api.dart';
 import 'package:pharmaplay_server/src/repository/database_api.dart';
 import 'package:pharmaplay_server/src/authentication/auth_api/auth_api.dart';
 import 'package:pharmaplay_server/src/router_api/static_assets_api.dart';
 import 'package:pharmaplay_server/src/user/route_api/user_api.dart';
-import 'package:pharmaplay_server/src/pharma/route_api/pharma_api.dart';
+import 'package:pharmaplay_server/src/pharma/route_api/pharma_drug_api.dart';
 
 import 'package:pharmaplay_server/src/utilites/config.dart';
 import 'package:shelf/shelf.dart';
@@ -48,7 +50,11 @@ void main(List<String> args) async {
     ..mount('/auth/',
         AuthApi(dbApi.db, authStore, sysEnv.secretKey, tokenService).router)
     ..mount('/users/', UserApi(dbApi.db, authStore).router)
-    ..mount('/pharma/', PharmaApi(dbApi.db, medicineStore).router)
+    ..mount('/pharma/drug', PharmaDrugApi(dbApi.db, medicineStore).router)
+    ..mount('/pharma/druggroups/',
+        PharmaDrugGroupApi(dbApi.db, medicineStore).router)
+    ..mount('/pharma/manufactory/',
+        PharmaManufactoryApi(dbApi.db, medicineStore).router)
     ..mount('/assets/', StaticAssetsApi('public').router)
     ..all('/<name|.*>', fallback('public/index.html'));
 

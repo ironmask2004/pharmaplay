@@ -36,7 +36,7 @@ class _$DrugTearOff {
       required String licenseNumber,
       required String licenseDate,
       required int drugPrice,
-      required double drugRating}) {
+      required String drugRating}) {
     return _Drug(
       drugID: drugID,
       drugNo: drugNo,
@@ -78,7 +78,7 @@ mixin _$Drug {
   String get licenseNumber => throw _privateConstructorUsedError;
   String get licenseDate => throw _privateConstructorUsedError;
   int get drugPrice => throw _privateConstructorUsedError;
-  double get drugRating => throw _privateConstructorUsedError;
+  String get drugRating => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -103,7 +103,7 @@ abstract class $DrugCopyWith<$Res> {
       String licenseNumber,
       String licenseDate,
       int drugPrice,
-      double drugRating});
+      String drugRating});
 }
 
 /// @nodoc
@@ -187,7 +187,7 @@ class _$DrugCopyWithImpl<$Res> implements $DrugCopyWith<$Res> {
       drugRating: drugRating == freezed
           ? _value.drugRating
           : drugRating // ignore: cast_nullable_to_non_nullable
-              as double,
+              as String,
     ));
   }
 }
@@ -211,7 +211,7 @@ abstract class _$DrugCopyWith<$Res> implements $DrugCopyWith<$Res> {
       String licenseNumber,
       String licenseDate,
       int drugPrice,
-      double drugRating});
+      String drugRating});
 }
 
 /// @nodoc
@@ -296,7 +296,7 @@ class __$DrugCopyWithImpl<$Res> extends _$DrugCopyWithImpl<$Res>
       drugRating: drugRating == freezed
           ? _value.drugRating
           : drugRating // ignore: cast_nullable_to_non_nullable
-              as double,
+              as String,
     ));
   }
 }
@@ -349,7 +349,7 @@ class _$_Drug implements _Drug {
   @override
   final int drugPrice;
   @override
-  final double drugRating;
+  final String drugRating;
 
   @override
   String toString() {
@@ -430,7 +430,7 @@ abstract class _Drug implements Drug {
       required String licenseNumber,
       required String licenseDate,
       required int drugPrice,
-      required double drugRating}) = _$_Drug;
+      required String drugRating}) = _$_Drug;
 
   factory _Drug.fromJson(Map<String, dynamic> json) = _$_Drug.fromJson;
 
@@ -461,7 +461,7 @@ abstract class _Drug implements Drug {
   @override
   int get drugPrice;
   @override
-  double get drugRating;
+  String get drugRating;
   @override
   @JsonKey(ignore: true)
   _$DrugCopyWith<_Drug> get copyWith => throw _privateConstructorUsedError;

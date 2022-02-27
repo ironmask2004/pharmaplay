@@ -23,10 +23,13 @@ class _$ManufactoryTearOff {
   const _$ManufactoryTearOff();
 
   _Manufactory call(
-      {required int manufactoryID, required String manufactoryName}) {
+      {required int manufactoryID,
+      required String manufactoryName,
+      required String manufactoryRating}) {
     return _Manufactory(
       manufactoryID: manufactoryID,
       manufactoryName: manufactoryName,
+      manufactoryRating: manufactoryRating,
     );
   }
 
@@ -42,6 +45,7 @@ const $Manufactory = _$ManufactoryTearOff();
 mixin _$Manufactory {
   int get manufactoryID => throw _privateConstructorUsedError;
   String get manufactoryName => throw _privateConstructorUsedError;
+  String get manufactoryRating => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -54,7 +58,8 @@ abstract class $ManufactoryCopyWith<$Res> {
   factory $ManufactoryCopyWith(
           Manufactory value, $Res Function(Manufactory) then) =
       _$ManufactoryCopyWithImpl<$Res>;
-  $Res call({int manufactoryID, String manufactoryName});
+  $Res call(
+      {int manufactoryID, String manufactoryName, String manufactoryRating});
 }
 
 /// @nodoc
@@ -69,6 +74,7 @@ class _$ManufactoryCopyWithImpl<$Res> implements $ManufactoryCopyWith<$Res> {
   $Res call({
     Object? manufactoryID = freezed,
     Object? manufactoryName = freezed,
+    Object? manufactoryRating = freezed,
   }) {
     return _then(_value.copyWith(
       manufactoryID: manufactoryID == freezed
@@ -78,6 +84,10 @@ class _$ManufactoryCopyWithImpl<$Res> implements $ManufactoryCopyWith<$Res> {
       manufactoryName: manufactoryName == freezed
           ? _value.manufactoryName
           : manufactoryName // ignore: cast_nullable_to_non_nullable
+              as String,
+      manufactoryRating: manufactoryRating == freezed
+          ? _value.manufactoryRating
+          : manufactoryRating // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -90,7 +100,8 @@ abstract class _$ManufactoryCopyWith<$Res>
           _Manufactory value, $Res Function(_Manufactory) then) =
       __$ManufactoryCopyWithImpl<$Res>;
   @override
-  $Res call({int manufactoryID, String manufactoryName});
+  $Res call(
+      {int manufactoryID, String manufactoryName, String manufactoryRating});
 }
 
 /// @nodoc
@@ -107,6 +118,7 @@ class __$ManufactoryCopyWithImpl<$Res> extends _$ManufactoryCopyWithImpl<$Res>
   $Res call({
     Object? manufactoryID = freezed,
     Object? manufactoryName = freezed,
+    Object? manufactoryRating = freezed,
   }) {
     return _then(_Manufactory(
       manufactoryID: manufactoryID == freezed
@@ -117,6 +129,10 @@ class __$ManufactoryCopyWithImpl<$Res> extends _$ManufactoryCopyWithImpl<$Res>
           ? _value.manufactoryName
           : manufactoryName // ignore: cast_nullable_to_non_nullable
               as String,
+      manufactoryRating: manufactoryRating == freezed
+          ? _value.manufactoryRating
+          : manufactoryRating // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -124,7 +140,10 @@ class __$ManufactoryCopyWithImpl<$Res> extends _$ManufactoryCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_Manufactory implements _Manufactory {
-  _$_Manufactory({required this.manufactoryID, required this.manufactoryName});
+  _$_Manufactory(
+      {required this.manufactoryID,
+      required this.manufactoryName,
+      required this.manufactoryRating});
 
   factory _$_Manufactory.fromJson(Map<String, dynamic> json) =>
       _$$_ManufactoryFromJson(json);
@@ -133,10 +152,12 @@ class _$_Manufactory implements _Manufactory {
   final int manufactoryID;
   @override
   final String manufactoryName;
+  @override
+  final String manufactoryRating;
 
   @override
   String toString() {
-    return 'Manufactory(manufactoryID: $manufactoryID, manufactoryName: $manufactoryName)';
+    return 'Manufactory(manufactoryID: $manufactoryID, manufactoryName: $manufactoryName, manufactoryRating: $manufactoryRating)';
   }
 
   @override
@@ -147,14 +168,17 @@ class _$_Manufactory implements _Manufactory {
             const DeepCollectionEquality()
                 .equals(other.manufactoryID, manufactoryID) &&
             const DeepCollectionEquality()
-                .equals(other.manufactoryName, manufactoryName));
+                .equals(other.manufactoryName, manufactoryName) &&
+            const DeepCollectionEquality()
+                .equals(other.manufactoryRating, manufactoryRating));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(manufactoryID),
-      const DeepCollectionEquality().hash(manufactoryName));
+      const DeepCollectionEquality().hash(manufactoryName),
+      const DeepCollectionEquality().hash(manufactoryRating));
 
   @JsonKey(ignore: true)
   @override
@@ -170,7 +194,8 @@ class _$_Manufactory implements _Manufactory {
 abstract class _Manufactory implements Manufactory {
   factory _Manufactory(
       {required int manufactoryID,
-      required String manufactoryName}) = _$_Manufactory;
+      required String manufactoryName,
+      required String manufactoryRating}) = _$_Manufactory;
 
   factory _Manufactory.fromJson(Map<String, dynamic> json) =
       _$_Manufactory.fromJson;
@@ -179,6 +204,8 @@ abstract class _Manufactory implements Manufactory {
   int get manufactoryID;
   @override
   String get manufactoryName;
+  @override
+  String get manufactoryRating;
   @override
   @JsonKey(ignore: true)
   _$ManufactoryCopyWith<_Manufactory> get copyWith =>

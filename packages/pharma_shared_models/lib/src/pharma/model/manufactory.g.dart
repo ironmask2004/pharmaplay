@@ -10,10 +10,12 @@ _$_Manufactory _$$_ManufactoryFromJson(Map<String, dynamic> json) =>
     _$_Manufactory(
       manufactoryID: json['manufactoryID'] as int,
       manufactoryName: json['manufactoryName'] as String,
+      manufactoryRating: json['manufactoryRating'] as String,
     );
 
 Map<String, dynamic> _$$_ManufactoryToJson(_$_Manufactory instance) =>
     <String, dynamic>{
       'manufactoryID': instance.manufactoryID,
       'manufactoryName': instance.manufactoryName,
+      'manufactoryRating': instance.manufactoryRating,
     };
