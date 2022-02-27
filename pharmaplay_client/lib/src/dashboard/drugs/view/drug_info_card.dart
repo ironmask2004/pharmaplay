@@ -57,7 +57,7 @@ class DrugInfoCard extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
           ),
           DrugRating(
-            rating: (double.parse(drugInfo.drug.drugRating)),
+            rating: (double.parse(drugInfo.drug.drugRating)), //--111
           ),
           /*ProgressLine(
             color:
