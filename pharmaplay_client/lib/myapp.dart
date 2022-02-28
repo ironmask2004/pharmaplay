@@ -13,8 +13,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'generated/l10n.dart';
 import 'src/dashboard/bloc/dashboard_bloc.dart';
+import 'src/dashboard/posts/posts.dart';
 import 'src/dashboard/view/dashboard_page.dart';
 import 'src/login/login.dart';
+import 'package:http/http.dart' as http;
 
 class MyApp extends StatelessWidget {
   const MyApp({
@@ -51,7 +53,11 @@ class MyApp extends StatelessWidget {
             BlocProvider(
               create: (_) => DrugBloc(pharmaRepository: pharmaRepository)
                 ..add(const DrugGetAll()),
-            ),
+            ), //
+            //  BlocProvider(
+            //     create: (_) =>
+            //        PostBloc(httpClient: http.Client())..add(PostFetched()),
+            //  ),
             /* BlocProvider<BlocC>(
       create: (BuildContext context) => BlocC(),
     ),*/

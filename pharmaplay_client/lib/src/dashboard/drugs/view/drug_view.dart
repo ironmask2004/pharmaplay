@@ -52,7 +52,7 @@ class DrugsView extends StatelessWidget {
   }
 }
 
-class DrugInfoCardGridView extends StatelessWidget {
+class DrugInfoCardGridView extends StatefulWidget {
   const DrugInfoCardGridView({
     Key? key,
     this.crossAxisCount = 4,
@@ -61,6 +61,19 @@ class DrugInfoCardGridView extends StatelessWidget {
 
   final int crossAxisCount;
   final double childAspectRatio;
+
+  @override
+  State<DrugInfoCardGridView> createState() => _DrugInfoCardGridViewState();
+}
+
+class _DrugInfoCardGridViewState extends State<DrugInfoCardGridView> {
+  final _scrollController = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(_onScroll);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -78,11 +91,12 @@ class DrugInfoCardGridView extends StatelessWidget {
               //shrinkWrap: true,
               itemCount: context.read<DrugBloc>().state.drugs.length,
               scrollDirection: Axis.horizontal,
+              controller: _scrollController,
 
               gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                 crossAxisSpacing: defaultPadding,
                 mainAxisSpacing: defaultPadding,
-                childAspectRatio: childAspectRatio,
+                childAspectRatio: widget.childAspectRatio,
                 maxCrossAxisExtent: 180,
                 // childAspectRatio: 1 / 2,
                 // crossAxisSpacing: 20,
@@ -95,5 +109,28 @@ class DrugInfoCardGridView extends StatelessWidget {
         );
       },
     );
+  }
+
+  @override
+  void dispose() {
+    _scrollController
+      ..removeListener(_onScroll)
+      ..dispose();
+    super.dispose();
+  }
+
+  void _onScroll() {
+    if (_isBottom) {
+      // context.read<PostBloc>().add(PostFetched());
+      print('Is Butooooom');
+    } else
+      print('Nor Boootm!!!!');
+  }
+
+  bool get _isBottom {
+    if (!_scrollController.hasClients) return false;
+    final maxScroll = _scrollController.position.maxScrollExtent;
+    final currentScroll = _scrollController.offset;
+    return currentScroll >= (maxScroll * 0.9);
   }
 }

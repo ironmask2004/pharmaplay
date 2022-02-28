@@ -33,15 +33,17 @@ dependencies:
 
 dev_dependencies:
   bloc: ^8.0.1
+  bloc_concurrency: ^0.2.0
   build_runner: ^2.1.5
   cached_network_image: ^3.2.0
   dart_jsonwebtoken: ^2.4.1
   dartz: ^0.10.0
   data_table_2: ^2.2.1
   dotenv: ^3.0.0
+  easy_infinite_scroll: ^1.0.0
   equatable: ^2.0.3
   fl_chart: ^0.45.0
-  flutter_bloc: ^8.0.0
+  flutter_bloc: ^8.0.1
   flutter_lints: ^1.0.4
   flutter_rating_bar: ^4.0.0
   flutter_spinkit: ^5.1.0
@@ -56,6 +58,7 @@ dev_dependencies:
   http: ^0.13.4
   intl_generator: ^0.2.1
   mailer: ^5.0.2
+  stream_transform: ^2.0.0
   uuid: ^3.0.5
 
 flutter:

@@ -28,3 +28,5 @@ class DrugGetSearch extends DrugEvent {
   @override
   List<Object> get props => [whereCond];
 }
+
+class DrugFetched extends DrugEvent {}
