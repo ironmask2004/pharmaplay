@@ -12,7 +12,10 @@ class DrugState extends Equatable {
       this.startFrompage = 1,
       this.pageLength = 10,
       this.currentPage = 1,
-      this.whereCond = ' '});
+      this.whereCond = '',
+      this.searchType = SearchType.none,
+      this.serachValue = '',
+      this.orderByFields = ''});
 
   final DrugStatus status;
   final String localUI;
@@ -23,6 +26,9 @@ class DrugState extends Equatable {
   final int startFrompage;
   final int currentPage;
   final int pageLength;
+  final String orderByFields;
+  final SearchType searchType;
+  final String serachValue;
 
   @override
   List<Object> get props => [
@@ -34,30 +40,37 @@ class DrugState extends Equatable {
         startFrompage,
         currentPage,
         pageLength,
-        stateMsg
+        stateMsg,
+        searchType,
+        serachValue,
+        orderByFields
       ];
 
-  DrugState copyWith({
-    DrugStatus? status,
-    String? localUI,
-    String? whereCond,
-    bool? hasReachedMax,
-    List<DrugRecord>? drugs,
-    String? stateMsg,
-    int? startFrompage,
-    int? currentPage,
-    int? pageLength,
-  }) {
+  DrugState copyWith(
+      {DrugStatus? status,
+      String? localUI,
+      String? whereCond,
+      bool? hasReachedMax,
+      List<DrugRecord>? drugs,
+      String? stateMsg,
+      int? startFrompage,
+      int? currentPage,
+      int? pageLength,
+      SearchType? searchType,
+      String? serachValue,
+      String? orderByFields}) {
     return DrugState(
-      status: status ?? this.status,
-      localUI: localUI ?? this.localUI,
-      whereCond: whereCond ?? this.whereCond,
-      hasReachedMax: hasReachedMax ?? this.hasReachedMax,
-      drugs: drugs ?? this.drugs,
-      stateMsg: stateMsg ?? this.stateMsg,
-      startFrompage: startFrompage ?? this.startFrompage,
-      currentPage: currentPage ?? this.currentPage,
-      pageLength: pageLength ?? this.pageLength,
-    );
+        status: status ?? this.status,
+        localUI: localUI ?? this.localUI,
+        whereCond: whereCond ?? this.whereCond,
+        hasReachedMax: hasReachedMax ?? this.hasReachedMax,
+        drugs: drugs ?? this.drugs,
+        stateMsg: stateMsg ?? this.stateMsg,
+        startFrompage: startFrompage ?? this.startFrompage,
+        currentPage: currentPage ?? this.currentPage,
+        pageLength: pageLength ?? this.pageLength,
+        searchType: searchType ?? this.searchType,
+        serachValue: serachValue ?? this.serachValue,
+        orderByFields: orderByFields ?? this.orderByFields);
   }
 }

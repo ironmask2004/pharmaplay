@@ -65,37 +65,75 @@ class PharmaRepository {
     String? whereCond,
   */
 
-  Future<dartz.Either<List<DrugRecord>, ApiError>> getDrugAll(
+  Future<dartz.Either<List<DrugRecord>, ApiError>> getDrugsSearch(
       {String? startFromPage,
       String? pageLength,
       String? orderByFields,
       String? localUI,
-      String? whereCond}) async {
+      String? whereCond,
+      String? searcValue,
+      String? searchType}) async {
+    String _whereCond = '';
+    String _fuzzycond = '';
     dartz.Either<ApiResponse, ApiError> _getDrugRecoredAllResponse;
 
     try {
       print('localUI: $localUI');
-      _getDrugRecoredAllResponse = await apiGetDrugAll(
+
+//like, equal, fuzzy, none
+      switch (searchType) {
+        case 'none':
+          {
+            _whereCond = '';
+          }
+          break;
+        case 'equal':
+          {
+            _whereCond =
+                ''' "wherecond":  " Where    drug.\\"ar__brandName\\" = '${searcValue}'  OR  lower ( drug.\\"en__brandName\\") =  lower ('${searcValue}')"  ''';
+          }
+          break;
+        case 'like':
+          {
+            _whereCond =
+                ''' "wherecond":  " Where    drug.\\"ar__brandName\\" like '%${searcValue}%'  OR  lower ( drug.\\"en__brandName\\") LIKE  lower ('%${searcValue}%')"  ''';
+          }
+          break;
+        case 'fuzzy':
+          {
+            _whereCond = '';
+            _fuzzycond = ''' "fuzzycond":  "\\"$searcValue\\"" ''';
+          }
+
+          break;
+        default:
+          {
+            _whereCond = '';
+          }
+      }
+      print('whereCond: $_whereCond  ----  _fuzzycond:::  $_fuzzycond ');
+      _getDrugRecoredAllResponse = await apiGetDrugsSearch(
           localUI: localUI,
           startFromPage: startFromPage,
           pageLength: pageLength,
           orderByFields: orderByFields,
           whereCond: whereCond,
+          fuzzyCond: _fuzzycond,
           baseUrl: baseUrl);
 
       print('DrugRecored response :' + _getDrugRecoredAllResponse.toString());
 
       return _getDrugRecoredAllResponse.fold((left) {
         //print((right as ApiError).error.toString());
-        print('left11 getDrugAll');
+        print('left11 getDrugsSearch');
         print(left.Data);
 
-        print('left2 getDrugAll');
+        print('left2 getDrugsSearch');
         //_controller.add(AuthRepoState.authenticated(_tokenPair));
 
         var DrugRecoredList =
             ((left.Data) as List).map((i) => DrugRecord.fromJson(i)).toList();
-        print('left233 getDrugAll');
+        print('left233 getDrugsSearch');
 
         return dartz.left(DrugRecoredList);
       }, (right) {

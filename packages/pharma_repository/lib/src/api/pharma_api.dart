@@ -34,9 +34,10 @@ Future<dartz.Either<ApiResponse, ApiError>> apiGetDrugGroupAll(
     print(_headers.toString() + 'Body :  $_json');
     final client = http.Client();
 
-    print('-000-0--0-0-0-0--0');
+    print('-000-0--0-0-0-0--0000000000000000000000000000');
     final http.Response response =
         await client.post(url, headers: _headers, body: _json);
+
     print(response.body.toString());
     print('kkkkkkkkkkkkkkkkkkkk');
 
@@ -88,12 +89,13 @@ pharmaplay.mywire.org:9093/pharma/drug/findlistbypage
 
 //----*/
 
-Future<dartz.Either<ApiResponse, ApiError>> apiGetDrugAll(
+Future<dartz.Either<ApiResponse, ApiError>> apiGetDrugsSearch(
     {String? startFromPage,
     String? pageLength,
     String? orderByFields,
     String? localUI,
     String? whereCond,
+    String? fuzzyCond,
     required String baseUrl}) async {
   ApiResponse _apiResponse = ApiResponse();
   ApiError _apiError; // = ApiError(error: error, errorNo: errorNo);
@@ -103,30 +105,39 @@ Future<dartz.Either<ApiResponse, ApiError>> apiGetDrugAll(
 
     var _jsonlocalUI = ' \"localUI\": \"$localUI\" ';
 
-    whereCond = whereCond == null ? ' ' : ' ,  $whereCond ';
+    whereCond =
+        whereCond == null || whereCond.isEmpty ? ' ' : ' ,  $whereCond ';
 
-    startFromPage = startFromPage == null
+    startFromPage = startFromPage == null || startFromPage.isEmpty
         ? ' , "startfrompage": "1" '
         : ' , "startfrompage": "$startFromPage" ';
-    pageLength = pageLength == null
+    pageLength = pageLength == null || pageLength.isEmpty
         ? ' , "pagelength": "25" '
         : ' , "pagelength": "$pageLength" ';
-    orderByFields = orderByFields == null
+    orderByFields = orderByFields == null || orderByFields.isEmpty
         ? ' ,  "orderbyfields": "drug.\\"${localUI}__brandName\\"" '
         : ' ,  "orderbyfields": "$orderByFields" ';
 
-    final _json =
-        ' {  $_jsonlocalUI  $whereCond  $startFromPage  $pageLength   $orderByFields     }';
+    var url;
+    final _json;
+    if (fuzzyCond == null || fuzzyCond.isEmpty) {
+      url = Uri.http(baseUrl, "pharma/drug/findlistbypage");
+      _json =
+          ' {  $_jsonlocalUI  $whereCond  $startFromPage  $pageLength   $orderByFields     }';
+    } else {
+      url = Uri.http(baseUrl, "pharma/drug/fuzzyfindbypage");
+      _json =
+          ' {  $_jsonlocalUI  $fuzzyCond  $startFromPage  $pageLength   $orderByFields     }';
+    }
 
-    var url = Uri.http(baseUrl, "pharma/drug/findlistbypage");
     Map<String, String> _headers = {
       'content-type': 'application/json',
       'accept': 'application/json',
     };
-    print(_headers.toString() + 'Body :  $_json');
+    print(_headers.toString() + 'Body :  $_json URL: $url ');
     final client = http.Client();
 
-    print('-000-0--0-0-0-0--0');
+    print('-000-0--0-0-0-0--011111111111111111111111111111');
 
     final http.Response response =
         await client.post(url, headers: _headers, body: _json);
