@@ -16,11 +16,11 @@ class DrugLocalUIChanged extends DrugEvent {
   List<Object> get props => [localUI];
 }
 
-class DrugGetAll extends DrugEvent {
-  const DrugGetAll();
+class DrugsScrolledd extends DrugEvent {
+  const DrugsScrolledd();
 }
 
-class DrugsFetched extends DrugEvent {
+class DrugsSearched extends DrugEvent {
   final DrugStatus? drugStatus;
   final String? localUI;
   final String? whereCond;
@@ -29,40 +29,7 @@ class DrugsFetched extends DrugEvent {
   final String? orderByFields;
   final SearchType? searchType;
   final String? serachValue;
-  const DrugsFetched({
-    this.drugStatus = DrugStatus.initializing,
-    this.localUI = 'en',
-    this.whereCond = '',
-    this.startFrompage = 1,
-    this.pageLength = 10,
-    this.orderByFields = '',
-    this.searchType = SearchType.none,
-    this.serachValue = '',
-  });
-
-  @override
-  List<Object> get props => [
-        drugStatus!,
-        localUI!,
-        whereCond!,
-        startFrompage!,
-        pageLength!,
-        orderByFields!,
-        searchType!,
-        serachValue!
-      ];
-}
-
-class DrugGetSearch extends DrugEvent {
-  final DrugStatus? drugStatus;
-  final String? localUI;
-  final String? whereCond;
-  final int? startFrompage;
-  final int? pageLength;
-  final String? orderByFields;
-  final SearchType? searchType;
-  final String? serachValue;
-  const DrugGetSearch({
+  const DrugsSearched({
     this.drugStatus = DrugStatus.initializing,
     this.localUI = 'en',
     this.whereCond = '',

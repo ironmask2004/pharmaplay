@@ -1,5 +1,4 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/locale.dart';
 import 'package:pharma_repository/pharma_repository.dart';
 import 'package:dartz/dartz.dart' as dartz;
 import 'package:stream_transform/stream_transform.dart';
@@ -22,12 +21,12 @@ class DrugBloc extends Bloc<DrugEvent, DrugState> {
   })  : _pharmaRepository = pharmaRepository,
         super(const DrugState()) {
     on<DrugLocalUIChanged>(_onDrugLocalUIChanged);
-    on<DrugGetSearch>(
-      _onDrugGetSearch,
+    on<DrugsSearched>(
+      _onDrugsSearched,
       transformer: throttleDroppable(throttleDuration),
     );
-    on<DrugsFetched>(
-      _onDrugsFetched,
+    on<DrugsScrolledd>(
+      _onDrugsScrolledd,
       transformer: throttleDroppable(throttleDuration),
     );
 
@@ -59,13 +58,13 @@ class DrugBloc extends Bloc<DrugEvent, DrugState> {
 */
 //===
 
-  void _onDrugGetSearch(
-    DrugGetSearch event,
+  void _onDrugsSearched(
+    DrugsSearched event,
     Emitter<DrugState> emit,
   ) async {
     int _startFromPage = 1;
     int _currentPage = 1;
-    int _pageLength = 10;
+    int _pageLength = state.pageLength;
     String _localUI = 'en';
     String _serachValue = '';
     String _orderByFields = '';
@@ -94,7 +93,7 @@ class DrugBloc extends Bloc<DrugEvent, DrugState> {
     }
 
     print(
-        '_onDrugGetSearch LOCALEUIIIIIIIIIIIIIIIIIIIIIIIIIII :  ${state.localUI} + WhewrCond:::: ${event.whereCond} ');
+        '_onDrugsSearched LOCALEUIIIIIIIIIIIIIIIIIIIIIIIIIII :  ${state.localUI} + WhewrCond:::: ${event.whereCond} ');
 
     final dartz.Either<List<DrugRecord>, ApiError> _repoResponse;
     try {
@@ -149,129 +148,59 @@ class DrugBloc extends Bloc<DrugEvent, DrugState> {
   //===
 
 //-----------------
-  Future<void> _onDrugsFetched(
-    DrugsFetched event,
+  Future<void> _onDrugsScrolledd(
+    DrugsScrolledd event,
     Emitter<DrugState> emit,
   ) async {
-    print(
-        '-------_onDrugsFetched-------${state.status}-----------------------------------------------------------------');
     if (state.hasReachedMax) return;
-    try {
-      List<DrugRecord> drugsRecords;
 
-      if (state.status == DrugStatus.empty) {
-        drugsRecords = await _fetchDrugs(
-            localUI: event.localUI,
-            whereCond: event.whereCond,
-            startFrompage: event.startFrompage,
-            pageLength: event.pageLength,
-            searchType: event.searchType,
-            serachValue: event.serachValue,
-            orderByFields: event.orderByFields);
+    //final DrugStatus _drugStatus = DrugStatus.scrolloading;
 
-        print(
-            '--------------------------------iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii');
-        print(drugsRecords);
-
-        return emit(state.copyWith(
-          status: DrugStatus.success,
-          drugs: drugsRecords,
-          hasReachedMax: false,
-          localUI: event.localUI,
-          whereCond: event.whereCond,
-          startFrompage: event.startFrompage,
-          currentPage: 1,
-          pageLength: event.pageLength,
-          searchType: event.searchType,
-          serachValue: event.serachValue,
-          orderByFields: event.orderByFields,
-        ));
-      }
-      drugsRecords = await _fetchDrugs(
-          localUI: event.localUI,
-          whereCond: event.whereCond,
-          startFrompage: event.startFrompage,
-          pageLength: event.pageLength,
-          searchType: event.searchType,
-          serachValue: event.serachValue,
-          orderByFields: event.orderByFields);
-      print('RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR');
-      print(drugsRecords);
-      drugsRecords.isEmpty
-          ? emit(state.copyWith(hasReachedMax: true))
-          : emit(
-              state.copyWith(
-                status: DrugStatus.success,
-                currentPage: state.currentPage + 1,
-                drugs: List.of(state.drugs)..addAll(drugsRecords),
-                hasReachedMax: false,
-              ),
-            );
-      print('RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR');
-
-      print(state.currentPage);
-      print(state.drugs);
-    } catch (err) {
-      print(err.toString());
-      emit(state.copyWith(status: DrugStatus.failed));
-    }
-  }
-
-//''================
-
-  Future<List<DrugRecord>> _fetchDrugs(
-      {String? localUI,
-      String? whereCond,
-      int? startFrompage,
-      int? pageLength,
-      SearchType? searchType,
-      String? serachValue,
-      String? orderByFields}) async {
-//-----------------
     final dartz.Either<List<DrugRecord>, ApiError> _repoResponse;
     try {
       //TokenPair _tokenInfo;
       _repoResponse = await _pharmaRepository.getDrugsSearch(
-          startFromPage: startFrompage.toString(),
-          pageLength: pageLength.toString(),
-          orderByFields: orderByFields,
-          localUI: localUI,
-          whereCond: whereCond,
-          searcValue: serachValue,
-          searchType: searchType);
+          startFromPage: (state.currentPage + 1).toString(),
+          pageLength: state.pageLength.toString(),
+          orderByFields: state.orderByFields,
+          localUI: state.localUI,
+          whereCond: state.whereCond,
+          searcValue: state.serachValue,
+          searchType: state.searchType);
 
       _repoResponse.fold((left) {
-        print('left from PAi get drugs back');
+        print('left from PAi get back');
+        print(left.toString());
 
-        print(
-            'llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll' +
-                left.toString());
-        print('back from left 333 ');
-
-        return (left);
+        emit(state.copyWith(
+          status: DrugStatus.success,
+          hasReachedMax: left.isEmpty,
+          drugs: (List.of(state.drugs)..addAll(left)),
+          currentPage: state.currentPage + 1,
+        ));
       }, (right) {
         print('right');
-        // emit(state.copyWith(
-        //     status: DrugStatus.failed,
-        //     drugs: [],
-        //     stateMsg: right.toJson().toString()));
-        return (right);
+        emit(state.copyWith(
+            status: DrugStatus.failed,
+            // drugs: state.drugs,
+            stateMsg: right.toJson().toString()));
+
+        //return (right);
       });
     } catch (err) {
       print('Error connectiing to server ' + err.toString());
-      throw (err); // showInSnackBar(context, err.toString());
+      rethrow;
+      // showInSnackBar(context, err.toString());
     }
-    return ([]);
   }
-  //===
 
 //--------------
-/*  void _onDrugGetSearch(
-    DrugGetSearch event,
+/*  void _onDrugsSearched(
+    DrugsSearched event,
     Emitter<DrugState> emit,
   ) async {
     print(
-        '_onDrugGetSearch LOCALEUIIIIIIIIIIIIIIIIIIIIIIIIIII :  ${state.localUI} + WhewrCond:::: ${event.whereCond} ');
+        '_onDrugsSearched LOCALEUIIIIIIIIIIIIIIIIIIIIIIIIIII :  ${state.localUI} + WhewrCond:::: ${event.whereCond} ');
     // print(state.email.value + ' password: ' + state.password.value);
     // _WereCond =
     //    ''' "wherecond": " Where similarity (drug.\\"ar__drugName\\",'${event.whereCond}' )  > 0.2  OR similarity (drug.\\"en__drugName\\",'${event.whereCond}' )  > 0.2  "  ''';

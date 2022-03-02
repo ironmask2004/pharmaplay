@@ -194,7 +194,7 @@ class SearchField extends StatelessWidget {
                     .read<DrugGroupBloc>()
                     .add(DrugGroupGetSearch(_serachValue));
 
-                context.read<DrugBloc>().add(DrugGetSearch(
+                context.read<DrugBloc>().add(DrugsSearched(
                     drugStatus: DrugStatus.initializing,
                     localUI: context
                         .read<DashBoardBloc>()
