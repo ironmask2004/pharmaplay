@@ -95,7 +95,7 @@ Future<List<DrugRecord>> findDrugByParams(
   // resultSet = await db.query(sql);
   dynamic resultSet = await db.query(sql, values: params);
 
-  if (resultSet.length > 0) {
+  if (resultSet.length >= 0) {
     resultSet.forEach((element) {
       print(element);
       print('----------------');
@@ -172,11 +172,11 @@ Future<List<DrugRecord>> findDrugAll(
     drug."dosageFormID",dosageForm."dosageFormID",
     dosageForm."${localUI}__dosageForm" as  "dosageForm" ,
     drug."drugClassID",drugClass."drugClassID",drugClass."${localUI}__drugClassName" as "drugClassName" ,
-    drugClass."drugGroupID", drug."drugGroupID",drugGroup."drugGroupID", 
+    drugClass."drugGroupID", drug."drugGroupID",drugGroup."drugGroupID",
     drugGroup."${localUI}__drugGroupName" as "drugGroupName",
     drug."drugFamilyID",drugFamily."drugFamilyID", drugFamily."drugClassID",
     drugFamily."${localUI}__drugFamilyName" as "drugFamilyName", drug."licenseNumber",
-    drug."licenseDate",drug."drugPrice",drug."drugRating" 
+    drug."licenseDate",drug."drugPrice",drug."drugRating"
     FROM pharmaplay.drug drug
     LEFT JOIN pharmaplay."manufactory" manufactory ON drug."manufactoryID" = manufactory."manufactoryID"
     LEFT JOIN pharmaplay."dosageForm" dosageForm ON drug."dosageFormID" = dosageForm."dosageFormID"
@@ -249,7 +249,7 @@ Future<List<DrugRecord>> findDrugByPage(
 
   dynamic resultSet = await db.query(sql);
 
-  if (resultSet.length > 0) {
+  if (resultSet.length >= 0) {
     resultSet.forEach((element) {
       print(element);
       //print(Drug.fromJson(element['drug']).toString());
@@ -316,7 +316,7 @@ Future<List<DrugRecord>> fuzzyFindDrugByPage(
 
   dynamic resultSet = await db.query(sql);
 
-  if (resultSet.length > 0) {
+  if (resultSet.length >= 0) {
     resultSet.forEach((element) {
       print(element);
       //print(Drug.fromJson(element['drug']).toString());

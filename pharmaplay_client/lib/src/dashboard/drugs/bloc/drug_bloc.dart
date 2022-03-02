@@ -64,13 +64,16 @@ class DrugBloc extends Bloc<DrugEvent, DrugState> {
     Emitter<DrugState> emit,
   ) async {
     int _startFromPage = 1;
+    int _currentPage = 1;
     int _pageLength = 10;
     String _localUI = 'en';
     String _serachValue = '';
+    String _orderByFields = '';
     SearchType _searchType = SearchType.none;
 
     if (event.drugStatus == DrugStatus.initializing) {
       _startFromPage = 1;
+      _currentPage = 1;
       _pageLength = event.pageLength ?? state.pageLength;
       // orderByFields: event.orderByFields,
       _localUI = state.localUI;
@@ -78,13 +81,16 @@ class DrugBloc extends Bloc<DrugEvent, DrugState> {
       _serachValue = event.serachValue ?? '';
       _searchType = event.searchType ?? SearchType.none;
     } else if (event.drugStatus == DrugStatus.scrolloading) {
+      if (state.hasReachedMax) return;
       _startFromPage = state.currentPage + 1;
       _pageLength = state.pageLength;
+      _currentPage = state.currentPage;
       // orderByFields: event.orderByFields,
       _localUI = state.localUI;
       // whereCond: event.whereCond,
       _serachValue = state.serachValue;
       _searchType = state.searchType;
+      _orderByFields = state.orderByFields;
     }
 
     print(
@@ -109,17 +115,21 @@ class DrugBloc extends Bloc<DrugEvent, DrugState> {
 
         emit(state.copyWith(
           status: DrugStatus.success,
-          drugs: left,
-          hasReachedMax: false,
+          hasReachedMax:
+              event.drugStatus == DrugStatus.scrolloading && left.isEmpty,
+          drugs: event.drugStatus == DrugStatus.scrolloading
+              ? (List.of(state.drugs)..addAll(left))
+              : left,
           localUI: event.localUI,
-          whereCond: event.whereCond,
-          startFrompage: event.startFrompage,
-          currentPage: event.drugStatus == DrugStatus.scrolloading ??
-              state.currentPage + 1,
-          pageLength: event.pageLength,
-          searchType: event.searchType,
-          serachValue: event.serachValue,
-          orderByFields: event.orderByFields,
+          //  whereCond: _whereCo,
+          startFrompage: _startFromPage,
+          currentPage: event.drugStatus == DrugStatus.scrolloading
+              ? _currentPage + 1
+              : 1,
+          pageLength: _pageLength,
+          searchType: _searchType,
+          serachValue: _serachValue,
+          orderByFields: _orderByFields,
         ));
       }, (right) {
         print('right');
