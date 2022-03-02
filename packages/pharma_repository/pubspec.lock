@@ -147,7 +147,7 @@ packages:
       name: dartz
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.10.0"
+    version: "0.10.1"
   dependencies:
     dependency: "direct dev"
     description:

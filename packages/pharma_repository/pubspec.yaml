@@ -8,7 +8,7 @@ environment:
 dependencies:
   equatable: ^2.0.3
   uuid: ^3.0.0
-  dartz: ^0.10.0
+  dartz: ^0.10.1
   http: ^0.13.4
   pharma_shared_models:
     path: ../pharma_shared_models

@@ -1,6 +1,6 @@
 part of 'drug_bloc.dart';
 
-enum DrugStatus { initializing, loading, success, failed, empty }
+enum DrugStatus { initializing, loading, success, failed, empty, scrolloading }
 
 class DrugState extends Equatable {
   const DrugState(

@@ -52,3 +52,36 @@ class DrugsFetched extends DrugEvent {
         serachValue!
       ];
 }
+
+class DrugGetSearch extends DrugEvent {
+  final DrugStatus? drugStatus;
+  final String? localUI;
+  final String? whereCond;
+  final int? startFrompage;
+  final int? pageLength;
+  final String? orderByFields;
+  final SearchType? searchType;
+  final String? serachValue;
+  const DrugGetSearch({
+    this.drugStatus = DrugStatus.initializing,
+    this.localUI = 'en',
+    this.whereCond = '',
+    this.startFrompage = 1,
+    this.pageLength = 10,
+    this.orderByFields = '',
+    this.searchType = SearchType.none,
+    this.serachValue = '',
+  });
+
+  @override
+  List<Object> get props => [
+        drugStatus!,
+        localUI!,
+        whereCond!,
+        startFrompage!,
+        pageLength!,
+        orderByFields!,
+        searchType!,
+        serachValue!
+      ];
+}

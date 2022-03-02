@@ -2,6 +2,8 @@ import 'package:authentication_repository/authentication_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pharma_repository/pharma_repository.dart';
+import 'package:pharmaplay_client/generated/intl/messages_all.dart';
 import 'package:pharmaplay_client/generated/l10n.dart';
 import 'package:pharmaplay_client/src/authentication/authentication.dart';
 import 'package:pharmaplay_client/src/dashboard/bloc/dashboard_bloc.dart';
@@ -192,7 +194,8 @@ class SearchField extends StatelessWidget {
                     .read<DrugGroupBloc>()
                     .add(DrugGroupGetSearch(_serachValue));
 
-                context.read<DrugBloc>().add(DrugsFetched(
+                context.read<DrugBloc>().add(DrugGetSearch(
+                    drugStatus: DrugStatus.initializing,
                     localUI: context
                         .read<DashBoardBloc>()
                         .state

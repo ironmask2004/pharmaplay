@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart' as dartz;
 import 'package:pharma_repository/src/api/pharma_api.dart';
 import 'package:pharma_repository/pharma_repository.dart';
+import 'package:pharma_repository/src/models/commaon.dart';
 import 'api/api_response.dart';
 
 class PharmaRepository {
@@ -72,7 +73,7 @@ class PharmaRepository {
       String? localUI,
       String? whereCond,
       String? searcValue,
-      String? searchType}) async {
+      SearchType? searchType}) async {
     String _whereCond = '';
     String _fuzzycond = '';
     dartz.Either<ApiResponse, ApiError> _getDrugRecoredAllResponse;
@@ -82,24 +83,24 @@ class PharmaRepository {
 
 //like, equal, fuzzy, none
       switch (searchType) {
-        case 'none':
+        case SearchType.none:
           {
             _whereCond = '';
           }
           break;
-        case 'equal':
+        case SearchType.equal:
           {
             _whereCond =
                 ''' "wherecond":  " Where    drug.\\"ar__brandName\\" = '${searcValue}'  OR  lower ( drug.\\"en__brandName\\") =  lower ('${searcValue}')"  ''';
           }
           break;
-        case 'like':
+        case SearchType.like:
           {
             _whereCond =
                 ''' "wherecond":  " Where    drug.\\"ar__brandName\\" like '%${searcValue}%'  OR  lower ( drug.\\"en__brandName\\") LIKE  lower ('%${searcValue}%')"  ''';
           }
           break;
-        case 'fuzzy':
+        case SearchType.fuzzy:
           {
             _whereCond = '';
             _fuzzycond = ''' "fuzzycond":  "\\"$searcValue\\"" ''';
@@ -111,13 +112,16 @@ class PharmaRepository {
             _whereCond = '';
           }
       }
-      print('whereCond: $_whereCond  ----  _fuzzycond:::  $_fuzzycond ');
+
+      print(
+          '\n\n\n\n\nn\ =!=!=!=!=!=!=!=============== $searchType ====================== \nwhereCond: $_whereCond  ----  _fuzzycond:::  $_fuzzycond ');
+
       _getDrugRecoredAllResponse = await apiGetDrugsSearch(
           localUI: localUI,
           startFromPage: startFromPage,
           pageLength: pageLength,
           orderByFields: orderByFields,
-          whereCond: whereCond,
+          whereCond: _whereCond,
           fuzzyCond: _fuzzycond,
           baseUrl: baseUrl);
 

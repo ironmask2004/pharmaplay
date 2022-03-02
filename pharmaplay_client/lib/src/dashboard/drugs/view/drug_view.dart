@@ -121,7 +121,10 @@ class _DrugInfoCardGridViewState extends State<DrugInfoCardGridView> {
 
   void _onScroll() {
     if (_isBottom) {
-      // context.read<PostBloc>().add(PostFetched());
+      context
+          .read<DrugBloc>()
+          .add(const DrugGetSearch(drugStatus: DrugStatus.scrolloading));
+      //context.read<PostBloc>().add(PostFetched());
       print('Is Butooooom');
     } else
       print('Nor Boootm!!!!');

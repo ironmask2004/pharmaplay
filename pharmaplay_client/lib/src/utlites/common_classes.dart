@@ -1,1 +1,1 @@
-enum SearchType { like, equal, fuzzy, none }
+//enum SearchType { like, equal, fuzzy, none }
