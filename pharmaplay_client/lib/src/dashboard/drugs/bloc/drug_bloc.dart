@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/locale.dart';
 import 'package:pharma_repository/pharma_repository.dart';
 import 'package:dartz/dartz.dart' as dartz;
-import 'package:pharmaplay_client/src/utlites/common_classes.dart';
 import 'package:stream_transform/stream_transform.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 
@@ -22,7 +22,10 @@ class DrugBloc extends Bloc<DrugEvent, DrugState> {
   })  : _pharmaRepository = pharmaRepository,
         super(const DrugState()) {
     on<DrugLocalUIChanged>(_onDrugLocalUIChanged);
-    //on<DrugGetSearch>(_onDrugGetSearch);
+    on<DrugGetSearch>(
+      _onDrugGetSearch,
+      transformer: throttleDroppable(throttleDuration),
+    );
     on<DrugsFetched>(
       _onDrugsFetched,
       transformer: throttleDroppable(throttleDuration),
@@ -44,27 +47,110 @@ class DrugBloc extends Bloc<DrugEvent, DrugState> {
 
     emit(state.copyWith(
       localUI: event.localUI,
-      status: DrugStatus.success,
+      //status: DrugStatus.success,
     ));
     //add(const DrugGetAll());
   }
 
 //-==========
 /*
-  ''' "wherecond": " Where similarity (drug.\\"ar__drugName\\",'$_serachValue' )  > 0.2  OR similarity (drug.\\"en__drugName\\",'$_serachValue' )  > 0.2  "  '''));
+
 
 */
+//===
 
+  void _onDrugGetSearch(
+    DrugGetSearch event,
+    Emitter<DrugState> emit,
+  ) async {
+    int _startFromPage = 1;
+    int _pageLength = 10;
+    String _localUI = 'en';
+    String _serachValue = '';
+    SearchType _searchType = SearchType.none;
+
+    if (event.drugStatus == DrugStatus.initializing) {
+      _startFromPage = 1;
+      _pageLength = event.pageLength ?? state.pageLength;
+      // orderByFields: event.orderByFields,
+      _localUI = state.localUI;
+      // whereCond: event.whereCond,
+      _serachValue = event.serachValue ?? '';
+      _searchType = event.searchType ?? SearchType.none;
+    } else if (event.drugStatus == DrugStatus.scrolloading) {
+      _startFromPage = state.currentPage + 1;
+      _pageLength = state.pageLength;
+      // orderByFields: event.orderByFields,
+      _localUI = state.localUI;
+      // whereCond: event.whereCond,
+      _serachValue = state.serachValue;
+      _searchType = state.searchType;
+    }
+
+    print(
+        '_onDrugGetSearch LOCALEUIIIIIIIIIIIIIIIIIIIIIIIIIII :  ${state.localUI} + WhewrCond:::: ${event.whereCond} ');
+
+    final dartz.Either<List<DrugRecord>, ApiError> _repoResponse;
+    try {
+      //TokenPair _tokenInfo;
+      _repoResponse = await _pharmaRepository.getDrugsSearch(
+          startFromPage: _startFromPage.toString(),
+          pageLength: _pageLength.toString(),
+          // orderByFields: event.orderByFields,
+          localUI: _localUI,
+          // whereCond: event.whereCond,
+          searcValue: _serachValue,
+          searchType: _searchType);
+
+      _repoResponse.fold((left) {
+        print('left from PAi get back');
+        // return (left);
+        print(left.toString());
+
+        emit(state.copyWith(
+          status: DrugStatus.success,
+          drugs: left,
+          hasReachedMax: false,
+          localUI: event.localUI,
+          whereCond: event.whereCond,
+          startFrompage: event.startFrompage,
+          currentPage: event.drugStatus == DrugStatus.scrolloading ??
+              state.currentPage + 1,
+          pageLength: event.pageLength,
+          searchType: event.searchType,
+          serachValue: event.serachValue,
+          orderByFields: event.orderByFields,
+        ));
+      }, (right) {
+        print('right');
+        emit(state.copyWith(
+            status: DrugStatus.failed,
+            // drugs: state.drugs,
+            stateMsg: right.toJson().toString()));
+
+        //return (right);
+      });
+    } catch (err) {
+      print('Error connectiing to server ' + err.toString());
+      rethrow;
+      // showInSnackBar(context, err.toString());
+    }
+  }
+  //===
+
+//-----------------
   Future<void> _onDrugsFetched(
     DrugsFetched event,
     Emitter<DrugState> emit,
   ) async {
+    print(
+        '-------_onDrugsFetched-------${state.status}-----------------------------------------------------------------');
     if (state.hasReachedMax) return;
     try {
-      print('--------------${state.status}-----------------');
+      List<DrugRecord> drugsRecords;
 
-      if (event.status == DrugStatus.initializing) {
-        final drugsRecords = await _fetchDrugs(
+      if (state.status == DrugStatus.empty) {
+        drugsRecords = await _fetchDrugs(
             localUI: event.localUI,
             whereCond: event.whereCond,
             startFrompage: event.startFrompage,
@@ -72,9 +158,11 @@ class DrugBloc extends Bloc<DrugEvent, DrugState> {
             searchType: event.searchType,
             serachValue: event.serachValue,
             orderByFields: event.orderByFields);
+
         print(
             '--------------------------------iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii');
         print(drugsRecords);
+
         return emit(state.copyWith(
           status: DrugStatus.success,
           drugs: drugsRecords,
@@ -89,7 +177,7 @@ class DrugBloc extends Bloc<DrugEvent, DrugState> {
           orderByFields: event.orderByFields,
         ));
       }
-      final drugsRecords = await _fetchDrugs(
+      drugsRecords = await _fetchDrugs(
           localUI: event.localUI,
           whereCond: event.whereCond,
           startFrompage: event.startFrompage,
@@ -98,6 +186,7 @@ class DrugBloc extends Bloc<DrugEvent, DrugState> {
           serachValue: event.serachValue,
           orderByFields: event.orderByFields);
       print('RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR');
+      print(drugsRecords);
       drugsRecords.isEmpty
           ? emit(state.copyWith(hasReachedMax: true))
           : emit(
@@ -112,7 +201,8 @@ class DrugBloc extends Bloc<DrugEvent, DrugState> {
 
       print(state.currentPage);
       print(state.drugs);
-    } catch (_) {
+    } catch (err) {
+      print(err.toString());
       emit(state.copyWith(status: DrugStatus.failed));
     }
   }
@@ -138,12 +228,16 @@ class DrugBloc extends Bloc<DrugEvent, DrugState> {
           localUI: localUI,
           whereCond: whereCond,
           searcValue: serachValue,
-          searchType: searchType.toString());
+          searchType: searchType);
 
       _repoResponse.fold((left) {
         print('left from PAi get drugs back');
 
-        print(left.toString());
+        print(
+            'llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll' +
+                left.toString());
+        print('back from left 333 ');
+
         return (left);
       }, (right) {
         print('right');
@@ -151,13 +245,11 @@ class DrugBloc extends Bloc<DrugEvent, DrugState> {
         //     status: DrugStatus.failed,
         //     drugs: [],
         //     stateMsg: right.toJson().toString()));
-
-        return ([]);
+        return (right);
       });
     } catch (err) {
       print('Error connectiing to server ' + err.toString());
-      return ([]);
-      // showInSnackBar(context, err.toString());
+      throw (err); // showInSnackBar(context, err.toString());
     }
     return ([]);
   }
