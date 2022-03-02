@@ -7,12 +7,11 @@ import 'package:pharmaplay_client/src/dashboard/dashboard.dart';
 import 'package:pharmaplay_client/src/utlites/sforms_style.dart';
 
 class DrugInfoCard extends StatelessWidget {
-  const DrugInfoCard({
-    Key? key,
-    required this.drugInfo,
-  }) : super(key: key);
+  const DrugInfoCard({Key? key, required this.drugInfo, required this.index})
+      : super(key: key);
 
   final DrugRecord drugInfo;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -31,8 +30,8 @@ class DrugInfoCard extends StatelessWidget {
             children: [
               Container(
                 padding: const EdgeInsets.all(defaultPadding * 0.75),
-                height: 40,
-                width: 40,
+                height: 80,
+                width: 80,
                 decoration: BoxDecoration(
                   color: context
                       .read<DashBoardBloc>()
@@ -46,6 +45,7 @@ class DrugInfoCard extends StatelessWidget {
                   color: context.read<DashBoardBloc>().state.primaryColor,
                 ),
               ),
+
               Icon(Icons.more_vert,
                   color:
                       context.read<DashBoardBloc>().state.fontbodyColor) //+45
@@ -70,6 +70,10 @@ class DrugInfoCard extends StatelessWidget {
             children: [
               Text(
                 drugInfo.manufactory.manufactoryName,
+                maxLines: 2,
+                softWrap: true,
+                overflow: TextOverflow.fade,
+
                 style: Theme.of(context).textTheme.caption!.copyWith(
                     color: context
                         .read<DashBoardBloc>()

@@ -70,27 +70,14 @@ class DrugBloc extends Bloc<DrugEvent, DrugState> {
     String _orderByFields = '';
     SearchType _searchType = SearchType.none;
 
-    if (event.drugStatus == DrugStatus.initializing) {
-      _startFromPage = 1;
-      _currentPage = 1;
-      _pageLength = event.pageLength ?? state.pageLength;
-      // orderByFields: event.orderByFields,
-      _localUI = state.localUI;
-      // whereCond: event.whereCond,
-      _serachValue = event.serachValue ?? '';
-      _searchType = event.searchType ?? SearchType.none;
-    } else if (event.drugStatus == DrugStatus.scrolloading) {
-      if (state.hasReachedMax) return;
-      _startFromPage = state.currentPage + 1;
-      _pageLength = state.pageLength;
-      _currentPage = state.currentPage;
-      // orderByFields: event.orderByFields,
-      _localUI = state.localUI;
-      // whereCond: event.whereCond,
-      _serachValue = state.serachValue;
-      _searchType = state.searchType;
-      _orderByFields = state.orderByFields;
-    }
+    _startFromPage = 1;
+    _currentPage = 1;
+    _pageLength = event.pageLength ?? state.pageLength;
+    // orderByFields: event.orderByFields,
+    _localUI = state.localUI;
+    // whereCond: event.whereCond,
+    _serachValue = event.serachValue ?? '';
+    _searchType = event.searchType ?? SearchType.none;
 
     print(
         '_onDrugsSearched LOCALEUIIIIIIIIIIIIIIIIIIIIIIIIIII :  ${state.localUI} + WhewrCond:::: ${event.whereCond} ');
@@ -99,50 +86,37 @@ class DrugBloc extends Bloc<DrugEvent, DrugState> {
     try {
       //TokenPair _tokenInfo;
       _repoResponse = await _pharmaRepository.getDrugsSearch(
-          startFromPage: _startFromPage.toString(),
-          pageLength: _pageLength.toString(),
-          // orderByFields: event.orderByFields,
-          localUI: _localUI,
-          // whereCond: event.whereCond,
-          searcValue: _serachValue,
-          searchType: _searchType);
+          startFromPage: "1",
+          pageLength: state.pageLength.toString(),
+          orderByFields: event.orderByFields ?? '',
+          localUI: state.localUI,
+          whereCond: event.whereCond ?? '',
+          serachValue: event.serachValue ?? '',
+          searchType: event.searchType ?? SearchType.none);
 
       _repoResponse.fold((left) {
         print('left from PAi get back');
-        // return (left);
         print(left.toString());
 
         emit(state.copyWith(
           status: DrugStatus.success,
-          hasReachedMax:
-              event.drugStatus == DrugStatus.scrolloading && left.isEmpty,
-          drugs: event.drugStatus == DrugStatus.scrolloading
-              ? (List.of(state.drugs)..addAll(left))
-              : left,
-          localUI: event.localUI,
-          //  whereCond: _whereCo,
-          startFrompage: _startFromPage,
-          currentPage: event.drugStatus == DrugStatus.scrolloading
-              ? _currentPage + 1
-              : 1,
-          pageLength: _pageLength,
-          searchType: _searchType,
-          serachValue: _serachValue,
-          orderByFields: _orderByFields,
+          hasReachedMax: left.isEmpty,
+          drugs: left,
+          whereCond: event.whereCond ?? '',
+          startFrompage: 1,
+          currentPage: 1,
+          serachValue: event.serachValue ?? '',
+          searchType: event.searchType ?? SearchType.none,
+          orderByFields: event.orderByFields ?? '',
         ));
       }, (right) {
         print('right');
         emit(state.copyWith(
-            status: DrugStatus.failed,
-            // drugs: state.drugs,
-            stateMsg: right.toJson().toString()));
-
-        //return (right);
+            status: DrugStatus.failed, stateMsg: right.toJson().toString()));
       });
     } catch (err) {
       print('Error connectiing to server ' + err.toString());
       rethrow;
-      // showInSnackBar(context, err.toString());
     }
   }
   //===
@@ -165,7 +139,7 @@ class DrugBloc extends Bloc<DrugEvent, DrugState> {
           orderByFields: state.orderByFields,
           localUI: state.localUI,
           whereCond: state.whereCond,
-          searcValue: state.serachValue,
+          serachValue: state.serachValue,
           searchType: state.searchType);
 
       _repoResponse.fold((left) {

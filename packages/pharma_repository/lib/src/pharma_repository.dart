@@ -72,7 +72,7 @@ class PharmaRepository {
       String? orderByFields,
       String? localUI,
       String? whereCond,
-      String? searcValue,
+      String? serachValue,
       SearchType? searchType}) async {
     String _whereCond = '';
     String _fuzzycond = '';
@@ -91,19 +91,19 @@ class PharmaRepository {
         case SearchType.equal:
           {
             _whereCond =
-                ''' "wherecond":  " Where    drug.\\"ar__brandName\\" = '${searcValue}'  OR  lower ( drug.\\"en__brandName\\") =  lower ('${searcValue}')"  ''';
+                ''' "wherecond":  " Where    drug.\\"ar__brandName\\" = '${serachValue}'  OR  lower ( drug.\\"en__brandName\\") =  lower ('${serachValue}')"  ''';
           }
           break;
         case SearchType.like:
           {
             _whereCond =
-                ''' "wherecond":  " Where    drug.\\"ar__brandName\\" like '%${searcValue}%'  OR  lower ( drug.\\"en__brandName\\") LIKE  lower ('%${searcValue}%')"  ''';
+                ''' "wherecond":  " Where    drug.\\"ar__brandName\\" like '%${serachValue}%'  OR  lower ( drug.\\"en__brandName\\") LIKE  lower ('%${serachValue}%')"  ''';
           }
           break;
         case SearchType.fuzzy:
           {
             _whereCond = '';
-            _fuzzycond = ''' "fuzzycond":  "\\"$searcValue\\"" ''';
+            _fuzzycond = ''' "fuzzycond":  "\\"$serachValue\\"" ''';
           }
 
           break;

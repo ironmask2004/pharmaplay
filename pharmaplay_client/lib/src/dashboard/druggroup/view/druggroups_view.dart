@@ -23,7 +23,7 @@ class DrugGroupsView extends StatelessWidget {
               SLang.of(context).drugGroups,
               style: Theme.of(context).textTheme.subtitle1,
             ),
-            ElevatedButton.icon(
+            /*  ElevatedButton.icon(
               style: TextButton.styleFrom(
                 padding: EdgeInsets.symmetric(
                   horizontal: defaultPadding * 1.5,
@@ -34,7 +34,7 @@ class DrugGroupsView extends StatelessWidget {
               onPressed: () {},
               icon: const Icon(Icons.add),
               label: const Text("Add New"),
-            ),
+            ),*/
           ],
         ),
         const SizedBox(height: defaultPadding),

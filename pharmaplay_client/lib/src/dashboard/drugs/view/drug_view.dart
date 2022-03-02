@@ -22,7 +22,7 @@ class DrugsView extends StatelessWidget {
               SLang.of(context).drugs,
               style: Theme.of(context).textTheme.subtitle1,
             ),
-            ElevatedButton.icon(
+            /* ElevatedButton.icon(
               style: TextButton.styleFrom(
                 padding: EdgeInsets.symmetric(
                   horizontal: defaultPadding * 1.5,
@@ -33,7 +33,7 @@ class DrugsView extends StatelessWidget {
               onPressed: () {},
               icon: const Icon(Icons.add),
               label: const Text("Add New"),
-            ),
+            ),*/
           ],
         ),
         const SizedBox(height: defaultPadding),
@@ -85,7 +85,7 @@ class _DrugInfoCardGridViewState extends State<DrugInfoCardGridView> {
         return SafeArea(
           child: SizedBox(
             width: double.infinity,
-            height: 390,
+            height: 440,
             child: GridView.builder(
               //physics: const NeverScrollableScrollPhysics(),
               //shrinkWrap: true,
@@ -97,13 +97,14 @@ class _DrugInfoCardGridViewState extends State<DrugInfoCardGridView> {
                 crossAxisSpacing: defaultPadding,
                 mainAxisSpacing: defaultPadding,
                 childAspectRatio: widget.childAspectRatio,
-                maxCrossAxisExtent: 180,
+                maxCrossAxisExtent: 220,
                 // childAspectRatio: 1 / 2,
                 // crossAxisSpacing: 20,
                 // mainAxisSpacing: 20
               ),
               itemBuilder: (context, index) => DrugInfoCard(
-                  drugInfo: context.read<DrugBloc>().state.drugs[index]),
+                  drugInfo: context.read<DrugBloc>().state.drugs[index],
+                  index: index),
             ),
           ),
         );
