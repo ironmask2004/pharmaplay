@@ -7,8 +7,8 @@ abstract class DrugGroupEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class LocalUIChanged extends DrugGroupEvent {
-  const LocalUIChanged(this.localUI);
+class DrugGroupLocalUIChanged extends DrugGroupEvent {
+  const DrugGroupLocalUIChanged(this.localUI);
 
   final String localUI;
 
@@ -16,15 +16,39 @@ class LocalUIChanged extends DrugGroupEvent {
   List<Object> get props => [localUI];
 }
 
-class DrugGroupGetAll extends DrugGroupEvent {
-  const DrugGroupGetAll();
+class DrugGroupsScrolledd extends DrugGroupEvent {
+  const DrugGroupsScrolledd();
 }
 
-class DrugGroupGetSearch extends DrugGroupEvent {
-  const DrugGroupGetSearch(this.whereCond);
-
-  final String whereCond;
+class DrugGroupsSearched extends DrugGroupEvent {
+  final DrugGroupStatus? druggroupStatus;
+  final String? localUI;
+  final String? whereCond;
+  final int? startFrompage;
+  final int? pageLength;
+  final String? orderByFields;
+  final SearchType? searchType;
+  final String? serachValue;
+  const DrugGroupsSearched({
+    this.druggroupStatus = DrugGroupStatus.initializing,
+    this.localUI = 'en',
+    this.whereCond = '',
+    this.startFrompage = 1,
+    this.pageLength = 10,
+    this.orderByFields = '',
+    this.searchType = SearchType.none,
+    this.serachValue = '',
+  });
 
   @override
-  List<Object> get props => [whereCond];
+  List<Object> get props => [
+        druggroupStatus!,
+        localUI!,
+        whereCond!,
+        startFrompage!,
+        pageLength!,
+        orderByFields!,
+        searchType!,
+        serachValue!
+      ];
 }

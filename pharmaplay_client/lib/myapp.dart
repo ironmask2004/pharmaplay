@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
             ),
             BlocProvider(
               create: (_) => DrugGroupBloc(pharmaRepository: pharmaRepository)
-                ..add(const DrugGroupGetAll()),
+                ..add(const DrugGroupsSearched()),
             ),
             BlocProvider(
               create: (_) => DrugBloc(pharmaRepository: pharmaRepository)

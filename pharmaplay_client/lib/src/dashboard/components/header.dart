@@ -182,7 +182,7 @@ class SearchField extends StatelessWidget {
                     .add(const HeaderSerachSubmitted());
                 print('Searching!!!!' +
                     context.read<DashBoardBloc>().state.uiLocale.languageCode);
-                context.read<DrugGroupBloc>().add(LocalUIChanged(
+                context.read<DrugGroupBloc>().add(DrugGroupLocalUIChanged(
                     context.read<DashBoardBloc>().state.uiLocale.languageCode));
 
                 var _serachValue =
@@ -190,9 +190,15 @@ class SearchField extends StatelessWidget {
 
                 context.read<DrugBloc>().add(DrugLocalUIChanged(
                     context.read<DashBoardBloc>().state.uiLocale.languageCode));
-                context
-                    .read<DrugGroupBloc>()
-                    .add(DrugGroupGetSearch(_serachValue));
+                context.read<DrugGroupBloc>().add(DrugGroupsSearched(
+                    druggroupStatus: DrugGroupStatus.initializing,
+                    localUI: context
+                        .read<DashBoardBloc>()
+                        .state
+                        .uiLocale
+                        .languageCode,
+                    searchType: SearchType.like,
+                    serachValue: _serachValue));
 
                 context.read<DrugBloc>().add(DrugsSearched(
                     drugStatus: DrugStatus.initializing,

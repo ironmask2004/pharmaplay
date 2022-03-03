@@ -77,7 +77,7 @@ class DrugGroupInfoCardGridView extends StatelessWidget {
             child: GridView.builder(
               //physics: const NeverScrollableScrollPhysics(),
               //shrinkWrap: true,
-              itemCount: context.read<DrugGroupBloc>().state.drugGroups.length,
+              itemCount: context.read<DrugGroupBloc>().state.druggroups.length,
               scrollDirection: Axis.horizontal,
 
               gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
@@ -91,7 +91,7 @@ class DrugGroupInfoCardGridView extends StatelessWidget {
               ),
               itemBuilder: (context, index) => DrugGroupInfoCard(
                   dragGroupInfo:
-                      context.read<DrugGroupBloc>().state.drugGroups[index]),
+                      context.read<DrugGroupBloc>().state.druggroups[index]),
             ),
           ),
         );

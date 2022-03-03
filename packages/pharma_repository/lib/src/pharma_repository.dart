@@ -152,4 +152,88 @@ class PharmaRepository {
       // return dartz.right(ApiError(error: '$err', errorNo: '1900202'));
     }
   }
+
+  Future<dartz.Either<List<DrugGroup>, ApiError>> getDrugGroupsSearch(
+      {String? startFromPage,
+      String? pageLength,
+      String? orderByFields,
+      String? localUI,
+      String? whereCond,
+      String? serachValue,
+      SearchType? searchType}) async {
+    String _whereCond = '';
+    String _fuzzycond = '';
+    dartz.Either<ApiResponse, ApiError> _getDrugGroupAllResponse;
+
+    try {
+      print('localUI: $localUI');
+
+//like, equal, fuzzy, none
+      switch (searchType) {
+        case SearchType.none:
+          {
+            _whereCond = '';
+          }
+          break;
+        case SearchType.equal:
+          {
+            _whereCond =
+                ''' "wherecond":  " Where    drug.\\"ar__brandName\\" = '${serachValue}'  OR  lower ( drug.\\"en__brandName\\") =  lower ('${serachValue}')"  ''';
+          }
+          break;
+        case SearchType.like:
+          {
+            _whereCond =
+                ''' "wherecond":  " Where    drug.\\"ar__brandName\\" like '%${serachValue}%'  OR  lower ( drug.\\"en__brandName\\") LIKE  lower ('%${serachValue}%')"  ''';
+          }
+          break;
+        case SearchType.fuzzy:
+          {
+            _whereCond = '';
+            _fuzzycond = ''' "fuzzycond":  "\\"$serachValue\\"" ''';
+          }
+
+          break;
+        default:
+          {
+            _whereCond = '';
+          }
+      }
+
+      print(
+          '\n\n\n\n\nn\ =!=!=!=!=!=!=!=============== $searchType ====================== \nwhereCond: $_whereCond  ----  _fuzzycond:::  $_fuzzycond ');
+
+      _getDrugGroupAllResponse = await apiGetDrugGroupsSearch(
+          localUI: localUI,
+          startFromPage: startFromPage,
+          pageLength: pageLength,
+          orderByFields: orderByFields,
+          whereCond: _whereCond,
+          fuzzyCond: _fuzzycond,
+          baseUrl: baseUrl);
+
+      print('DrugGroup response :' + _getDrugGroupAllResponse.toString());
+
+      return _getDrugGroupAllResponse.fold((left) {
+        print('left11 getDrugGroupsSearch');
+        print(left.Data);
+
+        print('left2 getDrugGroupsSearch');
+
+        var DrugGroupList =
+            ((left.Data) as List).map((i) => DrugGroup.fromJson(i)).toList();
+        print('left233 getDrugGroupsSearch');
+
+        return dartz.left(DrugGroupList);
+      }, (right) {
+        print('right');
+        print(right.toJson().toString());
+        return dartz.right(right);
+      });
+    } catch (err) {
+      print('Error ' + err.toString());
+      throw (err);
+      // return dartz.right(ApiError(error: '$err', errorNo: '1900202'));
+    }
+  }
 }

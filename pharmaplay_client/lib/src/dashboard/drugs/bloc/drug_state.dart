@@ -10,7 +10,7 @@ class DrugState extends Equatable {
       this.localUI = 'en',
       this.hasReachedMax = false,
       this.startFrompage = 1,
-      this.pageLength = 15,
+      this.pageLength = 16,
       this.currentPage = 1,
       this.whereCond = '',
       this.searchType = SearchType.none,

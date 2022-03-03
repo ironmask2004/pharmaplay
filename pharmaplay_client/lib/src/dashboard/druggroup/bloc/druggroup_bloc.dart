@@ -1,22 +1,34 @@
-import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
-import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
-import 'package:formz/formz.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pharma_repository/pharma_repository.dart';
-import 'package:pharmaplay_client/generated/l10n.dart';
 import 'package:dartz/dartz.dart' as dartz;
-part 'druggroup_event.dart';
+import 'package:stream_transform/stream_transform.dart';
+import 'package:bloc_concurrency/bloc_concurrency.dart';
+
 part 'druggroup_state.dart';
+part 'druggroup_event.dart';
+
+const throttleDuration = Duration(milliseconds: 100);
+
+EventTransformer<E> throttleDroppable<E>(Duration duration) {
+  return (events, mapper) {
+    return droppable<E>().call(events.throttle(duration), mapper);
+  };
+}
 
 class DrugGroupBloc extends Bloc<DrugGroupEvent, DrugGroupState> {
   DrugGroupBloc({
     required PharmaRepository pharmaRepository,
   })  : _pharmaRepository = pharmaRepository,
         super(const DrugGroupState()) {
-    on<LocalUIChanged>(_onLocalUIChanged);
-    on<DrugGroupGetAll>(_onDrugGroupGetAll);
-    on<DrugGroupGetSearch>(_onDrugGroupGetSearch);
+    on<DrugGroupLocalUIChanged>(_onDrugGroupLocalUIChanged);
+    on<DrugGroupsSearched>(
+      _onDrugGroupsSearched,
+      transformer: throttleDroppable(throttleDuration),
+    );
+    on<DrugGroupsScrolledd>(
+      _onDrugGroupsScrolledd,
+      transformer: throttleDroppable(throttleDuration),
+    );
 
     // on<RoutToSignUpPageSubmitted>(_onRoutToSignUpPageSubmitted);
   }
@@ -24,48 +36,158 @@ class DrugGroupBloc extends Bloc<DrugGroupEvent, DrugGroupState> {
   final PharmaRepository _pharmaRepository;
   // String _localUI = 'en';
 
-  void _onLocalUIChanged(
-    LocalUIChanged event,
+  void _onDrugGroupLocalUIChanged(
+    DrugGroupLocalUIChanged event,
     Emitter<DrugGroupState> emit,
   ) {
     //print(SLang.current.onforgotemailchanged);
 
-    print('_onLocalUIChanged ======================= ${event.localUI},   ');
+    print(
+        '_onDrugGroupLocalUIChanged ======================= ${event.localUI},   ');
 
     emit(state.copyWith(
       localUI: event.localUI,
-      status: DrugGroupStatus.success,
+      //status: DrugGroupStatus.success,
     ));
     //add(const DrugGroupGetAll());
   }
 
-//-==========
-/*
-  ''' "wherecond": " Where similarity (drugGroup.\\"ar__drugGroupName\\",'$_serachValue' )  > 0.2  OR similarity (drugGroup.\\"en__drugGroupName\\",'$_serachValue' )  > 0.2  "  '''));
+  void _onDrugGroupsSearched(
+    DrugGroupsSearched event,
+    Emitter<DrugGroupState> emit,
+  ) async {
+    int _startFromPage = 1;
+    int _currentPage = 1;
+    int _pageLength = state.pageLength;
+    String _localUI = 'en';
+    String _serachValue = '';
+    String _orderByFields = '';
+    SearchType _searchType = SearchType.none;
 
-*/
-  void _onDrugGroupGetSearch(
-    DrugGroupGetSearch event,
+    _startFromPage = 1;
+    _currentPage = 1;
+    _pageLength = event.pageLength ?? state.pageLength;
+    // orderByFields: event.orderByFields,
+    _localUI = state.localUI;
+    // whereCond: event.whereCond,
+    _serachValue = event.serachValue ?? '';
+    _searchType = event.searchType ?? SearchType.none;
+
+    print(
+        '_onDrugGroupsSearched LOCALEUIIIIIIIIIIIIIIIIIIIIIIIIIII :  ${state.localUI} + WhewrCond:::: ${event.whereCond} ');
+
+    final dartz.Either<List<DrugGroup>, ApiError> _repoResponse;
+    try {
+      //TokenPair _tokenInfo;
+      _repoResponse = await _pharmaRepository.getDrugGroupsSearch(
+          startFromPage: "1",
+          pageLength: state.pageLength.toString(),
+          orderByFields: event.orderByFields ?? '',
+          localUI: state.localUI,
+          whereCond: event.whereCond ?? '',
+          serachValue: event.serachValue ?? '',
+          searchType: event.searchType ?? SearchType.none);
+
+      _repoResponse.fold((left) {
+        print('left from PAi get back');
+        print(left.toString());
+
+        emit(state.copyWith(
+          status: DrugGroupStatus.success,
+          hasReachedMax: left.isEmpty,
+          druggroups: left,
+          whereCond: event.whereCond ?? '',
+          startFrompage: 1,
+          currentPage: 1,
+          serachValue: event.serachValue ?? '',
+          searchType: event.searchType ?? SearchType.none,
+          orderByFields: event.orderByFields ?? '',
+        ));
+      }, (right) {
+        print('right');
+        emit(state.copyWith(
+            status: DrugGroupStatus.failed,
+            stateMsg: right.toJson().toString()));
+      });
+    } catch (err) {
+      print('Error connectiing to server ' + err.toString());
+      rethrow;
+    }
+  }
+  //===
+
+//-----------------
+  Future<void> _onDrugGroupsScrolledd(
+    DrugGroupsScrolledd event,
+    Emitter<DrugGroupState> emit,
+  ) async {
+    if (state.hasReachedMax) return;
+
+    //final DrugGroupStatus _drugStatus = DrugGroupStatus.scrolloading;
+
+    final dartz.Either<List<DrugGroup>, ApiError> _repoResponse;
+    try {
+      //TokenPair _tokenInfo;
+      _repoResponse = await _pharmaRepository.getDrugGroupsSearch(
+          startFromPage: (state.currentPage + 1).toString(),
+          pageLength: state.pageLength.toString(),
+          orderByFields: state.orderByFields,
+          localUI: state.localUI,
+          whereCond: state.whereCond,
+          serachValue: state.serachValue,
+          searchType: state.searchType);
+
+      _repoResponse.fold((left) {
+        print('left from PAi get back');
+        print(left.toString());
+
+        emit(state.copyWith(
+          status: DrugGroupStatus.success,
+          hasReachedMax: left.isEmpty,
+          druggroups: (List.of(state.druggroups)..addAll(left)),
+          currentPage: state.currentPage + 1,
+        ));
+      }, (right) {
+        print('right');
+        emit(state.copyWith(
+            status: DrugGroupStatus.failed,
+            // druggroups: state.druggroups,
+            stateMsg: right.toJson().toString()));
+
+        //return (right);
+      });
+    } catch (err) {
+      print('Error connectiing to server ' + err.toString());
+      rethrow;
+      // showInSnackBar(context, err.toString());
+    }
+  }
+
+//--------------
+/*  void _onDrugGroupsSearched(
+    DrugGroupsSearched event,
     Emitter<DrugGroupState> emit,
   ) async {
     print(
-        '_onDrugGroupGetSearch LOCALEUIIIIIIIIIIIIIIIIIIIIIIIIIII :  ${state.localUI} + WhewrCond:::: ${event.whereCond} ');
+        '_onDrugGroupsSearched LOCALEUIIIIIIIIIIIIIIIIIIIIIIIIIII :  ${state.localUI} + WhewrCond:::: ${event.whereCond} ');
     // print(state.email.value + ' password: ' + state.password.value);
-    var _WereCond =
-        ''' "wherecond": " Where similarity (drugGroup.\\"ar__drugGroupName\\",'${event.whereCond}' )  > 0.2  OR similarity (drugGroup.\\"en__drugGroupName\\",'${event.whereCond}' )  > 0.2  "  ''';
+    // _WereCond =
+    //    ''' "wherecond": " Where similarity (drug.\\"ar__drugName\\",'${event.whereCond}' )  > 0.2  OR similarity (drug.\\"en__drugName\\",'${event.whereCond}' )  > 0.2  "  ''';
 
-    _WereCond =
-        ''' "wherecond": " Where    drugGroup.\\"ar__drugGroupName\\" like '%${event.whereCond}%'  OR  lower ( drugGroup.\\"en__drugGroupName\\") LIKE  lower ('%${event.whereCond}%') " ''';
+    var _wereCond =
+        ''' "wherecond":  " Where    drug.\\"ar__brandName\\" like '%${event.whereCond}%'  OR  lower ( drug.\\"en__brandName\\") LIKE  lower ('%${event.whereCond}%')"  ''';
 
-    emit(state.copyWith(
-        status: DrugGroupStatus.loading, errMsg: 'loading.....'));
+    print("----------------------------");
+    print(_wereCond);
+    print("----------------------------");
+    emit(state.copyWith(status: DrugGroupStatus.loading, stateMsg: 'loading.....'));
 
 //-----------------
     final dartz.Either<List<DrugGroup>, ApiError> _repoResponse;
     try {
       //TokenPair _tokenInfo;
       _repoResponse = await _pharmaRepository.getDrugGroupAll(
-          localUI: state.localUI, whereCond: _WereCond);
+          localUI: state.localUI, whereCond: _wereCond);
 
       _repoResponse.fold((left) {
         print('left from PAi get back');
@@ -74,16 +196,16 @@ class DrugGroupBloc extends Bloc<DrugGroupEvent, DrugGroupState> {
         emit(
           state.copyWith(
               status: DrugGroupStatus.success,
-              drugGroups: left,
-              whereCond: event.whereCond,
-              errMsg: 'All  Drug Group Loaded'),
+              druggroups: left,
+              whereCond: _wereCond,
+              stateMsg: 'DrugGroup Group Loaded'),
         );
       }, (right) {
         print('right');
         emit(state.copyWith(
             status: DrugGroupStatus.failed,
-            drugGroups: [],
-            errMsg: right.toJson().toString()));
+            druggroups: [],
+            stateMsg: right.toJson().toString()));
 
         //return (right);
       });
@@ -93,50 +215,6 @@ class DrugGroupBloc extends Bloc<DrugGroupEvent, DrugGroupState> {
       // showInSnackBar(context, err.toString());
     }
   }
-//================
-
-  void _onDrugGroupGetAll(
-    DrugGroupGetAll event,
-    Emitter<DrugGroupState> emit,
-  ) async {
-    print(
-        '_onDrugGroupGetAll LOCALEUIIIIIIIIIIIIIIIIIIIIIIIIIII :  ${state.localUI}');
-    // print(state.email.value + ' password: ' + state.password.value);
-
-    emit(state.copyWith(
-        status: DrugGroupStatus.loading, errMsg: 'loading.....'));
-
-//-----------------
-    final dartz.Either<List<DrugGroup>, ApiError> _repoResponse;
-    try {
-      //TokenPair _tokenInfo;
-      _repoResponse =
-          await _pharmaRepository.getDrugGroupAll(localUI: state.localUI);
-
-      _repoResponse.fold((left) {
-        print('left from PAi get back');
-        // return (left);
-        print(left.toString());
-        emit(
-          state.copyWith(
-              status: DrugGroupStatus.success,
-              drugGroups: left,
-              errMsg: 'All  Drug Group Loaded'),
-        );
-      }, (right) {
-        print('right');
-        emit(state.copyWith(
-            status: DrugGroupStatus.failed, errMsg: right.toJson().toString()));
-
-        //return (right);
-      });
-    } catch (err) {
-      print('Error connectiing to server ' + err.toString());
-      rethrow;
-      // showInSnackBar(context, err.toString());
-    }
-  }
-
-//===
-
+  //===
+*/
 }
