@@ -62,23 +62,6 @@ class DrugBloc extends Bloc<DrugEvent, DrugState> {
     DrugsSearched event,
     Emitter<DrugState> emit,
   ) async {
-    int _startFromPage = 1;
-    int _currentPage = 1;
-    int _pageLength = state.pageLength;
-    String _localUI = 'en';
-    String _serachValue = '';
-    String _orderByFields = '';
-    SearchType _searchType = SearchType.none;
-
-    _startFromPage = 1;
-    _currentPage = 1;
-    _pageLength = event.pageLength ?? state.pageLength;
-    // orderByFields: event.orderByFields,
-    _localUI = state.localUI;
-    // whereCond: event.whereCond,
-    _serachValue = event.serachValue ?? '';
-    _searchType = event.searchType ?? SearchType.none;
-
     print(
         '_onDrugsSearched LOCALEUIIIIIIIIIIIIIIIIIIIIIIIIIII :  ${state.localUI} + WhewrCond:::: ${event.whereCond} ');
 

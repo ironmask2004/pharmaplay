@@ -13,24 +13,47 @@ class PharmaDrugGroupApi {
 
     router.post('/search', (Request req) async {
       List<DrugGroup> drugGroupInfo;
-      try {
-        final payload = await req.readAsString();
+      // try {
+      final payload = await req.readAsString();
+      print(payload);
+      final String whereCond = json.decode(payload)['wherecond'] ?? '';
+      final String localUI = json.decode(payload)['localUI'] ?? 'en';
+      final Map<String, dynamic> listpagesparms = json.decode(payload);
+      print(listpagesparms);
 
-        final Map<String, dynamic> listpagesparms = json.decode(payload) ?? {};
-        print(listpagesparms);
+      final int startFromPage = int.parse(listpagesparms['startfrompage'] ?? 0);
 
-        final String localUI = listpagesparms['localUI'] ?? 'en';
-        final String whereCond = listpagesparms['wherecond'] ?? ' ';
+      final int pageLength = int.parse(listpagesparms['pagelength'] ?? 0);
 
-        drugGroupInfo = await getDrugGroupAll(
-            db: db, whereCond: whereCond, localUI: localUI);
+      final String orderByfields = listpagesparms['orderbyfields'] ?? '';
+      print('startFromPage :   $startFromPage   -- pagelength : $pageLength');
 
-        // print("founded_drug------:" + drugInfo.toString());
-      } catch (err) {
+      if (pageLength <= 0 || startFromPage <= 0 || orderByfields.isEmpty) {
+        return Response.forbidden(
+            responseErrMsg(
+                '''  {   "startfrompage": "2" , "pagelength": "5"  , "localUI": "ar" , 
+                "orderbyfields":  "drugGroup.\"ar__drugGroupName\""   } ''',
+                "403"),
+            headers: {
+              'content-type': 'application/json',
+            });
+      }
+
+      drugGroupInfo = await getDrugGrougSearch(
+          startFromPage: startFromPage,
+          pageLength: pageLength,
+          orderByfields: orderByfields,
+          whereCond: whereCond,
+          db: db,
+          drugStore: drugStore,
+          localUI: localUI);
+
+      print("founded_drugGroups------:" + drugGroupInfo.toString());
+      /*} catch (err) {
         return Response.forbidden(responseErrMsg("$err", "9004"), headers: {
           'content-type': 'application/json',
         });
-      }
+      }*/
 
       var jsonString = json.encode(drugGroupInfo);
       //print('--------------0-0-0-0-0-\n' + jsonString);
@@ -39,7 +62,6 @@ class PharmaDrugGroupApi {
         'content-type': 'application/json',
       });
     });
-
 //=============
     //============= /drug/  ROUTE
 

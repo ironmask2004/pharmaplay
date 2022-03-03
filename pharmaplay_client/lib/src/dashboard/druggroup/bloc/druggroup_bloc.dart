@@ -56,23 +56,6 @@ class DrugGroupBloc extends Bloc<DrugGroupEvent, DrugGroupState> {
     DrugGroupsSearched event,
     Emitter<DrugGroupState> emit,
   ) async {
-    int _startFromPage = 1;
-    int _currentPage = 1;
-    int _pageLength = state.pageLength;
-    String _localUI = 'en';
-    String _serachValue = '';
-    String _orderByFields = '';
-    SearchType _searchType = SearchType.none;
-
-    _startFromPage = 1;
-    _currentPage = 1;
-    _pageLength = event.pageLength ?? state.pageLength;
-    // orderByFields: event.orderByFields,
-    _localUI = state.localUI;
-    // whereCond: event.whereCond,
-    _serachValue = event.serachValue ?? '';
-    _searchType = event.searchType ?? SearchType.none;
-
     print(
         '_onDrugGroupsSearched LOCALEUIIIIIIIIIIIIIIIIIIIIIIIIIII :  ${state.localUI} + WhewrCond:::: ${event.whereCond} ');
 
@@ -95,7 +78,7 @@ class DrugGroupBloc extends Bloc<DrugGroupEvent, DrugGroupState> {
         emit(state.copyWith(
           status: DrugGroupStatus.success,
           hasReachedMax: left.isEmpty,
-          druggroups: left,
+          drugGroups: left,
           whereCond: event.whereCond ?? '',
           startFrompage: 1,
           currentPage: 1,
@@ -144,7 +127,7 @@ class DrugGroupBloc extends Bloc<DrugGroupEvent, DrugGroupState> {
         emit(state.copyWith(
           status: DrugGroupStatus.success,
           hasReachedMax: left.isEmpty,
-          druggroups: (List.of(state.druggroups)..addAll(left)),
+          drugGroups: (List.of(state.drugGroups)..addAll(left)),
           currentPage: state.currentPage + 1,
         ));
       }, (right) {

@@ -4,7 +4,6 @@ import 'package:pharmaplay_client/generated/l10n.dart';
 import 'package:pharmaplay_client/src/dashboard/druggroup/druggroup.dart';
 import 'package:pharmaplay_client/src/utlites/sforms_style.dart';
 import 'package:pharmaplay_client/src/utlites/responsive.dart';
-import 'druggroup_info_card.dart';
 
 class DrugGroupsView extends StatelessWidget {
   const DrugGroupsView({
@@ -53,7 +52,7 @@ class DrugGroupsView extends StatelessWidget {
   }
 }
 
-class DrugGroupInfoCardGridView extends StatelessWidget {
+class DrugGroupInfoCardGridView extends StatefulWidget {
   const DrugGroupInfoCardGridView({
     Key? key,
     this.crossAxisCount = 4,
@@ -62,6 +61,19 @@ class DrugGroupInfoCardGridView extends StatelessWidget {
 
   final int crossAxisCount;
   final double childAspectRatio;
+
+  @override
+  State<DrugGroupInfoCardGridView> createState() =>
+      _DrugGroupInfoCardGridViewState();
+}
+
+class _DrugGroupInfoCardGridViewState extends State<DrugGroupInfoCardGridView> {
+  final _scrollController = ScrollController();
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(_onScroll);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -77,13 +89,13 @@ class DrugGroupInfoCardGridView extends StatelessWidget {
             child: GridView.builder(
               //physics: const NeverScrollableScrollPhysics(),
               //shrinkWrap: true,
-              itemCount: context.read<DrugGroupBloc>().state.druggroups.length,
+              itemCount: context.read<DrugGroupBloc>().state.drugGroups.length,
               scrollDirection: Axis.horizontal,
-
+              controller: _scrollController,
               gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                 crossAxisSpacing: defaultPadding,
                 mainAxisSpacing: defaultPadding,
-                childAspectRatio: childAspectRatio,
+                childAspectRatio: widget.childAspectRatio,
                 maxCrossAxisExtent: 180,
                 // childAspectRatio: 1 / 2,
                 // crossAxisSpacing: 20,
@@ -91,11 +103,27 @@ class DrugGroupInfoCardGridView extends StatelessWidget {
               ),
               itemBuilder: (context, index) => DrugGroupInfoCard(
                   dragGroupInfo:
-                      context.read<DrugGroupBloc>().state.druggroups[index]),
+                      context.read<DrugGroupBloc>().state.drugGroups[index]),
             ),
           ),
         );
       },
     );
+  }
+
+  void _onScroll() {
+    if (_isBottom) {
+      context.read<DrugGroupBloc>().add(const DrugGroupsScrolledd());
+      //context.read<PostBloc>().add(PostFetched());
+      print('Is Butooooom');
+    } else
+      print('Nor Boootm!!!!');
+  }
+
+  bool get _isBottom {
+    if (!_scrollController.hasClients) return false;
+    final maxScroll = _scrollController.position.maxScrollExtent;
+    final currentScroll = _scrollController.offset;
+    return currentScroll >= (maxScroll * 0.9);
   }
 }

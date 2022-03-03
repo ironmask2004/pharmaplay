@@ -12,12 +12,12 @@ enum DrugGroupStatus {
 class DrugGroupState extends Equatable {
   const DrugGroupState(
       {this.status = DrugGroupStatus.empty,
-      this.druggroups = const [],
+      this.drugGroups = const [],
       this.stateMsg = '',
       this.localUI = 'en',
       this.hasReachedMax = false,
       this.startFrompage = 1,
-      this.pageLength = 16,
+      this.pageLength = 8,
       this.currentPage = 1,
       this.whereCond = '',
       this.searchType = SearchType.none,
@@ -28,7 +28,7 @@ class DrugGroupState extends Equatable {
   final String localUI;
   final String whereCond;
   final bool hasReachedMax;
-  final List<DrugGroup> druggroups;
+  final List<DrugGroup> drugGroups;
   final String stateMsg;
   final int startFrompage;
   final int currentPage;
@@ -40,7 +40,7 @@ class DrugGroupState extends Equatable {
   @override
   List<Object> get props => [
         status,
-        druggroups,
+        drugGroups,
         localUI,
         whereCond,
         hasReachedMax,
@@ -58,7 +58,7 @@ class DrugGroupState extends Equatable {
       String? localUI,
       String? whereCond,
       bool? hasReachedMax,
-      List<DrugGroup>? druggroups,
+      List<DrugGroup>? drugGroups,
       String? stateMsg,
       int? startFrompage,
       int? currentPage,
@@ -71,7 +71,7 @@ class DrugGroupState extends Equatable {
         localUI: localUI ?? this.localUI,
         whereCond: whereCond ?? this.whereCond,
         hasReachedMax: hasReachedMax ?? this.hasReachedMax,
-        druggroups: druggroups ?? this.druggroups,
+        drugGroups: drugGroups ?? this.drugGroups,
         stateMsg: stateMsg ?? this.stateMsg,
         startFrompage: startFrompage ?? this.startFrompage,
         currentPage: currentPage ?? this.currentPage,

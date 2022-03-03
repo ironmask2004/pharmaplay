@@ -2,21 +2,29 @@ import 'package:pharmaplay_server/pharmaplay_server.dart';
 
 ///---------------------
 
-Future<List<DrugGroup>> getDrugGroupAll(
-    {required DB db, String whereCond = ' ', required String localUI}) async {
+Future<List<DrugGroup>> getDrugGrougSearch(
+    {required int startFromPage,
+    required int pageLength,
+    required String orderByfields,
+    required String whereCond,
+    required DB db,
+    required String drugStore,
+    required String localUI}) async {
+  final String startFromRow = ((startFromPage - 1) * pageLength).toString();
   List<DrugGroup> resultDrugGroup = <DrugGroup>[];
   String sql = '''SELECT    drugGroup."drugGroupID" ,
       drugGroup."${localUI}__drugGroupName" as "drugGroupName"
       FROM  pharmaplay."drugGroup" drugGroup
       $whereCond
-      ORDER BY   drugGroup."${localUI}__drugGroupName"
+    ORDER BY   $orderByfields
+    LIMIT $pageLength  OFFSET  $startFromRow
     ''';
 
   dynamic resultSet = await db.query(sql);
 
   print(resultSet.toString());
   print('----------------');
-  if (resultSet.length > 0) {
+  if (resultSet.length >= 0) {
     resultSet.forEach((element) {
       print(element);
       print('----------------');
@@ -26,8 +34,8 @@ Future<List<DrugGroup>> getDrugGroupAll(
 
     return (resultDrugGroup);
   } else {
-    print(' Drug is Empty ');
-    throw ' Drug is Empty ';
+    print(' DrugGroup is Empty ');
+    throw ' DrugGroup is Empty ';
   }
 }
 

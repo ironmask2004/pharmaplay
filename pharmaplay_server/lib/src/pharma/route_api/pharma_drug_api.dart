@@ -49,7 +49,7 @@ class PharmaDrugApi {
     //============= /drugs/INFO ROUTE
     ///----------------------
     //{ "startfrompage": "3" , "pagelength": "2" , "orderbyfields": "drug.\"chemicalDrugID\",drug.\"tradeName\""  }
-    router.post('/findlistbypage', (Request req) async {
+    router.post('/search', (Request req) async {
       List<DrugRecord> drugInfo;
       // try {
       final payload = await req.readAsString();
