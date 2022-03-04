@@ -3,7 +3,8 @@ part of 'dashboard_bloc.dart';
 @immutable
 class DashBoardState extends Equatable {
   const DashBoardState(
-      {this.localeUI = const Locale('en'),
+      {this.status = 'Initial',
+      this.localeUI = const Locale('en'),
       this.uiThemeMode = ThemeMode.system,
       this.primaryColor = const Color(0xFF2697FF),
       this.secondaryColor = const Color(0xFF2A2D3E),
@@ -21,6 +22,7 @@ class DashBoardState extends Equatable {
   final Color secondaryColor;
   final Color bgColor;
   final Color fontbodyColor;
+  final String status;
 
   /*
    primaryColor = Color(0xFF2697FF);
@@ -36,7 +38,8 @@ class DashBoardState extends Equatable {
 */
 
   DashBoardState copyWith(
-      {Locale? localeUI,
+      {String? status,
+      Locale? localeUI,
       ThemeMode? uiThemeMode,
       Color? primaryColor,
       Color? secondaryColor,
@@ -44,6 +47,7 @@ class DashBoardState extends Equatable {
       Color? fontbodyColor,
       String? headerSerachField}) {
     return DashBoardState(
+        status: status ?? this.status,
         localeUI: localeUI ?? this.localeUI,
         uiThemeMode: uiThemeMode ?? this.uiThemeMode,
         primaryColor: primaryColor ?? this.primaryColor,
@@ -55,6 +59,7 @@ class DashBoardState extends Equatable {
 
   @override
   List<Object> get props => [
+        status,
         localeUI,
         uiThemeMode,
         primaryColor,

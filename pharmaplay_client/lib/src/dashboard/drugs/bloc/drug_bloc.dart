@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/locale.dart';
 import 'package:pharma_repository/pharma_repository.dart';
@@ -39,9 +40,11 @@ class DrugBloc extends Bloc<DrugEvent, DrugState> {
     );
 
     dashBoardStateubscription = dashBoardBlod.stream.listen((state) {
-      print(' -----------------  يقعل dashBoardStateubscription  ' +
-          state.localeUI.toString());
-      add(DruglocaleUIChanged(state.localeUI.toString()));
+      if (state.status == 'localeUIChanged') {
+        print(' -----------------    dashBoardStateubscription  ' +
+            state.localeUI.toString());
+        add(DruglocaleUIChanged(state.localeUI.toString()));
+      }
     });
   }
   void _onDruglocaleUIChanged(

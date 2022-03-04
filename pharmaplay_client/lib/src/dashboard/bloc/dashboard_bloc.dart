@@ -108,6 +108,7 @@ class DashBoardBloc extends Bloc<DashBoardEvent, DashBoardState> {
     //emit(DashBoardStateUIThemeModeChanged(currentThemeMode));
 
     emit(state.copyWith(
+        status: 'UITHemeChanged',
         uiThemeMode: currentThemeMode,
         primaryColor: primaryColor,
         secondaryColor: secondaryColor,
@@ -122,7 +123,9 @@ class DashBoardBloc extends Bloc<DashBoardEvent, DashBoardState> {
     print('emit DashBoardStatelocaleUIChanged ' + currentLocale);
     // emit(DashBoardStatelocaleUIChanged(
     //    Locale(currentLocale == 'ar' ? 'ar' : 'en')));
-    emit(state.copyWith(localeUI: Locale(currentLocale == 'ar' ? 'ar' : 'en')));
+    emit(state.copyWith(
+        status: 'localeUIChanged',
+        localeUI: Locale(currentLocale == 'ar' ? 'ar' : 'en')));
     print(
         ' -----------------  state localeUI : ' + state.localeUI.languageCode);
   }
@@ -162,6 +165,7 @@ class DashBoardBloc extends Bloc<DashBoardEvent, DashBoardState> {
     //emit(DashBoardStateUIThemeModeChanged(currentThemeMode));
 
     emit(state.copyWith(
+        status: 'UITHemeChanged',
         uiThemeMode: currentThemeMode,
         primaryColor: primaryColor,
         secondaryColor: secondaryColor,
@@ -177,6 +181,7 @@ class DashBoardBloc extends Bloc<DashBoardEvent, DashBoardState> {
   ) {
     print('_onHeaderSerachFieldChanged');
     emit(state.copyWith(
+      status: 'HeaderSerachFieldChanged',
       headerSerachField: event.headerSerachField,
     ));
   }
@@ -207,6 +212,7 @@ class DashBoardBloc extends Bloc<DashBoardEvent, DashBoardState> {
     print('  state localeUI : ' + state.localeUI.languageCode);
     print('emit DashBoardStatelocaleUIChanged ' + currentLocale);
     emit(state.copyWith(
+      status: 'localeUIChanged',
       localeUI: Locale(currentLocale == 'ar' ? 'ar' : 'en'),
     ));
 
@@ -246,6 +252,7 @@ class DashBoardBloc extends Bloc<DashBoardEvent, DashBoardState> {
               .setIntegerValue("fontbodyColor", Color(0xFF71CAE6).value);
 
           emit(state.copyWith(
+              status: 'UIThemeModeChanged',
               uiThemeMode: event.uiThemeMode,
               primaryColor: Color(0xFF2697FF),
               secondaryColor: const Color(0xFF2A2D3E),
@@ -269,6 +276,7 @@ class DashBoardBloc extends Bloc<DashBoardEvent, DashBoardState> {
               .setIntegerValue("fontbodyColor", Color(0xFF020D18).value);
 
           emit(state.copyWith(
+              status: 'UIThemeModeChanged',
               uiThemeMode: event.uiThemeMode,
               primaryColor: Color(0xFF294966),
               secondaryColor: Color(0xFFCDC8FF),
@@ -290,6 +298,7 @@ class DashBoardBloc extends Bloc<DashBoardEvent, DashBoardState> {
               .setIntegerValue("fontbodyColor", Color(0xFF020D18).value);
 
           emit(state.copyWith(
+              status: 'UIThemeModeChanged',
               uiThemeMode: event.uiThemeMode,
               primaryColor: Color(0xFF294966),
               secondaryColor: Color(0xFFCDC8FF),
@@ -320,6 +329,6 @@ class DashBoardBloc extends Bloc<DashBoardEvent, DashBoardState> {
     //  emit(DashBoardStatelocaleUIChanged(event.localeUI)
     // state.copyWith(localeUI: event.localeUI),
     //  );
-    emit(state.copyWith(localeUI: event.localeUI));
+    emit(state.copyWith(status: 'localeUIChanged', localeUI: event.localeUI));
   }
 }

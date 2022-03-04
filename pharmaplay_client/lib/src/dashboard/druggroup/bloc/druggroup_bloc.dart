@@ -39,9 +39,11 @@ class DrugGroupBloc extends Bloc<DrugGroupEvent, DrugGroupState> {
     );
 
     dashBoardStateubscription = dashBoardBlod.stream.listen((state) {
-      print(' ----------------- dashBoardStateubscription  ' +
-          state.localeUI.toString());
-      add(DrugGrouplocaleUIChanged(state.localeUI.toString()));
+      if (state.status == 'localeUIChanged') {
+        print(' -----------------  يقعل dashBoardStateubscription  ' +
+            state.localeUI.toString());
+        add(DrugGrouplocaleUIChanged(state.localeUI.toString()));
+      }
     });
   }
   @override
