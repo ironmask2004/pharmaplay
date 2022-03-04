@@ -19,7 +19,7 @@ class DashBoardForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final SFormsStyle style = SFormsStyle.defaultTemplate;
-    Locale newLocale = context.read<DashBoardBloc>().state.uiLocale;
+    Locale newLocale = context.read<DashBoardBloc>().state.localeUI;
     ThemeMode newThemeMode = context.read<DashBoardBloc>().state.uiThemeMode;
     return BlocBuilder<DashBoardBloc, DashBoardState>(
       buildWhen: (previousState, currentState) => previousState != currentState,
@@ -64,12 +64,12 @@ class DashBoardForm extends StatelessWidget {
                           ),
                           DropdownButton<Locale>(
                             // Read the selected themeMode from the controller
-                            value: context.read<DashBoardBloc>().state.uiLocale,
+                            value: context.read<DashBoardBloc>().state.localeUI,
                             // Call the updateThemeMode method any time the user selects a theme.
                             onChanged: (value) {
                               print(value);
                               /*  newLocale = value ??
-                                  context.read<DashBoardBloc>().state.uiLocale;
+                                  context.read<DashBoardBloc>().state.localeUI;
                               context
                                   .read<DashBoardBloc>()
                                   .add(UILocalChanged(newLocale));*/

@@ -15,8 +15,9 @@ class DashBoardBloc extends Bloc<DashBoardEvent, DashBoardState> {
     on<UILocalChanged>(_onUILocalChanged);
 
     on<UIThemeModeChanged>(_onUIThemeModeChanged);
+    on<NotifyState>(_onNotifyState);
 
-    on<ReloadUILocaleRequsted>(_onReloadUILocaleRequsted);
+    on<ReloadlocaleUIRequsted>(_onReloadlocaleUIRequsted);
     on<ReloadUIThemeModeRequsted>(_onReloadUIThemeModeRequsted);
     on<HeaderSerachFieldChanged>(_onHeaderSerachFieldChanged);
     on<HeaderSerachSubmitted>(_onHeaderSerachSubmitted);
@@ -30,6 +31,17 @@ class DashBoardBloc extends Bloc<DashBoardEvent, DashBoardState> {
       Scaffold.of(event.context).openDrawer();
     }
   }
+
+//====
+
+  Future<void> _onNotifyState(
+    NotifyState event,
+    Emitter<DashBoardState> emit,
+  ) async {
+    emit(state.copyWith());
+  }
+
+//===
 
   Future<void> _onRightMenuClicked(
     RightMenuClicked event,
@@ -105,13 +117,14 @@ class DashBoardBloc extends Bloc<DashBoardEvent, DashBoardState> {
     print('DashBoardInitialRequested !!!');
 
     String currentLocale =
-        await MySharedPreferences.instance.getStringValue("UILocale");
+        await MySharedPreferences.instance.getStringValue("localeUI");
 
-    print('emit DashBoardStateUILocaleChanged ' + currentLocale);
-    // emit(DashBoardStateUILocaleChanged(
+    print('emit DashBoardStatelocaleUIChanged ' + currentLocale);
+    // emit(DashBoardStatelocaleUIChanged(
     //    Locale(currentLocale == 'ar' ? 'ar' : 'en')));
-    emit(state.copyWith(uiLocale: Locale(currentLocale == 'ar' ? 'ar' : 'en')));
-    print('  state uiLocale : ' + state.uiLocale.languageCode);
+    emit(state.copyWith(localeUI: Locale(currentLocale == 'ar' ? 'ar' : 'en')));
+    print(
+        ' -----------------  state localeUI : ' + state.localeUI.languageCode);
   }
 
   /// Loads the User's preferred ThemeMode from local or remote storage.
@@ -184,20 +197,20 @@ class DashBoardBloc extends Bloc<DashBoardEvent, DashBoardState> {
 
   //=======================
 
-  Future<void> _onReloadUILocaleRequsted(
-    ReloadUILocaleRequsted event,
+  Future<void> _onReloadlocaleUIRequsted(
+    ReloadlocaleUIRequsted event,
     Emitter<DashBoardState> emit,
   ) async {
-    print('_onReloadUILocaleRequsted!!');
+    print('_onReloadlocaleUIRequsted!!');
     String currentLocale =
-        await MySharedPreferences.instance.getStringValue("UILocale");
-    print('  state uiLocale : ' + state.uiLocale.languageCode);
-    print('emit DashBoardStateUILocaleChanged ' + currentLocale);
+        await MySharedPreferences.instance.getStringValue("localeUI");
+    print('  state localeUI : ' + state.localeUI.languageCode);
+    print('emit DashBoardStatelocaleUIChanged ' + currentLocale);
     emit(state.copyWith(
-      uiLocale: Locale(currentLocale == 'ar' ? 'ar' : 'en'),
+      localeUI: Locale(currentLocale == 'ar' ? 'ar' : 'en'),
     ));
 
-    ///  emit(DashBoardStateUILocaleChanged(
+    ///  emit(DashBoardStatelocaleUIChanged(
     //    Locale(currentLocale == 'ar' ? 'ar' : 'en')));
   }
 
@@ -291,22 +304,22 @@ class DashBoardBloc extends Bloc<DashBoardEvent, DashBoardState> {
     Emitter<DashBoardState> emit,
   ) async {
     print('new Locale: ' +
-        event.uiLocale.languageCode +
+        event.localeUI.languageCode +
         ' OLD LocLE : + ' +
-        state.uiLocale.languageCode);
+        state.localeUI.languageCode);
     // Dot not perform any work if new and old ThemeMode are identical
-    if (event.uiLocale.languageCode == state.uiLocale.languageCode) return;
+    if (event.localeUI.languageCode == state.localeUI.languageCode) return;
 
     await MySharedPreferences.instance
-        .setStringValue("UILocale", event.uiLocale.languageCode);
-    print('emit DashBoardStateUILocaleChanged   form ' +
-        state.uiLocale.languageCode +
+        .setStringValue("localeUI", event.localeUI.languageCode);
+    print('emit DashBoardStatelocaleUIChanged   form ' +
+        state.localeUI.languageCode +
         ' to ' +
-        event.uiLocale.languageCode);
+        event.localeUI.languageCode);
 
-    //  emit(DashBoardStateUILocaleChanged(event.uiLocale)
-    // state.copyWith(uiLocale: event.uiLocale),
+    //  emit(DashBoardStatelocaleUIChanged(event.localeUI)
+    // state.copyWith(localeUI: event.localeUI),
     //  );
-    emit(state.copyWith(uiLocale: event.uiLocale));
+    emit(state.copyWith(localeUI: event.localeUI));
   }
 }

@@ -40,10 +40,10 @@ class SignInForm extends StatelessWidget {
         /*context
             .read<AuthenticationBloc>()
             .add(AuthenticationDashBoardRequested());
-        Locale currentLocale = context.read<DashBoardBloc>().state.uiLocale;
+        Locale currentLocale = context.read<DashBoardBloc>().state.localeUI;
         print('Chaneg Language pressed + current : $currentLocale');
 */
-        Locale currentLocale = context.read<DashBoardBloc>().state.uiLocale;
+        Locale currentLocale = context.read<DashBoardBloc>().state.localeUI;
         print('Chaneg Language pressed + current : $currentLocale');
         context.read<DashBoardBloc>().add(UILocalChanged(
             currentLocale.languageCode == 'ar'

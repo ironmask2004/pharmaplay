@@ -1,15 +1,12 @@
-import 'package:authentication_repository/authentication_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pharma_repository/pharma_repository.dart';
-import 'package:pharmaplay_client/generated/intl/messages_all.dart';
 import 'package:pharmaplay_client/generated/l10n.dart';
 import 'package:pharmaplay_client/src/authentication/authentication.dart';
 import 'package:pharmaplay_client/src/dashboard/bloc/dashboard_bloc.dart';
 import 'package:pharmaplay_client/src/dashboard/druggroup/druggroup.dart';
 import 'package:pharmaplay_client/src/dashboard/drugs/drug.dart';
-import 'package:pharmaplay_client/src/utlites/common_classes.dart';
 import 'package:pharmaplay_client/src/utlites/responsive.dart';
 import 'package:pharmaplay_client/src/utlites/sforms_style.dart';
 
@@ -54,7 +51,7 @@ class ProfileCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Locale newLocale = context.read<DashBoardBloc>().state.uiLocale;
+    Locale newLocale = context.read<DashBoardBloc>().state.localeUI;
 
     return BlocBuilder<DashBoardBloc, DashBoardState>(
       builder: (context, state) {
@@ -181,36 +178,18 @@ class SearchField extends StatelessWidget {
                     .read<DashBoardBloc>()
                     .add(const HeaderSerachSubmitted());
                 print('Searching!!!!' +
-                    context.read<DashBoardBloc>().state.uiLocale.languageCode);
-                context.read<DrugGroupBloc>().add(DrugGroupLocalUIChanged(
-                    context.read<DashBoardBloc>().state.uiLocale.languageCode));
+                    context.read<DashBoardBloc>().state.localeUI.languageCode);
 
                 var _serachValue =
                     context.read<DashBoardBloc>().state.headerSerachField;
 
-                context.read<DrugBloc>().add(DrugLocalUIChanged(
-                    context.read<DashBoardBloc>().state.uiLocale.languageCode));
                 context.read<DrugGroupBloc>().add(DrugGroupsSearched(
                     druggroupStatus: DrugGroupStatus.initializing,
-                    localUI: context
-                        .read<DashBoardBloc>()
-                        .state
-                        .uiLocale
-                        .languageCode,
                     searchType: SearchType.like,
                     serachValue: _serachValue));
 
                 context.read<DrugBloc>().add(DrugsSearched(
                     drugStatus: DrugStatus.initializing,
-                    localUI: context
-                        .read<DashBoardBloc>()
-                        .state
-                        .uiLocale
-                        .languageCode,
-                    //    whereCond: '',
-                    //     startFrompage: 1,
-                    //   pageLength: 10,
-                    //  orderByFields: '',
                     searchType: SearchType.like,
                     serachValue: _serachValue));
 

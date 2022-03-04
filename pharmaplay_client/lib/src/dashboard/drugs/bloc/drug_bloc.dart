@@ -1,6 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/locale.dart';
 import 'package:pharma_repository/pharma_repository.dart';
 import 'package:dartz/dartz.dart' as dartz;
+import 'package:pharmaplay_client/src/dashboard/dashboard.dart';
 import 'package:stream_transform/stream_transform.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 
@@ -16,11 +20,15 @@ EventTransformer<E> throttleDroppable<E>(Duration duration) {
 }
 
 class DrugBloc extends Bloc<DrugEvent, DrugState> {
+  final PharmaRepository _pharmaRepository;
+  late StreamSubscription<DashBoardState> dashBoardStateubscription;
+
   DrugBloc({
+    required DashBoardBloc dashBoardBlod,
     required PharmaRepository pharmaRepository,
   })  : _pharmaRepository = pharmaRepository,
         super(const DrugState()) {
-    on<DrugLocalUIChanged>(_onDrugLocalUIChanged);
+    on<DruglocaleUIChanged>(_onDruglocaleUIChanged);
     on<DrugsSearched>(
       _onDrugsSearched,
       transformer: throttleDroppable(throttleDuration),
@@ -30,22 +38,23 @@ class DrugBloc extends Bloc<DrugEvent, DrugState> {
       transformer: throttleDroppable(throttleDuration),
     );
 
-    // on<RoutToSignUpPageSubmitted>(_onRoutToSignUpPageSubmitted);
+    dashBoardStateubscription = dashBoardBlod.stream.listen((state) {
+      print(' -----------------  يقعل dashBoardStateubscription  ' +
+          state.localeUI.toString());
+      add(DruglocaleUIChanged(state.localeUI.toString()));
+    });
   }
-
-  final PharmaRepository _pharmaRepository;
-  // String _localUI = 'en';
-
-  void _onDrugLocalUIChanged(
-    DrugLocalUIChanged event,
+  void _onDruglocaleUIChanged(
+    DruglocaleUIChanged event,
     Emitter<DrugState> emit,
   ) {
     //print(SLang.current.onforgotemailchanged);
 
-    print('_onDrugLocalUIChanged ======================= ${event.localUI},   ');
+    print(
+        '_onDruglocaleUIChanged ======================= ${event.localeUI},   ');
 
     emit(state.copyWith(
-      localUI: event.localUI,
+      localeUI: event.localeUI,
       //status: DrugStatus.success,
     ));
     //add(const DrugGetAll());
@@ -63,7 +72,7 @@ class DrugBloc extends Bloc<DrugEvent, DrugState> {
     Emitter<DrugState> emit,
   ) async {
     print(
-        '_onDrugsSearched LOCALEUIIIIIIIIIIIIIIIIIIIIIIIIIII :  ${state.localUI} + WhewrCond:::: ${event.whereCond} ');
+        '_onDrugsSearched LOCALEUIIIIIIIIIIIIIIIIIIIIIIIIIII :  ${state.localeUI} + WhewrCond:::: ${event.whereCond} ');
 
     final dartz.Either<List<DrugRecord>, ApiError> _repoResponse;
     try {
@@ -72,7 +81,7 @@ class DrugBloc extends Bloc<DrugEvent, DrugState> {
           startFromPage: "1",
           pageLength: state.pageLength.toString(),
           orderByFields: event.orderByFields ?? '',
-          localUI: state.localUI,
+          localeUI: state.localeUI,
           whereCond: event.whereCond ?? '',
           serachValue: event.serachValue ?? '',
           searchType: event.searchType ?? SearchType.none);
@@ -120,7 +129,7 @@ class DrugBloc extends Bloc<DrugEvent, DrugState> {
           startFromPage: (state.currentPage + 1).toString(),
           pageLength: state.pageLength.toString(),
           orderByFields: state.orderByFields,
-          localUI: state.localUI,
+          localeUI: state.localeUI,
           whereCond: state.whereCond,
           serachValue: state.serachValue,
           searchType: state.searchType);
@@ -157,7 +166,7 @@ class DrugBloc extends Bloc<DrugEvent, DrugState> {
     Emitter<DrugState> emit,
   ) async {
     print(
-        '_onDrugsSearched LOCALEUIIIIIIIIIIIIIIIIIIIIIIIIIII :  ${state.localUI} + WhewrCond:::: ${event.whereCond} ');
+        '_onDrugsSearched LOCALEUIIIIIIIIIIIIIIIIIIIIIIIIIII :  ${state.localeUI} + WhewrCond:::: ${event.whereCond} ');
     // print(state.email.value + ' password: ' + state.password.value);
     // _WereCond =
     //    ''' "wherecond": " Where similarity (drug.\\"ar__drugName\\",'${event.whereCond}' )  > 0.2  OR similarity (drug.\\"en__drugName\\",'${event.whereCond}' )  > 0.2  "  ''';
@@ -175,7 +184,7 @@ class DrugBloc extends Bloc<DrugEvent, DrugState> {
     try {
       //TokenPair _tokenInfo;
       _repoResponse = await _pharmaRepository.getDrugAll(
-          localUI: state.localUI, whereCond: _wereCond);
+          localeUI: state.localeUI, whereCond: _wereCond);
 
       _repoResponse.fold((left) {
         print('left from PAi get back');

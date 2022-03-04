@@ -10,7 +10,7 @@ Future<dartz.Either<ApiResponse, ApiError>> apiGetDrugsSearch(
     {String? startFromPage,
     String? pageLength,
     String? orderByFields,
-    String? localUI,
+    String? localeUI,
     String? whereCond,
     String? fuzzyCond,
     required String baseUrl}) async {
@@ -18,9 +18,9 @@ Future<dartz.Either<ApiResponse, ApiError>> apiGetDrugsSearch(
   ApiError _apiError; // = ApiError(error: error, errorNo: errorNo);
 
   try {
-    localUI = localUI ?? 'en';
+    localeUI = localeUI ?? 'en';
 
-    var _jsonlocalUI = ' \"localUI\": \"$localUI\" ';
+    var _jsonlocaleUI = ' \"localeUI\": \"$localeUI\" ';
 
     whereCond =
         whereCond == null || whereCond.isEmpty ? ' ' : ' ,  $whereCond ';
@@ -32,7 +32,7 @@ Future<dartz.Either<ApiResponse, ApiError>> apiGetDrugsSearch(
         ? ' , "pagelength": "16" '
         : ' , "pagelength": "$pageLength" ';
     orderByFields = orderByFields == null || orderByFields.isEmpty
-        ? ' ,  "orderbyfields": "drug.\\"${localUI}__brandName\\"" '
+        ? ' ,  "orderbyfields": "drug.\\"${localeUI}__brandName\\"" '
         : ' ,  "orderbyfields": "$orderByFields" ';
 
     var url;
@@ -40,11 +40,11 @@ Future<dartz.Either<ApiResponse, ApiError>> apiGetDrugsSearch(
     if (fuzzyCond == null || fuzzyCond.isEmpty) {
       url = Uri.http(baseUrl, "pharma/drug/search");
       _json =
-          ' {  $_jsonlocalUI  $whereCond  $startFromPage  $pageLength   $orderByFields     }';
+          ' {  $_jsonlocaleUI  $whereCond  $startFromPage  $pageLength   $orderByFields     }';
     } else {
       url = Uri.http(baseUrl, "pharma/drug/searchfuzzy");
       _json =
-          ' {  $_jsonlocalUI  $fuzzyCond  $startFromPage  $pageLength   $orderByFields     }';
+          ' {  $_jsonlocaleUI  $fuzzyCond  $startFromPage  $pageLength   $orderByFields     }';
     }
 
     Map<String, String> _headers = {
@@ -85,7 +85,7 @@ Future<dartz.Either<ApiResponse, ApiError>> apiGetDrugGroupsSearch(
     {String? startFromPage,
     String? pageLength,
     String? orderByFields,
-    String? localUI,
+    String? localeUI,
     String? whereCond,
     String? fuzzyCond,
     required String baseUrl}) async {
@@ -93,9 +93,9 @@ Future<dartz.Either<ApiResponse, ApiError>> apiGetDrugGroupsSearch(
   ApiError _apiError; // = ApiError(error: error, errorNo: errorNo);
 
   try {
-    localUI = localUI ?? 'en';
+    localeUI = localeUI ?? 'en';
 
-    var _jsonlocalUI = ' \"localUI\": \"$localUI\" ';
+    var _jsonlocaleUI = ' \"localeUI\": \"$localeUI\" ';
 
     whereCond =
         whereCond == null || whereCond.isEmpty ? ' ' : ' ,  $whereCond ';
@@ -107,7 +107,7 @@ Future<dartz.Either<ApiResponse, ApiError>> apiGetDrugGroupsSearch(
         ? ' , "pagelength": "10" '
         : ' , "pagelength": "$pageLength" ';
     orderByFields = orderByFields == null || orderByFields.isEmpty
-        ? ' ,  "orderbyfields": "druggroup.\\"${localUI}__drugGroupName\\"" '
+        ? ' ,  "orderbyfields": "druggroup.\\"${localeUI}__drugGroupName\\"" '
         : ' ,  "orderbyfields": "$orderByFields" ';
 
     var url;
@@ -115,11 +115,11 @@ Future<dartz.Either<ApiResponse, ApiError>> apiGetDrugGroupsSearch(
     if (fuzzyCond == null || fuzzyCond.isEmpty) {
       url = Uri.http(baseUrl, "pharma/druggroups/search");
       _json =
-          ' {  $_jsonlocalUI  $whereCond  $startFromPage  $pageLength   $orderByFields     }';
+          ' {  $_jsonlocaleUI  $whereCond  $startFromPage  $pageLength   $orderByFields     }';
     } else {
       url = Uri.http(baseUrl, "pharma/druggroups/search");
       _json =
-          ' {  $_jsonlocalUI  $fuzzyCond  $startFromPage  $pageLength   $orderByFields     }';
+          ' {  $_jsonlocaleUI  $fuzzyCond  $startFromPage  $pageLength   $orderByFields     }';
     }
 
     Map<String, String> _headers = {

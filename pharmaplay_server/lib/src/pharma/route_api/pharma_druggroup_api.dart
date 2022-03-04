@@ -17,7 +17,7 @@ class PharmaDrugGroupApi {
       final payload = await req.readAsString();
       print(payload);
       final String whereCond = json.decode(payload)['wherecond'] ?? '';
-      final String localUI = json.decode(payload)['localUI'] ?? 'en';
+      final String localeUI = json.decode(payload)['localeUI'] ?? 'en';
       final Map<String, dynamic> listpagesparms = json.decode(payload);
       print(listpagesparms);
 
@@ -31,7 +31,7 @@ class PharmaDrugGroupApi {
       if (pageLength <= 0 || startFromPage <= 0 || orderByfields.isEmpty) {
         return Response.forbidden(
             responseErrMsg(
-                '''  {   "startfrompage": "2" , "pagelength": "5"  , "localUI": "ar" , 
+                '''  {   "startfrompage": "2" , "pagelength": "5"  , "localeUI": "ar" , 
                 "orderbyfields":  "drugGroup.\"ar__drugGroupName\""   } ''',
                 "403"),
             headers: {
@@ -46,7 +46,7 @@ class PharmaDrugGroupApi {
           whereCond: whereCond,
           db: db,
           drugStore: drugStore,
-          localUI: localUI);
+          localeUI: localeUI);
 
       print("founded_drugGroups------:" + drugGroupInfo.toString());
       /*} catch (err) {

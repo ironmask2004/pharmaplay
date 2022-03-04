@@ -9,12 +9,12 @@ abstract class DashBoardEvent extends Equatable {
 }
 
 class UILocalChanged extends DashBoardEvent {
-  const UILocalChanged(this.uiLocale);
+  const UILocalChanged(this.localeUI);
 
-  final Locale uiLocale;
+  final Locale localeUI;
 
   @override
-  List<Object> get props => [uiLocale];
+  List<Object> get props => [localeUI];
 }
 
 class UIThemeModeChanged extends DashBoardEvent {
@@ -28,7 +28,9 @@ class UIThemeModeChanged extends DashBoardEvent {
 
 class DashBoardInitialRequested extends DashBoardEvent {}
 
-class ReloadUILocaleRequsted extends DashBoardEvent {}
+class NotifyState extends DashBoardEvent {}
+
+class ReloadlocaleUIRequsted extends DashBoardEvent {}
 
 class ReloadUIThemeModeRequsted extends DashBoardEvent {}
 

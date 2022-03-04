@@ -1,21 +1,21 @@
 import 'shared_pref.dart';
 
-abstract class UILocale {
+abstract class localeUI {
   static String currentLocale = '';
 
-  static changeUILocale() async {
+  static changelocaleUI() async {
     currentLocale =
-        await MySharedPreferences.instance.getStringValue("UILocale");
+        await MySharedPreferences.instance.getStringValue("localeUI");
     currentLocale = currentLocale == 'ar' ? 'en' : 'ar';
 
     await MySharedPreferences.instance
-        .setStringValue("UILocale", currentLocale);
+        .setStringValue("localeUI", currentLocale);
     print(' LAnguge UI Changed to : $currentLocale ');
   }
 
-  static Future<String> getUILocale() async {
+  static Future<String> getlocaleUI() async {
     currentLocale =
-        await MySharedPreferences.instance.getStringValue("UILocale");
+        await MySharedPreferences.instance.getStringValue("localeUI");
     currentLocale = currentLocale == 'ar' ? 'en' : 'ar';
 
     print(' LAnguge UI     : $currentLocale ');

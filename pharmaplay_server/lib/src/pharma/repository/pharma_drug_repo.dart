@@ -48,7 +48,7 @@ Future<List<DrugRecord>> findDrugByParams(
     required Map<String, dynamic> params,
     required DB db,
     required String drugStore,
-    required String localUI}) async {
+    required String localeUI}) async {
   // String sql;
 
 //---- params to where condetion
@@ -64,20 +64,20 @@ Future<List<DrugRecord>> findDrugByParams(
   final String startFromRow = ((startFromPage - 1) * pageLength).toString();
   List<DrugRecord> resultDrugs = <DrugRecord>[];
   String sql = '''   SELECT drug."drugID",drug."drugNo",
-    drug."${localUI}__brandName" as "brandName",drug.caliber,
+    drug."${localeUI}__brandName" as "brandName",drug.caliber,
     drug."manufactoryID",manufactory."manufactoryID",
-    manufactory."${localUI}__manufactoryName" as "manufactoryName",  manufactory."manufactoryRating" ,
+    manufactory."${localeUI}__manufactoryName" as "manufactoryName",  manufactory."manufactoryRating" ,
     drug."chemicalDrugID", chemicalDrug."chemicalDrugID",
-    chemicalDrug."${localUI}__chemicalDrugName" as "chemicalDrugName",
+    chemicalDrug."${localeUI}__chemicalDrugName" as "chemicalDrugName",
     drug."genericDrugID",genericDrug."genericDrugID",
-    genericDrug."${localUI}__genericDrugName" as "genericDrugName",
+    genericDrug."${localeUI}__genericDrugName" as "genericDrugName",
     drug."dosageFormID",dosageForm."dosageFormID",
-    dosageForm."${localUI}__dosageForm" as  "dosageForm" ,
-    drug."drugClassID",drugClass."drugClassID",drugClass."${localUI}__drugClassName" as "drugClassName" ,
+    dosageForm."${localeUI}__dosageForm" as  "dosageForm" ,
+    drug."drugClassID",drugClass."drugClassID",drugClass."${localeUI}__drugClassName" as "drugClassName" ,
     drugClass."drugGroupID", drug."drugGroupID",drugGroup."drugGroupID", 
-    drugGroup."${localUI}__drugGroupName" as "drugGroupName",
+    drugGroup."${localeUI}__drugGroupName" as "drugGroupName",
     drug."drugFamilyID",drugFamily."drugFamilyID", drugFamily."drugClassID",
-    drugFamily."${localUI}__drugFamilyName" as "drugFamilyName", drug."licenseNumber",
+    drugFamily."${localeUI}__drugFamilyName" as "drugFamilyName", drug."licenseNumber",
     drug."licenseDate",drug."drugPrice",drug."drugRating"
     FROM pharmaplay.drug drug
     LEFT JOIN pharmaplay."manufactory" manufactory ON drug."manufactoryID" = manufactory."manufactoryID"
@@ -112,22 +112,22 @@ Future<List<DrugRecord>> findDrugByParams(
 
 //----------------------
 Future<DrugRecord> findDrugByID(
-    String drugID, DB db, String drugStore, String localUI) async {
+    String drugID, DB db, String drugStore, String localeUI) async {
   String sql = '''     SELECT drug."drugID",drug."drugNo",
-    drug."${localUI}__brandName" as "brandName",drug.caliber,
+    drug."${localeUI}__brandName" as "brandName",drug.caliber,
     drug."manufactoryID",manufactory."manufactoryID",
-    manufactory."${localUI}__manufactoryName" as "manufactoryName",  manufactory."manufactoryRating" ,
+    manufactory."${localeUI}__manufactoryName" as "manufactoryName",  manufactory."manufactoryRating" ,
     drug."chemicalDrugID", chemicalDrug."chemicalDrugID",
-    chemicalDrug."${localUI}__chemicalDrugName" as "chemicalDrugName",
+    chemicalDrug."${localeUI}__chemicalDrugName" as "chemicalDrugName",
     drug."genericDrugID",genericDrug."genericDrugID",
-    genericDrug."${localUI}__genericDrugName" as "genericDrugName",
+    genericDrug."${localeUI}__genericDrugName" as "genericDrugName",
     drug."dosageFormID",dosageForm."dosageFormID",
-    dosageForm."${localUI}__dosageForm" as  "dosageForm" ,
-    drug."drugClassID",drugClass."drugClassID",drugClass."${localUI}__drugClassName" as "drugClassName" ,
+    dosageForm."${localeUI}__dosageForm" as  "dosageForm" ,
+    drug."drugClassID",drugClass."drugClassID",drugClass."${localeUI}__drugClassName" as "drugClassName" ,
     drugClass."drugGroupID", drug."drugGroupID",drugGroup."drugGroupID",
-    drugGroup."${localUI}__drugGroupName" as "drugGroupName",
+    drugGroup."${localeUI}__drugGroupName" as "drugGroupName",
     drug."drugFamilyID",drugFamily."drugFamilyID", drugFamily."drugClassID",
-    drugFamily."${localUI}__drugFamilyName" as "drugFamilyName", drug."licenseNumber",
+    drugFamily."${localeUI}__drugFamilyName" as "drugFamilyName", drug."licenseNumber",
     drug."licenseDate",drug."drugPrice",  drug."drugRating"
     FROM pharmaplay.drug drug
     LEFT JOIN pharmaplay."manufactory" manufactory ON drug."manufactoryID" = manufactory."manufactoryID"
@@ -159,23 +159,23 @@ Future<DrugRecord> findDrugByID(
 ///---------------------
 
 Future<List<DrugRecord>> findDrugAll(
-    DB db, String drugStore, String localUI) async {
+    DB db, String drugStore, String localeUI) async {
   List<DrugRecord> resultDrugs = <DrugRecord>[];
   String sql = '''  SELECT drug."drugID",drug."drugNo",
-    drug."${localUI}__brandName" as "brandName",drug.caliber,
+    drug."${localeUI}__brandName" as "brandName",drug.caliber,
     drug."manufactoryID",manufactory."manufactoryID",
-    manufactory."${localUI}__manufactoryName" as "manufactoryName",  manufactory."manufactoryRating" ,
+    manufactory."${localeUI}__manufactoryName" as "manufactoryName",  manufactory."manufactoryRating" ,
     drug."chemicalDrugID", chemicalDrug."chemicalDrugID",
-    chemicalDrug."${localUI}__chemicalDrugName" as "chemicalDrugName",
+    chemicalDrug."${localeUI}__chemicalDrugName" as "chemicalDrugName",
     drug."genericDrugID",genericDrug."genericDrugID",
-    genericDrug."${localUI}__genericDrugName" as "genericDrugName",
+    genericDrug."${localeUI}__genericDrugName" as "genericDrugName",
     drug."dosageFormID",dosageForm."dosageFormID",
-    dosageForm."${localUI}__dosageForm" as  "dosageForm" ,
-    drug."drugClassID",drugClass."drugClassID",drugClass."${localUI}__drugClassName" as "drugClassName" ,
+    dosageForm."${localeUI}__dosageForm" as  "dosageForm" ,
+    drug."drugClassID",drugClass."drugClassID",drugClass."${localeUI}__drugClassName" as "drugClassName" ,
     drugClass."drugGroupID", drug."drugGroupID",drugGroup."drugGroupID",
-    drugGroup."${localUI}__drugGroupName" as "drugGroupName",
+    drugGroup."${localeUI}__drugGroupName" as "drugGroupName",
     drug."drugFamilyID",drugFamily."drugFamilyID", drugFamily."drugClassID",
-    drugFamily."${localUI}__drugFamilyName" as "drugFamilyName", drug."licenseNumber",
+    drugFamily."${localeUI}__drugFamilyName" as "drugFamilyName", drug."licenseNumber",
     drug."licenseDate",drug."drugPrice",drug."drugRating"
     FROM pharmaplay.drug drug
     LEFT JOIN pharmaplay."manufactory" manufactory ON drug."manufactoryID" = manufactory."manufactoryID"
@@ -215,24 +215,24 @@ Future<List<DrugRecord>> findDrugByPage(
     required String whereCond,
     required DB db,
     required String drugStore,
-    required String localUI}) async {
+    required String localeUI}) async {
   final String startFromRow = ((startFromPage - 1) * pageLength).toString();
   List<DrugRecord> resultDrugs = <DrugRecord>[];
   String sql = '''  SELECT drug."drugID",drug."drugNo",
-    drug."${localUI}__brandName" as "brandName",drug.caliber,
+    drug."${localeUI}__brandName" as "brandName",drug.caliber,
     drug."manufactoryID",manufactory."manufactoryID",
-    manufactory."${localUI}__manufactoryName" as "manufactoryName",  manufactory."manufactoryRating" ,
+    manufactory."${localeUI}__manufactoryName" as "manufactoryName",  manufactory."manufactoryRating" ,
     drug."chemicalDrugID", chemicalDrug."chemicalDrugID",
-    chemicalDrug."${localUI}__chemicalDrugName" as "chemicalDrugName",
+    chemicalDrug."${localeUI}__chemicalDrugName" as "chemicalDrugName",
     drug."genericDrugID",genericDrug."genericDrugID",
-    genericDrug."${localUI}__genericDrugName" as "genericDrugName",
+    genericDrug."${localeUI}__genericDrugName" as "genericDrugName",
     drug."dosageFormID",dosageForm."dosageFormID",
-    dosageForm."${localUI}__dosageForm" as  "dosageForm" ,
-    drug."drugClassID",drugClass."drugClassID",drugClass."${localUI}__drugClassName" as "drugClassName" ,
+    dosageForm."${localeUI}__dosageForm" as  "dosageForm" ,
+    drug."drugClassID",drugClass."drugClassID",drugClass."${localeUI}__drugClassName" as "drugClassName" ,
     drugClass."drugGroupID", drug."drugGroupID",drugGroup."drugGroupID",
-    drugGroup."${localUI}__drugGroupName" as "drugGroupName",
+    drugGroup."${localeUI}__drugGroupName" as "drugGroupName",
     drug."drugFamilyID",drugFamily."drugFamilyID", drugFamily."drugClassID",
-    drugFamily."${localUI}__drugFamilyName" as "drugFamilyName",
+    drugFamily."${localeUI}__drugFamilyName" as "drugFamilyName",
     drug."licenseNumber",drug."licenseDate",drug."drugPrice",drug."drugRating"
     FROM pharmaplay.drug drug
     LEFT JOIN pharmaplay."manufactory" manufactory ON drug."manufactoryID" = manufactory."manufactoryID"
@@ -275,24 +275,24 @@ Future<List<DrugRecord>> fuzzyFindDrugByPage(
     required String fuzzyCond,
     required DB db,
     required String drugStore,
-    required String localUI}) async {
+    required String localeUI}) async {
   final String startFromRow = ((startFromPage - 1) * pageLength).toString();
   List<DrugRecord> resultDrugs = <DrugRecord>[];
   String sql = '''  SELECT drug."drugID",drug."drugNo",
-    drug."${localUI}__brandName" as "brandName",drug.caliber,
+    drug."${localeUI}__brandName" as "brandName",drug.caliber,
     drug."manufactoryID",manufactory."manufactoryID",
-    manufactory."${localUI}__manufactoryName" as "manufactoryName",  manufactory."manufactoryRating" ,
+    manufactory."${localeUI}__manufactoryName" as "manufactoryName",  manufactory."manufactoryRating" ,
     drug."chemicalDrugID", chemicalDrug."chemicalDrugID",
-    chemicalDrug."${localUI}__chemicalDrugName" as "chemicalDrugName",
+    chemicalDrug."${localeUI}__chemicalDrugName" as "chemicalDrugName",
     drug."genericDrugID",genericDrug."genericDrugID",
-    genericDrug."${localUI}__genericDrugName" as "genericDrugName",
+    genericDrug."${localeUI}__genericDrugName" as "genericDrugName",
     drug."dosageFormID",dosageForm."dosageFormID",
-    dosageForm."${localUI}__dosageForm" as  "dosageForm" ,
-    drug."drugClassID",drugClass."drugClassID",drugClass."${localUI}__drugClassName" as "drugClassName" ,
+    dosageForm."${localeUI}__dosageForm" as  "dosageForm" ,
+    drug."drugClassID",drugClass."drugClassID",drugClass."${localeUI}__drugClassName" as "drugClassName" ,
     drugClass."drugGroupID", drug."drugGroupID",drugGroup."drugGroupID",
-    drugGroup."${localUI}__drugGroupName" as "drugGroupName",
+    drugGroup."${localeUI}__drugGroupName" as "drugGroupName",
     drug."drugFamilyID",drugFamily."drugFamilyID", drugFamily."drugClassID",
-    drugFamily."${localUI}__drugFamilyName" as "drugFamilyName", drug."licenseNumber",
+    drugFamily."${localeUI}__drugFamilyName" as "drugFamilyName", drug."licenseNumber",
     drug."licenseDate",drug."drugPrice",drug."drugRating" 
     FROM pharmaplay.drug drug
     LEFT JOIN pharmaplay."manufactory" manufactory ON drug."manufactoryID" = manufactory."manufactoryID"

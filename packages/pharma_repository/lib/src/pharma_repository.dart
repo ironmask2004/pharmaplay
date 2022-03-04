@@ -12,7 +12,7 @@ class PharmaRepository {
       {String? startFromPage,
       String? pageLength,
       String? orderByFields,
-      String? localUI,
+      String? localeUI,
       String? whereCond,
       String? serachValue,
       SearchType? searchType}) async {
@@ -54,7 +54,7 @@ class PharmaRepository {
       }
 
       _getDrugRecoredAllResponse = await apiGetDrugsSearch(
-          localUI: localUI,
+          localeUI: localeUI,
           startFromPage: startFromPage,
           pageLength: pageLength,
           orderByFields: orderByFields,
@@ -85,7 +85,7 @@ class PharmaRepository {
       {String? startFromPage,
       String? pageLength,
       String? orderByFields,
-      String? localUI,
+      String? localeUI,
       String? whereCond,
       String? serachValue,
       SearchType? searchType}) async {
@@ -127,7 +127,7 @@ class PharmaRepository {
       }
 
       _getDrugGroupAllResponse = await apiGetDrugGroupsSearch(
-          localUI: localUI,
+          localeUI: localeUI,
           startFromPage: startFromPage,
           pageLength: pageLength,
           orderByFields: orderByFields,

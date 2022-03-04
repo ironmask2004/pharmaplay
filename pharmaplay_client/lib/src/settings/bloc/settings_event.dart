@@ -9,12 +9,12 @@ abstract class SettingsEvent extends Equatable {
 }
 
 class UILocalChanged extends SettingsEvent {
-  const UILocalChanged(this.uiLocale);
+  const UILocalChanged(this.localeUI);
 
-  final Locale uiLocale;
+  final Locale localeUI;
 
   @override
-  List<Object> get props => [uiLocale];
+  List<Object> get props => [localeUI];
 }
 
 class UIThemeModeChanged extends SettingsEvent {
@@ -28,6 +28,6 @@ class UIThemeModeChanged extends SettingsEvent {
 
 class SettingsInitialRequested extends SettingsEvent {}
 
-class ReloadUILocaleRequsted extends SettingsEvent {}
+class ReloadlocaleUIRequsted extends SettingsEvent {}
 
 class ReloadUIThemeModeRequsted extends SettingsEvent {}

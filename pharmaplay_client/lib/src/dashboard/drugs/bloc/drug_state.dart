@@ -7,7 +7,7 @@ class DrugState extends Equatable {
       {this.status = DrugStatus.empty,
       this.drugs = const [],
       this.stateMsg = '',
-      this.localUI = 'en',
+      this.localeUI = 'en',
       this.hasReachedMax = false,
       this.startFrompage = 1,
       this.pageLength = 16,
@@ -18,7 +18,7 @@ class DrugState extends Equatable {
       this.orderByFields = ''});
 
   final DrugStatus status;
-  final String localUI;
+  final String localeUI;
   final String whereCond;
   final bool hasReachedMax;
   final List<DrugRecord> drugs;
@@ -34,7 +34,7 @@ class DrugState extends Equatable {
   List<Object> get props => [
         status,
         drugs,
-        localUI,
+        localeUI,
         whereCond,
         hasReachedMax,
         startFrompage,
@@ -48,7 +48,7 @@ class DrugState extends Equatable {
 
   DrugState copyWith(
       {DrugStatus? status,
-      String? localUI,
+      String? localeUI,
       String? whereCond,
       bool? hasReachedMax,
       List<DrugRecord>? drugs,
@@ -61,7 +61,7 @@ class DrugState extends Equatable {
       String? orderByFields}) {
     return DrugState(
         status: status ?? this.status,
-        localUI: localUI ?? this.localUI,
+        localeUI: localeUI ?? this.localeUI,
         whereCond: whereCond ?? this.whereCond,
         hasReachedMax: hasReachedMax ?? this.hasReachedMax,
         drugs: drugs ?? this.drugs,

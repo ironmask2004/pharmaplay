@@ -9,11 +9,11 @@ Future<List<DrugGroup>> getDrugGrougSearch(
     required String whereCond,
     required DB db,
     required String drugStore,
-    required String localUI}) async {
+    required String localeUI}) async {
   final String startFromRow = ((startFromPage - 1) * pageLength).toString();
   List<DrugGroup> resultDrugGroup = <DrugGroup>[];
   String sql = '''SELECT    drugGroup."drugGroupID" ,
-      drugGroup."${localUI}__drugGroupName" as "drugGroupName"
+      drugGroup."${localeUI}__drugGroupName" as "drugGroupName"
       FROM  pharmaplay."drugGroup" drugGroup
       $whereCond
     ORDER BY   $orderByfields

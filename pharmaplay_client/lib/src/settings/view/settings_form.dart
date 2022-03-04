@@ -18,7 +18,7 @@ class SettingsForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final SFormsStyle style = SFormsStyle.defaultTemplate;
-    Locale newLocale = context.read<SettingsBloc1>().state.uiLocale;
+    Locale newLocale = context.read<SettingsBloc1>().state.localeUI;
     ThemeMode newThemeMode = context.read<SettingsBloc1>().state.uiThemeMode;
     return BlocBuilder<SettingsBloc1, SettingsState>(
       buildWhen: (previousState, currentState) => previousState != currentState,
@@ -63,12 +63,12 @@ class SettingsForm extends StatelessWidget {
                           ),
                           DropdownButton<Locale>(
                             // Read the selected themeMode from the controller
-                            value: context.read<SettingsBloc1>().state.uiLocale,
+                            value: context.read<SettingsBloc1>().state.localeUI,
                             // Call the updateThemeMode method any time the user selects a theme.
                             onChanged: (value) {
                               print(value);
                               newLocale = value ??
-                                  context.read<SettingsBloc1>().state.uiLocale;
+                                  context.read<SettingsBloc1>().state.localeUI;
                               context
                                   .read<SettingsBloc1>()
                                   .add(UILocalChanged(newLocale));

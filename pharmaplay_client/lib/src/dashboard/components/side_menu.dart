@@ -63,7 +63,7 @@ class SideMenu extends StatelessWidget {
             svgSrc: "assets/icons/menu_setting.svg",
             press: () {
               Locale currentLocale =
-                  context.read<DashBoardBloc>().state.uiLocale;
+                  context.read<DashBoardBloc>().state.localeUI;
               print('Chaneg Language pressed + current : $currentLocale');
               context.read<DashBoardBloc>().add(UILocalChanged(
                   currentLocale.languageCode == 'ar'

@@ -1,6 +1,10 @@
+import 'dart:async';
+
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pharma_repository/pharma_repository.dart';
 import 'package:dartz/dartz.dart' as dartz;
+import 'package:pharmaplay_client/src/dashboard/bloc/dashboard_bloc.dart';
 import 'package:stream_transform/stream_transform.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 
@@ -16,11 +20,15 @@ EventTransformer<E> throttleDroppable<E>(Duration duration) {
 }
 
 class DrugGroupBloc extends Bloc<DrugGroupEvent, DrugGroupState> {
+  final PharmaRepository _pharmaRepository;
+  late StreamSubscription<DashBoardState> dashBoardStateubscription;
+
   DrugGroupBloc({
+    required DashBoardBloc dashBoardBlod,
     required PharmaRepository pharmaRepository,
   })  : _pharmaRepository = pharmaRepository,
         super(const DrugGroupState()) {
-    on<DrugGroupLocalUIChanged>(_onDrugGroupLocalUIChanged);
+    on<DrugGrouplocaleUIChanged>(_onDrugGrouplocaleUIChanged);
     on<DrugGroupsSearched>(
       _onDrugGroupsSearched,
       transformer: throttleDroppable(throttleDuration),
@@ -30,23 +38,30 @@ class DrugGroupBloc extends Bloc<DrugGroupEvent, DrugGroupState> {
       transformer: throttleDroppable(throttleDuration),
     );
 
-    // on<RoutToSignUpPageSubmitted>(_onRoutToSignUpPageSubmitted);
+    dashBoardStateubscription = dashBoardBlod.stream.listen((state) {
+      print(' ----------------- dashBoardStateubscription  ' +
+          state.localeUI.toString());
+      add(DrugGrouplocaleUIChanged(state.localeUI.toString()));
+    });
+  }
+  @override
+  Future<void> close() {
+    dashBoardStateubscription.cancel();
+    //_pharmaRepository.dispose();
+    return super.close();
   }
 
-  final PharmaRepository _pharmaRepository;
-  // String _localUI = 'en';
-
-  void _onDrugGroupLocalUIChanged(
-    DrugGroupLocalUIChanged event,
+  void _onDrugGrouplocaleUIChanged(
+    DrugGrouplocaleUIChanged event,
     Emitter<DrugGroupState> emit,
   ) {
     //print(SLang.current.onforgotemailchanged);
 
     print(
-        '_onDrugGroupLocalUIChanged ======================= ${event.localUI},   ');
+        '_onDrugGrouplocaleUIChanged ======================= ${event.localeUI},   ');
 
     emit(state.copyWith(
-      localUI: event.localUI,
+      localeUI: event.localeUI,
       //status: DrugGroupStatus.success,
     ));
     //add(const DrugGroupGetAll());
@@ -57,7 +72,7 @@ class DrugGroupBloc extends Bloc<DrugGroupEvent, DrugGroupState> {
     Emitter<DrugGroupState> emit,
   ) async {
     print(
-        '_onDrugGroupsSearched LOCALEUIIIIIIIIIIIIIIIIIIIIIIIIIII :  ${state.localUI} + WhewrCond:::: ${event.whereCond} ');
+        '_onDrugGroupsSearched LOCALEUIIIIIIIIIIIIIIIIIIIIIIIIIII :  ${state.localeUI} + WhewrCond:::: ${event.whereCond} ');
 
     final dartz.Either<List<DrugGroup>, ApiError> _repoResponse;
     try {
@@ -66,7 +81,7 @@ class DrugGroupBloc extends Bloc<DrugGroupEvent, DrugGroupState> {
           startFromPage: "1",
           pageLength: state.pageLength.toString(),
           orderByFields: event.orderByFields ?? '',
-          localUI: state.localUI,
+          localeUI: state.localeUI,
           whereCond: event.whereCond ?? '',
           serachValue: event.serachValue ?? '',
           searchType: event.searchType ?? SearchType.none);
@@ -115,7 +130,7 @@ class DrugGroupBloc extends Bloc<DrugGroupEvent, DrugGroupState> {
           startFromPage: (state.currentPage + 1).toString(),
           pageLength: state.pageLength.toString(),
           orderByFields: state.orderByFields,
-          localUI: state.localUI,
+          localeUI: state.localeUI,
           whereCond: state.whereCond,
           serachValue: state.serachValue,
           searchType: state.searchType);
@@ -152,7 +167,7 @@ class DrugGroupBloc extends Bloc<DrugGroupEvent, DrugGroupState> {
     Emitter<DrugGroupState> emit,
   ) async {
     print(
-        '_onDrugGroupsSearched LOCALEUIIIIIIIIIIIIIIIIIIIIIIIIIII :  ${state.localUI} + WhewrCond:::: ${event.whereCond} ');
+        '_onDrugGroupsSearched LOCALEUIIIIIIIIIIIIIIIIIIIIIIIIIII :  ${state.localeUI} + WhewrCond:::: ${event.whereCond} ');
     // print(state.email.value + ' password: ' + state.password.value);
     // _WereCond =
     //    ''' "wherecond": " Where similarity (drug.\\"ar__drugName\\",'${event.whereCond}' )  > 0.2  OR similarity (drug.\\"en__drugName\\",'${event.whereCond}' )  > 0.2  "  ''';
@@ -170,7 +185,7 @@ class DrugGroupBloc extends Bloc<DrugGroupEvent, DrugGroupState> {
     try {
       //TokenPair _tokenInfo;
       _repoResponse = await _pharmaRepository.getDrugGroupAll(
-          localUI: state.localUI, whereCond: _wereCond);
+          localeUI: state.localeUI, whereCond: _wereCond);
 
       _repoResponse.fold((left) {
         print('left from PAi get back');

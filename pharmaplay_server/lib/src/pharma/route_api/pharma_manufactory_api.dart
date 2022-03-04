@@ -19,11 +19,11 @@ class PharmaManufactoryApi {
         final Map<String, dynamic> listpagesparms = json.decode(payload) ?? {};
         print(listpagesparms);
 
-        final String localUI = listpagesparms['localUI'] ?? 'en';
+        final String localeUI = listpagesparms['localeUI'] ?? 'en';
         final String whereCond = listpagesparms['wherecond'] ?? ' ';
 
         drugGroupInfo = await getManufactoryAll(
-            db: db, whereCond: whereCond, localUI: localUI);
+            db: db, whereCond: whereCond, localeUI: localeUI);
 
         // print("founded_drug------:" + drugInfo.toString());
       } catch (err) {

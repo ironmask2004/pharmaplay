@@ -3,13 +3,13 @@ import 'package:pharmaplay_server/pharmaplay_server.dart';
 ///---------------------
 
 Future<List<Manufactory>> getManufactoryAll(
-    {required DB db, String whereCond = ' ', required String localUI}) async {
+    {required DB db, String whereCond = ' ', required String localeUI}) async {
   List<Manufactory> resultManufactory = <Manufactory>[];
   String sql = '''SELECT    manufactory."manufactoryID" ,
-      manufactory."${localUI}__manufactoryName" as "manufactoryName" ,  manufactory."manufactoryRating"
+      manufactory."${localeUI}__manufactoryName" as "manufactoryName" ,  manufactory."manufactoryRating"
       FROM  pharmaplay."manufactory" manufactory
       $whereCond
-      ORDER BY   manufactory."${localUI}__manufactoryName"
+      ORDER BY   manufactory."${localeUI}__manufactoryName"
     ''';
 
   dynamic resultSet = await db.query(sql);

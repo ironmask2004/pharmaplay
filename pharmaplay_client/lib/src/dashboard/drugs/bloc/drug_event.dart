@@ -7,13 +7,13 @@ abstract class DrugEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class DrugLocalUIChanged extends DrugEvent {
-  const DrugLocalUIChanged(this.localUI);
+class DruglocaleUIChanged extends DrugEvent {
+  const DruglocaleUIChanged(this.localeUI);
 
-  final String localUI;
+  final String localeUI;
 
   @override
-  List<Object> get props => [localUI];
+  List<Object> get props => [localeUI];
 }
 
 class DrugsScrolledd extends DrugEvent {
@@ -22,7 +22,7 @@ class DrugsScrolledd extends DrugEvent {
 
 class DrugsSearched extends DrugEvent {
   final DrugStatus? drugStatus;
-  final String? localUI;
+  final String? localeUI;
   final String? whereCond;
   final int? startFrompage;
   final int? pageLength;
@@ -31,7 +31,7 @@ class DrugsSearched extends DrugEvent {
   final String? serachValue;
   const DrugsSearched({
     this.drugStatus = DrugStatus.initializing,
-    this.localUI = 'en',
+    this.localeUI = 'en',
     this.whereCond = '',
     this.startFrompage = 1,
     this.pageLength = 10,
@@ -43,7 +43,7 @@ class DrugsSearched extends DrugEvent {
   @override
   List<Object> get props => [
         drugStatus!,
-        localUI!,
+        localeUI!,
         whereCond!,
         startFrompage!,
         pageLength!,

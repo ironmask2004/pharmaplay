@@ -3,33 +3,33 @@ part of 'settings_bloc.dart';
 @immutable
 class SettingsState extends Equatable {
   const SettingsState(
-      {this.uiLocale = const Locale('en'),
+      {this.localeUI = const Locale('en'),
       this.uiThemeMode = ThemeMode.system});
 
-  final Locale uiLocale;
+  final Locale localeUI;
   final ThemeMode uiThemeMode;
 
   SettingsState copyWith({
-    Locale? uiLocale,
+    Locale? localeUI,
     ThemeMode? uiThemeMode,
   }) {
     return SettingsState(
-        uiLocale: uiLocale ?? this.uiLocale,
+        localeUI: localeUI ?? this.localeUI,
         uiThemeMode: uiThemeMode ?? this.uiThemeMode);
   }
 
   @override
   List<Object> get props => [
-        uiLocale,
+        localeUI,
         uiThemeMode,
       ];
 }
 
 class SettingsInitial extends SettingsState {}
 
-/*class SettingsStateUILocaleChanged extends SettingsState {
-  const SettingsStateUILocaleChanged(Locale uiLocale)
-      : super(uiLocale: uiLocale);
+/*class SettingsStatelocaleUIChanged extends SettingsState {
+  const SettingsStatelocaleUIChanged(Locale localeUI)
+      : super(localeUI: localeUI);
 }
 
 class SettingsStateUIThemeModeChanged extends SettingsState {

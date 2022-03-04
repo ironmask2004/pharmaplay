@@ -29,8 +29,16 @@ class MyApp extends StatelessWidget {
   final PharmaRepository pharmaRepository;
   @override
   Widget build(BuildContext context) {
-    return RepositoryProvider.value(
-        value: authenticationRepository,
+    return MultiRepositoryProvider(
+        providers: [
+          RepositoryProvider<AuthenticationRepository>(create: (context) {
+            return authenticationRepository;
+          }),
+          RepositoryProvider<UserRepository>(
+              create: (context) => userRepository),
+          RepositoryProvider<PharmaRepository>(
+              create: (context) => pharmaRepository),
+        ],
         child: MultiBlocProvider(
           providers: [
             BlocProvider(
@@ -40,16 +48,22 @@ class MyApp extends StatelessWidget {
               )..add(AuthenticationLandingRequested()),
             ),
             BlocProvider<DashBoardBloc>(
-              create: (_) => DashBoardBloc()
-                // ..add(ReloadUILocaleRequsted())
-                ..add(DashBoardInitialRequested()),
+              create: (context) => DashBoardBloc()
+                // ..add(ReloadlocaleUIRequsted())
+                ..add(DashBoardInitialRequested())
+                ..add(NotifyState()),
             ),
             BlocProvider(
-              create: (_) => DrugGroupBloc(pharmaRepository: pharmaRepository)
+              create: (context) => DrugGroupBloc(
+                  dashBoardBlod: context.read<DashBoardBloc>(),
+                  pharmaRepository: context.read<PharmaRepository>())
                 ..add(const DrugGroupsSearched()),
             ),
             BlocProvider(
-              create: (_) => DrugBloc(pharmaRepository: pharmaRepository)
+              create: (context) => DrugBloc(
+                  dashBoardBlod:
+                      BlocProvider.of(context), //context.read<DashBoardBloc>(),
+                  pharmaRepository: context.read<PharmaRepository>())
                 ..add(const DrugsSearched()),
             ), //
             //  BlocProvider(
@@ -115,7 +129,7 @@ class AppView extends StatelessWidget {
             // themeMode: dashboardState.uiThemeMode,
             // themeMode: ThemeMode.system,
             locale:
-                dashboardState.uiLocale, //getUIlocale(context),Locale('ar'),
+                dashboardState.localeUI, //getlocaleUI(context),Locale('ar'),
             onGenerateTitle: (BuildContext context) =>
                 SLang.of(context).appTitle,
 
@@ -186,7 +200,7 @@ class AppView extends StatelessWidget {
                 BlocListener<DashBoardBloc, DashBoardState>(
                   listener: (context, state) {
                     print('Listner Lisner !!!!!!!!!' +
-                        state.uiLocale.languageCode);
+                        state.localeUI.languageCode);
                   },
                 ),
               ], child: child!); //const MainScreen());

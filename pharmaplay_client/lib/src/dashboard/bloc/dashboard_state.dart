@@ -3,7 +3,7 @@ part of 'dashboard_bloc.dart';
 @immutable
 class DashBoardState extends Equatable {
   const DashBoardState(
-      {this.uiLocale = const Locale('en'),
+      {this.localeUI = const Locale('en'),
       this.uiThemeMode = ThemeMode.system,
       this.primaryColor = const Color(0xFF2697FF),
       this.secondaryColor = const Color(0xFF2A2D3E),
@@ -14,7 +14,7 @@ class DashBoardState extends Equatable {
   //static final GlobalKey<ScaffoldState> scaffoldKey =       GlobalKey<ScaffoldState>();
 
   //final GlobalKey<ScaffoldState> scaffoldKey;
-  final Locale uiLocale;
+  final Locale localeUI;
   final String headerSerachField;
   final ThemeMode uiThemeMode;
   final Color primaryColor;
@@ -36,7 +36,7 @@ class DashBoardState extends Equatable {
 */
 
   DashBoardState copyWith(
-      {Locale? uiLocale,
+      {Locale? localeUI,
       ThemeMode? uiThemeMode,
       Color? primaryColor,
       Color? secondaryColor,
@@ -44,7 +44,7 @@ class DashBoardState extends Equatable {
       Color? fontbodyColor,
       String? headerSerachField}) {
     return DashBoardState(
-        uiLocale: uiLocale ?? this.uiLocale,
+        localeUI: localeUI ?? this.localeUI,
         uiThemeMode: uiThemeMode ?? this.uiThemeMode,
         primaryColor: primaryColor ?? this.primaryColor,
         secondaryColor: secondaryColor ?? this.secondaryColor,
@@ -55,7 +55,7 @@ class DashBoardState extends Equatable {
 
   @override
   List<Object> get props => [
-        uiLocale,
+        localeUI,
         uiThemeMode,
         primaryColor,
         secondaryColor,
@@ -70,9 +70,9 @@ class DashBoardInitial extends DashBoardState {
 }
 
 /*
-class DashBoardStateuiLocaleChanged extends DashBoardState {
-  const DashBoardStateuiLocaleChanged(Locale uiLocale)
-      : super(uiLocale: uiLocale);
+class DashBoardStatelocaleUIChanged extends DashBoardState {
+  const DashBoardStatelocaleUIChanged(Locale localeUI)
+      : super(localeUI: localeUI);
 }
 
 class DashBoardStateUIThemeModeChanged extends DashBoardState {

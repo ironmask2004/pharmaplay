@@ -37,7 +37,7 @@ class App extends StatelessWidget {
             ),
             BlocProvider<DashBoardBloc>(
               create: (_) => DashBoardBloc()
-                // ..add(ReloadUILocaleRequsted())
+                // ..add(ReloadlocaleUIRequsted())
                 ..add(DashBoardInitialRequested()),
             ),
             /* BlocProvider<BlocC>(
@@ -86,7 +86,7 @@ class AppView extends StatelessWidget {
             theme: ThemeData(),
             darkTheme: ThemeData.dark(),
             themeMode: dashboardState.uiThemeMode,
-            locale: dashboardState.uiLocale, //getUIlocale(context),
+            locale: dashboardState.localeUI, //getlocaleUI(context),
             //Locale('ar'),
 
             onGenerateTitle: (BuildContext context) =>
@@ -158,7 +158,7 @@ class AppView extends StatelessWidget {
                 BlocListener<DashBoardBloc, DashBoardState>(
                   listener: (context, state) {
                     print('Listner Lisner !!!!!!!!!' +
-                        state.uiLocale.languageCode);
+                        state.localeUI.languageCode);
                   },
                 ),
               ], child: child!);
@@ -168,10 +168,10 @@ class AppView extends StatelessWidget {
         });
   }
 
-  Locale getUIlocale(BuildContext context) {
+  Locale getlocaleUI(BuildContext context) {
     print('view get local ' +
-        context.read<DashBoardBloc>().state.uiLocale.languageCode);
-    return context.read<DashBoardBloc>().state.uiLocale;
+        context.read<DashBoardBloc>().state.localeUI.languageCode);
+    return context.read<DashBoardBloc>().state.localeUI;
   }
 }
 */
