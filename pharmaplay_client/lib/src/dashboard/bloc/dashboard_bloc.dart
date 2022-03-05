@@ -57,6 +57,7 @@ class DashBoardBloc extends Bloc<DashBoardEvent, DashBoardState> {
     DashBoardInitialRequested event,
     Emitter<DashBoardState> emit,
   ) async {
+    await Future.delayed(const Duration(seconds: 5));
     ThemeMode currentThemeMode;
     String savedThemeMode =
         await MySharedPreferences.instance.getStringValue("ThemeMode");

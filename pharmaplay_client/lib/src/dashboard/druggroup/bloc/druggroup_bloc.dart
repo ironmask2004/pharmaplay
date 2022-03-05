@@ -60,7 +60,7 @@ class DrugGroupBloc extends Bloc<DrugGroupEvent, DrugGroupState> {
     //print(SLang.current.onforgotemailchanged);
 
     print(
-        '_onDrugGrouplocaleUIChanged ======================= ${event.localeUI},   ');
+        '_onDrugGrouplocaleUIChanged ----------========== ${event.localeUI},   ');
 
     emit(state.copyWith(
       localeUI: event.localeUI,
