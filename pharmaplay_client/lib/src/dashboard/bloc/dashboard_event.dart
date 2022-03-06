@@ -34,6 +34,8 @@ class ReloadlocaleUIRequsted extends DashBoardEvent {}
 
 class ReloadUIThemeModeRequsted extends DashBoardEvent {}
 
+class InitSubBlocs extends DashBoardEvent {}
+
 class SideMenuClicked extends DashBoardEvent {
   final BuildContext context;
 

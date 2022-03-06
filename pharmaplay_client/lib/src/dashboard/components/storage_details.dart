@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:pharmaplay_client/src/dashboard/dashboard.dart';
 import 'package:pharmaplay_client/src/utlites/sforms_style.dart';
 
-import 'chart.dart';
 import 'storage_info_card.dart';
 
 class StarageDetails extends StatelessWidget {
@@ -31,7 +30,7 @@ class StarageDetails extends StatelessWidget {
                 ),
               ),
               SizedBox(height: defaultPadding),
-              Chart(),
+              // Chart(),
               StorageInfoCard(
                 svgSrc: "assets/icons/Documents.svg",
                 title: "Documents Files",

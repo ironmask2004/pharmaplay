@@ -26,17 +26,15 @@ class DashBoardPage extends StatelessWidget {
       body: MultiBlocProvider(
         providers: [
           BlocProvider(
-            create: (context) => DrugGroupBloc(
-                dashBoardBlod: context.read<DashBoardBloc>(),
-                pharmaRepository: context.read<PharmaRepository>())
-              ..add(const DrugGroupsSearched()),
-          ),
+              create: (context) => DrugGroupBloc(
+                  dashBoardBlod: context.read<DashBoardBloc>(),
+                  pharmaRepository: context.read<PharmaRepository>())
+                ..add(DrugGroupInitialized())),
           BlocProvider(
             create: (context) => DrugBloc(
                 dashBoardBlod:
                     BlocProvider.of(context), //context.read<DashBoardBloc>(),
-                pharmaRepository: context.read<PharmaRepository>())
-              ..add(const DrugsSearched()),
+                pharmaRepository: context.read<PharmaRepository>()),
           ),
         ],
         child: SafeArea(

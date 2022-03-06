@@ -28,7 +28,9 @@ class DrugGroupBloc extends Bloc<DrugGroupEvent, DrugGroupState> {
     required PharmaRepository pharmaRepository,
   })  : _pharmaRepository = pharmaRepository,
         super(const DrugGroupState()) {
+    //Future.delayed(const Duration(seconds: 15));
     on<DrugGrouplocaleUIChanged>(_onDrugGrouplocaleUIChanged);
+    on<DrugGroupInitialized>(_onDrugGroupInitialized);
     on<DrugGroupsSearched>(
       _onDrugGroupsSearched,
       transformer: throttleDroppable(throttleDuration),
@@ -39,10 +41,21 @@ class DrugGroupBloc extends Bloc<DrugGroupEvent, DrugGroupState> {
     );
 
     dashBoardStateubscription = dashBoardBlod.stream.listen((state) {
+      print(' -----------------    dashBoardStateubscription  ' +
+          state.toString());
+
       if (state.status == 'localeUIChanged') {
-        print(' -----------------  يقعل dashBoardStateubscription  ' +
+        print(' -----------------   druggroup dashBoardStateubscription  ' +
             state.localeUI.toString());
         add(DrugGrouplocaleUIChanged(state.localeUI.toString()));
+      }
+
+      if (state.status == 'InitSubBlocs') {
+        print(' ------------druggroup-----    InitSubBlocs  ' +
+            state.localeUI.toString());
+        add(DrugGroupsSearched(
+            druggroupStatus: DrugGroupStatus.initializing,
+            localeUI: state.localeUI.toString()));
       }
     });
   }
@@ -69,12 +82,28 @@ class DrugGroupBloc extends Bloc<DrugGroupEvent, DrugGroupState> {
     //add(const DrugGroupGetAll());
   }
 
+  void _onDrugGroupInitialized(
+    DrugGroupInitialized event,
+    Emitter<DrugGroupState> emit,
+  ) async {
+    //print(SLang.current.onforgotemailchanged);
+
+    print('_onDrugGroupInitialized ----------==========  ${state.localeUI}');
+
+    emit(state.copyWith(
+      status: DrugGroupStatus.initializing,
+      // localeUI: event.localeUI,
+      //status: DrugGroupStatus.success,
+    ));
+    //add(const DrugGroupGetAll());
+  }
+
   void _onDrugGroupsSearched(
     DrugGroupsSearched event,
     Emitter<DrugGroupState> emit,
   ) async {
     print(
-        '_onDrugGroupsSearched LOCALEUIIIIIIIIIIIIIIIIIIIIIIIIIII :  ${state.localeUI} + WhewrCond:::: ${event.whereCond} ');
+        '_onDrugGroupsSearched ------ LOCALEUIIIIIIIIIIIIIIIIIIIIIIIIIII :  ${state.localeUI} + WhewrCond:::: ${event.whereCond} ');
 
     final dartz.Either<List<DrugGroup>, ApiError> _repoResponse;
     try {

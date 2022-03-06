@@ -16,6 +16,13 @@ class DrugGrouplocaleUIChanged extends DrugGroupEvent {
   List<Object> get props => [localeUI];
 }
 
+class DrugGroupInitialized extends DrugGroupEvent {
+  const DrugGroupInitialized();
+
+  @override
+  List<Object> get props => [];
+}
+
 class DrugGroupsScrolledd extends DrugGroupEvent {
   const DrugGroupsScrolledd();
 }

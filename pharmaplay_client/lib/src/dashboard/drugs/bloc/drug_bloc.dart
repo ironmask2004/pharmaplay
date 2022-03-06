@@ -45,6 +45,13 @@ class DrugBloc extends Bloc<DrugEvent, DrugState> {
             state.localeUI.toString());
         add(DruglocaleUIChanged(state.localeUI.toString()));
       }
+      if (state.status == 'InitSubBlocs') {
+        print(' ------------druggroup-----    InitSubBlocs  ' +
+            state.localeUI.toString());
+        add(DrugsSearched(
+            drugStatus: DrugStatus.initializing,
+            localeUI: state.localeUI.toString()));
+      }
     });
   }
   void _onDruglocaleUIChanged(

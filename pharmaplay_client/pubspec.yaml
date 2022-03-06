@@ -42,7 +42,6 @@ dev_dependencies:
   dotenv: ^3.0.0
   easy_infinite_scroll: ^1.0.0
   equatable: ^2.0.3
-  fl_chart: ^0.45.0
   flutter_bloc: ^8.0.1
   flutter_lints: ^1.0.4
   flutter_rating_bar: ^4.0.0

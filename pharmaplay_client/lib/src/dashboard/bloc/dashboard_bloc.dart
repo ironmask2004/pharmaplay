@@ -21,6 +21,7 @@ class DashBoardBloc extends Bloc<DashBoardEvent, DashBoardState> {
     on<ReloadUIThemeModeRequsted>(_onReloadUIThemeModeRequsted);
     on<HeaderSerachFieldChanged>(_onHeaderSerachFieldChanged);
     on<HeaderSerachSubmitted>(_onHeaderSerachSubmitted);
+    on<InitSubBlocs>(_onInitSubBlocs);
   }
 
   Future<void> _onSideMenuClicked(
@@ -57,7 +58,6 @@ class DashBoardBloc extends Bloc<DashBoardEvent, DashBoardState> {
     DashBoardInitialRequested event,
     Emitter<DashBoardState> emit,
   ) async {
-    await Future.delayed(const Duration(seconds: 5));
     ThemeMode currentThemeMode;
     String savedThemeMode =
         await MySharedPreferences.instance.getStringValue("ThemeMode");
@@ -86,7 +86,7 @@ class DashBoardBloc extends Bloc<DashBoardEvent, DashBoardState> {
 
     secondaryColor = secondaryColor != Color(0x00000000)
         ? secondaryColor
-        : const Color(0xFF2A2D3E);
+        : const Color(0xFFA0CFFC);
 
     bgColor = bgColor != Color(0x00000000) ? bgColor : const Color(0xFF212332);
 
@@ -124,11 +124,22 @@ class DashBoardBloc extends Bloc<DashBoardEvent, DashBoardState> {
     print('emit DashBoardStatelocaleUIChanged ' + currentLocale);
     // emit(DashBoardStatelocaleUIChanged(
     //    Locale(currentLocale == 'ar' ? 'ar' : 'en')));
+    await Future.delayed(Duration(seconds: 1));
     emit(state.copyWith(
         status: 'localeUIChanged',
         localeUI: Locale(currentLocale == 'ar' ? 'ar' : 'en')));
     print(
         ' -----------------  state localeUI : ' + state.localeUI.languageCode);
+
+    add(InitSubBlocs());
+  }
+
+  void _onInitSubBlocs(
+    InitSubBlocs event,
+    Emitter<DashBoardState> emit,
+  ) async {
+    print('_onInitSubBlocs');
+    emit(state.copyWith(status: 'InitSubBlocs', localeUI: state.localeUI));
   }
 
   /// Loads the User's preferred ThemeMode from local or remote storage.
@@ -267,10 +278,10 @@ class DashBoardBloc extends Bloc<DashBoardEvent, DashBoardState> {
               Color(0xFF294966).value.toString() +
               int.parse(Color(0xFF294966).value.toString()).toString());
 
+          await MySharedPreferences.instance.setIntegerValue(
+              "primaryColor", Color.fromARGB(255, 98, 164, 225).value);
           await MySharedPreferences.instance
-              .setIntegerValue("primaryColor", Color(0xFF294966).value);
-          await MySharedPreferences.instance
-              .setIntegerValue("secondaryColor", Color(0xFFCDC8FF).value);
+              .setIntegerValue("secondaryColor", Color(0xFFA0CFFC).value);
           await MySharedPreferences.instance
               .setIntegerValue("bgColor", Color(0xFFCDE1FF).value);
           await MySharedPreferences.instance
@@ -280,7 +291,7 @@ class DashBoardBloc extends Bloc<DashBoardEvent, DashBoardState> {
               status: 'UIThemeModeChanged',
               uiThemeMode: event.uiThemeMode,
               primaryColor: Color(0xFF294966),
-              secondaryColor: Color(0xFFCDC8FF),
+              secondaryColor: Color(0xFFA0CFFC),
               bgColor: Color(0xFFCDE1FF),
               fontbodyColor: Color(0xFF020D18)));
         }
