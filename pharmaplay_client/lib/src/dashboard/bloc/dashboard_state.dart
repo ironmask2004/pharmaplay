@@ -24,19 +24,6 @@ class DashBoardState extends Equatable {
   final Color fontbodyColor;
   final String status;
 
-  /*
-   primaryColor = Color(0xFF2697FF);
-   secondaryColor = Color(0xFF2A2D3E);
-   bgColor = Color(0xFF212332);
-   fontbodyColor = Color.fromARGB(255, 51, 144, 236);
-
- primaryColor = Color.fromARGB(255, 41, 73, 102);
- secondaryColor = Color.fromARGB(255, 205, 200, 255);
- bgColor = Color.fromARGB(255, 205, 225, 255);
- fontbodyColor = Color.fromARGB(255, 2, 13, 24);
-
-*/
-
   DashBoardState copyWith(
       {String? status,
       Locale? localeUI,
