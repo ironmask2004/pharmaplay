@@ -84,7 +84,10 @@ class DashBoardBloc extends Bloc<DashBoardEvent, DashBoardState> {
     print(
         ' -----------------  state localeUI : ' + state.localeUI.languageCode);
 
+    await Future.delayed(const Duration(seconds: 1));
+    print('Waitnig 1 Seconds --------------------------------------');
     add(InitSubBlocs());
+    print('Waitnig 1 Seconds ----------------Done----------------------');
   }
 
   void _onInitSubBlocs(
@@ -133,6 +136,10 @@ class DashBoardBloc extends Bloc<DashBoardEvent, DashBoardState> {
     try {
       print('_onHeaderSerachSubmitted headerSerachField:====' +
           state.headerSerachField);
+      emit(state.copyWith(
+        status: 'HeaderSerachSubmitted',
+        headerSerachField: state.headerSerachField,
+      ));
     } catch (err) {
       print('Error connectiing to server ' + err.toString());
       rethrow;

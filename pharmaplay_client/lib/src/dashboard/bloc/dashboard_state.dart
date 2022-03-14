@@ -10,7 +10,8 @@ class DashBoardState extends Equatable {
       this.secondaryColor = const Color(0xFF2A2D3E),
       this.bgColor = const Color(0xFF212332),
       this.fontbodyColor = const Color(0xFF3390EC),
-      this.headerSerachField = ''});
+      this.headerSerachField = '',
+      this.headSearchFilterApplied = false});
 
   //static final GlobalKey<ScaffoldState> scaffoldKey =       GlobalKey<ScaffoldState>();
 
@@ -23,6 +24,7 @@ class DashBoardState extends Equatable {
   final Color bgColor;
   final Color fontbodyColor;
   final String status;
+  final bool headSearchFilterApplied;
 
   DashBoardState copyWith(
       {String? status,
@@ -32,16 +34,20 @@ class DashBoardState extends Equatable {
       Color? secondaryColor,
       Color? bgColor,
       Color? fontbodyColor,
-      String? headerSerachField}) {
+      String? headerSerachField,
+      bool? headSearchFilterApplied}) {
     return DashBoardState(
-        status: status ?? this.status,
-        localeUI: localeUI ?? this.localeUI,
-        uiThemeMode: uiThemeMode ?? this.uiThemeMode,
-        primaryColor: primaryColor ?? this.primaryColor,
-        secondaryColor: secondaryColor ?? this.secondaryColor,
-        bgColor: bgColor ?? this.bgColor,
-        fontbodyColor: fontbodyColor ?? this.fontbodyColor,
-        headerSerachField: headerSerachField ?? this.headerSerachField);
+      status: status ?? this.status,
+      localeUI: localeUI ?? this.localeUI,
+      uiThemeMode: uiThemeMode ?? this.uiThemeMode,
+      primaryColor: primaryColor ?? this.primaryColor,
+      secondaryColor: secondaryColor ?? this.secondaryColor,
+      bgColor: bgColor ?? this.bgColor,
+      fontbodyColor: fontbodyColor ?? this.fontbodyColor,
+      headerSerachField: headerSerachField ?? this.headerSerachField,
+      headSearchFilterApplied:
+          headSearchFilterApplied ?? this.headSearchFilterApplied,
+    );
   }
 
   @override
@@ -53,7 +59,8 @@ class DashBoardState extends Equatable {
         secondaryColor,
         bgColor,
         fontbodyColor,
-        headerSerachField
+        headerSerachField,
+        headSearchFilterApplied
       ];
 }
 

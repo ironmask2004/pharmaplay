@@ -56,95 +56,71 @@ class ProfileCard extends StatelessWidget {
     return BlocBuilder<DashBoardBloc, DashBoardState>(
       builder: (context, state) {
         return Container(
-          margin: const EdgeInsets.only(left: defaultPadding),
-          padding: const EdgeInsets.symmetric(
-            horizontal: defaultPadding,
-            vertical: defaultPadding / 2,
-          ),
-          decoration: BoxDecoration(
-            color: context.read<DashBoardBloc>().state.secondaryColor,
-            borderRadius: const BorderRadius.all(Radius.circular(10)),
-            border: Border.all(
-                color: context.read<DashBoardBloc>().state.fontbodyColor),
-          ),
-          child:
-              // ROW
-
-              Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10), // radius of 10
-                      border: Border.all(
-                          color: context
-                              .read<DashBoardBloc>()
-                              .state
-                              .fontbodyColor),
-                      color: context
-                          .read<DashBoardBloc>()
-                          .state
-                          .secondaryColor // green as background color
-                      ),
-                  child: Row(
-                    children: [
-                      FloatingActionButton(child:
-                          BlocBuilder<AuthenticationBloc, AuthenticationState>(
-                        builder: (context, state) {
-                          // print(
-                          //    '---=-=-=-=-=-=-= state Avatar : ' + state.user!.id ??
-                          //        'nnnnn');
-                          return CircleAvatar(
-                            radius: 25,
-                            backgroundImage: (state.user?.IsGuest() == false)
-                                ? const AssetImage(
-                                    "assets/images/profile_pic.png")
-                                : const AssetImage(
-                                    "assets/images/flutter_logo.png"),
-                          );
-                        },
-                      ), onPressed: () {
-                        print('hihhhii');
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10), // radius of 10
+                // border: Border.all(
+                //     color: context.read<DashBoardBloc>().state.fontbodyColor),
+                color: context
+                    .read<DashBoardBloc>()
+                    .state
+                    .secondaryColor // green as background color
+                ),
+            child: Row(
+              children: [
+                FloatingActionButton(
+                    child: BlocBuilder<AuthenticationBloc, AuthenticationState>(
+                  builder: (context, state) {
+                    // print(
+                    //    '---=-=-=-=-=-=-= state Avatar : ' + state.user!.id ??
+                    //        'nnnnn');
+                    return CircleAvatar(
+                      radius: 25,
+                      backgroundImage: (state.user?.IsGuest() == false)
+                          ? const AssetImage("assets/images/profile_pic.png")
+                          : const AssetImage("assets/images/flutter_logo.png"),
+                    );
+                  },
+                ), onPressed: () {
+                  print('hihhhii');
+                  context.read<DashBoardBloc>().add(RightMenuClicked(context));
+                }),
+                if (!Responsive.isMobile(context))
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: defaultPadding / 2),
+                    child: BlocBuilder<AuthenticationBloc, AuthenticationState>(
+                      builder: (context, state) {
+                        return Text(context
+                                .read<AuthenticationBloc>()
+                                .state
+                                .user
+                                ?.email ??
+                            'Guest');
+                      },
+                    ),
+                  ),
+                ClipOval(
+                  child: Material(
+                    color: context
+                        .read<DashBoardBloc>()
+                        .state
+                        .secondaryColor, // button color
+                    child: InkWell(
+                      // splashColor: Colors.red, // inkwell color
+                      child: const SizedBox(
+                          width: 50,
+                          height: 50,
+                          child: Icon(Icons.more_vert_rounded)),
+                      onTap: () {
                         context
                             .read<DashBoardBloc>()
                             .add(RightMenuClicked(context));
-                      }),
-                      if (!Responsive.isMobile(context))
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: defaultPadding / 2),
-                          child: BlocBuilder<AuthenticationBloc,
-                              AuthenticationState>(
-                            builder: (context, state) {
-                              return Text(context
-                                      .read<AuthenticationBloc>()
-                                      .state
-                                      .user
-                                      ?.email ??
-                                  'Guest');
-                            },
-                          ),
-                        ),
-                      ClipOval(
-                        child: Material(
-                          color: context
-                              .read<DashBoardBloc>()
-                              .state
-                              .secondaryColor, // button color
-                          child: InkWell(
-                            // splashColor: Colors.red, // inkwell color
-                            child: const SizedBox(
-                                width: 50,
-                                height: 50,
-                                child: Icon(Icons.more_vert_rounded)),
-                            onTap: () {
-                              context
-                                  .read<DashBoardBloc>()
-                                  .add(RightMenuClicked(context));
-                            },
-                          ),
-                        ),
-                      )
-                    ],
-                  )), //row-----------------------
-        );
+                      },
+                    ),
+                  ),
+                )
+              ],
+            ));
       },
     );
   }
@@ -183,7 +159,7 @@ class SearchField extends StatelessWidget {
                 var _serachValue =
                     context.read<DashBoardBloc>().state.headerSerachField;
 
-                context.read<DrugGroupBloc>().add(DrugGroupsSearched(
+                /* context.read<DrugGroupBloc>().add(DrugGroupsSearched(
                     druggroupStatus: DrugGroupStatus.initializing,
                     searchType: SearchType.like,
                     serachValue: _serachValue));
@@ -193,18 +169,19 @@ class SearchField extends StatelessWidget {
                     searchType: SearchType.like,
                     serachValue: _serachValue));
 
-                ;
+                ;*/
               },
               child: Container(
-                padding: const EdgeInsets.all(defaultPadding * 0.75),
-                margin:
-                    const EdgeInsets.symmetric(horizontal: defaultPadding / 2),
-                decoration: BoxDecoration(
-                  color: context.read<DashBoardBloc>().state.primaryColor,
-                  borderRadius: const BorderRadius.all(Radius.circular(10)),
-                ),
-                child: SvgPicture.asset("assets/icons/Search.svg"),
-              ),
+                  padding: const EdgeInsets.all(defaultPadding * 0.75),
+                  margin: const EdgeInsets.symmetric(
+                      horizontal: defaultPadding / 2),
+                  decoration: BoxDecoration(
+                    color: context.read<DashBoardBloc>().state.primaryColor,
+                    borderRadius: const BorderRadius.all(Radius.circular(10)),
+                  ),
+                  child: const Icon(Icons.search)
+                  //SvgPicture.asset("assets/icons/Search.svg"),
+                  ),
             ),
           ),
         );

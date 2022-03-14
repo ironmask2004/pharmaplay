@@ -40,17 +40,26 @@ class DrugBloc extends Bloc<DrugEvent, DrugState> {
     );
 
     dashBoardStateubscription = dashBoardBlod.stream.listen((state) {
-      if (state.status == 'localeUIChanged') {
-        print(' -----------------    dashBoardStateubscription  ' +
-            state.localeUI.toString());
-        add(DruglocaleUIChanged(state.localeUI.toString()));
-      }
-      if (state.status == 'InitSubBlocs') {
-        print(' ------------druggroup-----    InitSubBlocs  ' +
-            state.localeUI.toString());
-        add(DrugsSearched(
-            drugStatus: DrugStatus.initializing,
-            localeUI: state.localeUI.toString()));
+      switch (state.status) {
+        case 'localeUIChanged':
+          print(' -----------------   Drug dashBoardStateubscription  ' +
+              state.localeUI.toString());
+          add(DruglocaleUIChanged(state.localeUI.toString()));
+          break;
+        case 'InitSubBlocs':
+          print(' ------------Drug-----    InitSubBlocs  ' +
+              state.localeUI.toString());
+          add(DrugsSearched(
+              drugStatus: DrugStatus.initializing,
+              localeUI: state.localeUI.toString()));
+          break;
+        case 'HeaderSerachSubmitted':
+          add(DrugsSearched(
+              drugStatus: DrugStatus.initializing,
+              searchType: SearchType.like,
+              serachValue: state.headerSerachField));
+
+          break;
       }
     });
   }
@@ -84,6 +93,12 @@ class DrugBloc extends Bloc<DrugEvent, DrugState> {
     print(
         '_onDrugsSearched LOCALEUIIIIIIIIIIIIIIIIIIIIIIIIIII :  ${state.localeUI} + WhewrCond:::: ${event.whereCond} ');
 
+    if (((event.serachValue != '') &&
+        (event.serachValue == state.serachValue))) {
+      print(
+          '=======================  return without search !!!!!!!!!!!!1 ${event.serachValue}');
+      return;
+    }
     final dartz.Either<List<DrugRecord>, ApiError> _repoResponse;
     try {
       //TokenPair _tokenInfo;

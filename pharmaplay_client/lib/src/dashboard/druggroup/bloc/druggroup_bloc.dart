@@ -44,18 +44,26 @@ class DrugGroupBloc extends Bloc<DrugGroupEvent, DrugGroupState> {
       print(' -----------------    dashBoardStateubscription  ' +
           state.toString());
 
-      if (state.status == 'localeUIChanged') {
-        print(' -----------------   druggroup dashBoardStateubscription  ' +
-            state.localeUI.toString());
-        add(DrugGrouplocaleUIChanged(state.localeUI.toString()));
-      }
+      switch (state.status) {
+        case 'localeUIChanged':
+          print(' -----------------   druggroup dashBoardStateubscription  ' +
+              state.localeUI.toString());
+          add(DrugGrouplocaleUIChanged(state.localeUI.toString()));
+          break;
+        case 'InitSubBlocs':
+          print(' ------------druggroup-----    InitSubBlocs  ' +
+              state.localeUI.toString());
+          add(DrugGroupsSearched(
+              druggroupStatus: DrugGroupStatus.initializing,
+              localeUI: state.localeUI.toString()));
+          break;
+        case 'HeaderSerachSubmitted':
+          add(DrugGroupsSearched(
+              druggroupStatus: DrugGroupStatus.initializing,
+              searchType: SearchType.like,
+              serachValue: state.headerSerachField));
 
-      if (state.status == 'InitSubBlocs') {
-        print(' ------------druggroup-----    InitSubBlocs  ' +
-            state.localeUI.toString());
-        add(DrugGroupsSearched(
-            druggroupStatus: DrugGroupStatus.initializing,
-            localeUI: state.localeUI.toString()));
+          break;
       }
     });
   }
@@ -104,6 +112,18 @@ class DrugGroupBloc extends Bloc<DrugGroupEvent, DrugGroupState> {
   ) async {
     print(
         '_onDrugGroupsSearched ------ LOCALEUIIIIIIIIIIIIIIIIIIIIIIIIIII :  ${state.localeUI} + WhewrCond:::: ${event.whereCond} ');
+
+    print('=======================  ===  state serach ' +
+        state.serachValue +
+        ' new Searched value: ' +
+        event.serachValue!);
+
+    if (((event.serachValue != '') &&
+        (event.serachValue == state.serachValue))) {
+      print(
+          '=======================  return without search !!!!!!!!!!!!1 ${event.serachValue}');
+      return;
+    }
 
     final dartz.Either<List<DrugGroup>, ApiError> _repoResponse;
     try {
