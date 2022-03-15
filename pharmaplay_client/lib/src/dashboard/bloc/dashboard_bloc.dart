@@ -124,9 +124,9 @@ class DashBoardBloc extends Bloc<DashBoardEvent, DashBoardState> {
   ) {
     print('_onHeaderSerachFieldChanged');
     emit(state.copyWith(
-      status: 'HeaderSerachFieldChanged',
-      headerSerachField: event.headerSerachField,
-    ));
+        status: 'HeaderSerachFieldChanged',
+        headerSerachField: event.headerSerachField,
+        headSearchFilterApplied: false));
   }
 
   void _onHeaderSerachSubmitted(
@@ -136,10 +136,16 @@ class DashBoardBloc extends Bloc<DashBoardEvent, DashBoardState> {
     try {
       print('_onHeaderSerachSubmitted headerSerachField:====' +
           state.headerSerachField);
+      if (state.headSearchFilterApplied) {
+        emit(state.copyWith(
+            status: 'HeaderSerachFieldChanged',
+            headerSerachField: '',
+            headSearchFilterApplied: false));
+      }
       emit(state.copyWith(
-        status: 'HeaderSerachSubmitted',
-        headerSerachField: state.headerSerachField,
-      ));
+          status: 'HeaderSerachSubmitted',
+          headerSerachField: state.headerSerachField,
+          headSearchFilterApplied: true));
     } catch (err) {
       print('Error connectiing to server ' + err.toString());
       rethrow;

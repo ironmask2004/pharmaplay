@@ -1,8 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/widgets.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/locale.dart';
 import 'package:pharma_repository/pharma_repository.dart';
 import 'package:dartz/dartz.dart' as dartz;
 import 'package:pharmaplay_client/src/dashboard/dashboard.dart';

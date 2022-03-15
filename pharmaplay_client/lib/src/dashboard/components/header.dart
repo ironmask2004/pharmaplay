@@ -130,6 +130,9 @@ class SearchField extends StatelessWidget {
   const SearchField({
     Key? key,
   }) : super(key: key);
+  //final headerSerachFieldCTextCtrl = TextEditingController();
+
+  //
 
   @override
   Widget build(BuildContext context) {
@@ -172,16 +175,19 @@ class SearchField extends StatelessWidget {
                 ;*/
               },
               child: Container(
-                  padding: const EdgeInsets.all(defaultPadding * 0.75),
-                  margin: const EdgeInsets.symmetric(
-                      horizontal: defaultPadding / 2),
-                  decoration: BoxDecoration(
-                    color: context.read<DashBoardBloc>().state.primaryColor,
-                    borderRadius: const BorderRadius.all(Radius.circular(10)),
-                  ),
-                  child: const Icon(Icons.search)
-                  //SvgPicture.asset("assets/icons/Search.svg"),
-                  ),
+                padding: const EdgeInsets.all(defaultPadding * 0.75),
+                margin:
+                    const EdgeInsets.symmetric(horizontal: defaultPadding / 2),
+                decoration: BoxDecoration(
+                  color: context.read<DashBoardBloc>().state.secondaryColor,
+                  borderRadius: const BorderRadius.all(Radius.circular(10)),
+                ),
+                child:
+                    context.read<DashBoardBloc>().state.headSearchFilterApplied
+                        ? const Icon(Icons.dangerous)
+                        : const Icon(Icons.search),
+                //SvgPicture.asset("assets/icons/Search.svg"),
+              ),
             ),
           ),
         );
