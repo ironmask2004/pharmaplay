@@ -33,7 +33,7 @@ class Header extends StatelessWidget {
           ),
         if (!Responsive.isMobile(context))
           Spacer(flex: Responsive.isDesktop(context) ? 2 : 1),
-        const Expanded(child: SearchField()),
+        Expanded(child: SearchField()),
         const ProfileCard(),
 
         //----
@@ -127,18 +127,16 @@ class ProfileCard extends StatelessWidget {
 }
 
 class SearchField extends StatelessWidget {
-  const SearchField({
+  SearchField({
     Key? key,
   }) : super(key: key);
-  //final headerSerachFieldCTextCtrl = TextEditingController();
-
-  //
-
+  final headerSerachFieldCTextCtrl = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<DashBoardBloc, DashBoardState>(
       builder: (context, state) {
         return TextField(
+          controller: headerSerachFieldCTextCtrl,
           onChanged: (value) {
             //  print(value);
             context.read<DashBoardBloc>().add(HeaderSerachFieldChanged(value));
@@ -161,18 +159,12 @@ class SearchField extends StatelessWidget {
 
                 var _serachValue =
                     context.read<DashBoardBloc>().state.headerSerachField;
-
-                /* context.read<DrugGroupBloc>().add(DrugGroupsSearched(
-                    druggroupStatus: DrugGroupStatus.initializing,
-                    searchType: SearchType.like,
-                    serachValue: _serachValue));
-
-                context.read<DrugBloc>().add(DrugsSearched(
-                    drugStatus: DrugStatus.initializing,
-                    searchType: SearchType.like,
-                    serachValue: _serachValue));
-
-                ;*/
+                if (context
+                    .read<DashBoardBloc>()
+                    .state
+                    .headSearchFilterApplied) {
+                  headerSerachFieldCTextCtrl.clear();
+                }
               },
               child: Container(
                 padding: const EdgeInsets.all(defaultPadding * 0.75),

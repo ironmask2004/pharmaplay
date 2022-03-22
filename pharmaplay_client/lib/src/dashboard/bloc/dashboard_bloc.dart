@@ -116,6 +116,7 @@ class DashBoardBloc extends Bloc<DashBoardEvent, DashBoardState> {
         bgColor: savedPharmTheme.bgColor,
         fontbodyColor: savedPharmTheme.fontbodyColor));
   }
+
 //===========
 
   void _onHeaderSerachFieldChanged(
@@ -136,16 +137,24 @@ class DashBoardBloc extends Bloc<DashBoardEvent, DashBoardState> {
     try {
       print('_onHeaderSerachSubmitted headerSerachField:====' +
           state.headerSerachField);
+      if (state.headerSerachField == '') return;
+
       if (state.headSearchFilterApplied) {
         emit(state.copyWith(
-            status: 'HeaderSerachFieldChanged',
+            status: 'HeaderSerachSubmitted',
             headerSerachField: '',
             headSearchFilterApplied: false));
+
+        /*emit(state.copyWith(
+            status: 'HeaderSerachFieldChanged',
+            headerSerachField: '',
+            headSearchFilterApplied: false));*/
+      } else {
+        emit(state.copyWith(
+            status: 'HeaderSerachSubmitted',
+            headerSerachField: state.headerSerachField,
+            headSearchFilterApplied: true));
       }
-      emit(state.copyWith(
-          status: 'HeaderSerachSubmitted',
-          headerSerachField: state.headerSerachField,
-          headSearchFilterApplied: true));
     } catch (err) {
       print('Error connectiing to server ' + err.toString());
       rethrow;
