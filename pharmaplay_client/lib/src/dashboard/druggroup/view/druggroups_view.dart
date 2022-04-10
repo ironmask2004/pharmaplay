@@ -77,38 +77,62 @@ class _DrugGroupInfoCardGridViewState extends State<DrugGroupInfoCardGridView> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<DrugGroupBloc, DrugGroupState>(
-      buildWhen: (previous, current) {
-        return previous != current;
-      },
-      builder: (context, state) {
-        return SafeArea(
-          child: SizedBox(
-            width: double.infinity,
-            height: 150,
-            child: GridView.builder(
-              //physics: const NeverScrollableScrollPhysics(),
-              //shrinkWrap: true,
-              itemCount: context.read<DrugGroupBloc>().state.drugGroups.length,
-              scrollDirection: Axis.horizontal,
-              controller: _scrollController,
-              gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                crossAxisSpacing: defaultPadding,
-                mainAxisSpacing: defaultPadding,
-                childAspectRatio: widget.childAspectRatio,
-                maxCrossAxisExtent: 180,
-                // childAspectRatio: 1 / 2,
-                // crossAxisSpacing: 20,
-                // mainAxisSpacing: 20
+    return BlocListener<DrugGroupBloc, DrugGroupState>(
+        listener: (context, state) {
+          print(state.status.toString() +
+              '00000000000000000000000000000000000000000000000000000000000000');
+          if (state.status == DrugGroupStatus.scrolloading ||
+              state.status == DrugGroupStatus.initializing) {
+            /*  CircularProgressIndicator(
+            value: aniController.value,
+            semanticsLabel: 'Linear progress indicator',
+          );*/
+
+            ScaffoldMessenger.of(context)
+              ..hideCurrentSnackBar()
+              ..showSnackBar(
+                  SnackBar(content: Text(SLang.of(context).loading)));
+          }
+
+          if (state.status == DrugGroupStatus.success) {
+            ScaffoldMessenger.of(context).hideCurrentSnackBar();
+          }
+        },
+        child: BlocBuilder<DrugGroupBloc, DrugGroupState>(
+          buildWhen: (previous, current) {
+            return previous != current;
+          },
+          builder: (context, state) {
+            return SafeArea(
+              child: SizedBox(
+                width: double.infinity,
+                height: 150,
+                child: GridView.builder(
+                  //physics: const NeverScrollableScrollPhysics(),
+                  //shrinkWrap: true,
+                  itemCount:
+                      context.read<DrugGroupBloc>().state.drugGroups.length,
+                  scrollDirection: Axis.horizontal,
+                  controller: _scrollController,
+                  gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                    crossAxisSpacing: defaultPadding,
+                    mainAxisSpacing: defaultPadding,
+                    childAspectRatio: widget.childAspectRatio,
+                    maxCrossAxisExtent: 180,
+                    // childAspectRatio: 1 / 2,
+                    // crossAxisSpacing: 20,
+                    // mainAxisSpacing: 20
+                  ),
+                  itemBuilder: (context, index) => DrugGroupInfoCard(
+                      dragGroupInfo: context
+                          .read<DrugGroupBloc>()
+                          .state
+                          .drugGroups[index]),
+                ),
               ),
-              itemBuilder: (context, index) => DrugGroupInfoCard(
-                  dragGroupInfo:
-                      context.read<DrugGroupBloc>().state.drugGroups[index]),
-            ),
-          ),
-        );
-      },
-    );
+            );
+          },
+        ));
   }
 
   void _onScroll() {

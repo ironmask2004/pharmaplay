@@ -173,6 +173,7 @@ class DrugGroupBloc extends Bloc<DrugGroupEvent, DrugGroupState> {
     if (state.hasReachedMax) return;
 
     //final DrugGroupStatus _drugStatus = DrugGroupStatus.scrolloading;
+    emit(state.copyWith(status: DrugGroupStatus.scrolloading));
 
     final dartz.Either<List<DrugGroup>, ApiError> _repoResponse;
     try {

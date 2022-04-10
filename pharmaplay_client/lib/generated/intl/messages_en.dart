@@ -57,6 +57,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("forgotPassword"),
         "homelogout": MessageLookupByLibrary.simpleMessage("LogOut"),
         "lightMode": MessageLookupByLibrary.simpleMessage("Light Mode"),
+        "loading": MessageLookupByLibrary.simpleMessage("Loading...."),
         "loginPage": MessageLookupByLibrary.simpleMessage(
             "Wellcome Login To PahrmaPlay"),
         "mony": MessageLookupByLibrary.simpleMessage("S.P"),

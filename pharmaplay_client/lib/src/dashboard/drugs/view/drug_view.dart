@@ -66,54 +66,86 @@ class DrugInfoCardGridView extends StatefulWidget {
   State<DrugInfoCardGridView> createState() => _DrugInfoCardGridViewState();
 }
 
-class _DrugInfoCardGridViewState extends State<DrugInfoCardGridView> {
+class _DrugInfoCardGridViewState extends State<DrugInfoCardGridView>
+    with TickerProviderStateMixin {
   final _scrollController = ScrollController();
+  late AnimationController aniController;
 
   @override
   void initState() {
+    aniController = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 5),
+    )..addListener(() {
+        setState(() {});
+      });
+
     super.initState();
     _scrollController.addListener(_onScroll);
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<DrugBloc, DrugState>(
-      buildWhen: (previous, current) {
-        return previous != current;
-      },
-      builder: (context, state) {
-        return SafeArea(
-          child: SizedBox(
-            width: double.infinity,
-            height: 440,
-            child: GridView.builder(
-              //physics: const NeverScrollableScrollPhysics(),
-              //shrinkWrap: true,
-              itemCount: context.read<DrugBloc>().state.drugs.length,
-              scrollDirection: Axis.horizontal,
-              controller: _scrollController,
+    return BlocListener<DrugBloc, DrugState>(
+      listener: (context, state) {
+        print(state.status.toString() +
+            '00000000000000000000000000000000000000000000000000000000000000');
+        if (state.status == DrugStatus.scrolloading ||
+            state.status == DrugStatus.initializing) {
+          /*  CircularProgressIndicator(
+            value: aniController.value,
+            semanticsLabel: 'Linear progress indicator',
+          );*/
 
-              gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                crossAxisSpacing: defaultPadding,
-                mainAxisSpacing: defaultPadding,
-                childAspectRatio: widget.childAspectRatio,
-                maxCrossAxisExtent: 220,
-                // childAspectRatio: 1 / 2,
-                // crossAxisSpacing: 20,
-                // mainAxisSpacing: 20
-              ),
-              itemBuilder: (context, index) => DrugInfoCard(
-                  drugInfo: context.read<DrugBloc>().state.drugs[index],
-                  index: index),
-            ),
-          ),
-        );
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(SnackBar(content: Text(SLang.of(context).loading)));
+        }
+
+        if (state.status == DrugStatus.success) {
+          ScaffoldMessenger.of(context).hideCurrentSnackBar();
+        }
       },
+      child: BlocBuilder<DrugBloc, DrugState>(
+        buildWhen: (previous, current) {
+          return previous != current;
+        },
+        builder: (context, state) {
+          return SafeArea(
+            child: SizedBox(
+              width: double.infinity,
+              height: 440,
+              child: GridView.builder(
+                //physics: const NeverScrollableScrollPhysics(),
+                //shrinkWrap: true,
+                itemCount: context.read<DrugBloc>().state.drugs.length,
+                scrollDirection: Axis.horizontal,
+                controller: _scrollController,
+
+                gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                  crossAxisSpacing: defaultPadding,
+                  mainAxisSpacing: defaultPadding,
+                  childAspectRatio: widget.childAspectRatio,
+                  maxCrossAxisExtent: 220,
+                  // childAspectRatio: 1 / 2,
+                  // crossAxisSpacing: 20,
+                  // mainAxisSpacing: 20
+                ),
+                itemBuilder: (context, index) => DrugInfoCard(
+                    drugInfo: context.read<DrugBloc>().state.drugs[index],
+                    index: index),
+              ),
+            ),
+          );
+        },
+      ),
     );
   }
 
   @override
   void dispose() {
+    aniController.dispose();
+
     _scrollController
       ..removeListener(_onScroll)
       ..dispose();

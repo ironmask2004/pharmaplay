@@ -143,6 +143,7 @@ class DrugBloc extends Bloc<DrugEvent, DrugState> {
     if (state.hasReachedMax) return;
 
     //final DrugStatus _drugStatus = DrugStatus.scrolloading;
+    emit(state.copyWith(status: DrugStatus.scrolloading));
 
     final dartz.Either<List<DrugRecord>, ApiError> _repoResponse;
     try {

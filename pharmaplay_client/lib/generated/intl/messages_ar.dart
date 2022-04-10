@@ -58,6 +58,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("نسيت كلمة السر"),
         "homelogout": MessageLookupByLibrary.simpleMessage("تسجيل خروج"),
         "lightMode": MessageLookupByLibrary.simpleMessage("نمط ألوان فاتح"),
+        "loading": MessageLookupByLibrary.simpleMessage(".....تحميل البيانات"),
         "loginPage":
             MessageLookupByLibrary.simpleMessage("تسجيل الدخول إلى الصيدلية"),
         "mony": MessageLookupByLibrary.simpleMessage("ل.س"),

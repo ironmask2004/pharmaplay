@@ -78,5 +78,6 @@
   "drugGroups": "Drug Groups",
   "search": "Search",
   "drugs": "Drugs",
-  "mony": "S.P"
+  "mony": "S.P",
+  "loading": "Loading...."
 }
