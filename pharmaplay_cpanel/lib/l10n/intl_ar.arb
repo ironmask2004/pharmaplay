@@ -1,0 +1,83 @@
+{
+  "@@locale": "ar",
+  "pageHomeListTitle": "بعض النصوص المعربة:",
+  "pageHomeSamplePlaceholder": "اهلا {name}",
+  "pageHomeSamplePlaceholdersOrdered": "اسمي هو  {lastName}, {firstName} {lastName}",
+  "@pageHomeSamplePlaceholdersOrdered": {
+    "placeholders": {
+      "firstName": {},
+      "lastName": {}
+    }
+  },
+  "pageHomeSamplePlural": "{howMany, plural, one{You have 1 message} other{You have {howMany} messages}}",
+  "@pageHomeSamplePlural": {
+    "placeholders": {
+      "howMany": {
+        "type": "int"
+      }
+    }
+  },
+  "pageHomeSampleTotalAmount": "Total: {total}",
+  "@pageHomeSampleTotalAmount": {
+    "placeholders": {
+      "total": {
+        "type": "double",
+        "format": "currency",
+        "optionalParameters": {
+          "symbol": "€",
+          "decimalDigits": 2
+        }
+      }
+    }
+  },
+  "pageHomeSampleCurrentDateTime": "Date: {date} Time: {time}",
+  "@pageHomeSampleCurrentDateTime": {
+    "placeholders": {
+      "date": {
+        "type": "DateTime",
+        "format": "yMd"
+      },
+      "time": {
+        "type": "DateTime",
+        "format": "Hm"
+      }
+    }
+  },
+  "appTitle": "الصيدلية",
+  "@appTitle": {
+    "description": "عنوان التطبيق"
+  },
+  "confirmCode": "رمز التحقق",
+  "loginPage": "تسجيل الدخول إلى الصيدلية",
+  "email": "الإيميل",
+  "password": "كلمة السر",
+  "signIn": "تسجيل دخول",
+  "forgotPassword": "نسيت كلمة السر",
+  "signUp": "تسجيل جديد",
+  "signOut": "تسجيل خروج",
+  "onsignuplastnamechanged": "_onSignUpLastnameChanged",
+  "emailaddress": "Email",
+  "onforgotemailchanged": "تغيير في البريد الاكتروني",
+  "resetPassword": "اعادة تعيين كلمة السر",
+  "backTo": "عودة إلى ",
+  "SetLanguage": "تغيير اللغة",
+  "settings": "اﻷعدادات!",
+  "applyNewSettings": "تطبيق الاعدادات الجديدة",
+  "back": "عودة",
+  "englishLanguage": "اللغة اﻷنكليزية",
+  "themeMode": "نمط اﻷلوان",
+  "darkMode": "نمط ألوان غامق",
+  "lightMode": "نمط ألوان فاتح",
+  "SignInchangeLanguage": "English Language",
+  "homelogout": "تسجيل خروج",
+  "exitapp": "إغلاق برنامج الصيدلية",
+  "warning": "تحذير",
+  "yes": "نعم",
+  "no": "لا",
+  "areYouSureYouWantToExit": "هل أنت متأكد من الخروج النهائي؟",
+  "drugGroups": "أصناف اﻷدوية",
+  "search": "بحث",
+  "drugs": "اﻷدوية",
+  "mony": "ل.س",
+  "loading": ".....تحميل البيانات"
+}

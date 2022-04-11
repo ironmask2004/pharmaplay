@@ -1,0 +1,83 @@
+{
+  "@@locale": "en",
+  "pageHomeListTitle": "Some localized strings:",
+  "pageHomeSamplePlaceholder": "Welcome {name}",
+  "pageHomeSamplePlaceholdersOrdered": "My name is {lastName}, {firstName} {lastName}",
+  "@pageHomeSamplePlaceholdersOrdered": {
+    "placeholders": {
+      "firstName": {},
+      "lastName": {}
+    }
+  },
+  "pageHomeSamplePlural": "{howMany, plural, one{You have 1 message} other{You have {howMany} messages}}",
+  "@pageHomeSamplePlural": {
+    "placeholders": {
+      "howMany": {
+        "type": "int"
+      }
+    }
+  },
+  "pageHomeSampleTotalAmount": "Total: {total}",
+  "@pageHomeSampleTotalAmount": {
+    "placeholders": {
+      "total": {
+        "type": "double",
+        "format": "currency",
+        "optionalParameters": {
+          "symbol": "€",
+          "decimalDigits": 2
+        }
+      }
+    }
+  },
+  "pageHomeSampleCurrentDateTime": "Date: {date} Time: {time}",
+  "@pageHomeSampleCurrentDateTime": {
+    "placeholders": {
+      "date": {
+        "type": "DateTime",
+        "format": "yMd"
+      },
+      "time": {
+        "type": "DateTime",
+        "format": "Hm"
+      }
+    }
+  },
+  "appTitle": "Pharmaplay Market",
+  "@appTitle": {
+    "description": "The title of the application"
+  },
+  "confirmCode": "Confirm-Code",
+  "loginPage": "Wellcome Login To PahrmaPlay",
+  "email": "Email",
+  "password": "password",
+  "signIn": "signIn",
+  "signOut": "signOut",
+  "forgotPassword": "forgotPassword",
+  "signUp": "signUp",
+  "onsignuplastnamechanged": "_onSignUpLastnameChanged",
+  "emailaddress": "Email",
+  "onforgotemailchanged": "_onforgotEmailChanged",
+  "resetPassword": "Reset Password",
+  "backTo": "Back To ",
+  "SetLanguage": "Change Language",
+  "settings": "Settings",
+  "applyNewSettings": "Apply New Settings",
+  "back": "Back",
+  "englishLanguage": "English Language",
+  "themeMode": "Theme Mode",
+  "darkMode": "Dark Mode",
+  "lightMode": "Light Mode",
+  "SignInchangeLanguage": "اللغة العربية",
+  "homelogout": "LogOut",
+  "exitapp": "Close Pharam Play",
+  "warning": "Warning",
+  "yes": "Yes",
+  "no": "No",
+  "areYouSureYouWantToExit": "Are you sure you want to exit?",
+  "drugGroups": "Drug Groups",
+  "search": "Search",
+  "drugs": "Drugs",
+  "mony": "S.P",
+  "loading": "Loading...."
+}
