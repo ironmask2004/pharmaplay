@@ -56,10 +56,13 @@ dev_dependencies:
   freezed_annotation: ^1.1.0
   html: ^0.15.0
   http: ^0.13.4
+  image_picker: ^0.8.5
+  image_picker_for_web: ^2.1.6
   intl_generator: ^0.2.1
   mailer: ^5.0.2
   stream_transform: ^2.0.0
   uuid: ^3.0.5
+  video_player: ^2.3.0
 
 flutter:
   uses-material-design: true
