@@ -4,6 +4,7 @@ import 'package:pharma_repository/pharma_repository.dart';
 import 'package:pharmaplay_cpanel/generated/l10n.dart';
 import 'package:pharmaplay_cpanel/src/dashboard/components/drug_rating.dart';
 import 'package:pharmaplay_cpanel/src/dashboard/dashboard.dart';
+import 'package:pharmaplay_cpanel/src/dashboard/drugs/drug.dart';
 import 'package:pharmaplay_cpanel/src/utlites/sforms_style.dart';
 
 class DrugInfoCard extends StatelessWidget {
@@ -40,10 +41,18 @@ class DrugInfoCard extends StatelessWidget {
                       .withOpacity(0.4),
                   borderRadius: const BorderRadius.all(Radius.circular(10)),
                 ),
-                child: SvgPicture.asset(
-                  "assets/icons/drop_box.svg",
-                  color: context.read<DashBoardBloc>().state.primaryColor,
-                ),
+                child: GestureDetector(
+                    child: SvgPicture.asset(
+                      "assets/icons/drop_box.svg",
+                      color: context.read<DashBoardBloc>().state.primaryColor,
+                    ),
+                    onDoubleTap: () {
+                      print('onDoubleTap drugID: ${drugInfo.drug.drugID}');
+                      context
+                          .read<DrugBloc>()
+                          .add(DrugImagePickerPressed(drugInfo.drug.drugID));
+                    } //do something,
+                    ),
               ),
 
               Icon(Icons.more_vert,
@@ -95,43 +104,6 @@ class DrugInfoCard extends StatelessWidget {
           )
         ],
       ),
-    );
-  }
-}
-
-class ProgressLine extends StatelessWidget {
-  const ProgressLine({
-    Key? key,
-    this.color, // =  context.read<DashBoardBloc>().state.primaryColor,
-    required this.percentage,
-  }) : super(key: key);
-
-  final Color? color;
-  final int? percentage;
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Container(
-          width: double.infinity,
-          height: 5,
-          decoration: BoxDecoration(
-            color: color!.withOpacity(0.1),
-            borderRadius: const BorderRadius.all(Radius.circular(10)),
-          ),
-        ),
-        LayoutBuilder(
-          builder: (context, constraints) => Container(
-            width: constraints.maxWidth * (percentage! / 100),
-            height: 5,
-            decoration: BoxDecoration(
-              color: color,
-              borderRadius: const BorderRadius.all(Radius.circular(10)),
-            ),
-          ),
-        ),
-      ],
     );
   }
 }

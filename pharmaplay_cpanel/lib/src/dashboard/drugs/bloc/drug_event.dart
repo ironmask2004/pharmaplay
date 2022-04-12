@@ -16,6 +16,15 @@ class DruglocaleUIChanged extends DrugEvent {
   List<Object> get props => [localeUI];
 }
 
+class DrugImagePickerPressed extends DrugEvent {
+  const DrugImagePickerPressed(this.drugID);
+
+  final int drugID;
+
+  @override
+  List<Object> get props => [drugID];
+}
+
 class DrugsScrolledd extends DrugEvent {
   const DrugsScrolledd();
 }

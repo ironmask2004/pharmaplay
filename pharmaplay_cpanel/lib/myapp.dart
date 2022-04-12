@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:pharma_repository/pharma_repository.dart';
 import 'package:pharmaplay_cpanel/generated/l10n.dart';
 import 'package:pharmaplay_cpanel/src/authentication/authentication.dart';
+import 'package:pharmaplay_cpanel/src/imagepicker/view/view.dart';
 import 'package:pharmaplay_cpanel/src/splash/splash.dart';
 import 'package:user_repository/user_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -199,6 +200,34 @@ class AppView extends StatelessWidget {
                   listener: (context, state) {
                     print('Listner Lisner !!!!!!!!!' +
                         state.localeUI.languageCode);
+                    switch (state.status) {
+                      case "ImagePickerCalled":
+                        print('ImagePickerCalled : ' + state.toString());
+                        _navigator.push<void>(
+                          ImagePickerPage.route(),
+                          //  (route) => false,
+                        );
+
+                        break;
+                      // authenticateSignIn
+                      case "sdfsdfsdfsdfsd":
+                        print('un Auth : ' + state.toString());
+                        _navigator.push<void>(
+                          DashBoardPage.route(),
+                          // (route) => false,
+                        );
+                        break;
+                      default:
+                        print(
+                            'Lisnter find default DashBloc switch!!!!!!!!! : ' +
+                                state.toString());
+                        // _navigator.push<void>(
+                        //  DashBoardPage.route(),
+                        // (route) => false,
+                        //);
+
+                        break;
+                    }
                   },
                 ),
               ], child: child!); //const MainScreen());
