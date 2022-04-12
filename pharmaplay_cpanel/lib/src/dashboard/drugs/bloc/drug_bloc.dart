@@ -27,6 +27,7 @@ class DrugBloc extends Bloc<DrugEvent, DrugState> {
   })  : _pharmaRepository = pharmaRepository,
         super(const DrugState()) {
     on<DruglocaleUIChanged>(_onDruglocaleUIChanged);
+    on<DrugImagePickerPressed>(_onDrugImagePickerPressed);
     on<DrugsSearched>(
       _onDrugsSearched,
       transformer: throttleDroppable(throttleDuration),
@@ -60,6 +61,22 @@ class DrugBloc extends Bloc<DrugEvent, DrugState> {
       }
     });
   }
+
+  void _onDrugImagePickerPressed(
+    DrugImagePickerPressed event,
+    Emitter<DrugState> emit,
+  ) {
+    //print(SLang.current.onforgotemailchanged);
+
+    print(
+        '_onDrugImagePickerPressed ======================= ${event.drugID},   ');
+
+    emit(state.copyWith(
+      //localeUI: event.localeUI,
+      status: DrugStatus.success,
+    ));
+  }
+
   void _onDruglocaleUIChanged(
     DruglocaleUIChanged event,
     Emitter<DrugState> emit,
