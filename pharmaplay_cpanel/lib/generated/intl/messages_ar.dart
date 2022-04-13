@@ -46,8 +46,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "backTo": MessageLookupByLibrary.simpleMessage("عودة إلى "),
         "confirmCode": MessageLookupByLibrary.simpleMessage("رمز التحقق"),
         "darkMode": MessageLookupByLibrary.simpleMessage("نمط ألوان غامق"),
+        "delete": MessageLookupByLibrary.simpleMessage("حذف"),
         "drugGroups": MessageLookupByLibrary.simpleMessage("أصناف اﻷدوية"),
         "drugs": MessageLookupByLibrary.simpleMessage("اﻷدوية"),
+        "edit": MessageLookupByLibrary.simpleMessage("تعديل"),
         "email": MessageLookupByLibrary.simpleMessage("الإيميل"),
         "emailaddress": MessageLookupByLibrary.simpleMessage("Email"),
         "englishLanguage":
@@ -57,6 +59,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("نسيت كلمة السر"),
         "homelogout": MessageLookupByLibrary.simpleMessage("تسجيل خروج"),
+        "info": MessageLookupByLibrary.simpleMessage("المعلومات"),
         "lightMode": MessageLookupByLibrary.simpleMessage("نمط ألوان فاتح"),
         "loading": MessageLookupByLibrary.simpleMessage(".....تحميل البيانات"),
         "loginPage":

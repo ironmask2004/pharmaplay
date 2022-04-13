@@ -6,6 +6,7 @@ import 'package:pharmaplay_cpanel/src/dashboard/components/drug_rating.dart';
 import 'package:pharmaplay_cpanel/src/dashboard/dashboard.dart';
 import 'package:pharmaplay_cpanel/src/dashboard/drugs/drug.dart';
 import 'package:pharmaplay_cpanel/src/utlites/sforms_style.dart';
+import 'package:pharmaplay_cpanel/src/widgets/card_popup_menu.dart';
 
 class DrugInfoCard extends StatelessWidget {
   const DrugInfoCard({Key? key, required this.drugInfo, required this.index})
@@ -27,12 +28,13 @@ class DrugInfoCard extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Container(
-                padding: const EdgeInsets.all(defaultPadding * 0.75),
-                height: 80,
-                width: 80,
+                padding: const EdgeInsets.all(defaultPadding * 0.15),
+                height: 100,
+                width: 100,
                 decoration: BoxDecoration(
                   color: context
                       .read<DashBoardBloc>()
@@ -54,10 +56,18 @@ class DrugInfoCard extends StatelessWidget {
                     } //do something,
                     ),
               ),
-
-              Icon(Icons.more_vert,
-                  color:
-                      context.read<DashBoardBloc>().state.fontbodyColor) //+45
+              CardPopUpMenu(
+                key: key,
+                onEdit: () {
+                  print('OnEdit ${drugInfo.drug.drugID}');
+                },
+                onDelete: () {
+                  print('onDelete ${drugInfo.drug.drugID}');
+                },
+                onInfo: () {
+                  print('onInfo ${drugInfo.drug.drugID}');
+                },
+              ),
             ],
           ),
           Text(

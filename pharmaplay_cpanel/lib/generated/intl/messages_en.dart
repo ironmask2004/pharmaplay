@@ -46,8 +46,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "backTo": MessageLookupByLibrary.simpleMessage("Back To "),
         "confirmCode": MessageLookupByLibrary.simpleMessage("Confirm-Code"),
         "darkMode": MessageLookupByLibrary.simpleMessage("Dark Mode"),
+        "delete": MessageLookupByLibrary.simpleMessage("Delete"),
         "drugGroups": MessageLookupByLibrary.simpleMessage("Drug Groups"),
         "drugs": MessageLookupByLibrary.simpleMessage("Drugs"),
+        "edit": MessageLookupByLibrary.simpleMessage("Edit"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "emailaddress": MessageLookupByLibrary.simpleMessage("Email"),
         "englishLanguage":
@@ -56,6 +58,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("forgotPassword"),
         "homelogout": MessageLookupByLibrary.simpleMessage("LogOut"),
+        "info": MessageLookupByLibrary.simpleMessage("Info"),
         "lightMode": MessageLookupByLibrary.simpleMessage("Light Mode"),
         "loading": MessageLookupByLibrary.simpleMessage("Loading...."),
         "loginPage": MessageLookupByLibrary.simpleMessage(

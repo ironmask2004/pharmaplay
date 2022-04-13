@@ -14,7 +14,7 @@ const secondaryColor = Color.fromARGB(255, 205, 200, 255);
 const bgColor = Color.fromARGB(255, 205, 225, 255);
 const fontbodyColor = Color.fromARGB(255, 2, 13, 24);
 */
-const defaultPadding = 16.0;
+const defaultPadding = 8.0;
 
 const _kColorPrimary = Color(0xFFFFAB00);
 const _kColorPrimaryDark = Color(0xffc67c00);
