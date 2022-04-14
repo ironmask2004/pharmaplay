@@ -22,12 +22,13 @@ class DrugBloc extends Bloc<DrugEvent, DrugState> {
   late StreamSubscription<DashBoardState> dashBoardStateubscription;
 
   DrugBloc({
-    required DashBoardBloc dashBoardBlod,
+    required DashBoardBloc dashBoardBloc,
     required PharmaRepository pharmaRepository,
   })  : _pharmaRepository = pharmaRepository,
         super(const DrugState()) {
     on<DruglocaleUIChanged>(_onDruglocaleUIChanged);
-    on<DrugImagePickerPressed>(_onDrugImagePickerPressed);
+    on<DrugImageCardDoublePressed>(_onDrugImageCardDoublePressed);
+
     on<DrugsSearched>(
       _onDrugsSearched,
       transformer: throttleDroppable(throttleDuration),
@@ -37,7 +38,7 @@ class DrugBloc extends Bloc<DrugEvent, DrugState> {
       transformer: throttleDroppable(throttleDuration),
     );
 
-    dashBoardStateubscription = dashBoardBlod.stream.listen((state) {
+    dashBoardStateubscription = dashBoardBloc.stream.listen((state) {
       switch (state.status) {
         case 'localeUIChanged':
           print(' -----------------   Drug dashBoardStateubscription  ' +
@@ -62,14 +63,14 @@ class DrugBloc extends Bloc<DrugEvent, DrugState> {
     });
   }
 
-  void _onDrugImagePickerPressed(
-    DrugImagePickerPressed event,
+  void _onDrugImageCardDoublePressed(
+    DrugImageCardDoublePressed event,
     Emitter<DrugState> emit,
   ) {
     //print(SLang.current.onforgotemailchanged);
 
     print(
-        '_onDrugImagePickerPressed ======================= ${event.drugID},   ');
+        '_onDrugImageCardDoublePressed ======================= ${event.drugID},   ');
 
     emit(state.copyWith(
       //localeUI: event.localeUI,
@@ -159,8 +160,8 @@ class DrugBloc extends Bloc<DrugEvent, DrugState> {
   ) async {
     if (state.hasReachedMax) return;
 
-    //final DrugStatus _drugStatus = DrugStatus.scrolloading;
-    emit(state.copyWith(status: DrugStatus.scrolloading));
+    //final DrugStatus _drugStatus = DrugStatus.scrollLoading;
+    emit(state.copyWith(status: DrugStatus.scrollLoading));
 
     final dartz.Either<List<DrugRecord>, ApiError> _repoResponse;
     try {

@@ -48,6 +48,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "darkMode": MessageLookupByLibrary.simpleMessage("نمط ألوان غامق"),
         "delete": MessageLookupByLibrary.simpleMessage("حذف"),
         "drugGroups": MessageLookupByLibrary.simpleMessage("أصناف اﻷدوية"),
+        "drugRecord": MessageLookupByLibrary.simpleMessage("بطاقة الدواء"),
         "drugs": MessageLookupByLibrary.simpleMessage("اﻷدوية"),
         "edit": MessageLookupByLibrary.simpleMessage("تعديل"),
         "email": MessageLookupByLibrary.simpleMessage("الإيميل"),

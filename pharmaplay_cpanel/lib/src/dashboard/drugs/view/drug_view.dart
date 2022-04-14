@@ -89,7 +89,7 @@ class _DrugInfoCardGridViewState extends State<DrugInfoCardGridView>
     return BlocListener<DrugBloc, DrugState>(
       listener: (context, state) {
         print(state.status.toString() + '    000000000000000000000000000000');
-        if (state.status == DrugStatus.scrolloading ||
+        if (state.status == DrugStatus.scrollLoading ||
             state.status == DrugStatus.initializing) {
           /*  CircularProgressIndicator(
             value: aniController.value,

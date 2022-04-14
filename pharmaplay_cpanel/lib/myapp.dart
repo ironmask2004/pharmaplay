@@ -10,6 +10,7 @@ import 'package:pharmaplay_cpanel/src/splash/splash.dart';
 import 'package:user_repository/user_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'drug_recored/drug_record.dart';
 import 'generated/l10n.dart';
 import 'src/dashboard/bloc/dashboard_bloc.dart';
 import 'src/dashboard/view/dashboard_page.dart';
@@ -54,13 +55,13 @@ class MyApp extends StatelessWidget {
             ),
             /*BlocProvider(
               create: (context) => DrugGroupBloc(
-                  dashBoardBlod: context.read<DashBoardBloc>(),
+                  dashBoardBloc: context.read<DashBoardBloc>(),
                   pharmaRepository: context.read<PharmaRepository>())
                 ..add(const DrugGroupsSearched()),
             ),
              BlocProvider(
               create: (context) => DrugBloc(
-                  dashBoardBlod:
+                  dashBoardBloc:
                       BlocProvider.of(context), //context.read<DashBoardBloc>(),
                   pharmaRepository: context.read<PharmaRepository>())
                 ..add(const DrugsSearched()),
@@ -205,6 +206,14 @@ class AppView extends StatelessWidget {
                         print('ImagePickerCalled : ' + state.toString());
                         _navigator.push<void>(
                           ImagePickerPage.route(),
+                          //  (route) => false,
+                        );
+                        break;
+
+                      case "DrugRecordCardCalled":
+                        print('DrugRecordCardCalled : ' + state.toString());
+                        _navigator.push<void>(
+                          DrugRecordPage.route(),
                           //  (route) => false,
                         );
 

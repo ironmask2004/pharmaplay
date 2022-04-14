@@ -81,7 +81,7 @@ class _DrugGroupInfoCardGridViewState extends State<DrugGroupInfoCardGridView> {
         listener: (context, state) {
           print(state.status.toString() +
               '00000000000000000000000000000000000000000000000000000000000000');
-          if (state.status == DrugGroupStatus.scrolloading ||
+          if (state.status == DrugGroupStatus.scrollLoading ||
               state.status == DrugGroupStatus.initializing) {
             /*  CircularProgressIndicator(
             value: aniController.value,

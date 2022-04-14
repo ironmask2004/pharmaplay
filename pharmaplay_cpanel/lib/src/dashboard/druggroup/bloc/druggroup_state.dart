@@ -6,7 +6,7 @@ enum DrugGroupStatus {
   success,
   failed,
   empty,
-  scrolloading
+  scrollLoading
 }
 
 class DrugGroupState extends Equatable {

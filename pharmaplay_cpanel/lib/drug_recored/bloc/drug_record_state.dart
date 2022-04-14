@@ -1,11 +1,21 @@
-part of 'drug_bloc.dart';
+part of 'drug_record_bloc.dart';
 
-enum DrugStatus { initializing, loading, success, failed, empty, scrollLoading }
+enum DrugRecordStatus {
+  initializing,
+  loading,
+  success,
+  failed,
+  empty,
+  scrollLoading,
+  isSubmissionFailure,
+  isSubmissionSuccess,
+  isSubmissionInProgress
+}
 
-class DrugState extends Equatable {
-  const DrugState(
-      {this.status = DrugStatus.empty,
-      this.drugs = const [],
+class DrugRecordState extends Equatable {
+  const DrugRecordState(
+      {this.status = DrugRecordStatus.empty,
+      this.drugRecords = const [],
       this.stateMsg = '',
       this.localeUI = 'en',
       this.hasReachedMax = false,
@@ -15,13 +25,14 @@ class DrugState extends Equatable {
       this.whereCond = '',
       this.searchType = SearchType.none,
       this.serachValue = '',
-      this.orderByFields = ''});
+      this.orderByFields = '',
+      this.errMsg = ''});
 
-  final DrugStatus status;
+  final DrugRecordStatus status;
   final String localeUI;
   final String whereCond;
   final bool hasReachedMax;
-  final List<DrugRecord> drugs;
+  final List<DrugRecord> drugRecords;
   final String stateMsg;
   final int startFrompage;
   final int currentPage;
@@ -29,11 +40,12 @@ class DrugState extends Equatable {
   final String orderByFields;
   final SearchType searchType;
   final String serachValue;
+  final String errMsg;
 
   @override
   List<Object> get props => [
         status,
-        drugs,
+        drugRecords,
         localeUI,
         whereCond,
         hasReachedMax,
@@ -43,34 +55,37 @@ class DrugState extends Equatable {
         stateMsg,
         searchType,
         serachValue,
-        orderByFields
+        orderByFields,
+        errMsg
       ];
 
-  DrugState copyWith(
-      {DrugStatus? status,
+  DrugRecordState copyWith(
+      {DrugRecordStatus? status,
       String? localeUI,
       String? whereCond,
       bool? hasReachedMax,
-      List<DrugRecord>? drugs,
+      List<DrugRecord>? drugRecords,
       String? stateMsg,
       int? startFrompage,
       int? currentPage,
       int? pageLength,
       SearchType? searchType,
       String? serachValue,
-      String? orderByFields}) {
-    return DrugState(
+      String? orderByFields,
+      String? errMsg}) {
+    return DrugRecordState(
         status: status ?? this.status,
         localeUI: localeUI ?? this.localeUI,
         whereCond: whereCond ?? this.whereCond,
         hasReachedMax: hasReachedMax ?? this.hasReachedMax,
-        drugs: drugs ?? this.drugs,
+        drugRecords: drugRecords ?? this.drugRecords,
         stateMsg: stateMsg ?? this.stateMsg,
         startFrompage: startFrompage ?? this.startFrompage,
         currentPage: currentPage ?? this.currentPage,
         pageLength: pageLength ?? this.pageLength,
         searchType: searchType ?? this.searchType,
         serachValue: serachValue ?? this.serachValue,
-        orderByFields: orderByFields ?? this.orderByFields);
+        orderByFields: orderByFields ?? this.orderByFields,
+        errMsg: errMsg ?? this.errMsg);
   }
 }

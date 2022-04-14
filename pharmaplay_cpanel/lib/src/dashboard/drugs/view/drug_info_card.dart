@@ -50,10 +50,9 @@ class DrugInfoCard extends StatelessWidget {
                     ),
                     onDoubleTap: () {
                       print('onDoubleTap drugID: ${drugInfo.drug.drugID}');
-                      context
-                          .read<DrugBloc>()
-                          .add(DrugImagePickerPressed(drugInfo.drug.drugID));
-                    } //do something,
+                      context.read<DrugBloc>().add(
+                          DrugImageCardDoublePressed(drugInfo.drug.drugID));
+                    } //do something,DrugImageCardDoublePressed
                     ),
               ),
               CardPopUpMenu(
@@ -66,6 +65,9 @@ class DrugInfoCard extends StatelessWidget {
                 },
                 onInfo: () {
                   print('onInfo ${drugInfo.drug.drugID}');
+                  context
+                      .read<DashBoardBloc>()
+                      .add(DrugRecordCardCalled(drugInfo));
                 },
               ),
             ],

@@ -82,5 +82,6 @@
   "loading": "Loading....",
   "edit":"Edit",
   "info":"Info",
-  "delete":"Delete"
+  "delete":"Delete",
+  "drugRecord":"Drug Card"
 }

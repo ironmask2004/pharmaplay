@@ -48,6 +48,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "darkMode": MessageLookupByLibrary.simpleMessage("Dark Mode"),
         "delete": MessageLookupByLibrary.simpleMessage("Delete"),
         "drugGroups": MessageLookupByLibrary.simpleMessage("Drug Groups"),
+        "drugRecord": MessageLookupByLibrary.simpleMessage("Drug Card"),
         "drugs": MessageLookupByLibrary.simpleMessage("Drugs"),
         "edit": MessageLookupByLibrary.simpleMessage("Edit"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),

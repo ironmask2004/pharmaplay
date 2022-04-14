@@ -45,6 +45,16 @@ class SideMenuClicked extends DashBoardEvent {
   List<Object> get props => [context];
 }
 
+class DrugRecordCardCalled extends DashBoardEvent {
+  //final BuildContext context;
+  final DrugRecord drugRecor;
+
+  const DrugRecordCardCalled(this.drugRecor);
+
+  @override
+  List<Object> get props => [drugRecor];
+}
+
 class RightMenuClicked extends DashBoardEvent {
   final BuildContext context; //= GlobalKey<ScaffoldState>();
 

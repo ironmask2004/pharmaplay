@@ -1,13 +1,13 @@
-part of 'drug_bloc.dart';
+part of 'drug_record_bloc.dart';
 
-abstract class DrugEvent extends Equatable {
-  const DrugEvent();
+abstract class DrugRecordEvent extends Equatable {
+  const DrugRecordEvent();
 
   @override
   List<Object> get props => [];
 }
 
-class DruglocaleUIChanged extends DrugEvent {
+class DruglocaleUIChanged extends DrugRecordEvent {
   const DruglocaleUIChanged(this.localeUI);
 
   final String localeUI;
@@ -16,7 +16,7 @@ class DruglocaleUIChanged extends DrugEvent {
   List<Object> get props => [localeUI];
 }
 
-class DrugImageCardDoublePressed extends DrugEvent {
+class DrugImageCardDoublePressed extends DrugRecordEvent {
   const DrugImageCardDoublePressed(this.drugID);
 
   final int drugID;
@@ -25,12 +25,12 @@ class DrugImageCardDoublePressed extends DrugEvent {
   List<Object> get props => [drugID];
 }
 
-class DrugsScrolledd extends DrugEvent {
-  const DrugsScrolledd();
+class DrugRecordScrolledd extends DrugRecordEvent {
+  const DrugRecordScrolledd();
 }
 
-class DrugsSearched extends DrugEvent {
-  final DrugStatus? drugStatus;
+class DrugRecordSearched extends DrugRecordEvent {
+  final DrugRecordStatus? drugRecordStatus;
   final String? localeUI;
   final String? whereCond;
   final int? startFrompage;
@@ -38,8 +38,8 @@ class DrugsSearched extends DrugEvent {
   final String? orderByFields;
   final SearchType? searchType;
   final String? serachValue;
-  const DrugsSearched({
-    this.drugStatus = DrugStatus.initializing,
+  const DrugRecordSearched({
+    this.drugRecordStatus = DrugRecordStatus.initializing,
     this.localeUI = 'en',
     this.whereCond = '',
     this.startFrompage = 1,
@@ -51,7 +51,7 @@ class DrugsSearched extends DrugEvent {
 
   @override
   List<Object> get props => [
-        drugStatus!,
+        drugRecordStatus!,
         localeUI!,
         whereCond!,
         startFrompage!,

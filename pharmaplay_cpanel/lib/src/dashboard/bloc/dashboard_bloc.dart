@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:equatable/equatable.dart';
+import 'package:pharma_repository/pharma_repository.dart';
 import 'package:pharmaplay_cpanel/src/dashboard/models/pharmatheme.dart';
 
 import 'package:pharmaplay_cpanel/src/utlites/shared_pref.dart';
@@ -13,6 +14,7 @@ class DashBoardBloc extends Bloc<DashBoardEvent, DashBoardState> {
     on<DashBoardInitialRequested>(_onDashBoardInitialRequested);
     on<SideMenuClicked>(_onSideMenuClicked);
     on<RightMenuClicked>(_onRightMenuClicked);
+    on<DrugRecordCardCalled>(_onDrugRecordCardCalled);
     on<UILocalChanged>(_onUILocalChanged);
 
     on<UIThemeModeChanged>(_onUIThemeModeChanged);
@@ -115,6 +117,20 @@ class DashBoardBloc extends Bloc<DashBoardEvent, DashBoardState> {
         secondaryColor: savedPharmTheme.secondaryColor,
         bgColor: savedPharmTheme.bgColor,
         fontbodyColor: savedPharmTheme.fontbodyColor));
+  }
+
+//====
+
+  void _onDrugRecordCardCalled(
+    DrugRecordCardCalled event,
+    Emitter<DashBoardState> emit,
+  ) async {
+    print('_onDrugRecordCardCalled!!');
+    //=> ThemeMode.system;
+
+    emit(state.copyWith(
+      status: 'DrugRecordCardCalled',
+    ));
   }
 
 //===========
