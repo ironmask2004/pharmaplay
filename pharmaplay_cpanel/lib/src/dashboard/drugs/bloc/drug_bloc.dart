@@ -20,11 +20,13 @@ EventTransformer<E> throttleDroppable<E>(Duration duration) {
 class DrugBloc extends Bloc<DrugEvent, DrugState> {
   final PharmaRepository _pharmaRepository;
   late StreamSubscription<DashBoardState> dashBoardStateubscription;
+  final DashBoardBloc _dashBoardBloc;
 
   DrugBloc({
     required DashBoardBloc dashBoardBloc,
     required PharmaRepository pharmaRepository,
   })  : _pharmaRepository = pharmaRepository,
+        _dashBoardBloc = dashBoardBloc,
         super(const DrugState()) {
     on<DruglocaleUIChanged>(_onDruglocaleUIChanged);
     on<DrugImageCardDoublePressed>(_onDrugImageCardDoublePressed);
@@ -38,7 +40,7 @@ class DrugBloc extends Bloc<DrugEvent, DrugState> {
       transformer: throttleDroppable(throttleDuration),
     );
 
-    dashBoardStateubscription = dashBoardBloc.stream.listen((state) {
+    dashBoardStateubscription = _dashBoardBloc.stream.listen((state) {
       switch (state.status) {
         case 'localeUIChanged':
           print(' -----------------   Drug dashBoardStateubscription  ' +
@@ -70,8 +72,8 @@ class DrugBloc extends Bloc<DrugEvent, DrugState> {
     //print(SLang.current.onforgotemailchanged);
 
     print(
-        '_onDrugImageCardDoublePressed ======================= ${event.drugID},   ');
-
+        '_onDrugImageCardDoublePressed ======================= ${event.drugRecord.drug.drugID},   ');
+    _dashBoardBloc.add(DrugRecordCardCalled(event.drugRecord));
     emit(state.copyWith(
       //localeUI: event.localeUI,
       status: DrugStatus.success,

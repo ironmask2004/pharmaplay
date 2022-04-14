@@ -23,4 +23,20 @@ class Drug with _$Drug {
       required final String drugRating}) = _Drug;
 
   factory Drug.fromJson(Map<String, dynamic> json) => _$DrugFromJson(json);
+
+  factory Drug.blank() => Drug(
+      drugID: 0,
+      drugNo: '',
+      brandName: '',
+      caliber: '',
+      genericDrugID: 0,
+      chemicalDrugID: 0,
+      manufactoryID: 0,
+      dosageFormID: 0,
+      drugClassID: 0,
+      drugFamilyID: 0,
+      licenseNumber: '',
+      licenseDate: '',
+      drugPrice: 0,
+      drugRating: '');
 }

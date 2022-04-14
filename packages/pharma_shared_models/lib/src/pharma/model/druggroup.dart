@@ -11,4 +11,6 @@ class DrugGroup with _$DrugGroup {
 
   factory DrugGroup.fromJson(Map<String, dynamic> json) =>
       _$DrugGroupFromJson(json);
+
+  factory DrugGroup.blank() => DrugGroup(drugGroupID: 0, drugGroupName: '');
 }

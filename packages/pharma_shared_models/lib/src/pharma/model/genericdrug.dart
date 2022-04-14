@@ -9,6 +9,9 @@ class GenericDrug with _$GenericDrug {
       {required final int genericDrugID,
       required final String genericDrugName}) = _GenericDrug;
 
+  factory GenericDrug.blank() =>
+      GenericDrug(genericDrugID: 0, genericDrugName: '');
+      
   factory GenericDrug.fromJson(Map<String, dynamic> json) =>
       _$GenericDrugFromJson(json);
 }

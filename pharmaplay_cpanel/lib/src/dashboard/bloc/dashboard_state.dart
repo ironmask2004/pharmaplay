@@ -11,7 +11,8 @@ class DashBoardState extends Equatable {
       this.bgColor = const Color(0xFF212332),
       this.fontbodyColor = const Color(0xFF3390EC),
       this.headerSerachField = '',
-      this.headSearchFilterApplied = false});
+      this.headSearchFilterApplied = false,
+      this.drugRecord});
 
   //static final GlobalKey<ScaffoldState> scaffoldKey =       GlobalKey<ScaffoldState>();
 
@@ -25,6 +26,7 @@ class DashBoardState extends Equatable {
   final Color fontbodyColor;
   final String status;
   final bool headSearchFilterApplied;
+  final DrugRecord? drugRecord;
 
   DashBoardState copyWith(
       {String? status,
@@ -35,7 +37,8 @@ class DashBoardState extends Equatable {
       Color? bgColor,
       Color? fontbodyColor,
       String? headerSerachField,
-      bool? headSearchFilterApplied}) {
+      bool? headSearchFilterApplied,
+      DrugRecord? drugRecord}) {
     return DashBoardState(
       status: status ?? this.status,
       localeUI: localeUI ?? this.localeUI,
@@ -47,6 +50,7 @@ class DashBoardState extends Equatable {
       headerSerachField: headerSerachField ?? this.headerSerachField,
       headSearchFilterApplied:
           headSearchFilterApplied ?? this.headSearchFilterApplied,
+      drugRecord: drugRecord ?? this.drugRecord,
     );
   }
 
@@ -60,7 +64,8 @@ class DashBoardState extends Equatable {
         bgColor,
         fontbodyColor,
         headerSerachField,
-        headSearchFilterApplied
+        headSearchFilterApplied,
+        drugRecord ?? DrugRecord.blank()
       ];
 }
 
@@ -77,5 +82,15 @@ class DashBoardStatelocaleUIChanged extends DashBoardState {
 class DashBoardStateUIThemeModeChanged extends DashBoardState {
   const DashBoardStateUIThemeModeChanged(ThemeMode uiThemeMode)
       : super(uiThemeMode: uiThemeMode);
+}
+
+
+class DashBoardDrugRecordCalled extends DashBoardState {
+  final DrugRecord currentDrugRecord ;
+
+  const DashBoardDrugRecordCalled(this.currentDrugRecord);
+
+  @override
+  List<Object> get props => [currentDrugRecord];
 }
 */

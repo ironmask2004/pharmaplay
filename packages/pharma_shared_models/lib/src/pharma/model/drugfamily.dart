@@ -12,4 +12,7 @@ class DrugFamily with _$DrugFamily {
 
   factory DrugFamily.fromJson(Map<String, dynamic> json) =>
       _$DrugFamilyFromJson(json);
+
+  factory DrugFamily.blank() =>
+      DrugFamily(drugFamilyID: 0, drugClassID: 0, drugFamilyName: '');
 }

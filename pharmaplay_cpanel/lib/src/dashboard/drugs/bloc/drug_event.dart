@@ -17,12 +17,12 @@ class DruglocaleUIChanged extends DrugEvent {
 }
 
 class DrugImageCardDoublePressed extends DrugEvent {
-  const DrugImageCardDoublePressed(this.drugID);
+  const DrugImageCardDoublePressed(this.drugRecord);
 
-  final int drugID;
+  final DrugRecord drugRecord;
 
   @override
-  List<Object> get props => [drugID];
+  List<Object> get props => [drugRecord];
 }
 
 class DrugsScrolledd extends DrugEvent {

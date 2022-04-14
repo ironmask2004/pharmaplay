@@ -9,6 +9,8 @@ class ChemicalDrug with _$ChemicalDrug {
       {required final int chemicalDrugID,
       required final String chemicalDrugName}) = _ChemicalDrug;
 
+  factory ChemicalDrug.bank() =>
+      ChemicalDrug(chemicalDrugID: 0, chemicalDrugName: '');
   factory ChemicalDrug.fromJson(Map<String, dynamic> json) =>
       _$ChemicalDrugFromJson(json);
 }

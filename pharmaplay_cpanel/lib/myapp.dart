@@ -15,6 +15,7 @@ import 'generated/l10n.dart';
 import 'src/dashboard/bloc/dashboard_bloc.dart';
 import 'src/dashboard/view/dashboard_page.dart';
 import 'src/login/login.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({
@@ -109,6 +110,7 @@ class AppView extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             localizationsDelegates: const [
               SLang.delegate,
+              FormBuilderLocalizations.delegate,
               GlobalMaterialLocalizations.delegate,
               GlobalWidgetsLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate,

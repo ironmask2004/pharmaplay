@@ -126,11 +126,9 @@ class DashBoardBloc extends Bloc<DashBoardEvent, DashBoardState> {
     Emitter<DashBoardState> emit,
   ) async {
     print('_onDrugRecordCardCalled!!');
-    //=> ThemeMode.system;
 
     emit(state.copyWith(
-      status: 'DrugRecordCardCalled',
-    ));
+        status: 'DrugRecordCardCalled', drugRecord: event.drugRecord));
   }
 
 //===========

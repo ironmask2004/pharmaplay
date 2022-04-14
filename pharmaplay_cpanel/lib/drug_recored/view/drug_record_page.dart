@@ -25,7 +25,7 @@ class DrugRecordPage extends StatelessWidget {
                   RepositoryProvider.of<PharmaRepository>(context),
             );
           },
-          child: DrugRecordForm(), // LoginForm(),
+          child: const DrugRecordForm(), // LoginForm(),
         ),
       ),
     );

@@ -50,8 +50,9 @@ class DrugInfoCard extends StatelessWidget {
                     ),
                     onDoubleTap: () {
                       print('onDoubleTap drugID: ${drugInfo.drug.drugID}');
-                      context.read<DrugBloc>().add(
-                          DrugImageCardDoublePressed(drugInfo.drug.drugID));
+                      context
+                          .read<DrugBloc>()
+                          .add(DrugImageCardDoublePressed(drugInfo));
                     } //do something,DrugImageCardDoublePressed
                     ),
               ),

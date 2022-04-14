@@ -12,4 +12,7 @@ class Manufactory with _$Manufactory {
 
   factory Manufactory.fromJson(Map<String, dynamic> json) =>
       _$ManufactoryFromJson(json);
+
+  factory Manufactory.blank() =>
+      Manufactory(manufactoryID: 0, manufactoryName: '', manufactoryRating: '');
 }

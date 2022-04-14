@@ -17,7 +17,7 @@ Future<void> main() async {
   TokenPair _tokenPair = TokenPair(tokenId, refreshToken);
   print('Token Saved Pair:' + _tokenPair.toJson().toString());
   print(loggedInFlag);
-/*
+
   runApp(MyApp(
     authenticationRepository: AuthenticationRepository(
         loggedInFlag, _tokenPair, '82.137.207.84:9093'),
@@ -25,13 +25,13 @@ Future<void> main() async {
     pharmaRepository: PharmaRepository('82.137.207.84:9093'),
   ));
 
- */
-  runApp(MyApp(
+  /**runApp(MyApp(
     authenticationRepository: AuthenticationRepository(
         loggedInFlag, _tokenPair, 'pharmaplay.mywire.org:9093'),
     userRepository: UserRepository('pharmaplay.mywire.org:9093'),
     pharmaRepository: PharmaRepository('pharmaplay.mywire.org:9093'),
   ));
+*/
 }
 
 
