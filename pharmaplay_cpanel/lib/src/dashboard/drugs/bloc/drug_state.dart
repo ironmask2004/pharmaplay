@@ -15,7 +15,8 @@ class DrugState extends Equatable {
       this.whereCond = '',
       this.searchType = SearchType.none,
       this.serachValue = '',
-      this.orderByFields = ''});
+      this.orderByFields = '',
+      this.cuurrentDrugCardIndex = -1});
 
   final DrugStatus status;
   final String localeUI;
@@ -29,6 +30,7 @@ class DrugState extends Equatable {
   final String orderByFields;
   final SearchType searchType;
   final String serachValue;
+  final int cuurrentDrugCardIndex;
 
   @override
   List<Object> get props => [
@@ -43,7 +45,8 @@ class DrugState extends Equatable {
         stateMsg,
         searchType,
         serachValue,
-        orderByFields
+        orderByFields,
+        cuurrentDrugCardIndex
       ];
 
   DrugState copyWith(
@@ -58,7 +61,8 @@ class DrugState extends Equatable {
       int? pageLength,
       SearchType? searchType,
       String? serachValue,
-      String? orderByFields}) {
+      String? orderByFields,
+      int? cuurrentDrugCardIndex}) {
     return DrugState(
         status: status ?? this.status,
         localeUI: localeUI ?? this.localeUI,
@@ -71,6 +75,8 @@ class DrugState extends Equatable {
         pageLength: pageLength ?? this.pageLength,
         searchType: searchType ?? this.searchType,
         serachValue: serachValue ?? this.serachValue,
-        orderByFields: orderByFields ?? this.orderByFields);
+        orderByFields: orderByFields ?? this.orderByFields,
+        cuurrentDrugCardIndex:
+            cuurrentDrugCardIndex ?? this.cuurrentDrugCardIndex);
   }
 }

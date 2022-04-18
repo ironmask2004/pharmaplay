@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'dart:convert';
+
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_extra_fields/form_builder_extra_fields.dart';
+import 'package:pharma_repository/pharma_repository.dart';
 import 'package:pharmaplay_cpanel/drug_recored/drug_record.dart';
 
 //import 'data.dart';
@@ -8,6 +11,8 @@ import 'package:form_builder_validators/form_builder_validators.dart';
 
 import 'package:pharmaplay_cpanel/generated/l10n.dart';
 import 'package:pharmaplay_cpanel/src/dashboard/dashboard.dart';
+import 'package:pharmaplay_cpanel/src/dashboard/drugs/drug.dart';
+import 'package:pharmaplay_cpanel/src/utlites/data_lists.dart';
 
 class DrugRecordForm extends StatelessWidget {
   const DrugRecordForm({Key? key}) : super(key: key);
@@ -69,12 +74,13 @@ class _DrugFormBuilderState extends State<DrugFormBuilder> {
         padding: const EdgeInsets.all(8.0),
         child: FormBuilder(
           key: _formKey,
+          initialValue: getIniailCardValues(context),
           autovalidateMode: AutovalidateMode.onUserInteraction,
           child: Column(
             children: [
               FormBuilderTextField(
                 autovalidateMode: AutovalidateMode.always,
-                name: 'DrugNo',
+                name: 'drugNo',
                 decoration: InputDecoration(
                   labelText: 'DrugNo',
                   suffixIcon: _DrugNoHasError
@@ -161,6 +167,29 @@ class _DrugFormBuilderState extends State<DrugFormBuilder> {
                 textInputAction: TextInputAction.next,
               ),
               const SizedBox(height: 10),
+//  drugGroupID
+
+              FormBuilderSearchableDropdown<String> (
+                name: 'ar__manufactoryName',
+                items: () => await  getDrugroupslist(context),
+                onChanged: _onChanged,
+                showSearchBox: true,
+                isFilteredOnline: true,
+                compareFn: (item, selectedItem) =>
+                    item!.toLowerCase() == selectedItem!.toLowerCase(),
+                /*onFind: (text) async {
+                  // await Future.delayed(const Duration(seconds: 1));
+                  return DataLists(
+                          pharmaRepository: context.read<PharmaRepository>())
+                      .getDrugroupsString;
+
+                  //   druggrouplist2 = druggrouplist.where((element) =>
+                  //      element.toLowerCase().contains(text.toLowerCase()))
+                  //  .toList();
+                },*/
+                decoration: const InputDecoration(
+                    labelText: 'Searchable Dropdown Online'),
+              ),
 
               Row(
                 children: <Widget>[
@@ -205,6 +234,22 @@ class _DrugFormBuilderState extends State<DrugFormBuilder> {
   }
 }
 
+Future<List<String>> getDrugroupslist(BuildContext context) async {
+  var v1 = await DataLists(pharmaRepository: context.read<PharmaRepository>())
+      .getDrugroupsString;
+  return v1;
+}
+
+Map<String, dynamic> getIniailCardValues(BuildContext context) {
+  var values = context.read<DashBoardBloc>().state.drugRecord;
+  //Map drugMap = json.decode(values?.drug.toString() ?? '');
+
+  return {
+    'drugNo': values?.drug.drugNo ?? 0,
+    'ar__brandName': values?.drug.brandName,
+    'en__brandName': values?.drug.brandName,
+  };
+}
 /*
 class DrugFormBuilder extends StatefulWidget {
   const DrugFormBuilder({Key? key}) : super(key: key);
