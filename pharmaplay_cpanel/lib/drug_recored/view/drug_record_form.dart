@@ -169,26 +169,25 @@ class _DrugFormBuilderState extends State<DrugFormBuilder> {
               const SizedBox(height: 10),
 //  drugGroupID
 
-              FormBuilderSearchableDropdown<String> (
-                name: 'ar__manufactoryName',
-                items: () => await  getDrugroupslist(context),
+              FormBuilderSearchableDropdown<String>(
+                name: 'drugGroupName',
+                // items: allCountries,
                 onChanged: _onChanged,
                 showSearchBox: true,
                 isFilteredOnline: true,
-                compareFn: (item, selectedItem) =>
-                    item!.toLowerCase() == selectedItem!.toLowerCase(),
-                /*onFind: (text) async {
-                  // await Future.delayed(const Duration(seconds: 1));
-                  return DataLists(
-                          pharmaRepository: context.read<PharmaRepository>())
-                      .getDrugroupsString;
+                // compareFn: (item, selectedItem) =>
+                //     item!.toLowerCase() == selectedItem!.toLowerCase(),
+                onFind: (text) async {
+                  var resault = await getDrugroupsStringslist(context);
 
-                  //   druggrouplist2 = druggrouplist.where((element) =>
-                  //      element.toLowerCase().contains(text.toLowerCase()))
-                  //  .toList();
-                },*/
-                decoration: const InputDecoration(
-                    labelText: 'Searchable Dropdown Online'),
+                  return resault
+                      .where((element) => element
+                          .toString()
+                          .toLowerCase()
+                          .contains(text!.toLowerCase()))
+                      .toList();
+                },
+                decoration: const InputDecoration(labelText: 'drugGroupName'),
               ),
 
               Row(
@@ -234,9 +233,24 @@ class _DrugFormBuilderState extends State<DrugFormBuilder> {
   }
 }
 
-Future<List<String>> getDrugroupslist(BuildContext context) async {
-  var v1 = await DataLists(pharmaRepository: context.read<PharmaRepository>())
-      .getDrugroupsString;
+Future<List<DrugGroup>> getDrugroupslist(BuildContext context) async {
+  var v1 = await DataLists(
+          pharmaRepository: context.read<PharmaRepository>(),
+          localeUI: context.read<DashBoardBloc>().state.localeUI.languageCode)
+      .getDrugroups;
+  print(v1);
+  return v1;
+}
+
+Future<List<String>> getDrugroupsStringslist(BuildContext context) async {
+  var v1 = await DataLists(
+          pharmaRepository: context.read<PharmaRepository>(),
+          localeUI: context.read<DashBoardBloc>().state.localeUI.languageCode)
+      .getDrugroupsStrings;
+  print('-----');
+
+  print(v1);
+  print('-----');
   return v1;
 }
 
@@ -248,6 +262,8 @@ Map<String, dynamic> getIniailCardValues(BuildContext context) {
     'drugNo': values?.drug.drugNo ?? 0,
     'ar__brandName': values?.drug.brandName,
     'en__brandName': values?.drug.brandName,
+    'drugGroupName':
+        '{${values?.drugGroup.drugGroupName.trim()} , ${values?.drugGroup.drugGroupID}}',
   };
 }
 /*
