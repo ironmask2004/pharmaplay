@@ -83,5 +83,6 @@
   "edit":"Edit",
   "info":"Info",
   "delete":"Delete",
-  "drugRecord":"Drug Card"
+  "drugRecord":"Drug Card",
+  "pickimage":"Pick Image"
 }

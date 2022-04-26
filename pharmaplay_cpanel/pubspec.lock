@@ -462,6 +462,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "7.1.0"
+  form_builder_image_picker:
+    dependency: "direct dev"
+    description:
+      name: form_builder_image_picker
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.0.0"
   form_builder_validators:
     dependency: "direct dev"
     description:

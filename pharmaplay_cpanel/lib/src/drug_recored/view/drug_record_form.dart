@@ -1,18 +1,26 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
-
+import 'package:form_builder_image_picker/form_builder_image_picker.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_extra_fields/form_builder_extra_fields.dart';
 import 'package:pharma_repository/pharma_repository.dart';
-import 'package:pharmaplay_cpanel/drug_recored/drug_record.dart';
+import 'package:pharmaplay_cpanel/src/drug_recored/drug_record.dart';
 
 //import 'data.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 
 import 'package:pharmaplay_cpanel/generated/l10n.dart';
 import 'package:pharmaplay_cpanel/src/dashboard/dashboard.dart';
-import 'package:pharmaplay_cpanel/src/dashboard/drugs/drug.dart';
 import 'package:pharmaplay_cpanel/src/utlites/data_lists.dart';
+
+class ApiImage {
+  final String imageUrl;
+  final String id;
+  ApiImage({
+    required this.imageUrl,
+    required this.id,
+  });
+}
 
 class DrugRecordForm extends StatelessWidget {
   const DrugRecordForm({Key? key}) : super(key: key);
@@ -189,6 +197,28 @@ class _DrugFormBuilderState extends State<DrugFormBuilder> {
                 },
                 decoration: const InputDecoration(labelText: 'drugGroupName'),
               ),
+
+//======
+
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  FormBuilderImagePicker(
+                    name: 'photos',
+                    displayCustomType: (obj) =>
+                        obj is ApiImage ? obj.imageUrl : obj,
+                    decoration: const InputDecoration(labelText: 'Pick Photos'),
+                    maxImages: 1,
+                    initialValue: const [
+                      // "assets/icons/drop_box.svg",
+                      "assets/images/logo.png",
+                      // 'https://images.pexels.com/photos/8311418/pexels-photo-8311418.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260',
+                    ],
+                  ),
+                ],
+              ),
+
+              //====
 
               Row(
                 children: <Widget>[
@@ -496,3 +526,4 @@ class _DrugFormBuilderState extends State<DrugFormBuilder> {
   }
 }
 */
+

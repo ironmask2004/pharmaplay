@@ -501,6 +501,16 @@ class SLang {
       args: [],
     );
   }
+
+  /// `Pick Image`
+  String get pickimage {
+    return Intl.message(
+      'Pick Image',
+      name: 'pickimage',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<SLang> {

@@ -52,6 +52,7 @@ dev_dependencies:
     sdk: flutter
   font_awesome_flutter: ^9.2.0
   form_builder_extra_fields: ^7.1.0
+  form_builder_image_picker: ^2.0.0
   form_builder_validators: ^8.1.0
   formz: ^0.4.1
   foundation_fluttify: ^0.12.1+1
