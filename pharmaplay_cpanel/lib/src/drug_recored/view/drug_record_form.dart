@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
+import 'package:cross_file/cross_file.dart';
+
+import 'dart:io';
+import 'dart:typed_data';
+
+//import 'package:xfile/xfile.dart';
 import 'package:form_builder_image_picker/form_builder_image_picker.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_extra_fields/form_builder_extra_fields.dart';
@@ -211,7 +217,7 @@ class _DrugFormBuilderState extends State<DrugFormBuilder> {
                     maxImages: 1,
                     initialValue: const [
                       // "assets/icons/drop_box.svg",
-                      "assets/images/logo.png",
+                      //  "assets/images/logo.png",
                       // 'https://images.pexels.com/photos/8311418/pexels-photo-8311418.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260',
                     ],
                   ),
@@ -225,9 +231,33 @@ class _DrugFormBuilderState extends State<DrugFormBuilder> {
                   Expanded(
                     child: MaterialButton(
                       color: Theme.of(context).colorScheme.secondary,
-                      onPressed: () {
+                      onPressed: () async {
                         if (_formKey.currentState?.saveAndValidate() ?? false) {
                           debugPrint(_formKey.currentState?.value.toString());
+
+                          try {
+                            var val =
+                                _formKey.currentState?.fields['photos']!.value;
+                            XFile selectedImg = val!.first;
+                            debugPrint('changed 1 photo to : ' +
+                                selectedImg.path.toString());
+
+                            Uint8List imgbytes1 =
+                                await selectedImg.readAsBytes();
+
+                            debugPrint(selectedImg.runtimeType.toString());
+                            debugPrint(imgbytes1.toString());
+
+                            // convert to bytes
+                            var base64Image = base64Encode(imgbytes1);
+                            debugPrint('changed  2 photo to : ' +
+                                base64Image.toString());
+
+                            // convert to string
+
+                          } catch (e) {
+                            debugPrint(e.toString());
+                          }
                         } else {
                           debugPrint(_formKey.currentState?.value.toString());
                           debugPrint('validation failed');
