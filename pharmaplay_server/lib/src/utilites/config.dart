@@ -1,4 +1,4 @@
-import 'package:dotenv/dotenv.dart' show load, clean, isEveryDefined, env;
+import 'package:dotenv/dotenv.dart';
 
 class Env {
   late final String secretKey;
@@ -16,7 +16,7 @@ class Env {
 
   Env() {
 //! dotenv package : adding .env file  to platform.environment
-    load(); //env load
+    var env = DotEnv(includePlatformEnvironment: true)..load();
     secretKey = env['secretKey'] ?? '25BBD3FF-975D-4D45-8FFF-B3FA92155CFF';
     redisHost = env['redisHost'] ?? 'localhost';
     redisPort = int.parse(env['redisPort'] ?? '5432');
@@ -29,7 +29,7 @@ class Env {
     dbPassword = env['dbPassword'] ?? 'Password';
     smtpEmail = env['mjdoulin@gmail.com'] ?? 'mjdoulin@gmail.com';
     smtpPassword = env['smtpPassword'] ?? 'smtpPassword';
-    clean(); //env clean
+    env.clear(); //env clean
   }
 }
 
