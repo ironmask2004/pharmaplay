@@ -12,7 +12,7 @@ class Tafqeet {
   var amount = 0;
 
   String get tafqeet {
-    return (getTafqeet('123456789123456789.11'));
+    return (getTafqeet('1.16'));
     // return ('$amount  فقط لاغير');
   }
 }
@@ -325,6 +325,14 @@ String getTafqeet(String am) {
 
   if (((amount.length) - p) == 1) {
     amount = '${amount}0';
+  }
+
+  if (((amount.length)) >= 22) {
+    return ('!!!تجاوزت الحد الاعلى للرقم');
+  }
+
+  if (((amount.length) - p) > 3) {
+    return ('!!!تجاوزت الحد الاعلى للاجزاء (0.00) ');
   }
 
   v = '000000000000000000.00';
