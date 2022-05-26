@@ -9,13 +9,17 @@ class Awesome {
 }
 
 class Tafqeet {
-  String amount;
-  Tafqeet({
-    required this.amount,
-  });
+  String am;
+  Tafqeet(
+    this.am,
+  );
+
+  set amount(String newAmount) {
+    am = newAmount;
+  }
 
   String get tafqeet {
-    return (getTafqeet(amount));
+    return (getTafqeet(am));
     // return ('$amount  فقط لاغير');
   }
 }
