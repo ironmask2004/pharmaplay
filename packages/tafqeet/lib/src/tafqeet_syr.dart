@@ -4,13 +4,10 @@ import 'dart:ffi';
 import 'dart:typed_data';
 
 /// Checks if you are awesome. Spoiler: you are.
-class Awesome {
-  bool get isAwesome => true;
-}
 
-class Tafqeet {
+class TafqeetSyr {
   String am;
-  Tafqeet(
+  TafqeetSyr(
     this.am,
   );
 
@@ -429,6 +426,8 @@ String getTafqeet(String am) {
     taf = '$taf ليرة';
   }
 
+  taf = '$taf سورية';
+
   if ((x[1] > 0)) {
     t = spellnum('MX', x[1], 0, 0);
 
@@ -445,7 +444,7 @@ String getTafqeet(String am) {
     taf = 'صفر ليرة';
   }
 
-  taf = 'فقط $taf سورية لاغير';
+  taf = 'فقط $taf  لاغير';
 
   return (taf);
 }
