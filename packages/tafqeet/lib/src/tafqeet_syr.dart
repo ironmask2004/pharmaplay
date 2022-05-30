@@ -16,13 +16,13 @@ class TafqeetSyr {
   }
 
   String get tafqeet {
-    return (getTafqeet(am));
+    return (getTafqeetSyr(am));
     // return ('$amount  فقط لاغير');
   }
 }
 
 //  --################################################################
-String get_arr_val(String arr, var pR, var pC) {
+String getArrValSyr(String arr, var pR, var pC) {
   List<String> mx = [
     ' ',
     ' ',
@@ -106,12 +106,12 @@ String get_arr_val(String arr, var pR, var pC) {
     'مليار',
     'ملياراً',
     'مليارات',
-    'بليون',
-    'بليوناً',
-    'بلايين',
     'ترليون',
     'ترليوناً',
-    'ترليونات'
+    'بلايين',
+    'كوادريليون',
+    'كوادريليوناً',
+    'كوادريليونات'
   ];
   List<String> a = [
     ' ',
@@ -130,12 +130,12 @@ String get_arr_val(String arr, var pR, var pC) {
     'مليار',
     'ملياران',
     'مليارا',
-    'بليون',
-    'بليونان',
-    'بليونا',
     'ترليون',
     'ترليونان',
-    'ترليونا'
+    'ترليونا',
+    'كوادريليون',
+    'كوادريليونان',
+    'كوادريليونا'
   ];
   //print('$arr[$pR * 3 + $pC + 1]');
   if (arr == 'MX') {
@@ -153,7 +153,7 @@ String get_arr_val(String arr, var pR, var pC) {
 ///##########################################
 ///
 ///--################################################################
-String spellnum(String m1, var x, var part, var zx) {
+String spellNumSyr(String m1, var x, var part, var zx) {
   int? x100 = 0;
   int? x10 = 0;
 
@@ -175,27 +175,27 @@ String spellnum(String m1, var x, var part, var zx) {
     t = '';
     return (t);
   } else if (x == 1) {
-    t = get_arr_val('A', part, 0);
+    t = getArrValSyr('A', part, 0);
   } else if (x == 2) {
     if ((zx == 0)) {
-      t = get_arr_val('A', part, 2);
+      t = getArrValSyr('A', part, 2);
     } else {
-      t = get_arr_val('A', part, 1);
+      t = getArrValSyr('A', part, 1);
     }
   } else if (x == 10) {
-    if (get_arr_val(m1, 1, 0) == 'احدى') {
+    if (getArrValSyr(m1, 1, 0) == 'احدى') {
       t = 'عشر';
     } else {
       t = 'عشرة';
     }
   } else if (x == 11) {
-    if (get_arr_val(m1, 1, 0) == 'احدى') {
+    if (getArrValSyr(m1, 1, 0) == 'احدى') {
       t = 'احدى عشرة';
     } else {
       t = 'احد عشر';
     }
   } else if (x == 12) {
-    if (get_arr_val(m1, 1, 0) == 'احدى') {
+    if (getArrValSyr(m1, 1, 0) == 'احدى') {
       t = 'اثنتا عشرة';
     } else {
       t = 'اثنا عشر';
@@ -213,39 +213,39 @@ String spellnum(String m1, var x, var part, var zx) {
       t = 'مئتا';
     } else {
       if ((x10 == 0 && (x1 == 1 || x1 == 2))) {
-        t = get_arr_val(m1, x100, 2) +
+        t = getArrValSyr(m1, x100, 2) +
             w1 +
-            get_arr_val('A', part, (x1! - 1)) +
+            getArrValSyr('A', part, (x1! - 1)) +
             w2 +
-            get_arr_val(m1, x10, 1);
+            getArrValSyr(m1, x10, 1);
       } else if ((x10 == 1 && (x1 == 1 || x1 == 2 || x1 == 0))) {
         if (x1 == 1) {
-          if (get_arr_val(m1, 1, 0) == 'احدى') {
-            t = '${get_arr_val(m1, x100, 2)} واحدى عشرة';
+          if (getArrValSyr(m1, 1, 0) == 'احدى') {
+            t = '${getArrValSyr(m1, x100, 2)} واحدى عشرة';
           } else {
-            t = '${get_arr_val(m1, x100, 2)} واحد عشر';
+            t = '${getArrValSyr(m1, x100, 2)} واحد عشر';
           }
         } else if (x1 == 2) {
-          if (get_arr_val(m1, 1, 0) == 'احدى') {
-            t = '${get_arr_val(m1, x100, 2)} واثنتا عشرة';
+          if (getArrValSyr(m1, 1, 0) == 'احدى') {
+            t = '${getArrValSyr(m1, x100, 2)} واثنتا عشرة';
           } else {
-            t = '${get_arr_val(m1, x100, 2)} واثنا عشر';
+            t = '${getArrValSyr(m1, x100, 2)} واثنا عشر';
           }
         } else if (x1 == 0) {
           if ((x10 == 1 && x1 == 0)) {
-            if (get_arr_val(m1, 1, 0) == 'احدى') {
-              t = '${get_arr_val(m1, x100, 2)} وعشر';
+            if (getArrValSyr(m1, 1, 0) == 'احدى') {
+              t = '${getArrValSyr(m1, x100, 2)} وعشر';
             } else {
-              t = '${get_arr_val(m1, x100, 2)} وعشرة';
+              t = '${getArrValSyr(m1, x100, 2)} وعشرة';
             }
           }
         }
       } else {
-        t = get_arr_val(m1, x100, 2) +
+        t = getArrValSyr(m1, x100, 2) +
             w1 +
-            get_arr_val(m1, x1, 0) +
+            getArrValSyr(m1, x1, 0) +
             w2 +
-            get_arr_val(m1, x10, 1);
+            getArrValSyr(m1, x10, 1);
       }
     }
   }
@@ -281,7 +281,7 @@ String spellnum(String m1, var x, var part, var zx) {
       u = 2;
     }
 
-    t = '$t ${get_arr_val('W', part, u)}';
+    t = '$t ${getArrValSyr('W', part, u)}';
   }
 
   return (t);
@@ -289,7 +289,7 @@ String spellnum(String m1, var x, var part, var zx) {
 //  --################################################################
 
 //  --################################################################
-String getTafqeet(String am) {
+String getTafqeetSyr(String am) {
   String j;
   String t;
   String amount;
@@ -348,7 +348,7 @@ String getTafqeet(String am) {
   //print('fraction: ${x[1]}');
 
   if ((x[7] > 0)) {
-    t = spellnum('MX', x[7], 6, x[6] + x[5] + x[4] + x[3] + x[2]);
+    t = spellNumSyr('MX', x[7], 6, x[6] + x[5] + x[4] + x[3] + x[2]);
     taf = taf + t;
     flag = 1;
     f = 1;
@@ -357,7 +357,7 @@ String getTafqeet(String am) {
   }
 
   if ((x[6] > 0)) {
-    t = spellnum('MX', x[6], 5, x[5] + x[4] + x[3] + x[2]);
+    t = spellNumSyr('MX', x[6], 5, x[5] + x[4] + x[3] + x[2]);
     if ((f == 1)) {
       taf = '$taf و';
     }
@@ -369,7 +369,7 @@ String getTafqeet(String am) {
   }
 
   if ((x[5] > 0)) {
-    t = spellnum('MX', x[5], 4, x[4] + x[3] + x[2]);
+    t = spellNumSyr('MX', x[5], 4, x[4] + x[3] + x[2]);
 
     if ((f == 1)) {
       taf = '$taf و';
@@ -383,7 +383,7 @@ String getTafqeet(String am) {
   }
 
   if ((x[4] > 0)) {
-    t = spellnum('MX', x[4], 3, x[3] + x[2]);
+    t = spellNumSyr('MX', x[4], 3, x[3] + x[2]);
 
     if ((f == 1)) {
       taf = '$taf و';
@@ -397,7 +397,7 @@ String getTafqeet(String am) {
   }
 
   if ((x[3] > 0)) {
-    t = spellnum('MX', x[3], 2, x[2]);
+    t = spellNumSyr('MX', x[3], 2, x[2]);
 
     if ((f == 1)) {
       taf = '$taf و';
@@ -411,7 +411,7 @@ String getTafqeet(String am) {
   }
 
   if ((x[2] > 0)) {
-    t = spellnum('MY', x[2], 1, 0);
+    t = spellNumSyr('MY', x[2], 1, 0);
 
     if ((f == 1)) {
       taf = '$taf و';
@@ -426,10 +426,11 @@ String getTafqeet(String am) {
     taf = '$taf ليرة';
   }
 
-  taf = '$taf سورية';
+  print('flag: $flag f: $f ');
+  if (f == 1) taf = '$taf سورية';
 
   if ((x[1] > 0)) {
-    t = spellnum('MX', x[1], 0, 0);
+    t = spellNumSyr('MX', x[1], 0, 0);
 
     if ((f == 1)) {
       taf = '$taf و';
@@ -440,7 +441,8 @@ String getTafqeet(String am) {
     f = 1;
   }
 
-  if ((am == 0)) {
+  //print(' $am : ${double.tryParse(am)}');
+  if ((double.tryParse(am) == 0)) {
     taf = 'صفر ليرة';
   }
 

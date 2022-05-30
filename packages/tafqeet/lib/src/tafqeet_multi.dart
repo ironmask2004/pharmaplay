@@ -289,9 +289,7 @@ String spellNum(String m1, var x, var part, var zx) {
 //  --################################################################
 
 //  --################################################################
-String getTafqeetMulti(
-  String am,
-) {
+String getTafqeetMulti(String am) {
   String j;
   String t;
   String amount;
