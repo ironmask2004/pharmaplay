@@ -139,7 +139,7 @@ String getArrVal(
 //    'قرشان',
     (currency.currencyFrcMultiple),
     //'ليرة واحدة',
-    '${currency.currency}${currency.gender == 'F' ? 'واحدة' : 'واحداً'}',
+    '${currency.currency}${currency.gender == 'F' ? 'واحدة' : ' واحداً'}',
     //'ليرتان',
     (currency.currencyMultiple),
     //'ليرتان',
@@ -339,26 +339,66 @@ String getTafqeetMulti(String am, TafqeetCurrency currency) {
 
   // print('Founf DOT @ $p  lenght: ${amount.length}');
 
-  if ((p == -1)) {
-    amount = '$amount.00';
+  switch (currency.currncyFrcDigits) {
+    case 2:
+      {
+        if ((p == -1)) {
+          amount = '$amount.00';
 
-    j = '00';
-  } else if ((amount.length - p == 2)) {
-    amount = '${amount}0';
+          j = '00';
+        } else if ((amount.length - p == 2)) {
+          amount = '${amount}0';
 
-    j = '00';
-  } else if (((amount.length) - p) == 1) {
-    amount = '${amount}00';
-    j = '00';
-  } else if (((amount.length)) >= 22) {
-    return ('!!!تجاوزت الحد الاعلى للرقم');
-  } else if (((amount.length) - p) > 3) {
-    return ('!!!تجاوزت الحد الاعلى للاجزاء (0.00) ');
+          j = '00';
+        } else if (((amount.length) - p) == 1) {
+          amount = '${amount}00';
+          j = '00';
+        } else if (((amount.length)) >= 22) {
+          return ('!!!تجاوزت الحد الاعلى للرقم');
+        } else if (((amount.length) - p) > 3) {
+          return ('!!!تجاوزت الحد الاعلى للاجزاء (0.00) ');
+        }
+
+        v = '000000000000000000.00';
+        j = v.substring(0, 21 - (amount.length)) + amount;
+      }
+      break;
+
+    case 3:
+      {
+        if ((p == -1)) {
+          amount = '$amount.000';
+
+          j = '000';
+        } else if ((amount.length - p == 1)) {
+          amount = '${amount}000';
+
+          j = '000';
+        } else if ((amount.length - p == 2)) {
+          amount = '${amount}00';
+
+          j = '000';
+        } else if (((amount.length) - p) == 3) {
+          amount = '${amount}0';
+          j = '000';
+        } else if (((amount.length)) >= 23) {
+          return ('!!!تجاوزت الحد الاعلى للرقم');
+        } else if (((amount.length) - p) > 4) {
+          return ('!!!تجاوزت الحد الاعلى للاجزاء (0.00) ');
+        }
+
+        v = '000000000000000000.000';
+        j = v.substring(0, 22 - (amount.length)) + amount;
+      }
+      break;
+
+    default:
+      {
+        return ('!!! خطأ في  الحد الاعلى للاجزاء (0.00) ');
+      }
   }
 
-  v = '000000000000000000.00';
-  j = v.substring(0, 21 - (amount.length)) + amount;
-  //print('J: $j');
+  print('J: $j');
 
   for (int i = 0; i <= 5; i++) {
     amount = j.substring(0, 3);

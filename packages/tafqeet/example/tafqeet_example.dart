@@ -31,7 +31,7 @@ void main() {
       currency: 'ريالاً',
       currencyMultiple: 'ريالين',
       currencyPlural: 'ريالات',
-      currncyFrcDigits: 2,
+      currncyFrcDigits: 3,
       currencyFrc: 'هللة',
       currencyFrcMultiple: 'هللاتين',
       currencyFrcPlural: 'هللات',
@@ -39,10 +39,76 @@ void main() {
 
   var tafSA = TafqeetMulti('20.01', currenySA);
 
+//====
+
+  TafqeetCurrency currenyDK = TafqeetCurrency(
+      country: 'كويتياً',
+      currency: 'ديناراً',
+      currencyMultiple: 'دينارين',
+      currencyPlural: 'دنانير',
+      currncyFrcDigits: 3,
+      currencyFrc: 'فلس',
+      currencyFrcMultiple: 'فلسين',
+      currencyFrcPlural: 'فلوس',
+      gender: 'M');
+
   for (double dd = 0.0; dd <= 90.20; dd = dd + 0.01) {
     tafSA.amount = ((dd * 100).truncate() / 100).toString();
     print('Tafqeet :  ${tafSA.am}   ${tafSA.tafqeet}  ');
     tafUSA.amount = tafSA.am;
     print('Tafqeet :  ${tafUSA.am}   ${tafUSA.tafqeet}  ');
+  }
+
+  var tafDK = TafqeetMulti('20.010', currenyDK);
+
+  for (double dd = 0.0; dd <= 15.20; dd = dd + 0.001) {
+    // print('DDDD  $dd   : ${(dd * 1000).truncate() / 1000}');
+
+    tafDK.amount = ((dd * 1000).truncate() / 1000).toString();
+    // print('Tafqeet dk :  ${tafDK.am}');
+
+    print('Tafqeet :  ${tafDK.am}   ${tafDK.tafqeet}  ');
+  }
+
+  tafDK.amount = '0';
+  print('Tafqeet :  ${tafDK.am}   ${tafDK.tafqeet}  ');
+
+  tafDK.amount = '0.';
+  print('Tafqeet :  ${tafDK.am}   ${tafDK.tafqeet}  ');
+
+  tafDK.amount = '.0';
+  print('Tafqeet :  ${tafDK.am}   ${tafDK.tafqeet}  ');
+
+  tafDK.amount = '0.0';
+  print('Tafqeet :  ${tafDK.am}   ${tafDK.tafqeet}  ');
+
+  tafDK.amount = '0.01';
+  print('Tafqeet :  ${tafDK.am}   ${tafDK.tafqeet}  ');
+
+  tafDK.amount = '.123';
+  print('Tafqeet :  ${tafDK.am}   ${tafDK.tafqeet}  ');
+  tafDK.amount = '0.23';
+  print('Tafqeet :  ${tafDK.am}   ${tafDK.tafqeet}  ');
+
+  TafqeetCurrency currenyKG = TafqeetCurrency(
+      country: '',
+      currency: 'كيلو غراماً',
+      currencyMultiple: 'أثنين كيلو غراماً',
+      currencyPlural: 'كيلو غرامات',
+      currncyFrcDigits: 3,
+      currencyFrc: 'غرام',
+      currencyFrcMultiple: 'غرامين',
+      currencyFrcPlural: 'غرامات',
+      gender: 'M');
+
+  var tafK = TafqeetMulti('20.010', currenyKG);
+
+  for (double dd = 0.0; dd <= 15.20; dd = dd + 0.001) {
+    // print('DDDD  $dd   : ${(dd * 1000).truncate() / 1000}');
+
+    tafK.amount = ((dd * 1000).truncate() / 1000).toString();
+    // print('Tafqeet dk :  ${tafDK.am}');
+
+    print('Tafqeet :  ${tafK.am}   ${tafK.tafqeet}  ');
   }
 }
