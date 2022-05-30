@@ -34,5 +34,7 @@ dependancies, changed names
 library tafqeet;
 
 export 'src/tafqeet_syr.dart';
+export 'package:tafqeet/src/tafqeet_currency.dart';
+
 
 // TODO: Export any libraries intended for clients of this package.

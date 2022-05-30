@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:tafqeet/src/tafqeet_multi.dart';
 import 'package:tafqeet/tafqeet.dart';
 
@@ -9,18 +11,38 @@ void main() {
   //taf.amount = '0.03';
   //print('Tafqeet : ${taf.tafqeet}  ');
 
-  var tafM = TafqeetMulti('20.01');
-  print('Tafqeet :  ${tafM.am}   ${tafM.tafqeet}  ');
+  TafqeetCurrency currenyUsa = TafqeetCurrency(
+      country: 'أميريكياً',
+      currency: 'دولاراً',
+      currencyMultiple: 'دولارين',
+      currencyPlural: 'دولارات',
+      currncyFrcDigits: 2,
+      currencyFrc: 'سنت',
+      currencyFrcMultiple: 'سنتين',
+      currencyFrcPlural: 'سنتات',
+      gender: 'M');
 
-  tafM.amount = '6525.31';
-  print('Tafqeet :  ${tafM.am}   ${tafM.tafqeet}  ');
+  var tafUSA = TafqeetMulti('20.01', currenyUsa);
 
-  tafM.amount = '0.03';
-  print('Tafqeet :  ${tafM.am}   ${tafM.tafqeet}  ');
+//====
 
-  tafM.amount = '.0';
-  print('Tafqeet :  ${tafM.am}   ${tafM.tafqeet}  ');
+  TafqeetCurrency currenySA = TafqeetCurrency(
+      country: 'سعودياً',
+      currency: 'ريالاً',
+      currencyMultiple: 'ريالين',
+      currencyPlural: 'ريالات',
+      currncyFrcDigits: 2,
+      currencyFrc: 'هللة',
+      currencyFrcMultiple: 'هللاتين',
+      currencyFrcPlural: 'هللات',
+      gender: 'F');
 
-  //taf.amount = '3434.3';
-  // print('Tafqeet : ${tafM.tafqeet}  ');
+  var tafSA = TafqeetMulti('20.01', currenySA);
+
+  for (double dd = 0.0; dd <= 90.20; dd = dd + 0.01) {
+    tafSA.amount = ((dd * 100).truncate() / 100).toString();
+    print('Tafqeet :  ${tafSA.am}   ${tafSA.tafqeet}  ');
+    tafUSA.amount = tafSA.am;
+    print('Tafqeet :  ${tafUSA.am}   ${tafUSA.tafqeet}  ');
+  }
 }
