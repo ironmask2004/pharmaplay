@@ -428,7 +428,8 @@ String getTafqeetMulti(
     taf = '$taf ليرة';
   }
 
-  taf = '$taf سورية';
+  print('flag: $flag f: $f ');
+  if (f == 1) taf = '$taf سورية';
 
   if ((x[1] > 0)) {
     t = spellNum('MX', x[1], 0, 0);
@@ -442,7 +443,8 @@ String getTafqeetMulti(
     f = 1;
   }
 
-  if ((am == 0)) {
+  //print(' $am : ${double.tryParse(am)}');
+  if ((double.tryParse(am) == 0)) {
     taf = 'صفر ليرة';
   }
 
