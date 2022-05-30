@@ -111,4 +111,13 @@ void main() {
 
     print('Tafqeet :  ${tafK.am}   ${tafK.tafqeet}  ');
   }
+
+  tafK.amount = '11.12';
+  print('Tafqeet :  ${tafK.am}   ${tafK.tafqeet}  ');
+  tafK.amount = '12.11';
+  print('Tafqeet :  ${tafK.am}   ${tafK.tafqeet}  ');
+  tafK.amount = '1';
+  print('Tafqeet :  ${tafK.am}   ${tafK.tafqeet}  ');
+  tafK.amount = '2';
+  print('Tafqeet :  ${tafK.am}   ${tafK.tafqeet}  ');
 }
