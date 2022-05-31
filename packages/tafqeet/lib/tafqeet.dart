@@ -34,7 +34,7 @@ dependancies, changed names
 library tafqeet;
 
 export 'src/tafqeet_syr.dart';
-export 'package:tafqeet/src/tafqeet_unit.dart';
+export 'package:tafqeet/src/model/tafqeet_unit.dart';
 
 
 // TODO: Export any libraries intended for clients of this package.
