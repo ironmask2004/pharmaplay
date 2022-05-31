@@ -11,49 +11,49 @@ void main() {
   //taf.amount = '0.03';
   //print('Tafqeet : ${taf.tafqeet}  ');
 
-  TafqeetCurrency currenyUsa = TafqeetCurrency(
+  TafqeetUnit unitUsa = TafqeetUnit(
       country: 'أميريكياً',
-      currency: 'دولاراً',
-      currencyMultiple: 'دولارين',
-      currencyPlural: 'دولارات',
+      unit: 'دولاراً',
+      unitMultiple: 'دولارين',
+      unitPlural: 'دولارات',
       currncyFrcDigits: 2,
-      currencyFrc: 'سنت',
-      currencyFrcMultiple: 'سنتين',
-      currencyFrcPlural: 'سنتات',
-      currencyGender: 'M',
-      currencyFrcGender: 'M');
+      unitFrc: 'سنت',
+      unitFrcMultiple: 'سنتين',
+      unitFrcPlural: 'سنتات',
+      unitGender: 'M',
+      unitFrcGender: 'M');
 
-  var tafUSA = TafqeetMulti('20.01', currenyUsa);
+  var tafUSA = TafqeetMulti('20.01', unitUsa);
 
 //====
 
-  TafqeetCurrency currenySA = TafqeetCurrency(
+  TafqeetUnit unitSA = TafqeetUnit(
       country: 'سعودياً',
-      currency: 'ريالاً',
-      currencyMultiple: 'ريالين',
-      currencyPlural: 'ريالات',
+      unit: 'ريالاً',
+      unitMultiple: 'ريالين',
+      unitPlural: 'ريالات',
       currncyFrcDigits: 2,
-      currencyFrc: 'هللة',
-      currencyFrcMultiple: 'هللاتين',
-      currencyFrcPlural: 'هللات',
-      currencyGender: 'M',
-      currencyFrcGender: 'F');
+      unitFrc: 'هللة',
+      unitFrcMultiple: 'هللاتين',
+      unitFrcPlural: 'هللات',
+      unitGender: 'M',
+      unitFrcGender: 'F');
 
-  var tafSA = TafqeetMulti('20.01', currenySA);
+  var tafSA = TafqeetMulti('20.01', unitSA);
 
 //====
 
-  TafqeetCurrency currenyDK = TafqeetCurrency(
+  TafqeetUnit unitDK = TafqeetUnit(
       country: 'كويتياً',
-      currency: 'ديناراً',
-      currencyMultiple: 'دينارين',
-      currencyPlural: 'دنانير',
+      unit: 'ديناراً',
+      unitMultiple: 'دينارين',
+      unitPlural: 'دنانير',
       currncyFrcDigits: 3,
-      currencyFrc: 'فلس',
-      currencyFrcMultiple: 'فلسين',
-      currencyFrcPlural: 'فلوس',
-      currencyGender: 'M',
-      currencyFrcGender: 'M');
+      unitFrc: 'فلس',
+      unitFrcMultiple: 'فلسين',
+      unitFrcPlural: 'فلوس',
+      unitGender: 'M',
+      unitFrcGender: 'M');
 
   /*for (double dd = 0.0; dd <= 90.20; dd = dd + 0.01) {
     tafSA.amount = ((dd * 100).truncate() / 100).toString();
@@ -62,7 +62,7 @@ void main() {
     print('Tafqeet :  ${tafUSA.am}   ${tafUSA.tafqeet}  ');
   }
 */
-  var tafDK = TafqeetMulti('20.010', currenyDK);
+  var tafDK = TafqeetMulti('20.010', unitDK);
 /*
   for (double dd = 0.0; dd <= 15.20; dd = dd + 0.001) {
     // print('DDDD  $dd   : ${(dd * 1000).truncate() / 1000}');
@@ -93,19 +93,19 @@ void main() {
   tafDK.amount = '0.23';
   print('Tafqeet :  ${tafDK.am}   ${tafDK.tafqeet}  ');
 */
-  TafqeetCurrency currenyKG = TafqeetCurrency(
+  TafqeetUnit unitKG = TafqeetUnit(
       country: '',
-      currency: 'كيلو غراماً',
-      currencyMultiple: 'أثنين كيلو غراماً',
-      currencyPlural: 'كيلو غرامات',
+      unit: 'كيلو غراماً',
+      unitMultiple: 'أثنين كيلو غراماً',
+      unitPlural: 'كيلو غرامات',
       currncyFrcDigits: 3,
-      currencyFrc: 'غرام',
-      currencyFrcMultiple: 'غرامين',
-      currencyFrcPlural: 'غرامات',
-      currencyGender: 'M',
-      currencyFrcGender: 'M');
+      unitFrc: 'غرام',
+      unitFrcMultiple: 'غرامين',
+      unitFrcPlural: 'غرامات',
+      unitGender: 'M',
+      unitFrcGender: 'M');
 
-  var tafK = TafqeetMulti('20.010', currenyKG);
+  var tafK = TafqeetMulti('20.010', unitKG);
 
   for (double dd = 0.0; dd <= 15.20; dd = dd + 0.001) {
     // print('DDDD  $dd   : ${(dd * 1000).truncate() / 1000}');
@@ -135,19 +135,19 @@ void main() {
   tafK.amount = '3';
   //print('Tafqeet :  ${tafK.am}   ${tafK.tafqeet}  ');
 
-  TafqeetCurrency currenyOnce = TafqeetCurrency(
+  TafqeetUnit unitOnce = TafqeetUnit(
       country: '',
-      currency: 'أونصة',
-      currencyMultiple: 'أونصتين',
-      currencyPlural: 'أونصات',
+      unit: 'أونصة',
+      unitMultiple: 'أونصتين',
+      unitPlural: 'أونصات',
       currncyFrcDigits: 0,
-      currencyFrc: '',
-      currencyFrcMultiple: '',
-      currencyFrcPlural: '',
-      currencyGender: 'F',
-      currencyFrcGender: 'F');
+      unitFrc: '',
+      unitFrcMultiple: '',
+      unitFrcPlural: '',
+      unitGender: 'F',
+      unitFrcGender: 'F');
 
-  var tafOnce = TafqeetMulti('20', currenyOnce);
+  var tafOnce = TafqeetMulti('20', unitOnce);
   tafOnce.amount = '453576';
   print('---Tafqeet :  ${tafOnce.am}   ${tafOnce.tafqeet}  ');
 
@@ -162,19 +162,19 @@ void main() {
   tafOnce.amount = '4';
   print('---Tafqeet :  ${tafOnce.am}   ${tafOnce.tafqeet}  ');
 
-  TafqeetCurrency currenyKM = TafqeetCurrency(
+  TafqeetUnit unitKM = TafqeetUnit(
       country: '',
-      currency: 'متراً',
-      currencyMultiple: 'أثنين متراً',
-      currencyPlural: 'مترات',
+      unit: 'متراً',
+      unitMultiple: 'أثنين متراً',
+      unitPlural: 'مترات',
       currncyFrcDigits: 2,
-      currencyFrc: 'سنتميتراً',
-      currencyFrcMultiple: 'سنتيمتران',
-      currencyFrcPlural: 'سنتيمترات',
-      currencyGender: 'M',
-      currencyFrcGender: 'M');
+      unitFrc: 'سنتميتراً',
+      unitFrcMultiple: 'سنتيمتران',
+      unitFrcPlural: 'سنتيمترات',
+      unitGender: 'M',
+      unitFrcGender: 'M');
 
-  var tafKM = TafqeetMulti('20', currenyKM);
+  var tafKM = TafqeetMulti('20', unitKM);
   tafKM.amount = '453576.01';
   print('---Tafqeet :  ${tafKM.am}   ${tafKM.tafqeet}  ');
 
@@ -186,6 +186,35 @@ void main() {
   tafKM.amount = '0.03';
   print('---Tafqeet :  ${tafKM.am}   ${tafKM.tafqeet}  ');
 
-  tafKM.amount = '0.01';
+  tafKM.amount = '10.01';
   print('---Tafqeet :  ${tafKM.am}   ${tafKM.tafqeet}  ');
+
+  TafqeetUnit unitSY = TafqeetUnit(
+      country: 'سورية',
+      unit: 'ليرة',
+      unitMultiple: 'ليرتين',
+      unitPlural: 'ليرات',
+      currncyFrcDigits: 2,
+      unitFrc: 'قرشاً',
+      unitFrcMultiple: 'قرشان',
+      unitFrcPlural: 'قروش',
+      unitGender: 'F',
+      unitFrcGender: 'M');
+
+  // var unitSY = TafqeetMulti('20.01', unitSY);
+
+  var tafSy = TafqeetMulti('20', unitSY);
+  tafSy.amount = '453576.01';
+  print('---Tafqeet :  ${tafSy.am}   ${tafSy.tafqeet}  ');
+
+  tafSy.amount = '0.12';
+  print('---Tafqeet :  ${tafSy.am}   ${tafSy.tafqeet}  ');
+
+  tafSy.amount = '30.02';
+  print('---Tafqeet :  ${tafSy.am}   ${tafSy.tafqeet}  ');
+  tafSy.amount = '10.03';
+  print('---Tafqeet :  ${tafSy.am}   ${tafSy.tafqeet}  ');
+
+  tafSy.amount = '01.01';
+  print('---Tafqeet :  ${tafSy.am}   ${tafSy.tafqeet}  ');
 }
