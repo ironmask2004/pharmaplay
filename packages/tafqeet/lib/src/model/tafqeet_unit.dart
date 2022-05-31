@@ -2,85 +2,92 @@ import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
 
+import 'package:tafqeet/src/model/unit_code.dart';
+
 class TafqeetUnit extends Equatable {
+  final UnitCode unitCode;
   final String country;
   final String unit;
   final String unitMultiple;
   final String unitPlural;
   final String unitGender;
-  final int currncyFrcDigits;
-  final String unitFrc;
-  final String unitFrcMultiple;
-  final String unitFrcPlural;
-  final String unitFrcGender;
+  final int unitPartDigits;
+  final String unitPart;
+  final String unitPartMultiple;
+  final String unitPartPlural;
+  final String unitPartGender;
   TafqeetUnit({
+    required this.unitCode,
+    required this.country,
     required this.unit,
     required this.unitMultiple,
     required this.unitPlural,
     required this.unitGender,
-    required this.currncyFrcDigits,
-    required this.unitFrc,
-    required this.unitFrcMultiple,
-    required this.unitFrcPlural,
-    required this.unitFrcGender,
-    required this.country,
+    required this.unitPartDigits,
+    required this.unitPart,
+    required this.unitPartMultiple,
+    required this.unitPartPlural,
+    required this.unitPartGender,
   });
 
   TafqeetUnit copyWith({
+    UnitCode? unitCode,
+    String? country,
     String? unit,
     String? unitMultiple,
     String? unitPlural,
     String? unitGender,
-    int? currncyFrcDigits,
-    String? unitFrc,
-    String? unitFrcMultiple,
-    String? unitFrcPlural,
-    String? unitFrcGender,
-    String? country,
+    int? unitPartDigits,
+    String? unitPart,
+    String? unitPartMultiple,
+    String? unitPartPlural,
+    String? unitPartGender,
   }) {
     return TafqeetUnit(
+      unitCode: unitCode ?? this.unitCode,
+      country: country ?? this.country,
       unit: unit ?? this.unit,
       unitMultiple: unitMultiple ?? this.unitMultiple,
       unitPlural: unitPlural ?? this.unitPlural,
       unitGender: unitGender ?? this.unitGender,
-      currncyFrcDigits: currncyFrcDigits ?? this.currncyFrcDigits,
-      unitFrc: unitFrc ?? this.unitFrc,
-      unitFrcMultiple: unitFrcMultiple ?? this.unitFrcMultiple,
-      unitFrcPlural: unitFrcPlural ?? this.unitFrcPlural,
-      unitFrcGender: unitFrcGender ?? this.unitFrcGender,
-      country: country ?? this.country,
+      unitPartDigits: unitPartDigits ?? this.unitPartDigits,
+      unitPart: unitPart ?? this.unitPart,
+      unitPartMultiple: unitPartMultiple ?? this.unitPartMultiple,
+      unitPartPlural: unitPartPlural ?? this.unitPartPlural,
+      unitPartGender: unitPartGender ?? this.unitPartGender,
     );
   }
 
   Map<String, dynamic> toMap() {
     final result = <String, dynamic>{};
 
+    result.addAll({'unitCode': unitCode.toMap()});
+    result.addAll({'country': country});
     result.addAll({'unit': unit});
     result.addAll({'unitMultiple': unitMultiple});
     result.addAll({'unitPlural': unitPlural});
     result.addAll({'unitGender': unitGender});
-    result.addAll({'currncyFrcDigits': currncyFrcDigits});
-    result.addAll({'unitFrc': unitFrc});
-    result.addAll({'unitFrcMultiple': unitFrcMultiple});
-    result.addAll({'unitFrcPlural': unitFrcPlural});
-    result.addAll({'unitFrcGender': unitFrcGender});
-    result.addAll({'country': country});
-
+    result.addAll({'unitPartDigits': unitPartDigits});
+    result.addAll({'unitPart': unitPart});
+    result.addAll({'unitPartMultiple': unitPartMultiple});
+    result.addAll({'unitPartPlural': unitPartPlural});
+    result.addAll({'unitPartGender': unitPartGender});
     return result;
   }
 
   factory TafqeetUnit.fromMap(Map<String, dynamic> map) {
     return TafqeetUnit(
+      unitCode: UnitCode.fromMap(map['unitCode']),
+      country: map['country'] ?? '',
       unit: map['unit'] ?? '',
       unitMultiple: map['unitMultiple'] ?? '',
       unitPlural: map['unitPlural'] ?? '',
       unitGender: map['unitGender'] ?? '',
-      currncyFrcDigits: map['currncyFrcDigits']?.toInt() ?? 0,
-      unitFrc: map['unitFrc'] ?? '',
-      unitFrcMultiple: map['unitFrcMultiple'] ?? '',
-      unitFrcPlural: map['unitFrcPlural'] ?? '',
-      unitFrcGender: map['unitFrcGender'] ?? '',
-      country: map['country'] ?? '',
+      unitPartDigits: map['unitPartDigits']?.toInt() ?? 0,
+      unitPart: map['unitPart'] ?? '',
+      unitPartMultiple: map['unitPartMultiple'] ?? '',
+      unitPartPlural: map['unitPartPlural'] ?? '',
+      unitPartGender: map['unitPartGender'] ?? '',
     );
   }
 
@@ -91,22 +98,23 @@ class TafqeetUnit extends Equatable {
 
   @override
   String toString() {
-    return 'TafqeetUnit(unit: $unit, unitMultiple: $unitMultiple, unitPlural: $unitPlural, unitGender: $unitGender, currncyFrcDigits: $currncyFrcDigits, unitFrc: $unitFrc, unitFrcMultiple: $unitFrcMultiple, unitFrcPlural: $unitFrcPlural, unitFrcGender: $unitFrcGender, country: $country)';
+    return 'TafqeetUnit(unitCode: $unitCode, country: $country, unit: $unit, unitMultiple: $unitMultiple, unitPlural: $unitPlural, unitGender: $unitGender, unitPartDigits: $unitPartDigits, unitPart: $unitPart, unitPartMultiple: $unitPartMultiple, unitPartPlural: $unitPartPlural, unitPartGender: $unitPartGender)';
   }
 
   @override
   List<Object> get props {
     return [
+      unitCode,
+      country,
       unit,
       unitMultiple,
       unitPlural,
       unitGender,
-      currncyFrcDigits,
-      unitFrc,
-      unitFrcMultiple,
-      unitFrcPlural,
-      unitFrcGender,
-      country,
+      unitPartDigits,
+      unitPart,
+      unitPartMultiple,
+      unitPartPlural,
+      unitPartGender,
     ];
   }
 }

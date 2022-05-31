@@ -1,7 +1,9 @@
 import 'dart:ffi';
 import 'dart:typed_data';
 
-import 'package:tafqeet/tafqeet.dart';
+//import 'package:tafqeet/tafqeet.dart';
+
+import 'model/tafqeet_unit.dart';
 
 /// Checks if you are awesome. Spoiler: you are.
 
@@ -41,25 +43,39 @@ String getArrVal(
     'اثنان',
     'عشرون',
     'مئتان',
-    'ثلاثة',
+    //'ثلاثة',
+    (numGender == 'F' ? 'ثلاث' : 'ثلاثة'),
+
     'ثلاثون',
     'ثلاثمائة',
-    'اربعة',
+    //'اربعة',
+    (numGender == 'F' ? 'اربع' : 'اربعة'),
+
     'اربعون',
     'اربعمائة',
-    'خمسة',
+    //'خمسة',
+    (numGender == 'F' ? 'خمس' : 'خمسة'),
+
     'خمسون',
     'خمسمائة',
-    'ستة',
+    //'ستة',
+    (numGender == 'F' ? 'ست' : 'ستة'),
+
     'ستون',
     'ستمائة',
-    'سبعة',
+    //'سبعة',
+    (numGender == 'F' ? 'سبع' : 'سبعة'),
+
     'سبعون',
     'سبعمائة',
-    'ثمانية',
+    //'ثمانية',
+    (numGender == 'F' ? 'ثماني' : 'ثمانية'),
+
     'ثمانون',
     'ثمانمائة',
-    'تسعة',
+    //'تسعة',
+    (numGender == 'F' ? 'تسع' : 'تسعة'),
+
     'تسعون',
     'تسعمائة'
   ];
@@ -77,36 +93,50 @@ String getArrVal(
 
     'عشرون',
     'مئتان',
-    'ثلاث',
+    //'ثلاث',
+    (numGender == 'F' ? 'ثلاث' : 'ثلاثة'),
+
     'ثلاثون',
     'ثلاثمائة',
-    'اربع',
+    //'اربع',
+    (numGender == 'F' ? 'اربع' : 'اربعة'),
+
     'اربعون',
     'اربعمائة',
-    'خمس',
+    //'خمس',
+    (numGender == 'F' ? 'خمس' : 'خمسة'),
+
     'خمسون',
     'خمسمائة',
-    'ست',
+    //'ست',
+    (numGender == 'F' ? 'ست' : 'ستة'),
+
     'ستون',
     'ستمائة',
-    'سبع',
+    //'سبع',
+    (numGender == 'F' ? 'سبع' : 'سبعة'),
+
     'سبعون',
     'سبعمائة',
-    'ثماني',
+    //'ثماني',
+    (numGender == 'F' ? 'ثماني' : 'ثمانية'),
+
     'ثمانون',
     'ثمانمائة',
-    'تسع',
+    //'تسع',
+    (numGender == 'F' ? 'تسع' : 'تسعة'),
+
     'تسعون',
     'تسعمائة'
   ];
   List<String> w = [
     ' ',
     //'قرشاً',
-    (unit.unitFrc),
+    (unit.unitPart),
     //'قرشاً',
-    (unit.unitFrc),
+    (unit.unitPart),
     // 'قروش',
-    (unit.unitFrcPlural),
+    (unit.unitPartPlural),
     //'ليرة',
     unit.unit,
     //'ليرة',
@@ -132,11 +162,11 @@ String getArrVal(
   List<String> a = [
     ' ',
 //    'قرش واحد',
-    '${unit.unitFrc} ${numGender == 'F' ? 'واحدة' : 'واحد'}',
+    '${unit.unitPart} ${numGender == 'F' ? 'واحدة' : 'واحد'}',
 //    'قرشان',
-    (unit.unitFrcMultiple),
+    (unit.unitPartMultiple),
 //    'قرشان',
-    (unit.unitFrcMultiple),
+    (unit.unitPartMultiple),
     //'ليرة واحدة',
     '${unit.unit}${numGender == 'F' ? 'واحدة' : ' واحداً'}',
     //'ليرتان',
@@ -176,8 +206,8 @@ String getArrVal(
 ///
 ///--################################################################
 String spellNum(String m1, var x, var part, var zx, TafqeetUnit unit,
-    {String? unitFrcGender}) {
-  String numGender = (unitFrcGender == null ? unit.unitGender : unitFrcGender);
+    {String? unitPartGender}) {
+  String numGender = (unitPartGender ?? unit.unitGender);
   int? x100 = 0;
   int? x10 = 0;
 
@@ -322,6 +352,7 @@ String getTafqeetMulti(String am, TafqeetUnit unit) {
   // TYPE x_arr IS VARRAY (7) OF NUMBER NOT NULL;
 
   List x = [0, 0, 0, 0, 0, 0, 0, 0];
+
   int flag = 0;
   int f = 0;
 
@@ -340,7 +371,7 @@ String getTafqeetMulti(String am, TafqeetUnit unit) {
 
   // print('Founf DOT @ $p  lenght: ${amount.length}');
 
-  switch (unit.currncyFrcDigits) {
+  switch (unit.unitPartDigits) {
     case 0:
       {
         if ((p != -1)) {
@@ -510,7 +541,7 @@ String getTafqeetMulti(String am, TafqeetUnit unit) {
   if (f == 1) taf = '$taf ${unit.country}';
 
   if ((x[1] > 0)) {
-    t = spellNum('MX', x[1], 0, 0, unit, unitFrcGender: unit.unitFrcGender);
+    t = spellNum('MX', x[1], 0, 0, unit, unitPartGender: unit.unitPartGender);
 
     if ((f == 1)) {
       taf = '$taf و';

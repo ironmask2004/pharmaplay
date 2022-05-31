@@ -1,6 +1,6 @@
 import 'dart:ffi';
 
-import 'package:tafqeet/src/tafqeet_multi.dart';
+import 'package:tafqeet/src/model/tafqeet_unit.dart';
 import 'package:tafqeet/tafqeet.dart';
 
 void main() {
@@ -10,36 +10,24 @@ void main() {
 
   //taf.amount = '0.03';
   //print('Tafqeet : ${taf.tafqeet}  ');
-
+/*
   TafqeetUnit unitUsa = TafqeetUnit(
       country: 'أميريكياً',
       unit: 'دولاراً',
       unitMultiple: 'دولارين',
       unitPlural: 'دولارات',
-      currncyFrcDigits: 2,
-      unitFrc: 'سنت',
-      unitFrcMultiple: 'سنتين',
-      unitFrcPlural: 'سنتات',
+      unitPartDigits: 2,
+      unitPart: 'سنت',
+      unitPartMultiple: 'سنتين',
+      unitPartPlural: 'سنتات',
       unitGender: 'M',
-      unitFrcGender: 'M');
+      unitPartGender: 'M',
+      unitCode: UnitCode.UnitedStatesDollar);
 
   var tafUSA = TafqeetMulti('20.01', unitUsa);
 
 //====
 
-  TafqeetUnit unitSA = TafqeetUnit(
-      country: 'سعودياً',
-      unit: 'ريالاً',
-      unitMultiple: 'ريالين',
-      unitPlural: 'ريالات',
-      currncyFrcDigits: 2,
-      unitFrc: 'هللة',
-      unitFrcMultiple: 'هللاتين',
-      unitFrcPlural: 'هللات',
-      unitGender: 'M',
-      unitFrcGender: 'F');
-
-  var tafSA = TafqeetMulti('20.01', unitSA);
 
 //====
 
@@ -48,12 +36,13 @@ void main() {
       unit: 'ديناراً',
       unitMultiple: 'دينارين',
       unitPlural: 'دنانير',
-      currncyFrcDigits: 3,
-      unitFrc: 'فلس',
-      unitFrcMultiple: 'فلسين',
-      unitFrcPlural: 'فلوس',
+      unitPartDigits: 3,
+      unitPart: 'فلس',
+      unitPartMultiple: 'فلسين',
+      unitPartPlural: 'فلوس',
       unitGender: 'M',
-      unitFrcGender: 'M');
+      unitPartGender: 'M',
+      unitCode: UnitCode.KuwaitiDinar);
 
   /*for (double dd = 0.0; dd <= 90.20; dd = dd + 0.01) {
     tafSA.amount = ((dd * 100).truncate() / 100).toString();
@@ -98,12 +87,13 @@ void main() {
       unit: 'كيلو غراماً',
       unitMultiple: 'أثنين كيلو غراماً',
       unitPlural: 'كيلو غرامات',
-      currncyFrcDigits: 3,
-      unitFrc: 'غرام',
-      unitFrcMultiple: 'غرامين',
-      unitFrcPlural: 'غرامات',
+      unitPartDigits: 3,
+      unitPart: 'غرام',
+      unitPartMultiple: 'غرامين',
+      unitPartPlural: 'غرامات',
       unitGender: 'M',
-      unitFrcGender: 'M');
+      unitPartGender: 'M',
+      unitCode: UnitCode.KiloGram);
 
   var tafK = TafqeetMulti('20.010', unitKG);
 
@@ -129,8 +119,8 @@ void main() {
   tafK.amount = '2222.222';
   print('Tafqeet :  ${tafK.am}   ${tafK.tafqeet}  ');
 
-  tafSA.amount = '2222.46';
-  print('---Tafqeet :  ${tafSA.am}   ${tafSA.tafqeet}  ');
+
+
 
   tafK.amount = '3';
   //print('Tafqeet :  ${tafK.am}   ${tafK.tafqeet}  ');
@@ -140,12 +130,13 @@ void main() {
       unit: 'أونصة',
       unitMultiple: 'أونصتين',
       unitPlural: 'أونصات',
-      currncyFrcDigits: 0,
-      unitFrc: '',
-      unitFrcMultiple: '',
-      unitFrcPlural: '',
+      unitPartDigits: 0,
+      unitPart: '',
+      unitPartMultiple: '',
+      unitPartPlural: '',
       unitGender: 'F',
-      unitFrcGender: 'F');
+      unitPartGender: 'F',
+      unitCode: UnitCode.Ounce);
 
   var tafOnce = TafqeetMulti('20', unitOnce);
   tafOnce.amount = '453576';
@@ -166,13 +157,14 @@ void main() {
       country: '',
       unit: 'متراً',
       unitMultiple: 'أثنين متراً',
-      unitPlural: 'مترات',
-      currncyFrcDigits: 2,
-      unitFrc: 'سنتميتراً',
-      unitFrcMultiple: 'سنتيمتران',
-      unitFrcPlural: 'سنتيمترات',
+      unitPlural: 'أمتار',
+      unitPartDigits: 2,
+      unitPart: 'سنتميتراً',
+      unitPartMultiple: 'سنتيمتران',
+      unitPartPlural: 'سنتيمترات',
       unitGender: 'M',
-      unitFrcGender: 'M');
+      unitPartGender: 'M',
+      unitCode: UnitCode.KiloMetre);
 
   var tafKM = TafqeetMulti('20', unitKM);
   tafKM.amount = '453576.01';
@@ -186,7 +178,7 @@ void main() {
   tafKM.amount = '0.03';
   print('---Tafqeet :  ${tafKM.am}   ${tafKM.tafqeet}  ');
 
-  tafKM.amount = '10.01';
+  tafKM.amount = '110.01';
   print('---Tafqeet :  ${tafKM.am}   ${tafKM.tafqeet}  ');
 
   TafqeetUnit unitSY = TafqeetUnit(
@@ -194,12 +186,13 @@ void main() {
       unit: 'ليرة',
       unitMultiple: 'ليرتين',
       unitPlural: 'ليرات',
-      currncyFrcDigits: 2,
-      unitFrc: 'قرشاً',
-      unitFrcMultiple: 'قرشان',
-      unitFrcPlural: 'قروش',
+      unitPartDigits: 2,
+      unitPart: 'قرشاً',
+      unitPartMultiple: 'قرشان',
+      unitPartPlural: 'قروش',
       unitGender: 'F',
-      unitFrcGender: 'M');
+      unitPartGender: 'M',
+      unitCode: UnitCode.SyrianPound);
 
   // var unitSY = TafqeetMulti('20.01', unitSY);
 
@@ -217,4 +210,25 @@ void main() {
 
   tafSy.amount = '01.01';
   print('---Tafqeet :  ${tafSy.am}   ${tafSy.tafqeet}  ');
+
+  print(unitSY.toJson().toString());
+  */
+
+  TafqeetUnit unitSA = TafqeetUnit(
+      country: 'سعودياً',
+      unit: 'ريالاً',
+      unitMultiple: 'ريالين',
+      unitPlural: 'ريالات',
+      unitPartDigits: 2,
+      unitPart: 'هللة',
+      unitPartMultiple: 'هللاتين',
+      unitPartPlural: 'هللات',
+      unitGender: 'M',
+      unitPartGender: 'F',
+      unitCode: UnitCode.SaudiArabianRiyal);
+
+  var tafSA = TafqeetMulti('20.01', unitSA);
+
+  tafSA.amount = '10.1';
+  print('---Tafqeet :  ${tafSA.am}   ${tafSA.tafqeet}  ');
 }
