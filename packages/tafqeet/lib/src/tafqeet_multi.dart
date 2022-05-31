@@ -28,18 +28,14 @@ class TafqeetMulti {
 
 //  --################################################################
 String getArrVal(
-  String arr,
-  var pR,
-  var pC,
-  TafqeetCurrency currency,
-) {
+    String arr, var pR, var pC, TafqeetCurrency currency, String numGender) {
   List<String> mx = [
     ' ',
     ' ',
     ' ',
     ' ',
     //'واحد',
-    (currency.gender == 'F' ? 'احدى' : 'واحد'),
+    (numGender == 'F' ? 'احدى' : 'واحد'),
     ' عشر',
     'مئة',
     'اثنان',
@@ -72,10 +68,13 @@ String getArrVal(
     ' ',
     ' ',
     ' ',
-    'احدى',
+    //'احدى',
+    (numGender == 'F' ? 'احدى' : 'واحد'),
     ' عشرة',
     'مئة',
-    'اثنتان',
+    //'اثنتان',
+    (numGender == 'F' ? 'اثنتان' : 'إثنان'),
+
     'عشرون',
     'مئتان',
     'ثلاث',
@@ -133,13 +132,13 @@ String getArrVal(
   List<String> a = [
     ' ',
 //    'قرش واحد',
-    '${currency.currencyFrc} ${currency.gender == 'F' ? 'واحدة' : 'واحد'}',
+    '${currency.currencyFrc} ${numGender == 'F' ? 'واحدة' : 'واحد'}',
 //    'قرشان',
     (currency.currencyFrcMultiple),
 //    'قرشان',
     (currency.currencyFrcMultiple),
     //'ليرة واحدة',
-    '${currency.currency}${currency.gender == 'F' ? 'واحدة' : ' واحداً'}',
+    '${currency.currency}${numGender == 'F' ? 'واحدة' : ' واحداً'}',
     //'ليرتان',
     (currency.currencyMultiple),
     //'ليرتان',
@@ -176,7 +175,10 @@ String getArrVal(
 ///##########################################
 ///
 ///--################################################################
-String spellNum(String m1, var x, var part, var zx, TafqeetCurrency currency) {
+String spellNum(String m1, var x, var part, var zx, TafqeetCurrency currency,
+    {String? currencyFrcGender}) {
+  String numGender =
+      (currencyFrcGender == null ? currency.currencyGender : currencyFrcGender);
   int? x100 = 0;
   int? x10 = 0;
 
@@ -198,27 +200,27 @@ String spellNum(String m1, var x, var part, var zx, TafqeetCurrency currency) {
     t = '';
     return (t);
   } else if (x == 1) {
-    t = getArrVal('A', part, 0, currency);
+    t = getArrVal('A', part, 0, currency, numGender);
   } else if (x == 2) {
     if ((zx == 0)) {
-      t = getArrVal('A', part, 2, currency);
+      t = getArrVal('A', part, 2, currency, numGender);
     } else {
-      t = getArrVal('A', part, 1, currency);
+      t = getArrVal('A', part, 1, currency, numGender);
     }
   } else if (x == 10) {
-    if (getArrVal(m1, 1, 0, currency) == 'احدى') {
+    if (getArrVal(m1, 1, 0, currency, numGender) == 'احدى') {
       t = 'عشر';
     } else {
       t = 'عشرة';
     }
   } else if (x == 11) {
-    if (getArrVal(m1, 1, 0, currency) == 'احدى') {
+    if (getArrVal(m1, 1, 0, currency, numGender) == 'احدى') {
       t = 'احدى عشرة';
     } else {
       t = 'احد عشر';
     }
   } else if (x == 12) {
-    if (getArrVal(m1, 1, 0, currency) == 'احدى') {
+    if (getArrVal(m1, 1, 0, currency, numGender) == 'احدى') {
       t = 'اثنتا عشرة';
     } else {
       t = 'اثنا عشر';
@@ -236,39 +238,39 @@ String spellNum(String m1, var x, var part, var zx, TafqeetCurrency currency) {
       t = 'مئتا';
     } else {
       if ((x10 == 0 && (x1 == 1 || x1 == 2))) {
-        t = getArrVal(m1, x100, 2, currency) +
+        t = getArrVal(m1, x100, 2, currency, numGender) +
             w1 +
-            getArrVal('A', part, (x1! - 1), currency) +
+            getArrVal('A', part, (x1! - 1), currency, numGender) +
             w2 +
-            getArrVal(m1, x10, 1, currency);
+            getArrVal(m1, x10, 1, currency, numGender);
       } else if ((x10 == 1 && (x1 == 1 || x1 == 2 || x1 == 0))) {
         if (x1 == 1) {
-          if (getArrVal(m1, 1, 0, currency) == 'احدى') {
-            t = '${getArrVal(m1, x100, 2, currency)} واحدى عشرة';
+          if (getArrVal(m1, 1, 0, currency, numGender) == 'احدى') {
+            t = '${getArrVal(m1, x100, 2, currency, numGender)} واحدى عشرة';
           } else {
-            t = '${getArrVal(m1, x100, 2, currency)} واحد عشر';
+            t = '${getArrVal(m1, x100, 2, currency, numGender)} واحد عشر';
           }
         } else if (x1 == 2) {
-          if (getArrVal(m1, 1, 0, currency) == 'احدى') {
-            t = '${getArrVal(m1, x100, 2, currency)} واثنتا عشرة';
+          if (getArrVal(m1, 1, 0, currency, numGender) == 'احدى') {
+            t = '${getArrVal(m1, x100, 2, currency, numGender)} واثنتا عشرة';
           } else {
-            t = '${getArrVal(m1, x100, 2, currency)} واثنا عشر';
+            t = '${getArrVal(m1, x100, 2, currency, numGender)} واثنا عشر';
           }
         } else if (x1 == 0) {
           if ((x10 == 1 && x1 == 0)) {
-            if (getArrVal(m1, 1, 0, currency) == 'احدى') {
-              t = '${getArrVal(m1, x100, 2, currency)} وعشر';
+            if (getArrVal(m1, 1, 0, currency, numGender) == 'احدى') {
+              t = '${getArrVal(m1, x100, 2, currency, numGender)} وعشر';
             } else {
-              t = '${getArrVal(m1, x100, 2, currency)} وعشرة';
+              t = '${getArrVal(m1, x100, 2, currency, numGender)} وعشرة';
             }
           }
         }
       } else {
-        t = getArrVal(m1, x100, 2, currency) +
+        t = getArrVal(m1, x100, 2, currency, numGender) +
             w1 +
-            getArrVal(m1, x1, 0, currency) +
+            getArrVal(m1, x1, 0, currency, numGender) +
             w2 +
-            getArrVal(m1, x10, 1, currency);
+            getArrVal(m1, x10, 1, currency, numGender);
       }
     }
   }
@@ -304,7 +306,7 @@ String spellNum(String m1, var x, var part, var zx, TafqeetCurrency currency) {
       u = 2;
     }
 
-    t = '$t ${getArrVal('W', part, u, currency)}';
+    t = '$t ${getArrVal('W', part, u, currency, numGender)}';
   }
 
   return (t);
@@ -340,6 +342,22 @@ String getTafqeetMulti(String am, TafqeetCurrency currency) {
   // print('Founf DOT @ $p  lenght: ${amount.length}');
 
   switch (currency.currncyFrcDigits) {
+    case 0:
+      {
+        if ((p != -1)) {
+          return ('!!!تجاوزت الحد الاعلى للاجزاء (0) ');
+        }
+        if (((amount.length)) > 18) {
+          return ('!!!تجاوزت الحد الاعلى للرقم');
+        }
+
+        amount = '$amount.00';
+
+        v = '000000000000000000.00';
+        j = v.substring(0, 21 - (amount.length)) + amount;
+      }
+      break;
+
     case 2:
       {
         if ((p == -1)) {
@@ -493,7 +511,8 @@ String getTafqeetMulti(String am, TafqeetCurrency currency) {
   if (f == 1) taf = '$taf ${currency.country}';
 
   if ((x[1] > 0)) {
-    t = spellNum('MX', x[1], 0, 0, currency);
+    t = spellNum('MX', x[1], 0, 0, currency,
+        currencyFrcGender: currency.currencyFrcGender);
 
     if ((f == 1)) {
       taf = '$taf و';
@@ -509,7 +528,7 @@ String getTafqeetMulti(String am, TafqeetCurrency currency) {
     taf = 'صفر  ${currency.currency}  ${currency.country}';
   }
 
-  taf = 'فقط $taf  لاغير';
+  taf = 'فقط $taf لاغير';
 
   return (taf);
 }

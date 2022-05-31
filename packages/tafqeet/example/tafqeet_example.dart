@@ -20,7 +20,8 @@ void main() {
       currencyFrc: 'سنت',
       currencyFrcMultiple: 'سنتين',
       currencyFrcPlural: 'سنتات',
-      gender: 'M');
+      currencyGender: 'M',
+      currencyFrcGender: 'M');
 
   var tafUSA = TafqeetMulti('20.01', currenyUsa);
 
@@ -31,11 +32,12 @@ void main() {
       currency: 'ريالاً',
       currencyMultiple: 'ريالين',
       currencyPlural: 'ريالات',
-      currncyFrcDigits: 3,
+      currncyFrcDigits: 2,
       currencyFrc: 'هللة',
       currencyFrcMultiple: 'هللاتين',
       currencyFrcPlural: 'هللات',
-      gender: 'F');
+      currencyGender: 'M',
+      currencyFrcGender: 'F');
 
   var tafSA = TafqeetMulti('20.01', currenySA);
 
@@ -50,24 +52,25 @@ void main() {
       currencyFrc: 'فلس',
       currencyFrcMultiple: 'فلسين',
       currencyFrcPlural: 'فلوس',
-      gender: 'M');
+      currencyGender: 'M',
+      currencyFrcGender: 'M');
 
-  for (double dd = 0.0; dd <= 90.20; dd = dd + 0.01) {
+  /*for (double dd = 0.0; dd <= 90.20; dd = dd + 0.01) {
     tafSA.amount = ((dd * 100).truncate() / 100).toString();
     print('Tafqeet :  ${tafSA.am}   ${tafSA.tafqeet}  ');
     tafUSA.amount = tafSA.am;
     print('Tafqeet :  ${tafUSA.am}   ${tafUSA.tafqeet}  ');
   }
-
+*/
   var tafDK = TafqeetMulti('20.010', currenyDK);
-
+/*
   for (double dd = 0.0; dd <= 15.20; dd = dd + 0.001) {
     // print('DDDD  $dd   : ${(dd * 1000).truncate() / 1000}');
 
-    tafDK.amount = ((dd * 1000).truncate() / 1000).toString();
+    // tafDK.amount = ((dd * 1000).truncate() / 1000).toString();
     // print('Tafqeet dk :  ${tafDK.am}');
 
-    print('Tafqeet :  ${tafDK.am}   ${tafDK.tafqeet}  ');
+    //print('Tafqeet :  ${tafDK.am}   ${tafDK.tafqeet}  ');
   }
 
   tafDK.amount = '0';
@@ -89,7 +92,7 @@ void main() {
   print('Tafqeet :  ${tafDK.am}   ${tafDK.tafqeet}  ');
   tafDK.amount = '0.23';
   print('Tafqeet :  ${tafDK.am}   ${tafDK.tafqeet}  ');
-
+*/
   TafqeetCurrency currenyKG = TafqeetCurrency(
       country: '',
       currency: 'كيلو غراماً',
@@ -99,25 +102,90 @@ void main() {
       currencyFrc: 'غرام',
       currencyFrcMultiple: 'غرامين',
       currencyFrcPlural: 'غرامات',
-      gender: 'M');
+      currencyGender: 'M',
+      currencyFrcGender: 'M');
 
   var tafK = TafqeetMulti('20.010', currenyKG);
 
   for (double dd = 0.0; dd <= 15.20; dd = dd + 0.001) {
     // print('DDDD  $dd   : ${(dd * 1000).truncate() / 1000}');
 
-    tafK.amount = ((dd * 1000).truncate() / 1000).toString();
+    //tafK.amount = ((dd * 1000).truncate() / 1000).toString();
     // print('Tafqeet dk :  ${tafDK.am}');
 
-    print('Tafqeet :  ${tafK.am}   ${tafK.tafqeet}  ');
+    // print('Tafqeet :  ${tafK.am}   ${tafK.tafqeet}  ');
   }
 
-  tafK.amount = '11.12';
+  //tafK.amount = '11.12';
+  // print('Tafqeet :  ${tafK.am}   ${tafK.tafqeet}  ');
+  // tafK.amount = '12.11';
+  // print('Tafqeet :  ${tafK.am}   ${tafK.tafqeet}  ');
+  tafK.amount = '12.012';
   print('Tafqeet :  ${tafK.am}   ${tafK.tafqeet}  ');
-  tafK.amount = '12.11';
-  print('Tafqeet :  ${tafK.am}   ${tafK.tafqeet}  ');
+  tafDK.amount = '2222.222';
+  print('Tafqeet :  ${tafDK.am}   ${tafDK.tafqeet}  ');
   tafK.amount = '1';
   print('Tafqeet :  ${tafK.am}   ${tafK.tafqeet}  ');
-  tafK.amount = '2';
+  tafK.amount = '2222.222';
   print('Tafqeet :  ${tafK.am}   ${tafK.tafqeet}  ');
+
+  tafSA.amount = '2222.46';
+  print('---Tafqeet :  ${tafSA.am}   ${tafSA.tafqeet}  ');
+
+  tafK.amount = '3';
+  //print('Tafqeet :  ${tafK.am}   ${tafK.tafqeet}  ');
+
+  TafqeetCurrency currenyOnce = TafqeetCurrency(
+      country: '',
+      currency: 'أونصة',
+      currencyMultiple: 'أونصتين',
+      currencyPlural: 'أونصات',
+      currncyFrcDigits: 0,
+      currencyFrc: '',
+      currencyFrcMultiple: '',
+      currencyFrcPlural: '',
+      currencyGender: 'F',
+      currencyFrcGender: 'F');
+
+  var tafOnce = TafqeetMulti('20', currenyOnce);
+  tafOnce.amount = '453576';
+  print('---Tafqeet :  ${tafOnce.am}   ${tafOnce.tafqeet}  ');
+
+  tafOnce.amount = '1';
+  print('---Tafqeet :  ${tafOnce.am}   ${tafOnce.tafqeet}  ');
+
+  tafOnce.amount = '2';
+  print('---Tafqeet :  ${tafOnce.am}   ${tafOnce.tafqeet}  ');
+  tafOnce.amount = '3';
+  print('---Tafqeet :  ${tafOnce.am}   ${tafOnce.tafqeet}  ');
+
+  tafOnce.amount = '4';
+  print('---Tafqeet :  ${tafOnce.am}   ${tafOnce.tafqeet}  ');
+
+  TafqeetCurrency currenyKM = TafqeetCurrency(
+      country: '',
+      currency: 'متراً',
+      currencyMultiple: 'أثنين متراً',
+      currencyPlural: 'مترات',
+      currncyFrcDigits: 2,
+      currencyFrc: 'سنتميتراً',
+      currencyFrcMultiple: 'سنتيمتران',
+      currencyFrcPlural: 'سنتيمترات',
+      currencyGender: 'M',
+      currencyFrcGender: 'M');
+
+  var tafKM = TafqeetMulti('20', currenyKM);
+  tafKM.amount = '453576.01';
+  print('---Tafqeet :  ${tafKM.am}   ${tafKM.tafqeet}  ');
+
+  tafKM.amount = '0.12';
+  print('---Tafqeet :  ${tafKM.am}   ${tafKM.tafqeet}  ');
+
+  tafKM.amount = '0.02';
+  print('---Tafqeet :  ${tafKM.am}   ${tafKM.tafqeet}  ');
+  tafKM.amount = '0.03';
+  print('---Tafqeet :  ${tafKM.am}   ${tafKM.tafqeet}  ');
+
+  tafKM.amount = '0.01';
+  print('---Tafqeet :  ${tafKM.am}   ${tafKM.tafqeet}  ');
 }
