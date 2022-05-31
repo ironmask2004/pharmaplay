@@ -8,6 +8,7 @@
 */
 
 enum UnitCode {
+  Undefined('UND'),
   SyrianPound('SYP'),
   UnitedStatesDollar('USD'),
   SaudiArabianRiyal('SAR'),

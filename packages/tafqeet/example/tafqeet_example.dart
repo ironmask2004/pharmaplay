@@ -229,6 +229,55 @@ void main() {
 
   var tafSA = TafqeetMulti('20.01', unitSA);
 
-  tafSA.amount = '10.1';
+  tafSA.amount = '76.67';
   print('---Tafqeet :  ${tafSA.am}   ${tafSA.tafqeet}  ');
+
+  TafqeetUnit unitSY = TafqeetUnit(
+      country: 'سورية',
+      unit: 'ليرة',
+      unitMultiple: 'ليرتين',
+      unitPlural: 'ليرات',
+      unitPartDigits: 2,
+      unitPart: 'قرشاً',
+      unitPartMultiple: 'قرشان',
+      unitPartPlural: 'قروش',
+      unitGender: 'F',
+      unitPartGender: 'M',
+      unitCode: UnitCode.SyrianPound);
+
+  var tafSAp = TafqeetMulti('20.01', unitSY);
+
+  tafSAp.amount = '76.67';
+  print('---Tafqeet :  ${tafSAp.am}   ${tafSAp.tafqeet}  ');
+
+  TafqeetUnit unitund = TafqeetUnit(
+      country: '',
+      unit: 'قطعة',
+      unitMultiple: '',
+      unitPlural: 'قطع',
+      unitPartDigits: 3,
+      unitPart: 'جزء',
+      unitPartMultiple: '',
+      unitPartPlural: '',
+      unitGender: 'M',
+      unitPartGender: 'M',
+      unitCode: UnitCode.Undefined);
+
+  var tafund = TafqeetMulti('20.01', unitund);
+
+  tafund.amount = '76.67';
+  print('---Tafqeet :  ${tafund.am}   ${tafund.tafqeet}  ');
+
+  tafund.amount = '1.1';
+  print('---Tafqeet :  ${tafund.am}   ${tafund.tafqeet}  ');
+  tafund.amount = '2.2';
+  print('---Tafqeet :  ${tafund.am}   ${tafund.tafqeet}  ');
+  tafund.amount = '3.3';
+  print('---Tafqeet :  ${tafund.am}   ${tafund.tafqeet}  ');
+  tafund.amount = '4.4';
+  print('---Tafqeet :  ${tafund.am}   ${tafund.tafqeet}  ');
+  tafund.amount = '5.5';
+  print('---Tafqeet :  ${tafund.am}   ${tafund.tafqeet}  ');
+  tafund.amount = '6.6';
+  print('---Tafqeet :  ${tafund.am}   ${tafund.tafqeet}  ');
 }
