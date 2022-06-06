@@ -32,7 +32,7 @@ class TafqeetMulti {
 
 //  --################################################################
 String getArrVal(
-    String arr, var pR, var pC, TafqeetUnit unit, Gender numGender) {
+    String arr, var pR, var pC, TafqeetUnit tafUnit, Gender numGender) {
   List<String> mx = [
     ' ',
     ' ',
@@ -134,17 +134,22 @@ String getArrVal(
   List<String> w = [
     ' ',
     //'قرشاً',
-    (unit.unitPart),
+    // TODO add اً  to the end of unit
+    ((tafUnit.unitPart.substring(tafUnit.unitPart.length - 1) == 'ة'
+        ? '${tafUnit.unitPart.substring(0, tafUnit.unitPart.length - 1)}ةً'
+        : '${tafUnit.unitPart}اً')),
     //'قرشاً',
-    (unit.unitPart),
+    ((tafUnit.unitPart.substring(tafUnit.unitPart.length - 1) == 'ة'
+        ? 'ةً'
+        : 'اً')),
     // 'قروش',
-    (unit.unitPartPlural),
+    (tafUnit.unitPartPlural),
     //'ليرة',
-    unit.unit,
+    tafUnit.unit,
     //'ليرة',
-    unit.unit,
+    tafUnit.unit,
     //'ليرات',
-    (unit.unitPlural),
+    (tafUnit.unitPlural),
     'الف',
     'الفاً',
     'الاف',
@@ -164,17 +169,17 @@ String getArrVal(
   List<String> a = [
     ' ',
 //    'قرش واحد',
-    '${unit.unitPart} ${numGender == Gender.female ? 'واحدة' : 'واحد'}',
+    '${tafUnit.unitPart} ${numGender == Gender.female ? 'واحدة' : 'واحد'}',
 //    'قرشان',
-    (unit.unitPartMultiple),
+    (tafUnit.unitPartMultiple),
 //    'قرشان',
-    (unit.unitPartMultiple),
+    (tafUnit.unitPartMultiple),
     //'ليرة واحدة',
-    '${unit.unit}${numGender == Gender.female ? 'واحدة' : ' واحداً'}',
+    '${tafUnit.unit}${numGender == Gender.female ? 'واحدة' : ' واحداً'}',
     //'ليرتان',
-    (unit.unitMultiple),
+    (tafUnit.unitMultiple),
     //'ليرتان',
-    (unit.unitMultiple),
+    (tafUnit.unitMultiple),
     'الف',
     'الفان',
     'الفا',

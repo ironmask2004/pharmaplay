@@ -215,13 +215,11 @@ void main() {
   */
 
   TafqeetUnit unitSA = TafqeetUnit(
-      country: 'سعودياً',
-      unit: 'ريالاً',
-      unitMultiple: 'ريالين',
+      country: 'سعودية',
+      unit: 'ريال',
       unitPlural: 'ريالات',
       unitPartDigits: 2,
       unitPart: 'هللة',
-      unitPartMultiple: 'هللاتين',
       unitPartPlural: 'هللات',
       unitGender: Gender.male,
       unitPartGender: Gender.female,
@@ -235,11 +233,9 @@ void main() {
   TafqeetUnit unitSY = TafqeetUnit(
       country: 'سورية',
       unit: 'ليرة',
-      unitMultiple: 'ليرتين',
       unitPlural: 'ليرات',
       unitPartDigits: 2,
-      unitPart: 'قرشاً',
-      unitPartMultiple: 'قرشان',
+      unitPart: 'قرش',
       unitPartPlural: 'قروش',
       unitGender: Gender.female,
       unitPartGender: Gender.male,
@@ -247,17 +243,22 @@ void main() {
 
   var tafSAp = TafqeetMulti('20.01', unitSY);
 
-  tafSAp.amount = '76.67';
+  tafSAp.amount = '20.02';
+  print('---Tafqeet :  ${tafSAp.am}   ${tafSAp.tafqeet}  ');
+  tafSAp.amount = '2.2';
+  print('---Tafqeet :  ${tafSAp.am}   ${tafSAp.tafqeet}  ');
+  tafSAp.amount = '0.02';
+  print('---Tafqeet :  ${tafSAp.am}   ${tafSAp.tafqeet}  ');
+
+  tafSAp.amount = '2222.22';
   print('---Tafqeet :  ${tafSAp.am}   ${tafSAp.tafqeet}  ');
 
   TafqeetUnit unitund = TafqeetUnit(
       country: '',
       unit: 'قطعة',
-      unitMultiple: '',
       unitPlural: 'قطع',
       unitPartDigits: 3,
       unitPart: 'جزء',
-      unitPartMultiple: 'جزأن',
       unitPartPlural: 'أجزاء',
       unitGender: Gender.male,
       unitPartGender: Gender.male,
@@ -265,19 +266,19 @@ void main() {
 
   var tafund = TafqeetMulti('20.01', unitund);
 
-  tafund.amount = '76.67';
-  print('${tafund.tafqeet}  ');
+  tafSA.amount = '76.67';
+  print('${tafSA.tafqeet}  ');
 
-  tafund.amount = '14444.1666';
-  print('${tafund.tafqeet}  ');
-  tafund.amount = '25345.26';
-  print('${tafund.tafqeet}  ');
-  tafund.amount = '3333.344';
-  print('${tafund.tafqeet}  ');
-  tafund.amount = '4747646.4';
-  print('${tafund.tafqeet}  ');
-  tafund.amount = '357655.45';
-  print('${tafund.tafqeet}  ');
-  tafund.amount = '6546.006';
-  print('${tafund.tafqeet}  ');
+  tafSA.amount = '14444.1666';
+  print('${tafSA.tafqeet}  ');
+  tafSA.amount = '5';
+  print('${tafSA.tafqeet}  ');
+  tafSA.amount = '333.34';
+  print('${tafSA.tafqeet}  ');
+  tafSA.amount = '47.4';
+  print('${tafSA.tafqeet}  ');
+  tafSA.amount = '35.45';
+  print('${tafSA.tafqeet}  ');
+  tafSA.amount = '6.06';
+  print('${tafSA.tafqeet}  ');
 }

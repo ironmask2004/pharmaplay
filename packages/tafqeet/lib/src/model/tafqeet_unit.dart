@@ -8,27 +8,38 @@ class TafqeetUnit extends Equatable {
   final UnitCode unitCode;
   final String country;
   final String unit;
-  final String unitMultiple;
+
   final String unitPlural;
   final Gender unitGender;
   final int unitPartDigits;
   final String unitPart;
-  final String unitPartMultiple;
   final String unitPartPlural;
   final Gender unitPartGender;
   TafqeetUnit({
     required this.unitCode,
     required this.country,
     required this.unit,
-    required this.unitMultiple,
     required this.unitPlural,
     required this.unitGender,
     required this.unitPartDigits,
     required this.unitPart,
-    required this.unitPartMultiple,
     required this.unitPartPlural,
     required this.unitPartGender,
   });
+
+  String get unitMultiple {
+    return unit.substring(unit.length - 1) == 'ة'
+        ? '${unit.substring(0, unit.length - 1)}تان'
+        : '$unitان';
+  }
+
+  String get unitPartMultiple {
+    return unitPart.substring(unitPart.length - 1) == 'ة'
+        ? '${unitPart.substring(0, unitPart.length - 1)}تان'
+        : '$unitPartان';
+  }
+
+  //set setUnitMultiple(unitMultiple unitMultiple) => this.unitMultiple = unitMultiple;='';
 
   TafqeetUnit copyWith({
     UnitCode? unitCode,
@@ -47,12 +58,10 @@ class TafqeetUnit extends Equatable {
       unitCode: unitCode ?? this.unitCode,
       country: country ?? this.country,
       unit: unit ?? this.unit,
-      unitMultiple: unitMultiple ?? this.unitMultiple,
       unitPlural: unitPlural ?? this.unitPlural,
       unitGender: unitGender ?? this.unitGender,
       unitPartDigits: unitPartDigits ?? this.unitPartDigits,
       unitPart: unitPart ?? this.unitPart,
-      unitPartMultiple: unitPartMultiple ?? this.unitPartMultiple,
       unitPartPlural: unitPartPlural ?? this.unitPartPlural,
       unitPartGender: unitPartGender ?? this.unitPartGender,
     );
@@ -81,12 +90,10 @@ class TafqeetUnit extends Equatable {
       unitCode: UnitCode.fromMap(map['unitCode']),
       country: map['country'] ?? '',
       unit: map['unit'] ?? '',
-      unitMultiple: map['unitMultiple'] ?? '',
       unitPlural: map['unitPlural'] ?? '',
       unitGender: Gender.fromMap(map['unitGender']),
       unitPartDigits: map['unitPartDigits']?.toInt() ?? 0,
       unitPart: map['unitPart'] ?? '',
-      unitPartMultiple: map['unitPartMultiple'] ?? '',
       unitPartPlural: map['unitPartPlural'] ?? '',
       unitPartGender: Gender.fromMap(map['unitPartGender']),
     );
