@@ -101,8 +101,8 @@ TafqeetUnit unitund = TafqeetUnit(
     unitPlural: 'قطع',
     unitPartDigits: 3,
     unitPart: 'جزء',
-    unitPartMultiple: '',
-    unitPartPlural: '',
+    unitPartMultiple: 'جزأن',
+    unitPartPlural: 'أجزاء',
     unitGender: Gender.male,
     unitPartGender: Gender.male,
     unitCode: UnitCode.Undefined);

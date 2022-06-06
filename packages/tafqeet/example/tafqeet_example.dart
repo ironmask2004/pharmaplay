@@ -257,8 +257,8 @@ void main() {
       unitPlural: 'قطع',
       unitPartDigits: 3,
       unitPart: 'جزء',
-      unitPartMultiple: '',
-      unitPartPlural: '',
+      unitPartMultiple: 'جزأن',
+      unitPartPlural: 'أجزاء',
       unitGender: Gender.male,
       unitPartGender: Gender.male,
       unitCode: UnitCode.Undefined);
@@ -278,6 +278,6 @@ void main() {
   print('${tafund.tafqeet}  ');
   tafund.amount = '357655.45';
   print('${tafund.tafqeet}  ');
-  tafund.amount = '6546.466';
+  tafund.amount = '6546.006';
   print('${tafund.tafqeet}  ');
 }
