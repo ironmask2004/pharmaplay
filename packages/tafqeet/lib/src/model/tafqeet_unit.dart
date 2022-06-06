@@ -10,12 +10,12 @@ class TafqeetUnit extends Equatable {
   final String unit;
   final String unitMultiple;
   final String unitPlural;
-  final String unitGender;
+  final Gender unitGender;
   final int unitPartDigits;
   final String unitPart;
   final String unitPartMultiple;
   final String unitPartPlural;
-  final String unitPartGender;
+  final Gender unitPartGender;
   TafqeetUnit({
     required this.unitCode,
     required this.country,
@@ -36,12 +36,12 @@ class TafqeetUnit extends Equatable {
     String? unit,
     String? unitMultiple,
     String? unitPlural,
-    String? unitGender,
+    Gender? unitGender,
     int? unitPartDigits,
     String? unitPart,
     String? unitPartMultiple,
     String? unitPartPlural,
-    String? unitPartGender,
+    Gender? unitPartGender,
   }) {
     return TafqeetUnit(
       unitCode: unitCode ?? this.unitCode,
@@ -66,12 +66,13 @@ class TafqeetUnit extends Equatable {
     result.addAll({'unit': unit});
     result.addAll({'unitMultiple': unitMultiple});
     result.addAll({'unitPlural': unitPlural});
-    result.addAll({'unitGender': unitGender});
+    result.addAll({'unitGender': unitGender.toMap()});
     result.addAll({'unitPartDigits': unitPartDigits});
     result.addAll({'unitPart': unitPart});
     result.addAll({'unitPartMultiple': unitPartMultiple});
     result.addAll({'unitPartPlural': unitPartPlural});
-    result.addAll({'unitPartGender': unitPartGender});
+    result.addAll({'unitPartGender': unitPartGender.toMap()});
+
     return result;
   }
 
@@ -82,12 +83,12 @@ class TafqeetUnit extends Equatable {
       unit: map['unit'] ?? '',
       unitMultiple: map['unitMultiple'] ?? '',
       unitPlural: map['unitPlural'] ?? '',
-      unitGender: map['unitGender'] ?? '',
+      unitGender: Gender.fromMap(map['unitGender']),
       unitPartDigits: map['unitPartDigits']?.toInt() ?? 0,
       unitPart: map['unitPart'] ?? '',
       unitPartMultiple: map['unitPartMultiple'] ?? '',
       unitPartPlural: map['unitPartPlural'] ?? '',
-      unitPartGender: map['unitPartGender'] ?? '',
+      unitPartGender: Gender.fromMap(map['unitPartGender']),
     );
   }
 

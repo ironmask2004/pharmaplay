@@ -3,6 +3,8 @@ import 'dart:typed_data';
 
 //import 'package:tafqeet/tafqeet.dart';
 
+import 'package:tafqeet/tafqeet.dart';
+
 import 'model/tafqeet_unit.dart';
 
 /// Checks if you are awesome. Spoiler: you are.
@@ -30,51 +32,51 @@ class TafqeetMulti {
 
 //  --################################################################
 String getArrVal(
-    String arr, var pR, var pC, TafqeetUnit unit, String numGender) {
+    String arr, var pR, var pC, TafqeetUnit unit, Gender numGender) {
   List<String> mx = [
     ' ',
     ' ',
     ' ',
     ' ',
     //'واحد',
-    (numGender == 'F' ? 'احدى' : 'واحد'),
+    (numGender == Gender.female ? 'احدى' : 'واحد'),
     ' عشر',
     'مئة',
     'اثنان',
     'عشرون',
     'مئتان',
     //'ثلاثة',
-    (numGender == 'F' ? 'ثلاث' : 'ثلاثة'),
+    (numGender == Gender.female ? 'ثلاث' : 'ثلاثة'),
 
     'ثلاثون',
     'ثلاثمائة',
     //'اربعة',
-    (numGender == 'F' ? 'اربع' : 'اربعة'),
+    (numGender == Gender.female ? 'اربع' : 'اربعة'),
 
     'اربعون',
     'اربعمائة',
     //'خمسة',
-    (numGender == 'F' ? 'خمس' : 'خمسة'),
+    (numGender == Gender.female ? 'خمس' : 'خمسة'),
 
     'خمسون',
     'خمسمائة',
     //'ستة',
-    (numGender == 'F' ? 'ست' : 'ستة'),
+    (numGender == Gender.female ? 'ست' : 'ستة'),
 
     'ستون',
     'ستمائة',
     //'سبعة',
-    (numGender == 'F' ? 'سبع' : 'سبعة'),
+    (numGender == Gender.female ? 'سبع' : 'سبعة'),
 
     'سبعون',
     'سبعمائة',
     //'ثمانية',
-    (numGender == 'F' ? 'ثماني' : 'ثمانية'),
+    (numGender == Gender.female ? 'ثماني' : 'ثمانية'),
 
     'ثمانون',
     'ثمانمائة',
     //'تسعة',
-    (numGender == 'F' ? 'تسع' : 'تسعة'),
+    (numGender == Gender.female ? 'تسع' : 'تسعة'),
 
     'تسعون',
     'تسعمائة'
@@ -85,46 +87,46 @@ String getArrVal(
     ' ',
     ' ',
     //'احدى',
-    (numGender == 'F' ? 'احدى' : 'واحد'),
+    (numGender == Gender.female ? 'احدى' : 'واحد'),
     ' عشرة',
     'مئة',
     //'اثنتان',
-    (numGender == 'F' ? 'اثنتان' : 'إثنان'),
+    (numGender == Gender.female ? 'اثنتان' : 'إثنان'),
 
     'عشرون',
     'مئتان',
     //'ثلاث',
-    (numGender == 'F' ? 'ثلاث' : 'ثلاثة'),
+    (numGender == Gender.female ? 'ثلاث' : 'ثلاثة'),
 
     'ثلاثون',
     'ثلاثمائة',
     //'اربع',
-    (numGender == 'F' ? 'اربع' : 'اربعة'),
+    (numGender == Gender.female ? 'اربع' : 'اربعة'),
 
     'اربعون',
     'اربعمائة',
     //'خمس',
-    (numGender == 'F' ? 'خمس' : 'خمسة'),
+    (numGender == Gender.female ? 'خمس' : 'خمسة'),
 
     'خمسون',
     'خمسمائة',
     //'ست',
-    (numGender == 'F' ? 'ست' : 'ستة'),
+    (numGender == Gender.female ? 'ست' : 'ستة'),
 
     'ستون',
     'ستمائة',
     //'سبع',
-    (numGender == 'F' ? 'سبع' : 'سبعة'),
+    (numGender == Gender.female ? 'سبع' : 'سبعة'),
 
     'سبعون',
     'سبعمائة',
     //'ثماني',
-    (numGender == 'F' ? 'ثماني' : 'ثمانية'),
+    (numGender == Gender.female ? 'ثماني' : 'ثمانية'),
 
     'ثمانون',
     'ثمانمائة',
     //'تسع',
-    (numGender == 'F' ? 'تسع' : 'تسعة'),
+    (numGender == Gender.female ? 'تسع' : 'تسعة'),
 
     'تسعون',
     'تسعمائة'
@@ -162,13 +164,13 @@ String getArrVal(
   List<String> a = [
     ' ',
 //    'قرش واحد',
-    '${unit.unitPart} ${numGender == 'F' ? 'واحدة' : 'واحد'}',
+    '${unit.unitPart} ${numGender == Gender.female ? 'واحدة' : 'واحد'}',
 //    'قرشان',
     (unit.unitPartMultiple),
 //    'قرشان',
     (unit.unitPartMultiple),
     //'ليرة واحدة',
-    '${unit.unit}${numGender == 'F' ? 'واحدة' : ' واحداً'}',
+    '${unit.unit}${numGender == Gender.female ? 'واحدة' : ' واحداً'}',
     //'ليرتان',
     (unit.unitMultiple),
     //'ليرتان',
@@ -206,8 +208,8 @@ String getArrVal(
 ///
 ///--################################################################
 String spellNum(String m1, var x, var part, var zx, TafqeetUnit unit,
-    {String? unitPartGender}) {
-  String numGender = (unitPartGender ?? unit.unitGender);
+    {Gender? unitPartGender}) {
+  Gender numGender = (unitPartGender ?? unit.unitGender);
   int? x100 = 0;
   int? x10 = 0;
 
@@ -559,7 +561,7 @@ String getTafqeetMulti(String am, TafqeetUnit unit) {
 
   taf = 'فقط $taf لاغير';
 
-  return (taf);
+  return (taf.replaceAll('  ', ' ').replaceAll('  ', ' '));
 }
 // ==========
 

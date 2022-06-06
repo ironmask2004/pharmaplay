@@ -20,8 +20,8 @@ void main() {
       unitPart: 'سنت',
       unitPartMultiple: 'سنتين',
       unitPartPlural: 'سنتات',
-      unitGender: 'M',
-      unitPartGender: 'M',
+      unitGender: Gender.male,
+      unitPartGender: Gender.male,
       unitCode: UnitCode.UnitedStatesDollar);
 
   var tafUSA = TafqeetMulti('20.01', unitUsa);
@@ -40,8 +40,8 @@ void main() {
       unitPart: 'فلس',
       unitPartMultiple: 'فلسين',
       unitPartPlural: 'فلوس',
-      unitGender: 'M',
-      unitPartGender: 'M',
+      unitGender: Gender.male,
+      unitPartGender: Gender.male,
       unitCode: UnitCode.KuwaitiDinar);
 
   /*for (double dd = 0.0; dd <= 90.20; dd = dd + 0.01) {
@@ -91,8 +91,8 @@ void main() {
       unitPart: 'غرام',
       unitPartMultiple: 'غرامين',
       unitPartPlural: 'غرامات',
-      unitGender: 'M',
-      unitPartGender: 'M',
+      unitGender: Gender.male,
+      unitPartGender: Gender.male,
       unitCode: UnitCode.KiloGram);
 
   var tafK = TafqeetMulti('20.010', unitKG);
@@ -134,8 +134,8 @@ void main() {
       unitPart: '',
       unitPartMultiple: '',
       unitPartPlural: '',
-      unitGender: 'F',
-      unitPartGender: 'F',
+      unitGender: Gender.female,
+      unitPartGender: Gender.female,
       unitCode: UnitCode.Ounce);
 
   var tafOnce = TafqeetMulti('20', unitOnce);
@@ -162,8 +162,8 @@ void main() {
       unitPart: 'سنتميتراً',
       unitPartMultiple: 'سنتيمتران',
       unitPartPlural: 'سنتيمترات',
-      unitGender: 'M',
-      unitPartGender: 'M',
+      unitGender: Gender.male,
+      unitPartGender: Gender.male,
       unitCode: UnitCode.KiloMetre);
 
   var tafKM = TafqeetMulti('20', unitKM);
@@ -190,8 +190,8 @@ void main() {
       unitPart: 'قرشاً',
       unitPartMultiple: 'قرشان',
       unitPartPlural: 'قروش',
-      unitGender: 'F',
-      unitPartGender: 'M',
+      unitGender: Gender.female,
+      unitPartGender: Gender.male,
       unitCode: UnitCode.SyrianPound);
 
   // var unitSY = TafqeetMulti('20.01', unitSY);
@@ -223,13 +223,13 @@ void main() {
       unitPart: 'هللة',
       unitPartMultiple: 'هللاتين',
       unitPartPlural: 'هللات',
-      unitGender: 'M',
-      unitPartGender: 'F',
+      unitGender: Gender.male,
+      unitPartGender: Gender.female,
       unitCode: UnitCode.SaudiArabianRiyal);
 
-  var tafSA = TafqeetMulti('20.01', unitSA);
+  var tafSA = TafqeetMulti('2540.01', unitSA);
 
-  tafSA.amount = '76.67';
+  tafSA.amount = '46467476.67';
   print('---Tafqeet :  ${tafSA.am}   ${tafSA.tafqeet}  ');
 
   TafqeetUnit unitSY = TafqeetUnit(
@@ -241,8 +241,8 @@ void main() {
       unitPart: 'قرشاً',
       unitPartMultiple: 'قرشان',
       unitPartPlural: 'قروش',
-      unitGender: 'F',
-      unitPartGender: 'M',
+      unitGender: Gender.female,
+      unitPartGender: Gender.male,
       unitCode: UnitCode.SyrianPound);
 
   var tafSAp = TafqeetMulti('20.01', unitSY);
@@ -259,25 +259,25 @@ void main() {
       unitPart: 'جزء',
       unitPartMultiple: '',
       unitPartPlural: '',
-      unitGender: 'M',
-      unitPartGender: 'M',
+      unitGender: Gender.male,
+      unitPartGender: Gender.male,
       unitCode: UnitCode.Undefined);
 
   var tafund = TafqeetMulti('20.01', unitund);
 
   tafund.amount = '76.67';
-  print('---Tafqeet :  ${tafund.am}   ${tafund.tafqeet}  ');
+  print('${tafund.tafqeet}  ');
 
-  tafund.amount = '1.1';
-  print('---Tafqeet :  ${tafund.am}   ${tafund.tafqeet}  ');
-  tafund.amount = '2.2';
-  print('---Tafqeet :  ${tafund.am}   ${tafund.tafqeet}  ');
-  tafund.amount = '3.3';
-  print('---Tafqeet :  ${tafund.am}   ${tafund.tafqeet}  ');
-  tafund.amount = '4.4';
-  print('---Tafqeet :  ${tafund.am}   ${tafund.tafqeet}  ');
-  tafund.amount = '5.5';
-  print('---Tafqeet :  ${tafund.am}   ${tafund.tafqeet}  ');
-  tafund.amount = '6.6';
-  print('---Tafqeet :  ${tafund.am}   ${tafund.tafqeet}  ');
+  tafund.amount = '14444.1666';
+  print('${tafund.tafqeet}  ');
+  tafund.amount = '25345.26';
+  print('${tafund.tafqeet}  ');
+  tafund.amount = '3333.344';
+  print('${tafund.tafqeet}  ');
+  tafund.amount = '4747646.4';
+  print('${tafund.tafqeet}  ');
+  tafund.amount = '357655.45';
+  print('${tafund.tafqeet}  ');
+  tafund.amount = '6546.466';
+  print('${tafund.tafqeet}  ');
 }

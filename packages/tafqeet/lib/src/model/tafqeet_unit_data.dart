@@ -10,50 +10,11 @@ TafqeetUnit unitUsa = TafqeetUnit(
     unitPart: 'سنت',
     unitPartMultiple: 'سنتين',
     unitPartPlural: 'سنتات',
-    unitGender: 'M',
-    unitPartGender: 'M',
+    unitGender: Gender.male,
+    unitPartGender: Gender.male,
     unitCode: UnitCode.UnitedStatesDollar);
 
 //====
-
-TafqeetUnit unitSA = TafqeetUnit(
-    country: 'سعودياً',
-    unit: 'ريالاً',
-    unitMultiple: 'ريالين',
-    unitPlural: 'ريالات',
-    unitPartDigits: 2,
-    unitPart: 'هللة',
-    unitPartMultiple: 'هللاتين',
-    unitPartPlural: 'هللات',
-    unitGender: 'M',
-    unitPartGender: 'F',
-    unitCode: UnitCode.SaudiArabianRiyal);
-
-TafqeetUnit unitDK = TafqeetUnit(
-    country: 'كويتياً',
-    unit: 'ديناراً',
-    unitMultiple: 'دينارين',
-    unitPlural: 'دنانير',
-    unitPartDigits: 3,
-    unitPart: 'فلس',
-    unitPartMultiple: 'فلسين',
-    unitPartPlural: 'فلوس',
-    unitGender: 'M',
-    unitPartGender: 'M',
-    unitCode: UnitCode.UnitedStatesDollar);
-
-TafqeetUnit unitKG = TafqeetUnit(
-    country: '',
-    unit: 'كيلو غراماً',
-    unitMultiple: 'أثنين كيلو غراماً',
-    unitPlural: 'كيلو غرامات',
-    unitPartDigits: 3,
-    unitPart: 'غرام',
-    unitPartMultiple: 'غرامين',
-    unitPartPlural: 'غرامات',
-    unitGender: 'M',
-    unitPartGender: 'M',
-    unitCode: UnitCode.UnitedStatesDollar);
 
 TafqeetUnit unitOnce = TafqeetUnit(
     country: '',
@@ -64,8 +25,8 @@ TafqeetUnit unitOnce = TafqeetUnit(
     unitPart: '',
     unitPartMultiple: '',
     unitPartPlural: '',
-    unitGender: 'F',
-    unitPartGender: 'F',
+    unitGender: Gender.female,
+    unitPartGender: Gender.female,
     unitCode: UnitCode.UnitedStatesDollar);
 
 TafqeetUnit unitKM = TafqeetUnit(
@@ -77,8 +38,8 @@ TafqeetUnit unitKM = TafqeetUnit(
     unitPart: 'سنتميتراً',
     unitPartMultiple: 'سنتيمتران',
     unitPartPlural: 'سنتيمترات',
-    unitGender: 'M',
-    unitPartGender: 'M',
+    unitGender: Gender.male,
+    unitPartGender: Gender.male,
     unitCode: UnitCode.UnitedStatesDollar);
 
 TafqeetUnit unitSY = TafqeetUnit(
@@ -90,6 +51,58 @@ TafqeetUnit unitSY = TafqeetUnit(
     unitPart: 'قرشاً',
     unitPartMultiple: 'قرشان',
     unitPartPlural: 'قروش',
-    unitGender: 'F',
-    unitPartGender: 'M',
+    unitGender: Gender.female,
+    unitPartGender: Gender.male,
     unitCode: UnitCode.UnitedStatesDollar);
+
+TafqeetUnit unitSA = TafqeetUnit(
+    country: 'سعودياً',
+    unit: 'ريالاً',
+    unitMultiple: 'ريالين',
+    unitPlural: 'ريالات',
+    unitPartDigits: 2,
+    unitPart: 'هللة',
+    unitPartMultiple: 'هللاتين',
+    unitPartPlural: 'هللات',
+    unitGender: Gender.male,
+    unitPartGender: Gender.female,
+    unitCode: UnitCode.SaudiArabianRiyal);
+
+TafqeetUnit unitDK = TafqeetUnit(
+    country: 'كويتياً',
+    unit: 'ديناراً',
+    unitMultiple: 'دينارين',
+    unitPlural: 'دنانير',
+    unitPartDigits: 3,
+    unitPart: 'فلس',
+    unitPartMultiple: 'فلسين',
+    unitPartPlural: 'فلوس',
+    unitGender: Gender.male,
+    unitPartGender: Gender.male,
+    unitCode: UnitCode.UnitedStatesDollar);
+
+TafqeetUnit unitKG = TafqeetUnit(
+    country: '',
+    unit: 'كيلو غراماً',
+    unitMultiple: 'أثنين كيلو غراماً',
+    unitPlural: 'كيلو غرامات',
+    unitPartDigits: 3,
+    unitPart: 'غرام',
+    unitPartMultiple: 'غرامين',
+    unitPartPlural: 'غرامات',
+    unitGender: Gender.male,
+    unitPartGender: Gender.male,
+    unitCode: UnitCode.UnitedStatesDollar);
+
+TafqeetUnit unitund = TafqeetUnit(
+    country: '',
+    unit: 'قطعة',
+    unitMultiple: '',
+    unitPlural: 'قطع',
+    unitPartDigits: 3,
+    unitPart: 'جزء',
+    unitPartMultiple: '',
+    unitPartPlural: '',
+    unitGender: Gender.male,
+    unitPartGender: Gender.male,
+    unitCode: UnitCode.Undefined);
