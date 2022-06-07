@@ -11,20 +11,7 @@ void main() {
   //taf.amount = '0.03';
   //print('Tafqeet : ${taf.tafqeet}  ');
 /*
-  TafqeetUnit unitUsa = TafqeetUnit(
-      country: 'أميريكياً',
-      unit: 'دولاراً',
-      unitMultiple: 'دولارين',
-      unitPlural: 'دولارات',
-      unitPartDigits: 2,
-      unitPart: 'سنت',
-      unitPartMultiple: 'سنتين',
-      unitPartPlural: 'سنتات',
-      unitGender: Gender.male,
-      unitPartGender: Gender.male,
-      unitCode: UnitCode.UnitedStatesDollar);
 
-  var tafUSA = TafqeetMulti('20.01', unitUsa);
 
 //====
 
@@ -214,8 +201,21 @@ void main() {
   print(unitSY.toJson().toString());
   */
 
+  TafqeetUnit unitUsa = TafqeetUnit(
+      country: 'أميريكي',
+      unit: 'دولار',
+      unitPlural: 'دولارات',
+      unitPartDigits: 2,
+      unitPart: 'سنت',
+      unitPartPlural: 'سنتات',
+      unitGender: Gender.male,
+      unitPartGender: Gender.male,
+      unitCode: UnitCode.UnitedStatesDollar);
+
+  var tafUSA = TafqeetMulti('20.01', unitUsa);
+
   TafqeetUnit unitSA = TafqeetUnit(
-      country: 'سعودية',
+      country: 'سعودي',
       unit: 'ريال',
       unitPlural: 'ريالات',
       unitPartDigits: 2,
@@ -243,16 +243,6 @@ void main() {
 
   var tafSAp = TafqeetMulti('20.01', unitSY);
 
-  tafSAp.amount = '20.02';
-  print('---Tafqeet :  ${tafSAp.am}   ${tafSAp.tafqeet}  ');
-  tafSAp.amount = '2.2';
-  print('---Tafqeet :  ${tafSAp.am}   ${tafSAp.tafqeet}  ');
-  tafSAp.amount = '0.02';
-  print('---Tafqeet :  ${tafSAp.am}   ${tafSAp.tafqeet}  ');
-
-  tafSAp.amount = '2222.22';
-  print('---Tafqeet :  ${tafSAp.am}   ${tafSAp.tafqeet}  ');
-
   TafqeetUnit unitund = TafqeetUnit(
       country: '',
       unit: 'قطعة',
@@ -271,14 +261,14 @@ void main() {
 
   tafSA.amount = '14444.1666';
   print('${tafSA.tafqeet}  ');
-  tafSA.amount = '5';
-  print('${tafSA.tafqeet}  ');
-  tafSA.amount = '333.34';
-  print('${tafSA.tafqeet}  ');
-  tafSA.amount = '47.4';
-  print('${tafSA.tafqeet}  ');
-  tafSA.amount = '35.45';
-  print('${tafSA.tafqeet}  ');
-  tafSA.amount = '6.06';
-  print('${tafSA.tafqeet}  ');
+
+  for (double dd = 0.0; dd <= 15.20; dd = dd + 0.01) {
+    print('DDDD  $dd   : ${(dd * 100).truncate() / 100}');
+    tafSA.amount = ((dd * 100).truncate() / 100).toString();
+    print('${tafSA.tafqeet}');
+    tafSAp.amount = tafSA.am;
+    print('${tafSAp.tafqeet}  ');
+    tafUSA.amount = tafSA.am;
+    print('${tafUSA.tafqeet}');
+  }
 }

@@ -145,9 +145,18 @@ String getArrVal(
     // 'قروش',
     (tafUnit.unitPartPlural),
     //'ليرة',
-    tafUnit.unit,
+    //tafUnit.unit + '#',
+
+    ((tafUnit.unit.substring(tafUnit.unit.length - 1) == 'ة'
+        ? '${tafUnit.unit.substring(0, tafUnit.unit.length - 1)}ةً'
+        : '${tafUnit.unit}اً')),
+
     //'ليرة',
-    tafUnit.unit,
+    //tafUnit.unit + '%',
+    ((tafUnit.unit.substring(tafUnit.unit.length - 1) == 'ة'
+        ? '${tafUnit.unit.substring(0, tafUnit.unit.length - 1)}ةً'
+        : '${tafUnit.unit}اً')),
+
     //'ليرات',
     (tafUnit.unitPlural),
     'الف',
@@ -212,9 +221,9 @@ String getArrVal(
 ///##########################################
 ///
 ///--################################################################
-String spellNum(String m1, var x, var part, var zx, TafqeetUnit unit,
+String spellNum(String m1, var x, var part, var zx, TafqeetUnit tafUnit,
     {Gender? unitPartGender}) {
-  Gender numGender = (unitPartGender ?? unit.unitGender);
+  Gender numGender = (unitPartGender ?? tafUnit.unitGender);
   int? x100 = 0;
   int? x10 = 0;
 
@@ -236,27 +245,27 @@ String spellNum(String m1, var x, var part, var zx, TafqeetUnit unit,
     t = '';
     return (t);
   } else if (x == 1) {
-    t = getArrVal('A', part, 0, unit, numGender);
+    t = getArrVal('A', part, 0, tafUnit, numGender);
   } else if (x == 2) {
     if ((zx == 0)) {
-      t = getArrVal('A', part, 2, unit, numGender);
+      t = getArrVal('A', part, 2, tafUnit, numGender);
     } else {
-      t = getArrVal('A', part, 1, unit, numGender);
+      t = getArrVal('A', part, 1, tafUnit, numGender);
     }
   } else if (x == 10) {
-    if (getArrVal(m1, 1, 0, unit, numGender) == 'احدى') {
+    if (getArrVal(m1, 1, 0, tafUnit, numGender) == 'احدى') {
       t = 'عشر';
     } else {
       t = 'عشرة';
     }
   } else if (x == 11) {
-    if (getArrVal(m1, 1, 0, unit, numGender) == 'احدى') {
+    if (getArrVal(m1, 1, 0, tafUnit, numGender) == 'احدى') {
       t = 'احدى عشرة';
     } else {
       t = 'احد عشر';
     }
   } else if (x == 12) {
-    if (getArrVal(m1, 1, 0, unit, numGender) == 'احدى') {
+    if (getArrVal(m1, 1, 0, tafUnit, numGender) == 'احدى') {
       t = 'اثنتا عشرة';
     } else {
       t = 'اثنا عشر';
@@ -274,39 +283,39 @@ String spellNum(String m1, var x, var part, var zx, TafqeetUnit unit,
       t = 'مئتا';
     } else {
       if ((x10 == 0 && (x1 == 1 || x1 == 2))) {
-        t = getArrVal(m1, x100, 2, unit, numGender) +
+        t = getArrVal(m1, x100, 2, tafUnit, numGender) +
             w1 +
-            getArrVal('A', part, (x1! - 1), unit, numGender) +
+            getArrVal('A', part, (x1! - 1), tafUnit, numGender) +
             w2 +
-            getArrVal(m1, x10, 1, unit, numGender);
+            getArrVal(m1, x10, 1, tafUnit, numGender);
       } else if ((x10 == 1 && (x1 == 1 || x1 == 2 || x1 == 0))) {
         if (x1 == 1) {
-          if (getArrVal(m1, 1, 0, unit, numGender) == 'احدى') {
-            t = '${getArrVal(m1, x100, 2, unit, numGender)} واحدى عشرة';
+          if (getArrVal(m1, 1, 0, tafUnit, numGender) == 'احدى') {
+            t = '${getArrVal(m1, x100, 2, tafUnit, numGender)} واحدى عشرة';
           } else {
-            t = '${getArrVal(m1, x100, 2, unit, numGender)} واحد عشر';
+            t = '${getArrVal(m1, x100, 2, tafUnit, numGender)} واحد عشر';
           }
         } else if (x1 == 2) {
-          if (getArrVal(m1, 1, 0, unit, numGender) == 'احدى') {
-            t = '${getArrVal(m1, x100, 2, unit, numGender)} واثنتا عشرة';
+          if (getArrVal(m1, 1, 0, tafUnit, numGender) == 'احدى') {
+            t = '${getArrVal(m1, x100, 2, tafUnit, numGender)} واثنتا عشرة';
           } else {
-            t = '${getArrVal(m1, x100, 2, unit, numGender)} واثنا عشر';
+            t = '${getArrVal(m1, x100, 2, tafUnit, numGender)} واثنا عشر';
           }
         } else if (x1 == 0) {
           if ((x10 == 1 && x1 == 0)) {
-            if (getArrVal(m1, 1, 0, unit, numGender) == 'احدى') {
-              t = '${getArrVal(m1, x100, 2, unit, numGender)} وعشر';
+            if (getArrVal(m1, 1, 0, tafUnit, numGender) == 'احدى') {
+              t = '${getArrVal(m1, x100, 2, tafUnit, numGender)} وعشر';
             } else {
-              t = '${getArrVal(m1, x100, 2, unit, numGender)} وعشرة';
+              t = '${getArrVal(m1, x100, 2, tafUnit, numGender)} وعشرة';
             }
           }
         }
       } else {
-        t = getArrVal(m1, x100, 2, unit, numGender) +
+        t = getArrVal(m1, x100, 2, tafUnit, numGender) +
             w1 +
-            getArrVal(m1, x1, 0, unit, numGender) +
+            getArrVal(m1, x1, 0, tafUnit, numGender) +
             w2 +
-            getArrVal(m1, x10, 1, unit, numGender);
+            getArrVal(m1, x10, 1, tafUnit, numGender);
       }
     }
   }
@@ -342,7 +351,7 @@ String spellNum(String m1, var x, var part, var zx, TafqeetUnit unit,
       u = 2;
     }
 
-    t = '$t ${getArrVal('W', part, u, unit, numGender)}';
+    t = '$t ${getArrVal('W', part, u, tafUnit, numGender)}';
   }
 
   return (t);
@@ -350,7 +359,7 @@ String spellNum(String m1, var x, var part, var zx, TafqeetUnit unit,
 //  --################################################################
 
 //  --################################################################
-String getTafqeetMulti(String am, TafqeetUnit unit) {
+String getTafqeetMulti(String am, TafqeetUnit tafUnit) {
   String j;
   String t;
   String amount;
@@ -378,7 +387,7 @@ String getTafqeetMulti(String am, TafqeetUnit unit) {
 
   // print('Founf DOT @ $p  lenght: ${amount.length}');
 
-  switch (unit.unitPartDigits) {
+  switch (tafUnit.unitPartDigits) {
     case 0:
       {
         if ((p != -1)) {
@@ -453,7 +462,7 @@ String getTafqeetMulti(String am, TafqeetUnit unit) {
       }
   }
 
-  print('J: $j');
+  //print('J: $j');
 
   for (int i = 0; i <= 5; i++) {
     amount = j.substring(0, 3);
@@ -466,7 +475,7 @@ String getTafqeetMulti(String am, TafqeetUnit unit) {
   //print('fraction: ${x[1]}');
 
   if ((x[7] > 0)) {
-    t = spellNum('MX', x[7], 6, x[6] + x[5] + x[4] + x[3] + x[2], unit);
+    t = spellNum('MX', x[7], 6, x[6] + x[5] + x[4] + x[3] + x[2], tafUnit);
     taf = taf + t;
     flag = 1;
     f = 1;
@@ -475,7 +484,7 @@ String getTafqeetMulti(String am, TafqeetUnit unit) {
   }
 
   if ((x[6] > 0)) {
-    t = spellNum('MX', x[6], 5, x[5] + x[4] + x[3] + x[2], unit);
+    t = spellNum('MX', x[6], 5, x[5] + x[4] + x[3] + x[2], tafUnit);
     if ((f == 1)) {
       taf = '$taf و';
     }
@@ -487,7 +496,7 @@ String getTafqeetMulti(String am, TafqeetUnit unit) {
   }
 
   if ((x[5] > 0)) {
-    t = spellNum('MX', x[5], 4, x[4] + x[3] + x[2], unit);
+    t = spellNum('MX', x[5], 4, x[4] + x[3] + x[2], tafUnit);
 
     if ((f == 1)) {
       taf = '$taf و';
@@ -501,7 +510,7 @@ String getTafqeetMulti(String am, TafqeetUnit unit) {
   }
 
   if ((x[4] > 0)) {
-    t = spellNum('MX', x[4], 3, x[3] + x[2], unit);
+    t = spellNum('MX', x[4], 3, x[3] + x[2], tafUnit);
 
     if ((f == 1)) {
       taf = '$taf و';
@@ -515,7 +524,7 @@ String getTafqeetMulti(String am, TafqeetUnit unit) {
   }
 
   if ((x[3] > 0)) {
-    t = spellNum('MX', x[3], 2, x[2], unit);
+    t = spellNum('MX', x[3], 2, x[2], tafUnit);
 
     if ((f == 1)) {
       taf = '$taf و';
@@ -529,7 +538,7 @@ String getTafqeetMulti(String am, TafqeetUnit unit) {
   }
 
   if ((x[2] > 0)) {
-    t = spellNum('MY', x[2], 1, 0, unit);
+    t = spellNum('MY', x[2], 1, 0, tafUnit);
 
     if ((f == 1)) {
       taf = '$taf و';
@@ -541,14 +550,25 @@ String getTafqeetMulti(String am, TafqeetUnit unit) {
     //!NEED Verfiation
     f = 1;
   } else if (f == 1) {
-    taf = '$taf  ${unit.unit}';
+    taf = '$taf  ${tafUnit.unit}';
   }
 
-  //print('flag: $flag f: $f ');
-  if (f == 1) taf = '$taf ${unit.country}';
+  if (f == 1) {
+    if (x[2] >= 3 && x[2] <= 10) {
+      taf =
+          '$taf ${((tafUnit.country.substring(tafUnit.country.length - 1) == 'ة' ? tafUnit.country : '${tafUnit.country}ة'))}';
+    } else if (x[2] > 10) {
+      //   taf = '$taf ${tafUnit.country}اً';
+      taf =
+          '$taf ${((tafUnit.country.substring(tafUnit.country.length - 1) == 'ة' ? '${tafUnit.country.substring(0, tafUnit.country.length - 1)}ةً' : '${tafUnit.country}اً'))}';
+    } else {
+      taf = '$taf ${tafUnit.country}';
+    }
+  }
 
   if ((x[1] > 0)) {
-    t = spellNum('MX', x[1], 0, 0, unit, unitPartGender: unit.unitPartGender);
+    t = spellNum('MX', x[1], 0, 0, tafUnit,
+        unitPartGender: tafUnit.unitPartGender);
 
     if ((f == 1)) {
       taf = '$taf و';
@@ -561,7 +581,7 @@ String getTafqeetMulti(String am, TafqeetUnit unit) {
 
   //print(' $am : ${double.tryParse(am)}');
   if ((double.tryParse(am) == 0)) {
-    taf = 'صفر  ${unit.unit}  ${unit.country}';
+    taf = 'صفر ${tafUnit.unit}  ${tafUnit.country}';
   }
 
   taf = 'فقط $taf لاغير';
