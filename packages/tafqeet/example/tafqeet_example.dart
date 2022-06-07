@@ -1,18 +1,37 @@
 import 'dart:ffi';
 
-//import 'package:tafqeet/src/model/tafqeet_unit.dart';
-import 'package:tafqeet/src/model/tafqeet_unit_data.dart';
-
+import 'package:tafqeet/src/model/tafqeet_unit.dart';
 import 'package:tafqeet/tafqeet.dart';
 
 void main() {
   // var tafund = TafqeetMulti('20.01', unitund);
 
-  var tafSA = TafqeetMulti('20.01', unitSA);
-  var tafSAp = TafqeetMulti('20.01', unitSY);
-  var tafUSA = TafqeetMulti('20.01', unitUsa);
-  var tafM = TafqeetMulti('20.01', unitM);
-  var tafHR = TafqeetMulti('20.01', unitHR);
+  var tafUSA = TafqeetMulti();
+
+  print(tafUSA.tafqeetByPreDefinedUnit(
+      amount: '33.02', tafqeetUnitCode: TafqeetUnitCode.unitedStatesDollar));
+
+  print(tafUSA.tafqeetByPreDefinedUnit(
+      amount: '33.02', tafqeetUnitCode: TafqeetUnitCode.syrianPound));
+  print(tafUSA.tafqeetByUserDefinedUnit(
+      amount: '332',
+      userDefinedUnit: TafqeetUnit(
+          country: '',
+          unit: 'طنجرة',
+          unitPlural: 'طناجر',
+          unitPartDigits: 0,
+          unitPart: '',
+          unitPartPlural: ' ',
+          unitGender: TafqeetGender.feminine,
+          unitPartGender: TafqeetGender.feminine,
+          unitCode: TafqeetUnitCode.userDefined)));
+  /*
+
+  var tafSA = TafqeetMulti('20.01', TafqeetUnitCode.unitedStatesDollar);
+  var tafSAp = TafqeetMulti('20.01', TafqeetUnitCode.syrianPound);
+
+  var tafM = TafqeetMulti('20.01', TafqeetUnitCode.metre);
+  var tafHR = TafqeetMulti('20.01', TafqeetUnitCode.hour);
 
   for (double dd = 0.0; dd <= 4.20; dd = dd + 0.01) {
     print('DDDD  $dd   : ${(dd * 100).truncate() / 100}');
@@ -28,9 +47,9 @@ void main() {
     print('${tafHR.tafqeet}');
   }
 
-  var tafDK = TafqeetMulti('20.01', unitDK);
-  var tafKG = TafqeetMulti('20.01', unitKG);
-  var tafKM = TafqeetMulti('20.01', unitKM);
+  var tafDK = TafqeetMulti('20.01', TafqeetUnitCode.kuwaitiDinar);
+  var tafKG = TafqeetMulti('20.01', TafqeetUnitCode.kiloGram);
+  var tafKM = TafqeetMulti('20.01', TafqeetUnitCode.kiloMetre);
 
   for (double dd = 0.0; dd <= 0.20; dd = dd + 0.001) {
     print('DDDD  $dd   : ${(dd * 1000).truncate() / 1000}');
@@ -41,4 +60,6 @@ void main() {
     tafKM.amount = tafDK.amount;
     print('${tafKM.tafqeet}');
   }
+*/
+  //print(tafHR.tafqeet(tafqeetUnitCode: TafqeetUnitCode.kiloMetre));
 }

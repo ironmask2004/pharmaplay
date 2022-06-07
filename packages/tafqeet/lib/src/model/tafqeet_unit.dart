@@ -5,16 +5,16 @@ import 'package:equatable/equatable.dart';
 import 'package:tafqeet/src/model/unit_code.dart';
 
 class TafqeetUnit extends Equatable {
-  final UnitCode unitCode;
+  final TafqeetUnitCode unitCode;
   final String country;
   final String unit;
-
+// TODO   القيام بيعملية لجمع للوحدات بشكل الي
   final String unitPlural;
-  final Gender unitGender;
+  final TafqeetGender unitGender;
   final int unitPartDigits;
   final String unitPart;
   final String unitPartPlural;
-  final Gender unitPartGender;
+  final TafqeetGender unitPartGender;
   TafqeetUnit({
     required this.unitCode,
     required this.country,
@@ -42,17 +42,17 @@ class TafqeetUnit extends Equatable {
   //set setUnitMultiple(unitMultiple unitMultiple) => this.unitMultiple = unitMultiple;='';
 
   TafqeetUnit copyWith({
-    UnitCode? unitCode,
+    TafqeetUnitCode? unitCode,
     String? country,
     String? unit,
     String? unitMultiple,
     String? unitPlural,
-    Gender? unitGender,
+    TafqeetGender? unitGender,
     int? unitPartDigits,
     String? unitPart,
     String? unitPartMultiple,
     String? unitPartPlural,
-    Gender? unitPartGender,
+    TafqeetGender? unitPartGender,
   }) {
     return TafqeetUnit(
       unitCode: unitCode ?? this.unitCode,
@@ -87,15 +87,15 @@ class TafqeetUnit extends Equatable {
 
   factory TafqeetUnit.fromMap(Map<String, dynamic> map) {
     return TafqeetUnit(
-      unitCode: UnitCode.fromMap(map['unitCode']),
+      unitCode: TafqeetUnitCode.fromMap(map['unitCode']),
       country: map['country'] ?? '',
       unit: map['unit'] ?? '',
       unitPlural: map['unitPlural'] ?? '',
-      unitGender: Gender.fromMap(map['unitGender']),
+      unitGender: TafqeetGender.fromMap(map['unitGender']),
       unitPartDigits: map['unitPartDigits']?.toInt() ?? 0,
       unitPart: map['unitPart'] ?? '',
       unitPartPlural: map['unitPartPlural'] ?? '',
-      unitPartGender: Gender.fromMap(map['unitPartGender']),
+      unitPartGender: TafqeetGender.fromMap(map['unitPartGender']),
     );
   }
 

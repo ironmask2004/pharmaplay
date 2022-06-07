@@ -7,8 +7,9 @@
 "unitPartGender":"M"}
 */
 
-enum UnitCode {
+enum TafqeetUnitCode {
   undefined('UND'),
+  userDefined('USR'),
   syrianPound('SYP'),
   unitedStatesDollar('USD'),
   saudiArabianRiyal('SAR'),
@@ -22,58 +23,36 @@ enum UnitCode {
 
   //final int codeIndex;
   final String code;
-  const UnitCode(this.code);
+  const TafqeetUnitCode(this.code);
   @override
   String toString() => 'The $name Code is $code';
 
   String toMap() => code;
 
-  //UnitCode fromMap(String unitCode) =>
-  //   UnitCode.values.firstWhere((e) => e.toMap() == unitCode);
-  factory UnitCode.fromMap(String x) {
-    return (UnitCode.values.firstWhere((e) => e.toMap() == x));
+  //tafqeetUnitCode fromMap(String unitCode) =>
+  //   tafqeetUnitCode.values.firstWhere((e) => e.toMap() == unitCode);
+  factory TafqeetUnitCode.fromMap(String x) {
+    return (TafqeetUnitCode.values.firstWhere((e) => e.toMap() == x));
   }
 }
 
 //=== Gender
-
-/* Json UNIT CODE
-{"unitCode":"SYP",
-"country":"سورية","unit":"ليرة",
-"unitMultiple":"ليرتين","unitPlural":"ليرات",
-"unitGender":"F","unitPartDigits":2,"unitPart":"قرشاً",
-"unitPartMultiple":"قرشان","unitPartPlural":"قروش",
-"unitPartGender":"M"}
-*/
-
-enum Gender {
-  male('M'),
-  female('F');
+//Determine if the number is masculine or feminine
+enum TafqeetGender {
+  masculine('M'),
+  feminine('F');
 
   //final int codeIndex;
   final String code;
-  const Gender(this.code);
+  const TafqeetGender(this.code);
   @override
   String toString() => 'The $name Code is $code';
 
   String toMap() => code;
 
-  //UnitCode fromMap(String unitCode) =>
-  //   UnitCode.values.firstWhere((e) => e.toMap() == unitCode);
-  factory Gender.fromMap(String x) {
-    return (Gender.values.firstWhere((e) => e.toMap() == x));
+  //tafqeetUnitCode fromMap(String unitCode) =>
+  //   tafqeetUnitCode.values.firstWhere((e) => e.toMap() == unitCode);
+  factory TafqeetGender.fromMap(String x) {
+    return (TafqeetGender.values.firstWhere((e) => e.toMap() == x));
   }
-}
-
-void main() {
-  print(Gender.female);
-  print(Gender.fromMap('F').runtimeType); // Prints “The frozen water is 32 F.”
-}
-
-//===
-
-void main1() {
-  print(UnitCode.syrianPound);
-  print(UnitCode.fromMap('SAR')
-      .runtimeType); // Prints “The frozen water is 32 F.”
 }
