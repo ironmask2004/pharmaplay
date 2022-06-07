@@ -8,14 +8,16 @@
 */
 
 enum UnitCode {
-  Undefined('UND'),
-  SyrianPound('SYP'),
-  UnitedStatesDollar('USD'),
-  SaudiArabianRiyal('SAR'),
-  KuwaitiDinar('DK'),
-  KiloGram('KG'),
-  Ounce('OZ'),
-  KiloMetre('KM'),
+  undefined('UND'),
+  syrianPound('SYP'),
+  unitedStatesDollar('USD'),
+  saudiArabianRiyal('SAR'),
+  kuwaitiDinar('DK'),
+  kiloGram('KG'),
+  ounce('OZ'),
+  kiloMetre('KM'),
+  metre('M'),
+  hour('HR'),
   ;
 
   //final int codeIndex;
@@ -71,7 +73,7 @@ void main() {
 //===
 
 void main1() {
-  print(UnitCode.SyrianPound);
+  print(UnitCode.syrianPound);
   print(UnitCode.fromMap('SAR')
       .runtimeType); // Prints “The frozen water is 32 F.”
 }
