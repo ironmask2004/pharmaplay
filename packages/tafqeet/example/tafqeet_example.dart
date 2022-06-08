@@ -6,21 +6,42 @@ import 'package:tafqeet/tafqeet.dart';
 void main() {
   // var tafund = TafqeetMulti('20.01', unitund);
 
-  var tafUSA = TafqeetMulti();
+  var tafqeet = TafqeetMulti();
 
-  print(tafUSA.tafqeetByPreDefinedUnit(
+  print(tafqeet.tafqeetByPreDefinedUnit(
       amount: '33.02', tafqeetUnitCode: TafqeetUnitCode.unitedStatesDollar));
 
-  print(tafUSA.tafqeetByPreDefinedUnit(
+  print(tafqeet.tafqeetByPreDefinedUnit(
       amount: '33.02', tafqeetUnitCode: TafqeetUnitCode.syrianPound));
-  print(tafUSA.tafqeetByUserDefinedUnit(
+
+  print(tafqeet.tafqeetByPreDefinedUnit(
+      amount: '33.02',
+      tafqeetUnitCode: TafqeetUnitCode.syrianPound,
+      justWord: 'ففققطط',
+      noOtherWord: 'لاااغيييررر'));
+
+  String tafKM = tafqeet.tafqeetThreeUnitsByPreDefinedUnit(
+    number: '1425:0:01',
+    mainTafqeetUnitCode: TafqeetUnitCode.kiloMetre,
+    subTafqeetUnitCode: TafqeetUnitCode.metre,
+  );
+  print(tafKM);
+
+  String tafhr = tafqeet.tafqeetThreeUnitsByPreDefinedUnit(
+    number: '230:0:03',
+    mainTafqeetUnitCode: TafqeetUnitCode.hour,
+    subTafqeetUnitCode: TafqeetUnitCode.minute,
+  );
+  print(tafhr);
+
+  print(tafqeet.tafqeetByUserDefinedUnit(
       amount: '332',
       userDefinedUnit: TafqeetUnit(
           country: '',
           unit: 'طنجرة',
           unitPlural: 'طناجر',
           unitPartDigits: 0,
-          unitPart: '',
+          unitPart: ' ',
           unitPartPlural: ' ',
           unitGender: TafqeetGender.feminine,
           unitPartGender: TafqeetGender.feminine,

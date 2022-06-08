@@ -38,12 +38,66 @@ class TafqeetMulti {
   //}
 
   String tafqeetByUserDefinedUnit(
-      {required String amount, required TafqeetUnit userDefinedUnit}) {
-    return (_getTafqeetMulti(amount, userDefinedUnit));
+      {required String amount,
+      required TafqeetUnit userDefinedUnit,
+      String justWord = 'فقط',
+      String noOtherWord = 'لاغير'}) {
+    return (_getTafqeetMulti(
+        am: amount,
+        tafqeetUnit: userDefinedUnit,
+        justWord: justWord,
+        noOtherWord: noOtherWord));
+  }
+
+  String tafqeetThreeUnitsByPreDefinedUnit(
+      {required String number,
+      required TafqeetUnitCode mainTafqeetUnitCode,
+      required TafqeetUnitCode subTafqeetUnitCode,
+      String justWord = 'فقط',
+      String noOtherWord = 'لاغير'}) {
+    final splitsmount = number.split(':');
+
+    switch (splitsmount.length) {
+      case 0:
+        return ('$number Must Be in Three parts Units devided By ":" Like "123:45:67" !!');
+
+      case 1:
+        tafqeetByPreDefinedUnit(
+            amount: splitsmount.first,
+            tafqeetUnitCode: mainTafqeetUnitCode,
+            justWord: justWord,
+            noOtherWord: noOtherWord);
+        break;
+      case 2:
+        tafqeetByPreDefinedUnit(
+            amount: '${splitsmount[0]}.${splitsmount[1]}',
+            tafqeetUnitCode: mainTafqeetUnitCode,
+            justWord: justWord,
+            noOtherWord: noOtherWord);
+        break;
+      case 3:
+        // print('------${splitsmount[1]}.${splitsmount[2]}');
+        String tafKM = tafqeetByPreDefinedUnit(
+            amount: splitsmount[0],
+            tafqeetUnitCode: mainTafqeetUnitCode,
+            justWord: justWord,
+            noOtherWord: '');
+
+        String tafM = tafqeetByPreDefinedUnit(
+            amount: '${splitsmount[1]}.${splitsmount[2]}',
+            tafqeetUnitCode: subTafqeetUnitCode,
+            justWord: '',
+            noOtherWord: noOtherWord);
+        return ('$tafKMو$tafM');
+    }
+    return ('$number Must Be in Three parts Units devided By ":" Like "123:45:67" !!');
   }
 
   String tafqeetByPreDefinedUnit(
-      {required String amount, required TafqeetUnitCode tafqeetUnitCode}) {
+      {required String amount,
+      required TafqeetUnitCode tafqeetUnitCode,
+      String justWord = 'فقط',
+      String noOtherWord = 'لاغير'}) {
     // _tafqeetUnitCode = tafqeetUnitCode ?? _tafqeetUnitCode;
 
     var unitFiltered = _unitList.firstWhere(
@@ -52,7 +106,11 @@ class TafqeetMulti {
           .firstWhere((e) => e.unitCode == TafqeetUnitCode.undefined);
     });
 
-    return (_getTafqeetMulti(amount, unitFiltered));
+    return (_getTafqeetMulti(
+        am: amount,
+        tafqeetUnit: unitFiltered,
+        justWord: justWord,
+        noOtherWord: noOtherWord));
   }
 
 //  --################################################################
@@ -159,7 +217,6 @@ class TafqeetMulti {
     List<String> w = [
       ' ',
       //'قرشاً',
-      // TODO add اً  to the end of unit
       ((tafUnit.unitPart.substring(tafUnit.unitPart.length - 1) == 'ة'
           ? '${tafUnit.unitPart.substring(0, tafUnit.unitPart.length - 1)}ةً'
           : '${tafUnit.unitPart}اً')),
@@ -385,13 +442,26 @@ class TafqeetMulti {
 //  --################################################################
 
 //  --################################################################
-  String _getTafqeetMulti(String am, TafqeetUnit tafUnit) {
+  String _getTafqeetMulti(
+      {required String am,
+      required TafqeetUnit tafqeetUnit,
+      String justWord = 'فقط',
+      String noOtherWord = 'لاغير'}) {
     String j;
     String t;
     String amount;
     String v;
 
     // TYPE x_arr IS VARRAY (7) OF NUMBER NOT NULL;
+    TafqeetUnit tafUnit = tafqeetUnit.copyWith(
+      unit: tafqeetUnit.unit.isEmpty ? ' ' : tafqeetUnit.unit,
+      unitPart: tafqeetUnit.unitPart.isEmpty ? ' ' : tafqeetUnit.unitPart,
+      unitMultiple:
+          tafqeetUnit.unitMultiple.isEmpty ? ' ' : tafqeetUnit.unitMultiple,
+      unitPartPlural:
+          tafqeetUnit.unitPartPlural.isEmpty ? ' ' : tafqeetUnit.unitPartPlural,
+      unitPlural: tafqeetUnit.unitPlural.isEmpty ? ' ' : tafqeetUnit.unitPlural,
+    );
 
     List x = [0, 0, 0, 0, 0, 0, 0, 0];
 
@@ -404,9 +474,9 @@ class TafqeetMulti {
       return ('');
     }
 
-    //print('am: $am  ${am.runtimeType}  ');
+    // print('am: $am  ${am.runtimeType}  ');
     amount = am;
-    //print('am: $am  Amount: $amount');
+    // print('am: $am  Amount: $amount');
 
     p = amount.indexOf('.');
 
@@ -601,7 +671,7 @@ class TafqeetMulti {
     if (x[7] + x[6] + x[5] + x[4] + x[3] + x[2] == 0) {
       taf = _getCountryUnit(x[1], taf, tafUnit.country, tafUnit.unitPartGender);
     }
-    taf = 'فقط $taf لاغير';
+    taf = '$justWord $taf $noOtherWord';
 
     return (taf.replaceAll('  ', ' ').replaceAll('  ', ' '));
   }

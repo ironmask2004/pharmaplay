@@ -19,6 +19,7 @@ enum TafqeetUnitCode {
   kiloMetre('KM'),
   metre('M'),
   hour('HR'),
+  minute('MIN'),
   ;
 
   //final int codeIndex;
