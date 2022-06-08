@@ -28,7 +28,7 @@ void main() {
   print(tafKM);
 
   String tafhr = tafqeet.tafqeetThreeUnitsByPreDefinedUnit(
-    number: '230:0:03',
+    number: '3:01:01',
     mainTafqeetUnitCode: TafqeetUnitCode.hour,
     subTafqeetUnitCode: TafqeetUnitCode.minute,
   );
@@ -46,6 +46,7 @@ void main() {
           unitGender: TafqeetGender.feminine,
           unitPartGender: TafqeetGender.feminine,
           unitCode: TafqeetUnitCode.userDefined)));
+
   /*
 
   var tafSA = TafqeetMulti('20.01', TafqeetUnitCode.unitedStatesDollar);

@@ -57,39 +57,45 @@ class TafqeetMulti {
       String noOtherWord = 'لاغير'}) {
     final splitsmount = number.split(':');
 
+    //print('splitsmount.length ${splitsmount.length}');
+
+    // for (int i = 0; i < splitsmount.length; i++) print(splitsmount[i]);
+
     switch (splitsmount.length) {
       case 0:
         return ('$number Must Be in Three parts Units devided By ":" Like "123:45:67" !!');
 
       case 1:
-        tafqeetByPreDefinedUnit(
+        return (tafqeetByPreDefinedUnit(
             amount: splitsmount.first,
             tafqeetUnitCode: mainTafqeetUnitCode,
             justWord: justWord,
-            noOtherWord: noOtherWord);
+            noOtherWord: noOtherWord));
         break;
       case 2:
-        tafqeetByPreDefinedUnit(
+        return (tafqeetByPreDefinedUnit(
             amount: '${splitsmount[0]}.${splitsmount[1]}',
             tafqeetUnitCode: mainTafqeetUnitCode,
             justWord: justWord,
-            noOtherWord: noOtherWord);
+            noOtherWord: noOtherWord));
         break;
       case 3:
+
         // print('------${splitsmount[1]}.${splitsmount[2]}');
-        String tafKM = tafqeetByPreDefinedUnit(
+        String tafMainamount = tafqeetByPreDefinedUnit(
             amount: splitsmount[0],
             tafqeetUnitCode: mainTafqeetUnitCode,
             justWord: justWord,
             noOtherWord: '');
 
-        String tafM = tafqeetByPreDefinedUnit(
+        String tafSubamount = tafqeetByPreDefinedUnit(
             amount: '${splitsmount[1]}.${splitsmount[2]}',
             tafqeetUnitCode: subTafqeetUnitCode,
             justWord: '',
             noOtherWord: noOtherWord);
-        return ('$tafKMو$tafM');
+        return ('$tafMainamountو$tafSubamount');
     }
+
     return ('$number Must Be in Three parts Units devided By ":" Like "123:45:67" !!');
   }
 
