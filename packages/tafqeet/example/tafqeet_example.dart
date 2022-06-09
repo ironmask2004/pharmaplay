@@ -21,14 +21,14 @@ void main() {
       noOtherWord: 'لاااغيييررر'));
 
   String tafKM = tafqeet.tafqeetThreeUnitsByPreDefinedUnit(
-    number: '1425:0:01',
+    number: '1425:48:91',
     mainTafqeetUnitCode: TafqeetUnitCode.kiloMetre,
     subTafqeetUnitCode: TafqeetUnitCode.metre,
   );
   print(tafKM);
 
   String tafhr = tafqeet.tafqeetThreeUnitsByPreDefinedUnit(
-    number: '3:01:01',
+    number: '0:00:01',
     mainTafqeetUnitCode: TafqeetUnitCode.hour,
     subTafqeetUnitCode: TafqeetUnitCode.minute,
   );
@@ -46,6 +46,24 @@ void main() {
           unitGender: TafqeetGender.feminine,
           unitPartGender: TafqeetGender.feminine,
           unitCode: TafqeetUnitCode.userDefined)));
+
+  print(tafqeet.tafqeetByPreDefinedUnit(
+      amount: '33.02', tafqeetUnitCode: TafqeetUnitCode.syrianPound));
+
+  print(tafqeet.tafqeetThreeUnitsByPreDefinedUnit(
+    number: '33:02:0',
+    mainTafqeetUnitCode: TafqeetUnitCode.syrianPound,
+    subTafqeetUnitCode: TafqeetUnitCode.syrianPoundPArt,
+  ));
+
+  print(tafqeet.tafqeetByPreDefinedUnit(
+      amount: '11.12', tafqeetUnitCode: TafqeetUnitCode.syrianPound));
+
+  print(tafqeet.tafqeetThreeUnitsByPreDefinedUnit(
+    number: '11:12:0',
+    mainTafqeetUnitCode: TafqeetUnitCode.syrianPound,
+    subTafqeetUnitCode: TafqeetUnitCode.syrianPoundPArt,
+  ));
 
   /*
 

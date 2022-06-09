@@ -11,6 +11,7 @@ enum TafqeetUnitCode {
   undefined('UND'),
   userDefined('USR'),
   syrianPound('SYP'),
+  syrianPoundPArt('SYPP'),
   unitedStatesDollar('USD'),
   saudiArabianRiyal('SAR'),
   kuwaitiDinar('DK'),

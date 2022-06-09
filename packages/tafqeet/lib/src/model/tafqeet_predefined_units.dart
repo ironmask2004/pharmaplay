@@ -83,6 +83,16 @@ List<TafqeetUnit> tafqeetPredefinedUnits = [
       unitPartGender: TafqeetGender.masculine,
       unitCode: TafqeetUnitCode.syrianPound),
   TafqeetUnit(
+      country: 'سورية',
+      unit: 'قرش',
+      unitPlural: 'قروش',
+      unitPartDigits: 2,
+      unitPart: ' ',
+      unitPartPlural: ' ',
+      unitGender: TafqeetGender.masculine,
+      unitPartGender: TafqeetGender.masculine,
+      unitCode: TafqeetUnitCode.syrianPoundPArt),
+  TafqeetUnit(
       country: '',
       unit: 'قلم',
       unitPlural: 'أٌقلام',
