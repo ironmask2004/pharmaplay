@@ -6,21 +6,31 @@
 "unitPartMultiple":"قرشان","unitPartPlural":"قروش",
 "unitPartGender":"M"}
 */
-
 enum TafqeetUnitCode {
+  none('NONE'),
   undefined('UND'),
+  undefinedPart('UNDP'),
+
   userDefined('USR'),
   syrianPound('SYP'),
-  syrianPoundPArt('SYPP'),
+  syrianPoundPenny('SYPP'),
   unitedStatesDollar('USD'),
+  unitedStatesDollarPenny('USDP'),
   saudiArabianRiyal('SAR'),
+  saudiArabianRiyalPenny('SARP'),
   kuwaitiDinar('DK'),
+  kuwaitiDinarPenny('DKP'),
   kiloGram('KG'),
+  gram('GRAM'),
   ounce('OZ'),
   kiloMetre('KM'),
   metre('M'),
+  centimeter('CM'),
+  millimeter('MM'),
   hour('HR'),
   minute('MIN'),
+  second('SEC'),
+  millisecond('MSEC'),
   ;
 
   //final int codeIndex;

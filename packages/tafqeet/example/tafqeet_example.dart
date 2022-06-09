@@ -8,6 +8,9 @@ void main() {
 
   var tafqeet = TafqeetMulti();
 
+  print(tafqeet.tafqeetNumber(
+      amountAndParts: [33, 22], tafqeetUnitCode: TafqeetUnitCode.syrianPound));
+
   print(tafqeet.tafqeetByPreDefinedUnit(
       amount: '33.02', tafqeetUnitCode: TafqeetUnitCode.unitedStatesDollar));
 
@@ -40,12 +43,10 @@ void main() {
           country: '',
           unit: 'طنجرة',
           unitPlural: 'طناجر',
-          unitPartDigits: 0,
-          unitPart: ' ',
-          unitPartPlural: ' ',
+          unitMaxValue: 0,
           unitGender: TafqeetGender.feminine,
-          unitPartGender: TafqeetGender.feminine,
-          unitCode: TafqeetUnitCode.userDefined)));
+          unitCode: TafqeetUnitCode.userDefined,
+          partialUnitCode: TafqeetUnitCode.none)));
 
   print(tafqeet.tafqeetByPreDefinedUnit(
       amount: '33.02', tafqeetUnitCode: TafqeetUnitCode.syrianPound));
@@ -53,7 +54,7 @@ void main() {
   print(tafqeet.tafqeetThreeUnitsByPreDefinedUnit(
     number: '33:02:0',
     mainTafqeetUnitCode: TafqeetUnitCode.syrianPound,
-    subTafqeetUnitCode: TafqeetUnitCode.syrianPoundPArt,
+    subTafqeetUnitCode: TafqeetUnitCode.syrianPoundPenny,
   ));
 
   print(tafqeet.tafqeetByPreDefinedUnit(

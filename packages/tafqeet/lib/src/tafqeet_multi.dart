@@ -223,15 +223,19 @@ class TafqeetMulti {
     List<String> w = [
       ' ',
       //'قرشاً',
-      ((tafUnit.unitPart.substring(tafUnit.unitPart.length - 1) == 'ة'
-          ? '${tafUnit.unitPart.substring(0, tafUnit.unitPart.length - 1)}ةً'
-          : '${tafUnit.unitPart}اً')),
+      ' ',
+      // ((tafUnit.unitPart.substring(tafUnit.unitPart.length - 1) == 'ة'
+      //     ? '${tafUnit.unitPart.substring(0, tafUnit.unitPart.length - 1)}ةً'
+      //    : '${tafUnit.unitPart}اً')),
       //'قرشاً',
-      ((tafUnit.unitPart.substring(tafUnit.unitPart.length - 1) == 'ة'
-          ? 'ةً'
-          : 'اً')),
+      ' ',
+      // ((tafUnit.unitPart.substring(tafUnit.unitPart.length - 1) == 'ة'
+      //     ? 'ةً'
+      //    : 'اً')),
       // 'قروش',
-      (tafUnit.unitPartPlural),
+      // (tafUnit.unitPartPlural),
+      ' ',
+      //
       //'ليرة',
       //tafUnit.unit + '#',
 
@@ -266,13 +270,15 @@ class TafqeetMulti {
     List<String> a = [
       ' ',
 //    'قرش واحد',
-      '${tafUnit.unitPart} ${numGender == TafqeetGender.feminine ? 'واحدة' : 'واحد'}',
+      ' ',
+//       '${tafUnit.unitPart} ${numGender == TafqeetGender.feminine ? 'واحدة' : 'واحد'}',
 //    'قرشان',
-      (tafUnit.unitPartMultiple),
+      ' ',
+      //       (tafUnit.unitPartMultiple),
 //    'قرشان',
-      (tafUnit.unitPartMultiple),
+      ' ',
+      //       (tafUnit.unitPartMultiple),
       //'ليرة واحدة',
-
       '${((tafUnit.unit.substring(tafUnit.unit.length - 1) == 'ة' ? '${tafUnit.unit.substring(0, tafUnit.unit.length - 1)}ةً' : '${tafUnit.unit}اً'))}${numGender == TafqeetGender.feminine ? ' واحدة' : ' واحداً'}',
       //'ليرتان',
       (tafUnit.unitMultiple),
