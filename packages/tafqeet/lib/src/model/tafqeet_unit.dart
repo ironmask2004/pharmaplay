@@ -23,11 +23,11 @@ class TafqeetUnit extends Equatable {
     required this.partialUnitCode,
   });
 
-  String get unitMultiple {
+  /*String get unitMultiple {
     return unit.substring(unit.length - 1) == 'ة'
         ? '${unit.substring(0, unit.length - 1)}تان'
         : '$unitان';
-  }
+  }*/
   //set setUnitMultiple(unitMultiple unitMultiple) => this.unitMultiple = unitMultiple;='';
 
   TafqeetUnit copyWith({

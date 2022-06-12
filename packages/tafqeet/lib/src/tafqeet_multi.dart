@@ -203,13 +203,11 @@ class TafqeetMulti {
       ' ',
       //'قرشاً',
       ' ',
-      // ((tafUnit.unitPart.substring(tafUnit.unitPart.length - 1) == 'ة'
-      //     ? '${tafUnit.unitPart.substring(0, tafUnit.unitPart.length - 1)}ةً'
+      // ((tafUnit.unitPart.substring(tafUnit.unitPart.length - 1) == 'ة'      ? '${tafUnit.unitPart.substring(0, tafUnit.unitPart.length - 1)}ةً'
       //    : '${tafUnit.unitPart}اً')),
       //'قرشاً',
       ' ',
-      // ((tafUnit.unitPart.substring(tafUnit.unitPart.length - 1) == 'ة'
-      //     ? 'ةً'
+      // ((tafUnit.unitPart.substring(tafUnit.unitPart.length - 1) == 'ة'     ? 'ةً'
       //    : 'اً')),
       // 'قروش',
       // (tafUnit.unitPartPlural),
@@ -259,10 +257,15 @@ class TafqeetMulti {
       //       (tafUnit.unitPartMultiple),
       //'ليرة واحدة',
       '${((tafUnit.unit.substring(tafUnit.unit.length - 1) == 'ة' ? '${tafUnit.unit.substring(0, tafUnit.unit.length - 1)}ةً' : '${tafUnit.unit}اً'))}${numGender == TafqeetGender.feminine ? ' واحدة' : ' واحداً'}',
-      //'ليرتان',
-      (tafUnit.unitMultiple),
-      //'ليرتان',
-      (tafUnit.unitMultiple),
+      //'ليرتان',     // (tafUnit.unitMultiple),
+      (tafUnit.unit.substring(tafUnit.unit.length - 1) == 'ة'
+          ? '${tafUnit.unit.substring(0, tafUnit.unit.length - 1)}تان'
+          : '${tafUnit.unit}ان'),
+
+      //'ليرتان',       (tafUnit.unitMultiple),
+      (tafUnit.unit.substring(tafUnit.unit.length - 1) == 'ة'
+          ? '${tafUnit.unit.substring(0, tafUnit.unit.length - 1)}تان'
+          : '${tafUnit.unit}ان'),
       'الف',
       'الفان',
       'الفا',
