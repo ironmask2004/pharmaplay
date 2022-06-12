@@ -7,64 +7,23 @@ void main() {
   // var tafund = TafqeetMulti('20.01', unitund);
 
   var tafqeet = TafqeetMulti();
+  //print(tafqeet.tafqeetNumber(
+  //  numberAndParts: [0], tafqeetUnitCode: TafqeetUnitCode.kiloMetre));
 
-  print(tafqeet.tafqeetNumber(
-      amountAndParts: [33, 22], tafqeetUnitCode: TafqeetUnitCode.syrianPound));
+  print(tafqeet.tafqeetNumberWithParts(
+      listOfNumberAndParts: [33453453, 99, 44, 1],
+      tafqeetUnitCode: TafqeetUnitCode.kiloMetre));
 
-  print(tafqeet.tafqeetByPreDefinedUnit(
-      amount: '33.02', tafqeetUnitCode: TafqeetUnitCode.unitedStatesDollar));
+  print(tafqeet.tafqeetNumberWithParts(
+      listOfNumberAndParts: [11, 2],
+      tafqeetUnitCode: TafqeetUnitCode.syrianPound));
 
-  print(tafqeet.tafqeetByPreDefinedUnit(
-      amount: '33.02', tafqeetUnitCode: TafqeetUnitCode.syrianPound));
-
-  print(tafqeet.tafqeetByPreDefinedUnit(
-      amount: '33.02',
-      tafqeetUnitCode: TafqeetUnitCode.syrianPound,
-      justWord: 'ففققطط',
-      noOtherWord: 'لاااغيييررر'));
-
-  String tafKM = tafqeet.tafqeetThreeUnitsByPreDefinedUnit(
-    number: '1425:48:91',
-    mainTafqeetUnitCode: TafqeetUnitCode.kiloMetre,
-    subTafqeetUnitCode: TafqeetUnitCode.metre,
-  );
-  print(tafKM);
-
-  String tafhr = tafqeet.tafqeetThreeUnitsByPreDefinedUnit(
-    number: '0:00:01',
-    mainTafqeetUnitCode: TafqeetUnitCode.hour,
-    subTafqeetUnitCode: TafqeetUnitCode.minute,
-  );
-  print(tafhr);
-
-  print(tafqeet.tafqeetByUserDefinedUnit(
-      amount: '332',
-      userDefinedUnit: TafqeetUnit(
-          country: '',
-          unit: 'طنجرة',
-          unitPlural: 'طناجر',
-          unitMaxValue: 0,
-          unitGender: TafqeetGender.feminine,
-          unitCode: TafqeetUnitCode.userDefined,
-          partialUnitCode: TafqeetUnitCode.none)));
-
-  print(tafqeet.tafqeetByPreDefinedUnit(
-      amount: '33.02', tafqeetUnitCode: TafqeetUnitCode.syrianPound));
-
-  print(tafqeet.tafqeetThreeUnitsByPreDefinedUnit(
-    number: '33:02:0',
-    mainTafqeetUnitCode: TafqeetUnitCode.syrianPound,
-    subTafqeetUnitCode: TafqeetUnitCode.syrianPoundPenny,
-  ));
-
-  print(tafqeet.tafqeetByPreDefinedUnit(
-      amount: '11.12', tafqeetUnitCode: TafqeetUnitCode.syrianPound));
-
-  print(tafqeet.tafqeetThreeUnitsByPreDefinedUnit(
-    number: '11:12:0',
-    mainTafqeetUnitCode: TafqeetUnitCode.syrianPound,
-    subTafqeetUnitCode: TafqeetUnitCode.syrianPoundPArt,
-  ));
+  print(tafqeet.tafqeetNumberWithParts(
+      listOfNumberAndParts: [2, 10],
+      tafqeetUnitCode: TafqeetUnitCode.saudiArabianRiyal));
+  print(tafqeet.tafqeetNumberWithParts(
+      listOfNumberAndParts: [3, 99],
+      tafqeetUnitCode: TafqeetUnitCode.kiloGram));
 
   /*
 

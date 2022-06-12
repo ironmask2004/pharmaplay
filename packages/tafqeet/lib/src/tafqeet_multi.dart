@@ -6,36 +6,73 @@ import 'dart:typed_data';
 
 import 'package:tafqeet/src/model/tafqeet_predefined_units.dart';
 import 'package:tafqeet/tafqeet.dart';
-
 import 'model/tafqeet_unit.dart';
-
-/// Checks if you are awesome. Spoiler: you are.
+import 'model/utility.dart';
 
 class TafqeetMulti {
-  // String _am;
-  //TafqeetUnit _tafUnit;
-  // TafqeetUnitCode _tafqeetUnitCode;
-
   final List<TafqeetUnit> _unitList = tafqeetPredefinedUnits;
 
-  //String gender;
+  String? tafqeetNumberWithParts(
+      {required List<num> listOfNumberAndParts,
+      required TafqeetUnitCode tafqeetUnitCode,
+      String justWord = 'فقط',
+      String noOtherWord = 'لاغير'}) {
+    ///----
+    List? splitedUnitValue;
+    // List<Map> listValuesToTafqeet = [];
+    num currentUnitValue = 0;
 
-  // TafqeetMulti(
-  //  this._am,
-  //  this._tafqeetUnitCode,
-  // );
+    TafqeetUnit currentUnit;
+    TafqeetUnitCode currentUnitCode = tafqeetUnitCode;
+    // bool mainUnit = true;
 
-  //set amount(String newAmount) {
-  // _am = newAmount;
-  // }
+    ///--
 
-  /// set unitCode(TafqeetUnitCode newTafqeetunit) {
-  //  _tafqeetUnitCode = newTafqeetunit;
-  //}
+    // ignore: unused_local_variable
+    bool mainUnitFlag = true;
+    String taf = '';
+    int listLenght = listOfNumberAndParts.length;
+    //num previousValueToRound = 0;
 
-  //String get amount {
-  //  return (_am);
-  //}
+    for (int i = 0; i < listLenght; i++) {
+      // print(listOfNumberAndParts[i].toString());
+      splitedUnitValue = splitUnitValue(listOfNumberAndParts[i]);
+
+      currentUnit = _unitList.firstWhere(
+          (element) => element.unitCode == currentUnitCode, orElse: () {
+        return _unitList
+            .firstWhere((e) => e.unitCode == TafqeetUnitCode.undefinedPart);
+      });
+
+      if (splitedUnitValue.length > 2) {
+        return ('لايمكن تفقيط ارقام بفواصل، ادخل الرقم الصحيح، واضف الفواصل كرقم صحيح في الاجزاء ');
+      }
+      if (currentUnit.unitMaxValue != 0 &&
+          splitedUnitValue[1] >= currentUnit.unitMaxValue) {
+        return (" The value of the parts should not exceed the upper limit of the unit  ${currentUnit.unitCode}    " +
+            " upper limit:"
+                '${currentUnit.unitMaxValue}' +
+            " the pass value was: ${splitedUnitValue[1]} ");
+      }
+      currentUnitValue = splitedUnitValue[1];
+
+      taf = taf +
+          ((i > 0 && i < listLenght) ? ' و' : '') +
+          _getTafqeetMulti(
+            am: splitedUnitValue[1].toString(),
+            tafqeetUnit: currentUnit,
+            //  justWord: i == 0 ? justWord : '',
+            //  noOtherWord: i == listLenght ? noOtherWord : ''
+          );
+      currentUnitCode = currentUnit.partialUnitCode;
+    }
+
+    mainUnitFlag = false;
+    taf = '$justWord $taf $noOtherWord';
+    return (taf);
+  }
+
+  ///=====================
 
   String tafqeetByUserDefinedUnit(
       {required String amount,
@@ -43,12 +80,14 @@ class TafqeetMulti {
       String justWord = 'فقط',
       String noOtherWord = 'لاغير'}) {
     return (_getTafqeetMulti(
-        am: amount,
-        tafqeetUnit: userDefinedUnit,
-        justWord: justWord,
-        noOtherWord: noOtherWord));
+      am: amount,
+      tafqeetUnit: userDefinedUnit,
+      //justWord: justWord,
+      //noOtherWord: noOtherWord
+    ));
   }
 
+//==================
   String tafqeetThreeUnitsByPreDefinedUnit(
       {required String number,
       required TafqeetUnitCode mainTafqeetUnitCode,
@@ -113,10 +152,11 @@ class TafqeetMulti {
     });
 
     return (_getTafqeetMulti(
-        am: amount,
-        tafqeetUnit: unitFiltered,
-        justWord: justWord,
-        noOtherWord: noOtherWord));
+      am: amount,
+      tafqeetUnit: unitFiltered,
+      //justWord: justWord,
+      //noOtherWord: noOtherWord
+    ));
   }
 
 //  --################################################################
@@ -454,11 +494,12 @@ class TafqeetMulti {
 //  --################################################################
 
 //  --################################################################
-  String _getTafqeetMulti(
-      {required String am,
-      required TafqeetUnit tafqeetUnit,
-      String justWord = 'فقط',
-      String noOtherWord = 'لاغير'}) {
+  String _getTafqeetMulti({
+    required String am,
+    required TafqeetUnit tafqeetUnit,
+    //String justWord = 'فقط',
+    //String noOtherWord = 'لاغير'
+  }) {
     String j;
     String t;
     String amount;
@@ -467,11 +508,6 @@ class TafqeetMulti {
     // TYPE x_arr IS VARRAY (7) OF NUMBER NOT NULL;
     TafqeetUnit tafUnit = tafqeetUnit.copyWith(
       unit: tafqeetUnit.unit.isEmpty ? ' ' : tafqeetUnit.unit,
-      unitPart: tafqeetUnit.unitPart.isEmpty ? ' ' : tafqeetUnit.unitPart,
-      unitMultiple:
-          tafqeetUnit.unitMultiple.isEmpty ? ' ' : tafqeetUnit.unitMultiple,
-      unitPartPlural:
-          tafqeetUnit.unitPartPlural.isEmpty ? ' ' : tafqeetUnit.unitPartPlural,
       unitPlural: tafqeetUnit.unitPlural.isEmpty ? ' ' : tafqeetUnit.unitPlural,
     );
 
@@ -494,7 +530,8 @@ class TafqeetMulti {
 
     // print('Founf DOT @ $p  lenght: ${amount.length}');
 
-    switch (tafUnit.unitPartDigits) {
+    //switch (tafUnit.unitMaxValue) {
+    switch (0) {
       case 0:
         {
           if ((p != -1)) {
@@ -662,9 +699,10 @@ class TafqeetMulti {
     if (f == 1) {
       taf = _getCountryUnit(x[2], taf, tafUnit.country, tafUnit.unitGender);
     }
+
     if ((x[1] > 0)) {
       t = _spellNum('MX', x[1], 0, 0, tafUnit,
-          unitPartGender: tafUnit.unitPartGender);
+          unitPartGender: tafUnit.unitGender);
 
       if ((f == 1)) {
         taf = '$taf و';
@@ -681,15 +719,14 @@ class TafqeetMulti {
     }
 
     if (x[7] + x[6] + x[5] + x[4] + x[3] + x[2] == 0) {
-      taf = _getCountryUnit(x[1], taf, tafUnit.country, tafUnit.unitPartGender);
+      taf = _getCountryUnit(x[1], taf, tafUnit.country, tafUnit.unitGender);
     }
-    taf = '$justWord $taf $noOtherWord';
+    //taf = '$justWord $taf $noOtherWord';
 
     return (taf.replaceAll('  ', ' ').replaceAll('  ', ' '));
   }
 
 // ==========
-// TODO  change tom gender masculine and feminine
   String _getCountryUnit(var amount, String taf, String tafUnitCountry,
       TafqeetGender tafUnitGender) {
     if (tafUnitCountry.isEmpty) return taf;
