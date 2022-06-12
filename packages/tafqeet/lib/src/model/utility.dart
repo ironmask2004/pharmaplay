@@ -85,11 +85,11 @@ main() {
   print(splitUnitValue(1111.33));
   print(splitUnitValue(0));
   print(splitUnitValue(-1111.03));
-  print(splitUnitValue(04));
+  print(splitUnitValue(1));
   print(splitUnitValue(0.9));
   print(splitUnitValue(0.004));
-  print(splitUnitValue(-11));
-  print(splitUnitValue(-0.002));
+  print(splitUnitValue(-1));
+  print(splitUnitValue(0.6));
   print(splitUnitValue(99.089));
   print(splitUnitValue(123456789012004));
 }

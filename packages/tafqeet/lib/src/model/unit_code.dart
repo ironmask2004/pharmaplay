@@ -10,23 +10,31 @@ enum TafqeetUnitCode {
   none('NONE'),
   undefined('UND'),
   undefinedPart('UNDP'),
+  userDefined('USRD'),
 
-  userDefined('USR'),
   syrianPound('SYP'),
   syrianPoundPenny('SYPP'),
+
   unitedStatesDollar('USD'),
   unitedStatesDollarPenny('USDP'),
+
   saudiArabianRiyal('SAR'),
   saudiArabianRiyalPenny('SARP'),
+
   kuwaitiDinar('DK'),
   kuwaitiDinarPenny('DKP'),
+
+  metricTon('MTON'),
   kiloGram('KG'),
   gram('GRAM'),
+
   ounce('OZ'),
+
   kiloMetre('KM'),
   metre('M'),
   centimeter('CM'),
   millimeter('MM'),
+
   hour('HR'),
   minute('MIN'),
   second('SEC'),

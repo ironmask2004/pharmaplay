@@ -16,26 +16,21 @@ class TafqeetMulti {
       {required List<num> listOfNumberAndParts,
       required TafqeetUnitCode tafqeetUnitCode,
       String justWord = 'فقط',
-      String noOtherWord = 'لاغير'}) {
+      String noOtherWord = 'لاغير',
+      bool tryTafqeet = false}) {
     ///----
     List? splitedUnitValue;
     // List<Map> listValuesToTafqeet = [];
-    num currentUnitValue = 0;
-
+    //num currentUnitValue = 0;
+    String andWord = '';
     TafqeetUnit currentUnit;
     TafqeetUnitCode currentUnitCode = tafqeetUnitCode;
-    // bool mainUnit = true;
 
-    ///--
-
-    // ignore: unused_local_variable
-    bool mainUnitFlag = true;
     String taf = '';
     int listLenght = listOfNumberAndParts.length;
     //num previousValueToRound = 0;
 
     for (int i = 0; i < listLenght; i++) {
-      // print(listOfNumberAndParts[i].toString());
       splitedUnitValue = splitUnitValue(listOfNumberAndParts[i]);
 
       currentUnit = _unitList.firstWhere(
@@ -45,32 +40,46 @@ class TafqeetMulti {
       });
 
       if (splitedUnitValue.length > 2) {
-        return ('لايمكن تفقيط ارقام بفواصل، ادخل الرقم الصحيح، واضف الفواصل كرقم صحيح في الاجزاء ');
+        if (tryTafqeet) {
+          return null;
+        } else {
+          throw FormatException(
+              '''It is not possible to handle numbers containing commas ${listOfNumberAndParts[i]},
+              enter the number without commas  ( ${splitedUnitValue[1]}) ,
+              and add the parts ( ${splitedUnitValue[2]}) as a valid number in the parts field:''');
+        }
       }
-      if (currentUnit.unitMaxValue != 0 &&
+      if (i > 0 &&
+          currentUnit.unitMaxValue != 0 &&
           splitedUnitValue[1] >= currentUnit.unitMaxValue) {
-        return (" The value of the parts should not exceed the upper limit of the unit  ${currentUnit.unitCode}    " +
-            " upper limit:"
-                '${currentUnit.unitMaxValue}' +
-            " the pass value was: ${splitedUnitValue[1]} ");
+        if (tryTafqeet) {
+          return null;
+        } else {
+          throw FormatException(
+              '''The value of the parts should not exceed the upper limit of the unit  ${currentUnit.unitCode}    "  
+            upper limit:  ${currentUnit.unitMaxValue}
+            the pass value was: ${splitedUnitValue[1]}  ''');
+        }
       }
-      currentUnitValue = splitedUnitValue[1];
+      // currentUnitValue = splitedUnitValue[1];
 
-      taf = taf +
-          ((i > 0 && i < listLenght) ? ' و' : '') +
-          _getTafqeetMulti(
-            am: splitedUnitValue[1].toString(),
-            tafqeetUnit: currentUnit,
-            //  justWord: i == 0 ? justWord : '',
-            //  noOtherWord: i == listLenght ? noOtherWord : ''
-          );
+      if (splitedUnitValue[1] != 0) {
+        taf = taf +
+            andWord +
+            _getTafqeetMulti(
+              am: splitedUnitValue[1].toString(),
+              tafqeetUnit: currentUnit,
+            );
+        andWord = ' و';
+      }
       currentUnitCode = currentUnit.partialUnitCode;
     }
 
-    mainUnitFlag = false;
     taf = '$justWord $taf $noOtherWord';
     return (taf);
   }
+
+//======
 
   ///=====================
 
@@ -88,76 +97,6 @@ class TafqeetMulti {
   }
 
 //==================
-  String tafqeetThreeUnitsByPreDefinedUnit(
-      {required String number,
-      required TafqeetUnitCode mainTafqeetUnitCode,
-      required TafqeetUnitCode subTafqeetUnitCode,
-      String justWord = 'فقط',
-      String noOtherWord = 'لاغير'}) {
-    final splitsmount = number.split(':');
-
-    //print('splitsmount.length ${splitsmount.length}');
-
-    // for (int i = 0; i < splitsmount.length; i++) print(splitsmount[i]);
-
-    switch (splitsmount.length) {
-      case 0:
-        return ('$number Must Be in Three parts Units devided By ":" Like "123:45:67" !!');
-
-      case 1:
-        return (tafqeetByPreDefinedUnit(
-            amount: splitsmount.first,
-            tafqeetUnitCode: mainTafqeetUnitCode,
-            justWord: justWord,
-            noOtherWord: noOtherWord));
-        break;
-      case 2:
-        return (tafqeetByPreDefinedUnit(
-            amount: '${splitsmount[0]}.${splitsmount[1]}',
-            tafqeetUnitCode: mainTafqeetUnitCode,
-            justWord: justWord,
-            noOtherWord: noOtherWord));
-        break;
-      case 3:
-
-        // print('------${splitsmount[1]}.${splitsmount[2]}');
-        String tafMainamount = tafqeetByPreDefinedUnit(
-            amount: splitsmount[0],
-            tafqeetUnitCode: mainTafqeetUnitCode,
-            justWord: justWord,
-            noOtherWord: '');
-
-        String tafSubamount = tafqeetByPreDefinedUnit(
-            amount: '${splitsmount[1]}.${splitsmount[2]}',
-            tafqeetUnitCode: subTafqeetUnitCode,
-            justWord: '',
-            noOtherWord: noOtherWord);
-        return ('$tafMainamountو$tafSubamount');
-    }
-
-    return ('$number Must Be in Three parts Units devided By ":" Like "123:45:67" !!');
-  }
-
-  String tafqeetByPreDefinedUnit(
-      {required String amount,
-      required TafqeetUnitCode tafqeetUnitCode,
-      String justWord = 'فقط',
-      String noOtherWord = 'لاغير'}) {
-    // _tafqeetUnitCode = tafqeetUnitCode ?? _tafqeetUnitCode;
-
-    var unitFiltered = _unitList.firstWhere(
-        (element) => element.unitCode == tafqeetUnitCode, orElse: () {
-      return _unitList
-          .firstWhere((e) => e.unitCode == TafqeetUnitCode.undefined);
-    });
-
-    return (_getTafqeetMulti(
-      am: amount,
-      tafqeetUnit: unitFiltered,
-      //justWord: justWord,
-      //noOtherWord: noOtherWord
-    ));
-  }
 
 //  --################################################################
   String _getArrVal(String arr, var pR, var pC, TafqeetUnit tafUnit,
