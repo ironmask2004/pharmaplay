@@ -25,7 +25,7 @@ class TafqeetMulti {
     String andWord = '';
     TafqeetUnit currentUnit;
     TafqeetUnitCode currentUnitCode = tafqeetUnitCode;
-
+    bool mainUnitFlag = true;
     String taf = '';
     int listLenght = listOfNumberAndParts.length;
     //num previousValueToRound = 0;
@@ -66,11 +66,16 @@ class TafqeetMulti {
       if (splitedUnitValue[1] != 0) {
         taf = taf +
             andWord +
-            _getTafqeetMulti(
-              am: splitedUnitValue[1].toString(),
-              tafqeetUnit: currentUnit,
-            );
+            (_getTafqeetMulti(
+                    am: splitedUnitValue[1].toString(),
+                    tafqeetUnit: currentUnit,
+                    isPartialValue:
+                        (currentUnit.country.isNotEmpty && mainUnitFlag
+                            ? true
+                            : false)) ??
+                '');
         andWord = ' و';
+        mainUnitFlag = false;
       }
       currentUnitCode = currentUnit.partialUnitCode;
     }
@@ -88,12 +93,11 @@ class TafqeetMulti {
       required TafqeetUnit userDefinedUnit,
       String justWord = 'فقط',
       String noOtherWord = 'لاغير'}) {
-    return (_getTafqeetMulti(
-      am: amount,
-      tafqeetUnit: userDefinedUnit,
-      //justWord: justWord,
-      //noOtherWord: noOtherWord
-    ));
+    return ((_getTafqeetMulti(
+          am: amount,
+          tafqeetUnit: userDefinedUnit,
+        ) ??
+        ''));
   }
 
 //==================
@@ -436,16 +440,15 @@ class TafqeetMulti {
 //  --################################################################
 
 //  --################################################################
-  String _getTafqeetMulti({
+  String? _getTafqeetMulti({
     required String am,
     required TafqeetUnit tafqeetUnit,
-    //String justWord = 'فقط',
+    bool isPartialValue = true, //  main amount only   get counter value
     //String noOtherWord = 'لاغير'
   }) {
     String j;
     String t;
     String amount;
-    String v;
 
     // TYPE x_arr IS VARRAY (7) OF NUMBER NOT NULL;
     TafqeetUnit tafUnit = tafqeetUnit.copyWith(
@@ -472,81 +475,17 @@ class TafqeetMulti {
 
     // print('Founf DOT @ $p  lenght: ${amount.length}');
 
-    //switch (tafUnit.unitMaxValue) {
-    switch (0) {
-      case 0:
-        {
-          if ((p != -1)) {
-            return ('!!!تجاوزت الحد الاعلى للاجزاء (0) ');
-          }
-          if (((amount.length)) > 18) {
-            return ('!!!تجاوزت الحد الاعلى للرقم');
-          }
-
-          amount = '$amount.00';
-
-          v = '000000000000000000.00';
-          j = v.substring(0, 21 - (amount.length)) + amount;
-        }
-        break;
-
-      case 2:
-        {
-          if ((p == -1)) {
-            amount = '$amount.00';
-
-            j = '00';
-          } else if ((amount.length - p == 2)) {
-            amount = '${amount}0';
-
-            j = '00';
-          } else if (((amount.length) - p) == 1) {
-            amount = '${amount}00';
-            j = '00';
-          } else if (((amount.length)) >= 22) {
-            return ('!!!تجاوزت الحد الاعلى للرقم');
-          } else if (((amount.length) - p) > 3) {
-            return ('!!!تجاوزت الحد الاعلى للاجزاء (0.00) ');
-          }
-
-          v = '000000000000000000.00';
-          j = v.substring(0, 21 - (amount.length)) + amount;
-        }
-        break;
-
-      case 3:
-        {
-          if ((p == -1)) {
-            amount = '$amount.000';
-
-            j = '000';
-          } else if ((amount.length - p == 1)) {
-            amount = '${amount}000';
-
-            j = '000';
-          } else if ((amount.length - p == 2)) {
-            amount = '${amount}00';
-
-            j = '000';
-          } else if (((amount.length) - p) == 3) {
-            amount = '${amount}0';
-            j = '000';
-          } else if (((amount.length)) >= 23) {
-            return ('!!!تجاوزت الحد الاعلى للرقم');
-          } else if (((amount.length) - p) > 4) {
-            return ('!!!تجاوزت الحد الاعلى للاجزاء (0.00) ');
-          }
-
-          v = '000000000000000000.000';
-          j = v.substring(0, 22 - (amount.length)) + amount;
-        }
-        break;
-
-      default:
-        {
-          return ('!!! خطأ في  الحد الاعلى للاجزاء (0.00) ');
-        }
+    if ((p != -1)) {
+      return (null);
     }
+
+    if (((amount.length)) > 18) {
+      return ('!!!تجاوزت الحد الاعلى للرقم');
+    }
+
+    // amount = '$amount.00';
+
+    j = '000000000000000000'.substring(0, 18 - (amount.length)) + amount;
 
     //print('J: $j');
 
@@ -557,7 +496,7 @@ class TafqeetMulti {
       j = j.substring(3, (j.length));
     }
     //print('fraction: J: $j  ${j.substring(2)}');
-    x[1] = int.tryParse(j.substring(1));
+    // x[1] = int.tryParse(j.substring(1));
     //print('fraction: ${x[1]}');
 
     if ((x[7] > 0)) {
@@ -638,10 +577,12 @@ class TafqeetMulti {
     } else if (f == 1) {
       taf = '$taf  ${tafUnit.unit}';
     }
-    if (f == 1) {
+
+    if (f == 1 && tafUnit.country.isNotEmpty && isPartialValue) {
       taf = _getCountryUnit(x[2], taf, tafUnit.country, tafUnit.unitGender);
     }
 
+/*
     if ((x[1] > 0)) {
       t = _spellNum('MX', x[1], 0, 0, tafUnit,
           unitPartGender: tafUnit.unitGender);
@@ -654,15 +595,15 @@ class TafqeetMulti {
       flag = 1;
       f = 1;
     }
-
+*/
     //print(' $am : ${double.tryParse(am)}');
     if ((double.tryParse(am) == 0)) {
       taf = 'صفر ${tafUnit.unit}';
     }
 
-    if (x[7] + x[6] + x[5] + x[4] + x[3] + x[2] == 0) {
+    /*if (x[7] + x[6] + x[5] + x[4] + x[3] + x[2] == 0) {
       taf = _getCountryUnit(x[1], taf, tafUnit.country, tafUnit.unitGender);
-    }
+    }*/
     //taf = '$justWord $taf $noOtherWord';
 
     return (taf.replaceAll('  ', ' ').replaceAll('  ', ' '));

@@ -19,10 +19,14 @@ void main() {
       tafqeetUnitCode: TafqeetUnitCode.syrianPound));
 
   print(tafqeet.tafqeetNumberWithParts(
-      listOfNumberAndParts: [2, 2],
+      listOfNumberAndParts: [0, 2],
       tafqeetUnitCode: TafqeetUnitCode.saudiArabianRiyal));
   print(tafqeet.tafqeetNumberWithParts(
-      listOfNumberAndParts: [2, 2],
+      listOfNumberAndParts: [2, 222],
+      tafqeetUnitCode: TafqeetUnitCode.kuwaitiDinar));
+
+  print(tafqeet.tafqeetNumberWithParts(
+      listOfNumberAndParts: [0, 222],
       tafqeetUnitCode: TafqeetUnitCode.kuwaitiDinar));
 
   print(tafqeet.tafqeetNumberWithParts(
