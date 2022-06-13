@@ -119,40 +119,39 @@ class TafqeetMulti {
       'اثنان',
       'عشرون',
       'مئتان',
+
       'ثلاثة',
       //(numGender == TafqeetUnitGender.feminine ? 'ثلاث' : 'ثلاثة'),
-
       'ثلاثون',
       'ثلاثمائة',
-      //'اربعة',
-      (numGender == TafqeetUnitGender.feminine ? 'اربع' : 'اربعة'),
 
+      'اربعة',
+      // (numGender == TafqeetUnitGender.feminine ? 'اربع' : 'اربعة'),
       'اربعون',
       'اربعمائة',
-      //'خمسة',
-      (numGender == TafqeetUnitGender.feminine ? 'خمس' : 'خمسة'),
 
+      'خمسة',
+      // (numGender == TafqeetUnitGender.feminine ? 'خمس' : 'خمسة'),
       'خمسون',
       'خمسمائة',
 
       'ستة',
       //(numGender == TafqeetUnitGender.feminine ? 'ست' : 'ستة'),
-
       'ستون',
       'ستمائة',
-      //'سبعة',
-      (numGender == TafqeetUnitGender.feminine ? 'سبع' : 'سبعة'),
 
+      'سبعة',
+      // (numGender == TafqeetUnitGender.feminine ? 'سبع' : 'سبعة'),
       'سبعون',
       'سبعمائة',
-      //'ثمانية',
-      (numGender == TafqeetUnitGender.feminine ? 'ثماني' : 'ثمانية'),
 
+      'ثمانية',
+      //(numGender == TafqeetUnitGender.feminine ? 'ثماني' : 'ثمانية'),
       'ثمانون',
       'ثمانمائة',
-      //'تسعة',
-      (numGender == TafqeetUnitGender.feminine ? 'تسع' : 'تسعة'),
 
+      'تسعة',
+      //(numGender == TafqeetUnitGender.feminine ? 'تسع' : 'تسعة'),
       'تسعون',
       'تسعمائة'
     ];
