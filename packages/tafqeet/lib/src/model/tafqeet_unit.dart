@@ -13,15 +13,14 @@ class TafqeetUnit extends Equatable {
   final TafqeetUnitGender unitGender;
   final int unitMaxValue;
   final TafqeetUnitCode partialUnitCode;
-  TafqeetUnit({
-    required this.unitCode,
-    required this.country,
-    required this.unit,
-    required this.unitPlural,
-    required this.unitGender,
-    required this.unitMaxValue,
-    required this.partialUnitCode,
-  });
+  TafqeetUnit(
+      {this.unitCode = TafqeetUnitCode.undefined,
+      this.country = '',
+      required this.unit,
+      required this.unitPlural,
+      required this.unitGender,
+      this.unitMaxValue = 0,
+      this.partialUnitCode = TafqeetUnitCode.undefinedPart});
 
   /*String get unitMultiple {
     return unit.substring(unit.length - 1) == 'ة'

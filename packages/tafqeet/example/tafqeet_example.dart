@@ -54,15 +54,12 @@ void main() {
     {19: batPennyUnit}
   ]));
 
-  var number1 = 234234;
+  var number1 = 13;
   TafqeetUnit unit1 = TafqeetUnit(
-      unitCode: TafqeetUnitCode.userDefined,
-      country: '',
-      unit: 'طنجرة',
-      unitPlural: 'طناجر',
-      unitMaxValue: 0,
-      unitGender: TafqeetUnitGender.feminine,
-      partialUnitCode: TafqeetUnitCode.none);
+    unit: 'طنجرة',
+    unitPlural: 'طناجر',
+    unitGender: TafqeetUnitGender.feminine,
+  );
 
   print(tafqeet.tafqeetByUserDefinedUnit(listOfNumberAndParts: [
     {number1: unit1}
@@ -118,5 +115,10 @@ void main() {
   print(tafqeet.tafqeetByUserDefinedUnit(listOfNumberAndParts: [
     {boxesNumber: unitBoxes},
     {partsNumber: partsUnit}
+  ]));
+
+  print(tafqeet.tafqeetByUserDefinedUnit(listOfNumberAndParts: [
+    {boxesNumber: null},
+    {partsNumber: null}
   ]));
 }

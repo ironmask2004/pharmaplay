@@ -79,13 +79,10 @@ void main() {
       var tafqeet = Tafqeet();
       var number1 = 234234;
       TafqeetUnit unit1 = TafqeetUnit(
-          unitCode: TafqeetUnitCode.userDefined,
-          country: '',
-          unit: 'طنجرة',
-          unitPlural: 'طناجر',
-          unitMaxValue: 0,
-          unitGender: TafqeetUnitGender.feminine,
-          partialUnitCode: TafqeetUnitCode.none);
+        unit: 'طنجرة',
+        unitPlural: 'طناجر',
+        unitGender: TafqeetUnitGender.feminine,
+      );
 
       expect(
           tafqeet.tafqeetByUserDefinedUnit(listOfNumberAndParts: [
@@ -121,6 +118,12 @@ void main() {
           ]),
           'فقط مئتان واربعة وثلاثون الفاً ومئتان واربعة وثلاثون صندوقاً واحدى عشرة قطعةً لاغير');
 
+      expect(
+          tafqeet.tafqeetByUserDefinedUnit(listOfNumberAndParts: [
+            {boxesNumber: null},
+            {partsNumber: null}
+          ]),
+          'فقط مئتان واربعة وثلاثون الفاً ومئتان واربعة وثلاثون قلماً واحد عشر جزءاً لاغير');
       unit1 = TafqeetUnit(
           unitCode: TafqeetUnitCode.userDefined,
           country: '',

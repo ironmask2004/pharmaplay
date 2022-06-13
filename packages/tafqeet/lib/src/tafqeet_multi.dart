@@ -88,7 +88,7 @@ class Tafqeet {
   ///=====================
 
   String? tafqeetByUserDefinedUnit(
-      {required List<Map<num, TafqeetUnit>> listOfNumberAndParts,
+      {required List<Map<num, TafqeetUnit?>> listOfNumberAndParts,
       String justWord = 'فقط',
       String noOtherWord = 'لاغير',
       bool tryTafqeet = false}) {
@@ -107,7 +107,12 @@ class Tafqeet {
     for (int i = 0; i < listLenght; i++) {
       splitedUnitValue = splitUnitValue(listOfNumberAndParts[i].keys.first);
 
-      currentUnit = listOfNumberAndParts[i].values.first;
+      currentUnit = listOfNumberAndParts[i].values.first ??
+          (i == 0
+              ? _unitList
+                  .firstWhere((e) => e.unitCode == TafqeetUnitCode.undefined)
+              : _unitList.firstWhere(
+                  (e) => e.unitCode == TafqeetUnitCode.undefinedPart));
 
       if (splitedUnitValue.length > 2) {
         if (tryTafqeet) {
