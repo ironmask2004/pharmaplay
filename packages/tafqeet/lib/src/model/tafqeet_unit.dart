@@ -10,7 +10,7 @@ class TafqeetUnit extends Equatable {
   final String country;
   final String unit;
   final String unitPlural;
-  final TafqeetGender unitGender;
+  final TafqeetUnitGender unitGender;
   final int unitMaxValue;
   final TafqeetUnitCode partialUnitCode;
   TafqeetUnit({
@@ -35,7 +35,7 @@ class TafqeetUnit extends Equatable {
     String? country,
     String? unit,
     String? unitPlural,
-    TafqeetGender? unitGender,
+    TafqeetUnitGender? unitGender,
     int? unitMaxValue,
     TafqeetUnitCode? partialUnitCode,
   }) {
@@ -70,7 +70,7 @@ class TafqeetUnit extends Equatable {
       country: map['country'] ?? '',
       unit: map['unit'] ?? '',
       unitPlural: map['unitPlural'] ?? '',
-      unitGender: TafqeetGender.fromMap(map['unitGender']),
+      unitGender: TafqeetUnitGender.fromMap(map['unitGender']),
       unitMaxValue: map['unitMaxValue']?.toInt() ?? 0,
       partialUnitCode: TafqeetUnitCode.fromMap(map['partialUnitCode']),
     );

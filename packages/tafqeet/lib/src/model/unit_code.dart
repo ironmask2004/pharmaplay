@@ -58,13 +58,13 @@ enum TafqeetUnitCode {
 
 //=== Gender
 //Determine if the number is masculine or feminine
-enum TafqeetGender {
+enum TafqeetUnitGender {
   masculine('M'),
   feminine('F');
 
   //final int codeIndex;
   final String code;
-  const TafqeetGender(this.code);
+  const TafqeetUnitGender(this.code);
   @override
   String toString() => 'The $name Code is $code';
 
@@ -72,7 +72,7 @@ enum TafqeetGender {
 
   //tafqeetUnitCode fromMap(String unitCode) =>
   //   tafqeetUnitCode.values.firstWhere((e) => e.toMap() == unitCode);
-  factory TafqeetGender.fromMap(String x) {
-    return (TafqeetGender.values.firstWhere((e) => e.toMap() == x));
+  factory TafqeetUnitGender.fromMap(String x) {
+    return (TafqeetUnitGender.values.firstWhere((e) => e.toMap() == x));
   }
 }

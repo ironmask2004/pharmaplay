@@ -8,7 +8,7 @@ List<TafqeetUnit> tafqeetPredefinedUnits = [
       unit: 'أونصة',
       unitPlural: 'أونصات',
       unitMaxValue: 0,
-      unitGender: TafqeetGender.feminine,
+      unitGender: TafqeetUnitGender.feminine,
       partialUnitCode: TafqeetUnitCode.none),
   TafqeetUnit(
       unitCode: TafqeetUnitCode.hour,
@@ -16,14 +16,14 @@ List<TafqeetUnit> tafqeetPredefinedUnits = [
       unit: 'ساعة',
       unitPlural: 'ساعات',
       unitMaxValue: 0,
-      unitGender: TafqeetGender.feminine,
+      unitGender: TafqeetUnitGender.feminine,
       partialUnitCode: TafqeetUnitCode.minute),
   TafqeetUnit(
       country: '',
       unit: 'دقيقة',
       unitPlural: 'دقائق',
       unitMaxValue: 60,
-      unitGender: TafqeetGender.feminine,
+      unitGender: TafqeetUnitGender.feminine,
       unitCode: TafqeetUnitCode.minute,
       partialUnitCode: TafqeetUnitCode.second),
   TafqeetUnit(
@@ -32,7 +32,7 @@ List<TafqeetUnit> tafqeetPredefinedUnits = [
     unit: 'ثانية',
     unitPlural: 'ثواني',
     unitMaxValue: 60,
-    unitGender: TafqeetGender.feminine,
+    unitGender: TafqeetUnitGender.feminine,
     partialUnitCode: TafqeetUnitCode.millisecond,
   ),
   TafqeetUnit(
@@ -41,7 +41,7 @@ List<TafqeetUnit> tafqeetPredefinedUnits = [
     unit: 'ميللي ثانية',
     unitPlural: 'ميللي ثواني',
     unitMaxValue: 60,
-    unitGender: TafqeetGender.feminine,
+    unitGender: TafqeetUnitGender.feminine,
     partialUnitCode: TafqeetUnitCode.none,
   ),
   TafqeetUnit(
@@ -50,7 +50,7 @@ List<TafqeetUnit> tafqeetPredefinedUnits = [
     unit: 'كيلو متر',
     unitPlural: 'كيلو مترات',
     unitMaxValue: 0,
-    unitGender: TafqeetGender.masculine,
+    unitGender: TafqeetUnitGender.masculine,
     partialUnitCode: TafqeetUnitCode.metre,
   ),
   TafqeetUnit(
@@ -59,7 +59,7 @@ List<TafqeetUnit> tafqeetPredefinedUnits = [
       unit: 'متر',
       unitPlural: 'امتار',
       unitMaxValue: 1000,
-      unitGender: TafqeetGender.masculine,
+      unitGender: TafqeetUnitGender.masculine,
       partialUnitCode: TafqeetUnitCode.centimeter),
   TafqeetUnit(
       unitCode: TafqeetUnitCode.centimeter,
@@ -67,7 +67,7 @@ List<TafqeetUnit> tafqeetPredefinedUnits = [
       unit: 'سنتميتر',
       unitPlural: 'سنتيمترات',
       unitMaxValue: 100,
-      unitGender: TafqeetGender.masculine,
+      unitGender: TafqeetUnitGender.masculine,
       partialUnitCode: TafqeetUnitCode.millimeter),
   TafqeetUnit(
       unitCode: TafqeetUnitCode.millimeter,
@@ -75,7 +75,7 @@ List<TafqeetUnit> tafqeetPredefinedUnits = [
       unit: 'ميللي',
       unitPlural: 'ميلليات',
       unitMaxValue: 10,
-      unitGender: TafqeetGender.masculine,
+      unitGender: TafqeetUnitGender.masculine,
       partialUnitCode: TafqeetUnitCode.none),
   TafqeetUnit(
     unitCode: TafqeetUnitCode.unitedStatesDollar,
@@ -83,7 +83,7 @@ List<TafqeetUnit> tafqeetPredefinedUnits = [
     unit: 'دولار',
     unitPlural: 'دولارات',
     unitMaxValue: 0,
-    unitGender: TafqeetGender.masculine,
+    unitGender: TafqeetUnitGender.masculine,
     partialUnitCode: TafqeetUnitCode.unitedStatesDollarPenny,
   ),
   TafqeetUnit(
@@ -92,7 +92,7 @@ List<TafqeetUnit> tafqeetPredefinedUnits = [
       unit: 'سنت',
       unitPlural: 'سنتات',
       unitMaxValue: 100,
-      unitGender: TafqeetGender.masculine,
+      unitGender: TafqeetUnitGender.masculine,
       partialUnitCode: TafqeetUnitCode.none),
   TafqeetUnit(
       unitCode: TafqeetUnitCode.saudiArabianRiyal,
@@ -100,7 +100,7 @@ List<TafqeetUnit> tafqeetPredefinedUnits = [
       unit: 'ريال',
       unitPlural: 'ريالات',
       unitMaxValue: 0,
-      unitGender: TafqeetGender.masculine,
+      unitGender: TafqeetUnitGender.masculine,
       partialUnitCode: TafqeetUnitCode.saudiArabianRiyalPenny),
   TafqeetUnit(
       unitCode: TafqeetUnitCode.saudiArabianRiyalPenny,
@@ -108,14 +108,14 @@ List<TafqeetUnit> tafqeetPredefinedUnits = [
       unit: 'هللة',
       unitPlural: 'هللات',
       unitMaxValue: 100,
-      unitGender: TafqeetGender.feminine,
+      unitGender: TafqeetUnitGender.feminine,
       partialUnitCode: TafqeetUnitCode.none),
   TafqeetUnit(
       country: 'سورية',
       unit: 'ليرة',
       unitPlural: 'ليرات',
       unitMaxValue: 0,
-      unitGender: TafqeetGender.feminine,
+      unitGender: TafqeetUnitGender.feminine,
       unitCode: TafqeetUnitCode.syrianPound,
       partialUnitCode: TafqeetUnitCode.syrianPoundPenny),
   TafqeetUnit(
@@ -124,7 +124,7 @@ List<TafqeetUnit> tafqeetPredefinedUnits = [
       unit: 'قرش',
       unitPlural: 'قروش',
       unitMaxValue: 100,
-      unitGender: TafqeetGender.masculine,
+      unitGender: TafqeetUnitGender.masculine,
       partialUnitCode: TafqeetUnitCode.none),
   TafqeetUnit(
     unitCode: TafqeetUnitCode.undefined,
@@ -132,7 +132,7 @@ List<TafqeetUnit> tafqeetPredefinedUnits = [
     unit: 'قلم',
     unitPlural: 'أٌقلام',
     unitMaxValue: 0,
-    unitGender: TafqeetGender.masculine,
+    unitGender: TafqeetUnitGender.masculine,
     partialUnitCode: TafqeetUnitCode.undefinedPart,
   ),
   TafqeetUnit(
@@ -141,7 +141,7 @@ List<TafqeetUnit> tafqeetPredefinedUnits = [
       unit: 'جزء',
       unitPlural: 'أجزاء',
       unitMaxValue: 0,
-      unitGender: TafqeetGender.masculine,
+      unitGender: TafqeetUnitGender.masculine,
       partialUnitCode: TafqeetUnitCode.none),
   TafqeetUnit(
       unitCode: TafqeetUnitCode.kuwaitiDinar,
@@ -149,7 +149,7 @@ List<TafqeetUnit> tafqeetPredefinedUnits = [
       unit: 'دينار',
       unitPlural: 'دنانير',
       unitMaxValue: 0,
-      unitGender: TafqeetGender.masculine,
+      unitGender: TafqeetUnitGender.masculine,
       partialUnitCode: TafqeetUnitCode.kuwaitiDinarPenny),
   TafqeetUnit(
       unitCode: TafqeetUnitCode.kuwaitiDinarPenny,
@@ -157,7 +157,7 @@ List<TafqeetUnit> tafqeetPredefinedUnits = [
       unit: 'فلس',
       unitPlural: 'فلوس',
       unitMaxValue: 1000,
-      unitGender: TafqeetGender.masculine,
+      unitGender: TafqeetUnitGender.masculine,
       partialUnitCode: TafqeetUnitCode.none),
   TafqeetUnit(
     unitCode: TafqeetUnitCode.metricTon,
@@ -165,7 +165,7 @@ List<TafqeetUnit> tafqeetPredefinedUnits = [
     unit: 'طن',
     unitPlural: 'أطنان',
     unitMaxValue: 0,
-    unitGender: TafqeetGender.masculine,
+    unitGender: TafqeetUnitGender.masculine,
     partialUnitCode: TafqeetUnitCode.kiloGram,
   ),
   TafqeetUnit(
@@ -174,7 +174,7 @@ List<TafqeetUnit> tafqeetPredefinedUnits = [
     unit: 'كيلو غرام',
     unitPlural: 'كيلو غرامات',
     unitMaxValue: 1000,
-    unitGender: TafqeetGender.masculine,
+    unitGender: TafqeetUnitGender.masculine,
     partialUnitCode: TafqeetUnitCode.gram,
   ),
   TafqeetUnit(
@@ -183,6 +183,6 @@ List<TafqeetUnit> tafqeetPredefinedUnits = [
       unit: 'غرام',
       unitPlural: 'غرامات',
       unitMaxValue: 1000,
-      unitGender: TafqeetGender.masculine,
+      unitGender: TafqeetUnitGender.masculine,
       partialUnitCode: TafqeetUnitCode.none),
 ];

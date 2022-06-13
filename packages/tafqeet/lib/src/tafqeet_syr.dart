@@ -22,7 +22,7 @@ class TafqeetSyr {
 }
 
 //  --################################################################
-String getArrValSyr(String arr, var pR, var pC) {
+String getArrValSyr(String transaltionList, var pR, var pC) {
   List<String> mx = [
     ' ',
     ' ',
@@ -137,14 +137,14 @@ String getArrValSyr(String arr, var pR, var pC) {
     'كوادريليونان',
     'كوادريليونا'
   ];
-  //print('$arr[$pR * 3 + $pC + 1]');
-  if (arr == 'MX') {
+  //print('$transaltionList[$pR * 3 + $pC + 1]');
+  if (transaltionList == 'hndrdsThsandsWordList') {
     return (mx[pR * 3 + pC + 1]);
-  } else if (arr == 'MY') {
+  } else if (transaltionList == 'onesWordList') {
     return (my[pR * 3 + pC + 1]);
-  } else if (arr == 'A') {
+  } else if (transaltionList == 'A') {
     return (a[pR * 3 + pC + 1]);
-  } else if (arr == 'W') {
+  } else if (transaltionList == 'countedWordList') {
     return (w[pR * 3 + pC + 1]);
   }
   return ('');
@@ -153,7 +153,7 @@ String getArrValSyr(String arr, var pR, var pC) {
 ///##########################################
 ///
 ///--################################################################
-String spellNumSyr(String m1, var x, var part, var zx) {
+String spellNumSyr(String WordsList, var x, var part, var zx) {
   int? x100 = 0;
   int? x10 = 0;
 
@@ -183,19 +183,19 @@ String spellNumSyr(String m1, var x, var part, var zx) {
       t = getArrValSyr('A', part, 1);
     }
   } else if (x == 10) {
-    if (getArrValSyr(m1, 1, 0) == 'احدى') {
+    if (getArrValSyr(WordsList, 1, 0) == 'احدى') {
       t = 'عشر';
     } else {
       t = 'عشرة';
     }
   } else if (x == 11) {
-    if (getArrValSyr(m1, 1, 0) == 'احدى') {
+    if (getArrValSyr(WordsList, 1, 0) == 'احدى') {
       t = 'احدى عشرة';
     } else {
       t = 'احد عشر';
     }
   } else if (x == 12) {
-    if (getArrValSyr(m1, 1, 0) == 'احدى') {
+    if (getArrValSyr(WordsList, 1, 0) == 'احدى') {
       t = 'اثنتا عشرة';
     } else {
       t = 'اثنا عشر';
@@ -213,39 +213,39 @@ String spellNumSyr(String m1, var x, var part, var zx) {
       t = 'مئتا';
     } else {
       if ((x10 == 0 && (x1 == 1 || x1 == 2))) {
-        t = getArrValSyr(m1, x100, 2) +
+        t = getArrValSyr(WordsList, x100, 2) +
             w1 +
             getArrValSyr('A', part, (x1! - 1)) +
             w2 +
-            getArrValSyr(m1, x10, 1);
+            getArrValSyr(WordsList, x10, 1);
       } else if ((x10 == 1 && (x1 == 1 || x1 == 2 || x1 == 0))) {
         if (x1 == 1) {
-          if (getArrValSyr(m1, 1, 0) == 'احدى') {
-            t = '${getArrValSyr(m1, x100, 2)} واحدى عشرة';
+          if (getArrValSyr(WordsList, 1, 0) == 'احدى') {
+            t = '${getArrValSyr(WordsList, x100, 2)} واحدى عشرة';
           } else {
-            t = '${getArrValSyr(m1, x100, 2)} واحد عشر';
+            t = '${getArrValSyr(WordsList, x100, 2)} واحد عشر';
           }
         } else if (x1 == 2) {
-          if (getArrValSyr(m1, 1, 0) == 'احدى') {
-            t = '${getArrValSyr(m1, x100, 2)} واثنتا عشرة';
+          if (getArrValSyr(WordsList, 1, 0) == 'احدى') {
+            t = '${getArrValSyr(WordsList, x100, 2)} واثنتا عشرة';
           } else {
-            t = '${getArrValSyr(m1, x100, 2)} واثنا عشر';
+            t = '${getArrValSyr(WordsList, x100, 2)} واثنا عشر';
           }
         } else if (x1 == 0) {
           if ((x10 == 1 && x1 == 0)) {
-            if (getArrValSyr(m1, 1, 0) == 'احدى') {
-              t = '${getArrValSyr(m1, x100, 2)} وعشر';
+            if (getArrValSyr(WordsList, 1, 0) == 'احدى') {
+              t = '${getArrValSyr(WordsList, x100, 2)} وعشر';
             } else {
-              t = '${getArrValSyr(m1, x100, 2)} وعشرة';
+              t = '${getArrValSyr(WordsList, x100, 2)} وعشرة';
             }
           }
         }
       } else {
-        t = getArrValSyr(m1, x100, 2) +
+        t = getArrValSyr(WordsList, x100, 2) +
             w1 +
-            getArrValSyr(m1, x1, 0) +
+            getArrValSyr(WordsList, x1, 0) +
             w2 +
-            getArrValSyr(m1, x10, 1);
+            getArrValSyr(WordsList, x10, 1);
       }
     }
   }
@@ -281,7 +281,7 @@ String spellNumSyr(String m1, var x, var part, var zx) {
       u = 2;
     }
 
-    t = '$t ${getArrValSyr('W', part, u)}';
+    t = '$t ${getArrValSyr('countedWordList', part, u)}';
   }
 
   return (t);
@@ -348,7 +348,8 @@ String getTafqeetSyr(String am) {
   //print('fraction: ${x[1]}');
 
   if ((x[7] > 0)) {
-    t = spellNumSyr('MX', x[7], 6, x[6] + x[5] + x[4] + x[3] + x[2]);
+    t = spellNumSyr(
+        'hndrdsThsandsWordList', x[7], 6, x[6] + x[5] + x[4] + x[3] + x[2]);
     taf = taf + t;
     flag = 1;
     f = 1;
@@ -357,7 +358,8 @@ String getTafqeetSyr(String am) {
   }
 
   if ((x[6] > 0)) {
-    t = spellNumSyr('MX', x[6], 5, x[5] + x[4] + x[3] + x[2]);
+    t = spellNumSyr(
+        'hndrdsThsandsWordList', x[6], 5, x[5] + x[4] + x[3] + x[2]);
     if ((f == 1)) {
       taf = '$taf و';
     }
@@ -369,7 +371,7 @@ String getTafqeetSyr(String am) {
   }
 
   if ((x[5] > 0)) {
-    t = spellNumSyr('MX', x[5], 4, x[4] + x[3] + x[2]);
+    t = spellNumSyr('hndrdsThsandsWordList', x[5], 4, x[4] + x[3] + x[2]);
 
     if ((f == 1)) {
       taf = '$taf و';
@@ -383,7 +385,7 @@ String getTafqeetSyr(String am) {
   }
 
   if ((x[4] > 0)) {
-    t = spellNumSyr('MX', x[4], 3, x[3] + x[2]);
+    t = spellNumSyr('hndrdsThsandsWordList', x[4], 3, x[3] + x[2]);
 
     if ((f == 1)) {
       taf = '$taf و';
@@ -397,7 +399,7 @@ String getTafqeetSyr(String am) {
   }
 
   if ((x[3] > 0)) {
-    t = spellNumSyr('MX', x[3], 2, x[2]);
+    t = spellNumSyr('hndrdsThsandsWordList', x[3], 2, x[2]);
 
     if ((f == 1)) {
       taf = '$taf و';
@@ -411,7 +413,7 @@ String getTafqeetSyr(String am) {
   }
 
   if ((x[2] > 0)) {
-    t = spellNumSyr('MY', x[2], 1, 0);
+    t = spellNumSyr('onesWordList', x[2], 1, 0);
 
     if ((f == 1)) {
       taf = '$taf و';
@@ -430,7 +432,7 @@ String getTafqeetSyr(String am) {
   if (f == 1) taf = '$taf سورية';
 
   if ((x[1] > 0)) {
-    t = spellNumSyr('MX', x[1], 0, 0);
+    t = spellNumSyr('hndrdsThsandsWordList', x[1], 0, 0);
 
     if ((f == 1)) {
       taf = '$taf و';
@@ -452,3 +454,6 @@ String getTafqeetSyr(String am) {
 }
 // ==========
 
+main() {
+  print(getTafqeetSyr('11111111.12'));
+}
