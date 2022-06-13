@@ -9,7 +9,7 @@ import 'package:tafqeet/tafqeet.dart';
 import 'model/tafqeet_unit.dart';
 import 'model/utility.dart';
 
-class TafqeetMulti {
+class Tafqeet {
   final List<TafqeetUnit> _unitList = tafqeetPredefinedUnits;
 
   String? tafqeetNumberWithParts(
@@ -26,7 +26,7 @@ class TafqeetMulti {
     TafqeetUnit currentUnit;
     TafqeetUnitCode currentUnitCode = tafqeetUnitCode;
     bool mainUnitFlag = true;
-    String taf = '';
+    String tafResult = '';
     int listLenght = listOfNumberAndParts.length;
     //num previousValueToRound = 0;
 
@@ -64,15 +64,14 @@ class TafqeetMulti {
       // currentUnitValue = splitedUnitValue[1];
 
       if (splitedUnitValue[1] != 0) {
-        taf = taf +
+        tafResult = tafResult +
             andWord +
             (_getTafqeet(
                     am: splitedUnitValue[1].toString(),
                     tafqeetUnit: currentUnit,
-                    isPartialValue:
-                        (currentUnit.country.isNotEmpty && mainUnitFlag
-                            ? true
-                            : false)) ??
+                    isMainUnit: (currentUnit.country.isNotEmpty && mainUnitFlag
+                        ? true
+                        : false)) ??
                 '');
         andWord = ' و';
         mainUnitFlag = false;
@@ -80,24 +79,77 @@ class TafqeetMulti {
       currentUnitCode = currentUnit.partialUnitCode;
     }
 
-    taf = '$justWord $taf $noOtherWord';
-    return (taf);
+    tafResult = '$justWord $tafResult $noOtherWord';
+    return (tafResult);
   }
 
 //======
 
   ///=====================
 
-  String tafqeetByUserDefinedUnit(
-      {required String amount,
-      required TafqeetUnit userDefinedUnit,
+  String? tafqeetByUserDefinedUnit(
+      {required List<Map<num, TafqeetUnit>> listOfNumberAndParts,
       String justWord = 'فقط',
-      String noOtherWord = 'لاغير'}) {
-    return ((_getTafqeet(
-          am: amount,
-          tafqeetUnit: userDefinedUnit,
-        ) ??
-        ''));
+      String noOtherWord = 'لاغير',
+      bool tryTafqeet = false}) {
+    ///----
+    List? splitedUnitValue;
+    // List<Map> listValuesToTafqeet = [];
+    //num currentUnitValue = 0;
+    String andWord = '';
+    TafqeetUnit currentUnit;
+    // TafqeetUnitCode currentUnitCode = tafqeetUnitCode;
+    bool mainUnitFlag = true;
+    String tafResult = '';
+    int listLenght = listOfNumberAndParts.length;
+    //num previousValueToRound = 0;
+
+    for (int i = 0; i < listLenght; i++) {
+      splitedUnitValue = splitUnitValue(listOfNumberAndParts[i].keys.first);
+
+      currentUnit = listOfNumberAndParts[i].values.first;
+
+      if (splitedUnitValue.length > 2) {
+        if (tryTafqeet) {
+          return null;
+        } else {
+          throw FormatException(
+              '''It is not possible to handle numbers containing commas ${listOfNumberAndParts[i]},
+              enter the number without commas  ( ${splitedUnitValue[1]}) ,
+              and add the parts ( ${splitedUnitValue[2]}) as a valid number in the parts field:''');
+        }
+      }
+      if (i > 0 &&
+          currentUnit.unitMaxValue != 0 &&
+          splitedUnitValue[1] >= currentUnit.unitMaxValue) {
+        if (tryTafqeet) {
+          return null;
+        } else {
+          throw FormatException(
+              '''The value of the parts should not exceed the upper limit of the unit  ${currentUnit.unitCode}    "  
+            upper limit:  ${currentUnit.unitMaxValue}
+            the pass value was: ${splitedUnitValue[1]}  ''');
+        }
+      }
+      // currentUnitValue = splitedUnitValue[1];
+
+      if (splitedUnitValue[1] != 0) {
+        tafResult = tafResult +
+            andWord +
+            (_getTafqeet(
+                    am: splitedUnitValue[1].toString(),
+                    tafqeetUnit: currentUnit,
+                    isMainUnit: (currentUnit.country.isNotEmpty && mainUnitFlag
+                        ? true
+                        : false)) ??
+                '');
+        andWord = ' و';
+        mainUnitFlag = false;
+      }
+    }
+
+    tafResult = '$justWord $tafResult $noOtherWord';
+    return (tafResult);
   }
 
 //==================
@@ -471,10 +523,10 @@ _tafqeetOnePart(  onesTensWordList, partValue: 389,  partLocation: 1, sumRestPar
   String? _getTafqeet({
     required String am,
     required TafqeetUnit tafqeetUnit,
-    bool isPartialValue = true, //  main amount only   get countery value
+    bool isMainUnit = true, //  main amount only   get countery value
   }) {
     String j;
-    String t;
+    String onePartTaf;
     String amount;
 
     TafqeetUnit tafUnit = tafqeetUnit.copyWith(
@@ -487,7 +539,7 @@ _tafqeetOnePart(  onesTensWordList, partValue: 389,  partLocation: 1, sumRestPar
     int f = 0;
     int flag = 0;
     int p;
-    String taf = '';
+    String tafResult = '';
 
     if (am.isEmpty) {
       return ('');
@@ -518,7 +570,7 @@ _tafqeetOnePart(  onesTensWordList, partValue: 389,  partLocation: 1, sumRestPar
     }
 
     if ((partValue[7] > 0)) {
-      t = _tafqeetOnePart(
+      onePartTaf = _tafqeetOnePart(
           'hndrdsThosndsWordList',
           partValue[7],
           6,
@@ -528,7 +580,7 @@ _tafqeetOnePart(  onesTensWordList, partValue: 389,  partLocation: 1, sumRestPar
               partValue[3] +
               partValue[2],
           tafUnit);
-      taf = taf + t;
+      tafResult = tafResult + onePartTaf;
       flag = 1;
       f = 1;
     } else {
@@ -536,12 +588,12 @@ _tafqeetOnePart(  onesTensWordList, partValue: 389,  partLocation: 1, sumRestPar
     }
 
     if ((partValue[6] > 0)) {
-      t = _tafqeetOnePart('hndrdsThosndsWordList', partValue[6], 5,
+      onePartTaf = _tafqeetOnePart('hndrdsThosndsWordList', partValue[6], 5,
           partValue[5] + partValue[4] + partValue[3] + partValue[2], tafUnit);
       if ((f == 1)) {
-        taf = '$taf و';
+        tafResult = '$tafResult و';
       }
-      taf = taf + t;
+      tafResult = tafResult + onePartTaf;
       flag = 1;
       f = 1;
     } else {
@@ -549,14 +601,14 @@ _tafqeetOnePart(  onesTensWordList, partValue: 389,  partLocation: 1, sumRestPar
     }
 
     if ((partValue[5] > 0)) {
-      t = _tafqeetOnePart('hndrdsThosndsWordList', partValue[5], 4,
+      onePartTaf = _tafqeetOnePart('hndrdsThosndsWordList', partValue[5], 4,
           partValue[4] + partValue[3] + partValue[2], tafUnit);
 
       if ((f == 1)) {
-        taf = '$taf و';
+        tafResult = '$tafResult و';
       }
 
-      taf = taf + t;
+      tafResult = tafResult + onePartTaf;
       flag = 1;
       f = 1;
     } else {
@@ -564,14 +616,14 @@ _tafqeetOnePart(  onesTensWordList, partValue: 389,  partLocation: 1, sumRestPar
     }
 
     if ((partValue[4] > 0)) {
-      t = _tafqeetOnePart('hndrdsThosndsWordList', partValue[4], 3,
+      onePartTaf = _tafqeetOnePart('hndrdsThosndsWordList', partValue[4], 3,
           partValue[3] + partValue[2], tafUnit);
 
       if ((f == 1)) {
-        taf = '$taf و';
+        tafResult = '$tafResult و';
       }
 
-      taf = taf + t;
+      tafResult = tafResult + onePartTaf;
       flag = 1;
       f = 1;
     } else {
@@ -579,14 +631,14 @@ _tafqeetOnePart(  onesTensWordList, partValue: 389,  partLocation: 1, sumRestPar
     }
 
     if ((partValue[3] > 0)) {
-      t = _tafqeetOnePart(
+      onePartTaf = _tafqeetOnePart(
           'hndrdsThosndsWordList', partValue[3], 2, partValue[2], tafUnit);
 
       if ((f == 1)) {
-        taf = '$taf و';
+        tafResult = '$tafResult و';
       }
 
-      taf = taf + t;
+      tafResult = tafResult + onePartTaf;
       flag = 1;
       f = 1;
     } else {
@@ -594,36 +646,37 @@ _tafqeetOnePart(  onesTensWordList, partValue: 389,  partLocation: 1, sumRestPar
     }
 
     if ((partValue[2] > 0)) {
-      t = _tafqeetOnePart('onesTensWordList', partValue[2], 1, 0, tafUnit);
+      onePartTaf =
+          _tafqeetOnePart('onesTensWordList', partValue[2], 1, 0, tafUnit);
 
       if ((f == 1)) {
-        taf = '$taf و';
+        tafResult = '$tafResult و';
       }
 
-      taf = taf + t;
+      tafResult = tafResult + onePartTaf;
       flag = 1;
       f = 1;
     } else if (f == 1) {
-      taf = '$taf  ${tafUnit.unit}';
+      tafResult = '$tafResult  ${tafUnit.unit}';
     }
 
-    if (f == 1 && tafUnit.country.isNotEmpty && isPartialValue) {
-      taf = _getCountryUnit(
-          partValue[2], taf, tafUnit.country, tafUnit.unitGender);
+    if (f == 1 && tafUnit.country.isNotEmpty && isMainUnit) {
+      tafResult = _getCountryUnit(
+          partValue[2], tafResult, tafUnit.country, tafUnit.unitGender);
     }
 
     if ((double.tryParse(am) == 0)) {
-      taf = 'صفر ${tafUnit.unit}';
+      tafResult = 'صفر ${tafUnit.unit}';
     }
 
-    return (taf.replaceAll('  ', ' ').replaceAll('  ', ' '));
+    return (tafResult.replaceAll('  ', ' ').replaceAll('  ', ' '));
   }
 
 // ==========
 
-  String _getCountryUnit(var amount, String taf, String tafUnitCountry,
+  String _getCountryUnit(var amount, String tafResult, String tafUnitCountry,
       TafqeetUnitGender tafUnitGender) {
-    if (tafUnitCountry.isEmpty) return taf;
+    if (tafUnitCountry.isEmpty) return tafResult;
 
     String unitCountryLastChar =
         tafUnitCountry.substring(tafUnitCountry.length - 1);
@@ -632,46 +685,38 @@ _tafqeetOnePart(  onesTensWordList, partValue: 389,  partLocation: 1, sumRestPar
     switch (tafUnitGender) {
       case TafqeetUnitGender.feminine:
         if (amount >= 3 && amount <= 10) {
-          taf =
-              '$taf ${((unitCountryLastChar == 'ة' ? tafUnitCountry : '${tafUnitCountry}ة'))}';
+          tafResult =
+              '$tafResult ${((unitCountryLastChar == 'ة' ? tafUnitCountry : '${tafUnitCountry}ة'))}';
         } else if (amount > 10) {
-          //   taf = '$taf ${tafUnit.country}اً';
-          taf =
-              '$taf ${((unitCountryLastChar == 'ة' ? '${unitCountryWithoutLastChar}ةً' : '${tafUnitCountry}ةً'))}';
+          tafResult =
+              '$tafResult ${((unitCountryLastChar == 'ة' ? '${unitCountryWithoutLastChar}ةً' : '${tafUnitCountry}ةً'))}';
         } else if (amount == 2) {
-          //taf =  '$taf ${tafUnit.country}';
-
-          taf =
-              '$taf ${((unitCountryLastChar == 'ة' ? '${unitCountryWithoutLastChar}تان' : '${tafUnitCountry}تان'))}';
+          tafResult =
+              '$tafResult ${((unitCountryLastChar == 'ة' ? '${unitCountryWithoutLastChar}تان' : '${tafUnitCountry}تان'))}';
         } else if (amount == 1) {
-          //taf =  '$taf ${tafUnit.country}';
-          taf =
-              '$taf ${((unitCountryLastChar == 'ة' ? tafUnitCountry : '${tafUnitCountry}ة'))}';
+          tafResult =
+              '$tafResult ${((unitCountryLastChar == 'ة' ? tafUnitCountry : '${tafUnitCountry}ة'))}';
         } else {
-          taf = '$taf $tafUnitCountry';
+          tafResult = '$tafResult $tafUnitCountry';
         }
         break;
       case TafqeetUnitGender.masculine:
         if (amount >= 3 && amount <= 10) {
-          taf =
-              '$taf ${((unitCountryLastChar == 'ة' ? tafUnitCountry : '${tafUnitCountry}ة'))}';
+          tafResult =
+              '$tafResult ${((unitCountryLastChar == 'ة' ? tafUnitCountry : '${tafUnitCountry}ة'))}';
         } else if (amount > 10) {
-          //   taf = '$taf ${tafUnit.country}اً';
-          taf =
-              '$taf ${((unitCountryLastChar == 'ة' ? '${unitCountryWithoutLastChar}اً' : '${tafUnitCountry}اً'))}';
+          tafResult =
+              '$tafResult ${((unitCountryLastChar == 'ة' ? '${unitCountryWithoutLastChar}اً' : '${tafUnitCountry}اً'))}';
         } else if (amount == 2) {
-          //taf =  '$taf ${tafUnit.country}';
-
-          taf =
-              '$taf ${((unitCountryLastChar == 'ة' ? '${unitCountryWithoutLastChar}ان' : '${tafUnitCountry}ان'))}';
+          tafResult =
+              '$tafResult ${((unitCountryLastChar == 'ة' ? '${unitCountryWithoutLastChar}ان' : '${tafUnitCountry}ان'))}';
         } else if (amount == 1) {
-          //taf =  '$taf ${tafUnit.country}';
-          taf =
-              '$taf ${((unitCountryLastChar == 'ة' ? unitCountryWithoutLastChar : tafUnitCountry))}';
+          tafResult =
+              '$tafResult ${((unitCountryLastChar == 'ة' ? unitCountryWithoutLastChar : tafUnitCountry))}';
         } else {
-          taf = '$taf $tafUnitCountry';
+          tafResult = '$tafResult $tafUnitCountry';
         }
     }
-    return taf;
+    return tafResult;
   }
 }

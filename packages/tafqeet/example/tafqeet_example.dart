@@ -4,115 +4,18 @@ import 'package:tafqeet/src/model/tafqeet_unit.dart';
 import 'package:tafqeet/tafqeet.dart';
 
 void main() {
-  // var tafund = TafqeetMulti('20.01', unitund);
-
-  var tafqeet = TafqeetMulti();
-  //print(tafqeet.tafqeetNumber(
-  //  numberAndParts: [0], tafqeetUnitCode: TafqeetUnitCode.kiloMetre));
-
-  /*
-  print(tafqeet.tafqeetNumberWithParts(
-      listOfNumberAndParts: [33453, 99, 44, 1],
-      tafqeetUnitCode: TafqeetUnitCode.kiloMetre));
+  var tafqeet = Tafqeet();
 
   print(tafqeet.tafqeetNumberWithParts(
-      listOfNumberAndParts: [111, 12],
-      tafqeetUnitCode: TafqeetUnitCode.syrianPound));
-  print(tafqeet.tafqeetNumberWithParts(
-      listOfNumberAndParts: [111, 12],
-      tafqeetUnitCode: TafqeetUnitCode.saudiArabianRiyal));
-  print(tafqeet.tafqeetNumberWithParts(
-      listOfNumberAndParts: [126002070113, 12],
-      tafqeetUnitCode: TafqeetUnitCode.syrianPound));
-  print(tafqeet.tafqeetNumberWithParts(
-      listOfNumberAndParts: [126002070113, 12],
-      tafqeetUnitCode: TafqeetUnitCode.saudiArabianRiyal));
-  print(tafqeet.tafqeetNumberWithParts(
-      listOfNumberAndParts: [120002000111, 11],
-      tafqeetUnitCode: TafqeetUnitCode.syrianPound));
+      listOfNumberAndParts: [23, 2, 59],
+      tafqeetUnitCode: TafqeetUnitCode.hour));
 
   print(tafqeet.tafqeetNumberWithParts(
-      listOfNumberAndParts: [120002000111, 12],
-      tafqeetUnitCode: TafqeetUnitCode.saudiArabianRiyal));
-  print(tafqeet.tafqeetNumberWithParts(
-      listOfNumberAndParts: [11120002000114, 11],
-      tafqeetUnitCode: TafqeetUnitCode.syrianPound));
-
-  print(tafqeet.tafqeetNumberWithParts(
-      listOfNumberAndParts: [112, 12],
-      tafqeetUnitCode: TafqeetUnitCode.saudiArabianRiyal));
-  print(tafqeet.tafqeetNumberWithParts(
-      listOfNumberAndParts: [555412, 12],
-      tafqeetUnitCode: TafqeetUnitCode.saudiArabianRiyal));
-  print(tafqeet.tafqeetNumberWithParts(
-      listOfNumberAndParts: [0, 2],
-      tafqeetUnitCode: TafqeetUnitCode.saudiArabianRiyal));
-  print(tafqeet.tafqeetNumberWithParts(
-      listOfNumberAndParts: [2, 222],
-      tafqeetUnitCode: TafqeetUnitCode.kuwaitiDinar));
-
-  print(tafqeet.tafqeetNumberWithParts(
-      listOfNumberAndParts: [0, 16],
-      tafqeetUnitCode: TafqeetUnitCode.kuwaitiDinar));
-
-  print(tafqeet.tafqeetNumberWithParts(
-      listOfNumberAndParts: [0, 51],
-      tafqeetUnitCode: TafqeetUnitCode.syrianPound));
-  print(tafqeet.tafqeetNumberWithParts(
-      listOfNumberAndParts: [0, 15],
-      tafqeetUnitCode: TafqeetUnitCode.saudiArabianRiyal));
-
-  print(tafqeet.tafqeetNumberWithParts(
-      listOfNumberAndParts: [345545, 99],
-      tafqeetUnitCode: TafqeetUnitCode.kiloGram));
-
-  print(tafqeet.tafqeetNumberWithParts(
-      listOfNumberAndParts: [0, 657, 2, 66],
-      tafqeetUnitCode: TafqeetUnitCode.metricTon));
-  print(tafqeet.tafqeetNumberWithParts(
-    listOfNumberAndParts: [0, 465, 66],
-    tafqeetUnitCode: TafqeetUnitCode.metricTon,
+    listOfNumberAndParts: [23, 2, 59],
+    tafqeetUnitCode: TafqeetUnitCode.hour,
+    justWord: 'الوقت المتوقع هو:',
+    noOtherWord: 'بدءً من ساعة الصفر',
   ));
-
-  print(tafqeet.tafqeetNumberWithParts(
-      listOfNumberAndParts: [11, 11],
-      tafqeetUnitCode: TafqeetUnitCode.syrianPound));
-  print(tafqeet.tafqeetNumberWithParts(
-      listOfNumberAndParts: [117131121211, 11],
-      tafqeetUnitCode: TafqeetUnitCode.syrianPound));
-
-  print(tafqeet.tafqeetNumberWithParts(
-      listOfNumberAndParts: [11, 011],
-      tafqeetUnitCode: TafqeetUnitCode.kuwaitiDinar));
-
-  print(tafqeet.tafqeetNumberWithParts(
-      listOfNumberAndParts: [316916116116, 26],
-      tafqeetUnitCode: TafqeetUnitCode.syrianPound));
-
-  print(tafqeet.tafqeetNumberWithParts(
-      listOfNumberAndParts: [11, 11],
-      tafqeetUnitCode: TafqeetUnitCode.saudiArabianRiyal));
-
-  print(tafqeet.tafqeetNumberWithParts(
-      listOfNumberAndParts: [11111, 12],
-      tafqeetUnitCode: TafqeetUnitCode.syrianPound));
-  print(tafqeet.tafqeetNumberWithParts(
-      listOfNumberAndParts: [11111, 11],
-      tafqeetUnitCode: TafqeetUnitCode.saudiArabianRiyal));
-
-  print(tafqeet.tafqeetNumberWithParts(
-      listOfNumberAndParts: [111111111111, 12],
-      tafqeetUnitCode: TafqeetUnitCode.syrianPound));
-  print(tafqeet.tafqeetNumberWithParts(
-      listOfNumberAndParts: [111111111111, 12],
-      tafqeetUnitCode: TafqeetUnitCode.saudiArabianRiyal));
-*/
-  print(tafqeet.tafqeetNumberWithParts(
-      listOfNumberAndParts: [479576, 67],
-      tafqeetUnitCode: TafqeetUnitCode.syrianPound));
-  print(tafqeet.tafqeetNumberWithParts(
-      listOfNumberAndParts: [479576, 67],
-      tafqeetUnitCode: TafqeetUnitCode.saudiArabianRiyal));
 
   print(tafqeet.tafqeetNumberWithParts(
       listOfNumberAndParts: [585890449645464512, 02],
@@ -120,4 +23,100 @@ void main() {
   print(tafqeet.tafqeetNumberWithParts(
       listOfNumberAndParts: [2, 62],
       tafqeetUnitCode: TafqeetUnitCode.saudiArabianRiyal));
+  print(tafqeet.tafqeetNumberWithParts(
+      listOfNumberAndParts: [0, 62],
+      tafqeetUnitCode: TafqeetUnitCode.saudiArabianRiyal));
+
+  // بات تايلدندي - ساتانغ 100
+  var batUnit = TafqeetUnit(
+      unitCode: TafqeetUnitCode.userDefined,
+      country: 'تايلندي',
+      unit: 'بات',
+      unitPlural: 'باتات',
+      unitMaxValue: 100,
+      unitGender: TafqeetUnitGender.masculine,
+      partialUnitCode: TafqeetUnitCode.none);
+  var batPennyUnit = TafqeetUnit(
+      unitCode: TafqeetUnitCode.userDefined,
+      country: 'تايلندي',
+      unit: 'ساتانغ',
+      unitPlural: 'ساتانغات',
+      unitMaxValue: 100,
+      unitGender: TafqeetUnitGender.masculine,
+      partialUnitCode: TafqeetUnitCode.none);
+
+  print(tafqeet.tafqeetByUserDefinedUnit(listOfNumberAndParts: [
+    {3: batUnit},
+    {11: batPennyUnit}
+  ]));
+  print(tafqeet.tafqeetByUserDefinedUnit(listOfNumberAndParts: [
+    {46588453: batUnit},
+    {19: batPennyUnit}
+  ]));
+
+  var number1 = 234234;
+  TafqeetUnit unit1 = TafqeetUnit(
+      unitCode: TafqeetUnitCode.userDefined,
+      country: '',
+      unit: 'طنجرة',
+      unitPlural: 'طناجر',
+      unitMaxValue: 0,
+      unitGender: TafqeetUnitGender.feminine,
+      partialUnitCode: TafqeetUnitCode.none);
+
+  print(tafqeet.tafqeetByUserDefinedUnit(listOfNumberAndParts: [
+    {number1: unit1}
+  ]));
+
+  number1 = 1;
+  unit1 = TafqeetUnit(
+      unitCode: TafqeetUnitCode.userDefined,
+      country: '',
+      unit: 'بطيخة',
+      unitPlural: 'بطيخات',
+      unitMaxValue: 0,
+      unitGender: TafqeetUnitGender.feminine,
+      partialUnitCode: TafqeetUnitCode.none);
+
+  print(tafqeet.tafqeetByUserDefinedUnit(listOfNumberAndParts: [
+    {number1: unit1}
+  ]));
+
+  print(tafqeet.tafqeetByUserDefinedUnit(listOfNumberAndParts: [
+    {2: unit1}
+  ]));
+
+  print(tafqeet.tafqeetByUserDefinedUnit(listOfNumberAndParts: [
+    {3: unit1}
+  ]));
+
+  print(tafqeet.tafqeetByUserDefinedUnit(listOfNumberAndParts: [
+    {3453453477: unit1}
+  ]));
+
+  var boxesNumber = 234234;
+  TafqeetUnit unitBoxes = TafqeetUnit(
+      unitCode: TafqeetUnitCode.userDefined,
+      country: '',
+      unit: 'صندوق',
+      unitPlural: 'صناديق',
+      unitMaxValue: 0,
+      unitGender: TafqeetUnitGender.masculine,
+      partialUnitCode: TafqeetUnitCode.none);
+
+  var partsNumber = 11;
+
+  TafqeetUnit partsUnit = TafqeetUnit(
+      unitCode: TafqeetUnitCode.userDefined,
+      country: '',
+      unit: 'قطعة',
+      unitPlural: 'قطع',
+      unitMaxValue: 12,
+      unitGender: TafqeetUnitGender.feminine,
+      partialUnitCode: TafqeetUnitCode.none);
+
+  print(tafqeet.tafqeetByUserDefinedUnit(listOfNumberAndParts: [
+    {boxesNumber: unitBoxes},
+    {partsNumber: partsUnit}
+  ]));
 }
