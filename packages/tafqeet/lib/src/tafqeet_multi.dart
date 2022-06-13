@@ -66,7 +66,7 @@ class TafqeetMulti {
       if (splitedUnitValue[1] != 0) {
         taf = taf +
             andWord +
-            (_getTafqeetMulti(
+            (_getTafqeet(
                     am: splitedUnitValue[1].toString(),
                     tafqeetUnit: currentUnit,
                     isPartialValue:
@@ -93,7 +93,7 @@ class TafqeetMulti {
       required TafqeetUnit userDefinedUnit,
       String justWord = 'فقط',
       String noOtherWord = 'لاغير'}) {
-    return ((_getTafqeetMulti(
+    return ((_getTafqeet(
           am: amount,
           tafqeetUnit: userDefinedUnit,
         ) ??
@@ -103,59 +103,64 @@ class TafqeetMulti {
 //==================
 
 //  --################################################################
-  String _getArrVal(
-      String tafqeetWordsList, var pR, var pC, TafqeetUnit tafUnit) {
+/*  example :
+                        x=584
+                3XDigits =5-8-4
+          xDigitLocation= 2-1-0
+_getTafqeetWord( onesTensWordList,   xDigit =5 ,  xDigitLocation = 2 ,   TafqeetUnit)
+  onesTensWordList [5 * 3 + 2 + 1] ----->  خمسمائة
+
+getTafqeetWord( onesTensWordList,   xDigit =4 ,  xDigitLocation = 0 ,   TafqeetUnit)
+
+onesTensWordList[4 * 3 + 0 + 1] -------> اربعة
+
+getTafqeetWord( onesTensWordList,   xDigit =8 ,  xDigitLocation = 1 ,   TafqeetUnit)
+onesTensWordList[8 * 3 + 1 + 1] ------>  ثمانون
+
+getTafqeetWord( countedWordList,   xDigit = 1,  xDigitLocation = 0 ,   TafqeetUnit)
+
+countedWordList[1 * 3 + 0 + 1] ------> ريالاً
+--
+        فقط خمسمائة واربعة وثمانون ريالاً
+  */
+  String _getTafqeetWord(String tafqeetWordsList, var xDigit,
+      var xDigitLocation, TafqeetUnit tafUnit) {
     TafqeetUnitGender numGender = (tafUnit.unitGender);
 
-    List<String> mx = [
+    List<String> hndrdsThosndsWordList = [
       ' ',
       ' ',
       ' ',
       ' ',
       'واحد',
-      //(numGender == TafqeetUnitGender.feminine ? '#احدى' : '#واحد'),
       ' عشر',
       'مئة',
       'اثنان',
       'عشرون',
       'مئتان',
-
       'ثلاثة',
-      //(numGender == TafqeetUnitGender.feminine ? 'ثلاث' : 'ثلاثة'),
       'ثلاثون',
       'ثلاثمائة',
-
       'اربعة',
-      // (numGender == TafqeetUnitGender.feminine ? 'اربع' : 'اربعة'),
       'اربعون',
       'اربعمائة',
-
       'خمسة',
-      // (numGender == TafqeetUnitGender.feminine ? 'خمس' : 'خمسة'),
       'خمسون',
       'خمسمائة',
-
       'ستة',
-      //(numGender == TafqeetUnitGender.feminine ? 'ست' : 'ستة'),
       'ستون',
       'ستمائة',
-
       'سبعة',
-      // (numGender == TafqeetUnitGender.feminine ? 'سبع' : 'سبعة'),
       'سبعون',
       'سبعمائة',
-
       'ثمانية',
-      //(numGender == TafqeetUnitGender.feminine ? 'ثماني' : 'ثمانية'),
       'ثمانون',
       'ثمانمائة',
-
       'تسعة',
-      //(numGender == TafqeetUnitGender.feminine ? 'تسع' : 'تسعة'),
       'تسعون',
       'تسعمائة'
     ];
-    List<String> onesWordList = [
+    List<String> onesTensWordList = [
       ' ',
       ' ',
       ' ',
@@ -165,44 +170,44 @@ class TafqeetMulti {
       //     ' عشرة',
       (numGender == TafqeetUnitGender.feminine ? ' عشرة' : ' عشر'),
       'مئة',
+
       //'اثنتان',
       (numGender == TafqeetUnitGender.feminine ? 'اثنتان' : 'إثنان'),
-
       'عشرون',
       'مئتان',
+
       //'ثلاث',
       (numGender == TafqeetUnitGender.feminine ? 'ثلاث' : 'ثلاثة'),
-
       'ثلاثون',
       'ثلاثمائة',
+
       //'اربع',
       (numGender == TafqeetUnitGender.feminine ? 'اربع' : 'اربعة'),
-
       'اربعون',
       'اربعمائة',
+
       //'خمس',
       (numGender == TafqeetUnitGender.feminine ? 'خمس' : 'خمسة'),
-
       'خمسون',
       'خمسمائة',
+
       //'ست',
       (numGender == TafqeetUnitGender.feminine ? 'ست' : 'ستة'),
-
       'ستون',
       'ستمائة',
+
       //'سبع',
       (numGender == TafqeetUnitGender.feminine ? 'سبع' : 'سبعة'),
-
       'سبعون',
       'سبعمائة',
+
       //'ثماني',
       (numGender == TafqeetUnitGender.feminine ? 'ثماني' : 'ثمانية'),
-
       'ثمانون',
       'ثمانمائة',
+
       //'تسع',
       (numGender == TafqeetUnitGender.feminine ? 'تسع' : 'تسعة'),
-
       'تسعون',
       'تسعمائة'
     ];
@@ -210,25 +215,17 @@ class TafqeetMulti {
       ' ',
       //'قرشاً',
       ' ',
-      // ((tafUnit.unitPart.substring(tafUnit.unitPart.length - 1) == 'ة'      ? '${tafUnit.unitPart.substring(0, tafUnit.unitPart.length - 1)}ةً'
-      //    : '${tafUnit.unitPart}اً')),
       //'قرشاً',
       ' ',
-      // ((tafUnit.unitPart.substring(tafUnit.unitPart.length - 1) == 'ة'     ? 'ةً'
-      //    : 'اً')),
       // 'قروش',
-      // (tafUnit.unitPartPlural),
       ' ',
-      //
-      //'ليرة',
-      //tafUnit.unit + '#',
 
+      //'ليرة',
       ((tafUnit.unit.substring(tafUnit.unit.length - 1) == 'ة'
           ? '${tafUnit.unit.substring(0, tafUnit.unit.length - 1)}ةً'
           : '${tafUnit.unit}اً')),
 
       //'ليرة',
-      //tafUnit.unit + '%',
       ((tafUnit.unit.substring(tafUnit.unit.length - 1) == 'ة'
           ? '${tafUnit.unit.substring(0, tafUnit.unit.length - 1)}ةً'
           : '${tafUnit.unit}اً')),
@@ -255,13 +252,10 @@ class TafqeetMulti {
       ' ',
 //    'قرش واحد',
       ' ',
-//       '${tafUnit.unitPart} ${numGender == TafqeetUnitGender.feminine ? 'واحدة' : 'واحد'}',
 //    'قرشان',
       ' ',
-      //       (tafUnit.unitPartMultiple),
 //    'قرشان',
       ' ',
-      //       (tafUnit.unitPartMultiple),
       //'ليرة واحدة',
       '${((tafUnit.unit.substring(tafUnit.unit.length - 1) == 'ة' ? '${tafUnit.unit.substring(0, tafUnit.unit.length - 1)}ةً' : '${tafUnit.unit}اً'))}${numGender == TafqeetUnitGender.feminine ? ' واحدة' : ' واحداً'}',
       //'ليرتان',     // (tafUnit.unitMultiple),
@@ -289,170 +283,184 @@ class TafqeetMulti {
       'كوادريليونان',
       'كوادريليونا'
     ];
-    //print('$tafqeetWordsList[$pR * 3 + $pC + 1]');
-    if (tafqeetWordsList == 'MX') {
-      return (mx[pR * 3 + pC + 1]);
-    } else if (tafqeetWordsList == 'onesWordList') {
-      return (onesWordList[pR * 3 + pC + 1]);
+    // print('$tafqeetWordsList[$xDigit * 3 + $xDigitLocation + 1]');
+    if (tafqeetWordsList == 'hndrdsThosndsWordList') {
+      return (hndrdsThosndsWordList[xDigit * 3 + xDigitLocation + 1]);
+    } else if (tafqeetWordsList == 'onesTensWordList') {
+      return (onesTensWordList[xDigit * 3 + xDigitLocation + 1]);
     } else if (tafqeetWordsList == 'oneTowWordList') {
-      return (oneTowWordList[pR * 3 + pC + 1]);
+      return (oneTowWordList[xDigit * 3 + xDigitLocation + 1]);
     } else if (tafqeetWordsList == 'countedWordList') {
-      return (countedWordList[pR * 3 + pC + 1]);
+      return (countedWordList[xDigit * 3 + xDigitLocation + 1]);
     }
     return ('');
   }
 
   ///##########################################
-  ///
+  /*  _tafqeetOnePart
+example :
+    tafqeetNumber = 479 576 389
+    -------------------------
+_tafqeetOnePart(  hndrdsThosndsWordList, partValue: 479, partLocation: 3, sumRestPartsValue:  965,  tafUnit )
+اربعمائة وتسعة وسبعون مليوناً
+
+_tafqeetOnePart(  hndrdsThosndsWordList, partValue: 576, partLocation: 2, sumRestPartsValue: 389,  tafUnit)
+خمسمائة وستة وسبعون الفاً
+
+_tafqeetOnePart(  onesTensWordList, partValue: 389,  partLocation: 1, sumRestPartsValue 0,  tafUnit)
+
+ثلاثمائة وتسعة وثمانون ريالاً
+
+
+  */
   ///--################################################################
-  String _spellNum(String m1, var x, var part, var zx, TafqeetUnit tafUnit
-      //,     {TafqeetUnitGender? unitPartGender}
-      ) {
-    // TafqeetUnitGender numGender = (unitPartGender ?? tafUnit.unitGender);
-    TafqeetUnitGender numGender = tafUnit.unitGender;
+  String _tafqeetOnePart(String tafqeetWordList, var partValue,
+      var partLocation, var sumRestPartsValue, TafqeetUnit tafUnit) {
+    //  print(
+    //    '_tafqeetOnePart(  $tafqeetWordList, $partValue, $partLocation, $sumRestPartsValue,  tafUnit ');
 
-    int x100 = 0;
-    int x10 = 0;
+    int xHundred = 0;
+    int xTens = 0;
 
-    int x1 = 0;
+    int xOnes = 0;
     var u = 0;
 
     String tafResult = '';
 
-    String andWordFirst = '';
-    String andWordBetween = '';
+    String firstAndWord = '';
+    String betweenAndWord = '';
 
-    //print('X: $x');
-    x100 = int.tryParse((x / 100).truncate().toString()) ?? 0;
-    x10 = int.tryParse(((x - (x100 * 100)) / 10).truncate().toString()) ?? 0;
-    x1 = int.tryParse(((x - x100 * 100 - x10 * 10)).truncate().toString()) ?? 0;
+    xHundred = int.tryParse((partValue / 100).truncate().toString()) ?? 0;
+    xTens = int.tryParse(
+            ((partValue - (xHundred * 100)) / 10).truncate().toString()) ??
+        0;
+    xOnes = int.tryParse(((partValue - xHundred * 100 - xTens * 10))
+            .truncate()
+            .toString()) ??
+        0;
 
-    //print('X: $x  X100: $x100  X10:  $x10 X1:  $x1 ');
-    if (x == 0) {
+    if (partValue == 0) {
       tafResult = '';
       return (tafResult);
-    } else if (x == 1) {
-      tafResult = _getArrVal('oneTowWordList', part, 0, tafUnit);
-    } else if (x == 2) {
-      if ((zx == 0)) {
-        tafResult = _getArrVal('oneTowWordList', part, 2, tafUnit);
+    } else if (partValue == 1) {
+      tafResult = _getTafqeetWord('oneTowWordList', partLocation, 0, tafUnit);
+    } else if (partValue == 2) {
+      if ((sumRestPartsValue == 0)) {
+        tafResult = _getTafqeetWord('oneTowWordList', partLocation, 2, tafUnit);
       } else {
-        tafResult = _getArrVal('oneTowWordList', part, 1, tafUnit);
+        tafResult = _getTafqeetWord('oneTowWordList', partLocation, 1, tafUnit);
       }
-      // print('ZX=$zx  tafResult $tafResult  ');
-    } else if (x == 10) {
-      if (_getArrVal(m1, 1, 0, tafUnit) == 'احدى') {
+    } else if (partValue == 10) {
+      if (_getTafqeetWord(tafqeetWordList, 1, 0, tafUnit) == 'احدى') {
         tafResult = 'عشر';
       } else {
         tafResult = 'عشرة';
       }
-
-      // tafResult = (numGender == TafqeetUnitGender.feminine ? 'عشرة' : 'عشر');
-    } else if (x == 11) {
-      if (_getArrVal(m1, 1, 0, tafUnit) == 'احدى') {
+    } else if (partValue == 11) {
+      if (_getTafqeetWord(tafqeetWordList, 1, 0, tafUnit) == 'احدى') {
         tafResult = 'احدى عشرة';
       } else {
         tafResult = 'احد عشر';
       }
-      // tafResult =
-      //    (numGender == TafqeetUnitGender.feminine ? 'احدى عشرة' : 'احد عشر');
-    } else if (x == 12) {
-      if (_getArrVal(m1, 1, 0, tafUnit) == 'احدى') {
+    } else if (partValue == 12) {
+      if (_getTafqeetWord(tafqeetWordList, 1, 0, tafUnit) == 'احدى') {
         tafResult = 'اثنتا عشرة';
       } else {
         tafResult = 'اثنا عشر';
       }
-      // tafResult =
-      //    (numGender == TafqeetUnitGender.feminine ? 'اثنتا عشرة' : 'اثنا عشر');
     } else {
-      if ((x100 > 0 && x10 + x1 != 0)) {
-        andWordFirst = ' و';
+      if ((xHundred > 0 && xTens + xOnes != 0)) {
+        firstAndWord = ' و';
       }
 
-      if ((x10 > 0 && x10 != 1 && x1 != 0)) {
-        andWordBetween = ' و';
+      if ((xTens > 0 && xTens != 1 && xOnes != 0)) {
+        betweenAndWord = ' و';
       }
 
-      if ((x100 == 2 && x10 + x1 == 0)) {
+      if ((xHundred == 2 && xTens + xOnes == 0)) {
         tafResult = 'مئتا';
       } else {
-        if ((x10 == 0 && (x1 == 1 || x1 == 2))) {
-          tafResult = _getArrVal(m1, x100, 2, tafUnit) +
-              andWordFirst +
-              _getArrVal('oneTowWordList', part, (x1 - 1), tafUnit) +
-              andWordBetween +
-              _getArrVal(m1, x10, 1, tafUnit);
-        } else if ((x10 == 1 && (x1 == 1 || x1 == 2 || x1 == 0))) {
-          if (x1 == 1) {
-            if (_getArrVal(m1, 1, 0, tafUnit) == 'احدى') {
-              tafResult = '${_getArrVal(m1, x100, 2, tafUnit)} واحدى عشرة';
+        if ((xTens == 0 && (xOnes == 1 || xOnes == 2))) {
+          tafResult = _getTafqeetWord(tafqeetWordList, xHundred, 2, tafUnit) +
+              firstAndWord +
+              _getTafqeetWord(
+                  'oneTowWordList', partLocation, (xOnes - 1), tafUnit) +
+              betweenAndWord +
+              _getTafqeetWord(tafqeetWordList, xTens, 1, tafUnit);
+        } else if ((xTens == 1 && (xOnes == 1 || xOnes == 2 || xOnes == 0))) {
+          if (xOnes == 1) {
+            if (_getTafqeetWord(tafqeetWordList, 1, 0, tafUnit) == 'احدى') {
+              tafResult =
+                  '${_getTafqeetWord(tafqeetWordList, xHundred, 2, tafUnit)} واحدى عشرة';
             } else {
-              tafResult = '${_getArrVal(m1, x100, 2, tafUnit)} واحد عشر';
+              tafResult =
+                  '${_getTafqeetWord(tafqeetWordList, xHundred, 2, tafUnit)} واحد عشر';
             }
-            // tafResult =
-            //      '${_getArrVal(m1, x100, 2, tafUnit)} ${numGender == TafqeetUnitGender.feminine ? 'واحدى عشرة' : 'واحد عشر'}';
-          } else if (x1 == 2) {
-            if (_getArrVal(m1, 1, 0, tafUnit) == 'احدى') {
-              tafResult = '${_getArrVal(m1, x100, 2, tafUnit)} واثنتا عشرة';
+          } else if (xOnes == 2) {
+            if (_getTafqeetWord(tafqeetWordList, 1, 0, tafUnit) == 'احدى') {
+              tafResult =
+                  '${_getTafqeetWord(tafqeetWordList, xHundred, 2, tafUnit)} واثنتا عشرة';
             } else {
-              tafResult = '${_getArrVal(m1, x100, 2, tafUnit)} واثنا عشر';
+              tafResult =
+                  '${_getTafqeetWord(tafqeetWordList, xHundred, 2, tafUnit)} واثنا عشر';
             }
-            //  tafResult =
-            //     '${_getArrVal(m1, x100, 2, tafUnit)} ${numGender == TafqeetUnitGender.feminine ? 'واثنتا عشرة' : 'واثنا عشر'}';
-          } else if (x1 == 0) {
-            if ((x10 == 1 && x1 == 0)) {
-              if (_getArrVal(m1, 1, 0, tafUnit) == 'احدى') {
-                tafResult = '${_getArrVal(m1, x100, 2, tafUnit)} وعشر';
+          } else if (xOnes == 0) {
+            if ((xTens == 1 && xOnes == 0)) {
+              if (_getTafqeetWord(tafqeetWordList, 1, 0, tafUnit) == 'احدى') {
+                tafResult =
+                    '${_getTafqeetWord(tafqeetWordList, xHundred, 2, tafUnit)} وعشر';
               } else {
-                tafResult = '${_getArrVal(m1, x100, 2, tafUnit)} وعشرة';
+                tafResult =
+                    '${_getTafqeetWord(tafqeetWordList, xHundred, 2, tafUnit)} وعشرة';
               }
-              //  tafResult =
-              //     '${_getArrVal(m1, x100, 2, tafUnit)} ${numGender == TafqeetUnitGender.feminine ? 'وعشر' : 'وعشر'}';
             }
           }
         } else {
-          tafResult = _getArrVal(m1, x100, 2, tafUnit) +
-              andWordFirst +
-              _getArrVal(m1, x1, 0, tafUnit) +
-              andWordBetween +
-              _getArrVal(m1, x10, 1, tafUnit);
+          tafResult = _getTafqeetWord(tafqeetWordList, xHundred, 2, tafUnit) +
+              firstAndWord +
+              _getTafqeetWord(tafqeetWordList, xOnes, 0, tafUnit) +
+              betweenAndWord +
+              _getTafqeetWord(tafqeetWordList, xTens, 1, tafUnit);
         }
       }
     }
 
     u = 0;
 
-    if ((!((x10 == 0 && (x1 == 1 || x1 == 2)) || x == 1 || x == 2))) {
-      if ((x >= 11 && x <= 99)) {
+    if ((!((xTens == 0 && (xOnes == 1 || xOnes == 2)) ||
+        partValue == 1 ||
+        partValue == 2))) {
+      if ((partValue >= 11 && partValue <= 99)) {
         u = 1;
       }
 
-      if ((x >= 100 && x10 == 1 && x1 == 0)) {
+      if ((partValue >= 100 && xTens == 1 && xOnes == 0)) {
         u = 2;
       }
 
-      if ((x >= 100 && x10 != 0)) {
+      if ((partValue >= 100 && xTens != 0)) {
         u = 1;
       }
 
-      if (((x >= 100 && (x1 + x10) == 0) || (zx == 0))) {
+      if (((partValue >= 100 && (xOnes + xTens) == 0) ||
+          (sumRestPartsValue == 0))) {
         u = 0;
       }
 
-      if ((x >= 3 && x <= 10)) {
+      if ((partValue >= 3 && partValue <= 10)) {
         u = 2;
       }
 
-      if ((x >= 100 && x10 == 0 && x1 > 2)) {
+      if ((partValue >= 100 && xTens == 0 && xOnes > 2)) {
         u = 2;
       }
 
-      if ((x >= 100 && x10 == 1 && x1 == 0)) {
+      if ((partValue >= 100 && xTens == 1 && xOnes == 0)) {
         u = 2;
       }
 
       tafResult =
-          '$tafResult ${_getArrVal('countedWordList', part, u, tafUnit)}';
+          '$tafResult ${_getTafqeetWord('countedWordList', partLocation, u, tafUnit)}';
     }
 
     return (tafResult);
@@ -460,23 +468,21 @@ class TafqeetMulti {
 //  --################################################################
 
 //  --################################################################
-  String? _getTafqeetMulti({
+  String? _getTafqeet({
     required String am,
     required TafqeetUnit tafqeetUnit,
-    bool isPartialValue = true, //  main amount only   get counter value
-    //String noOtherWord = 'لاغير'
+    bool isPartialValue = true, //  main amount only   get countery value
   }) {
     String j;
     String t;
     String amount;
 
-    // TYPE x_arr IS VARRAY (7) OF NUMBER NOT NULL;
     TafqeetUnit tafUnit = tafqeetUnit.copyWith(
       unit: tafqeetUnit.unit.isEmpty ? ' ' : tafqeetUnit.unit,
       unitPlural: tafqeetUnit.unitPlural.isEmpty ? ' ' : tafqeetUnit.unitPlural,
     );
 
-    List x = [0, 0, 0, 0, 0, 0, 0, 0];
+    List partValue = [0, 0, 0, 0, 0, 0, 0, 0];
 
     int f = 0;
     int flag = 0;
@@ -503,24 +509,25 @@ class TafqeetMulti {
       return ('!!!تجاوزت الحد الاعلى للرقم');
     }
 
-    // amount = '$amount.00';
-
     j = '000000000000000000'.substring(0, 18 - (amount.length)) + amount;
-
-    //print('J: $j');
 
     for (int i = 0; i <= 5; i++) {
       amount = j.substring(0, 3);
-      x[(7 - i)] = int.tryParse(amount);
-      //print('i: $i : J: $j  amount: $amount  X: ${x[7 - i]}');
+      partValue[(7 - i)] = int.tryParse(amount);
       j = j.substring(3, (j.length));
     }
-    //print('fraction: J: $j  ${j.substring(2)}');
-    // x[1] = int.tryParse(j.substring(1));
-    //print('fraction: ${x[1]}');
 
-    if ((x[7] > 0)) {
-      t = _spellNum('MX', x[7], 6, x[6] + x[5] + x[4] + x[3] + x[2], tafUnit);
+    if ((partValue[7] > 0)) {
+      t = _tafqeetOnePart(
+          'hndrdsThosndsWordList',
+          partValue[7],
+          6,
+          partValue[6] +
+              partValue[5] +
+              partValue[4] +
+              partValue[3] +
+              partValue[2],
+          tafUnit);
       taf = taf + t;
       flag = 1;
       f = 1;
@@ -528,8 +535,9 @@ class TafqeetMulti {
       flag = 0;
     }
 
-    if ((x[6] > 0)) {
-      t = _spellNum('MX', x[6], 5, x[5] + x[4] + x[3] + x[2], tafUnit);
+    if ((partValue[6] > 0)) {
+      t = _tafqeetOnePart('hndrdsThosndsWordList', partValue[6], 5,
+          partValue[5] + partValue[4] + partValue[3] + partValue[2], tafUnit);
       if ((f == 1)) {
         taf = '$taf و';
       }
@@ -540,22 +548,9 @@ class TafqeetMulti {
       flag = 0;
     }
 
-    if ((x[5] > 0)) {
-      t = _spellNum('MX', x[5], 4, x[4] + x[3] + x[2], tafUnit);
-
-      if ((f == 1)) {
-        taf = '$taf و';
-      }
-
-      taf = taf + t;
-      flag = 1;
-      f = 1;
-    } else {
-      flag = 0;
-    }
-
-    if ((x[4] > 0)) {
-      t = _spellNum('MX', x[4], 3, x[3] + x[2], tafUnit);
+    if ((partValue[5] > 0)) {
+      t = _tafqeetOnePart('hndrdsThosndsWordList', partValue[5], 4,
+          partValue[4] + partValue[3] + partValue[2], tafUnit);
 
       if ((f == 1)) {
         taf = '$taf و';
@@ -568,8 +563,9 @@ class TafqeetMulti {
       flag = 0;
     }
 
-    if ((x[3] > 0)) {
-      t = _spellNum('MX', x[3], 2, x[2], tafUnit);
+    if ((partValue[4] > 0)) {
+      t = _tafqeetOnePart('hndrdsThosndsWordList', partValue[4], 3,
+          partValue[3] + partValue[2], tafUnit);
 
       if ((f == 1)) {
         taf = '$taf و';
@@ -582,99 +578,98 @@ class TafqeetMulti {
       flag = 0;
     }
 
-    if ((x[2] > 0)) {
-      t = _spellNum('onesWordList', x[2], 1, 0, tafUnit);
+    if ((partValue[3] > 0)) {
+      t = _tafqeetOnePart(
+          'hndrdsThosndsWordList', partValue[3], 2, partValue[2], tafUnit);
 
       if ((f == 1)) {
         taf = '$taf و';
       }
 
       taf = taf + t;
-      //!Need fervication
       flag = 1;
-      //!NEED Verfiation
+      f = 1;
+    } else {
+      flag = 0;
+    }
+
+    if ((partValue[2] > 0)) {
+      t = _tafqeetOnePart('onesTensWordList', partValue[2], 1, 0, tafUnit);
+
+      if ((f == 1)) {
+        taf = '$taf و';
+      }
+
+      taf = taf + t;
+      flag = 1;
       f = 1;
     } else if (f == 1) {
       taf = '$taf  ${tafUnit.unit}';
     }
 
     if (f == 1 && tafUnit.country.isNotEmpty && isPartialValue) {
-      taf = _getCountryUnit(x[2], taf, tafUnit.country, tafUnit.unitGender);
+      taf = _getCountryUnit(
+          partValue[2], taf, tafUnit.country, tafUnit.unitGender);
     }
 
-/*
-    if ((x[1] > 0)) {
-      t = _spellNum('MX', x[1], 0, 0, tafUnit,
-          unitPartGender: tafUnit.unitGender);
-
-      if ((f == 1)) {
-        taf = '$taf و';
-      }
-
-      taf = taf + t;
-      flag = 1;
-      f = 1;
-    }
-*/
-    //print(' $am : ${double.tryParse(am)}');
     if ((double.tryParse(am) == 0)) {
       taf = 'صفر ${tafUnit.unit}';
     }
-
-    /*if (x[7] + x[6] + x[5] + x[4] + x[3] + x[2] == 0) {
-      taf = _getCountryUnit(x[1], taf, tafUnit.country, tafUnit.unitGender);
-    }*/
-    //taf = '$justWord $taf $noOtherWord';
 
     return (taf.replaceAll('  ', ' ').replaceAll('  ', ' '));
   }
 
 // ==========
+
   String _getCountryUnit(var amount, String taf, String tafUnitCountry,
       TafqeetUnitGender tafUnitGender) {
     if (tafUnitCountry.isEmpty) return taf;
 
+    String unitCountryLastChar =
+        tafUnitCountry.substring(tafUnitCountry.length - 1);
+    String unitCountryWithoutLastChar =
+        tafUnitCountry.substring(0, tafUnitCountry.length - 1);
     switch (tafUnitGender) {
       case TafqeetUnitGender.feminine:
         if (amount >= 3 && amount <= 10) {
           taf =
-              '$taf ${((tafUnitCountry.substring(tafUnitCountry.length - 1) == 'ة' ? tafUnitCountry : '${tafUnitCountry}ة'))}';
+              '$taf ${((unitCountryLastChar == 'ة' ? tafUnitCountry : '${tafUnitCountry}ة'))}';
         } else if (amount > 10) {
           //   taf = '$taf ${tafUnit.country}اً';
           taf =
-              '$taf ${((tafUnitCountry.substring(tafUnitCountry.length - 1) == 'ة' ? '${tafUnitCountry.substring(0, tafUnitCountry.length - 1)}ةً' : '${tafUnitCountry}ةً'))}';
+              '$taf ${((unitCountryLastChar == 'ة' ? '${unitCountryWithoutLastChar}ةً' : '${tafUnitCountry}ةً'))}';
         } else if (amount == 2) {
           //taf =  '$taf ${tafUnit.country}';
 
           taf =
-              '$taf ${((tafUnitCountry.substring(tafUnitCountry.length - 1) == 'ة' ? '${tafUnitCountry.substring(0, tafUnitCountry.length - 1)}تان' : '${tafUnitCountry}تان'))}';
+              '$taf ${((unitCountryLastChar == 'ة' ? '${unitCountryWithoutLastChar}تان' : '${tafUnitCountry}تان'))}';
         } else if (amount == 1) {
           //taf =  '$taf ${tafUnit.country}';
           taf =
-              '$taf ${((tafUnitCountry.substring(tafUnitCountry.length - 1) == 'ة' ? '${tafUnitCountry}' : '${tafUnitCountry}ة'))}';
+              '$taf ${((unitCountryLastChar == 'ة' ? tafUnitCountry : '${tafUnitCountry}ة'))}';
         } else {
-          taf = '$taf ${tafUnitCountry}';
+          taf = '$taf $tafUnitCountry';
         }
         break;
       case TafqeetUnitGender.masculine:
         if (amount >= 3 && amount <= 10) {
           taf =
-              '$taf ${((tafUnitCountry.substring(tafUnitCountry.length - 1) == 'ة' ? tafUnitCountry : '${tafUnitCountry}ة'))}';
+              '$taf ${((unitCountryLastChar == 'ة' ? tafUnitCountry : '${tafUnitCountry}ة'))}';
         } else if (amount > 10) {
           //   taf = '$taf ${tafUnit.country}اً';
           taf =
-              '$taf ${((tafUnitCountry.substring(tafUnitCountry.length - 1) == 'ة' ? '${tafUnitCountry.substring(0, tafUnitCountry.length - 1)}اً' : '${tafUnitCountry}اً'))}';
+              '$taf ${((unitCountryLastChar == 'ة' ? '${unitCountryWithoutLastChar}اً' : '${tafUnitCountry}اً'))}';
         } else if (amount == 2) {
           //taf =  '$taf ${tafUnit.country}';
 
           taf =
-              '$taf ${((tafUnitCountry.substring(tafUnitCountry.length - 1) == 'ة' ? '${tafUnitCountry.substring(0, tafUnitCountry.length - 1)}ان' : '${tafUnitCountry}ان'))}';
+              '$taf ${((unitCountryLastChar == 'ة' ? '${unitCountryWithoutLastChar}ان' : '${tafUnitCountry}ان'))}';
         } else if (amount == 1) {
           //taf =  '$taf ${tafUnit.country}';
           taf =
-              '$taf ${((tafUnitCountry.substring(tafUnitCountry.length - 1) == 'ة' ? '${tafUnitCountry.substring(0, tafUnitCountry.length - 1)}' : '${tafUnitCountry}'))}';
+              '$taf ${((unitCountryLastChar == 'ة' ? unitCountryWithoutLastChar : tafUnitCountry))}';
         } else {
-          taf = '$taf ${tafUnitCountry}';
+          taf = '$taf $tafUnitCountry';
         }
     }
     return taf;

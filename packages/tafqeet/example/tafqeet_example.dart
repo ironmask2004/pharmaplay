@@ -108,16 +108,16 @@ void main() {
       tafqeetUnitCode: TafqeetUnitCode.saudiArabianRiyal));
 */
   print(tafqeet.tafqeetNumberWithParts(
-      listOfNumberAndParts: [76, 67],
+      listOfNumberAndParts: [479576, 67],
       tafqeetUnitCode: TafqeetUnitCode.syrianPound));
   print(tafqeet.tafqeetNumberWithParts(
-      listOfNumberAndParts: [76, 67],
+      listOfNumberAndParts: [479576, 67],
       tafqeetUnitCode: TafqeetUnitCode.saudiArabianRiyal));
 
   print(tafqeet.tafqeetNumberWithParts(
-      listOfNumberAndParts: [3445785857567673, 16],
+      listOfNumberAndParts: [585890449645464512, 02],
       tafqeetUnitCode: TafqeetUnitCode.syrianPound));
   print(tafqeet.tafqeetNumberWithParts(
-      listOfNumberAndParts: [3445785857567673, 16],
+      listOfNumberAndParts: [2, 62],
       tafqeetUnitCode: TafqeetUnitCode.saudiArabianRiyal));
 }
