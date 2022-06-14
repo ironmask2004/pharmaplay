@@ -7,22 +7,42 @@
 "unitPartGender":"M"}
 */
 enum TafqeetUnitCode {
+  test('TST'),
+
   none('NONE'),
   undefined('UND'),
   undefinedPart('UNDP'),
   userDefined('USRD'),
 
   syrianPound('SYP'),
-  syrianPoundPenny('SYPP'),
+  syrianPoundqirsh('SYPQ'),
+
+  lebanonPound('LBP'),
+  lebanonPoundPenny('LBPP'),
+
+  emiratesDirham('AED'),
+  emiratesDirhamPenny('AEDP'),
 
   unitedStatesDollar('USD'),
   unitedStatesDollarPenny('USDP'),
 
+  egyptianPound('EGP'),
+  egyptianPoundPiastre('EGPP'),
+  egyptianPoundMillieme('EGPM'),
+
+  jordanianDinar('JOD'),
+  jordanianDinardirhams('JODD'), //10 dirham
+  jordanianDinarqirsh('JODQ'), //100 qirsh
+  jordanianDinarFulus('JODF'), //1000 fulus
+
   saudiArabianRiyal('SAR'),
-  saudiArabianRiyalPenny('SARP'),
+  saudiArabianRiyalHalala('SARP'),
 
   kuwaitiDinar('DK'),
-  kuwaitiDinarPenny('DKP'),
+  kuwaitiDinarFulus('DKF'),
+
+  bahrainiDinar('BHD'),
+  bahrainiDinarFulus('BHDF'),
 
   metricTon('MTON'),
   kiloGram('KG'),
@@ -51,8 +71,8 @@ enum TafqeetUnitCode {
 
   //tafqeetUnitCode fromMap(String unitCode) =>
   //   tafqeetUnitCode.values.firstWhere((e) => e.toMap() == unitCode);
-  factory TafqeetUnitCode.fromMap(String x) {
-    return (TafqeetUnitCode.values.firstWhere((e) => e.toMap() == x));
+  factory TafqeetUnitCode.fromMap(TafqeetUnitCode x) {
+    return (x); //(TafqeetUnitCode.values.firstWhere((e) => e.toMap() == x));
   }
 }
 
@@ -72,7 +92,8 @@ enum TafqeetUnitGender {
 
   //tafqeetUnitCode fromMap(String unitCode) =>
   //   tafqeetUnitCode.values.firstWhere((e) => e.toMap() == unitCode);
-  factory TafqeetUnitGender.fromMap(String x) {
-    return (TafqeetUnitGender.values.firstWhere((e) => e.toMap() == x));
+  factory TafqeetUnitGender.fromMap(TafqeetUnitGender x) {
+    return (x);
+    // (TafqeetUnitGender.values.firstWhere((e) => e.toMap() == x));
   }
 }

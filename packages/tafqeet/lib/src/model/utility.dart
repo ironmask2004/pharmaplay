@@ -1,3 +1,8 @@
+import 'package:tafqeet/src/model/tafqeet_unit.dart';
+import 'package:tafqeet/src/model/unit_code.dart';
+
+import 'tafqeet_predefined_units.dart';
+
 RegExp _numeric = RegExp(r'^-?[0-9]+$');
 
 /// check if the string contains only numbers
@@ -82,14 +87,13 @@ List splitUnitValue(num number) {
 }
 
 main() {
-  print(splitUnitValue(1111.33));
-  print(splitUnitValue(0));
-  print(splitUnitValue(-1111.03));
-  print(splitUnitValue(1));
-  print(splitUnitValue(0.9));
-  print(splitUnitValue(0.004));
-  print(splitUnitValue(-1));
-  print(splitUnitValue(0.6));
-  print(splitUnitValue(99.089));
-  print(splitUnitValue(123456789012004));
+  // splitedUnitValue = splitUnitValue(listOfNumberAndParts[i]);
+
+  TafqeetUnit tafunit = TafqeetUnit.fromMap(tafqeetPredefinedUnits.firstWhere(
+      (element) => element['unitCode'] == TafqeetUnitCode.test, orElse: () {
+    return tafqeetPredefinedUnits
+        .firstWhere((e) => e['unitCode'] == TafqeetUnitCode.undefinedPart);
+  }));
+
+  print(tafunit);
 }

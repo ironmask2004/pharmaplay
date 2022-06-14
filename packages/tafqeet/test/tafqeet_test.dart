@@ -33,12 +33,12 @@ void main() {
             tafqeet.tafqeetNumberWithParts(
                 listOfNumberAndParts: [2, 62],
                 tafqeetUnitCode: TafqeetUnitCode.saudiArabianRiyal),
-            'فقط ريالان سعوديان و اثنتان وستون هللةً لاغير');
+            'فقط ريالان سعوديان واثنتان وستون هللةً لاغير');
         expect(
             tafqeet.tafqeetNumberWithParts(
                 listOfNumberAndParts: [0, 62],
                 tafqeetUnitCode: TafqeetUnitCode.saudiArabianRiyal),
-            'فقط  اثنتان وستون هللةً سعوديةً لاغير');
+            'فقط اثنتان وستون هللةً سعوديةً لاغير');
         expect(
             tafqeet.tafqeetNumberWithParts(
                 listOfNumberAndParts: [0.9, 62],
@@ -50,19 +50,19 @@ void main() {
             tafqeet.tafqeetNumberWithParts(
                 listOfNumberAndParts: [23, 2, 59],
                 tafqeetUnitCode: TafqeetUnitCode.hour),
-            'فقط  ثلاث وعشرون ساعةً ودقيقتان و تسع وخمسون ثانيةً لاغير');
+            'فقط ثلاث وعشرون ساعةً ودقيقتان وتسع وخمسون ثانيةً لاغير');
       },
     );
 
     test(
-      'tafqeetNumberWithParts User defiend  "justWord"  and  "noOtherWord" Test',
+      'tafqeetNumberWithParts User defiend "justWord" and "noOtherWord" Test',
       () {
         var tafqeet = Tafqeet();
         expect(
             tafqeet.tafqeetNumberWithParts(
                 listOfNumberAndParts: [23, 2, 59],
                 tafqeetUnitCode: TafqeetUnitCode.hour),
-            'فقط  ثلاث وعشرون ساعةً ودقيقتان و تسع وخمسون ثانيةً لاغير');
+            'فقط ثلاث وعشرون ساعةً ودقيقتان وتسع وخمسون ثانيةً لاغير');
 
         expect(
             tafqeet.tafqeetNumberWithParts(
@@ -71,45 +71,40 @@ void main() {
               justWord: 'الوقت المتوقع هو:',
               noOtherWord: 'بدأً من ساعة الصفر',
             ),
-            'الوقت المتوقع هو:  ثلاث وعشرون ساعةً ودقيقتان و تسع وخمسون ثانيةً بدأً من ساعة الصفر');
+            'الوقت المتوقع هو: ثلاث وعشرون ساعةً ودقيقتان وتسع وخمسون ثانيةً بدأً من ساعة الصفر');
       },
     );
 
     test('tafqeetByUserDefinedUnit Test', () {
       var tafqeet = Tafqeet();
       var number1 = 234234;
-      TafqeetUnit unit1 = TafqeetUnit(
-        unit: 'طنجرة',
-        unitPlural: 'طناجر',
-        unitGender: TafqeetUnitGender.feminine,
-      );
+      var aPotunit = {
+        'unit': 'طنجرة',
+        'unitPlural': 'طناجر',
+        'unitGender': TafqeetUnitGender.feminine
+      };
 
       expect(
           tafqeet.tafqeetByUserDefinedUnit(listOfNumberAndParts: [
-            {number1: unit1}
+            {number1: aPotunit}
           ]),
           'فقط مئتان واربعة وثلاثون الفاً ومئتان واربع وثلاثون طنجرةً لاغير');
 
       var boxesNumber = 234234;
-      TafqeetUnit unitBoxes = TafqeetUnit(
-          unitCode: TafqeetUnitCode.userDefined,
-          country: '',
-          unit: 'صندوق',
-          unitPlural: 'صناديق',
-          unitMaxValue: 0,
-          unitGender: TafqeetUnitGender.masculine,
-          partialUnitCode: TafqeetUnitCode.none);
+      var unitBoxes = {
+        'unit': 'صندوق',
+        'unitPlural': 'صناديق',
+        'unitGender': TafqeetUnitGender.masculine,
+      };
 
       var partsNumber = 11;
 
-      TafqeetUnit partsUnit = TafqeetUnit(
-          unitCode: TafqeetUnitCode.userDefined,
-          country: '',
-          unit: 'قطعة',
-          unitPlural: 'قطع',
-          unitMaxValue: 12,
-          unitGender: TafqeetUnitGender.feminine,
-          partialUnitCode: TafqeetUnitCode.none);
+      var partsUnit = {
+        'unit': 'قطعة',
+        'unitPlural': 'قطع',
+        'unitMaxValue': 12,
+        'unitGender': TafqeetUnitGender.feminine,
+      };
 
       expect(
           tafqeet.tafqeetByUserDefinedUnit(listOfNumberAndParts: [
@@ -124,56 +119,51 @@ void main() {
             {partsNumber: null}
           ]),
           'فقط مئتان واربعة وثلاثون الفاً ومئتان واربعة وثلاثون قلماً واحد عشر جزءاً لاغير');
-      unit1 = TafqeetUnit(
-          unitCode: TafqeetUnitCode.userDefined,
-          country: '',
-          unit: 'بطيخة',
-          unitPlural: 'بطيخات',
-          unitMaxValue: 0,
-          unitGender: TafqeetUnitGender.feminine,
-          partialUnitCode: TafqeetUnitCode.none);
+      var mellonUnit = {
+        'unit': 'بطيخة',
+        'unitPlural': 'بطيخات',
+        'unitGender': TafqeetUnitGender.feminine,
+      };
+
       expect(
           tafqeet.tafqeetByUserDefinedUnit(listOfNumberAndParts: [
-            {1: unit1}
+            {1: mellonUnit}
           ]),
           'فقط بطيخةً واحدة لاغير');
 
       expect(
           tafqeet.tafqeetByUserDefinedUnit(listOfNumberAndParts: [
-            {2: unit1}
+            {2: mellonUnit}
           ]),
           'فقط بطيختان لاغير');
 
       expect(
           tafqeet.tafqeetByUserDefinedUnit(listOfNumberAndParts: [
-            {3: unit1}
+            {3: mellonUnit}
           ]),
-          'فقط  ثلاث بطيخات لاغير');
+          'فقط ثلاث بطيخات لاغير');
 
       // بات تايلدندي - ساتانغ 100
-      var batUnit = TafqeetUnit(
-          unitCode: TafqeetUnitCode.userDefined,
-          country: 'تايلندي',
-          unit: 'بات',
-          unitPlural: 'باتات',
-          unitMaxValue: 100,
-          unitGender: TafqeetUnitGender.masculine,
-          partialUnitCode: TafqeetUnitCode.none);
-      var batPennyUnit = TafqeetUnit(
-          unitCode: TafqeetUnitCode.userDefined,
-          country: 'تايلندي',
-          unit: 'ساتانغ',
-          unitPlural: 'ساتانغات',
-          unitMaxValue: 100,
-          unitGender: TafqeetUnitGender.masculine,
-          partialUnitCode: TafqeetUnitCode.none);
+      var batUnit = {
+        'country': 'تايلندي',
+        'unit': 'بات',
+        'unitPlural': 'باتات',
+        'unitGender': TafqeetUnitGender.masculine,
+      };
+      var batPennyUnit = {
+        'country': 'تايلندي',
+        'unit': 'ساتانغ',
+        'unitPlural': 'ساتانغات',
+        'unitMaxValue': 100,
+        'unitGender': TafqeetUnitGender.masculine,
+      };
 
       expect(
           tafqeet.tafqeetByUserDefinedUnit(listOfNumberAndParts: [
             {3: batUnit},
             {11: batPennyUnit}
           ]),
-          'فقط  ثلاثة باتات تايلندية واحد عشر ساتانغاً لاغير');
+          'فقط ثلاثة باتات تايلندية واحد عشر ساتانغاً لاغير');
     });
   });
 }

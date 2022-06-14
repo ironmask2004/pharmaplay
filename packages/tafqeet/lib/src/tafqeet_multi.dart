@@ -10,7 +10,7 @@ import 'model/tafqeet_unit.dart';
 import 'model/utility.dart';
 
 class Tafqeet {
-  final List<TafqeetUnit> _unitList = tafqeetPredefinedUnits;
+  //final List<Map<String, dynamic>> _PredefinedUnits = tafqeetPredefinedUnits;
 
   String? tafqeetNumberWithParts(
       {required List<num> listOfNumberAndParts,
@@ -33,11 +33,11 @@ class Tafqeet {
     for (int i = 0; i < listLenght; i++) {
       splitedUnitValue = splitUnitValue(listOfNumberAndParts[i]);
 
-      currentUnit = _unitList.firstWhere(
-          (element) => element.unitCode == currentUnitCode, orElse: () {
-        return _unitList
-            .firstWhere((e) => e.unitCode == TafqeetUnitCode.undefinedPart);
-      });
+      currentUnit = TafqeetUnit.fromMap(tafqeetPredefinedUnits.firstWhere(
+          (element) => element['unitCode'] == currentUnitCode, orElse: () {
+        return tafqeetPredefinedUnits
+            .firstWhere((e) => e['unitCode'] == TafqeetUnitCode.undefinedPart);
+      }));
 
       if (splitedUnitValue.length > 2) {
         if (tryTafqeet) {
@@ -56,7 +56,7 @@ class Tafqeet {
           return null;
         } else {
           throw FormatException(
-              '''The value of the parts should not exceed the upper limit of the unit  ${currentUnit.unitCode}    "  
+              '''The value of the parts should not exceed the upper limit of the unit  ${currentUnit.unitCode}    "
             upper limit:  ${currentUnit.unitMaxValue}
             the pass value was: ${splitedUnitValue[1]}  ''');
         }
@@ -73,13 +73,16 @@ class Tafqeet {
                         ? true
                         : false)) ??
                 '');
-        andWord = ' و';
+        andWord = ' و ';
         mainUnitFlag = false;
       }
       currentUnitCode = currentUnit.partialUnitCode;
     }
 
-    tafResult = '$justWord $tafResult $noOtherWord';
+    tafResult = '$justWord $tafResult $noOtherWord'
+        .replaceAll('  ', ' ')
+        .replaceAll('  ', ' ')
+        .replaceAll('و ', 'و');
     return (tafResult);
   }
 
@@ -88,7 +91,7 @@ class Tafqeet {
   ///=====================
 
   String? tafqeetByUserDefinedUnit(
-      {required List<Map<num, TafqeetUnit?>> listOfNumberAndParts,
+      {required List<Map<num, Map<String, dynamic>?>> listOfNumberAndParts,
       String justWord = 'فقط',
       String noOtherWord = 'لاغير',
       bool tryTafqeet = false}) {
@@ -107,12 +110,19 @@ class Tafqeet {
     for (int i = 0; i < listLenght; i++) {
       splitedUnitValue = splitUnitValue(listOfNumberAndParts[i].keys.first);
 
-      currentUnit = listOfNumberAndParts[i].values.first ??
+      currentUnit = TafqeetUnit.fromMap(listOfNumberAndParts[i].values.first ??
           (i == 0
-              ? _unitList
-                  .firstWhere((e) => e.unitCode == TafqeetUnitCode.undefined)
-              : _unitList.firstWhere(
-                  (e) => e.unitCode == TafqeetUnitCode.undefinedPart));
+              ? tafqeetPredefinedUnits
+                  .firstWhere((e) => e['unitCode'] == TafqeetUnitCode.undefined)
+              : tafqeetPredefinedUnits.firstWhere(
+                  (e) => e['unitCode'] == TafqeetUnitCode.undefinedPart)));
+
+      /* currentUnit = TafqeetUnit.fromMap(tafqeetPredefinedUnits.firstWhere(
+          (element) => element['unitCode'] == TafqeetUnitCode.undefined,
+          orElse: () {
+        return tafqeetPredefinedUnits
+            .firstWhere((e) => e['unitCode'] == TafqeetUnitCode.undefinedPart);
+      }));*/
 
       if (splitedUnitValue.length > 2) {
         if (tryTafqeet) {
@@ -131,7 +141,7 @@ class Tafqeet {
           return null;
         } else {
           throw FormatException(
-              '''The value of the parts should not exceed the upper limit of the unit  ${currentUnit.unitCode}    "  
+              '''The value of the parts should not exceed the upper limit of the unit  ${currentUnit.unitCode}    " 
             upper limit:  ${currentUnit.unitMaxValue}
             the pass value was: ${splitedUnitValue[1]}  ''');
         }
@@ -148,12 +158,15 @@ class Tafqeet {
                         ? true
                         : false)) ??
                 '');
-        andWord = ' و';
+        andWord = ' و ';
         mainUnitFlag = false;
       }
     }
 
-    tafResult = '$justWord $tafResult $noOtherWord';
+    tafResult = '$justWord $tafResult $noOtherWord'
+        .replaceAll('  ', ' ')
+        .replaceAll('  ', ' ')
+        .replaceAll('و ', 'و');
     return (tafResult);
   }
 

@@ -64,14 +64,19 @@ class TafqeetUnit extends Equatable {
   }
 
   factory TafqeetUnit.fromMap(Map<String, dynamic> map) {
+    // print(map);
     return TafqeetUnit(
-      unitCode: TafqeetUnitCode.fromMap(map['unitCode']),
-      country: map['country'] ?? '',
+      unitCode:
+          TafqeetUnitCode.fromMap(map['unitCode'] ?? TafqeetUnitCode.none),
+      country: ((map['country'] ?? '').replaceAll(' ', '')).isEmpty
+          ? ''
+          : map['country'] ?? '',
       unit: map['unit'] ?? '',
       unitPlural: map['unitPlural'] ?? '',
       unitGender: TafqeetUnitGender.fromMap(map['unitGender']),
       unitMaxValue: map['unitMaxValue']?.toInt() ?? 0,
-      partialUnitCode: TafqeetUnitCode.fromMap(map['partialUnitCode']),
+      partialUnitCode: TafqeetUnitCode.fromMap(
+          map['partialUnitCode'] ?? TafqeetUnitCode.none),
     );
   }
 
