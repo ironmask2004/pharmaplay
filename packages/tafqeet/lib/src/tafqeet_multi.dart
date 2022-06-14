@@ -291,14 +291,18 @@ countedWordList[1 * 3 + 0 + 1] ------> ريالاً
       ' ',
 
       //'ليرة',
-      ((tafUnit.unit.substring(tafUnit.unit.length - 1) == 'ة'
-          ? '${tafUnit.unit.substring(0, tafUnit.unit.length - 1)}ةً'
-          : '${tafUnit.unit}اً')),
+      tafUnit.unit.isEmpty
+          ? ''
+          : ((tafUnit.unit.substring(tafUnit.unit.length - 1) == 'ة'
+              ? '${tafUnit.unit.substring(0, tafUnit.unit.length - 1)}ةً'
+              : '${tafUnit.unit}اً')),
 
       //'ليرة',
-      ((tafUnit.unit.substring(tafUnit.unit.length - 1) == 'ة'
-          ? '${tafUnit.unit.substring(0, tafUnit.unit.length - 1)}ةً'
-          : '${tafUnit.unit}اً')),
+      tafUnit.unit.isEmpty
+          ? ''
+          : ((tafUnit.unit.substring(tafUnit.unit.length - 1) == 'ة'
+              ? '${tafUnit.unit.substring(0, tafUnit.unit.length - 1)}ةً'
+              : '${tafUnit.unit}اً')),
 
       //'ليرات',
       (tafUnit.unitPlural),
@@ -327,16 +331,23 @@ countedWordList[1 * 3 + 0 + 1] ------> ريالاً
 //    'قرشان',
       ' ',
       //'ليرة واحدة',
-      '${((tafUnit.unit.substring(tafUnit.unit.length - 1) == 'ة' ? '${tafUnit.unit.substring(0, tafUnit.unit.length - 1)}ةً' : '${tafUnit.unit}اً'))}${numGender == TafqeetUnitGender.feminine ? ' واحدة' : ' واحداً'}',
-      //'ليرتان',     // (tafUnit.unitMultiple),
-      (tafUnit.unit.substring(tafUnit.unit.length - 1) == 'ة'
-          ? '${tafUnit.unit.substring(0, tafUnit.unit.length - 1)}تان'
-          : '${tafUnit.unit}ان'),
+      tafUnit.unit.isEmpty
+          ? ''
+          : '${((tafUnit.unit.substring(tafUnit.unit.length - 1) == 'ة' ? '${tafUnit.unit.substring(0, tafUnit.unit.length - 1)}ةً' : '${tafUnit.unit}اً'))}${numGender == TafqeetUnitGender.feminine ? ' واحدة' : ' واحداً'}',
+      //'ليرتان',
+      tafUnit.unit.isEmpty
+          ? ''
+          : // (tafUnit.unitMultiple),
+          (tafUnit.unit.substring(tafUnit.unit.length - 1) == 'ة'
+              ? '${tafUnit.unit.substring(0, tafUnit.unit.length - 1)}تان'
+              : '${tafUnit.unit}ان'),
 
       //'ليرتان',       (tafUnit.unitMultiple),
-      (tafUnit.unit.substring(tafUnit.unit.length - 1) == 'ة'
-          ? '${tafUnit.unit.substring(0, tafUnit.unit.length - 1)}تان'
-          : '${tafUnit.unit}ان'),
+      tafUnit.unit.isEmpty
+          ? ''
+          : (tafUnit.unit.substring(tafUnit.unit.length - 1) == 'ة'
+              ? '${tafUnit.unit.substring(0, tafUnit.unit.length - 1)}تان'
+              : '${tafUnit.unit}ان'),
       'الف',
       'الفان',
       'الفا',
@@ -548,8 +559,8 @@ _tafqeetOnePart(  onesTensWordList, partValue: 389,  partLocation: 1, sumRestPar
     String amount;
 
     TafqeetUnit tafUnit = tafqeetUnit.copyWith(
-      unit: tafqeetUnit.unit.isEmpty ? ' ' : tafqeetUnit.unit,
-      unitPlural: tafqeetUnit.unitPlural.isEmpty ? ' ' : tafqeetUnit.unitPlural,
+      unit: tafqeetUnit.unit.isEmpty ? '' : tafqeetUnit.unit,
+      unitPlural: tafqeetUnit.unitPlural.isEmpty ? '' : tafqeetUnit.unitPlural,
     );
 
     List partValue = [0, 0, 0, 0, 0, 0, 0, 0];

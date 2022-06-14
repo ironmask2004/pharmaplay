@@ -184,7 +184,7 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
     'unitCode': TafqeetUnitCode.euro,
     'country': 'أوربي',
     'unit': 'يورو',
-    'unitPlural': 'يورويات',
+    'unitPlural': 'يوروهات',
     'unitMaxValue': 0,
     'unitGender': TafqeetUnitGender.masculine,
     'partialUnitCode': TafqeetUnitCode.euroCent,
@@ -293,6 +293,25 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
   },
 
   {
+    'unitCode': TafqeetUnitCode.mauritanianOuguiya,
+    'country': 'موريتانية',
+    'unit': 'أوقية',
+    'unitPlural': 'أوقيات',
+    'unitMaxValue': 0,
+    'unitGender': TafqeetUnitGender.feminine,
+    'partialUnitCode': TafqeetUnitCode.mauritanianOuguiyaKhoums
+  },
+  {
+    'unitCode': TafqeetUnitCode.syrianPoundqirsh,
+    'country': 'موريتانية',
+    'unit': 'خمس',
+    'unitPlural': 'أخماس',
+    'unitMaxValue': 5,
+    'unitGender': TafqeetUnitGender.masculine,
+    'partialUnitCode': TafqeetUnitCode.none
+  },
+
+  {
     'unitCode': TafqeetUnitCode.turkishLira,
     'country': 'تركية',
     'unit': 'ليرة',
@@ -376,6 +395,24 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
     'unitGender': TafqeetUnitGender.masculine,
     'partialUnitCode': TafqeetUnitCode.none
   },
+  {
+    'unitCode': TafqeetUnitCode.sudanesePound,
+    'country': 'سوداني',
+    'unit': 'جنيه',
+    'unitPlural': 'جنيهات',
+    'unitMaxValue': 0,
+    'unitGender': TafqeetUnitGender.masculine,
+    'partialUnitCode': TafqeetUnitCode.sudanesePoundQirsh
+  },
+  {
+    'unitCode': TafqeetUnitCode.sudanesePoundQirsh,
+    'country': 'سوداني',
+    'unit': 'قرش',
+    'unitPlural': 'قروش',
+    'unitMaxValue': 100,
+    'unitGender': TafqeetUnitGender.masculine,
+    'partialUnitCode': TafqeetUnitCode.none
+  },
 
   {
     'unitCode': TafqeetUnitCode.jordanianDinar,
@@ -411,6 +448,62 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
     'unit': 'درهم',
     'unitPlural': 'دراهم',
     'unitMaxValue': 10,
+    'unitGender': TafqeetUnitGender.masculine,
+    'partialUnitCode': TafqeetUnitCode.none
+  },
+
+  {
+    'unitCode': TafqeetUnitCode.libyanDinar,
+    'country': 'ليبي',
+    'unit': 'درهم',
+    'unitPlural': 'دراهم',
+    'unitMaxValue': 0,
+    'unitGender': TafqeetUnitGender.masculine,
+    'partialUnitCode': TafqeetUnitCode.libyanDinarDirham
+  },
+  {
+    'unitCode': TafqeetUnitCode.libyanDinarDirham,
+    'country': 'ليبي',
+    'unit': 'درهم',
+    'unitPlural': 'دراهم',
+    'unitMaxValue': 1000,
+    'unitGender': TafqeetUnitGender.masculine,
+    'partialUnitCode': TafqeetUnitCode.none
+  },
+  {
+    'unitCode': TafqeetUnitCode.yemeniRial,
+    'country': 'يمني',
+    'unit': 'ريال',
+    'unitPlural': 'ريالات',
+    'unitMaxValue': 0,
+    'unitGender': TafqeetUnitGender.masculine,
+    'partialUnitCode': TafqeetUnitCode.yemeniRialFils
+  },
+  {
+    'unitCode': TafqeetUnitCode.yemeniRialFils,
+    'country': 'يمني',
+    'unit': 'فلس',
+    'unitPlural': 'فلوس',
+    'unitMaxValue': 100,
+    'unitGender': TafqeetUnitGender.masculine,
+    'partialUnitCode': TafqeetUnitCode.none
+  },
+
+  {
+    'unitCode': TafqeetUnitCode.omaniRial,
+    'country': 'عماني',
+    'unit': 'ريال',
+    'unitPlural': 'ريالات',
+    'unitMaxValue': 0,
+    'unitGender': TafqeetUnitGender.masculine,
+    'partialUnitCode': TafqeetUnitCode.omaniRialBaisa
+  },
+  {
+    'unitCode': TafqeetUnitCode.omaniRialBaisa,
+    'country': 'عماني',
+    'unit': 'بيسة',
+    'unitPlural': 'بيسات',
+    'unitMaxValue': 1000,
     'unitGender': TafqeetUnitGender.masculine,
     'partialUnitCode': TafqeetUnitCode.jordanianDinarqirsh
   },
@@ -522,6 +615,78 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
     'unit': 'فلس',
     'unitPlural': 'فلوس',
     'unitMaxValue': 1000,
+    'unitGender': TafqeetUnitGender.masculine,
+    'partialUnitCode': TafqeetUnitCode.none
+  },
+
+  ///=======
+  ///
+
+  {
+    'unitCode': TafqeetUnitCode.container,
+    'country': '',
+    'unit': 'حاوية',
+    'unitPlural': 'حاويات',
+    'unitMaxValue': 0,
+    'unitGender': TafqeetUnitGender.masculine,
+    'partialUnitCode': TafqeetUnitCode.none
+  },
+  {
+    'unitCode': TafqeetUnitCode.package,
+    'country': '',
+    'unit': 'طرد',
+    'unitPlural': 'طرود',
+    'unitMaxValue': 0,
+    'unitGender': TafqeetUnitGender.masculine,
+    'partialUnitCode': TafqeetUnitCode.none
+  },
+
+  {
+    'unitCode': TafqeetUnitCode.share,
+    'country': '',
+    'unit': 'سهم',
+    'unitPlural': 'أسهم',
+    'unitMaxValue': 0,
+    'unitGender': TafqeetUnitGender.masculine,
+    'partialUnitCode': TafqeetUnitCode.none
+  },
+
+  {
+    'unitCode': TafqeetUnitCode.box,
+    'country': '',
+    'unit': 'صندوق',
+    'unitPlural': 'صناديق',
+    'unitMaxValue': 0,
+    'unitGender': TafqeetUnitGender.masculine,
+    'partialUnitCode': TafqeetUnitCode.none
+  },
+
+  {
+    'unitCode': TafqeetUnitCode.can,
+    'country': '',
+    'unit': 'علبة',
+    'unitPlural': 'علب',
+    'unitMaxValue': 0,
+    'unitGender': TafqeetUnitGender.feminine,
+    'partialUnitCode': TafqeetUnitCode.none
+  },
+
+  {
+    'unitCode': TafqeetUnitCode.kiloMetrePerHour,
+    'country': '',
+    'unit': 'كيلومتر في الساعة',
+    'unitPlural': 'كيلومترات في الساعة',
+    'unitMaxValue': 0,
+    'unitGender': TafqeetUnitGender.masculine,
+    'partialUnitCode': TafqeetUnitCode.none
+  },
+
+  {
+    'unitCode': TafqeetUnitCode.metrePerSecond,
+    'country': '',
+    'unit': 'متر في الثانية',
+    'unitPlural': 'أمتار في الثانية',
+    'unitMaxValue': 0,
     'unitGender': TafqeetUnitGender.masculine,
     'partialUnitCode': TafqeetUnitCode.none
   },

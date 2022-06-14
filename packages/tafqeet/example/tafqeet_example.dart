@@ -133,4 +133,11 @@ void main() {
       listOfNumberAndParts: [3, 3], tafqeetUnitCode: TafqeetUnitCode.euro));
   print(tafqeet.tafqeetNumberWithParts(
       listOfNumberAndParts: [0, 11], tafqeetUnitCode: TafqeetUnitCode.euro));
+
+  print(tafqeet.tafqeetNumberWithParts(
+      listOfNumberAndParts: [13, 13],
+      tafqeetUnitCode: TafqeetUnitCode.kiloMetrePerHour));
+  print(tafqeet.tafqeetNumberWithParts(
+      listOfNumberAndParts: [11],
+      tafqeetUnitCode: TafqeetUnitCode.kiloMetrePerHour));
 }

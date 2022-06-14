@@ -12,6 +12,12 @@ enum TafqeetUnitCode {
   turkishLira('TRY'),
   turkishLiraQirsh('TRYQ'),
 
+  sudanesePound('SDG'),
+  sudanesePoundQirsh('SDGQ'),
+
+  omaniRial('OMR'),
+  omaniRialBaisa('OMR'),
+
   lebanonPound('LBP'),
   lebanonPoundPenny('LBPP'),
 
@@ -36,11 +42,20 @@ enum TafqeetUnitCode {
   kuwaitiDinar('DK'),
   kuwaitiDinarFulus('DKF'),
 
+  libyanDinar('LYD'),
+  libyanDinarDirham('LYDD'),
+
+  mauritanianOuguiya('MRU'),
+  mauritanianOuguiyaKhoums('MRUKH'),
+
   bahrainiDinar('BHD'),
   bahrainiDinarFulus('BHDF'),
 
   tunisianDinar('TD'),
   tunisianDinarMillim('TDM'),
+
+  yemeniRial('YER'),
+  yemeniRialFils('YERF'),
 
   algerianDinar('DZD'),
   algerianDinarCentime('DZDM'),
@@ -76,10 +91,20 @@ enum TafqeetUnitCode {
   centimeter('CM'),
   millimeter('MM'),
 
+  kiloMetrePerHour('KMPH'),
+  metrePerSecond('MPS'),
+
   hour('HR'),
   minute('MIN'),
   second('SEC'),
   millisecond('MSEC'),
+
+  container('CON'),
+  package('PKG'),
+  box('BOX'),
+  can('CAN'),
+
+  share('SHARE'),
   ;
 
   //final int codeIndex;
