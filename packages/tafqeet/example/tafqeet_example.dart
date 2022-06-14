@@ -130,6 +130,7 @@ void main() {
       listOfNumberAndParts: [12, 0, 0, 11],
       tafqeetUnitCode: TafqeetUnitCode.jordanianDinar));
   print(tafqeet.tafqeetNumberWithParts(
-      listOfNumberAndParts: [2334, 7, 45, 44],
-      tafqeetUnitCode: TafqeetUnitCode.jordanianDinar));
+      listOfNumberAndParts: [3, 3], tafqeetUnitCode: TafqeetUnitCode.euro));
+  print(tafqeet.tafqeetNumberWithParts(
+      listOfNumberAndParts: [0, 11], tafqeetUnitCode: TafqeetUnitCode.euro));
 }

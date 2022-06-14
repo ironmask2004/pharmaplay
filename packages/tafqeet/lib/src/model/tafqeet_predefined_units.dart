@@ -162,6 +162,82 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
     'partialUnitCode': TafqeetUnitCode.none
   },
   {
+    'unitCode': TafqeetUnitCode.canadianDollar,
+    'country': 'كندي',
+    'unit': 'دولار',
+    'unitPlural': 'دولارات',
+    'unitMaxValue': 0,
+    'unitGender': TafqeetUnitGender.masculine,
+    'partialUnitCode': TafqeetUnitCode.canadianDollarCent,
+  },
+  {
+    'unitCode': TafqeetUnitCode.canadianDollarCent,
+    'country': 'كندي',
+    'unit': 'سنت',
+    'unitPlural': 'سنتات',
+    'unitMaxValue': 100,
+    'unitGender': TafqeetUnitGender.masculine,
+    'partialUnitCode': TafqeetUnitCode.none
+  },
+
+  {
+    'unitCode': TafqeetUnitCode.euro,
+    'country': 'أوربي',
+    'unit': 'يورو',
+    'unitPlural': 'يورويات',
+    'unitMaxValue': 0,
+    'unitGender': TafqeetUnitGender.masculine,
+    'partialUnitCode': TafqeetUnitCode.euroCent,
+  },
+  {
+    'unitCode': TafqeetUnitCode.euroCent,
+    'country': 'أوربي',
+    'unit': 'سنت',
+    'unitPlural': 'سنتات',
+    'unitMaxValue': 100,
+    'unitGender': TafqeetUnitGender.masculine,
+    'partialUnitCode': TafqeetUnitCode.none
+  },
+
+  {
+    'unitCode': TafqeetUnitCode.australianDollar,
+    'country': 'أسترالي',
+    'unit': 'جنيه',
+    'unitPlural': 'جنيهات',
+    'unitMaxValue': 0,
+    'unitGender': TafqeetUnitGender.masculine,
+    'partialUnitCode': TafqeetUnitCode.australianDollarCent,
+  },
+  {
+    'unitCode': TafqeetUnitCode.australianDollarCent,
+    'country': 'أسترالي',
+    'unit': 'سنت',
+    'unitPlural': 'سنتات',
+    'unitMaxValue': 100,
+    'unitGender': TafqeetUnitGender.masculine,
+    'partialUnitCode': TafqeetUnitCode.none
+  },
+
+  {
+    'unitCode': TafqeetUnitCode.poundSterling,
+    'country': 'أسترليني',
+    'unit': 'جنيه',
+    'unitPlural': 'جنيهات',
+    'unitMaxValue': 0,
+    'unitGender': TafqeetUnitGender.masculine,
+    'partialUnitCode': TafqeetUnitCode.poundSterlingPence,
+  },
+  {
+    'unitCode': TafqeetUnitCode.poundSterlingPence,
+    'country': 'أسترليني',
+    'unit': 'بنس',
+    'unitPlural': 'بنسات',
+    'unitMaxValue': 100,
+    'unitGender': TafqeetUnitGender.masculine,
+    'partialUnitCode': TafqeetUnitCode.none
+  },
+
+  {
     'unitCode': TafqeetUnitCode.kuwaitiDinar,
     'country': 'كويتي',
     'unit': 'دينار',
@@ -215,6 +291,26 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
     'unitGender': TafqeetUnitGender.masculine,
     'partialUnitCode': TafqeetUnitCode.none
   },
+
+  {
+    'unitCode': TafqeetUnitCode.turkishLira,
+    'country': 'تركية',
+    'unit': 'ليرة',
+    'unitPlural': 'ليرات',
+    'unitMaxValue': 0,
+    'unitGender': TafqeetUnitGender.feminine,
+    'partialUnitCode': TafqeetUnitCode.turkishLiraQirsh
+  },
+  {
+    'unitCode': TafqeetUnitCode.turkishLiraQirsh,
+    'country': 'تركية',
+    'unit': 'قرش',
+    'unitPlural': 'قروش',
+    'unitMaxValue': 100,
+    'unitGender': TafqeetUnitGender.masculine,
+    'partialUnitCode': TafqeetUnitCode.none
+  },
+
   {
     'unitCode': TafqeetUnitCode.lebanonPound,
     'country': 'لبنانية',
@@ -288,10 +384,10 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
     'unitPlural': 'دنانير',
     'unitMaxValue': 0,
     'unitGender': TafqeetUnitGender.masculine,
-    'partialUnitCode': TafqeetUnitCode.jordanianDinardirhams
+    'partialUnitCode': TafqeetUnitCode.jordanianDinardirham
   },
   {
-    'unitCode': TafqeetUnitCode.jordanianDinardirhams,
+    'unitCode': TafqeetUnitCode.jordanianDinardirham,
     'country': 'أردني',
     'unit': 'درهم',
     'unitPlural': 'دراهم',
@@ -299,6 +395,26 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
     'unitGender': TafqeetUnitGender.masculine,
     'partialUnitCode': TafqeetUnitCode.jordanianDinarqirsh
   },
+
+  {
+    'unitCode': TafqeetUnitCode.qatariRiyal,
+    'country': 'قطري',
+    'unit': 'ريال',
+    'unitPlural': 'ريالات',
+    'unitMaxValue': 0,
+    'unitGender': TafqeetUnitGender.masculine,
+    'partialUnitCode': TafqeetUnitCode.qatariRiyalDirham
+  },
+  {
+    'unitCode': TafqeetUnitCode.qatariRiyalDirham,
+    'country': 'قطري',
+    'unit': 'درهم',
+    'unitPlural': 'دراهم',
+    'unitMaxValue': 10,
+    'unitGender': TafqeetUnitGender.masculine,
+    'partialUnitCode': TafqeetUnitCode.jordanianDinarqirsh
+  },
+
   {
     'unitCode': TafqeetUnitCode.jordanianDinarqirsh,
     'country': 'أردني',
@@ -329,6 +445,80 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
   {
     'unitCode': TafqeetUnitCode.bahrainiDinarFulus,
     'country': 'بحريني',
+    'unit': 'فلس',
+    'unitPlural': 'فلوس',
+    'unitMaxValue': 1000,
+    'unitGender': TafqeetUnitGender.masculine,
+    'partialUnitCode': TafqeetUnitCode.none
+  },
+
+  {
+    'unitCode': TafqeetUnitCode.tunisianDinar,
+    'country': 'تونسي',
+    'unit': 'دينار',
+    'unitPlural': 'دنانير',
+    'unitMaxValue': 0,
+    'unitGender': TafqeetUnitGender.masculine,
+    'partialUnitCode': TafqeetUnitCode.tunisianDinarMillim
+  },
+  {
+    'unitCode': TafqeetUnitCode.tunisianDinarMillim,
+    'country': 'تونسي',
+    'unit': 'مليم',
+    'unitPlural': 'مليمات',
+    'unitMaxValue': 1000,
+    'unitGender': TafqeetUnitGender.masculine,
+    'partialUnitCode': TafqeetUnitCode.none
+  },
+  {
+    'unitCode': TafqeetUnitCode.algerianDinar,
+    'country': 'جزائري',
+    'unit': 'دينار',
+    'unitPlural': 'دنانير',
+    'unitMaxValue': 0,
+    'unitGender': TafqeetUnitGender.masculine,
+    'partialUnitCode': TafqeetUnitCode.algerianDinarCentime
+  },
+  {
+    'unitCode': TafqeetUnitCode.algerianDinarCentime,
+    'country': 'جزائري',
+    'unit': 'سنتيم',
+    'unitPlural': 'سنتيمات',
+    'unitMaxValue': 100,
+    'unitGender': TafqeetUnitGender.masculine,
+    'partialUnitCode': TafqeetUnitCode.none
+  },
+
+  {
+    'unitCode': TafqeetUnitCode.moroccanDirham,
+    'country': 'مغربي',
+    'unit': 'درهم',
+    'unitPlural': 'دراهم',
+    'unitMaxValue': 0,
+    'unitGender': TafqeetUnitGender.masculine,
+    'partialUnitCode': TafqeetUnitCode.moroccanDirhamCentime
+  },
+  {
+    'unitCode': TafqeetUnitCode.moroccanDirhamCentime,
+    'country': 'مغربي',
+    'unit': 'سنتيم',
+    'unitPlural': 'سنتيمات',
+    'unitMaxValue': 100,
+    'unitGender': TafqeetUnitGender.masculine,
+    'partialUnitCode': TafqeetUnitCode.none
+  },
+  {
+    'unitCode': TafqeetUnitCode.iraqiDinar,
+    'country': 'عراقي',
+    'unit': 'دينار',
+    'unitPlural': 'دنانير',
+    'unitMaxValue': 0,
+    'unitGender': TafqeetUnitGender.masculine,
+    'partialUnitCode': TafqeetUnitCode.iraqiDinarFils
+  },
+  {
+    'unitCode': TafqeetUnitCode.iraqiDinarFils,
+    'country': 'عراقي',
     'unit': 'فلس',
     'unitPlural': 'فلوس',
     'unitMaxValue': 1000,

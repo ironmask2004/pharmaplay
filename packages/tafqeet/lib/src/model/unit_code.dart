@@ -1,21 +1,16 @@
-/* Json UNIT CODE
-{"unitCode":"SYP",
-"country":"سورية","unit":"ليرة",
-"unitMultiple":"ليرتين","unitPlural":"ليرات",
-"unitGender":"F","unitPartDigits":2,"unitPart":"قرشاً",
-"unitPartMultiple":"قرشان","unitPartPlural":"قروش",
-"unitPartGender":"M"}
-*/
 enum TafqeetUnitCode {
   test('TST'),
 
-  none('NONE'),
+  none('NON'),
   undefined('UND'),
   undefinedPart('UNDP'),
   userDefined('USRD'),
 
   syrianPound('SYP'),
   syrianPoundqirsh('SYPQ'),
+
+  turkishLira('TRY'),
+  turkishLiraQirsh('TRYQ'),
 
   lebanonPound('LBP'),
   lebanonPoundPenny('LBPP'),
@@ -31,7 +26,7 @@ enum TafqeetUnitCode {
   egyptianPoundMillieme('EGPM'),
 
   jordanianDinar('JOD'),
-  jordanianDinardirhams('JODD'), //10 dirham
+  jordanianDinardirham('JODD'), //10 dirham
   jordanianDinarqirsh('JODQ'), //100 qirsh
   jordanianDinarFulus('JODF'), //1000 fulus
 
@@ -43,6 +38,32 @@ enum TafqeetUnitCode {
 
   bahrainiDinar('BHD'),
   bahrainiDinarFulus('BHDF'),
+
+  tunisianDinar('TD'),
+  tunisianDinarMillim('TDM'),
+
+  algerianDinar('DZD'),
+  algerianDinarCentime('DZDM'),
+
+  iraqiDinar('IQD'),
+  iraqiDinarFils('IQDF'),
+
+  euro('EUR'),
+  euroCent('EURC'),
+
+  australianDollar('AUSD'),
+  australianDollarCent('AUSC'),
+  canadianDollar('CAD'),
+  canadianDollarCent('CADC'),
+
+  poundSterling('GBP'),
+  poundSterlingPence('GBPP'),
+
+  moroccanDirham('MAD'),
+  moroccanDirhamCentime('MADC'),
+
+  qatariRiyal('QR'),
+  qatariRiyalDirham('QRD'),
 
   metricTon('MTON'),
   kiloGram('KG'),
