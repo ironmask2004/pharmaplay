@@ -11,10 +11,11 @@ void main() {
       tafqeetUnitCode: TafqeetUnitCode.hour));
 
   print(tafqeet.tafqeetNumberWithParts(
-    listOfNumberAndParts: [23, 2, 59],
+    listOfNumberAndParts: [23, 2, 44],
     tafqeetUnitCode: TafqeetUnitCode.hour,
     justWord: 'الوقت المتوقع هو:',
     noOtherWord: 'بدءً من ساعة الصفر',
+    tryTafqeet: true,
   ));
 
   print(tafqeet.tafqeetNumberWithParts(
@@ -28,22 +29,20 @@ void main() {
       tafqeetUnitCode: TafqeetUnitCode.saudiArabianRiyal));
 
   // بات تايلدندي - ساتانغ 100
-  var batUnit = TafqeetUnit(
-      unitCode: TafqeetUnitCode.userDefined,
-      country: 'تايلندي',
-      unit: 'بات',
-      unitPlural: 'باتات',
-      unitMaxValue: 100,
-      unitGender: TafqeetUnitGender.masculine,
-      partialUnitCode: TafqeetUnitCode.none);
-  var batPennyUnit = TafqeetUnit(
-      unitCode: TafqeetUnitCode.userDefined,
-      country: 'تايلندي',
-      unit: 'ساتانغ',
-      unitPlural: 'ساتانغات',
-      unitMaxValue: 100,
-      unitGender: TafqeetUnitGender.masculine,
-      partialUnitCode: TafqeetUnitCode.none);
+  var batUnit = {
+    'country': 'تايلندي',
+    'unit': 'بات',
+    'unitPlural': 'باتات',
+    'unitMaxValue': 100,
+    'unitGender': TafqeetUnitGender.masculine,
+  };
+  var batPennyUnit = {
+    'country': 'تايلندي',
+    'unit': 'ساتانغ',
+    'unitPlural': 'ساتانغات',
+    'unitMaxValue': 100,
+    'unitGender': TafqeetUnitGender.masculine,
+  };
 
   print(tafqeet.tafqeetByUserDefinedUnit(listOfNumberAndParts: [
     {3: batUnit},
@@ -55,25 +54,22 @@ void main() {
   ]));
 
   var number1 = 13;
-  TafqeetUnit unit1 = TafqeetUnit(
-    unit: 'طنجرة',
-    unitPlural: 'طناجر',
-    unitGender: TafqeetUnitGender.feminine,
-  );
+  var unit1 = {
+    'unit': 'طنجرة',
+    'unitPlural': 'طناجر',
+    'unitGender': TafqeetUnitGender.feminine
+  };
 
   print(tafqeet.tafqeetByUserDefinedUnit(listOfNumberAndParts: [
     {number1: unit1}
   ]));
 
   number1 = 1;
-  unit1 = TafqeetUnit(
-      unitCode: TafqeetUnitCode.userDefined,
-      country: '',
-      unit: 'بطيخة',
-      unitPlural: 'بطيخات',
-      unitMaxValue: 0,
-      unitGender: TafqeetUnitGender.feminine,
-      partialUnitCode: TafqeetUnitCode.none);
+  unit1 = {
+    'unit': 'بطيخة',
+    'unitPlural': 'بطيخات',
+    'unitGender': TafqeetUnitGender.feminine,
+  };
 
   print(tafqeet.tafqeetByUserDefinedUnit(listOfNumberAndParts: [
     {number1: unit1}
@@ -92,25 +88,27 @@ void main() {
   ]));
 
   var boxesNumber = 234234;
-  TafqeetUnit unitBoxes = TafqeetUnit(
-      unitCode: TafqeetUnitCode.userDefined,
-      country: '',
-      unit: 'صندوق',
-      unitPlural: 'صناديق',
-      unitMaxValue: 0,
-      unitGender: TafqeetUnitGender.masculine,
-      partialUnitCode: TafqeetUnitCode.none);
+  var unitBoxes = {
+    'unitCode': TafqeetUnitCode.userDefined,
+    'country': '',
+    'unit': 'صندوق',
+    'unitPlural': 'صناديق',
+    'unitMaxValue': 0,
+    'unitGender': TafqeetUnitGender.masculine,
+    'partialUnitCode': TafqeetUnitCode.none
+  };
 
   var partsNumber = 11;
 
-  TafqeetUnit partsUnit = TafqeetUnit(
-      unitCode: TafqeetUnitCode.userDefined,
-      country: '',
-      unit: 'قطعة',
-      unitPlural: 'قطع',
-      unitMaxValue: 12,
-      unitGender: TafqeetUnitGender.feminine,
-      partialUnitCode: TafqeetUnitCode.none);
+  var partsUnit = {
+    'unitCode': TafqeetUnitCode.userDefined,
+    'country': '',
+    'unit': 'قطعة',
+    'unitPlural': 'قطع',
+    'unitMaxValue': 12,
+    'unitGender': TafqeetUnitGender.feminine,
+    'partialUnitCode': TafqeetUnitCode.none
+  };
 
   print(tafqeet.tafqeetByUserDefinedUnit(listOfNumberAndParts: [
     {boxesNumber: unitBoxes},
@@ -121,4 +119,17 @@ void main() {
     {boxesNumber: null},
     {partsNumber: null}
   ]));
+
+  print(tafqeet.tafqeetNumberWithParts(
+      listOfNumberAndParts: [2, 2, 0, 300],
+      tafqeetUnitCode: TafqeetUnitCode.jordanianDinar));
+  print(tafqeet.tafqeetNumberWithParts(
+      listOfNumberAndParts: [0, 0, 2, 22],
+      tafqeetUnitCode: TafqeetUnitCode.jordanianDinar));
+  print(tafqeet.tafqeetNumberWithParts(
+      listOfNumberAndParts: [12, 0, 0, 11],
+      tafqeetUnitCode: TafqeetUnitCode.jordanianDinar));
+  print(tafqeet.tafqeetNumberWithParts(
+      listOfNumberAndParts: [2334, 7, 45, 44],
+      tafqeetUnitCode: TafqeetUnitCode.jordanianDinar));
 }
