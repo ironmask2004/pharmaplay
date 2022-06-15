@@ -8,7 +8,7 @@
             "name": "tafqeet",
             "request": "launch",
             "type": "dart",
-            "program": "example/tafqeet_example.dart"
+            "program": "example/dart_tafqeet_test/tafqeet_example.dart"
         }
     ]
 }

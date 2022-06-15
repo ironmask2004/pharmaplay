@@ -24,6 +24,15 @@ void main() {
       expect(splitUnitValue(123456789012004), [1, 123456789012004]);
     });
 
+    test('tafqeet 0 Number  Test', () {
+      var tafqeet = Tafqeet();
+
+      expect(
+          tafqeet.tafqeetNumberWithParts(
+              listOfNumberAndParts: [0], tafqeetUnitCode: TafqeetUnitCode.none),
+          'فقط صفر لاغير');
+    });
+
     test(
       'tafqeetNumberWithParts Test',
       () {
@@ -72,9 +81,55 @@ void main() {
               noOtherWord: 'بدأً من ساعة الصفر',
             ),
             'الوقت المتوقع هو: ثلاث وعشرون ساعةً ودقيقتان وتسع وخمسون ثانيةً بدأً من ساعة الصفر');
+
+        expect(
+            tafqeet.tafqeetNumberWithParts(
+                listOfNumberAndParts: [1],
+                tafqeetUnitCode: TafqeetUnitCode.percent),
+            'فقط واحد بالمئة لاغير');
+        expect(
+            tafqeet.tafqeetNumberWithParts(
+                listOfNumberAndParts: [2],
+                tafqeetUnitCode: TafqeetUnitCode.percent),
+            'فقط إثنان بالمئة لاغير');
+
+        expect(
+            tafqeet.tafqeetNumberWithParts(
+                listOfNumberAndParts: [3],
+                tafqeetUnitCode: TafqeetUnitCode.percent),
+            'فقط ثلاثة بالمئة لاغير');
       },
     );
 
+    test(
+      'TafqeetUnitGender.neutral  Test',
+      () {
+        var tafqeet = Tafqeet();
+
+        expect(
+            tafqeet.tafqeetNumberWithParts(
+                listOfNumberAndParts: [1],
+                tafqeetUnitCode: TafqeetUnitCode.percent),
+            'فقط واحد بالمئة لاغير');
+        expect(
+            tafqeet.tafqeetNumberWithParts(
+                listOfNumberAndParts: [2],
+                tafqeetUnitCode: TafqeetUnitCode.percent),
+            'فقط إثنان بالمئة لاغير');
+
+        expect(
+            tafqeet.tafqeetNumberWithParts(
+                listOfNumberAndParts: [3],
+                tafqeetUnitCode: TafqeetUnitCode.percent),
+            'فقط ثلاثة بالمئة لاغير');
+
+        expect(
+            tafqeet.tafqeetNumberWithParts(
+                listOfNumberAndParts: [12345689],
+                tafqeetUnitCode: TafqeetUnitCode.percent),
+            'فقط اثنا عشر مليوناً وثلاثمائة وخمسة واربعون الفاً وستمائة وتسعة وثمانون بالمئة لاغير');
+      },
+    );
     test('tafqeetByUserDefinedUnit Test', () {
       var tafqeet = Tafqeet();
       var number1 = 234234;
@@ -118,7 +173,7 @@ void main() {
             {boxesNumber: null},
             {partsNumber: null}
           ]),
-          'فقط مئتان واربعة وثلاثون الفاً ومئتان واربعة وثلاثون قلماً واحد عشر جزءاً لاغير');
+          'فقط مئتان واربعة وثلاثون الفاً ومئتان واربعة وثلاثون قلماً واحد عشر جزءً لاغير');
       var mellonUnit = {
         'unit': 'بطيخة',
         'unitPlural': 'بطيخات',
@@ -157,6 +212,11 @@ void main() {
         'unitMaxValue': 100,
         'unitGender': TafqeetUnitGender.masculine,
       };
+/*
+فقط إثنان بالمئان لاغير
+فقط واحد بالمئ لاغير
+
+*/
 
       expect(
           tafqeet.tafqeetByUserDefinedUnit(listOfNumberAndParts: [

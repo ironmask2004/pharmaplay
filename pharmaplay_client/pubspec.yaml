@@ -31,6 +31,10 @@ dependencies:
   user_repository:
     path: ../packages/user_repository
 
+
+/home/kflihan/AndroidStudioProjects/pharmaplay/packages/pharma_shared_models/
+/home/kflihan/AndroidStudioProjects/pharmaplay/pharmaplay_client/
+
 dev_dependencies:
   bloc: ^8.0.1
   bloc_concurrency: ^0.2.0

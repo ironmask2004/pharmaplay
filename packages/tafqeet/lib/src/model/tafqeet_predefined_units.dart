@@ -3,12 +3,21 @@ import 'unit_code.dart';
 
 const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
   {
+    'unitCode': TafqeetUnitCode.once,
+    'comprehensiveUnit': '',
+    'unit': 'مرّة',
+    'unitPlural': 'مرّات',
+    'unitMaxValue': 0,
+    'unitGender': TafqeetUnitGender.feminine,
+    'partialUnitCode': TafqeetUnitCode.none,
+  },
+  {
     'unitCode': TafqeetUnitCode.none,
     'comprehensiveUnit': '',
     'unit': '',
     'unitPlural': '',
     'unitMaxValue': 0,
-    'unitGender': TafqeetUnitGender.masculine,
+    'unitGender': TafqeetUnitGender.neutral,
     'partialUnitCode': TafqeetUnitCode.none,
   },
   {
@@ -147,7 +156,7 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
   {
     'unitCode': TafqeetUnitCode.centimeter2,
     'comprehensiveUnit': 'مربع',
-    'unit': 'سنتميتر ',
+    'unit': 'سنتميتر',
     'unitPlural': 'سنتيمترات',
     'unitMaxValue': 100,
     'unitGender': TafqeetUnitGender.masculine,
@@ -333,6 +342,25 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
     'unit': 'سنت',
     'unitPlural': 'سنتات',
     'unitMaxValue': 100,
+    'unitGender': TafqeetUnitGender.masculine,
+    'partialUnitCode': TafqeetUnitCode.none
+  },
+
+  {
+    'unitCode': TafqeetUnitCode.bitcoin,
+    'comprehensiveUnit': '',
+    'unit': 'بيتكوين',
+    'unitPlural': 'بيتكوينات',
+    'unitMaxValue': 0,
+    'unitGender': TafqeetUnitGender.masculine,
+    'partialUnitCode': TafqeetUnitCode.bitcoinSatoshi,
+  },
+  {
+    'unitCode': TafqeetUnitCode.bitcoinSatoshi,
+    'comprehensiveUnit': '',
+    'unit': 'سيتوشي',
+    'unitPlural': 'سيتوشيات',
+    'unitMaxValue': 100000000,
     'unitGender': TafqeetUnitGender.masculine,
     'partialUnitCode': TafqeetUnitCode.none
   },
@@ -735,6 +763,18 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
     'unitPlural': 'فلوس',
     'unitMaxValue': 1000,
     'unitGender': TafqeetUnitGender.masculine,
+    'partialUnitCode': TafqeetUnitCode.none
+  },
+
+  //====
+
+  {
+    'unitCode': TafqeetUnitCode.percent,
+    'comprehensiveUnit': 'بالمئة',
+    'unit': '',
+    'unitPlural': '',
+    'unitMaxValue': 0,
+    'unitGender': TafqeetUnitGender.neutral,
     'partialUnitCode': TafqeetUnitCode.none
   },
 

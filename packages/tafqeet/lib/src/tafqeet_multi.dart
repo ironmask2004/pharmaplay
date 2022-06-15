@@ -1,6 +1,6 @@
-import 'dart:convert';
-import 'dart:ffi';
-import 'dart:typed_data';
+//import 'dart:convert';
+//import 'dart:ffi';
+//import 'dart:typed_data';
 
 //import 'package:tafqeet/tafqeet.dart';
 
@@ -63,7 +63,8 @@ class Tafqeet {
       }
       // currentUnitValue = splitedUnitValue[1];
 
-      if (splitedUnitValue[1] != 0) {
+      if ((splitedUnitValue[1] != 0) ||
+          (splitedUnitValue[1] == 0 && listLenght == 1)) {
         tafResult = tafResult +
             andWord +
             (_getTafqeet(
@@ -79,7 +80,6 @@ class Tafqeet {
       }
       currentUnitCode = currentUnit.partialUnitCode;
     }
-
     tafResult = '$justWord $tafResult $noOtherWord'
         .replaceAll('  ', ' ')
         .replaceAll('  ', ' ')
@@ -106,8 +106,6 @@ class Tafqeet {
     bool mainUnitFlag = true;
     String tafResult = '';
     int listLenght = listOfNumberAndParts.length;
-    //num previousValueToRound = 0;
-
     for (int i = 0; i < listLenght; i++) {
       splitedUnitValue = splitUnitValue(listOfNumberAndParts[i].keys.first);
 
@@ -117,13 +115,6 @@ class Tafqeet {
                   .firstWhere((e) => e['unitCode'] == TafqeetUnitCode.undefined)
               : tafqeetPredefinedUnits.firstWhere(
                   (e) => e['unitCode'] == TafqeetUnitCode.undefinedPart)));
-
-      /* currentUnit = TafqeetUnit.fromMap(tafqeetPredefinedUnits.firstWhere(
-          (element) => element['unitCode'] == TafqeetUnitCode.undefined,
-          orElse: () {
-        return tafqeetPredefinedUnits
-            .firstWhere((e) => e['unitCode'] == TafqeetUnitCode.undefinedPart);
-      }));*/
 
       if (splitedUnitValue.length > 2) {
         if (tryTafqeet) {
@@ -149,7 +140,8 @@ class Tafqeet {
       }
       // currentUnitValue = splitedUnitValue[1];
 
-      if (splitedUnitValue[1] != 0) {
+      if ((splitedUnitValue[1] != 0) ||
+          (splitedUnitValue[1] == 0 && listLenght == 1)) {
         tafResult = tafResult +
             andWord +
             (_getTafqeet(
@@ -164,7 +156,6 @@ class Tafqeet {
         mainUnitFlag = false;
       }
     }
-
     tafResult = '$justWord $tafResult $noOtherWord'
         .replaceAll('  ', ' ')
         .replaceAll('  ', ' ')
@@ -297,15 +288,18 @@ countedWordList[1 * 3 + 0 + 1] ------> ريالاً
           ? ''
           : ((tafUnit.unit.substring(tafUnit.unit.length - 1) == 'ة'
               ? '${tafUnit.unit.substring(0, tafUnit.unit.length - 1)}ةً'
-              : '${tafUnit.unit}اً')),
+              : ((tafUnit.unit.substring(tafUnit.unit.length - 1) == 'ء'
+                  ? '${tafUnit.unit.substring(0, tafUnit.unit.length - 1)}ءً'
+                  : '${tafUnit.unit}اً')))),
 
       //'ليرة',
       tafUnit.unit.isEmpty
-          ? ''
+          ? 'واحد'
           : ((tafUnit.unit.substring(tafUnit.unit.length - 1) == 'ة'
               ? '${tafUnit.unit.substring(0, tafUnit.unit.length - 1)}ةً'
-              : '${tafUnit.unit}اً')),
-
+              : ((tafUnit.unit.substring(tafUnit.unit.length - 1) == 'ء'
+                  ? '${tafUnit.unit.substring(0, tafUnit.unit.length - 1)}ءً'
+                  : '${tafUnit.unit}اً')))),
       //'ليرات',
       (tafUnit.unitPlural),
       'الف',
@@ -334,11 +328,11 @@ countedWordList[1 * 3 + 0 + 1] ------> ريالاً
       ' ',
       //'ليرة واحدة',
       tafUnit.unit.isEmpty
-          ? ''
+          ? 'واحد'
           : '${((tafUnit.unit.substring(tafUnit.unit.length - 1) == 'ة' ? '${tafUnit.unit.substring(0, tafUnit.unit.length - 1)}ةً' : '${tafUnit.unit}اً'))}${numGender == TafqeetUnitGender.feminine ? ' واحدة' : ' واحداً'}',
       //'ليرتان',
       tafUnit.unit.isEmpty
-          ? ''
+          ? 'إثنان'
           : // (tafUnit.unitMultiple),
           (tafUnit.unit.substring(tafUnit.unit.length - 1) == 'ة'
               ? '${tafUnit.unit.substring(0, tafUnit.unit.length - 1)}تان'
@@ -346,7 +340,7 @@ countedWordList[1 * 3 + 0 + 1] ------> ريالاً
 
       //'ليرتان',       (tafUnit.unitMultiple),
       tafUnit.unit.isEmpty
-          ? ''
+          ? 'إثنان'
           : (tafUnit.unit.substring(tafUnit.unit.length - 1) == 'ة'
               ? '${tafUnit.unit.substring(0, tafUnit.unit.length - 1)}تان'
               : '${tafUnit.unit}ان'),
@@ -714,6 +708,10 @@ _tafqeetOnePart(  onesTensWordList, partValue: 389,  partLocation: 1, sumRestPar
     String unitcomprehensiveUnitWithoutLastChar = tafUnitcomprehensiveUnit
         .substring(0, tafUnitcomprehensiveUnit.length - 1);
     switch (tafUnitGender) {
+      case TafqeetUnitGender.neutral:
+        tafResult = '$tafResult $tafUnitcomprehensiveUnit';
+        break;
+
       case TafqeetUnitGender.feminine:
         if (amount >= 3 && amount <= 10) {
           tafResult =

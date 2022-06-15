@@ -1,6 +1,6 @@
 enum TafqeetUnitCode {
   test('TST'),
-
+  once('once'),
   none('NON'),
   undefined('UND'),
   undefinedPart('UNDP'),
@@ -77,6 +77,9 @@ enum TafqeetUnitCode {
   moroccanDirham('MAD'),
   moroccanDirhamCentime('MADC'),
 
+  bitcoin('BITC'),
+  bitcoinSatoshi('BITCS'), // 100000000
+
   qatariRiyal('QR'),
   qatariRiyalDirham('QRD'),
   mile('MI'),
@@ -94,6 +97,7 @@ enum TafqeetUnitCode {
   gram('GRAM'),
 
   ounce('OZ'),
+  percent('PCT'),
 
   kiloMetre2('KM2'),
   kiloMetre('KM'),
@@ -140,6 +144,7 @@ enum TafqeetUnitCode {
 //Determine if the number is masculine or feminine
 enum TafqeetUnitGender {
   masculine('M'),
+  neutral('N'),
   feminine('F');
 
   //final int codeIndex;

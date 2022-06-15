@@ -1,11 +1,10 @@
 import 'dart:ffi';
 
-import 'package:tafqeet/src/model/tafqeet_unit.dart';
 import 'package:tafqeet/tafqeet.dart';
 
 void main() {
   var tafqeet = Tafqeet();
-
+/*
   print(tafqeet.tafqeetNumberWithParts(
       listOfNumberAndParts: [23, 2, 59],
       tafqeetUnitCode: TafqeetUnitCode.hour));
@@ -127,24 +126,50 @@ void main() {
       listOfNumberAndParts: [0, 0, 2, 22],
       tafqeetUnitCode: TafqeetUnitCode.jordanianDinar));
   print(tafqeet.tafqeetNumberWithParts(
-      listOfNumberAndParts: [2], tafqeetUnitCode: TafqeetUnitCode.kiloGram));
+      listOfNumberAndParts: [2], tafqeetUnitCode: TafqeetUnitCode.kiloMetre2));
 
   print(tafqeet.tafqeetNumberWithParts(
-      listOfNumberAndParts: [33], tafqeetUnitCode: TafqeetUnitCode.gram));
+      listOfNumberAndParts: [12], tafqeetUnitCode: TafqeetUnitCode.kiloMetre2));
 
   print(tafqeet.tafqeetNumberWithParts(
-      listOfNumberAndParts: [213, 45],
-      tafqeetUnitCode: TafqeetUnitCode.kiloGram));
+      listOfNumberAndParts: [11], tafqeetUnitCode: TafqeetUnitCode.kiloMetre2));
 
   print(tafqeet.tafqeetNumberWithParts(
-      listOfNumberAndParts: [33], tafqeetUnitCode: TafqeetUnitCode.gram));
+      listOfNumberAndParts: [353],
+      tafqeetUnitCode: TafqeetUnitCode.kiloMetre2));
 
   print(tafqeet.tafqeetNumberWithParts(
-      listOfNumberAndParts: [2], tafqeetUnitCode: TafqeetUnitCode.kiloGram));
+      listOfNumberAndParts: [3], tafqeetUnitCode: TafqeetUnitCode.kiloMetre2));
 
   print(tafqeet.tafqeetNumberWithParts(
-      listOfNumberAndParts: [13, 8],
-      tafqeetUnitCode: TafqeetUnitCode.kiloGram));
+      listOfNumberAndParts: [2], tafqeetUnitCode: TafqeetUnitCode.kiloMetre2));
   print(tafqeet.tafqeetNumberWithParts(
-      listOfNumberAndParts: [3], tafqeetUnitCode: TafqeetUnitCode.kiloGram));
+      listOfNumberAndParts: [15445, 13],
+      tafqeetUnitCode: TafqeetUnitCode.kiloMetre2));
+  print(tafqeet.tafqeetNumberWithParts(
+      listOfNumberAndParts: [45645],
+      tafqeetUnitCode: TafqeetUnitCode.kiloMetre2));
+
+  print(tafqeet.tafqeetNumberWithParts(
+      listOfNumberAndParts: [12], tafqeetUnitCode: TafqeetUnitCode.kiloMetre2));
+
+  print(tafqeet.tafqeetNumberWithParts(
+      listOfNumberAndParts: [11], tafqeetUnitCode: TafqeetUnitCode.kiloMetre2));
+
+  print(tafqeet.tafqeetNumberWithParts(
+      listOfNumberAndParts: [353],
+      tafqeetUnitCode: TafqeetUnitCode.kiloMetre2));
+
+  print(tafqeet.tafqeetNumberWithParts(
+      listOfNumberAndParts: [3], tafqeetUnitCode: TafqeetUnitCode.kiloMetre2));
+
+  print(tafqeet.tafqeetNumberWithParts(
+      listOfNumberAndParts: [2], tafqeetUnitCode: TafqeetUnitCode.kiloMetre2));
+  print(tafqeet.tafqeetNumberWithParts(
+      listOfNumberAndParts: [0, 0, 1],
+      tafqeetUnitCode: TafqeetUnitCode.kiloMetre2));
+      */
+
+  print(tafqeet.tafqeetNumberWithParts(
+      listOfNumberAndParts: [0], tafqeetUnitCode: TafqeetUnitCode.kiloMetre2));
 }
