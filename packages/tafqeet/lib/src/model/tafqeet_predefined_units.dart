@@ -4,7 +4,7 @@ import 'unit_code.dart';
 const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
   {
     'unitCode': TafqeetUnitCode.none,
-    'country': '',
+    'comprehensiveUnit': '',
     'unit': '',
     'unitPlural': '',
     'unitMaxValue': 0,
@@ -13,7 +13,7 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
   },
   {
     'unitCode': TafqeetUnitCode.undefined,
-    'country': '',
+    'comprehensiveUnit': '',
     'unit': 'قلم',
     'unitPlural': 'أٌقلام',
     'unitMaxValue': 0,
@@ -22,7 +22,7 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
   },
   {
     'unitCode': TafqeetUnitCode.undefinedPart,
-    'country': '',
+    'comprehensiveUnit': '',
     'unit': 'جزء',
     'unitPlural': 'أجزاء',
     'unitMaxValue': 0,
@@ -33,7 +33,7 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
   // ========  weight Units
   {
     'unitCode': TafqeetUnitCode.metricTon,
-    'country': '',
+    'comprehensiveUnit': '',
     'unit': 'طن',
     'unitPlural': 'أطنان',
     'unitMaxValue': 0,
@@ -42,7 +42,7 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
   },
   {
     'unitCode': TafqeetUnitCode.kiloGram,
-    'country': '',
+    'comprehensiveUnit': '',
     'unit': 'كيلو غرام',
     'unitPlural': 'كيلو غرامات',
     'unitMaxValue': 1000,
@@ -51,7 +51,7 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
   },
   {
     'unitCode': TafqeetUnitCode.gram,
-    'country': '',
+    'comprehensiveUnit': '',
     'unit': 'غرام',
     'unitPlural': 'غرامات',
     'unitMaxValue': 1000,
@@ -60,7 +60,7 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
   },
   {
     'unitCode': TafqeetUnitCode.ounce,
-    'country': '',
+    'comprehensiveUnit': '',
     'unit': 'أونصة',
     'unitPlural': 'أونصات',
     'unitMaxValue': 0,
@@ -71,7 +71,7 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
   //====== Units of times
   {
     'unitCode': TafqeetUnitCode.hour,
-    'country': '',
+    'comprehensiveUnit': '',
     'unit': 'ساعة',
     'unitPlural': 'ساعات',
     'unitMaxValue': 0,
@@ -79,7 +79,7 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
     'partialUnitCode': TafqeetUnitCode.minute
   },
   {
-    'country': '',
+    'comprehensiveUnit': '',
     'unit': 'دقيقة',
     'unitPlural': 'دقائق',
     'unitMaxValue': 60,
@@ -89,7 +89,7 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
   },
   {
     'unitCode': TafqeetUnitCode.second,
-    'country': '',
+    'comprehensiveUnit': '',
     'unit': 'ثانية',
     'unitPlural': 'ثواني',
     'unitMaxValue': 60,
@@ -98,9 +98,9 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
   },
   {
     'unitCode': TafqeetUnitCode.millisecond,
-    'country': '',
-    'unit': 'ميللي ثانية',
-    'unitPlural': 'ميللي ثواني',
+    'comprehensiveUnit': '',
+    'unit': 'ميلي ثانية',
+    'unitPlural': 'ميلي ثواني',
     'unitMaxValue': 60,
     'unitGender': TafqeetUnitGender.feminine,
     'partialUnitCode': TafqeetUnitCode.none,
@@ -108,16 +108,26 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
   //=============== Units of  distances and lengths
   {
     'unitCode': TafqeetUnitCode.kiloMetre,
-    'country': '',
+    'comprehensiveUnit': '',
     'unit': 'كيلو متر',
     'unitPlural': 'كيلو مترات',
     'unitMaxValue': 0,
     'unitGender': TafqeetUnitGender.masculine,
     'partialUnitCode': TafqeetUnitCode.metre,
   },
+
+  {
+    'unitCode': TafqeetUnitCode.kiloMetre2,
+    'comprehensiveUnit': 'مربع',
+    'unit': 'كيلو متر',
+    'unitPlural': 'كيلو مترات',
+    'unitMaxValue': 0,
+    'unitGender': TafqeetUnitGender.masculine,
+    'partialUnitCode': TafqeetUnitCode.metre2,
+  },
   {
     'unitCode': TafqeetUnitCode.metre,
-    'country': '',
+    'comprehensiveUnit': '',
     'unit': 'متر',
     'unitPlural': 'امتار',
     'unitMaxValue': 1000,
@@ -125,19 +135,107 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
     'partialUnitCode': TafqeetUnitCode.centimeter
   },
   {
+    'unitCode': TafqeetUnitCode.metre2,
+    'comprehensiveUnit': 'مربع',
+    'unit': 'متر',
+    'unitPlural': 'امتار',
+    'unitMaxValue': 1000,
+    'unitGender': TafqeetUnitGender.masculine,
+    'partialUnitCode': TafqeetUnitCode.centimeter2
+  },
+
+  {
+    'unitCode': TafqeetUnitCode.centimeter2,
+    'comprehensiveUnit': 'مربع',
+    'unit': 'سنتميتر ',
+    'unitPlural': 'سنتيمترات',
+    'unitMaxValue': 100,
+    'unitGender': TafqeetUnitGender.masculine,
+    'partialUnitCode': TafqeetUnitCode.milliMeter2
+  },
+
+  {
+    'unitCode': TafqeetUnitCode.milliMeter2,
+    'comprehensiveUnit': 'مربع',
+    'unit': 'ميلي',
+    'unitPlural': 'ميليات',
+    'unitMaxValue': 10,
+    'unitGender': TafqeetUnitGender.masculine,
+    'partialUnitCode': TafqeetUnitCode.none
+  },
+  {
+    'unitCode': TafqeetUnitCode.yard,
+    'comprehensiveUnit': '',
+    'unit': 'ياردة',
+    'unitPlural': 'ياردات',
+    'unitMaxValue': 0,
+    'unitGender': TafqeetUnitGender.feminine,
+    'partialUnitCode': TafqeetUnitCode.none
+  },
+
+  {
+    'unitCode': TafqeetUnitCode.mile,
+    'comprehensiveUnit': '',
+    'unit': 'ميل',
+    'unitPlural': 'أميال',
+    'unitMaxValue': 0,
+    'unitGender': TafqeetUnitGender.feminine,
+    'partialUnitCode': TafqeetUnitCode.none
+  },
+
+  {
+    'unitCode': TafqeetUnitCode.feet,
+    'comprehensiveUnit': '',
+    'unit': 'قدم',
+    'unitPlural': 'أقدام',
+    'unitMaxValue': 0,
+    'unitGender': TafqeetUnitGender.masculine,
+    'partialUnitCode': TafqeetUnitCode.none
+  },
+
+  {
+    'unitCode': TafqeetUnitCode.inch,
+    'comprehensiveUnit': '',
+    'unit': 'إنش',
+    'unitPlural': 'إنشات',
+    'unitMaxValue': 0,
+    'unitGender': TafqeetUnitGender.masculine,
+    'partialUnitCode': TafqeetUnitCode.none
+  },
+
+  {
+    'unitCode': TafqeetUnitCode.degree,
+    'comprehensiveUnit': '',
+    'unit': 'درجة',
+    'unitPlural': 'درجات',
+    'unitMaxValue': 0,
+    'unitGender': TafqeetUnitGender.feminine,
+    'partialUnitCode': TafqeetUnitCode.none
+  },
+
+  {
+    'unitCode': TafqeetUnitCode.fahrenheit,
+    'comprehensiveUnit': '',
+    'unit': 'درجة فهرنهايت',
+    'unitPlural': 'درجات فهرنهايت',
+    'unitMaxValue': 0,
+    'unitGender': TafqeetUnitGender.masculine,
+    'partialUnitCode': TafqeetUnitCode.none
+  },
+  {
     'unitCode': TafqeetUnitCode.centimeter,
-    'country': '',
+    'comprehensiveUnit': '',
     'unit': 'سنتميتر',
     'unitPlural': 'سنتيمترات',
     'unitMaxValue': 100,
     'unitGender': TafqeetUnitGender.masculine,
-    'partialUnitCode': TafqeetUnitCode.millimeter
+    'partialUnitCode': TafqeetUnitCode.milliMeter
   },
   {
-    'unitCode': TafqeetUnitCode.millimeter,
-    'country': '',
-    'unit': 'ميللي',
-    'unitPlural': 'ميلليات',
+    'unitCode': TafqeetUnitCode.milliMeter,
+    'comprehensiveUnit': '',
+    'unit': 'ميلي',
+    'unitPlural': 'ميليات',
     'unitMaxValue': 10,
     'unitGender': TafqeetUnitGender.masculine,
     'partialUnitCode': TafqeetUnitCode.none
@@ -145,7 +243,7 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
   // ===== Units of currencies
   {
     'unitCode': TafqeetUnitCode.unitedStatesDollar,
-    'country': 'أميريكي',
+    'comprehensiveUnit': 'أميريكي',
     'unit': 'دولار',
     'unitPlural': 'دولارات',
     'unitMaxValue': 0,
@@ -154,16 +252,37 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
   },
   {
     'unitCode': TafqeetUnitCode.unitedStatesDollarPenny,
-    'country': 'أميريكي',
+    'comprehensiveUnit': 'أميريكي',
     'unit': 'سنت',
     'unitPlural': 'سنتات',
     'unitMaxValue': 100,
     'unitGender': TafqeetUnitGender.masculine,
     'partialUnitCode': TafqeetUnitCode.none
   },
+
+  {
+    'unitCode': TafqeetUnitCode.russianRuble,
+    'comprehensiveUnit': 'روسي',
+    'unit': 'روبل',
+    'unitPlural': 'روبلات',
+    'unitMaxValue': 100,
+    'unitGender': TafqeetUnitGender.masculine,
+    'partialUnitCode': TafqeetUnitCode.russianRubleCopeck
+  },
+
+  {
+    'unitCode': TafqeetUnitCode.russianRubleCopeck,
+    'comprehensiveUnit': 'روسي',
+    'unit': 'كوبيك',
+    'unitPlural': 'كوييكات',
+    'unitMaxValue': 0,
+    'unitGender': TafqeetUnitGender.masculine,
+    'partialUnitCode': TafqeetUnitCode.none,
+  },
+
   {
     'unitCode': TafqeetUnitCode.canadianDollar,
-    'country': 'كندي',
+    'comprehensiveUnit': 'كندي',
     'unit': 'دولار',
     'unitPlural': 'دولارات',
     'unitMaxValue': 0,
@@ -172,7 +291,7 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
   },
   {
     'unitCode': TafqeetUnitCode.canadianDollarCent,
-    'country': 'كندي',
+    'comprehensiveUnit': 'كندي',
     'unit': 'سنت',
     'unitPlural': 'سنتات',
     'unitMaxValue': 100,
@@ -182,7 +301,7 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
 
   {
     'unitCode': TafqeetUnitCode.euro,
-    'country': 'أوربي',
+    'comprehensiveUnit': 'أوربي',
     'unit': 'يورو',
     'unitPlural': 'يوروهات',
     'unitMaxValue': 0,
@@ -191,7 +310,7 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
   },
   {
     'unitCode': TafqeetUnitCode.euroCent,
-    'country': 'أوربي',
+    'comprehensiveUnit': 'أوربي',
     'unit': 'سنت',
     'unitPlural': 'سنتات',
     'unitMaxValue': 100,
@@ -201,7 +320,7 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
 
   {
     'unitCode': TafqeetUnitCode.australianDollar,
-    'country': 'أسترالي',
+    'comprehensiveUnit': 'أسترالي',
     'unit': 'جنيه',
     'unitPlural': 'جنيهات',
     'unitMaxValue': 0,
@@ -210,7 +329,7 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
   },
   {
     'unitCode': TafqeetUnitCode.australianDollarCent,
-    'country': 'أسترالي',
+    'comprehensiveUnit': 'أسترالي',
     'unit': 'سنت',
     'unitPlural': 'سنتات',
     'unitMaxValue': 100,
@@ -220,7 +339,7 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
 
   {
     'unitCode': TafqeetUnitCode.poundSterling,
-    'country': 'أسترليني',
+    'comprehensiveUnit': 'أسترليني',
     'unit': 'جنيه',
     'unitPlural': 'جنيهات',
     'unitMaxValue': 0,
@@ -229,7 +348,7 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
   },
   {
     'unitCode': TafqeetUnitCode.poundSterlingPence,
-    'country': 'أسترليني',
+    'comprehensiveUnit': 'أسترليني',
     'unit': 'بنس',
     'unitPlural': 'بنسات',
     'unitMaxValue': 100,
@@ -239,7 +358,7 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
 
   {
     'unitCode': TafqeetUnitCode.kuwaitiDinar,
-    'country': 'كويتي',
+    'comprehensiveUnit': 'كويتي',
     'unit': 'دينار',
     'unitPlural': 'دنانير',
     'unitMaxValue': 0,
@@ -248,7 +367,7 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
   },
   {
     'unitCode': TafqeetUnitCode.kuwaitiDinarFulus,
-    'country': 'كويتي',
+    'comprehensiveUnit': 'كويتي',
     'unit': 'فلس',
     'unitPlural': 'فلوس',
     'unitMaxValue': 1000,
@@ -257,7 +376,7 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
   },
   {
     'unitCode': TafqeetUnitCode.saudiArabianRiyal,
-    'country': 'سعودي',
+    'comprehensiveUnit': 'سعودي',
     'unit': 'ريال',
     'unitPlural': 'ريالات',
     'unitMaxValue': 0,
@@ -266,7 +385,7 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
   },
   {
     'unitCode': TafqeetUnitCode.saudiArabianRiyalHalala,
-    'country': 'سعودي',
+    'comprehensiveUnit': 'سعودي',
     'unit': 'هللة',
     'unitPlural': 'هللات',
     'unitMaxValue': 100,
@@ -275,7 +394,7 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
   },
   {
     'unitCode': TafqeetUnitCode.syrianPound,
-    'country': 'سورية',
+    'comprehensiveUnit': 'سورية',
     'unit': 'ليرة',
     'unitPlural': 'ليرات',
     'unitMaxValue': 0,
@@ -284,7 +403,7 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
   },
   {
     'unitCode': TafqeetUnitCode.syrianPoundqirsh,
-    'country': 'سورية',
+    'comprehensiveUnit': 'سورية',
     'unit': 'قرش',
     'unitPlural': 'قروش',
     'unitMaxValue': 100,
@@ -294,7 +413,7 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
 
   {
     'unitCode': TafqeetUnitCode.mauritanianOuguiya,
-    'country': 'موريتانية',
+    'comprehensiveUnit': 'موريتانية',
     'unit': 'أوقية',
     'unitPlural': 'أوقيات',
     'unitMaxValue': 0,
@@ -303,7 +422,7 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
   },
   {
     'unitCode': TafqeetUnitCode.syrianPoundqirsh,
-    'country': 'موريتانية',
+    'comprehensiveUnit': 'موريتانية',
     'unit': 'خمس',
     'unitPlural': 'أخماس',
     'unitMaxValue': 5,
@@ -313,7 +432,7 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
 
   {
     'unitCode': TafqeetUnitCode.turkishLira,
-    'country': 'تركية',
+    'comprehensiveUnit': 'تركية',
     'unit': 'ليرة',
     'unitPlural': 'ليرات',
     'unitMaxValue': 0,
@@ -322,7 +441,7 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
   },
   {
     'unitCode': TafqeetUnitCode.turkishLiraQirsh,
-    'country': 'تركية',
+    'comprehensiveUnit': 'تركية',
     'unit': 'قرش',
     'unitPlural': 'قروش',
     'unitMaxValue': 100,
@@ -332,7 +451,7 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
 
   {
     'unitCode': TafqeetUnitCode.lebanonPound,
-    'country': 'لبنانية',
+    'comprehensiveUnit': 'لبنانية',
     'unit': 'ليرة',
     'unitPlural': 'ليرات',
     'unitMaxValue': 0,
@@ -341,7 +460,7 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
   },
   {
     'unitCode': TafqeetUnitCode.lebanonPoundPenny,
-    'country': 'لبنانية',
+    'comprehensiveUnit': 'لبنانية',
     'unit': 'قرش',
     'unitPlural': 'قروش',
     'unitMaxValue': 100,
@@ -351,7 +470,7 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
 
   {
     'unitCode': TafqeetUnitCode.emiratesDirham,
-    'country': 'إماراتي',
+    'comprehensiveUnit': 'إماراتي',
     'unit': 'درهم',
     'unitPlural': 'دراهم',
     'unitMaxValue': 0,
@@ -360,7 +479,7 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
   },
   {
     'unitCode': TafqeetUnitCode.emiratesDirhamPenny,
-    'country': 'إماراتي',
+    'comprehensiveUnit': 'إماراتي',
     'unit': 'فلس',
     'unitPlural': 'فلوس',
     'unitMaxValue': 100,
@@ -370,7 +489,7 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
 
   {
     'unitCode': TafqeetUnitCode.egyptianPound,
-    'country': 'مصري',
+    'comprehensiveUnit': 'مصري',
     'unit': 'جنيه',
     'unitPlural': 'جنيهات',
     'unitMaxValue': 0,
@@ -379,7 +498,7 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
   },
   {
     'unitCode': TafqeetUnitCode.egyptianPoundPiastre,
-    'country': 'مصري',
+    'comprehensiveUnit': 'مصري',
     'unit': 'قرش',
     'unitPlural': 'قروش',
     'unitMaxValue': 100,
@@ -388,7 +507,7 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
   },
   {
     'unitCode': TafqeetUnitCode.egyptianPoundMillieme,
-    'country': 'مصري',
+    'comprehensiveUnit': 'مصري',
     'unit': 'مليم',
     'unitPlural': 'مليمات',
     'unitMaxValue': 1000,
@@ -397,7 +516,7 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
   },
   {
     'unitCode': TafqeetUnitCode.sudanesePound,
-    'country': 'سوداني',
+    'comprehensiveUnit': 'سوداني',
     'unit': 'جنيه',
     'unitPlural': 'جنيهات',
     'unitMaxValue': 0,
@@ -406,7 +525,7 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
   },
   {
     'unitCode': TafqeetUnitCode.sudanesePoundQirsh,
-    'country': 'سوداني',
+    'comprehensiveUnit': 'سوداني',
     'unit': 'قرش',
     'unitPlural': 'قروش',
     'unitMaxValue': 100,
@@ -416,7 +535,7 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
 
   {
     'unitCode': TafqeetUnitCode.jordanianDinar,
-    'country': 'أردني',
+    'comprehensiveUnit': 'أردني',
     'unit': 'دينار',
     'unitPlural': 'دنانير',
     'unitMaxValue': 0,
@@ -425,7 +544,7 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
   },
   {
     'unitCode': TafqeetUnitCode.jordanianDinardirham,
-    'country': 'أردني',
+    'comprehensiveUnit': 'أردني',
     'unit': 'درهم',
     'unitPlural': 'دراهم',
     'unitMaxValue': 10,
@@ -435,7 +554,7 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
 
   {
     'unitCode': TafqeetUnitCode.qatariRiyal,
-    'country': 'قطري',
+    'comprehensiveUnit': 'قطري',
     'unit': 'ريال',
     'unitPlural': 'ريالات',
     'unitMaxValue': 0,
@@ -444,7 +563,7 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
   },
   {
     'unitCode': TafqeetUnitCode.qatariRiyalDirham,
-    'country': 'قطري',
+    'comprehensiveUnit': 'قطري',
     'unit': 'درهم',
     'unitPlural': 'دراهم',
     'unitMaxValue': 10,
@@ -454,7 +573,7 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
 
   {
     'unitCode': TafqeetUnitCode.libyanDinar,
-    'country': 'ليبي',
+    'comprehensiveUnit': 'ليبي',
     'unit': 'درهم',
     'unitPlural': 'دراهم',
     'unitMaxValue': 0,
@@ -463,7 +582,7 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
   },
   {
     'unitCode': TafqeetUnitCode.libyanDinarDirham,
-    'country': 'ليبي',
+    'comprehensiveUnit': 'ليبي',
     'unit': 'درهم',
     'unitPlural': 'دراهم',
     'unitMaxValue': 1000,
@@ -472,7 +591,7 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
   },
   {
     'unitCode': TafqeetUnitCode.yemeniRial,
-    'country': 'يمني',
+    'comprehensiveUnit': 'يمني',
     'unit': 'ريال',
     'unitPlural': 'ريالات',
     'unitMaxValue': 0,
@@ -481,7 +600,7 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
   },
   {
     'unitCode': TafqeetUnitCode.yemeniRialFils,
-    'country': 'يمني',
+    'comprehensiveUnit': 'يمني',
     'unit': 'فلس',
     'unitPlural': 'فلوس',
     'unitMaxValue': 100,
@@ -491,7 +610,7 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
 
   {
     'unitCode': TafqeetUnitCode.omaniRial,
-    'country': 'عماني',
+    'comprehensiveUnit': 'عماني',
     'unit': 'ريال',
     'unitPlural': 'ريالات',
     'unitMaxValue': 0,
@@ -500,7 +619,7 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
   },
   {
     'unitCode': TafqeetUnitCode.omaniRialBaisa,
-    'country': 'عماني',
+    'comprehensiveUnit': 'عماني',
     'unit': 'بيسة',
     'unitPlural': 'بيسات',
     'unitMaxValue': 1000,
@@ -510,7 +629,7 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
 
   {
     'unitCode': TafqeetUnitCode.jordanianDinarqirsh,
-    'country': 'أردني',
+    'comprehensiveUnit': 'أردني',
     'unit': 'قرش',
     'unitPlural': 'قروش',
     'unitMaxValue': 100,
@@ -519,7 +638,7 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
   },
   {
     'unitCode': TafqeetUnitCode.jordanianDinarFulus,
-    'country': 'أردني',
+    'comprehensiveUnit': 'أردني',
     'unit': 'فلس',
     'unitPlural': 'فلوس',
     'unitMaxValue': 1000,
@@ -528,7 +647,7 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
   },
   {
     'unitCode': TafqeetUnitCode.bahrainiDinar,
-    'country': 'بحريني',
+    'comprehensiveUnit': 'بحريني',
     'unit': 'دينار',
     'unitPlural': 'دنانير',
     'unitMaxValue': 0,
@@ -537,7 +656,7 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
   },
   {
     'unitCode': TafqeetUnitCode.bahrainiDinarFulus,
-    'country': 'بحريني',
+    'comprehensiveUnit': 'بحريني',
     'unit': 'فلس',
     'unitPlural': 'فلوس',
     'unitMaxValue': 1000,
@@ -547,7 +666,7 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
 
   {
     'unitCode': TafqeetUnitCode.tunisianDinar,
-    'country': 'تونسي',
+    'comprehensiveUnit': 'تونسي',
     'unit': 'دينار',
     'unitPlural': 'دنانير',
     'unitMaxValue': 0,
@@ -556,7 +675,7 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
   },
   {
     'unitCode': TafqeetUnitCode.tunisianDinarMillim,
-    'country': 'تونسي',
+    'comprehensiveUnit': 'تونسي',
     'unit': 'مليم',
     'unitPlural': 'مليمات',
     'unitMaxValue': 1000,
@@ -565,7 +684,7 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
   },
   {
     'unitCode': TafqeetUnitCode.algerianDinar,
-    'country': 'جزائري',
+    'comprehensiveUnit': 'جزائري',
     'unit': 'دينار',
     'unitPlural': 'دنانير',
     'unitMaxValue': 0,
@@ -574,7 +693,7 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
   },
   {
     'unitCode': TafqeetUnitCode.algerianDinarCentime,
-    'country': 'جزائري',
+    'comprehensiveUnit': 'جزائري',
     'unit': 'سنتيم',
     'unitPlural': 'سنتيمات',
     'unitMaxValue': 100,
@@ -584,7 +703,7 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
 
   {
     'unitCode': TafqeetUnitCode.moroccanDirham,
-    'country': 'مغربي',
+    'comprehensiveUnit': 'مغربي',
     'unit': 'درهم',
     'unitPlural': 'دراهم',
     'unitMaxValue': 0,
@@ -593,7 +712,7 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
   },
   {
     'unitCode': TafqeetUnitCode.moroccanDirhamCentime,
-    'country': 'مغربي',
+    'comprehensiveUnit': 'مغربي',
     'unit': 'سنتيم',
     'unitPlural': 'سنتيمات',
     'unitMaxValue': 100,
@@ -602,7 +721,7 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
   },
   {
     'unitCode': TafqeetUnitCode.iraqiDinar,
-    'country': 'عراقي',
+    'comprehensiveUnit': 'عراقي',
     'unit': 'دينار',
     'unitPlural': 'دنانير',
     'unitMaxValue': 0,
@@ -611,7 +730,7 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
   },
   {
     'unitCode': TafqeetUnitCode.iraqiDinarFils,
-    'country': 'عراقي',
+    'comprehensiveUnit': 'عراقي',
     'unit': 'فلس',
     'unitPlural': 'فلوس',
     'unitMaxValue': 1000,
@@ -624,7 +743,7 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
 
   {
     'unitCode': TafqeetUnitCode.container,
-    'country': '',
+    'comprehensiveUnit': '',
     'unit': 'حاوية',
     'unitPlural': 'حاويات',
     'unitMaxValue': 0,
@@ -633,7 +752,7 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
   },
   {
     'unitCode': TafqeetUnitCode.package,
-    'country': '',
+    'comprehensiveUnit': '',
     'unit': 'طرد',
     'unitPlural': 'طرود',
     'unitMaxValue': 0,
@@ -643,7 +762,7 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
 
   {
     'unitCode': TafqeetUnitCode.share,
-    'country': '',
+    'comprehensiveUnit': '',
     'unit': 'سهم',
     'unitPlural': 'أسهم',
     'unitMaxValue': 0,
@@ -653,7 +772,7 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
 
   {
     'unitCode': TafqeetUnitCode.box,
-    'country': '',
+    'comprehensiveUnit': '',
     'unit': 'صندوق',
     'unitPlural': 'صناديق',
     'unitMaxValue': 0,
@@ -663,7 +782,7 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
 
   {
     'unitCode': TafqeetUnitCode.can,
-    'country': '',
+    'comprehensiveUnit': '',
     'unit': 'علبة',
     'unitPlural': 'علب',
     'unitMaxValue': 0,
@@ -673,7 +792,7 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
 
   {
     'unitCode': TafqeetUnitCode.kiloMetrePerHour,
-    'country': '',
+    'comprehensiveUnit': '',
     'unit': 'كيلومتر في الساعة',
     'unitPlural': 'كيلومترات في الساعة',
     'unitMaxValue': 0,
@@ -683,7 +802,7 @@ const List<Map<String, dynamic>> tafqeetPredefinedUnits = [
 
   {
     'unitCode': TafqeetUnitCode.metrePerSecond,
-    'country': '',
+    'comprehensiveUnit': '',
     'unit': 'متر في الثانية',
     'unitPlural': 'أمتار في الثانية',
     'unitMaxValue': 0,

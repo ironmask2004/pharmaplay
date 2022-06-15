@@ -79,6 +79,15 @@ enum TafqeetUnitCode {
 
   qatariRiyal('QR'),
   qatariRiyalDirham('QRD'),
+  mile('MI'),
+  yard('YA'),
+  feet('FE'),
+  inch('INCH'),
+  degree('DGRE'),
+  fahrenheit('FHRN'),
+
+  russianRuble('RUB'),
+  russianRubleCopeck('RUBC'),
 
   metricTon('MTON'),
   kiloGram('KG'),
@@ -86,10 +95,15 @@ enum TafqeetUnitCode {
 
   ounce('OZ'),
 
+  kiloMetre2('KM2'),
   kiloMetre('KM'),
   metre('M'),
+  metre2('M2'),
   centimeter('CM'),
-  millimeter('MM'),
+  centimeter2('CM2'),
+
+  milliMeter('MM'),
+  milliMeter2('MM2'),
 
   kiloMetrePerHour('KMPH'),
   metrePerSecond('MPS'),

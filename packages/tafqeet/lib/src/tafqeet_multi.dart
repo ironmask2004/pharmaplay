@@ -69,7 +69,8 @@ class Tafqeet {
             (_getTafqeet(
                     am: splitedUnitValue[1].toString(),
                     tafqeetUnit: currentUnit,
-                    isMainUnit: (currentUnit.country.isNotEmpty && mainUnitFlag
+                    isMainUnit: (currentUnit.comprehensiveUnit.isNotEmpty &&
+                            mainUnitFlag
                         ? true
                         : false)) ??
                 '');
@@ -154,7 +155,8 @@ class Tafqeet {
             (_getTafqeet(
                     am: splitedUnitValue[1].toString(),
                     tafqeetUnit: currentUnit,
-                    isMainUnit: (currentUnit.country.isNotEmpty && mainUnitFlag
+                    isMainUnit: (currentUnit.comprehensiveUnit.isNotEmpty &&
+                            mainUnitFlag
                         ? true
                         : false)) ??
                 '');
@@ -689,9 +691,9 @@ _tafqeetOnePart(  onesTensWordList, partValue: 389,  partLocation: 1, sumRestPar
       tafResult = '$tafResult  ${tafUnit.unit}';
     }
 
-    if (f == 1 && tafUnit.country.isNotEmpty && isMainUnit) {
-      tafResult = _getCountryUnit(
-          partValue[2], tafResult, tafUnit.country, tafUnit.unitGender);
+    if (f == 1 && tafUnit.comprehensiveUnit.isNotEmpty && isMainUnit) {
+      tafResult = _getcomprehensiveUnitUnit(partValue[2], tafResult,
+          tafUnit.comprehensiveUnit, tafUnit.unitGender);
     }
 
     if ((double.tryParse(am) == 0)) {
@@ -703,47 +705,47 @@ _tafqeetOnePart(  onesTensWordList, partValue: 389,  partLocation: 1, sumRestPar
 
 // ==========
 
-  String _getCountryUnit(var amount, String tafResult, String tafUnitCountry,
-      TafqeetUnitGender tafUnitGender) {
-    if (tafUnitCountry.isEmpty) return tafResult;
+  String _getcomprehensiveUnitUnit(var amount, String tafResult,
+      String tafUnitcomprehensiveUnit, TafqeetUnitGender tafUnitGender) {
+    if (tafUnitcomprehensiveUnit.isEmpty) return tafResult;
 
-    String unitCountryLastChar =
-        tafUnitCountry.substring(tafUnitCountry.length - 1);
-    String unitCountryWithoutLastChar =
-        tafUnitCountry.substring(0, tafUnitCountry.length - 1);
+    String unitcomprehensiveUnitLastChar =
+        tafUnitcomprehensiveUnit.substring(tafUnitcomprehensiveUnit.length - 1);
+    String unitcomprehensiveUnitWithoutLastChar = tafUnitcomprehensiveUnit
+        .substring(0, tafUnitcomprehensiveUnit.length - 1);
     switch (tafUnitGender) {
       case TafqeetUnitGender.feminine:
         if (amount >= 3 && amount <= 10) {
           tafResult =
-              '$tafResult ${((unitCountryLastChar == 'ة' ? tafUnitCountry : '${tafUnitCountry}ة'))}';
+              '$tafResult ${((unitcomprehensiveUnitLastChar == 'ة' ? tafUnitcomprehensiveUnit : '${tafUnitcomprehensiveUnit}ة'))}';
         } else if (amount > 10) {
           tafResult =
-              '$tafResult ${((unitCountryLastChar == 'ة' ? '${unitCountryWithoutLastChar}ةً' : '${tafUnitCountry}ةً'))}';
+              '$tafResult ${((unitcomprehensiveUnitLastChar == 'ة' ? '${unitcomprehensiveUnitWithoutLastChar}ةً' : '${tafUnitcomprehensiveUnit}ةً'))}';
         } else if (amount == 2) {
           tafResult =
-              '$tafResult ${((unitCountryLastChar == 'ة' ? '${unitCountryWithoutLastChar}تان' : '${tafUnitCountry}تان'))}';
+              '$tafResult ${((unitcomprehensiveUnitLastChar == 'ة' ? '${unitcomprehensiveUnitWithoutLastChar}تان' : '${tafUnitcomprehensiveUnit}تان'))}';
         } else if (amount == 1) {
           tafResult =
-              '$tafResult ${((unitCountryLastChar == 'ة' ? tafUnitCountry : '${tafUnitCountry}ة'))}';
+              '$tafResult ${((unitcomprehensiveUnitLastChar == 'ة' ? tafUnitcomprehensiveUnit : '${tafUnitcomprehensiveUnit}ة'))}';
         } else {
-          tafResult = '$tafResult $tafUnitCountry';
+          tafResult = '$tafResult $tafUnitcomprehensiveUnit';
         }
         break;
       case TafqeetUnitGender.masculine:
         if (amount >= 3 && amount <= 10) {
           tafResult =
-              '$tafResult ${((unitCountryLastChar == 'ة' ? tafUnitCountry : '${tafUnitCountry}ة'))}';
+              '$tafResult ${((unitcomprehensiveUnitLastChar == 'ة' ? tafUnitcomprehensiveUnit : '${tafUnitcomprehensiveUnit}ة'))}';
         } else if (amount > 10) {
           tafResult =
-              '$tafResult ${((unitCountryLastChar == 'ة' ? '${unitCountryWithoutLastChar}اً' : '${tafUnitCountry}اً'))}';
+              '$tafResult ${((unitcomprehensiveUnitLastChar == 'ة' ? '${unitcomprehensiveUnitWithoutLastChar}اً' : '${tafUnitcomprehensiveUnit}اً'))}';
         } else if (amount == 2) {
           tafResult =
-              '$tafResult ${((unitCountryLastChar == 'ة' ? '${unitCountryWithoutLastChar}ان' : '${tafUnitCountry}ان'))}';
+              '$tafResult ${((unitcomprehensiveUnitLastChar == 'ة' ? '${unitcomprehensiveUnitWithoutLastChar}ان' : '${tafUnitcomprehensiveUnit}ان'))}';
         } else if (amount == 1) {
           tafResult =
-              '$tafResult ${((unitCountryLastChar == 'ة' ? unitCountryWithoutLastChar : tafUnitCountry))}';
+              '$tafResult ${((unitcomprehensiveUnitLastChar == 'ة' ? unitcomprehensiveUnitWithoutLastChar : tafUnitcomprehensiveUnit))}';
         } else {
-          tafResult = '$tafResult $tafUnitCountry';
+          tafResult = '$tafResult $tafUnitcomprehensiveUnit';
         }
     }
     return tafResult;

@@ -145,13 +145,13 @@ void main() {
 
       // بات تايلدندي - ساتانغ 100
       var batUnit = {
-        'country': 'تايلندي',
+        'comprehensiveUnit': 'تايلندي',
         'unit': 'بات',
         'unitPlural': 'باتات',
         'unitGender': TafqeetUnitGender.masculine,
       };
       var batPennyUnit = {
-        'country': 'تايلندي',
+        'comprehensiveUnit': 'تايلندي',
         'unit': 'ساتانغ',
         'unitPlural': 'ساتانغات',
         'unitMaxValue': 100,

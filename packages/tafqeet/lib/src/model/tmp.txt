@@ -2,7 +2,7 @@
 List<TafqeetUnit> tafqeetPredefinedUnits = [
   TafqeetUnit(
       unitCode: TafqeetUnitCode.ounce,
-      country: '',
+      comprehensiveUnit: '',
       unit: 'أونصة',
       unitPlural: 'أونصات',
       unitMaxValue: 0,
@@ -10,14 +10,14 @@ List<TafqeetUnit> tafqeetPredefinedUnits = [
       partialUnitCode: TafqeetUnitCode.none),
   TafqeetUnit(
       unitCode: TafqeetUnitCode.hour,
-      country: '',
+      comprehensiveUnit: '',
       unit: 'ساعة',
       unitPlural: 'ساعات',
       unitMaxValue: 0,
       unitGender: TafqeetUnitGender.feminine,
       partialUnitCode: TafqeetUnitCode.minute),
   TafqeetUnit(
-      country: '',
+      comprehensiveUnit: '',
       unit: 'دقيقة',
       unitPlural: 'دقائق',
       unitMaxValue: 60,
@@ -26,7 +26,7 @@ List<TafqeetUnit> tafqeetPredefinedUnits = [
       partialUnitCode: TafqeetUnitCode.second),
   TafqeetUnit(
     unitCode: TafqeetUnitCode.second,
-    country: '',
+    comprehensiveUnit: '',
     unit: 'ثانية',
     unitPlural: 'ثواني',
     unitMaxValue: 60,
@@ -35,7 +35,7 @@ List<TafqeetUnit> tafqeetPredefinedUnits = [
   ),
   TafqeetUnit(
     unitCode: TafqeetUnitCode.millisecond,
-    country: '',
+    comprehensiveUnit: '',
     unit: 'ميللي ثانية',
     unitPlural: 'ميللي ثواني',
     unitMaxValue: 60,
@@ -44,7 +44,7 @@ List<TafqeetUnit> tafqeetPredefinedUnits = [
   ),
   TafqeetUnit(
     unitCode: TafqeetUnitCode.kiloMetre,
-    country: '',
+    comprehensiveUnit: '',
     unit: 'كيلو متر',
     unitPlural: 'كيلو مترات',
     unitMaxValue: 0,
@@ -53,7 +53,7 @@ List<TafqeetUnit> tafqeetPredefinedUnits = [
   ),
   TafqeetUnit(
       unitCode: TafqeetUnitCode.metre,
-      country: '',
+      comprehensiveUnit: '',
       unit: 'متر',
       unitPlural: 'امتار',
       unitMaxValue: 1000,
@@ -61,7 +61,7 @@ List<TafqeetUnit> tafqeetPredefinedUnits = [
       partialUnitCode: TafqeetUnitCode.centimeter),
   TafqeetUnit(
       unitCode: TafqeetUnitCode.centimeter,
-      country: '',
+      comprehensiveUnit: '',
       unit: 'سنتميتر',
       unitPlural: 'سنتيمترات',
       unitMaxValue: 100,
@@ -69,7 +69,7 @@ List<TafqeetUnit> tafqeetPredefinedUnits = [
       partialUnitCode: TafqeetUnitCode.millimeter),
   TafqeetUnit(
       unitCode: TafqeetUnitCode.millimeter,
-      country: '',
+      comprehensiveUnit: '',
       unit: 'ميللي',
       unitPlural: 'ميلليات',
       unitMaxValue: 10,
@@ -77,7 +77,7 @@ List<TafqeetUnit> tafqeetPredefinedUnits = [
       partialUnitCode: TafqeetUnitCode.none),
   TafqeetUnit(
     unitCode: TafqeetUnitCode.unitedStatesDollar,
-    country: 'أميريكي',
+    comprehensiveUnit: 'أميريكي',
     unit: 'دولار',
     unitPlural: 'دولارات',
     unitMaxValue: 0,
@@ -86,7 +86,7 @@ List<TafqeetUnit> tafqeetPredefinedUnits = [
   ),
   TafqeetUnit(
       unitCode: TafqeetUnitCode.unitedStatesDollarPenny,
-      country: 'أميريكي',
+      comprehensiveUnit: 'أميريكي',
       unit: 'سنت',
       unitPlural: 'سنتات',
       unitMaxValue: 100,
@@ -94,7 +94,7 @@ List<TafqeetUnit> tafqeetPredefinedUnits = [
       partialUnitCode: TafqeetUnitCode.none),
   TafqeetUnit(
       unitCode: TafqeetUnitCode.saudiArabianRiyal,
-      country: 'سعودي',
+      comprehensiveUnit: 'سعودي',
       unit: 'ريال',
       unitPlural: 'ريالات',
       unitMaxValue: 0,
@@ -102,14 +102,14 @@ List<TafqeetUnit> tafqeetPredefinedUnits = [
       partialUnitCode: TafqeetUnitCode.saudiArabianRiyalPenny),
   TafqeetUnit(
       unitCode: TafqeetUnitCode.saudiArabianRiyalPenny,
-      country: 'سعودي',
+      comprehensiveUnit: 'سعودي',
       unit: 'هللة',
       unitPlural: 'هللات',
       unitMaxValue: 100,
       unitGender: TafqeetUnitGender.feminine,
       partialUnitCode: TafqeetUnitCode.none),
   TafqeetUnit(
-      country: 'سورية',
+      comprehensiveUnit: 'سورية',
       unit: 'ليرة',
       unitPlural: 'ليرات',
       unitMaxValue: 0,
@@ -118,7 +118,7 @@ List<TafqeetUnit> tafqeetPredefinedUnits = [
       partialUnitCode: TafqeetUnitCode.syrianPoundPenny),
   TafqeetUnit(
       unitCode: TafqeetUnitCode.syrianPoundPenny,
-      country: 'سورية',
+      comprehensiveUnit: 'سورية',
       unit: 'قرش',
       unitPlural: 'قروش',
       unitMaxValue: 100,
@@ -126,7 +126,7 @@ List<TafqeetUnit> tafqeetPredefinedUnits = [
       partialUnitCode: TafqeetUnitCode.none),
   TafqeetUnit(
     unitCode: TafqeetUnitCode.undefined,
-    country: '',
+    comprehensiveUnit: '',
     unit: 'قلم',
     unitPlural: 'أٌقلام',
     unitMaxValue: 0,
@@ -135,7 +135,7 @@ List<TafqeetUnit> tafqeetPredefinedUnits = [
   ),
   TafqeetUnit(
       unitCode: TafqeetUnitCode.undefinedPart,
-      country: '',
+      comprehensiveUnit: '',
       unit: 'جزء',
       unitPlural: 'أجزاء',
       unitMaxValue: 0,
@@ -143,7 +143,7 @@ List<TafqeetUnit> tafqeetPredefinedUnits = [
       partialUnitCode: TafqeetUnitCode.none),
   TafqeetUnit(
       unitCode: TafqeetUnitCode.kuwaitiDinar,
-      country: 'كويتي',
+      comprehensiveUnit: 'كويتي',
       unit: 'دينار',
       unitPlural: 'دنانير',
       unitMaxValue: 0,
@@ -151,7 +151,7 @@ List<TafqeetUnit> tafqeetPredefinedUnits = [
       partialUnitCode: TafqeetUnitCode.kuwaitiDinarPenny),
   TafqeetUnit(
       unitCode: TafqeetUnitCode.kuwaitiDinarPenny,
-      country: 'كويتي',
+      comprehensiveUnit: 'كويتي',
       unit: 'فلس',
       unitPlural: 'فلوس',
       unitMaxValue: 1000,
@@ -159,7 +159,7 @@ List<TafqeetUnit> tafqeetPredefinedUnits = [
       partialUnitCode: TafqeetUnitCode.none),
   TafqeetUnit(
     unitCode: TafqeetUnitCode.metricTon,
-    country: '',
+    comprehensiveUnit: '',
     unit: 'طن',
     unitPlural: 'أطنان',
     unitMaxValue: 0,
@@ -168,7 +168,7 @@ List<TafqeetUnit> tafqeetPredefinedUnits = [
   ),
   TafqeetUnit(
     unitCode: TafqeetUnitCode.kiloGram,
-    country: '',
+    comprehensiveUnit: '',
     unit: 'كيلو غرام',
     unitPlural: 'كيلو غرامات',
     unitMaxValue: 1000,
@@ -177,7 +177,7 @@ List<TafqeetUnit> tafqeetPredefinedUnits = [
   ),
   TafqeetUnit(
       unitCode: TafqeetUnitCode.gram,
-      country: '',
+      comprehensiveUnit: '',
       unit: 'غرام',
       unitPlural: 'غرامات',
       unitMaxValue: 1000,

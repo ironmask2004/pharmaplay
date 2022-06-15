@@ -7,7 +7,7 @@ import 'package:tafqeet/src/model/unit_code.dart';
 
 class TafqeetUnit extends Equatable {
   final TafqeetUnitCode unitCode;
-  final String country;
+  final String comprehensiveUnit;
   final String unit;
   final String unitPlural;
   final TafqeetUnitGender unitGender;
@@ -15,7 +15,7 @@ class TafqeetUnit extends Equatable {
   final TafqeetUnitCode partialUnitCode;
   TafqeetUnit(
       {this.unitCode = TafqeetUnitCode.undefined,
-      this.country = '',
+      this.comprehensiveUnit = '',
       required this.unit,
       required this.unitPlural,
       required this.unitGender,
@@ -31,7 +31,7 @@ class TafqeetUnit extends Equatable {
 
   TafqeetUnit copyWith({
     TafqeetUnitCode? unitCode,
-    String? country,
+    String? comprehensiveUnit,
     String? unit,
     String? unitPlural,
     TafqeetUnitGender? unitGender,
@@ -40,7 +40,7 @@ class TafqeetUnit extends Equatable {
   }) {
     return TafqeetUnit(
       unitCode: unitCode ?? this.unitCode,
-      country: country ?? this.country,
+      comprehensiveUnit: comprehensiveUnit ?? this.comprehensiveUnit,
       unit: unit ?? this.unit,
       unitPlural: unitPlural ?? this.unitPlural,
       unitGender: unitGender ?? this.unitGender,
@@ -53,7 +53,7 @@ class TafqeetUnit extends Equatable {
     final result = <String, dynamic>{};
 
     result.addAll({'unitCode': unitCode.toMap()});
-    result.addAll({'country': country});
+    result.addAll({'comprehensiveUnit': comprehensiveUnit});
     result.addAll({'unit': unit});
     result.addAll({'unitPlural': unitPlural});
     result.addAll({'unitGender': unitGender.toMap()});
@@ -68,9 +68,10 @@ class TafqeetUnit extends Equatable {
     return TafqeetUnit(
       unitCode:
           TafqeetUnitCode.fromMap(map['unitCode'] ?? TafqeetUnitCode.none),
-      country: ((map['country'] ?? '').replaceAll(' ', '')).isEmpty
-          ? ''
-          : map['country'] ?? '',
+      comprehensiveUnit:
+          ((map['comprehensiveUnit'] ?? '').replaceAll(' ', '')).isEmpty
+              ? ''
+              : map['comprehensiveUnit'] ?? '',
       unit: map['unit'] ?? '',
       unitPlural: map['unitPlural'] ?? '',
       unitGender: TafqeetUnitGender.fromMap(map['unitGender']),
@@ -87,14 +88,14 @@ class TafqeetUnit extends Equatable {
 
   @override
   String toString() {
-    return 'TafqeetUnit(unitCode: $unitCode, country: $country, unit: $unit, unitPlural: $unitPlural, unitGender: $unitGender, unitMaxValue: $unitMaxValue, partialUnitCode: $partialUnitCode)';
+    return 'TafqeetUnit(unitCode: $unitCode, comprehensiveUnit: $comprehensiveUnit, unit: $unit, unitPlural: $unitPlural, unitGender: $unitGender, unitMaxValue: $unitMaxValue, partialUnitCode: $partialUnitCode)';
   }
 
   @override
   List<Object> get props {
     return [
       unitCode,
-      country,
+      comprehensiveUnit,
       unit,
       unitPlural,
       unitGender,

@@ -30,14 +30,14 @@ void main() {
 
   // بات تايلدندي - ساتانغ 100
   var batUnit = {
-    'country': 'تايلندي',
+    'comprehensiveUnit': 'تايلندي',
     'unit': 'بات',
     'unitPlural': 'باتات',
     'unitMaxValue': 100,
     'unitGender': TafqeetUnitGender.masculine,
   };
   var batPennyUnit = {
-    'country': 'تايلندي',
+    'comprehensiveUnit': 'تايلندي',
     'unit': 'ساتانغ',
     'unitPlural': 'ساتانغات',
     'unitMaxValue': 100,
@@ -90,7 +90,7 @@ void main() {
   var boxesNumber = 234234;
   var unitBoxes = {
     'unitCode': TafqeetUnitCode.userDefined,
-    'country': '',
+    'comprehensiveUnit': '',
     'unit': 'صندوق',
     'unitPlural': 'صناديق',
     'unitMaxValue': 0,
@@ -102,7 +102,7 @@ void main() {
 
   var partsUnit = {
     'unitCode': TafqeetUnitCode.userDefined,
-    'country': '',
+    'comprehensiveUnit': '',
     'unit': 'قطعة',
     'unitPlural': 'قطع',
     'unitMaxValue': 12,
@@ -127,17 +127,24 @@ void main() {
       listOfNumberAndParts: [0, 0, 2, 22],
       tafqeetUnitCode: TafqeetUnitCode.jordanianDinar));
   print(tafqeet.tafqeetNumberWithParts(
-      listOfNumberAndParts: [12, 0, 0, 11],
-      tafqeetUnitCode: TafqeetUnitCode.jordanianDinar));
-  print(tafqeet.tafqeetNumberWithParts(
-      listOfNumberAndParts: [3, 3], tafqeetUnitCode: TafqeetUnitCode.euro));
-  print(tafqeet.tafqeetNumberWithParts(
-      listOfNumberAndParts: [0, 11], tafqeetUnitCode: TafqeetUnitCode.euro));
+      listOfNumberAndParts: [2], tafqeetUnitCode: TafqeetUnitCode.kiloGram));
 
   print(tafqeet.tafqeetNumberWithParts(
-      listOfNumberAndParts: [13, 13],
-      tafqeetUnitCode: TafqeetUnitCode.kiloMetrePerHour));
+      listOfNumberAndParts: [33], tafqeetUnitCode: TafqeetUnitCode.gram));
+
   print(tafqeet.tafqeetNumberWithParts(
-      listOfNumberAndParts: [11],
-      tafqeetUnitCode: TafqeetUnitCode.kiloMetrePerHour));
+      listOfNumberAndParts: [213, 45],
+      tafqeetUnitCode: TafqeetUnitCode.kiloGram));
+
+  print(tafqeet.tafqeetNumberWithParts(
+      listOfNumberAndParts: [33], tafqeetUnitCode: TafqeetUnitCode.gram));
+
+  print(tafqeet.tafqeetNumberWithParts(
+      listOfNumberAndParts: [2], tafqeetUnitCode: TafqeetUnitCode.kiloGram));
+
+  print(tafqeet.tafqeetNumberWithParts(
+      listOfNumberAndParts: [13, 8],
+      tafqeetUnitCode: TafqeetUnitCode.kiloGram));
+  print(tafqeet.tafqeetNumberWithParts(
+      listOfNumberAndParts: [3], tafqeetUnitCode: TafqeetUnitCode.kiloGram));
 }
